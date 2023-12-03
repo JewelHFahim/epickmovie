@@ -3,7 +3,7 @@ import router from "./routes/router";
 
 const App = () => {
   return (
-    <div className=" px-[365px] bg-[#202022]">
+    <div className=" bg-[#27272A] lg:bg-[#18181a] ">
       <RouterProvider router={router} />
     </div>
   );

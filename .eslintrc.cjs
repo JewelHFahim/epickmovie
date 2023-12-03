@@ -17,6 +17,6 @@ module.exports = {
       { allowConstantExport: true },
     ],
 
-    "eslint-disable-next-line react/prop-types": false,
+    // "eslint-disable-next-line react/prop-types": false,
   },
 };

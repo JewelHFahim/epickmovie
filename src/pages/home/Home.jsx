@@ -1,5 +1,6 @@
 import SubMenuButton from "../../utils/SubMenuButton";
-import jawan from "../../assets/jawan.png";
+import HomeMovieList from "../movies/mobie-list/HomeMovieList";
+import NavigationButton from "../../utils/NavigationButton";
 
 const Home = () => {
   const subMenus = [
@@ -29,23 +30,19 @@ const Home = () => {
     },
   ];
 
-  const movies = [
-    {
-      name: "Download Jawan (2023) Extended Cut Hindi Movie 480p | 720p | 1080p | 2160p WEB-DL ESub",
-      img: jawan,
-    },
-  ];
-
   return (
     <div className="flex flex-col justify-center items-center">
-      <div className="flex items-center gap-[34px] mt-[6px]">
+
+      {/* ==================>> Submenus <<================*/}
+      <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {subMenus.map((menu, i) => (
-          <SubMenuButton>{menu.title}</SubMenuButton>
+          <SubMenuButton key={i}>{menu.title}</SubMenuButton>
         ))}
       </div>
 
-      <div className="w-full h-[28px] flex justify-center items-center bg-[#5C1EC2] mt-[8px]">
-        <p className="text-[14px] font-[600] flex items-center gap-4 text-white">
+      {/* ==================>> Domains <<=================*/}
+      <div className="w-[90%] h-[28px] hidden lg:flex justify-center items-center bg-[#5C1EC2] mt-[8px]">
+        <p className="text-[14px] font-[600] flex items-center gap-2 text-white">
           Our All Domains are
           <span className="text-[#F00]">Epickmovies.fun</span> |
           <span className="text-[#FFD600]">EpickMovies.link</span> |
@@ -58,43 +55,18 @@ const Home = () => {
         </p>
       </div>
 
-      {/* Movies */}
-      <div className="grid grid-cols-5 gap-[25px] my-[18px]">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((item, i) => (
-          <div
-            key={i}
-            className="w-[205px] h-[460px] rounded-[10px] flex flex-col  items-center bg-[#27272A]"
-          >
-            <img src={jawan} alt="" className="w-full h-[322px]" />
-            <p className="text-center text-[14px] text-white font-[700]">
-              Download Jawan (2023) Extended Cut Hindi Movie 480p | 720p | 1080p
-              | 2160p WEB-DL ESub
-            </p>
-          </div>
-        ))}
-      </div>
+      <HomeMovieList />
 
-      {/* Navigation */}
-      <div className="w-full h-[87px] bg-[#27272A] mt-[64px] flex justify-start items-center gap-[13px] px-[23px]">
+      {/* ==================>> Navigation <<=============*/}
+      <div className="w-full h-[47px] lg:h-[87px] bg-[#343437] mt-[64px] flex justify-start items-center gap-[8px] lg:gap-[13px] px-[23px]">
+
         {[1, 2, 3, 4, 5, 6].map((item, i) => (
-          <div
-            key={i}
-            className="flex justify-center items-center bg-[#494949] rounded-[6px] p-5 w-[8px] h-[15px] text-[12px] font-[600] text-white"
-          >
-            {item}
-          </div>
+          <NavigationButton key={i}>{item}</NavigationButton>
         ))}
-
-        <div className="flex justify-center items-center bg-[#494949] rounded-[6px] p-5 w-[8px] h-[15px] text-[12px] font-[600] text-white">
-          ...
-        </div>
-
-        <div className="flex justify-center items-center bg-[#494949] rounded-[6px] p-5 w-[8px] h-[15px] text-[12px] font-[600] text-white">
-          Next
-        </div>
+        <NavigationButton>...</NavigationButton>
+        <NavigationButton>140</NavigationButton>
+        <NavigationButton>Next</NavigationButton>
       </div>
-
-      
     </div>
   );
 };

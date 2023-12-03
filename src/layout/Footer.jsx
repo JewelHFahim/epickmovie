@@ -1,9 +1,8 @@
-import React from 'react';
 
 const Footer = () => {
     return (
-        <div className="w-full h-[100px] bg-[#27272A] mt-[43px] flex justify-center items-center">
-        <p className="text-[14px] font-[600] text-white">
+        <div className="w-full lg:px-[365px] h-[100%] lg:h-[100px] bg-[#343437] lg:bg-[#27272A] mt-[43px] flex justify-center items-center px-4 py-2 lg:p-0">
+        <p className=" text-[10px] lg:text-[14px] font-inter font-[600] text-white text-center lg:text-left">
           EPICKMOVIES does not rip or host any files on it’s servers. All files
           or contents hosted on third party websites. EPICKMOVIES doesn't accept
           the responsibility for contents hosted on third party websites. Also
