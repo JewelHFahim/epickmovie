@@ -12,8 +12,9 @@ import { useState } from "react";
 import GenerMenu from "../../components/menus/GenerMenu";
 import YearMenu from "../../components/menus/YearMenu";
 import QualityMenu from "../../components/menus/QualityMenu";
-import { IoMenu } from "react-icons/io5";
 import MobileMenuButton from "../../utils/MobileMenuButton";
+import MobileMenu from "../../components/menus/MobileMenu";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,54 +22,61 @@ const Navbar = () => {
   const [year1, setYear] = useState(false);
   const [quality1, setQuality] = useState(false);
 
-  // const toggleDropdown = () => {
-  //   setIsOpen(!isOpen);
-  // };
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const menus = [
     {
       titile: "Home",
       url: "/",
       icon: home1,
+      id: 1,
     },
     {
       titile: "Home",
       url: "/",
       icon: home2,
       fn: setIsOpen,
+      id: 2,
     },
     {
       titile: "Gener",
       url: "/",
       icon: gener,
       fn: setGener,
+      id: 3,
     },
     {
       titile: "Year",
       url: "/",
       icon: year,
       fn: setYear,
+      id: 4,
     },
     {
       titile: "Quality",
       url: "/",
       icon: quality,
       fn: setQuality,
+      id: 5,
     },
     {
       titile: "Web Series",
       url: "/",
       icon: series,
+      id: 6,
     },
     {
       titile: "Bangla",
       url: "/",
       icon: bangla,
+      id: 7,
     },
     {
       titile: "Join Telegram",
       url: "/",
       icon: telegram,
+      id: 8,
     },
   ];
 
@@ -151,31 +159,48 @@ const Navbar = () => {
     },
   ];
 
+  //
+  const handleMenuClick = (id) => {
+    // Close all other submenus when a new one is clicked
+    const closeSubmenus = [setIsOpen, setGener, setYear, setQuality];
+
+    closeSubmenus.forEach((closeFn, i) => {
+      if (i !== id) {
+        closeFn(false);
+      }
+    });
+
+    // Toggle the clicked submenu
+    const currentToggleFn = closeSubmenus[id];
+    currentToggleFn((prevState) => !prevState);
+  };
+
   return (
-    <div className=" lg:h-[184px] bg-[#27272A]">
+    <div className=" lg:h-[184px] bg-[#27272A] mx-2">
       <Header />
 
-      <div className="w-full h-[35px] bg-[#464646] mt-[15px] flex  items-center justify-between px-4 lg:hidden">
-        <p className="text-[14px] font-[600] font-inter text-[#BDBBBB]">MENU</p>
-        <IoMenu className="text-[25px] text-[#D6D6D6]" />
+      <div className="lg:hidden">
+        <MobileMenu />
       </div>
 
-      <div className="w-[95%] h-[100%] border border-black mx-auto mt-[34px] p-2 lg:hidden mb-[30px]">
-        <div className="grid grid-cols-5 gap-2">
-          {movieCategory.map((movie, i) => (
-            <MobileMenuButton key={i}>{movie.title}</MobileMenuButton>
-          ))}
+      {/* Only For Mobile Device */}
+      {currentPath === "/" && (
+        <div className="w-[95%] h-[100%] border border-black mx-auto mt-[34px] p-2 lg:hidden mb-[30px]">
+          <div className="grid grid-cols-5 gap-2">
+            {movieCategory.map((movie, i) => (
+              <MobileMenuButton key={i}>{movie.title}</MobileMenuButton>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="bg-[#494949] w-full h-[54px]  items-center gap-5 font-inter z-[999] hidden lg:flex">
+      <div className="bg-[#494949] w-full h-[54px] items-center gap-5 font-inter z-[999] hidden lg:flex">
         {menus.map((menu, i) => (
           <ul
             key={i}
             className="text-[14px] text-white px-5 py-2 flex justify-center items-center border-r rounded-[6px]"
           >
             <li>
-              {/* have a issue multiple open */}
               <button
                 onClick={() => menu.fn((l) => !l)}
                 className="flex items-center gap-1"
@@ -188,12 +213,29 @@ const Navbar = () => {
         ))}
       </div>
 
+      {/* <div className="bg-[#494949] w-full h-[54px] items-center gap-5 font-inter z-[999] hidden lg:flex">
+        {menus.map((menu, i) => (
+          <ul
+            key={i}
+            className="text-[14px] text-white px-5 py-2 flex justify-center items-center border-r rounded-[6px]"
+          >
+            <li>
+              <button
+                onClick={() => handleMenuClick(menu.id)}
+                className="flex items-center gap-1"
+              >
+                <img src={menu.icon} alt="" className="w-[22px] h-[22px]" />
+                {menu.titile}
+              </button>
+            </li>
+          </ul>
+        ))}
+      </div> */}
+
       <MovieMenu isOpen={isOpen} setIsOpen={setIsOpen} />
       <GenerMenu gener1={gener1} setGener={setGener} />
       <YearMenu year1={year1} setYear={setYear} />
       <QualityMenu quality1={quality1} setQuality={setQuality} />
-
-
     </div>
   );
 };

@@ -5,9 +5,12 @@ import search from "../../assets/Search Icon.svg";
 const NotFound = () => {
     
   return (
-    <div className="bg-[#27272A] mt-[22px]">
-      <section className=" p-[32px] flex justify-between">
-        <div className="w-[70%] font-inter">
+    <div className="bg-[#27272A] mt-[22px] min-h-screen">
+
+
+      <section className=" p-[32px] lg:flex justify-between">
+
+        <div className=" lg:w-[70%] font-inter">
           <h3 className="text-[32px] font-[700]  text-[#727171]">
             Error 404 Not Found
           </h3>
@@ -18,18 +21,18 @@ const NotFound = () => {
             Please check your URL or use the search form below.
           </p>
 
-          <div className="w-[453px] h-[42px] flex items-center justify-between rounded-[9px] bg-[#18181B] mt-[22px]">
-            <input
-              type="text"
-              placeholder="What are you looking for?"
-              className="w-full h-full bg-transparent border-0 focus:outline-none text-[12px] text-white px-5"
-            />
-            <img src={search} alt="" className="h-full cursor-pointer" />
-          </div>
+          <div className=" w-[320px] lg:w-[453px] h-[42px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[9px] bg-[#18181B]">
+        <input
+          type="text"
+          placeholder="What are you looking for?"
+          className="w-full h-full bg-transparent border-0 focus:outline-none text-[12px] text-white px-5"
+        />
+        <img src={search} alt="" className="h-full cursor-pointer" />
+      </div>
 
         </div>
 
-        <div className="w-[30%] bg-[#1F1F22] p-4">
+        <div className="hidden lg:block w-[30%] bg-[#1F1F22] p-4">
           <div className="w-[299px] h-[193px] bg-[#27272A] flex flex-col">
             <p className="text-white font-inter font-[500] mt-[39px] ml-[34px]">
               Join Our Telegram
@@ -65,7 +68,10 @@ const NotFound = () => {
             <img src={ads} alt="" />
           </div>
         </div>
+
       </section>
+
+
     </div>
   );
 };

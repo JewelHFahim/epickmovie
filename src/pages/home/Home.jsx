@@ -67,6 +67,7 @@ const Home = () => {
         <NavigationButton>140</NavigationButton>
         <NavigationButton>Next</NavigationButton>
       </div>
+      
     </div>
   );
 };

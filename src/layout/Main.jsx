@@ -5,8 +5,11 @@ import Footer from "./Footer";
 const Main = () => {
   return (
     <>
-      <div className=" lg:w-[1170px] mx-auto">
+      {/*  lg:w-[1170px]  */}
+
+      <div className="w-full lg:w-[61vw] lg:min-w-[1170px] mx-auto">
         <Navbar />
+
         <Outlet />
       </div>
 
