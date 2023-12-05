@@ -1,6 +1,8 @@
 import SubMenuButton from "../../utils/SubMenuButton";
 import HomeMovieList from "../movies/mobie-list/HomeMovieList";
-import NavigationButton from "../../utils/NavigationButton";
+import { useState } from "react";
+import { usePerPgaeMovieQuery } from "../../redux/features/movies/movieApi";
+import Pagination from "../../components/pagination/Pagination";
 
 const Home = () => {
   const subMenus = [
@@ -30,9 +32,14 @@ const Home = () => {
     },
   ];
 
+  const [currentPage, setCurrentPage] = useState(2);
+
+  const { data: perPgaeMovie } = usePerPgaeMovieQuery(currentPage);
+
+  console.log(perPgaeMovie);
+
   return (
     <div className="flex flex-col justify-center items-center">
-
       {/* ==================>> Submenus <<================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {subMenus.map((menu, i) => (
@@ -55,19 +62,10 @@ const Home = () => {
         </p>
       </div>
 
-      <HomeMovieList />
+      <HomeMovieList perPgaeMovie={perPgaeMovie} />
 
       {/* ==================>> Navigation <<=============*/}
-      <div className="w-full h-[47px] lg:h-[87px] bg-[#343437] mt-[64px] flex justify-start items-center gap-[8px] lg:gap-[13px] px-[23px]">
-
-        {[1, 2, 3, 4, 5, 6].map((item, i) => (
-          <NavigationButton key={i}>{item}</NavigationButton>
-        ))}
-        <NavigationButton>...</NavigationButton>
-        <NavigationButton>140</NavigationButton>
-        <NavigationButton>Next</NavigationButton>
-      </div>
-      
+      <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} perPgaeMovie={perPgaeMovie}/>
     </div>
   );
 };

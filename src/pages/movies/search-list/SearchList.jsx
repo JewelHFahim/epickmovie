@@ -1,4 +1,4 @@
-import NavigationButton from "../../../utils/NavigationButton";
+import PaginationButton from "../../../utils/PaginationButton";
 import HomeMovieList from "../mobie-list/HomeMovieList";
 
 const SearchList = () => {
@@ -18,11 +18,11 @@ const SearchList = () => {
       <div className="w-full h-[47px] lg:h-[87px] bg-[#343437] mt-[64px] flex justify-start items-center gap-[8px] lg:gap-[13px] px-[23px]">
 
         {[1, 2, 3, 4, 5, 6].map((item, i) => (
-          <NavigationButton key={i}>{item}</NavigationButton>
+          <PaginationButton key={i}>{item}</PaginationButton>
         ))}
-        <NavigationButton>...</NavigationButton>
-        <NavigationButton>140</NavigationButton>
-        <NavigationButton>Next</NavigationButton>
+        <PaginationButton>...</PaginationButton>
+        <PaginationButton>140</PaginationButton>
+        <PaginationButton>Next</PaginationButton>
       </div>
 
       

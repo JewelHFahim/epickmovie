@@ -3,7 +3,7 @@ const YearMenu = ({ year1, setYear }) => {
     setYear(false);
   };
 
-  const menus = [
+  const years = [
     {
       title: "2023",
       url: "",

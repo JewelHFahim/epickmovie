@@ -1,7 +1,15 @@
-import NavigationButton from "../../../utils/NavigationButton";
+import { useMovieListQuery } from "../../../redux/features/movies/movieApi";
+import PaginationButton from "../../../utils/PaginationButton";
 import HomeMovieList from "../mobie-list/HomeMovieList";
 
 const Category = () => {
+
+  const {data: movieList } = useMovieListQuery();
+
+  console.log(movieList?.data?.data)
+
+  // const hollywood = movieList?.data?.data?.filter(movie => movie?.)
+
   return (
     <div className="px-4">
       {/* ==================>> Searched Category <<=============*/}
@@ -27,11 +35,11 @@ const Category = () => {
       {/* ==================>> Navigation <<=============*/}
       <div className="w-full h-[87px] bg-[#27272A] mt-[64px] flex justify-start items-center gap-[13px] px-[23px]">
         {[1, 2, 3].map((item, i) => (
-          <NavigationButton key={i}>{item}</NavigationButton>
+          <PaginationButton key={i}>{item}</PaginationButton>
         ))}
-        <NavigationButton>...</NavigationButton>
-        <NavigationButton>140</NavigationButton>
-        <NavigationButton>Next</NavigationButton>
+        <PaginationButton>...</PaginationButton>
+        <PaginationButton>140</PaginationButton>
+        <PaginationButton>Next</PaginationButton>
       </div>
     </div>
   );

@@ -3,7 +3,7 @@ const QualityMenu = ({ quality1, setQuality }) => {
     setQuality(false);
   };
 
-  const menus = [
+  const qualitys = [
     {
       title: "480p",
       url: "",
@@ -45,7 +45,7 @@ const QualityMenu = ({ quality1, setQuality }) => {
           onClick={closeDropdown}
           className="ml-[450px] z-[99] absolute w-48 py-2 origin-top-right shadow-xl bg-[#27272A]"
         >
-          {menus.map((menu, i) => (
+          {qualitys.map((menu, i) => (
             <a
               key={i}
               href="#"
