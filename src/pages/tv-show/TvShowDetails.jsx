@@ -1,19 +1,19 @@
 import { AiOutlineDoubleRight } from "react-icons/ai";
-import calender from "../../../assets/calender.svg";
-import jawan from "../../../assets/jawan.png";
-import telegraqm from "../../../assets/telegram.svg";
-import joinTelegran from "../../../assets/join telegram.png";
-import ads from "../../../assets/ads.png";
-import DownloadButton from "../../../utils/DownloadButton";
-import { useMovieDetailsQuery } from "../../../redux/features/movies/movieApi";
+import calender from "../../assets/calender.svg";
+import jawan from "../../assets/jawan.png";
+import telegraqm from "../../assets/telegram.svg";
+import joinTelegran from "../../assets/join telegram.png";
+import ads from "../../assets/ads.png";
+import DownloadButton from "../../utils/DownloadButton";
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
+import { useSeriesDetailsQuery } from "../../redux/features/tv-show/tvShowApi";
 
-const MovieDetails = () => {
+const TvShowDetails = () => {
   const { id } = useParams();
 
-  const { data: movieDetails } = useMovieDetailsQuery(id);
-  const details = movieDetails?.data;
+  const { data: seriesDetails } = useSeriesDetailsQuery(id);
+  const details = seriesDetails?.data;
   console.log(details);
 
   const sanitizedHtml = DOMPurify.sanitize(details?.post_content);
@@ -44,6 +44,7 @@ const MovieDetails = () => {
       </div>
 
       <section className=" p-2 lg:p-5 flex justify-between">
+        {/* Column One */}
         <div className="w-full  lg:w-[70%]">
           <div>
             <h4 className=" text-[20px] lg:text-[24px] text-white font-aclonica max-w-[748px]">
@@ -194,10 +195,11 @@ const MovieDetails = () => {
             </p>
           </div>
 
+          {/* ==========>> DOWNLOAD BUTTOn <<=============*/}
           <div className=" max-w-[276px] lg:max-w-[399px] flex flex-col gap-3 mx-auto">
             {details?.download_links?.map((item, i) => (
-              <DownloadButton key={i} url={item?.download_url}>
-                {item?.label} {item?.file_size}
+              <DownloadButton key={i} url={item?.download_link}>
+                Download
               </DownloadButton>
             ))}
           </div>
@@ -213,7 +215,8 @@ const MovieDetails = () => {
           </div>
         </div>
 
-        {/* Static Data */}
+        {/* Column Two */}
+        {/* Advertisemen Section (Static Data) */}
         <div className="hidden lg:block  w-[30%] bg-[#1F1F22] p-4">
           <div className="w-[299px] h-[193px] bg-[#27272A] flex flex-col">
             <p className="text-white font-inter font-[500] mt-[39px] ml-[34px]">
@@ -236,7 +239,10 @@ const MovieDetails = () => {
 
             <div className="px-4 py-2 grid grid-cols-4 gap-[8px]">
               {Array.from({ length: 32 }).map((item, i) => (
-                <button className="w-[53px] h-[20px] rounded-[4px] bg-[#f4f4f4c9] text-[10px] text-[#27272A] font-inter">
+                <button
+                  key={i}
+                  className="w-[53px] h-[20px] rounded-[4px] bg-[#f4f4f4c9] text-[10px] text-[#27272A] font-inter"
+                >
                   Bengali
                 </button>
               ))}
@@ -282,4 +288,4 @@ const MovieDetails = () => {
   );
 };
 
-export default MovieDetails;
+export default TvShowDetails;

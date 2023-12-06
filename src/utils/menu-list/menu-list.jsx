@@ -268,3 +268,30 @@ export const qualityList = [
     url: "",
   },
 ];
+
+export const subMenus = [
+  {
+    title: "Join Telegram",
+  },
+  {
+    title: "[18+] Movies",
+  },
+  {
+    title: "Bollywood",
+  },
+  {
+    title: "Hollywood",
+  },
+  {
+    title: "Dual Audio",
+  },
+  {
+    title: "Tamil",
+  },
+  {
+    title: "Telegu",
+  },
+  {
+    title: "Korean Collection",
+  },
+];

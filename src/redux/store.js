@@ -2,10 +2,12 @@ import { configureStore } from "@reduxjs/toolkit";
 import { thunk } from "redux-thunk";
 import movieSlice from "./features/movies/movieSlice";
 import apiSlice from "./features/api/apiSlice";
+import searchSlice from "./features/search/searchSlice";
 
 const store = configureStore({
   reducer: {
     movie: movieSlice,
+    search: searchSlice,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>

@@ -2,9 +2,10 @@ import React from "react";
 import PaginationButton from "../../utils/PaginationButton";
 
 const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
+  
   const totalData = perPgaeMovie?.data?.total;
 
-  const perPage = 10;
+  const perPage = 20;
   const totalPages = Math.ceil(totalData / perPage);
 
   // Function to handle page change

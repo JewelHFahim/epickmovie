@@ -1,7 +1,9 @@
 import apiSlice from "../api/apiSlice";
 
 const movieApi = apiSlice.injectEndpoints({
+
   endpoints: (builder) => ({
+
     // ==========================>> ALL MOVIES <<===========================
     movieList: builder.query({
       query: () => "/movie-posts",
@@ -32,7 +34,7 @@ const movieApi = apiSlice.injectEndpoints({
         providesTags: ["bollyflix"],
       }),
 
-      // =======================>> QUALITY <<===========================
+      // ========================>> QUALITY <<============================
       qualityList: builder.query({
         query: () => "/terms/quality-list",
         providesTags: ["bollyflix"],

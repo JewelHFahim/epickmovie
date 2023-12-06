@@ -1,6 +1,5 @@
 import { useMovieListQuery } from "../../../redux/features/movies/movieApi";
 import PaginationButton from "../../../utils/PaginationButton";
-import HomeMovieList from "../mobie-list/HomeMovieList";
 
 const Category = () => {
 
@@ -30,7 +29,8 @@ const Category = () => {
       </div>
 
       {/* ==================>> Movie List <<=============*/}
-      <HomeMovieList />
+      {/* <HomeMovieList /> */}
+      
 
       {/* ==================>> Navigation <<=============*/}
       <div className="w-full h-[87px] bg-[#27272A] mt-[64px] flex justify-start items-center gap-[13px] px-[23px]">
