@@ -8,6 +8,7 @@ import DownloadButton from "../../../utils/DownloadButton";
 import { useMovieDetailsQuery } from "../../../redux/features/movies/movieApi";
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
+import DateFormate from "../../../utils/DateFormate";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -26,16 +27,6 @@ const MovieDetails = () => {
 
   // Convert milliseconds to days
   const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-  // Given date
-  const publishedDate = new Date(details?.release_date);
-
-  // Format the date
-  const formattedDate = publishedDate.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
 
   return (
     <div className="bg-[#27272A]">
@@ -99,7 +90,7 @@ const MovieDetails = () => {
                   {details?.post_name}
                 </h3>
 
-                <p className="text-[10px] text-white">{formattedDate}</p>
+                <DateFormate date={details?.release_date}/>
 
                 <p className="text-[13px] text-[#AEABAB] mt-[10px] flex items-start gap-1 max-w-[100%]">
                   Director:

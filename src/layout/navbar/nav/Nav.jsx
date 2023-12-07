@@ -15,6 +15,7 @@ import {
 } from "../../../redux/features/movies/movieApi";
 import { useDispatch } from "react-redux";
 import { collectFilteredItem } from "../../../redux/features/search/searchSlice";
+import { Link } from "react-router-dom";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -28,9 +29,6 @@ const Nav = () => {
     columns.push(genreList?.data?.slice(i, i + itemsPerColumn));
   }
 
-
-
-
   return (
     <nav className="menu bg-[#494949] w-full h-[54px]">
       <ul>
@@ -43,7 +41,7 @@ const Nav = () => {
         {/* =========>> MOVIES <<========== */}
         <li className="main-menu">
           <a href="#" className=" flex items-center gap-2">
-            <img src={home2} alt="" className="w-[21px] h-[16px]" /> Home{" "}
+            <img src={home2} alt="" className="w-[21px] h-[16px]" /> Home
           </a>
           <ul>
             {movieList?.map((item, i) => (
@@ -57,17 +55,17 @@ const Nav = () => {
         {/* =========>> GENRE <<========== */}
         <li className="main-menu">
           <a href="#" className=" flex items-center gap-2">
-            <img src={link} alt="" className="w-[23px] h-[23px]" /> Genre{" "}
+            <img src={link} alt="" className="w-[23px] h-[23px]" /> Genre
           </a>
           <ul>
             {genreList?.data?.map((item, i) => (
               <li key={i}>
-                <button
-                  href={item?.href}
+                <Link
+                  to="/search-list"
                   onClick={() => dispatch(collectFilteredItem(item?.href.split("/").filter(Boolean).pop()))}
                 >
                   {item?.name}
-                </button>
+                </Link>
               </li>
             ))}
           </ul>
@@ -82,9 +80,9 @@ const Nav = () => {
           <ul className="grid">
             {yearList?.data?.map((item, i) => (
               <li key={i}>
-                <button href={item?.href}
+                <Link to="/search-list"
                  onClick={() => dispatch(collectFilteredItem(item?.href.split("/").filter(Boolean).pop()))}
-                >{item.name}</button>
+                >{item.name}</Link>
               </li>
             ))}
           </ul>
@@ -98,11 +96,11 @@ const Nav = () => {
           <ul>
             {qualityList?.data?.map((item, i) => (
               <li key={i}>
-                <button href={item?.href}
-                onClick={() => dispatch(collectFilteredItem(item?.href.split("/").filter(Boolean).pop()))}
-                >{item.name}</button>
+                <Link to="/search-list"
+                      onClick={() => dispatch(collectFilteredItem(item?.href.split("/").filter(Boolean).pop()))}
+                >{item.name}</Link>
               </li>
-            ))}
+            ))} 
           </ul>
         </li>
 

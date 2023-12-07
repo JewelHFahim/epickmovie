@@ -19,7 +19,6 @@ export const searchSlice = createSlice({
       state.filteredTerm = action.payload;
     },
 
-
   },
 });
 

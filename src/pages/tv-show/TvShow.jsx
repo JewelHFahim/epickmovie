@@ -6,6 +6,7 @@ import Title from "../../utils/Title";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 
 const TvShow = () => {
+  
   const [currentPage, setCurrentPage] = useState(1);
   const { data: perPgaeMovie } = usePerPgaeTvShowQuery(currentPage);
   console.log(perPgaeMovie);

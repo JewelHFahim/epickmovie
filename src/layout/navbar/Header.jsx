@@ -1,14 +1,14 @@
 import logo from "../../assets/logo.png";
 import search from "../../assets//Search Icon.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate  } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
 
 const Header = () => {
-
   const dispatch = useDispatch();
-  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+  const [searchTermState, setSearchTerm] = useState("");
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -16,9 +16,13 @@ const Header = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Searching for:", searchTerm);
-    dispatch(collectSearchItem(searchTerm))
+    console.log("Searching for:", searchTermState);
+    const res = dispatch(collectSearchItem(searchTermState));
+    if(res.payload !== null){
+      return navigate("/search-list")
+    }
   };
+
 
   return (
     <div className="w-full lg:h-[130px] flex flex-col lg:flex-row items-center justify-between py-2 lg:py-0 px-4 ">
@@ -32,11 +36,12 @@ const Header = () => {
       >
         <input
           type="text"
-          value={searchTerm}
+          value={searchTermState}
           onChange={handleInputChange}
           placeholder="What are you looking for?"
           className="w-full h-full bg-transparent border-0 focus:outline-none text-[12px] text-white px-5"
         />
+
         <button type="submit">
           <img src={search} alt="" className="h-full cursor-pointer" />
         </button>

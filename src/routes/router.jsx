@@ -8,8 +8,15 @@ import NotFound from "../pages/not-found/NotFound";
 import Movies from "../pages/movies/movies/Movies";
 import TvShow from "../pages/tv-show/TvShow";
 import TvShowDetails from "../pages/tv-show/tvShowDetails";
+import Dashboard from "../dashboard/dashboard/Dashboard";
+import DashMain from "../layout/dashboard/DashMain";
+import DbMovies from "../dashboard/DbMovies";
+import MoviesDB from "../dashboard/dashboard/movies/MoviesDB";
+import DbSeries from "../dashboard/dashboard/series/DbSeries";
+import AddMovies from "../dashboard/dashboard/movies/AddMovies";
 
 const router = createBrowserRouter([
+  // ==========>> CLIENT ROUTES <<===========
   {
     path: "/",
     element: <Main />,
@@ -60,6 +67,40 @@ const router = createBrowserRouter([
       },
     ],
   },
+
+  // ==========>> ADMIN ROUTES <<===========
+  {
+    path: "/dashboard",
+    element: <DashMain />,
+    children: [
+      {
+        path: "/dashboard",
+        element: <Dashboard />,
+      },
+
+      {
+        path: "/dashboard/db-movies",
+        element: <DbMovies />,
+      },
+
+      {
+        path: "/dashboard/movies-db",
+        element: <MoviesDB />,
+      },
+
+      {
+        path: "/dashboard/add-movie",
+        element: <AddMovies />,
+      },
+
+      {
+        path: "/dashboard/db-series",
+        element: <DbSeries />,
+      },
+    ],
+  },
+
+  // ========>> ERROR/LOGIN ROUTES <<=======
 ]);
 
 export default router;

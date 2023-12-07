@@ -150,8 +150,8 @@ const TvShowDetails = () => {
                 </>
               </div>
             </div>
-            {/* ===> CARD END <=== */}
 
+            {/* ===> CARD END <=== */}
             <div className="max-w-[715px] mt-[13px]">
               <h3 className="text-[18px] lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center">
                 <a href={details?.guid}> {details?.post_title} ~ BollyFlix </a>
@@ -199,7 +199,7 @@ const TvShowDetails = () => {
           <div className=" max-w-[276px] lg:max-w-[399px] flex flex-col gap-3 mx-auto">
             {details?.download_links?.map((item, i) => (
               <DownloadButton key={i} url={item?.download_link}>
-                Download
+                Seasion {item?.season_no}
               </DownloadButton>
             ))}
           </div>
@@ -257,6 +257,7 @@ const TvShowDetails = () => {
           </div>
         </div>
       </section>
+
 
       {/* ===========>> RELETED POST <<=========== */}
       <section className="mt-[33px] p-5">
