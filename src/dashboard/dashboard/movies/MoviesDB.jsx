@@ -79,8 +79,7 @@ const MoviesDB = () => {
 
             <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} perPgaeMovie={perPgaeMovie} />
             </div>
-
-
+            
         </div>
     )
 }

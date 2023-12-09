@@ -15,14 +15,14 @@ const DbSeries = () => {
 
             <div className="items-start justify-between md:flex">
                 <div className="max-w-lg">
-                    <h3 className="text-gray-100 text-xl font-bold sm:text-2xl uppercase">
-                        Series
+                    <h3 className="text- text-xl font-bold sm:text-2xl uppercase">
+                        TV Series
                     </h3>
                 </div>
 
                 <div className="mt-3 md:mt-0">
                     <a
-                        href="javascript:void(0)"
+                        href="/dashboard/add-series"
                         className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
                     >
                         Add Series

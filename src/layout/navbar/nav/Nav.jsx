@@ -61,7 +61,7 @@ const Nav = () => {
             {genreList?.data?.map((item, i) => (
               <li key={i}>
                 <Link
-                  to="/search-list"
+                  to="/filter-list"
                   onClick={() => dispatch(collectFilteredItem(item?.href.split("/").filter(Boolean).pop()))}
                 >
                   {item?.name}
@@ -80,7 +80,7 @@ const Nav = () => {
           <ul className="grid">
             {yearList?.data?.map((item, i) => (
               <li key={i}>
-                <Link to="/search-list"
+                <Link to="/filter-list"
                  onClick={() => dispatch(collectFilteredItem(item?.href.split("/").filter(Boolean).pop()))}
                 >{item.name}</Link>
               </li>
@@ -96,7 +96,7 @@ const Nav = () => {
           <ul>
             {qualityList?.data?.map((item, i) => (
               <li key={i}>
-                <Link to="/search-list"
+                <Link to="/filter-list"
                       onClick={() => dispatch(collectFilteredItem(item?.href.split("/").filter(Boolean).pop()))}
                 >{item.name}</Link>
               </li>

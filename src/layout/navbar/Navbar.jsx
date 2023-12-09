@@ -14,7 +14,6 @@ const Navbar = () => {
 
       <Header />
 
-
       <div className="lg:hidden">
         <MobileMenu />
       </div>
