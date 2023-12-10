@@ -9,18 +9,19 @@ const Seasons = () => {
   console.log(perPgaeMovie);
 
   return (
-    <div className="mx-auto bg-slate-100 border w-full h-full p-2">
+    <div className="mx-auto bg-white border w-full h-full p-2">
+
       <div className="items-start justify-between md:flex">
         <div className="max-w-lg">
-          <h3 className="text- text-xl font-bold sm:text-2xl uppercase">
+          <h3 className="text- text-xl text-slate-700 font-bold sm:text-2xl uppercase">
           Seasons
           </h3>
         </div>
 
         <div className="mt-3 md:mt-0">
           <a
-            href="/dashboard/add-season"
-            className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
+            href="/admin/dashboard/add-season"
+            className="inline-block px-4 py-2 text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
           >
             Add Seasons
           </a>

@@ -12,19 +12,19 @@ const MoviesDB = () => {
 
 
     return (
-        <div className="mx-auto bg-slate-100 border w-full h-full p-2">
+        <div className="mx-auto bg-white border w-full h-full p-2">
 
             <div className="items-start justify-between md:flex">
                 <div className="max-w-lg">
-                    <h3 className="text-xl font-bold sm:text-2xl uppercase">
+                    <h3 className="text-xl font-bold text-slate-700 sm:text-2xl uppercase">
                         Movies
                     </h3>
                 </div>
 
                 <div className="mt-3 md:mt-0">
                     <Link
-                        to="/dashboard/add-movie"
-                        className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
+                        to="/admin/dashboard/add-movie"
+                        className="inline-block px-4 py-2 text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
                     >
                         Add Movie
                     </Link>
@@ -62,7 +62,7 @@ const MoviesDB = () => {
                                         <a href="javascript:void()" className="py-2 px-3 font-medium text-green-600 hover:text-green-500 duration-150 hover:bg-gray-50 rounded-lg">
                                             Preview
                                         </a>
-                                        <a href="javascript:void()" className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
+                                        <a href={`/admin/dashboard/edit-movie/${item?.ID}`} className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
                                             Edit
                                         </a>
                                         <button href="javascript:void()" className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg">

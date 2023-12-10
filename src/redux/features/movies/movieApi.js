@@ -10,7 +10,7 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["bollyflix"],
     }),
 
-    // ========================>>  MOVIE DETAILS <<=======================
+    // ========================>>  SINGLE/MOVIE DETAILS <<=======================
     movieDetails: builder.query({
       query: (movieId) => `/movie-post/${movieId}`,
       providesTags: ["bollyflix"],

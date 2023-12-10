@@ -17,7 +17,7 @@ const AddNetworks = () => {
           <h3 className="text-xl font-bold sm:text-2xl uppercase" >Add New Networks </h3>
         </div>
 
-        <form className="mt-6 bg-slate-100 p-6">
+        <form className="mt-6 bg-slate-50 p-6 rounded-md">
 
           <div className="flex flex-col">
             <label>Name</label>

@@ -10,18 +10,10 @@ import TvShow from "../pages/tv-show/TvShow";
 import TvShowDetails from "../pages/tv-show/tvShowDetails";
 import Dashboard from "../dashboard/dashboard/Dashboard";
 import DashMain from "../layout/dashboard/DashMain";
-import DbMovies from "../dashboard/DbMovies";
 import MoviesDB from "../dashboard/dashboard/movies/MoviesDB";
 import DbSeries from "../dashboard/dashboard/series/DbSeries";
-import AddMovies from "../dashboard/dashboard/movies/AddMovies";
 import FilterList from "../pages/movies/filter-list/FilterList";
 import AddSeries from "../dashboard/dashboard/series/AddSeries";
-import AddTags from "../dashboard/dashboard/movies/AddTags";
-import AddGenre from "../dashboard/dashboard/movies/AddGenre";
-import AddQuality from "../dashboard/dashboard/movies/AddQuality";
-import AddYear from "../dashboard/dashboard/movies/AddYear";
-import AddCast from "../dashboard/dashboard/movies/AddCast";
-import AddDirector from "../dashboard/dashboard/movies/AddDirector";
 import AddCreator from "../dashboard/dashboard/series/AddCreator";
 import AddStudio from "../dashboard/dashboard/series/AddStudio";
 import AddNetworks from "../dashboard/dashboard/series/AddNetworks";
@@ -29,6 +21,15 @@ import Seasons from "../dashboard/dashboard/series/Seasons";
 import AddSeasons from "../dashboard/dashboard/series/AddSeason";
 import Episode from "../dashboard/dashboard/series/Episode";
 import AddEpisode from "../dashboard/dashboard/series/AddEpisode";
+import DbMovies from "../dashboard/db-movies/DbMovies";
+import AddCast from "../dashboard/dashboard/movies/cast/AddCast";
+import AddMovies from "../dashboard/dashboard/movies/movies/AddMovies";
+import AddTags from "../dashboard/dashboard/movies/tags/AddTags";
+import AddGenre from "../dashboard/dashboard/movies/genre/AddGenre";
+import AddQuality from "../dashboard/dashboard/movies/quality/AddQuality";
+import AddDirector from "../dashboard/dashboard/movies/director/AddDirector";
+import AddYear from "../dashboard/dashboard/movies/year/AddYear";
+import EditMovies from "../dashboard/dashboard/movies/movies/EditMovies";
 
 const router = createBrowserRouter([
   // ==========>> CLIENT ROUTES <<===========
@@ -89,107 +90,110 @@ const router = createBrowserRouter([
 
   // ==========>> ADMIN ROUTES <<===========
   {
-    path: "/dashboard",
+    path: "/admin/dashboard",
     element: <DashMain />,
     children: [
       {
-        path: "/dashboard",
+        path: "/admin/dashboard",
         element: <Dashboard />,
       },
 
       // ================>> MOVIES ROUTES <<===============
       {
-        path: "/dashboard/db-movies",
+        path: "/admin/dashboard/db-movies",
         element: <DbMovies />,
       },
 
       {
-        path: "/dashboard/movies-db",
+        path: "/admin/dashboard/movies-db",
         element: <MoviesDB />,
       },
 
       {
-        path: "/dashboard/add-movie",
+        path: "/admin/dashboard/add-movie",
         element: <AddMovies />,
       },
 
       {
-        path: "/dashboard/add-tags",
+        path: "/admin/dashboard/edit-movie/:id",
+        element: <EditMovies />,
+      },
+
+      {
+        path: "/admin/dashboard/add-tags",
         element: <AddTags />,
       },
 
       {
-        path: "/dashboard/add-genre",
+        path: "/admin/dashboard/add-genre",
         element: <AddGenre />,
       },
 
       {
-        path: "/dashboard/add-quality",
+        path: "/admin/dashboard/add-quality",
         element: <AddQuality />,
       },
 
       {
-        path: "/dashboard/add-cast",
+        path: "/admin/dashboard/add-cast",
         element: <AddCast />,
       },
 
       {
-        path: "/dashboard/add-director",
+        path: "/admin/dashboard/add-director",
         element: <AddDirector />,
       },
 
       {
-        path: "/dashboard/add-year",
+        path: "/admin/dashboard/add-year",
         element: <AddYear />,
       },
 
       // ================>> TV SHOWS ROUTES <<===============
       {
-        path: "/dashboard/db-series",
+        path: "/admin/dashboard/db-series",
         element: <DbSeries />,
       },
-      
+
       {
-        path: "/dashboard/add-series",
+        path: "/admin/dashboard/add-series",
         element: <AddSeries />,
       },
 
       {
-        path: "/dashboard/add-creator",
+        path: "/admin/dashboard/add-creator",
         element: <AddCreator />,
       },
 
       {
-        path: "/dashboard/add-studio",
+        path: "/admin/dashboard/add-studio",
         element: <AddStudio />,
       },
 
       {
-        path: "/dashboard/add-networks",
+        path: "/admin/dashboard/add-networks",
         element: <AddNetworks />,
       },
 
       {
-        path: "/dashboard/db-seasons",
+        path: "/admin/dashboard/db-seasons",
         element: <Seasons />,
       },
 
       {
-        path: "/dashboard/add-season",
+        path: "/admin/dashboard/add-season",
         element: <AddSeasons />,
       },
 
       {
-        path: "/dashboard/episode",
+        path: "/admin/dashboard/episode",
         element: <Episode />,
       },
 
       {
-        path: "/dashboard/add-episode",
+        path: "/admin/dashboard/add-episode",
         element: <AddEpisode />,
       },
-
-
     ],
   },
 

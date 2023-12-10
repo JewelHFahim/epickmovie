@@ -1,9 +1,7 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
-import {
-  MdOutlineDashboardCustomize,
-  MdOutlineLocalMovies,
-} from "react-icons/md";
+import { MdMovieEdit, MdOutlineDashboardCustomize } from "react-icons/md";
+import { TbMovie } from "react-icons/tb";
 import { BsCameraReels } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 
@@ -46,15 +44,18 @@ const Menu = (props) => {
 };
 
 const Sidebar = () => {
+
+
+
   const navigation = [
     {
-      href: "/dashboard",
+      href: "/admin/dashboard",
       name: "Dashboard",
       icon: <MdOutlineDashboardCustomize />,
     },
 
     {
-      href: "/dashboard/db-movies",
+      href: "/admin/dashboard/db-movies",
       name: "Dbmovies",
       icon: <BsCameraReels />,
     },
@@ -108,29 +109,29 @@ const Sidebar = () => {
     },
   ];
 
-  const nestedNMovie = [
-    { name: "Movies", href: "/dashboard/movies-db", icon: "" },
-    { name: "Add New Post", href: "/dashboard/add-movie", icon: "" },
-    { name: "Tags", href: "/dashboard/add-tags", icon: "" },
-    { name: "Genres", href: "/dashboard/add-genre", icon: "" },
-    { name: "Quality", href: "/dashboard/add-quality", icon: "" },
-    { name: "Cast", href: "/dashboard/add-cast", icon: "" },
-    { name: "Director", href: "/dashboard/add-director", icon: "" },
-    { name: "Year", href: "/dashboard/add-year", icon: "" },
+  const nestedMovie = [
+    { name: "Movies", href: "/admin/dashboard/movies-db", icon: "" },
+    { name: "Add New Post", href: "/admin/dashboard/add-movie", icon: "" },
+    { name: "Tags", href: "/admin/dashboard/add-tags", icon: "" },
+    { name: "Genres", href: "/admin/dashboard/add-genre", icon: "" },
+    { name: "Quality", href: "/admin/dashboard/add-quality", icon: "" },
+    { name: "Cast", href: "/admin/dashboard/add-cast", icon: "" },
+    { name: "Director", href: "/admin/dashboard/add-director", icon: "" },
+    { name: "Year", href: "/admin/dashboard/add-year", icon: "" },
   ];
 
   const nestedNavTV = [
-    { name: "Tv Shows", href: "/dashboard/db-series", icon: "" },
-    { name: "Add New Post", href: "/dashboard/add-series", icon: "" },
-    { name: "Tags", href: "/dashboard/add-tags", icon: "" },
-    { name: "Genres", href: "/dashboard/add-genre", icon: "" },
-    { name: "Cast", href: "/dashboard/add-cast", icon: "" },
-    { name: "Creator", href: "/dashboard/add-creator", icon: "" },
-    { name: "Studio", href: "/dashboard/add-studio", icon: "" },
-    { name: "Networks", href: "/dashboard/add-networks", icon: "" },
-    { name: "Year", href: "/dashboard/add-year", icon: "" },
-    { name: "Seasons", href: "/dashboard/db-seasons", icon: "" },
-    { name: "Episodes", href: "/dashboard/episode", icon: "" },
+    { name: "Tv Shows", href: "/admin/dashboard/db-series", icon: "" },
+    { name: "Add New Post", href: "/admin/dashboard/add-series", icon: "" },
+    { name: "Tags", href: "/admin/dashboard/add-tags", icon: "" },
+    { name: "Genres", href: "/admin/dashboard/add-genre", icon: "" },
+    { name: "Cast", href: "/admin/dashboard/add-cast", icon: "" },
+    { name: "Creator", href: "/admin/dashboard/add-creator", icon: "" },
+    { name: "Studio", href: "/admin/dashboard/add-studio", icon: "" },
+    { name: "Networks", href: "/admin/dashboard/add-networks", icon: "" },
+    { name: "Year", href: "/admin/dashboard/add-year", icon: "" },
+    { name: "Seasons", href: "/admin/dashboard/db-seasons", icon: "" },
+    { name: "Episodes", href: "/admin/dashboard/episode", icon: "" },
   ];
 
   return (
@@ -143,6 +144,7 @@ const Sidebar = () => {
           </div>
 
           <div className="overflow-auto">
+
             {/* ========================>> MAIN MENUES <<=======================*/}
             <ul className="text-sm font-medium flex-1">
               {navigation.map((item, idx) => (
@@ -151,7 +153,7 @@ const Sidebar = () => {
                     href={item.href}
                     className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                   >
-                    <div className="text-gray-500">{item.icon}</div>
+                    <div className="text-gray-500 text-lg">{item.icon}</div>
                     {item.name}
                   </a>
                 </li>
@@ -159,13 +161,11 @@ const Sidebar = () => {
 
               {/* =====================>> NESTED MENUES <<==========================*/}
               <li>
-                <Menu items={nestedNMovie}>
-                  {" "}
-                  <MdOutlineLocalMovies /> Movies{" "}
+                <Menu items={nestedMovie}>
+                  <MdMovieEdit className="text-lg"/> Movies
                 </Menu>
                 <Menu items={nestedNavTV}>
-                  {" "}
-                  <MdOutlineLocalMovies /> TV Shows{" "}
+                  <TbMovie className="text-lg"/> TV Shows
                 </Menu>
               </li>
             </ul>
@@ -186,6 +186,7 @@ const Sidebar = () => {
                 ))}
               </ul>
             </div>
+            
           </div>
         </div>
       </nav>
