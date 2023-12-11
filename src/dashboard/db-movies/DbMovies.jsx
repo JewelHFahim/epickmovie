@@ -1,14 +1,36 @@
 import { IoIosArrowDown } from "react-icons/io";
 import Discovery from "./Discovery";
+import { useEffect, useState } from "react";
+import FilterByGenre from "./FilterByGenre";
 
 const DbMovies = () => {
+  const [toggleState, setToggleState] = useState("movie");
+  const handleState = (state) => {
+    setToggleState(state);
+  };
+
+  const [genreList, setGenre] = useState();
+  console.log(genreList);
+
+const [genreId, setGenreId] = useState(null)
+console.log(genreId)
+
+  const getGenreId = (gnid) => {
+    setGenreId(gnid)
+  }
+
+  useEffect(() => {
+    fetch(
+      `https://api.themoviedb.org/3/genre/movie/list?api_key=246b8014c5aa8430016780041a413012`
+    )
+      .then((res) => res.json())
+      .then((data) => setGenre(data));
+  }, []);
 
   return (
     <div className="w-full h-full">
-
       {/* ================>> Header Action Buttons and Filters <<=================*/}
       <div className="bg-slate-50 p-6">
-
         {/* Top Menus */}
         <div className="flex justify-between items-center mb-3">
           <div className="flex items-center gap-x-4">
@@ -17,11 +39,25 @@ const DbMovies = () => {
               <p className="text-sm font-medium">DBMVS</p>
             </div>
 
-            <button className=" px-5 py-[3px] rounded-[4px] text-sm border bg-slate-700 text-white ">
+            <button
+              onClick={() => handleState("movie")}
+              className={`px-5 py-[3px] rounded-[4px] text-sm border ${
+                toggleState === "movie"
+                  ? "bg-slate-700 text-white"
+                  : "bg-white text-slate-700"
+              }`}
+            >
               Movie
             </button>
 
-            <button className="px-5 py-[3px] rounded-[4px] text-sm border border-slate-700 text-slate-700">
+            <button
+              onClick={() => handleState("shows")}
+              className={`px-5 py-[3px] rounded-[4px] text-sm border ${
+                toggleState === "shows"
+                  ? "bg-slate-700 text-white"
+                  : "bg-white text-slate-700"
+              }`}
+            >
               Shows
             </button>
 
@@ -29,7 +65,9 @@ const DbMovies = () => {
               <button className="px-3 py-1 text-xs font-medium hover:bg-slate-200">
                 Credits: 9,999
               </button>
-              <button className="px-3 py-1 text-xs font-medium hover:bg-slate-200">Used: 0</button>
+              <button className="px-3 py-1 text-xs font-medium hover:bg-slate-200">
+                Used: 0
+              </button>
               <button className="px-3 py-1 text-xs font-medium hover:bg-slate-200">
                 Requests: 1
               </button>
@@ -45,6 +83,7 @@ const DbMovies = () => {
         </div>
 
         <hr />
+
         {/* Bottom Menus */}
         <div className="mt-3 flex items-center gap-x-3">
           <button className="border px-4 py-2 rounded-md">
@@ -72,6 +111,7 @@ const DbMovies = () => {
           </select>
 
           <select
+          
             data-te-select-init
             className="border px-4 py-1 rounded-md w-[170px]"
           >
@@ -79,13 +119,10 @@ const DbMovies = () => {
               All Genre
             </option>
             <option value="1">Action</option>
-            <option value="1">Animation</option>
-            <option value="1">Adventure</option>
-            <option value="1">Comedy</option>
-            <option value="1">Crime</option>
-            <option value="1">Documentary</option>
-            <option value="1">Drama</option>
-            <option value="1">Family</option>
+
+            {genreList?.genres?.map((item) => (
+              <option key={item?.id} value={item?.id} onClick={()=> getGenreId(item?.id)}> {item?.name} </option>
+            ))}
           </select>
 
           <button className="border px-4 py-1 rounded-md text-blue-500 border-blue-500">
@@ -95,13 +132,12 @@ const DbMovies = () => {
           <button className="border px-4 py-1 rounded-md text-blue-500 border-blue-500">
             Bulk Import
           </button>
-
         </div>
-
       </div>
 
       {/* ==========================>> Discovery <<================================*/}
-      <Discovery/>
+      <FilterByGenre />
+      <Discovery toggleState={toggleState} />
 
     </div>
   );

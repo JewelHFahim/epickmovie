@@ -30,6 +30,8 @@ import AddQuality from "../dashboard/dashboard/movies/quality/AddQuality";
 import AddDirector from "../dashboard/dashboard/movies/director/AddDirector";
 import AddYear from "../dashboard/dashboard/movies/year/AddYear";
 import EditMovies from "../dashboard/dashboard/movies/movies/EditMovies";
+import Login from "../dashboard/authentication/login/Login";
+import Register from "../dashboard/authentication/register/Register";
 
 const router = createBrowserRouter([
   // ==========>> CLIENT ROUTES <<===========
@@ -198,6 +200,14 @@ const router = createBrowserRouter([
   },
 
   // ========>> ERROR/LOGIN ROUTES <<=======
+  {
+    path: "/admin/login",
+    element: <Login />,
+  },
+  {
+    path: "/admin/register",
+    element: <Register />,
+  },
 ]);
 
 export default router;
