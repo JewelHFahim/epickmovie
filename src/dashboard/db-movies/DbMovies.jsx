@@ -63,24 +63,6 @@ const DbMovies = () => {
               Shows
             </button>
 
-            <div className="border border-slate-400 rounded-md divide-x-2 flex items-center overflow-hidden">
-              <button className="px-3 py-1 text-xs font-medium hover:bg-slate-200">
-                Credits: 9,999
-              </button>
-              <button className="px-3 py-1 text-xs font-medium hover:bg-slate-200">
-                Used: 0
-              </button>
-              <button className="px-3 py-1 text-xs font-medium hover:bg-slate-200">
-                Requests: 1
-              </button>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            <p className="text-sm text-slate-400 font-medium">Meta Updater</p>
-            <button className="px-3 py-1 bg-slate-700 text-white border rounded-md text-xs font-medium">
-              Start
-            </button>
           </div>
         </div>
 
