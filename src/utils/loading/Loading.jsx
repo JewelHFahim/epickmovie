@@ -1,7 +1,5 @@
-import "./Loading.css"
+import "./Loading.css";
 const Loading = () => {
-
-
   return (
     <div className="loader">
       <div className="inner one"></div>
@@ -9,8 +7,6 @@ const Loading = () => {
       <div className="inner three"></div>
     </div>
   );
-
-
 };
 
 export default Loading;

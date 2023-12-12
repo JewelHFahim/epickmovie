@@ -1,10 +1,14 @@
 import { useForm } from "react-hook-form";
 import { registerUser } from "../../../redux/features/users/userSlice";
 import toast from "react-hot-toast";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const {message} = useSelector(state => state.user);
+  console.log(message)
 
   const {
     handleSubmit,
@@ -15,7 +19,8 @@ const Register = () => {
   const onSubmit = (data) => {
     console.log(data);
     dispatch(registerUser(data));
-    toast.success("Registered")
+    // toast.success(message);
+    // navigate("/admin/login");
   };
 
   return (

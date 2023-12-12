@@ -32,6 +32,7 @@ import AddYear from "../dashboard/dashboard/movies/year/AddYear";
 import EditMovies from "../dashboard/dashboard/movies/movies/EditMovies";
 import Login from "../dashboard/authentication/login/Login";
 import Register from "../dashboard/authentication/register/Register";
+import PrivateRouter from "./PrivateRouter";
 
 const router = createBrowserRouter([
   // ==========>> CLIENT ROUTES <<===========
@@ -93,7 +94,7 @@ const router = createBrowserRouter([
   // ==========>> ADMIN ROUTES <<===========
   {
     path: "/admin/dashboard",
-    element: <DashMain />,
+    element: <PrivateRouter> <DashMain /></PrivateRouter>,
     children: [
       {
         path: "/admin/dashboard",

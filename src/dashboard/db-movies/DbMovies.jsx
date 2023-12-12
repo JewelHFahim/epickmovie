@@ -1,31 +1,33 @@
 import { IoIosArrowDown } from "react-icons/io";
-import Discovery from "./Discovery";
 import { useEffect, useState } from "react";
-import FilterByGenre from "./FilterByGenre";
+import { base_url, key } from "../../utils/Importants";
+import { useForm } from "react-hook-form";
+import Discovery from "./Discovery";
+import { Select, initTE } from "tw-elements";
 
 const DbMovies = () => {
+  initTE({ Select });
+
   const [toggleState, setToggleState] = useState("movie");
   const handleState = (state) => {
     setToggleState(state);
   };
 
   const [genreList, setGenre] = useState();
-  console.log(genreList);
-
-const [genreId, setGenreId] = useState(null)
-console.log(genreId)
-
-  const getGenreId = (gnid) => {
-    setGenreId(gnid)
-  }
-
   useEffect(() => {
-    fetch(
-      `https://api.themoviedb.org/3/genre/movie/list?api_key=246b8014c5aa8430016780041a413012`
-    )
+    fetch(`${base_url}/genre/movie/list?${key}`)
       .then((res) => res.json())
       .then((data) => setGenre(data));
   }, []);
+
+  const [filteredData, setFiltredData] = useState();
+
+  const { handleSubmit, register } = useForm();
+  const onSubmit = (data) => {
+    // e.preventDefault();
+    console.log(data);
+    setFiltredData(data);
+  };
 
   return (
     <div className="w-full h-full">
@@ -84,60 +86,80 @@ console.log(genreId)
 
         <hr />
 
-        {/* Bottom Menus */}
-        <div className="mt-3 flex items-center gap-x-3">
+        {/* FORM START */}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="mt-3 flex items-center gap-x-3"
+        >
           <button className="border px-4 py-2 rounded-md">
             <IoIosArrowDown />
           </button>
 
+          {/* =====================>> SORT BY YEAR <<==============================*/}
           <input
             type="number"
-            defaultValue={2021}
-            className="border px-4 py-1 rounded-md w-[80px]"
+            {...register("year")}
+            placeholder="year"
+            className="border px-4 py-1 rounded-md w-[85px] focus:outline-blue-500"
           />
 
+          {/* =====================>> FILTER BY PAGE <<=============================*/}
           <input
             type="number"
-            defaultValue={1}
-            className="border px-4 py-1 rounded-md w-[80px]"
+            {...register("page")}
+            placeholder="page"
+            className="border px-4 py-1 rounded-md w-[80px] focus:outline-blue-500"
           />
 
+          {/* =====================>> SORT BY ASC/DSC <<=============================*/}
           <select
-            data-te-select-init
-            className="border px-4 py-1 rounded-md w-[170px]"
+            {...register("sort")}
+            className="border px-4 py-1 rounded-md w-[170px] focus:outline-blue-500"
           >
-            <option value="1">Popularity desc</option>
-            <option value="1">Popularity asc</option>
+            <option value="popularity.desc">Popularity desc</option>
+            <option value="popularity.asc">Popularity asc</option>
           </select>
 
-          <select
-          
-            data-te-select-init
-            className="border px-4 py-1 rounded-md w-[170px]"
+          {/* =====================>> SORT BY GENRE<<================================*/}
+          <select data-te-select-init multiple  {...register("genreId")}
+            className="border p-4 py-1 rounded-md w-full border-red-800 focus:outline-blue-500  bg-red-200"
           >
-            <option value="1" hidden>
-              All Genre
-            </option>
-            <option value="1">Action</option>
-
+            <option  className="border p-4 py-1 rounded-md min-w-[170px] focus:outline-blue-500 bg-green-300"> All Genre </option>
             {genreList?.genres?.map((item) => (
-              <option key={item?.id} value={item?.id} onClick={()=> getGenreId(item?.id)}> {item?.name} </option>
+              <option key={item?.id} value={item?.id}>
+                {item?.name}
+              </option>
             ))}
           </select>
 
-          <button className="border px-4 py-1 rounded-md text-blue-500 border-blue-500">
+
+
+          <button
+            type="submit"
+            className="border px-4 py-1 rounded-md text-blue-500 border-blue-500 hover:text-blue-700 hover:border-blue-700 hover:bg-blue-50 "
+          >
             Discover
           </button>
 
           <button className="border px-4 py-1 rounded-md text-blue-500 border-blue-500">
             Bulk Import
           </button>
-        </div>
+        </form>
       </div>
 
       {/* ==========================>> Discovery <<================================*/}
-      <FilterByGenre />
-      <Discovery toggleState={toggleState} />
+
+      {filteredData?.genreId?.length > 0 ||
+      filteredData?.sort?.length > 0 ||
+      filteredData?.year?.length > 0 ||
+      filteredData?.page?.length ? (
+        <Discovery filteredData={filteredData} toggleState={toggleState} />
+      ) : (
+        <p className="">
+          <span className="font-medium mt-5"> DBMS </span> Welcome, the service
+          has started successfully
+        </p>
+      )}
 
     </div>
   );

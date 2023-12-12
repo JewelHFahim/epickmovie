@@ -1,7 +1,6 @@
 import { useForm } from "react-hook-form";
 import { loginUser } from "../../../redux/features/users/userSlice";
 import { useDispatch } from "react-redux";
-import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
@@ -17,7 +16,6 @@ const navigate = useNavigate();
   const onSubmit = (data) => {
     console.log(data);
     dispatch(loginUser(data));
-    toast.success("Login Success");
     navigate("/admin/dashboard")
   };
 
