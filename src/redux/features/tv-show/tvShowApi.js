@@ -5,22 +5,26 @@ const tvShowApi = apiSlice.injectEndpoints({
     // ==========================>> ALL TV Shows <<===========================
     tvShowList: builder.query({
       query: () => "/tv-posts",
-      providesTags: ["bollyflix"],
+      providesTags: ["EpicMovies"],
     }),
 
     // ========================>>  TV SHOW DETAILS <<=======================
     seriesDetails: builder.query({
       query: (tvShowId) => `/tv-post/${tvShowId}`,
-      providesTags: ["bollyflix"],
+      providesTags: ["EpicMovies"],
     }),
 
     // ===================>>  PAGINATION WISE MOVIE <<====================
     perPgaeTvShow: builder.query({
       query: (pageNo) => `/tv-posts?page=${pageNo}`,
-      providesTags: ["bollyflix"],
+      providesTags: ["EpicMovies"],
     }),
   }),
 });
 
-export const { useTvShowListQuery, useSeriesDetailsQuery, usePerPgaeTvShowQuery } = tvShowApi;
+export const {
+  useTvShowListQuery,
+  useSeriesDetailsQuery,
+  usePerPgaeTvShowQuery,
+} = tvShowApi;
 export default tvShowApi;

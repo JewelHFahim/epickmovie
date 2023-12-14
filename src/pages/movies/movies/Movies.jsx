@@ -2,10 +2,15 @@ import { useState } from "react";
 import DomainList from "../../../components/domain-list/DomainList";
 import MovieCard from "../../../components/movie-card/MovieCard";
 import Pagination from "../../../components/pagination/Pagination";
-import { usePerPgaeMovieQuery } from "../../../redux/features/movies/movieApi";
+import { useMovieListQuery, usePerPgaeMovieQuery } from "../../../redux/features/movies/movieApi";
 import Title from "../../../utils/Title";
 
 const Movies = () => {
+
+  const {data: movies} = useMovieListQuery();
+  console.log(movies);
+
+
 
   const [currentPage, setCurrentPage] = useState(1);
   const { data: perPgaeMovie } = usePerPgaeMovieQuery(currentPage);
@@ -23,8 +28,8 @@ const Movies = () => {
 
       {/* ==================>> Movies <<==================*/}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
-        {perPgaeMovie?.data?.data?.map((item) => (
-          <MovieCard key={item?.ID} item={item} redirect={`/movie/${item?.ID}`} ></MovieCard>
+        {movies?.data?.data?.map((item) => (
+          <MovieCard key={item?.id} item={item} redirect={`/movie/${item?.id}`}></MovieCard>
         ))}
       </div>
 

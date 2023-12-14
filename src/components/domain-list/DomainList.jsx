@@ -5,7 +5,7 @@ const DomainList = () => {
         Our All Domains are
         <span className="text-[#F00]">Epickmovies.fun</span> |
         <span className="text-[#FFD600]">EpickMovies.link</span> |
-        <span className="text-[#42FF00]">BollyFlix.shop</span>|
+        <span className="text-[#42FF00]">EpicMovies.shop</span>|
         <span className="text-[#69C9FF]"> movieshub.pro</span> |
         <span className="text-[#F00]">mlwbd.lat</span> |
         <span className="text-[#FFD600]">mlwbd.team</span>|

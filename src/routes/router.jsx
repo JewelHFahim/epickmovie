@@ -33,6 +33,7 @@ import EditMovies from "../dashboard/dashboard/movies/movies/EditMovies";
 import Login from "../dashboard/authentication/login/Login";
 import Register from "../dashboard/authentication/register/Register";
 import PrivateRouter from "./PrivateRouter";
+import Users from "../dashboard/users/Users";
 
 const router = createBrowserRouter([
   // ==========>> CLIENT ROUTES <<===========
@@ -94,11 +95,20 @@ const router = createBrowserRouter([
   // ==========>> ADMIN ROUTES <<===========
   {
     path: "/admin/dashboard",
-    element: <PrivateRouter> <DashMain /></PrivateRouter>,
+    element: (
+      <PrivateRouter>
+        <DashMain />
+      </PrivateRouter>
+    ),
     children: [
       {
         path: "/admin/dashboard",
         element: <Dashboard />,
+      },
+
+      {
+        path: "/admin/dashboard/users",
+        element: <Users />,
       },
 
       // ================>> MOVIES ROUTES <<===============
@@ -197,6 +207,11 @@ const router = createBrowserRouter([
         path: "/admin/dashboard/add-episode",
         element: <AddEpisode />,
       },
+
+      {
+        path: "/admin/dashboard/register",
+        element: <Register />,
+      },
     ],
   },
 
@@ -204,11 +219,8 @@ const router = createBrowserRouter([
   {
     path: "/admin/login",
     element: <Login />,
-  },
-  {
-    path: "/admin/register",
-    element: <Register />,
-  },
+  }
+
 ]);
 
 export default router;

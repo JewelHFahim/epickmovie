@@ -6,22 +6,25 @@ import Loading from "../utils/loading/Loading";
 const PrivateRouter = ({ children }) => {
   const location = useLocation();
   const { isLoading, token } = useSelector((state) => state.user);
+  
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
-  console.log(token)
+  console.log(token);
 
-  console.log(userInfo?.token)
+  console.log(userInfo?.token);
 
   if (isLoading) {
     return (
       <div className="w-screen h-screen flex flex-col justify-center items-center">
-        <div>
-          <Loading />
-        </div>
+        <Loading />
       </div>
     );
   }
 
-  if (userInfo?.token && userInfo?.token !== null && userInfo?.token !== undefined) {
+  if (
+    userInfo?.token &&
+    userInfo?.token !== null &&
+    userInfo?.token !== undefined
+  ) {
     return children;
   } else {
     return <Navigate to="/admin/login" state={{ from: location }} replace />;

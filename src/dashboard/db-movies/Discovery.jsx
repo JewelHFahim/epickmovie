@@ -6,7 +6,11 @@ const Discovery = ({ filteredData, toggleState }) => {
 
   return (
     <div className="p-10">
-      {toggleState === "movie" ? <DiscoverMovies filteredData={filteredData} /> : <DiscoverTvshows />}
+      {toggleState === "movie" ? (
+        <DiscoverMovies filteredData={filteredData} />
+      ) : (
+        <DiscoverTvshows />
+      )}
     </div>
   );
 };

@@ -20,7 +20,7 @@ const MovieDetails = () => {
   const sanitizedHtml = DOMPurify.sanitize(details?.post_content);
 
   const currentDate = new Date();
-  const givenDate = new Date(details?.post_modified);
+  const givenDate = new Date(details?.updated_at);
 
   // Calculate time difference in milliseconds
   const timeDifference = currentDate.getTime() - givenDate.getTime();
@@ -46,15 +46,15 @@ const MovieDetails = () => {
               <p className="text-[13px] text-white font-roboto">
                 {daysDifference === 0
                   ? "Today Uploaded"
-                  : `${daysDifference} "Days Ago" `}
+                  : `${daysDifference} Days Ago`}
               </p>
             </div>
 
             <div className="mt-[11px] lg:mt-[48px] max-w-[745px]">
-              <p
-                className="text-[13px] lg:text-[15px]  text-white font-roboto"
-                dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
-              ></p>
+              <p className="text-[13px] lg:text-[15px]  text-white font-roboto">
+                {" "}
+                {details?.post_content}{" "}
+              </p>
             </div>
 
             {/* Static Data */}
@@ -87,10 +87,11 @@ const MovieDetails = () => {
 
               <div className="font-roboto lg:w-[70%]">
                 <h3 className="text-[20px] text-[#FFA113]">
-                  {details?.post_name}
+                  {" "}
+                  {details?.post_title}{" "}
                 </h3>
 
-                <DateFormate date={details?.release_date}/>
+                <DateFormate date={details?.release_date} />
 
                 <p className="text-[13px] text-[#AEABAB] mt-[10px] flex items-start gap-1 max-w-[100%]">
                   Director:
@@ -101,19 +102,34 @@ const MovieDetails = () => {
                         key={i}
                         className="text-[#FFA113] underline mx-1"
                       >
-                        {item.name}
+                        {" "}
+                        {item?.term?.name}{" "}
+                      </a>
+                    ))}
+                  </span>
+                </p>
+                <p className="text-[13px] text-[#AEABAB] mt-[10px] flex items-start gap-1 max-w-[100%]">
+                  Stars:
+                  <span>
+                    {details?.additional_data?.dtcast?.map((item, i) => (
+                      <a
+                        href=""
+                        key={i}
+                        className="text-[#FFA113] underline mx-1"
+                      >
+                        {" "}
+                        {item?.term?.name}{" "}
                       </a>
                     ))}
                   </span>
                 </p>
 
-                {/* Nedd Summery*/}
+                {/* Need Summery*/}
                 <p className="text-[13px] text-[#AEABAB] font-[700] max-w-[455px]">
                   Summary:
                   <a href="" className="text-white font-[400]">
-                    A high-octane action thriller which outlines the emotional
-                    journey of a man who is set to rectify the wrongs in the
-                    society.
+                    {" "}
+                    {details?.post_content}{" "}
                   </a>
                 </p>
 
@@ -144,7 +160,7 @@ const MovieDetails = () => {
 
             <div className="max-w-[715px] mt-[13px]">
               <h3 className="text-[18px] lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center">
-                <a href={details?.guid}> {details?.post_title} ~ BollyFlix </a>
+                <a href={details?.guid}> {details?.post_title} ~ EpicMovies </a>
               </h3>
             </div>
 
@@ -154,9 +170,7 @@ const MovieDetails = () => {
                 Storyline:
               </h3>
               <p className="text-white text-[16px] lg:text-[20px] mt-4">
-                A high-octane action thriller which outlines the emotional
-                journey of a man who is set to rectify the wrongs in the
-                society.
+                {details?.post_content}
               </p>
             </div>
 

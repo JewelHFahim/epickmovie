@@ -23,7 +23,7 @@ const TvShow = () => {
       {/* ==================>> Movies <<==================*/}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
         {perPgaeMovie?.data?.data?.map((item) => (
-          <MovieCard key={item?.ID}  item={item} redirect={`/series/${item?.ID}`}></MovieCard>
+          <MovieCard key={item?.id}  item={item}></MovieCard>
         ))}
       </div>
 

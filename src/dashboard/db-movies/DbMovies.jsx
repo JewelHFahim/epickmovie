@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { base_url, key } from "../../utils/Importants";
 import { useForm } from "react-hook-form";
 import Discovery from "./Discovery";
-import { Select, initTE } from "tw-elements";
+import { useDispatch, useSelector } from "react-redux";
+import { bulkMovieImport } from "../../redux/features/movies/movieSlice";
 
 const DbMovies = () => {
-  initTE({ Select });
-
+  const {bulkData} = useSelector(state => state.movie);
   const [toggleState, setToggleState] = useState("movie");
+  const dispatch = useDispatch();
   const handleState = (state) => {
     setToggleState(state);
   };
@@ -21,19 +22,26 @@ const DbMovies = () => {
   }, []);
 
   const [filteredData, setFiltredData] = useState();
-
   const { handleSubmit, register } = useForm();
   const onSubmit = (data) => {
-    // e.preventDefault();
     console.log(data);
     setFiltredData(data);
   };
 
+    // ===================>> BULK DATA IMPORT <<====================
+    const handleBulkImport = async () => {
+      // const data = { tmdb_ids: selectedIds};
+      const res = await dispatch(bulkMovieImport({tmdb_ids:bulkData}));
+      console.log(res);
+    };
+
+
   return (
     <div className="w-full h-full">
       {/* ================>> Header Action Buttons and Filters <<=================*/}
-      <div className="bg-slate-50 p-6">
+      <div className="bg-slate-200 p-6">
         {/* Top Menus */}
+
         <div className="flex justify-between items-center mb-3">
           <div className="flex items-center gap-x-4">
             <div className="flex items-center gap-1">
@@ -62,13 +70,15 @@ const DbMovies = () => {
             >
               Shows
             </button>
-
           </div>
         </div>
 
         <hr />
 
-        {/* FORM START */}
+        {/* ============================>> FORM START <<============================ */}
+        
+        <div className="flex items-center gap-x-3">
+
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="mt-3 flex items-center gap-x-3"
@@ -103,18 +113,12 @@ const DbMovies = () => {
           </select>
 
           {/* =====================>> SORT BY GENRE<<================================*/}
-          <select data-te-select-init multiple  {...register("genreId")}
-            className="border p-4 py-1 rounded-md w-full border-red-800 focus:outline-blue-500  bg-red-200"
+          <select data-te-select-init  {...register("genreId")}
+            className="border p-4 py-1 rounded-md w-[170px]  focus:outline-blue-500  "
           >
-            <option  className="border p-4 py-1 rounded-md min-w-[170px] focus:outline-blue-500 bg-green-300"> All Genre </option>
-            {genreList?.genres?.map((item) => (
-              <option key={item?.id} value={item?.id}>
-                {item?.name}
-              </option>
-            ))}
+            {genreList?.genres?.map((item) => ( <option key={item?.id} value={item?.id}> {item?.name} </option> ))}
+
           </select>
-
-
 
           <button
             type="submit"
@@ -122,11 +126,14 @@ const DbMovies = () => {
           >
             Discover
           </button>
-
-          <button className="border px-4 py-1 rounded-md text-blue-500 border-blue-500">
-            Bulk Import
-          </button>
         </form>
+
+        <button onClick={()=> handleBulkImport()} className="border px-4 py-1 rounded-md text-blue-500 border-blue-500 mt-[12px]">
+            Bulk Import
+        </button>
+
+        </div>
+
       </div>
 
       {/* ==========================>> Discovery <<================================*/}
@@ -137,12 +144,11 @@ const DbMovies = () => {
       filteredData?.page?.length ? (
         <Discovery filteredData={filteredData} toggleState={toggleState} />
       ) : (
-        <p className="">
-          <span className="font-medium mt-5"> DBMS </span> Welcome, the service
-          has started successfully
+        <p className="border p-5 text-sm">
+          <span className="font-medium mt-5"> DBMS </span> 
+          Welcome, the service has started successfully
         </p>
       )}
-
     </div>
   );
 };

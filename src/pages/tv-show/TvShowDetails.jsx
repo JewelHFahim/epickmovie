@@ -154,7 +154,7 @@ const TvShowDetails = () => {
             {/* ===> CARD END <=== */}
             <div className="max-w-[715px] mt-[13px]">
               <h3 className="text-[18px] lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center">
-                <a href={details?.guid}> {details?.post_title} ~ BollyFlix </a>
+                <a href={details?.guid}> {details?.post_title} ~ EpicMovies </a>
               </h3>
             </div>
 
@@ -257,7 +257,6 @@ const TvShowDetails = () => {
           </div>
         </div>
       </section>
-
 
       {/* ===========>> RELETED POST <<=========== */}
       <section className="mt-[33px] p-5">

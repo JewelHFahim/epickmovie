@@ -4,8 +4,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-const dispatch = useDispatch();
-const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const {
     handleSubmit,
@@ -13,10 +13,16 @@ const navigate = useNavigate();
     formState: { errors },
   } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
-    dispatch(loginUser(data));
-    navigate("/admin/dashboard")
+  const onSubmit = async (data) => {
+    try {
+      const userToken = await dispatch(loginUser(data));
+
+      if (userToken) {
+        navigate("/admin/dashboard");
+      }
+    } catch (error) {
+      console.error("Error during login:", error);
+    }
   };
 
   return (
@@ -80,17 +86,6 @@ const navigate = useNavigate();
               </button>
             </div>
           </form>
-        </div>
-
-        <div className="flex items-center justify-center py-4 text-center">
-          <span className="text-sm">Dont have an account?</span>
-
-          <a
-            href="/admin/register"
-            className="mx-2 text-sm font-medium text-blue-500 hover:underline"
-          >
-            Register
-          </a>
         </div>
       </div>
     </div>
