@@ -1,11 +1,17 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
+const getUserName = localStorage.getItem("user-info");
+const logoutToken = JSON.parse(getUserName);
+console.log(logoutToken?.token)
+
+
 const initialState = {
   email: "",
   isLoading: false,
   token: "",
   message: "",
+
 };
 
 // ==================================>> LOGIN <<==============================
@@ -25,8 +31,9 @@ export const loginUser = createAsyncThunk(
       if (response.ok) {
         const data = await response.json();
         console.log(data);
+
         dispatch(setToken(data?.data?.token));
-        const info = { token: data?.data?.token };
+        const info = { token: data?.data?.token, user_name: data?.data?.user_name };
         localStorage.setItem("user-info", JSON.stringify(info));
         toast.success(`Login Success`);
         return data?.data?.token;
@@ -41,7 +48,7 @@ export const loginUser = createAsyncThunk(
   }
 );
 
-// ==================================>> Register <<============================
+// ==================================>> REGISTER <<============================
 export const registerUser = createAsyncThunk(
   "registerUser",
   async (body, { dispatch }) => {
@@ -66,6 +73,37 @@ export const registerUser = createAsyncThunk(
     }
   }
 );
+
+
+// ===================================>> LOGOUT <<=============================
+export const logoutUser = createAsyncThunk(
+  "logoutUser",
+  async (body, { dispatch }) => {
+    try {
+      const res = await fetch("https://fapi.epickmovies.online/api/admin/logout", {
+        method: "POST",
+        headers: { "Content-Type": "application/json",
+        "Authorization": `Bearer ${logoutToken}`
+       },
+        body: JSON.stringify(body),
+      });
+
+      if (res.ok) {
+        const logOut = await res.json();
+        dispatch(setMessage(logOut?.message));
+        console.log(logOut);
+        toast.success(`${logOut?.message}`);
+      } else {
+        return toast.error("Logout Failed");
+      }
+    } catch (error) {
+      console.log("Logout Failed");
+    }
+  }
+);
+
+
+
 
 const userSlice = createSlice({
   name: "user",

@@ -1,48 +1,9 @@
+import { useUserListQuery } from "../../redux/features/users/userApi";
+
 const Users = () => {
-  const tableItems = [
-    {
-      avatar:
-        "https://images.unsplash.com/photo-1511485977113-f34c92461ad9?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
-      name: "Liam James",
-      email: "liamjames@example.com",
-      phone_nimber: "+1 (555) 000-000",
-      position: "Admin",
-      salary: "0",
-    },
-    {
-      avatar: "https://randomuser.me/api/portraits/men/86.jpg",
-      name: "Olivia Emma",
-      email: "oliviaemma@example.com",
-      phone_nimber: "+1 (555) 000-000",
-      position: "Editor",
-      salary: "0",
-    },
-    {
-      avatar: "https://randomuser.me/api/portraits/women/79.jpg",
-      name: "William Benjamin",
-      email: "william.benjamin@example.com",
-      phone_nimber: "+1 (555) 000-000",
-      position: "Moderator",
-      salary: "0",
-    },
-    {
-      avatar: "https://api.uifaces.co/our-content/donated/xZ4wg2Xj.jpg",
-      name: "Henry Theodore",
-      email: "henrytheodore@example.com",
-      phone_nimber: "+1 (555) 000-000",
-      position: "Admin",
-      salary: "0",
-    },
-    {
-      avatar:
-        "https://images.unsplash.com/photo-1439911767590-c724b615299d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&ixid=eyJhcHBfaWQiOjE3Nzg0fQ",
-      name: "Amelia Elijah",
-      email: "amelia.elijah@example.com",
-      phone_nimber: "+1 (555) 000-000",
-      position: "Editor",
-      salary: "0",
-    },
-  ];
+
+  const {data: userList} = useUserListQuery();
+  console.log(userList)
 
   return (
     <div className=" mx-auto p-10">
@@ -73,10 +34,16 @@ const Users = () => {
             </tr>
           </thead>
           <tbody className="text-gray-600 divide-y">
-            {tableItems.map((item, idx) => (
+            {userList?.data?.map((item, idx) => (
               <tr key={idx}>
                 <td className="flex items-center gap-x-3 py-3 px-6 whitespace-nowrap">
-                  <img src={item.avatar} className="w-10 h-10 rounded-full" />
+
+                  <div className="w-10 h-10 rounded-full bg-slate-200">
+                    {/* <img src={item.avatar} className="w-10 h-10 rounded-full" /> */}
+                    </div>
+
+                  
+
                   <div>
                     <span className="block text-gray-700 text-sm font-medium">
                       {item.name}
@@ -84,8 +51,15 @@ const Users = () => {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{item.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{item.position}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{item.user_type}</td>
                 <td className="text-right px-6 whitespace-nowrap">
+                  <a
+                    href={`/admin/dashboard/users/${item?.id}`}
+                    className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"
+                  >
+                    View
+                  </a>
+
                   <a
                     href="javascript:void()"
                     className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"

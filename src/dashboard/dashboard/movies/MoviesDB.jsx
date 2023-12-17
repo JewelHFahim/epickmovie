@@ -36,9 +36,8 @@ const MoviesDB = () => {
                     <thead className="text-gray-600 font-medium border-b">
                         <tr>
                             <th className="py-3 px-6">Poster & Title</th>
-                            <th className="py-3 px-6">Genre</th>
+                            <th className="py-3 px-6">Type</th>
                             <th className="py-3 px-6">Published</th>
-                            <th className="py-3 px-6">Rating</th>
                             <th className="text-center">Actions</th>
                         </tr>
                     </thead>
@@ -51,15 +50,15 @@ const MoviesDB = () => {
                                 <tr key={idx} className="odd:bg-gray-50 even:bg-white">
                                     <td className="px-6 py-4 font-medium flex items-center gap-x-2">
                                         <img src={item?.poster_image_url} alt="" className="w-[50px] h-[50px] rounded-full" />
-                                        {item?.post_name.slice(0,50)}
+                                        {item?.post_title?.slice(0,50)}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">{item?.post_type}</td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        {item?.post_modified.slice(0,10)}
+                                        {item?.release_date?.slice(0,10)}
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap">{item?.post_status}</td>
+
                                     <td className="text-right px-6 whitespace-nowrap">
-                                        <a href="javascript:void()" className="py-2 px-3 font-medium text-green-600 hover:text-green-500 duration-150 hover:bg-gray-50 rounded-lg">
+                                        <a href={`/admin/dashboard/details/${item?.id}`} className="py-2 px-3 font-medium text-green-600 hover:text-green-500 duration-150 hover:bg-gray-50 rounded-lg">
                                             Preview
                                         </a>
                                         <a href={`/admin/dashboard/edit-movie/${item?.ID}`} className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">

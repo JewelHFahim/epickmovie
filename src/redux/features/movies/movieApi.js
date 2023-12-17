@@ -38,6 +38,16 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
+    // ========================>> BANGLA <<=============================
+    banglaMovieList: builder.query({
+      query: () => "/sp-terms/bangla",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ##################################################################
+    // ############################## ADMIN ROUTES ######################
+    // ##################################################################
+
     // =================>> SINGLE MOVIE IMPORT(MUTATION) <<==============
     singleMovieImport: builder.mutation({
       query: (data) => ({
@@ -57,6 +67,13 @@ const movieApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["EpicMovies"],
     }),
+
+    adminMovieDetails: builder.query({
+      query: (id) => `/admin/get-movie/${id}`,
+      providesTags: ["EpicMovies"],
+    }),
+
+
   }),
 });
 
@@ -69,5 +86,7 @@ export const {
   useQualityListQuery,
   useSingleMovieImportMutation,
   useBulkMovieImportMutation,
+  useBanglaMovieListQuery,
+  useAdminMovieDetailsQuery
 } = movieApi;
 export default movieApi;

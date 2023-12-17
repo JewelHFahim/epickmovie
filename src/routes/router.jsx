@@ -34,6 +34,9 @@ import Login from "../dashboard/authentication/login/Login";
 import Register from "../dashboard/authentication/register/Register";
 import PrivateRouter from "./PrivateRouter";
 import Users from "../dashboard/users/Users";
+import BanglaMovie from "../pages/movies/bangla/BanglaMovie";
+import AdminMovieDetails from "../dashboard/dashboard/movies/movies/AdminMovieDetails";
+import UserDetails from "../dashboard/users/UserDetails";
 
 const router = createBrowserRouter([
   // ==========>> CLIENT ROUTES <<===========
@@ -53,6 +56,11 @@ const router = createBrowserRouter([
       {
         path: "/movies",
         element: <Movies />,
+      },
+
+      {
+        path: "/bangla",
+        element: <BanglaMovie />,
       },
 
       {
@@ -111,6 +119,11 @@ const router = createBrowserRouter([
         element: <Users />,
       },
 
+      {
+        path: "/admin/dashboard/users/:id",
+        element: <UserDetails />,
+      },
+
       // ================>> MOVIES ROUTES <<===============
       {
         path: "/admin/dashboard/db-movies",
@@ -120,6 +133,11 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard/movies-db",
         element: <MoviesDB />,
+      },
+
+      {
+        path: "/admin/dashboard/details/:id",
+        element: <AdminMovieDetails />,
       },
 
       {

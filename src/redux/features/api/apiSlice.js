@@ -1,4 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+const getUserName = localStorage.getItem("user-info");
+const token = JSON.parse(getUserName)?.token;
+console.log(token)
 
 const apiSlice = createApi({
   reducerPath: "apiSlice",
@@ -7,7 +10,7 @@ const apiSlice = createApi({
     headers: {
       "content-type": "application/json",
       "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
-      "Authorization": "Bearer 2|jmfnE005o9dl7RZNdUchCRooOxdiLeHA7SYxBFnv188d14e9"
+      "Authorization": `Bearer ${token}`
     },
   }),
   tagTypes: ["EpicMovies"],

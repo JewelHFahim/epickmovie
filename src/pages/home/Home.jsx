@@ -34,7 +34,7 @@ const Home = () => {
 
       {/* ==================>> Movies <<==================*/}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
-        {movies?.data?.data?.slice(0, 10)?.map((item) => (
+        {movies?.data?.data?.map((item) => (
           <MovieCard
             key={item?.ID}
             item={item}

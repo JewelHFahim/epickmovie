@@ -7,6 +7,7 @@ import MovieCard from "../../../components/movie-card/MovieCard";
 const SearchList = () => {
 
   const { searchTerm } = useSelector((state) => state.search);
+  console.log(searchTerm)
   const { data: searchResults } = useSerachResultsQuery(searchTerm);
 
   return (

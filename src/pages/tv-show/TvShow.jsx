@@ -12,7 +12,7 @@ const TvShow = () => {
   console.log(perPgaeMovie);
 
   return (
-    <div className="flex flex-col justify-center items-center">
+    <div className="min-h-screen flex flex-col items-center">
       {/* ==================>> Domains <<=================*/}
       <DomainList />
 

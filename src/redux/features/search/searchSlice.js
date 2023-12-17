@@ -4,13 +4,13 @@ const initialState = {
   isLoading: false,
   searchTerm: "",
   filteredTerm: "",
+  pageNo: "",
 };
 
 export const searchSlice = createSlice({
   name: "search",
   initialState,
   reducers: {
-
     collectSearchItem: (state, action) => {
       state.searchTerm = action.payload;
     },
@@ -19,9 +19,12 @@ export const searchSlice = createSlice({
       state.filteredTerm = action.payload;
     },
 
+    setPageNo: (state, action) => {
+      state.pageNo = action.payload;
+    },
   },
 });
 
-export const { collectSearchItem, collectFilteredItem } = searchSlice.actions;
+export const { collectSearchItem, collectFilteredItem, setPageNo } = searchSlice.actions;
 
 export default searchSlice.reducer;

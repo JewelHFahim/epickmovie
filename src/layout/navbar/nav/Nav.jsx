@@ -14,8 +14,13 @@ import {
   useYearListQuery,
 } from "../../../redux/features/movies/movieApi";
 import { useDispatch } from "react-redux";
-import { collectFilteredItem } from "../../../redux/features/search/searchSlice";
+import {
+  collectFilteredItem,
+  setPageNo,
+} from "../../../redux/features/search/searchSlice";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { BiMovie } from "react-icons/bi";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -29,6 +34,18 @@ const Nav = () => {
     columns.push(genreList?.data?.slice(i, i + itemsPerColumn));
   }
 
+  const [page, setPage] = useState(1);
+  const handleGenre = (data) => {
+    console.log({ data, page });
+    dispatch(collectFilteredItem(data));
+    dispatch(setPageNo(page));
+  };
+
+  const handleYear = (year) => {
+    console.log(year);
+    dispatch(collectFilteredItem(year));
+  };
+
   return (
     <nav className="menu bg-[#494949] w-full h-[54px]">
       <ul>
@@ -38,8 +55,16 @@ const Nav = () => {
           </a>
         </li>
 
-        {/* =========>> MOVIES <<========== */}
         <li className="main-menu">
+          <a href="/movies" className=" flex items-center gap-2">
+            {/* <img src={home} alt="" className="w-[25px] h-[25px]" /> */}
+            <BiMovie className="text-[25px]" />
+            Movies
+          </a>
+        </li>
+
+        {/* =========>> MOVIES <<========== */}
+        {/* <li className="main-menu">
           <a href="#" className=" flex items-center gap-2">
             <img src={home2} alt="" className="w-[21px] h-[16px]" /> Home
           </a>
@@ -50,7 +75,7 @@ const Nav = () => {
               </li>
             ))}
           </ul>
-        </li>
+        </li> */}
 
         {/* =========>> GENRE <<========== */}
         <li className="main-menu">
@@ -62,7 +87,8 @@ const Nav = () => {
               <li key={i}>
                 <Link
                   to="/filter-list"
-                  onClick={() => dispatch(collectFilteredItem(item?.href.split("/").filter(Boolean).pop()))}
+                  // onClick={()=> dispatch(collectFilteredItem(item?.slug))}>
+                  onClick={() => handleGenre(item?.slug)}
                 >
                   {item?.name}
                 </Link>
@@ -80,9 +106,9 @@ const Nav = () => {
           <ul className="grid">
             {yearList?.data?.map((item, i) => (
               <li key={i}>
-                <Link to="/filter-list"
-                 onClick={() => dispatch(collectFilteredItem(item?.href.split("/").filter(Boolean).pop()))}
-                >{item.name}</Link>
+                <Link to="/filter-list" onClick={() => handleYear(item?.slug)}>
+                  {item.name}
+                </Link>
               </li>
             ))}
           </ul>
@@ -96,22 +122,34 @@ const Nav = () => {
           <ul>
             {qualityList?.data?.map((item, i) => (
               <li key={i}>
-                <Link to="/filter-list"
-                      onClick={() => dispatch(collectFilteredItem(item?.href.split("/").filter(Boolean).pop()))}
-                >{item.name}</Link>
+                <Link
+                  to="/filter-list"
+                  onClick={() =>
+                    dispatch(
+                      collectFilteredItem(
+                        item?.href.split("/").filter(Boolean).pop()
+                      )
+                    )
+                  }
+                >
+                  {item.name}
+                </Link>
               </li>
-            ))} 
+            ))}
           </ul>
         </li>
 
         <li className="main-menu">
-          <a href="http://localhost:3000/tv-show/" className=" flex items-center gap-2">
+          <a
+            href="/tv-show"
+            className=" flex items-center gap-2"
+          >
             <img src={webSer} alt="" className="w-[22px] h-[22px]" /> Web Series
           </a>
         </li>
 
         <li className="main-menu">
-          <a href="#" className=" flex items-center gap-2">
+          <a href="/bangla" className=" flex items-center gap-2">
             <img src={bangla} alt="" className="w-[20px] h-[20px]" /> Bangla
           </a>
         </li>

@@ -7,6 +7,9 @@ import { IoIosArrowDown } from "react-icons/io";
 import { GoQuestion } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
+import { useDispatch } from "react-redux";
+import { logoutUser } from "../redux/features/users/userSlice";
 
 // NESTED MENUS
 const Menu = (props) => {
@@ -47,6 +50,8 @@ const Menu = (props) => {
 };
 
 const Sidebar = () => {
+  const dispatch = useDispatch();
+
   const navigation = [
     {
       href: "/admin/dashboard",
@@ -106,17 +111,29 @@ const Sidebar = () => {
     { name: "Episodes", href: "/admin/dashboard/episode", icon: "" },
   ];
 
+  const getUserName = localStorage.getItem("user-info");
+  const parsData = JSON.parse(getUserName);
+  const userName = parsData?.user_name;
+
+
+  const handleLogout = () => {
+    dispatch(logoutUser());
+    localStorage.clear();
+    
+  };
+
   return (
     <>
       <nav className="full h-screen border-r bg-white space-y-8">
-        <div className="flex flex-col h-full px-4 overflow-y-auto">
-          {/* =================>> ADMIN/PROFILE RELATED <<======================*/}
+        <div className="flex flex-col h-full px-4 overflow-y-auto border relative">
+          {/* ============================>> LOGO <<=======================*/}
           <div className="h-20 flex items-center pl-2">
             <img src={logo} alt="" className="object-cover" />
           </div>
 
+          {/* ========================>> MENUES <<=========================*/}
           <div className="overflow-auto">
-            {/* ========================>> MAIN MENUES <<=======================*/}
+            {/* ======================>> MAIN MENUES <<====================*/}
             <ul className="text-sm font-medium flex-1">
               {navigation.map((item, idx) => (
                 <li key={idx}>
@@ -130,7 +147,7 @@ const Sidebar = () => {
                 </li>
               ))}
 
-              {/* =====================>> NESTED MENUES <<==========================*/}
+              {/* ==================>> NESTED MENUES <<=====================*/}
               <li>
                 <Menu items={nestedMovie}>
                   <MdMovieEdit className="text-lg" /> Movies
@@ -141,7 +158,7 @@ const Sidebar = () => {
               </li>
             </ul>
 
-            {/* =======================>> FOOTER MENUES <<========================*/}
+            {/* =====================>> FOOTER MENUES <<======================*/}
             <div className="pt-2 mt-2 border-t">
               <ul className="text-sm font-medium">
                 {navsFooter.map((item, idx) => (
@@ -157,6 +174,26 @@ const Sidebar = () => {
                 ))}
               </ul>
             </div>
+          </div>
+
+          {/* ==================>> ADMIN PROFILE/LOGOUT <<==================*/}
+
+          <div className="absolute bottom-6 left-6 flex items-center">
+            <div className="flex items-center gap-2">
+              <div className="w-[45px] h-[45px] border rounded-full bg-slate-200 "></div>
+              <div>
+                <h3 className="p-0 m-0 leading-0 text-sm">{userName}</h3>
+                <p className="p-0 m-0 leading-0 text-xs">Admin</p>
+              </div>
+            </div>
+
+            <button
+              onClick={() => handleLogout()}
+              className="flex items-center gap-1 ml-16 hover:text-red-300 transform duration-150 cursor-pointer"
+            >
+              <FiLogOut className="text-xl" />
+              <p>Logout</p>
+            </button>
           </div>
         </div>
       </nav>
