@@ -46,6 +46,11 @@ const Nav = () => {
     dispatch(collectFilteredItem(year));
   };
 
+  const handleQuality = (quality) => {
+    console.log(quality);
+    dispatch(collectFilteredItem(quality));
+  };
+
   return (
     <nav className="menu bg-[#494949] w-full h-[54px]">
       <ul>
@@ -122,16 +127,7 @@ const Nav = () => {
           <ul>
             {qualityList?.data?.map((item, i) => (
               <li key={i}>
-                <Link
-                  to="/filter-list"
-                  onClick={() =>
-                    dispatch(
-                      collectFilteredItem(
-                        item?.href.split("/").filter(Boolean).pop()
-                      )
-                    )
-                  }
-                >
+                <Link to="/filter-list" onClick={() => handleQuality(item?.slug)}>
                   {item.name}
                 </Link>
               </li>

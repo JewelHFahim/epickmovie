@@ -10,6 +10,7 @@ import { FaUsers } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/features/users/userSlice";
+import { useNavigate } from "react-router-dom";
 
 // NESTED MENUS
 const Menu = (props) => {
@@ -51,6 +52,7 @@ const Menu = (props) => {
 
 const Sidebar = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const navigation = [
     {
@@ -89,6 +91,7 @@ const Sidebar = () => {
   const nestedMovie = [
     { name: "Movies", href: "/admin/dashboard/movies-db", icon: "" },
     { name: "Add New Post", href: "/admin/dashboard/add-movie", icon: "" },
+    { name: "Audio", href: "/admin/dashboard/add-audio", icon: "" },
     { name: "Tags", href: "/admin/dashboard/add-tags", icon: "" },
     { name: "Genres", href: "/admin/dashboard/add-genre", icon: "" },
     { name: "Quality", href: "/admin/dashboard/add-quality", icon: "" },
@@ -115,11 +118,10 @@ const Sidebar = () => {
   const parsData = JSON.parse(getUserName);
   const userName = parsData?.user_name;
 
-
-  const handleLogout = () => {
+  const handleLogout = async () => {
     dispatch(logoutUser());
     localStorage.clear();
-    
+    navigate("/admin/login");
   };
 
   return (

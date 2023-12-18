@@ -5,11 +5,9 @@ import Loading from "../utils/loading/Loading";
 
 const PrivateRouter = ({ children }) => {
   const location = useLocation();
-  const { isLoading, token } = useSelector((state) => state.user);
+  const { isLoading } = useSelector((state) => state.user);
   
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
-  console.log(token);
-
   console.log(userInfo?.token);
 
   if (isLoading) {

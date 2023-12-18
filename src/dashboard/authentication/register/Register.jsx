@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { registerUser } from "../../../redux/features/users/userSlice";
 import { useDispatch } from "react-redux";
-import { Select, initTE } from "tw-elements";
+// import { Select, initTE } from "tw-elements";
 import { useNavigate } from "react-router-dom";
 import {
   useUserRoleListQuery,
@@ -9,7 +9,7 @@ import {
 
 const Register = () => {
   
-  initTE({ Select });
+  // initTE({ Select });
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const {

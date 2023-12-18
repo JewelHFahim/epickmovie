@@ -37,6 +37,7 @@ import Users from "../dashboard/users/Users";
 import BanglaMovie from "../pages/movies/bangla/BanglaMovie";
 import AdminMovieDetails from "../dashboard/dashboard/movies/movies/AdminMovieDetails";
 import UserDetails from "../dashboard/users/UserDetails";
+import AddAudio from "../dashboard/dashboard/movies/audio/AddAudio";
 
 const router = createBrowserRouter([
   // ==========>> CLIENT ROUTES <<===========
@@ -148,6 +149,11 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard/edit-movie/:id",
         element: <EditMovies />,
+      },
+
+      {
+        path: "/admin/dashboard/add-audio",
+        element: <AddAudio />,
       },
 
       {

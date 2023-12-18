@@ -1,40 +1,34 @@
 import { useParams } from "react-router-dom";
-import { useSingleUserDetailsQuery, useUserRoleListQuery } from "../../redux/features/users/userApi";
+import {
+  useSingleUserDetailsQuery,
+  useUserRoleListQuery,
+} from "../../redux/features/users/userApi";
 import { useForm } from "react-hook-form";
-import { useDispatch } from "react-redux";
-import { Select, initTE } from "tw-elements";
 import { useNavigate } from "react-router-dom";
+import { useUpdateUserMutation } from "../../redux/features/movies/movieApi";
 
 const UserDetails = () => {
-  initTE({ Select });
   const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const {
-    handleSubmit,
-    register,
-  } = useForm();
-  const { data: userRoleList } = useUserRoleListQuery();
-  const {id } = useParams();
+  const { handleSubmit, register } = useForm();
 
+  const { id } = useParams();
+  console.log(id)
   const { data: userDetails } = useSingleUserDetailsQuery(parseInt(id));
+  const { data: userRoleList } = useUserRoleListQuery();
 
-  console.log(userRoleList);
+  const [updateUser] = useUpdateUserMutation();
 
   const onSubmit = (data) => {
-    const userData = {
-      full_name: data.full_name,
-      email: data.email,
-      password: data.password,
-      role_type: parseInt(data.user_role),
-    };
-
-    console.log(userData);
-
-    // dispatch(registerUser(userData));
+    console.log({ data, id: parseInt(id) });
+    const res = updateUser({ data, id: parseInt(id) });
+    console.log(res)
     navigate("/admin/dashboard/users");
   };
 
   const rolesData = userRoleList?.data;
+
+  const inputStyle =
+    "block w-full px-4 py-1 mt-2 placeholder:text-sm placeholder-gray-500 bg-white border border-gray-500 focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300";
 
   return (
     <div className="w-full h-full flex justify-center items-center bg-white">
@@ -54,11 +48,11 @@ const UserDetails = () => {
             <div className="w-full mt-4">
               <input
                 type="text"
-                {...register("full_name")}
+                {...register("name")}
                 defaultValue={userDetails?.data?.name}
                 placeholder="Full Name"
                 aria-label="Full Name"
-                className="block w-full px-4 py-1 mt-2 placeholder:text-sm placeholder-gray-500 bg-white border border-gray-500 focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+                className={inputStyle}
               />
             </div>
 
@@ -69,16 +63,11 @@ const UserDetails = () => {
                 defaultValue={userDetails?.data?.email}
                 placeholder="Email Address"
                 aria-label="Email Address"
-                className="block w-full px-4 py-1 mt-2 placeholder:text-sm  placeholder-gray-500 bg-white border border-gray-500 focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+                className={inputStyle}
               />
             </div>
 
-
-            <select
-              data-te-select-init
-              {...register("user_role")}
-              className="block w-full px-4 py-1 mt-2 placeholder:text-sm  placeholder-gray-500 bg-white border border-gray-500 focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
-            >
+            <select {...register("user_type")} className={inputStyle}>
               <option hidden>{userDetails?.data?.user_type}</option>
 
               {Object.entries(rolesData ?? {}).map(([roleId, role]) => (
@@ -88,6 +77,16 @@ const UserDetails = () => {
               ))}
             </select>
 
+            <div className="w-full mt-4">
+              <input
+                type="password"
+                {...register("password")}
+                defaultValue={userDetails?.data?.email}
+                placeholder="Password"
+                aria-label="Password"
+                className={inputStyle}
+              />
+            </div>
 
             <div className="flex items-center justify-center mt-4">
               <button

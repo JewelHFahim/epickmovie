@@ -1,17 +1,14 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
-const getUserName = localStorage.getItem("user-info");
-const logoutToken = JSON.parse(getUserName);
-console.log(logoutToken?.token)
-
+const userInfo = JSON.parse(localStorage.getItem("user-info"));
+console.log(`Bearer ${userInfo?.token}`);
 
 const initialState = {
   email: "",
   isLoading: false,
   token: "",
   message: "",
-
 };
 
 // ==================================>> LOGIN <<==============================
@@ -20,7 +17,8 @@ export const loginUser = createAsyncThunk(
   "loginUser",
   async (body, { dispatch }) => {
     try {
-      const response = await fetch("https://fapi.epickmovies.online/api/admin/login",
+      const response = await fetch(
+        "https://fapi.epickmovies.online/api/admin/login",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -33,7 +31,10 @@ export const loginUser = createAsyncThunk(
         console.log(data);
 
         dispatch(setToken(data?.data?.token));
-        const info = { token: data?.data?.token, user_name: data?.data?.user_name };
+        const info = {
+          token: data?.data?.token,
+          user_name: data?.data?.user_name,
+        };
         localStorage.setItem("user-info", JSON.stringify(info));
         toast.success(`Login Success`);
         return data?.data?.token;
@@ -53,11 +54,14 @@ export const registerUser = createAsyncThunk(
   "registerUser",
   async (body, { dispatch }) => {
     try {
-      const res = await fetch("https://fapi.epickmovies.online/api/admin/signup", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(body),
-      });
+      const res = await fetch(
+        "https://fapi.epickmovies.online/api/admin/signup",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(body),
+        }
+      );
 
       if (res.ok) {
         const registerRes = await res.json();
@@ -74,19 +78,22 @@ export const registerUser = createAsyncThunk(
   }
 );
 
-
 // ===================================>> LOGOUT <<=============================
 export const logoutUser = createAsyncThunk(
   "logoutUser",
   async (body, { dispatch }) => {
     try {
-      const res = await fetch("https://fapi.epickmovies.online/api/admin/logout", {
-        method: "POST",
-        headers: { "Content-Type": "application/json",
-        "Authorization": `Bearer ${logoutToken}`
-       },
-        body: JSON.stringify(body),
-      });
+      const res = await fetch(
+        "https://fapi.epickmovies.online/api/admin/logout",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${userInfo.token}`,
+          },
+          body: JSON.stringify({}),
+        }
+      );
 
       if (res.ok) {
         const logOut = await res.json();
@@ -102,9 +109,6 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
-
-
-
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -116,8 +120,7 @@ const userSlice = createSlice({
 
     setToken: (state, action) => {
       state.token = action.payload;
-
-      console.log("setToken", action.payload)
+      console.log("setToken", action.payload);
     },
 
     setMessage: (state, action) => {

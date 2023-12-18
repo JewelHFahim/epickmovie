@@ -58,6 +58,11 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
+    adminMovieDetails: builder.query({
+      query: (id) => `/admin/get-movie/${id}`,
+      providesTags: ["EpicMovies"],
+    }),
+
     // =================>> BULK MOVIE IMPORT(MUTATION) <<================
     bulkMovieImport: builder.mutation({
       query: (data) => ({
@@ -68,9 +73,60 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-    adminMovieDetails: builder.query({
-      query: (id) => `/admin/get-movie/${id}`,
+    // ======================>> CREATE GENRE <<==========================
+    createGenre: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: "/admin/create-genre",
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+    // ======================>> CREATE QUALITY <<==========================
+    createQuality: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: "/admin/create-quality",
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+    // ======================>> AUDIO LIST <<==============================
+    getAudioList: builder.query({
+      query: () => `/admin/get-audio`,
       providesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> CREATE AUDIO  <<=============================
+    createAudio: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: "/admin/create-audio",
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> UPDATE MOVIE  <<=============================
+    updateMovie: builder.mutation({
+      query: ({data, id}) => ({
+        method: "PUT",
+        url: `/admin/movie-update/${id}`,
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> UPDATE USERE  <<=============================
+    updateUser: builder.mutation({
+      query: ({data, id}) => ({
+        method: "PUT",
+        url: `/admin/get-user-data/${id}`,
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
     }),
 
 
@@ -87,6 +143,12 @@ export const {
   useSingleMovieImportMutation,
   useBulkMovieImportMutation,
   useBanglaMovieListQuery,
-  useAdminMovieDetailsQuery
+  useAdminMovieDetailsQuery,
+  useCreateGenreMutation,
+  useCreateQualityMutation,
+  useGetAudioListQuery,
+  useCreateAudioMutation,
+  useUpdateMovieMutation,
+  useUpdateUserMutation
 } = movieApi;
 export default movieApi;

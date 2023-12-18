@@ -61,7 +61,7 @@ const MoviesDB = () => {
                                         <a href={`/admin/dashboard/details/${item?.id}`} className="py-2 px-3 font-medium text-green-600 hover:text-green-500 duration-150 hover:bg-gray-50 rounded-lg">
                                             Preview
                                         </a>
-                                        <a href={`/admin/dashboard/edit-movie/${item?.ID}`} className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
+                                        <a href={`/admin/dashboard/edit-movie/${item?.id}`} className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
                                             Edit
                                         </a>
                                         <button href="javascript:void()" className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg">
