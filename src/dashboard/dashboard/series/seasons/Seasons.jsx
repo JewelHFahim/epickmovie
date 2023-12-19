@@ -1,27 +1,29 @@
 import { useState } from "react";
-import Pagination from "../../../components/pagination/Pagination";
-import { usePerPgaeTvShowQuery } from "../../../redux/features/tv-show/tvShowApi";
+import Pagination from "../../../../components/pagination/Pagination";
+import { usePerPgaeTvShowQuery } from "../../../../redux/features/tv-show/tvShowApi";
 
-const Episode = () => {
+const Seasons = () => {
+
   const [currentPage, setCurrentPage] = useState(1);
   const { data: perPgaeMovie } = usePerPgaeTvShowQuery(currentPage);
   console.log(perPgaeMovie);
 
   return (
     <div className="mx-auto bg-white border w-full h-full p-2">
+
       <div className="items-start justify-between md:flex">
         <div className="max-w-lg">
           <h3 className="text- text-xl text-slate-700 font-bold sm:text-2xl uppercase">
-            Episode
+          Seasons
           </h3>
         </div>
 
         <div className="mt-3 md:mt-0">
           <a
-            href="/admin/dashboard/add-episode"
+            href="/admin/dashboard/add-season"
             className="inline-block px-4 py-2 text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
           >
-            Add Episode
+            Add Seasons
           </a>
         </div>
       </div>
@@ -47,13 +49,13 @@ const Episode = () => {
                     alt=""
                     className="w-[50px] h-[50px] rounded-full"
                   />
-                  {item?.post_name.slice(0, 50)}
+                  {item?.post_name?.slice(0, 50)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item?.post_type}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  {item?.post_modified.slice(0, 10)}
+                  {item?.post_modified?.slice(0, 10)}
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item?.post_status}
@@ -93,4 +95,4 @@ const Episode = () => {
   );
 };
 
-export default Episode;
+export default Seasons;

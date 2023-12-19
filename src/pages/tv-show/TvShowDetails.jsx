@@ -11,7 +11,7 @@ import { useSeriesDetailsQuery } from "../../redux/features/tv-show/tvShowApi";
 
 const TvShowDetails = () => {
   const { id } = useParams();
-
+  console.log(id);
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
   console.log(details);
@@ -19,7 +19,7 @@ const TvShowDetails = () => {
   const sanitizedHtml = DOMPurify.sanitize(details?.post_content);
 
   const currentDate = new Date();
-  const givenDate = new Date(details?.post_modified);
+  const givenDate = new Date(details?.updated_at);
 
   // Calculate time difference in milliseconds
   const timeDifference = currentDate.getTime() - givenDate.getTime();
@@ -28,7 +28,7 @@ const TvShowDetails = () => {
   const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
   // Given date
-  const publishedDate = new Date(details?.release_date);
+  const publishedDate = new Date(details?.updated_at);
 
   // Format the date
   const formattedDate = publishedDate.toLocaleDateString("en-US", {
@@ -40,7 +40,7 @@ const TvShowDetails = () => {
   return (
     <div className="bg-[#27272A]">
       <div className="hidden  bg-[#18181a] text-[#727171] lg:flex items-center font-inter pt-[15px] pb-[20px] gap-[8px] font-[500] uppercase">
-        Home <AiOutlineDoubleRight /> Movies <AiOutlineDoubleRight /> Bllywood
+        Home <AiOutlineDoubleRight /> TV Series <AiOutlineDoubleRight /> Bllywood
       </div>
 
       <section className=" p-2 lg:p-5 flex justify-between">

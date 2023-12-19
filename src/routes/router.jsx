@@ -1,26 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import Main from "../layout/Main";
-import Home from "../pages/home/Home";
-import MovieDetails from "../pages/movies/movie-details/MovieDetails";
-import Category from "../pages/movies/category/Category";
-import SearchList from "../pages/movies/search-list/SearchList";
-import NotFound from "../pages/not-found/NotFound";
-import Movies from "../pages/movies/movies/Movies";
-import TvShow from "../pages/tv-show/TvShow";
-import TvShowDetails from "../pages/tv-show/tvShowDetails";
 import Dashboard from "../dashboard/dashboard/Dashboard";
 import DashMain from "../layout/dashboard/DashMain";
 import MoviesDB from "../dashboard/dashboard/movies/MoviesDB";
 import DbSeries from "../dashboard/dashboard/series/DbSeries";
-import FilterList from "../pages/movies/filter-list/FilterList";
-import AddSeries from "../dashboard/dashboard/series/AddSeries";
 import AddCreator from "../dashboard/dashboard/series/AddCreator";
 import AddStudio from "../dashboard/dashboard/series/AddStudio";
 import AddNetworks from "../dashboard/dashboard/series/AddNetworks";
-import Seasons from "../dashboard/dashboard/series/Seasons";
-import AddSeasons from "../dashboard/dashboard/series/AddSeason";
-import Episode from "../dashboard/dashboard/series/Episode";
-import AddEpisode from "../dashboard/dashboard/series/AddEpisode";
 import DbMovies from "../dashboard/db-movies/DbMovies";
 import AddCast from "../dashboard/dashboard/movies/cast/AddCast";
 import AddMovies from "../dashboard/dashboard/movies/movies/AddMovies";
@@ -34,71 +20,25 @@ import Login from "../dashboard/authentication/login/Login";
 import Register from "../dashboard/authentication/register/Register";
 import PrivateRouter from "./PrivateRouter";
 import Users from "../dashboard/users/Users";
-import BanglaMovie from "../pages/movies/bangla/BanglaMovie";
 import AdminMovieDetails from "../dashboard/dashboard/movies/movies/AdminMovieDetails";
 import UserDetails from "../dashboard/users/UserDetails";
 import AddAudio from "../dashboard/dashboard/movies/audio/AddAudio";
+import AdminTvShowDetails from "../dashboard/dashboard/series/series/AdminTvShowDetails";
+import AddSeries from "../dashboard/dashboard/series/series/AddSeries";
+import UpdateTvShow from "../dashboard/dashboard/series/series/UpdateTvShow";
+import Seasons from "../dashboard/dashboard/series/seasons/Seasons";
+import AddSeasons from "../dashboard/dashboard/series/seasons/AddSeason";
+import Episode from "../dashboard/dashboard/series/episode/Episode";
+import AddEpisode from "../dashboard/dashboard/series/episode/AddEpisode";
+import { clientRoutes } from "./clientRoutes";
 
 const router = createBrowserRouter([
+
   // ==========>> CLIENT ROUTES <<===========
   {
     path: "/",
     element: <Main />,
-    children: [
-      {
-        path: "/",
-        element: <Home />,
-      },
-
-      {
-        path: "/",
-        element: <Home />,
-      },
-      {
-        path: "/movies",
-        element: <Movies />,
-      },
-
-      {
-        path: "/bangla",
-        element: <BanglaMovie />,
-      },
-
-      {
-        path: "/tv-show",
-        element: <TvShow />,
-      },
-
-      {
-        path: "/movie/:id",
-        element: <MovieDetails />,
-      },
-
-      {
-        path: "/series/:id",
-        element: <TvShowDetails />,
-      },
-
-      {
-        path: "/category",
-        element: <Category />,
-      },
-
-      {
-        path: "/search-list",
-        element: <SearchList />,
-      },
-
-      {
-        path: "/filter-list",
-        element: <FilterList />,
-      },
-
-      {
-        path: "/not-found",
-        element: <NotFound />,
-      },
-    ],
+    children: clientRoutes
   },
 
   // ==========>> ADMIN ROUTES <<===========
@@ -110,6 +50,7 @@ const router = createBrowserRouter([
       </PrivateRouter>
     ),
     children: [
+
       {
         path: "/admin/dashboard",
         element: <Dashboard />,
@@ -193,8 +134,18 @@ const router = createBrowserRouter([
       },
 
       {
+        path: "/admin/dashboard/tvshow-details/:id",
+        element: <AdminTvShowDetails />,
+      },
+
+      {
         path: "/admin/dashboard/add-series",
         element: <AddSeries />,
+      },
+
+      {
+        path: "/admin/dashboard/update-tvShow/:id",
+        element: <UpdateTvShow />,
       },
 
       {
@@ -243,7 +194,7 @@ const router = createBrowserRouter([
   {
     path: "/admin/login",
     element: <Login />,
-  }
+  },
 
 ]);
 

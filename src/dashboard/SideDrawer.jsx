@@ -180,18 +180,18 @@ const Sidebar = () => {
 
           {/* ==================>> ADMIN PROFILE/LOGOUT <<==================*/}
 
-          <div className="absolute bottom-6 left-6 flex items-center">
+          <div className="absolute bottom-6 left-4 flex items-center">
             <div className="flex items-center gap-2">
               <div className="w-[45px] h-[45px] border rounded-full bg-slate-200 "></div>
               <div>
-                <h3 className="p-0 m-0 leading-0 text-sm">{userName}</h3>
+                <h3 className="p-0 m-0 leading-0 text-xs">{userName}</h3>
                 <p className="p-0 m-0 leading-0 text-xs">Admin</p>
               </div>
             </div>
 
             <button
               onClick={() => handleLogout()}
-              className="flex items-center gap-1 ml-16 hover:text-red-300 transform duration-150 cursor-pointer"
+              className="flex items-center gap-1 ml-7 hover:text-red-300 transform duration-150 cursor-pointer"
             >
               <FiLogOut className="text-xl" />
               <p>Logout</p>

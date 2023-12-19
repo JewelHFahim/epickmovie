@@ -9,14 +9,14 @@ import { useTvShowListQuery } from "../../redux/features/tv-show/tvShowApi";
 const Home = () => {
   const { data: movieList } = useMovieListQuery();
   const totalMovies = movieList?.data?.total;
+
   console.log(movieList)
+
   const { data: tvShowList } = useTvShowListQuery();
   const totalTvShow = tvShowList?.data?.total;
 
-
-  const {data: movies} = useMovieListQuery();
+  console.log(tvShowList)
   
-  console.log(movies)
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">
@@ -34,11 +34,11 @@ const Home = () => {
 
       {/* ==================>> Movies <<==================*/}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
-        {movies?.data?.data?.map((item) => (
+        {movieList?.data?.data?.slice(0, 10)?.map((item) => (
           <MovieCard
             key={item?.ID}
             item={item}
-            redirect={`/movie/${item?.ID}`}
+            redirect={`/movie/${item?.id}`}
           ></MovieCard>
         ))}
       </div>
@@ -51,7 +51,7 @@ const Home = () => {
           <MovieCard
             key={item?.ID}
             item={item}
-            redirect={`/series/${item?.ID}`}
+            redirect={`/series/${item?.id}`}
           ></MovieCard>
         ))}
       </div>

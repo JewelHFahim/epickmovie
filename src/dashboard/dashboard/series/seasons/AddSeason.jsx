@@ -23,7 +23,30 @@ const AddSeasons = () => {
         {/* ==================>> Tv Show INFO <<============== */}
         <h2 className="text-[20px]">Seasons Info</h2>
         <div className="px-8 bg-slate-100 p-5">
-          <div className="flex flex-col">
+          <div className="flex flex-col w-full">
+            <label className="">Generate Aata</label>
+            <div className="flex items-center gap-2 w-full">
+              <input
+                type="text"
+                name="generate-data"
+                {...register("generate-data")}
+                placeholder="1402"
+                className={`${inputStyle} w-1/4`}
+              />
+              <input
+                type="text"
+                name="generate-data"
+                {...register("generate-data")}
+                placeholder="1"
+                className={`${inputStyle} w-1/4`}
+              />
+            </div>
+            <p className="text-xs text-slate-400">
+              E.g. https://www.themoviedb.org/tv/1402-the-walking-dead/season/1/
+            </p>
+          </div>
+
+          <div className="flex flex-col mt-2">
             <label className="">Serie Name</label>
             <input
               type="text"
