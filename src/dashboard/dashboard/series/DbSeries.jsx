@@ -1,6 +1,8 @@
 import { useState } from "react"
 import Pagination from "../../../components/pagination/Pagination";
 import { useAdminTvShowListQuery, usePerPgaeTvShowQuery } from "../../../redux/features/tv-show/tvShowApi";
+import { useDeleteMovieSeriesMutation } from "../../../redux/features/trash/trashApi";
+import toast from "react-hot-toast";
 
 const DbSeries = () => {
     
@@ -10,6 +12,15 @@ const DbSeries = () => {
 
   const {data: alltvShows} = useAdminTvShowListQuery();
   console.log(alltvShows)
+
+
+  const [deleteMovieSeries] = useDeleteMovieSeriesMutation();
+
+  const handleDeleteSeason = (id) => {
+    deleteMovieSeries(id);
+    toast.error("Deleted");
+    console.log(id);
+  };
 
 
     return (
@@ -63,7 +74,7 @@ const DbSeries = () => {
                                         <a href={`/admin/dashboard/update-tvShow/${item?.id}`} className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
                                             Edit
                                         </a>
-                                        <button href="javascript:void()" className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg">
+                                        <button onClick={()=> handleDeleteSeason(item?.id)} className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg">
                                             Delete
                                         </button>
                                     </td>

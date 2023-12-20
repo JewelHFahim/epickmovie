@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import VedioPlayer from "../../../../components/video-player/VedioPlayer";
 
 const AdminMovieDetails = () => {
-  const { register, handleSubmit, reset } = useForm();
+  const { register } = useForm();
   const { id } = useParams();
   const { data: movieDetails } = useAdminMovieDetailsQuery(id);
   const details = movieDetails?.data;
@@ -21,7 +21,7 @@ const AdminMovieDetails = () => {
         </h3>
       </div>
 
-      {/* =============>> FORM DATA <<=========== */}
+      {/* ==================>> FORM DATA <<================= */}
       <div className="space-y-5 mb-12">
         {/* ==================>> MOVIE INFO <<============== */}
         <h2 className="text-[20px]">Movies Info</h2>
@@ -57,7 +57,7 @@ const AdminMovieDetails = () => {
           </div>
         </div>
 
-        {/* ==================>> Images and trailer <<============== */}
+        {/* =============>> Images and trailer <<=========== */}
         <h2 className="text-[20px]"> Images and trailer </h2>
         <div className="px-8 bg-slate-100 p-5">
           <div className="flex flex-col mt-2">
@@ -240,7 +240,7 @@ const AdminMovieDetails = () => {
         </div>
       </div>
 
-      {/* =============>> VEDIO PLAYER<<=========== */}
+      {/* =================>> VEDIO PLAYER<<================= */}
       <VedioPlayer />
     </main>
   );

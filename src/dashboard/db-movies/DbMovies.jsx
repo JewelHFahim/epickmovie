@@ -31,18 +31,16 @@ const DbMovies = () => {
   };
 
   // ===================>> BULK MOVIE IMPORT <<====================
-  const handleBulkImport = async () => {
-    // const data = { tmdb_ids: selectedIds};
-    // const res = await dispatch(bulkMovieImport({ tmdb_ids: bulkData }));
-    // console.log(res);
-    console.log({ tmdb_ids: bulkData })
+  const handleBulkImport =  () => {
+    const res = dispatch(bulkMovieImport({ tmdb_ids: bulkData }));
+    console.log(res);
 
   };
 
   // ===================>> BULK TV SHOW IMPORT <<====================
   const handleBulkTvShowImport = async () => {
-    // const res = dispatch(bulkTvShowImport({tmdb_ids:bulkTvData}));
-    console.log({ tmdb_ids: bulkTvData });
+    const res = dispatch(bulkTvShowImport({tmdb_ids:bulkTvData}));
+    console.log(res);
   };
 
   return (

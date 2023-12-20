@@ -8,9 +8,7 @@ const AdminTvShowDetails = () => {
   const details = tvShowDetails?.data;
   console.log(details);
 
-  const { register} = useForm();
-
-
+  const { register } = useForm();
 
   const inputStyle =
     "py-1 focus:outline-blue-500 border px-4 placeholder:text-sm";
@@ -23,7 +21,7 @@ const AdminTvShowDetails = () => {
         </h3>
       </div>
 
-      <div  className="space-y-5">
+      <div className="space-y-5">
         {/* ==================>> Tv Show INFO <<============== */}
         <h2 className="text-[20px]">Tv Show Info</h2>
         <div className="px-8 bg-slate-100 p-5">
@@ -42,7 +40,7 @@ const AdminTvShowDetails = () => {
             <input
               type="text"
               readOnly
-              defaultValue={details?.poster_image_url}
+              defaultValue={details?.additional_data[3]?.meta_value}
               className={inputStyle}
             />
           </div>
@@ -52,7 +50,7 @@ const AdminTvShowDetails = () => {
             <input
               type="text"
               readOnly
-              defaultValue={details?.backdrop_image}
+              defaultValue={details?.additional_data[4]?.meta_value}
               className={inputStyle}
             />
           </div>
@@ -61,10 +59,9 @@ const AdminTvShowDetails = () => {
             <label className="">Backdrops</label>
             <textarea
               type="text"
+              rows={4}
               readOnly
-              name="backdrops"
-              {...register("backdrops")}
-              placeholder="Place each image url below another"
+              defaultValue={details?.additional_data[2]?.meta_value}
               className={inputStyle}
             />
           </div>
@@ -90,9 +87,7 @@ const AdminTvShowDetails = () => {
             <input
               type="text"
               readOnly
-              name="original_title"
-              {...register("original_title")}
-              placeholder="Original title"
+              defaultValue={details?.additional_data[9]?.meta_value}
               className={inputStyle}
             />
           </div>
@@ -101,9 +96,8 @@ const AdminTvShowDetails = () => {
             <label className="">First Air Date</label>
             <input
               type="date"
-              name="first_air_date"
-              {...register("first_air_date")}
-              placeholder="Tag line"
+              readOnly
+              defaultValue={details?.additional_data[5]?.meta_value}
               className={inputStyle}
             />
           </div>
@@ -111,10 +105,9 @@ const AdminTvShowDetails = () => {
           <div className="flex flex-col mt-2 lg:w-1/2">
             <label className="">Last Air Date</label>
             <input
+              readOnly
               type="date"
-              name="last_air_date"
-              {...register("last_air_date")}
-              placeholder="Tag line"
+              defaultValue={details?.additional_data[6]?.meta_value}
               className={inputStyle}
             />
           </div>
@@ -124,17 +117,15 @@ const AdminTvShowDetails = () => {
             <div className="flex items-center gap-5 w-full">
               <input
                 type="text"
-                name="content_total1"
-                {...register("content_total1")}
-                placeholder="Seasons / Episodes"
+                readOnly
+                defaultValue={`${details?.additional_data[8]?.meta_value} Seaosns`}
                 className={`${inputStyle} w-1/2`}
               />
 
               <input
                 type="text"
-                name="content_total2"
-                {...register("content_total2")}
-                placeholder="Seasons / Episodes"
+                readOnly
+                defaultValue={`${details?.additional_data[7]?.meta_value} Episode`}
                 className={`${inputStyle} w-1/2`}
               />
             </div>
@@ -145,54 +136,43 @@ const AdminTvShowDetails = () => {
             <div className="flex items-center gap-5 w-full">
               <input
                 type="text"
-                name="rating_timd1"
-                {...register("rating_timd1")}
-                placeholder="Rating TMDb"
+                readOnly
+                defaultValue={details?.additional_data[0]?.meta_value}
                 className={`${inputStyle} w-1/2`}
               />
 
               <input
                 type="text"
-                name="rating_timd2"
-                {...register("rating_timd2")}
-                placeholder="Rating TMDb"
+                readOnly
+                defaultValue={details?.additional_data[1]?.meta_value}
                 className={`${inputStyle} w-1/2`}
               />
             </div>
           </div>
 
-          <div className="flex flex-col mt-2 lg:w-1/2">
-            <label className="">Episode Runtime</label>
-            <input
-              type="text"
-              readOnly
-              defaultValue={details?.runtime !== null ? details?.runtime : "N/A" }
-              className={inputStyle}
-            />
-          </div>
 
           <div className="flex flex-col mt-2">
             <label className="">Cast</label>
-            <div
-              className={`${inputStyle} flex gap-1 bg-white min-h-full h-[70px]`}
-            >
-              {details?.additional_data?.dtcast?.map((cast, i) => (
-                <p key={i}>{cast?.term?.name}</p>
-              ))}
-            </div>
+            <textarea
+              type="text"
+              rows={4}
+              readOnly
+              defaultValue={details?.additional_data[12]?.meta_value}
+              className={inputStyle}
+            />
           </div>
 
           <div className="flex flex-col mt-2">
             <label className="">Creator</label>
-            <input
+            <textarea
+            rows={4}
               type="text"
               readOnly
-              defaultValue={details?.additional_data?.dtcreator?.[0].term?.name}
+              defaultValue={details?.additional_data[13]?.meta_value}
               className={inputStyle}
             />
           </div>
         </div>
-
       </div>
     </main>
   );

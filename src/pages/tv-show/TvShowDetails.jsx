@@ -8,6 +8,8 @@ import DownloadButton from "../../utils/DownloadButton";
 import { useParams } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { useSeriesDetailsQuery } from "../../redux/features/tv-show/tvShowApi";
+import JoinTelegramBtn from "../../utils/JoinTelegramBtn";
+import SeasonMenu from "./SeasonMenu";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -37,10 +39,13 @@ const TvShowDetails = () => {
     day: "numeric",
   });
 
+  const keysList = Object?.keys(details?.download_links || {});
+  console.log(keysList);
+
   return (
     <div className="bg-[#27272A]">
       <div className="hidden  bg-[#18181a] text-[#727171] lg:flex items-center font-inter pt-[15px] pb-[20px] gap-[8px] font-[500] uppercase">
-        Home <AiOutlineDoubleRight /> TV Series <AiOutlineDoubleRight /> Bllywood
+        Home <AiOutlineDoubleRight /> TV Series
       </div>
 
       <section className=" p-2 lg:p-5 flex justify-between">
@@ -67,21 +72,9 @@ const TvShowDetails = () => {
               ></p>
             </div>
 
-            {/* Static Data */}
-            <div className="mt-[11px] lg:mt-[19px] max-w-[745px]">
-              <p className="text-[13px] lg:text-[15px]  text-white font-roboto">
-                <span className="font-[700]"> EpickMovies</span> Provide You
-                With Super Quality Of Movies and
-                <span className="font-[700]">WEB Series.</span> We Provide
-                Google Drive Direct Download Links For Fast And Secure
-                <span className="font-[700]">Download.</span> You Can Join us on
-                Telegram For the Latest Updates.
-              </p>
-            </div>
-
             <div className="my-[11px] lg:my-[15px]">
               <p className="text-[18px] lg:text-[24px] text-[#217703] font-[600] font-roboto">
-                Movie Details :
+                Series Details :
               </p>
             </div>
 
@@ -97,7 +90,7 @@ const TvShowDetails = () => {
 
               <div className="font-roboto lg:w-[70%]">
                 <h3 className="text-[20px] text-[#FFA113]">
-                  {details?.post_name}
+                  {details?.post_title}
                 </h3>
 
                 <p className="text-[10px] text-white">{formattedDate}</p>
@@ -105,13 +98,13 @@ const TvShowDetails = () => {
                 <p className="text-[13px] text-[#AEABAB] mt-[10px] flex items-start gap-1 max-w-[100%]">
                   Director:
                   <span>
-                    {details?.additional_data?.dtdirector?.map((item, i) => (
+                    {details?.additional_data?.dtcreator?.map((item, i) => (
                       <a
                         href=""
                         key={i}
                         className="text-[#FFA113] underline mx-1"
                       >
-                        {item.name}
+                        {item?.term?.name}
                       </a>
                     ))}
                   </span>
@@ -119,7 +112,7 @@ const TvShowDetails = () => {
 
                 {/* Nedd Summery*/}
                 <p className="text-[13px] text-[#AEABAB] font-[700] max-w-[455px]">
-                  Summary:
+                  Summary:{" "}
                   <a href="" className="text-white font-[400]">
                     A high-octane action thriller which outlines the emotional
                     journey of a man who is set to rectify the wrongs in the
@@ -130,21 +123,26 @@ const TvShowDetails = () => {
                 {/* IMDB Section */}
                 <>
                   <p className="text-[11px] text-[#AEABAB] mt-[22px]">
-                    Countries:{" "}
-                    <span className="text-white ">{details?.country}</span>
+                    Countries:
+                    <span className="text-white ">
+                      {" "}
+                      {details?.country !== null ? details?.country : "N/A"}
+                    </span>
                   </p>
 
                   <p className="text-[11px] text-[#AEABAB]">
-                    Source:
+                    Source:{" "}
                     <a href="" className="text-[#FFA113] font-[700]">
-                      imdb.com
+                      {" "}
+                      imdb.com{" "}
                     </a>
                   </p>
 
                   <p className="text-[11px] text-[#AEABAB]">
-                    IMBDb RATING:
+                    IMBDb RATING:{" "}
                     <a href="" className="text-[#FFA113] font-[700]">
-                      {details?.imdb_rating}
+                      {" "}
+                      {details?.imdb_rating}{" "}
                     </a>
                   </p>
                 </>
@@ -154,7 +152,7 @@ const TvShowDetails = () => {
             {/* ===> CARD END <=== */}
             <div className="max-w-[715px] mt-[13px]">
               <h3 className="text-[18px] lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center">
-                <a href={details?.guid}> {details?.post_title} ~ EpicMovies </a>
+                <a href={details?.guid}> {details?.post_title} ~ EpicSeries </a>
               </h3>
             </div>
 
@@ -179,7 +177,7 @@ const TvShowDetails = () => {
 
           {/* ==========>> SCREEN SHOTS <<=============*/}
           <div className="flex flex-col gap-4 mt-3">
-            {details?.screenshots?.map((item, i) => (
+            {details?.screenshots?.slice(0, 3)?.map((item, i) => (
               <img
                 key={i}
                 src={item}
@@ -195,24 +193,23 @@ const TvShowDetails = () => {
             </p>
           </div>
 
-          {/* ==========>> DOWNLOAD BUTTOn <<=============*/}
+          {/* ==========>> DOWNLOAD BUTTOJN <<=============*/}
           <div className=" max-w-[276px] lg:max-w-[399px] flex flex-col gap-3 mx-auto">
+            {/* 
             {details?.download_links?.map((item, i) => (
               <DownloadButton key={i} url={item?.download_link}>
                 Seasion {item?.season_no}
               </DownloadButton>
-            ))}
+            ))} */}
           </div>
 
-          {/* Missing */}
-          <div className="flex justify-center mt-[21px] lg:mt-[36px]">
-            <button className="flex justify-center items-center gap-2 border w-[211px] h-[43px] bg-[#FCD8FF] rounded-[9px]">
-              <img src={telegraqm} alt="" className="w-[22px] h-[22px]" />
-              <p className="text-[15px] text-black font-[700] font-roboto">
-                Join Our Telegram
-              </p>
-            </button>
-          </div>
+          {/* ===========>> TELEGRAM BUTTON <<=============*/}
+          <JoinTelegramBtn />
+
+          {/* ===========>> SEASON MENU <<=============*/}
+          {/* <div className="flex justify-center mt-4">
+            <SeasonMenu details={details}/>
+          </div> */}
         </div>
 
         {/* Column Two */}
@@ -289,3 +286,21 @@ const TvShowDetails = () => {
 };
 
 export default TvShowDetails;
+
+// const myArray = {
+//   Season1: [
+//     { balebl: "EP 1", download_links: "abc.com/test1" },
+//     { balebl: "EP 2", download_links: "abc.com/test2" },
+//     { balebl: "EP 3", download_links: "abc.com/test3" },
+//   ],
+//   Season2: [
+//     { balebl: "EP 1", download_links: "abc.com/test3" },
+//     { balebl: "EP 2", download_links: "abc.com/test4" },
+//   ],
+//   Season3: [{ balebl: "EP 1", download_links: "abc.com/test5" }],
+//   Season4: [],
+//   Season5: [
+//     { balebl: "EP 1", download_links: "abc.com/test6" },
+//     { balebl: "EP 2", download_links: "abc.com/test7" },
+//   ],
+// };

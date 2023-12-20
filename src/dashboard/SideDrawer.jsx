@@ -6,7 +6,7 @@ import { BsCameraReels } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 import { GoQuestion } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
-import { FaUsers } from "react-icons/fa";
+import { FaRegTrashAlt, FaUsers } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/features/users/userSlice";
@@ -73,6 +73,12 @@ const Sidebar = () => {
       href: "/admin/dashboard/users",
       name: "Users",
       icon: <FaUsers />,
+    },
+
+    {
+      href: "/admin/dashboard/trash",
+      name: "Trash",
+      icon: <FaRegTrashAlt />,
     },
 
     {
@@ -179,7 +185,6 @@ const Sidebar = () => {
           </div>
 
           {/* ==================>> ADMIN PROFILE/LOGOUT <<==================*/}
-
           <div className="absolute bottom-6 left-4 flex items-center">
             <div className="flex items-center gap-2">
               <div className="w-[45px] h-[45px] border rounded-full bg-slate-200 "></div>

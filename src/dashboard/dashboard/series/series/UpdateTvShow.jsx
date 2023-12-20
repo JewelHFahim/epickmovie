@@ -15,7 +15,7 @@ const UpdateTvShow = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    // updateMovie({ data, id });
+    updateMovie({ data, id });
     reset();
     navigate("/admin/dashboard/movies-db");
   };
@@ -60,6 +60,7 @@ const UpdateTvShow = () => {
               className={`${inputStyle} py-2`}
             />
           </div>
+
         </div>
 
         {/* ================>> Submit Btn <<================= */}

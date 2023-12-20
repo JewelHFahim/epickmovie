@@ -31,6 +31,7 @@ import AddSeasons from "../dashboard/dashboard/series/seasons/AddSeason";
 import Episode from "../dashboard/dashboard/series/episode/Episode";
 import AddEpisode from "../dashboard/dashboard/series/episode/AddEpisode";
 import { clientRoutes } from "./clientRoutes";
+import TrashList from "../dashboard/trash/trash/TrashList";
 
 const router = createBrowserRouter([
 
@@ -187,6 +188,12 @@ const router = createBrowserRouter([
         path: "/admin/dashboard/register",
         element: <Register />,
       },
+
+      {
+        path: "/admin/dashboard/trash",
+        element: <TrashList />,
+      },
+
     ],
   },
 

@@ -111,7 +111,7 @@ const movieApi = apiSlice.injectEndpoints({
 
     // ====================>> UPDATE MOVIE  <<=============================
     updateMovie: builder.mutation({
-      query: ({data, id}) => ({
+      query: ({ data, id }) => ({
         method: "PUT",
         url: `/admin/movie-update/${id}`,
         body: data,
@@ -119,17 +119,16 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
+
     // ====================>> UPDATE USERE  <<=============================
     updateUser: builder.mutation({
-      query: ({data, id}) => ({
+      query: ({ data, id }) => ({
         method: "PUT",
         url: `/admin/get-user-data/${id}`,
         body: data,
       }),
       invalidatesTags: ["EpicMovies"],
     }),
-
-
   }),
 });
 
@@ -149,6 +148,6 @@ export const {
   useGetAudioListQuery,
   useCreateAudioMutation,
   useUpdateMovieMutation,
-  useUpdateUserMutation
+  useUpdateUserMutation,
 } = movieApi;
 export default movieApi;

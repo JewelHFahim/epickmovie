@@ -98,7 +98,7 @@ const MovieDetails = () => {
 
           {/* ==========>> SCREEN SHOTS <<=============*/}
           <div className="flex flex-col gap-4 mt-3">
-            {details?.screenshots?.map((item, i) => (
+            {details?.screenshots?.slice(0,3)?.map((item, i) => (
               <img
                 key={i}
                 src={item}
