@@ -68,6 +68,11 @@ const DbSeries = () => {
                                         {item?.release_date?.slice(0,10)}
                                     </td>
                                     <td className="text-right px-6 whitespace-nowrap">
+
+                                    <a href={`/admin/dashboard/add-season/${item?.id}`} className="py-2 px-3 font-medium text-orange-800 hover:text-orange-500 duration-150 hover:bg-gray-50 rounded-lg">
+                                           +Add Season
+                                        </a>
+
                                     <a href={`/admin/dashboard/tvshow-details/${item?.id}`} className="py-2 px-3 font-medium text-green-600 hover:text-green-500 duration-150 hover:bg-gray-50 rounded-lg">
                                             Preview
                                         </a>

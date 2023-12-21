@@ -1,20 +1,17 @@
 import toast from "react-hot-toast";
-import {
-  useDeleteAllParmanetMutation,
-  useDeleteParmanetMutation,
-  useRestoreMovieSeriesMutation,
-  useTrashListQuery,
-} from "../../../redux/features/trash/trashApi";
 import { useState } from "react";
+import { useDeleteAllParmanetMutation, useDeleteParmanetMutation, useRestoreMovieSeriesMutation, useTrashListQuery } from "../../../../redux/features/trash/trashApi";
 import { useDispatch } from "react-redux";
 
-const TrashList = () => {
+const SeasonTrash = () => {
+
+
+
   const { data: trashList } = useTrashListQuery();
   console.log(trashList);
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const trashListData =
-    trashList?.data !== "Empty list." ? trashList?.data : [];
+  const trashListData = trashList?.data !== "Empty list." ? trashList?.data : [];
 
   const [deleteParmanet] = useDeleteParmanetMutation();
 
@@ -42,9 +39,9 @@ const TrashList = () => {
     setSelectedIds(allIds);
   };
 
-  const handleDeleteAll = () =>{
+  const handleDeleteAll = () => {
     // dispatch(deleteAllParmanet({ids: [selectedIds]}));
-  }
+  };
 
   console.log(selectedIds);
   const isSelected = (id) => {
@@ -53,10 +50,11 @@ const TrashList = () => {
 
   return (
     <div className="mx-auto bg-white border w-full h-full py-6 px-2">
+
       <div className="items-start justify-between md:flex">
         <div className="max-w-lg">
           <h3 className="text- text-xl text-slate-700 font-bold sm:text-2xl uppercase">
-            Trash List - (
+            Season Trash - (
             {trashList?.data !== "Empty list." ? trashList?.data?.length : 0})
           </h3>
         </div>
@@ -64,7 +62,7 @@ const TrashList = () => {
         {trashList?.data !== "Empty list." && (
           <div className="mt-3 md:mt-0">
             <button
-            onClick={()=> handleDeleteAll()}
+              onClick={() => handleDeleteAll()}
               className="inline-block px-4 py-2 text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
             >
               Delete All
@@ -147,17 +145,31 @@ const TrashList = () => {
                 </tr>
               ))}
             </tbody>
+
+            {/* <tbody>
+                {
+                    Object.values(myArray).flatMap(subArray => subArray.map(item => item.name))
+
+                    <tr>
+
+                </tr>
+                }
+            </tbody> */}
+
           </table>
         )}
 
         {/* <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          perPgaeMovie={perPgaeMovie}
-        /> */}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              perPgaeMovie={perPgaeMovie}
+            /> */}
       </div>
+
+
     </div>
   );
+
 };
 
-export default TrashList;
+export default SeasonTrash;

@@ -31,6 +31,35 @@ const tvShowApi = apiSlice.injectEndpoints({
       query: (pageNo) => `/tv-posts?page=${pageNo}`,
       providesTags: ["EpicMovies"],
     }),
+
+    // ===============================>> ADD SEASON <<==============================
+    addSeason: builder.mutation({
+      query: ({ data, id }) => ({
+        method: "POST",
+        url: `/admin/add-season/${id}`,
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+
+    // ===============================>> ADD EPISODE <<==============================
+    addEpisode: builder.mutation({
+      query: ({ data, id }) => ({
+        method: "POST",
+        url: `/admin/add-episode/${id}`,
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+    // ===============================>> EPISODE LIST <<==============================
+    episodeList: builder.query({
+      query: (id) => `/admin/get-episode/${id}`,
+      providesTags: ["EpicMovies"],
+    }),
+
+
   }),
 });
 
@@ -39,6 +68,9 @@ export const {
   useSeriesDetailsQuery,
   usePerPgaeTvShowQuery,
   useAdminTvShowListQuery,
-  useAdminTvShowDetailsQuery
+  useAdminTvShowDetailsQuery,
+  useAddSeasonMutation,
+  useEpisodeListQuery,
+  useAddEpisodeMutation
 } = tvShowApi;
 export default tvShowApi;

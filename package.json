@@ -22,7 +22,8 @@
     "react-router-dom": "^6.20.1",
     "redux-thunk": "^3.0.1",
     "tailwind-merge": "^2.1.0",
-    "tw-elements": "^1.1.0"
+    "tw-elements": "^1.1.0",
+    "tw-elements-react": "^1.0.0-alpha2"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

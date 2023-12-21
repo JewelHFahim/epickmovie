@@ -10,6 +10,7 @@ import DOMPurify from "dompurify";
 import { useSeriesDetailsQuery } from "../../redux/features/tv-show/tvShowApi";
 import JoinTelegramBtn from "../../utils/JoinTelegramBtn";
 import SeasonMenu from "./SeasonMenu";
+import Accrodion from "../../components/accrodion/Accrodion";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -194,22 +195,13 @@ const TvShowDetails = () => {
           </div>
 
           {/* ==========>> DOWNLOAD BUTTOJN <<=============*/}
-          <div className=" max-w-[276px] lg:max-w-[399px] flex flex-col gap-3 mx-auto">
-            {/* 
-            {details?.download_links?.map((item, i) => (
-              <DownloadButton key={i} url={item?.download_link}>
-                Seasion {item?.season_no}
-              </DownloadButton>
-            ))} */}
-          </div>
+          <Accrodion details={details}/>
+
 
           {/* ===========>> TELEGRAM BUTTON <<=============*/}
           <JoinTelegramBtn />
 
-          {/* ===========>> SEASON MENU <<=============*/}
-          {/* <div className="flex justify-center mt-4">
-            <SeasonMenu details={details}/>
-          </div> */}
+
         </div>
 
         {/* Column Two */}
@@ -287,20 +279,3 @@ const TvShowDetails = () => {
 
 export default TvShowDetails;
 
-// const myArray = {
-//   Season1: [
-//     { balebl: "EP 1", download_links: "abc.com/test1" },
-//     { balebl: "EP 2", download_links: "abc.com/test2" },
-//     { balebl: "EP 3", download_links: "abc.com/test3" },
-//   ],
-//   Season2: [
-//     { balebl: "EP 1", download_links: "abc.com/test3" },
-//     { balebl: "EP 2", download_links: "abc.com/test4" },
-//   ],
-//   Season3: [{ balebl: "EP 1", download_links: "abc.com/test5" }],
-//   Season4: [],
-//   Season5: [
-//     { balebl: "EP 1", download_links: "abc.com/test6" },
-//     { balebl: "EP 2", download_links: "abc.com/test7" },
-//   ],
-// };

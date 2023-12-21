@@ -41,8 +41,6 @@ const MovieGallery = ({ movies }) => {
     selectedIds.includes(id);
   };
 
-  console.log(selectedIds);
-
   // ===================>> BULK DATA IMPORT <<====================
   const handleBulkImport = async () => {
     const data = { tmdb_ids: selectedIds};
@@ -107,6 +105,7 @@ const MovieGallery = ({ movies }) => {
         >
           Select All
         </button>
+
       </div>
 
       <div style={{ display: "flex", flexWrap: "wrap" }}>

@@ -1,6 +1,9 @@
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useAdminTvShowDetailsQuery } from "../../../../redux/features/tv-show/tvShowApi";
+import { MdEditSquare } from "react-icons/md";
+import { FaTrashAlt } from "react-icons/fa";
+import { MdRemoveRedEye } from "react-icons/md";
 
 const AdminTvShowDetails = () => {
   const { id } = useParams();
@@ -150,7 +153,6 @@ const AdminTvShowDetails = () => {
             </div>
           </div>
 
-
           <div className="flex flex-col mt-2">
             <label className="">Cast</label>
             <textarea
@@ -165,7 +167,7 @@ const AdminTvShowDetails = () => {
           <div className="flex flex-col mt-2">
             <label className="">Creator</label>
             <textarea
-            rows={4}
+              rows={4}
               type="text"
               readOnly
               defaultValue={details?.additional_data[13]?.meta_value}
@@ -174,6 +176,59 @@ const AdminTvShowDetails = () => {
           </div>
         </div>
       </div>
+
+      <hr className="my-5" />
+      {/* ===============>> SEASON LIST HERE <<============== */}
+      <section>
+        <div className="mx-auto  bg-white">
+          <div className="items-start justify-center md:flex">
+            <div className="max-w-lg">
+              <h3 className="text-xl font-bold sm:text-2xl uppercase">
+                Season List
+              </h3>
+            </div>
+          </div>
+
+          {/* ==============>> GENRE LIST <<=============== */}
+          <div className="mt-4 shadow-sm border rounded-lg overflow-x-auto">
+            <table className="w-full table-auto text-sm text-left">
+              <thead className="text-gray-600 font-medium border-b">
+                <tr>
+                  <th className="py-3 px-6">Titile</th>
+                  <th className="text-center">Actions</th>
+                </tr>
+              </thead>
+
+              <tbody className="divide-y">
+                {details?.tv_seasons?.map((item, idx) => (
+                  <tr key={idx} className="odd:bg-gray-50 even:bg-white">
+                    <td className="px-6 py-4 font-medium flex items-center gap-x-2">
+                      {item?.season_name}
+                    </td>
+
+                    <td className="text-center px-6 ">
+
+                      <Link to={`/admin/dashboard/episode-list/${item?.id}`}>
+                      <button className="py-2 text-xl px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
+                        <MdRemoveRedEye />
+                      </button>
+                      </Link>
+                      
+
+                      <button
+                        href="javascript:void()"
+                        className="py-2 text-lg leading-none px-6 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
+                      >
+                        <FaTrashAlt />
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
     </main>
   );
 };

@@ -1,11 +1,27 @@
 import { useForm } from "react-hook-form";
+import { useParams } from "react-router-dom";
+import {
+  useAddSeasonMutation,
+  useAdminTvShowDetailsQuery,
+} from "../../../../redux/features/tv-show/tvShowApi";
+import toast from "react-hot-toast";
 
 const AddSeasons = () => {
+  const { id } = useParams();
   const { register, handleSubmit, reset } = useForm();
+  const { data: tvShowDetails } = useAdminTvShowDetailsQuery(id);
+  const [addSeason] = useAddSeasonMutation();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const details = tvShowDetails?.data;
+
+  console.log(details);
+
+  const onSubmit = (abc) => {
+    const data = {season_no: parseInt(abc.season_no)}
+   const res =   addSeason({data, id});
+console.log(res)
     reset();
+    toast.success("Season Added")
   };
 
   const inputStyle =
@@ -22,59 +38,27 @@ const AddSeasons = () => {
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {/* ==================>> Tv Show INFO <<============== */}
         <h2 className="text-[20px]">Seasons Info</h2>
-        <div className="px-8 bg-slate-100 p-5">
-          <div className="flex flex-col w-full">
-            <label className="">Generate Aata</label>
-            <div className="flex items-center gap-2 w-full">
-              <input
-                type="text"
-                name="generate-data"
-                {...register("generate-data")}
-                placeholder="1402"
-                className={`${inputStyle} w-1/4`}
-              />
-              <input
-                type="text"
-                name="generate-data"
-                {...register("generate-data")}
-                placeholder="1"
-                className={`${inputStyle} w-1/4`}
-              />
-            </div>
-            <p className="text-xs text-slate-400">
-              E.g. https://www.themoviedb.org/tv/1402-the-walking-dead/season/1/
-            </p>
-          </div>
 
+        <div className="px-8 bg-slate-100 p-5">
           <div className="flex flex-col mt-2">
             <label className="">Serie Name</label>
             <input
               type="text"
               name="title"
-              {...register("title")}
+              readOnly
               placeholder="Season Name"
+              defaultValue={details?.post_title}
               className={inputStyle}
             />
           </div>
 
           <div className="flex flex-col mt-2">
-            <label className="">Poster</label>
+            <label className="">Season No</label>
             <input
-              type="text"
-              name="poster"
-              {...register("poster")}
-              placeholder="Add Img URL"
-              className={inputStyle}
-            />
-          </div>
-
-          <div className="flex flex-col mt-2 lg:w-1/2">
-            <label className="">First Air Date</label>
-            <input
-              type="date"
-              name="first_air_date"
-              {...register("first_air_date")}
-              placeholder="Tag line"
+              type="number"
+              name="season_no"
+              {...register("season_no")}
+              placeholder="Season No"
               className={inputStyle}
             />
           </div>

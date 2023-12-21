@@ -17,11 +17,20 @@ const trashApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-    // =============>> DELETE MOVIE?SERIES PERMANENTLY  <<=================
+    // ===========>> DELETE SINGLE MOVIE/SERIES PERMANENTLY  <<============
     deleteParmanet: builder.mutation({
       query: (id) => ({
         method: "DELETE",
         url: `/admin/delete-trash-post/${id}`,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+    // ===========>> DELETE ALL MOVIE/SERIES PERMANENTLY  <<================
+    deleteAllParmanet: builder.mutation({
+      query: (allIds) => ({
+        method: "DELETE",
+        url: `/admin/clear-all-trash-post/${allIds}`,
       }),
       invalidatesTags: ["EpicMovies"],
     }),
@@ -35,8 +44,23 @@ const trashApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
+    // ===========>> DELETE SEASON  <<============
+    deleteSeason: builder.mutation({
+      query: (id) => ({
+        method: "DELETE",
+        url: `/admin/trash-season/${id}`,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
 
-
+    // ===========>> DELETE EPISODE  <<============
+    deleteEpisode: builder.mutation({
+      query: (id) => ({
+        method: "DELETE",
+        url: `/admin/trash-episode/${id}`,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
   }),
 });
 
@@ -44,6 +68,9 @@ export const {
   useTrashListQuery,
   useDeleteMovieSeriesMutation,
   useDeleteParmanetMutation,
-  useRestoreMovieSeriesMutation
+  useRestoreMovieSeriesMutation,
+  useDeleteAllParmanetMutation,
+  useDeleteSeasonMutation,
+  useDeleteEpisodeMutation
 } = trashApi;
 export default trashApi;
