@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import {
   useAddSeasonMutation,
   useAdminTvShowDetailsQuery,
@@ -11,17 +11,19 @@ const AddSeasons = () => {
   const { register, handleSubmit, reset } = useForm();
   const { data: tvShowDetails } = useAdminTvShowDetailsQuery(id);
   const [addSeason] = useAddSeasonMutation();
+  const navigate = useNavigate();
 
   const details = tvShowDetails?.data;
 
   console.log(details);
 
   const onSubmit = (abc) => {
-    const data = {season_no: parseInt(abc.season_no)}
-   const res =   addSeason({data, id});
-console.log(res)
+    const data = { season_no: parseInt(abc.season_no) };
+    const res = addSeason({ data, id });
+    console.log(res);
     reset();
-    toast.success("Season Added")
+    toast.success("Season Added");
+    navigate(`/admin/dashboard/tvshow-details/${id}`)
   };
 
   const inputStyle =

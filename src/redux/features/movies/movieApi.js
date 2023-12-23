@@ -48,7 +48,7 @@ const movieApi = apiSlice.injectEndpoints({
     // ############################## ADMIN ROUTES ######################
     // ##################################################################
 
-    // =================>> SINGLE MOVIE IMPORT(MUTATION) <<==============
+    // =====================>> SINGLE MOVIE IMPORT(MUTATION) <<==============
     singleMovieImport: builder.mutation({
       query: (data) => ({
         method: "POST",
@@ -58,12 +58,13 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
+    // =====================>> SINGLE MOVIE DETAILS<<=========================
     adminMovieDetails: builder.query({
       query: (id) => `/admin/get-movie/${id}`,
       providesTags: ["EpicMovies"],
     }),
 
-    // =================>> BULK MOVIE IMPORT(MUTATION) <<================
+    // ===================>> BULK MOVIE IMPORT(MUTATION) <<===================
     bulkMovieImport: builder.mutation({
       query: (data) => ({
         method: "POST",
@@ -73,7 +74,7 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-    // ======================>> CREATE GENRE <<==========================
+    // ========================>> CREATE GENRE <<=============================
     createGenre: builder.mutation({
       query: (data) => ({
         method: "POST",
@@ -83,23 +84,45 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-    // ======================>> CREATE QUALITY <<==========================
-    createQuality: builder.mutation({
+    // ====================>> PIXEl QUALITY LIST <<===========================
+    pixelQualityList: builder.query({
+      query: () => "/admin/get-px-quality",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // =====================>> CREATE PIXEl QUALITY <<========================
+    createPixelQuality: builder.mutation({
       query: (data) => ({
         method: "POST",
-        url: "/admin/create-quality",
+        url: "/admin/create-px-quality",
         body: data,
       }),
       invalidatesTags: ["EpicMovies"],
     }),
 
-    // ======================>> AUDIO LIST <<==============================
+    // ======================>> PRINT QUALITY LIST <<=========================
+    printQualityList: builder.query({
+      query: () => "/admin/get-pr-quality",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> CREATE PRINT QUALITY <<=========================
+    createPrintQuality: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: "/admin/create-pr-quality",
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+    // ======================>> AUDIO LIST <<=================================
     getAudioList: builder.query({
       query: () => `/admin/get-audio`,
       providesTags: ["EpicMovies"],
     }),
 
-    // ====================>> CREATE AUDIO  <<=============================
+    // ====================>> CREATE AUDIO  <<================================
     createAudio: builder.mutation({
       query: (data) => ({
         method: "POST",
@@ -109,7 +132,7 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-    // ====================>> UPDATE MOVIE  <<=============================
+    // ====================>> UPDATE MOVIE  <<================================
     updateMovie: builder.mutation({
       query: ({ data, id }) => ({
         method: "PUT",
@@ -119,13 +142,21 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-
-    // ====================>> UPDATE USERE  <<=============================
+    // ====================>> UPDATE USERE  <<================================
     updateUser: builder.mutation({
       query: ({ data, id }) => ({
         method: "PUT",
         url: `/admin/get-user-data/${id}`,
         body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> DELETE ALL TERM (QUALITY/ GENRE/ AUDIO)  <<================================
+    deleteTerms: builder.mutation({
+      query: (id) => ({
+        method: "DELETE",
+        url: `/admin/delete-term/${id}`,
       }),
       invalidatesTags: ["EpicMovies"],
     }),
@@ -144,10 +175,14 @@ export const {
   useBanglaMovieListQuery,
   useAdminMovieDetailsQuery,
   useCreateGenreMutation,
-  useCreateQualityMutation,
   useGetAudioListQuery,
   useCreateAudioMutation,
   useUpdateMovieMutation,
   useUpdateUserMutation,
+  useCreatePixelQualityMutation,
+  usePixelQualityListQuery,
+  usePrintQualityListQuery,
+  useCreatePrintQualityMutation,
+  useDeleteTermsMutation
 } = movieApi;
 export default movieApi;

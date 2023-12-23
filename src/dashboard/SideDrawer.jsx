@@ -76,12 +76,6 @@ const Sidebar = () => {
     },
 
     {
-      href: "/admin/dashboard/trash",
-      name: "Trash",
-      icon: <FaRegTrashAlt />,
-    },
-
-    {
       href: "javascript:void(0)",
       name: "Help",
       icon: <GoQuestion />,

@@ -1,17 +1,14 @@
 import toast from "react-hot-toast";
 import {
-  useDeleteAllParmanetMutation,
+  useDeleteAllMovieSeriesParmanetMutation,
   useDeleteParmanetMutation,
   useRestoreMovieSeriesMutation,
   useTrashListQuery,
 } from "../../../redux/features/trash/trashApi";
-import { useState } from "react";
-import { useDispatch } from "react-redux";
 
 const TrashList = () => {
   const { data: trashList } = useTrashListQuery();
   console.log(trashList);
-  const dispatch = useDispatch()
 
   const trashListData =
     trashList?.data !== "Empty list." ? trashList?.data : [];
@@ -20,7 +17,8 @@ const TrashList = () => {
 
   const [restoreMovieSeries] = useRestoreMovieSeriesMutation();
 
-  const [deleteAllParmanet] = useDeleteAllParmanetMutation();
+  const [deleteAllMovieSeriesParmanet] =
+    useDeleteAllMovieSeriesParmanetMutation();
 
   // ===============>> HANDLE SINGLE DELETE PARMANET <<================
   const handleDeleteSingle = (id) => {
@@ -34,21 +32,10 @@ const TrashList = () => {
     toast.success("Restored");
   };
 
-  // ===============>> HANDLE ALL DELETE PARMANET <<===================
-  const [selectedIds, setSelectedIds] = useState([]);
-  const handleSelectAll = () => {
-    const allIds = trashList?.data?.map((item) => parseInt(item.id));
-    console.log(allIds);
-    setSelectedIds(allIds);
-  };
-
-  const handleDeleteAll = () =>{
-    // dispatch(deleteAllParmanet({ids: [selectedIds]}));
-  }
-
-  console.log(selectedIds);
-  const isSelected = (id) => {
-    selectedIds.includes(id);
+  // ===============>> HANDLE ALL DELETE PARMANETLY <<=================
+  const handleDeleteAll = () => {
+    deleteAllMovieSeriesParmanet();
+    toast.success("All Clear");
   };
 
   return (
@@ -64,7 +51,7 @@ const TrashList = () => {
         {trashList?.data !== "Empty list." && (
           <div className="mt-3 md:mt-0">
             <button
-            onClick={()=> handleDeleteAll()}
+              onClick={() => handleDeleteAll()}
               className="inline-block px-4 py-2 text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
             >
               Delete All
@@ -73,18 +60,7 @@ const TrashList = () => {
         )}
       </div>
 
-      {trashList?.data !== "Empty list." && (
-        <div className="flex justify-end items-center">
-          <button
-            onClick={handleSelectAll}
-            className="mt-8 mx-5 text-sm font-medium rounded-lg text-blue-500  hover:text-blue-700 transform duration-200"
-          >
-            Select All
-          </button>
-        </div>
-      )}
-
-      <div className="mt-2 shadow-sm border rounded-lg overflow-x-auto">
+      <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
         {trashList?.data === "Empty list." ? (
           <p className="text-center text-2xl text-slate-400 uppercase">
             {trashList?.data}
@@ -105,11 +81,7 @@ const TrashList = () => {
               {trashListData?.map((item, idx) => (
                 <tr
                   key={idx}
-                  className={`odd:bg-gray-50 even:bg-white border-2 ${
-                    selectedIds?.includes(item.id)
-                      ? "border-slate-500 opacity-[70%]"
-                      : "border-transparent"
-                  } `}
+                  className={`odd:bg-gray-50 even:bg-white border-2 `}
                 >
                   <td className="px-2">{idx + 1}</td>
 
@@ -150,11 +122,6 @@ const TrashList = () => {
           </table>
         )}
 
-        {/* <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          perPgaeMovie={perPgaeMovie}
-        /> */}
       </div>
     </div>
   );

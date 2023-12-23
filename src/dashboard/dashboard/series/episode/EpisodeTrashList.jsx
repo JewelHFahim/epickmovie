@@ -1,39 +1,40 @@
 import toast from "react-hot-toast";
 import {
-  useDeleteAllSeasonParmanetMutation,
-  useDeleteSeasonParmanentMutation,
-  useRestoreSeasonMutation,
-  useSeasonTrashListQuery,
+  useDeleteAllEpisodeParmanetMutation,
+  useDeleteEpisodeParmanetMutation,
+  useEpisodeTrashListQuery,
+  useRestoreEpisodeMutation,
 } from "../../../../redux/features/trash/trashApi";
 
-const SeasonTrash = () => {
-  const { data: seasonTrashList } = useSeasonTrashListQuery();
-  const [deleteAllSeasonParmanet] = useDeleteAllSeasonParmanetMutation();
+const EpisodeTrashList = () => {
+  const { data: episodetrashList } = useEpisodeTrashListQuery();
+  console.log(episodetrashList);
 
   const trashListData =
-    seasonTrashList?.data !== "Empty list." ? seasonTrashList?.data : [];
+    episodetrashList?.data !== "Empty list." ? episodetrashList?.data : [];
 
-  const [restoreSeason] = useRestoreSeasonMutation();
+  const [restoreEpisode] = useRestoreEpisodeMutation();
 
-  const [deleteSeasonParmanent] = useDeleteSeasonParmanentMutation();
+  const [deleteEpisodeParmanet] = useDeleteEpisodeParmanetMutation();
+  const [deleteAllEpisodeParmanet] = useDeleteAllEpisodeParmanetMutation();
 
-  // ===============>> SINGLE DELETE PARMANET <<================
+  // ===============>> HANDLE SINGLE DELETE PARMANET <<================
   const handleDeleteSingle = (id) => {
-    deleteSeasonParmanent(id);
+    deleteEpisodeParmanet(id);
     toast.error("Deleted");
   };
 
   // =====================>> HANDLE RESTORE <<=========================
   const handleRestoreSeason = (id) => {
-    restoreSeason(id);
+    restoreEpisode(id);
     console.log(id);
     toast.success("Restored");
   };
 
-  // ===============>>  ALL DELETE PARMANET <<===================
+  // ==================>>  ALL DELETE PARMANET <<======================
   const handleDeleteAll = () => {
-    deleteAllSeasonParmanet();
-    toast.success("Clear All")
+    deleteAllEpisodeParmanet();
+    toast.success("Clear All");
   };
 
   return (
@@ -41,15 +42,15 @@ const SeasonTrash = () => {
       <div className="items-start justify-between md:flex">
         <div className="max-w-lg">
           <h3 className="text- text-xl text-slate-700 font-bold sm:text-2xl uppercase">
-            Season Trash - (
-            {seasonTrashList?.data !== "Empty list."
-              ? seasonTrashList?.data?.length
+            Episode Trash - (
+            {episodetrashList?.data !== "Empty list."
+              ? episodetrashList?.data?.length
               : 0}
             )
           </h3>
         </div>
 
-        {seasonTrashList?.data !== "Empty list." && (
+        {episodetrashList?.data !== "Empty list." && (
           <div className="mt-3 md:mt-0">
             <button
               onClick={() => handleDeleteAll()}
@@ -62,9 +63,9 @@ const SeasonTrash = () => {
       </div>
 
       <div className="mt-2 shadow-sm border rounded-lg overflow-x-auto">
-        {seasonTrashList?.data === "Empty list." ? (
+        {episodetrashList?.data === "Empty list." ? (
           <p className="text-center text-2xl text-slate-400 uppercase">
-            {seasonTrashList?.data}
+            {episodetrashList?.data}
           </p>
         ) : (
           <table className="w-full table-auto text-sm text-left">
@@ -86,7 +87,7 @@ const SeasonTrash = () => {
                   <td className="px-2">{idx + 1}</td>
 
                   <td className="px-6 py-4 font-medium flex items-center gap-x-2">
-                    {item?.season_name?.slice(0, 50)}
+                    {item?.episode_name}
                   </td>
 
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -118,4 +119,4 @@ const SeasonTrash = () => {
   );
 };
 
-export default SeasonTrash;
+export default EpisodeTrashList;

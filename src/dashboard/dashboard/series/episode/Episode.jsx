@@ -9,6 +9,7 @@ const Episode = () => {
 
   return (
     <div className="mx-auto bg-white border w-full h-full p-2">
+      
       <div className="items-start justify-between md:flex">
         <div className="max-w-lg">
           <h3 className="text- text-xl text-slate-700 font-bold sm:text-2xl uppercase">
@@ -21,7 +22,7 @@ const Episode = () => {
             href="/admin/dashboard/add-episode"
             className="inline-block px-4 py-2 text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
           >
-            Add Episode
+            Add Episode Episode
           </a>
         </div>
       </div>

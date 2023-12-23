@@ -1,52 +1,49 @@
+import { useForm } from "react-hook-form";
 import Loading from "../../../../utils/loading/Loading";
-import {
-  useCreatePixelQualityMutation,
-  useDeleteTermsMutation,
-  usePixelQualityListQuery,
-} from "../../../../redux/features/movies/movieApi";
+import toast from "react-hot-toast";
+import { useCreatePrintQualityMutation, useDeleteTermsMutation, usePrintQualityListQuery } from "../../../../redux/features/movies/movieApi";
 import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
-import PrintQuality from "./PrintQuality";
 
-const AddQuality = () => {
-  const { data: pixelQualityList, isLoading } = usePixelQualityListQuery();
-  const [createPixelQuality] = useCreatePixelQualityMutation();
-  const [deleteTerms] = useDeleteTermsMutation();
+const PrintQuality = () => {
+    const { handleSubmit, register, formState: { errors }, reset} = useForm()
 
-  const { handleSubmit, formState: { errors }, register, reset } = useForm();
+      const [createPrintQuality] = useCreatePrintQualityMutation();
+      const { data: printQualityList, isLoading } = usePrintQualityListQuery();  
+      const [deleteTerms] = useDeleteTermsMutation();
 
-  const onSubmit = (data) => {
-    console.log(data)
-   const res =  createPixelQuality(data);
-   console.log(res)
-    toast.success("Create Quality");
-    reset();
-  };
 
-  const handleDelete = (id) => {
-    deleteTerms(id);
-    toast.error("Deleted")
-  }
+    const onSubmitPrint = (data) => {
+        console.log(data);
+        createPrintQuality(data);
+        toast.success("Create Quality");
+        reset();
+      };
 
-  return (
-    <div className="flex flex-col w-full">
-      {/* ================>> PIXEL QUALITY <<==============*/}
+
+      const handleDelete = (id) => {
+        deleteTerms(id);
+        toast.error("Deleted")
+      }
+    
+    return (
+        <div>
+            
+      {/* ================>> PRINT QUALITY <<==============*/}
       <div className="flex">
         <div className="bg-white w-[45%] border-r px-2  py-4">
           <div className="flex justify-center">
             <h3 className="text-xl font-bold sm:text-2xl uppercase">
-              Add Pixel Quality
+              Add PRINT Quality
             </h3>
           </div>
 
           <form
-            onSubmit={handleSubmit(onSubmit)}
+            onSubmit={handleSubmit(onSubmitPrint)}
             className="mt-6 bg-slate-50 p-6 rounded-md"
           >
             <div className="flex flex-col">
-              <label>Pixel Quality Name</label>
+              <label>Print Quality Name</label>
               <input
                 type="text"
                 placeholder="Add Pixel quality"
@@ -73,7 +70,6 @@ const AddQuality = () => {
         </div>
 
         <div className="mx-auto bg-white border w-[60%]  p-2">
-
           <div className="items-start justify-center md:flex">
             <div className="max-w-lg">
               <h3 className="text-xl font-bold sm:text-2xl uppercase">
@@ -82,7 +78,7 @@ const AddQuality = () => {
             </div>
           </div>
 
-          {/* ==============>> QUALITY LIST <<=============== */}
+          {/* ==============>> GENRE LIST <<=============== */}
           <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
             <table className="w-full table-auto text-sm text-left">
               <thead className="text-gray-600 font-medium border-b">
@@ -96,7 +92,7 @@ const AddQuality = () => {
                 <Loading />
               ) : (
                 <tbody className="divide-y">
-                  {pixelQualityList?.data?.map((item,) => (
+                  {printQualityList?.data?.map((item) => (
                     <tr key={item?.id} className="odd:bg-gray-50 even:bg-white">
                       <td className="px-6 py-4 font-medium flex items-center gap-x-2">
                         {item?.name}
@@ -106,7 +102,7 @@ const AddQuality = () => {
                           <MdEditSquare />
                         </button>
                         <button
-                        onClick={()=> handleDelete(item?.id)}
+                          onClick={()=>handleDelete(item?.id)}
                           className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
                         >
                           <FaTrashAlt />
@@ -118,16 +114,10 @@ const AddQuality = () => {
               )}
             </table>
           </div>
-
         </div>
       </div>
-
-      <hr className="my-10" />
-
-      {/* ================>> PRINT QUALITY <<==============*/}
-      <PrintQuality />
-    </div>
-  );
+        </div>
+    );
 };
 
-export default AddQuality;
+export default PrintQuality;

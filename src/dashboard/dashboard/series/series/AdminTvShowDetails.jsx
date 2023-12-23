@@ -1,17 +1,24 @@
 import { useForm } from "react-hook-form";
 import { Link, useParams } from "react-router-dom";
 import { useAdminTvShowDetailsQuery } from "../../../../redux/features/tv-show/tvShowApi";
-import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
 import { MdRemoveRedEye } from "react-icons/md";
+import { useDeleteSeasonMutation } from "../../../../redux/features/trash/trashApi";
+import toast from "react-hot-toast";
+import { FiTrash } from "react-icons/fi";
 
 const AdminTvShowDetails = () => {
   const { id } = useParams();
+  const { register } = useForm();
   const { data: tvShowDetails } = useAdminTvShowDetailsQuery(id);
   const details = tvShowDetails?.data;
-  console.log(details);
+  const [deleteSeason] = useDeleteSeasonMutation();
 
-  const { register } = useForm();
+  const handleDeleteSeason = (seasonId) => {
+    console.log(seasonId);
+    deleteSeason(seasonId);
+    toast.error("Deleted");
+  };
 
   const inputStyle =
     "py-1 focus:outline-blue-500 border px-4 placeholder:text-sm";
@@ -190,7 +197,22 @@ const AdminTvShowDetails = () => {
           </div>
 
           {/* ==============>> GENRE LIST <<=============== */}
-          <div className="mt-4 shadow-sm border rounded-lg overflow-x-auto">
+          <div className="flex justify-between items-center">
+            <Link to="/admin/dashboard/season-trash">
+              <button className="flex items-center gap-1 text-red-700 hover:bg-red-50 px-2 py-[2px] rounded-lg">
+                <FiTrash />
+                Trash
+              </button>
+            </Link>
+
+            <Link
+              to={`/admin/dashboard/add-season/${id}`}
+              className="py-1 px-2  duration-150 hover:bg-gray-50 rounded-lg"
+            >
+              +Add Season
+            </Link>
+          </div>
+          <div className="shadow-sm border rounded-lg overflow-x-auto">
             <table className="w-full table-auto text-sm text-left">
               <thead className="text-gray-600 font-medium border-b">
                 <tr>
@@ -207,16 +229,14 @@ const AdminTvShowDetails = () => {
                     </td>
 
                     <td className="text-center px-6 ">
-
                       <Link to={`/admin/dashboard/episode-list/${item?.id}`}>
-                      <button className="py-2 text-xl px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
-                        <MdRemoveRedEye />
-                      </button>
+                        <button className="py-2 text-xl px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
+                          <MdRemoveRedEye />
+                        </button>
                       </Link>
-                      
 
                       <button
-                        href="javascript:void()"
+                        onClick={() => handleDeleteSeason(item?.id)}
                         className="py-2 text-lg leading-none px-6 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
                       >
                         <FaTrashAlt />
