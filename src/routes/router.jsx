@@ -4,17 +4,9 @@ import Dashboard from "../dashboard/dashboard/Dashboard";
 import DashMain from "../layout/dashboard/DashMain";
 import MoviesDB from "../dashboard/dashboard/movies/MoviesDB";
 import DbSeries from "../dashboard/dashboard/series/DbSeries";
-import AddCreator from "../dashboard/dashboard/series/AddCreator";
-import AddStudio from "../dashboard/dashboard/series/AddStudio";
-import AddNetworks from "../dashboard/dashboard/series/AddNetworks";
 import DbMovies from "../dashboard/db-movies/DbMovies";
-import AddCast from "../dashboard/dashboard/movies/cast/AddCast";
 import AddMovies from "../dashboard/dashboard/movies/movies/AddMovies";
-import AddTags from "../dashboard/dashboard/movies/tags/AddTags";
-import AddGenre from "../dashboard/dashboard/movies/genre/AddGenre";
-import AddQuality from "../dashboard/dashboard/movies/quality/AddQuality";
-import AddDirector from "../dashboard/dashboard/movies/director/AddDirector";
-import AddYear from "../dashboard/dashboard/movies/year/AddYear";
+import AddDirector from "../dashboard/terms/director/AddDirector";
 import EditMovies from "../dashboard/dashboard/movies/movies/EditMovies";
 import Login from "../dashboard/authentication/login/Login";
 import Register from "../dashboard/authentication/register/Register";
@@ -22,7 +14,6 @@ import PrivateRouter from "./PrivateRouter";
 import Users from "../dashboard/users/Users";
 import AdminMovieDetails from "../dashboard/dashboard/movies/movies/AdminMovieDetails";
 import UserDetails from "../dashboard/users/UserDetails";
-import AddAudio from "../dashboard/dashboard/movies/audio/AddAudio";
 import AdminTvShowDetails from "../dashboard/dashboard/series/series/AdminTvShowDetails";
 import AddSeries from "../dashboard/dashboard/series/series/AddSeries";
 import UpdateTvShow from "../dashboard/dashboard/series/series/UpdateTvShow";
@@ -35,14 +26,23 @@ import TrashList from "../dashboard/trash/trash/TrashList";
 import SeasonTrash from "../dashboard/dashboard/series/seasons/SeasonTrash";
 import EpisodeList from "../dashboard/dashboard/series/series/EpisodeList";
 import EpisodeTrashList from "../dashboard/dashboard/series/episode/EpisodeTrashList";
+import AddCast from "../dashboard/terms/cast/AddCast";
+import AddAudio from "../dashboard/terms/audio/AddAudio";
+import AddYear from "../dashboard/terms/year/AddYear";
+import AddTags from "../dashboard/terms/tags/AddTags";
+import AddGenre from "../dashboard/terms/genre/AddGenre";
+import AddQuality from "../dashboard/terms/quality/AddQuality";
+import AddStudio from "../dashboard/terms/studio/AddStudio";
+import AddCreator from "../dashboard/terms/creator/AddCreator";
+import AddNetworks from "../dashboard/terms/networks/AddNetworks";
+import Settings from "../dashboard/settings/Settings";
 
 const router = createBrowserRouter([
-
   // ==========>> CLIENT ROUTES <<===========
   {
     path: "/",
     element: <Main />,
-    children: clientRoutes
+    children: clientRoutes,
   },
 
   // ==========>> ADMIN ROUTES <<===========
@@ -54,10 +54,19 @@ const router = createBrowserRouter([
       </PrivateRouter>
     ),
     children: [
-
       {
         path: "/admin/dashboard",
         element: <Dashboard />,
+      },
+
+      {
+        path: "/admin/dashboard/settings",
+        element: <Settings />,
+      },
+
+      {
+        path: "/admin/dashboard/users",
+        element: <Users />,
       },
 
       {
@@ -192,8 +201,6 @@ const router = createBrowserRouter([
         element: <EpisodeTrashList />,
       },
 
-
-
       {
         path: "/admin/dashboard/add-episode",
         element: <AddEpisode />,
@@ -213,7 +220,6 @@ const router = createBrowserRouter([
         path: "/admin/dashboard/season-trash",
         element: <SeasonTrash />,
       },
-
     ],
   },
 
@@ -222,7 +228,6 @@ const router = createBrowserRouter([
     path: "/admin/login",
     element: <Login />,
   },
-
 ]);
 
 export default router;

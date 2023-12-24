@@ -2,7 +2,6 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
 const userInfo = JSON.parse(localStorage.getItem("user-info"));
-console.log(`Bearer ${userInfo?.token}`);
 
 const initialState = {
   email: "",
@@ -28,7 +27,7 @@ export const loginUser = createAsyncThunk(
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
 
         dispatch(setToken(data?.data?.token));
         const info = {
@@ -36,13 +35,17 @@ export const loginUser = createAsyncThunk(
           user_name: data?.data?.user_name,
         };
         localStorage.setItem("user-info", JSON.stringify(info));
-        toast.success(`Login Success`);
+
+        data?.status === true
+          ? toast.success(data?.message)
+          : toast.error(data?.message);
+
         return data?.data?.token;
       } else {
         toast.error("Login Failed");
       }
     } catch (error) {
-      console.error(error);
+      // console.error(error);
       toast.error("Login Failed");
       throw error;
     }
@@ -66,8 +69,6 @@ export const registerUser = createAsyncThunk(
       if (res.ok) {
         const registerRes = await res.json();
         dispatch(setMessage(registerRes?.message));
-        console.log(registerRes);
-        console.log(registerRes?.message);
         toast.success(`${registerRes?.message}`);
       } else {
         return toast.error("Register Failed");
@@ -89,7 +90,7 @@ export const logoutUser = createAsyncThunk(
           method: "POST",
           headers: {
             "Content-Type": "application/json",
-            "Authorization": `Bearer ${userInfo.token}`,
+            Authorization: `Bearer ${userInfo.token}`,
           },
           body: JSON.stringify({}),
         }
@@ -98,7 +99,7 @@ export const logoutUser = createAsyncThunk(
       if (res.ok) {
         const logOut = await res.json();
         dispatch(setMessage(logOut?.message));
-        console.log(logOut);
+        // console.log(logOut);
         toast.success(`${logOut?.message}`);
       } else {
         return toast.error("Logout Failed");
@@ -120,7 +121,7 @@ const userSlice = createSlice({
 
     setToken: (state, action) => {
       state.token = action.payload;
-      console.log("setToken", action.payload);
+      // console.log("setToken", action.payload);
     },
 
     setMessage: (state, action) => {

@@ -1,87 +1,70 @@
-import Loading from "../../../../utils/loading/Loading";
-import {
-  useCreateAudioMutation,
-  useGetAudioListQuery,
-} from "../../../../redux/features/movies/movieApi";
 import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
-import { useForm } from "react-hook-form";
-import toast from "react-hot-toast";
+import { useGenreListQuery } from "../../../redux/features/movies/movieApi";
+import Loading from "../../../utils/loading/Loading";
 
-const AddAudio = () => {
-  const { data: audioList, isLoading } = useGetAudioListQuery();
-  const [createAudio] = useCreateAudioMutation();
-
-  const {
-    handleSubmit,
-    register,
-    formState: { errors },
-    reset,
-  } = useForm();
-
-  const onSubmit = (data) => {
-    console.log(data);
-    createAudio(data);
-    toast.success("Create Audio");
-    reset();
-  };
+const AddStudio = () => {
+  
+  const { data: genreList, isLoading } = useGenreListQuery();
+  console.log(genreList);
 
   return (
     <div className="flex w-full">
+
       <div className="bg-white w-[45%] border-r px-2  py-4">
+
         <div className="flex justify-center">
-          <h3 className="text-xl font-bold sm:text-2xl uppercase">
-            Add New Audio
-          </h3>
+          <h3 className="text-xl font-bold sm:text-2xl uppercase" >Add New Studio </h3>
         </div>
 
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="mt-6 bg-slate-50 p-6 rounded-md"
-        >
+        <form className="mt-6 bg-slate-50 p-6 rounded-md">
+
           <div className="flex flex-col">
             <label>Name</label>
             <input
               type="text"
-              {...register("name", { required: true })}
-              placeholder="add new genre"
+              placeholder="add new Studio"
               className="border py-1 px-4 rounded-md bg-white focus:outline-blue-500"
             />
             <p className="text-xs text-gray-400">
               The name is how it appears on your site.
             </p>
-            {errors.name && (
-              <span className="text-red-400">Name is required</span>
-            )}
+          </div>
+
+          <div className="flex flex-col mt-4">
+            <label>Slug</label>
+            <input
+              type="text"
+              placeholder="add slug"
+              className="border py-1 px-4 rounded-md bg-white focus:outline-blue-500"
+            />
+            <p className="text-xs text-gray-400">
+              The “slug” is the URL-friendly version of the name. It is usually
+              all lowercase and contains only letters, numbers, and hyphens.
+            </p>
           </div>
 
           <div className="mt-8">
-            <button
-              type="submit"
-              className="bg-slate-700 px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-slate-800"
-            >
-              Add New Audio
-            </button>
+            <button className="bg-slate-700 px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-slate-800">Add New Studio</button>
           </div>
         </form>
       </div>
 
-      {/* ===================>> LIST <<=================  */}
       <div className="mx-auto bg-white border w-[60%]  p-2">
         <div className="items-start justify-center md:flex">
           <div className="max-w-lg">
             <h3 className="text-xl font-bold sm:text-2xl uppercase">
-              Audio List
+              Studio List
             </h3>
           </div>
         </div>
 
-        {/* ==============>> GENRE LIST <<=============== */}
+        {/* ==============>> Studio LIST <<=============== */}
         <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
           <table className="w-full table-auto text-sm text-left">
             <thead className="text-gray-600 font-medium border-b">
               <tr>
-                <th className="py-3 px-6">Genre</th>
+                <th className="py-3 px-6">Studio</th>
                 <th className="text-center">Actions</th>
               </tr>
             </thead>
@@ -90,7 +73,7 @@ const AddAudio = () => {
               <Loading />
             ) : (
               <tbody className="divide-y">
-                {audioList?.data?.map((item, idx) => (
+                {genreList?.data?.map((item, idx) => (
                   <tr key={idx} className="odd:bg-gray-50 even:bg-white">
                     <td className="px-6 py-4 font-medium flex items-center gap-x-2">
                       {item?.name}
@@ -115,6 +98,7 @@ const AddAudio = () => {
       </div>
     </div>
   );
+
 };
 
-export default AddAudio;
+export default AddStudio;

@@ -1,5 +1,5 @@
-import joinTelegran from "../../../assets/join telegram.png";
-import ads from "../../../assets/ads.png";
+import joinTelegran from "../../assets/join telegram.png";
+import ads from "../../assets/ads.png";
 
 const AdvertisementSection = () => {
   return (

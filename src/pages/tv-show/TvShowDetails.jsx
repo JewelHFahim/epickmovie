@@ -1,16 +1,11 @@
 import { AiOutlineDoubleRight } from "react-icons/ai";
 import calender from "../../assets/calender.svg";
-import jawan from "../../assets/jawan.png";
-import telegraqm from "../../assets/telegram.svg";
-import joinTelegran from "../../assets/join telegram.png";
-import ads from "../../assets/ads.png";
-import DownloadButton from "../../utils/DownloadButton";
 import { useParams } from "react-router-dom";
-import DOMPurify from "dompurify";
 import { useSeriesDetailsQuery } from "../../redux/features/tv-show/tvShowApi";
 import JoinTelegramBtn from "../../utils/JoinTelegramBtn";
-import SeasonMenu from "./SeasonMenu";
 import Accrodion from "../../components/accrodion/Accrodion";
+import RelatedPost from "../../components/related-post/RelatedPost";
+import AdvertisementSection from "../../components/advertisement/AdvertisementSection";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -19,7 +14,6 @@ const TvShowDetails = () => {
   const details = seriesDetails?.data;
   console.log(details);
 
-  const sanitizedHtml = DOMPurify.sanitize(details?.post_content);
 
   const currentDate = new Date();
   const givenDate = new Date(details?.updated_at);
@@ -66,12 +60,25 @@ const TvShowDetails = () => {
               </p>
             </div>
 
-            <div className="mt-[11px] lg:mt-[48px] max-w-[745px]">
-              <p
-                className="text-[13px] lg:text-[15px]  text-white font-roboto"
-                dangerouslySetInnerHTML={{ __html: sanitizedHtml }}
-              ></p>
-            </div>
+            {/* Post Content */}
+            {details?.post_content ? (
+              <div className="mt-[11px] lg:mt-[48px] max-w-[745px]">
+                <p className="text-[13px] lg:text-[15px]  text-white font-roboto">
+                  {details?.post_content}
+                </p>
+              </div>
+            ) : (
+              <div className="mt-[11px] lg:mt-[19px] max-w-[745px]">
+                <p className="text-[13px] lg:text-[15px]  text-white font-roboto">
+                  <span className="font-[700]"> EpickMovies</span> Provide You
+                  With Super Quality Of Movies and
+                  <span className="font-[700]">WEB Series.</span> We Provide
+                  Google Drive Direct Download Links For Fast And Secure
+                  <span className="font-[700]">Download.</span> You Can Join us
+                  on Telegram For the Latest Updates.
+                </p>
+              </div>
+            )}
 
             <div className="my-[11px] lg:my-[15px]">
               <p className="text-[18px] lg:text-[24px] text-[#217703] font-[600] font-roboto">
@@ -195,87 +202,21 @@ const TvShowDetails = () => {
           </div>
 
           {/* ==========>> DOWNLOAD BUTTOJN <<=============*/}
-          <Accrodion details={details}/>
-
+          <Accrodion details={details} />
 
           {/* ===========>> TELEGRAM BUTTON <<=============*/}
           <JoinTelegramBtn />
-
-
         </div>
 
         {/* Column Two */}
         {/* Advertisemen Section (Static Data) */}
-        <div className="hidden lg:block  w-[30%] bg-[#1F1F22] p-4">
-          <div className="w-[299px] h-[193px] bg-[#27272A] flex flex-col">
-            <p className="text-white font-inter font-[500] mt-[39px] ml-[34px]">
-              Join Our Telegram
-            </p>
-            <hr className="w-full bg-[#494949] opacity-[.4]" />
-            <img
-              src={joinTelegran}
-              alt=""
-              className="mt-[10px] w-[268px] h-[104px] mx-auto"
-            />
-          </div>
-
-          <div className="w-[299px] h-[275px]  bg-[#27272A] mt-[27px]">
-            <p className="pl-[30px] pt-[15px] font-[500] font-inter text-[#F4F4F4C9] ">
-              Movies
-            </p>
-
-            <hr className="w-full bg-[#494949] opacity-[.4]" />
-
-            <div className="px-4 py-2 grid grid-cols-4 gap-[8px]">
-              {Array.from({ length: 32 }).map((item, i) => (
-                <button
-                  key={i}
-                  className="w-[53px] h-[20px] rounded-[4px] bg-[#f4f4f4c9] text-[10px] text-[#27272A] font-inter"
-                >
-                  Bengali
-                </button>
-              ))}
-            </div>
-          </div>
-
-          <div className="w-[299px] h-[271px] bg-[#27272A] mt-[25px]">
-            <p className="px-[34px] pt-[15px] font-[500] text-[#F4F4F4C9] opacity-[.79] m-0">
-              Ads
-            </p>
-            <img src={ads} alt="" />
-          </div>
-        </div>
+        <AdvertisementSection />
       </section>
 
       {/* ===========>> RELETED POST <<=========== */}
-      <section className="mt-[33px] p-5">
-        <h3 className="text-[18px] lg:text-[22px] text-[#AEABAB] font-[700] font-roboto">
-          RELATED POSTS
-        </h3>
-
-        <div className="mt-[23px] grid grid-cols-2 lg:grid-cols-4 items-center gap-[18px]">
-          {Array.from({ length: 4 }).map((item, i) => (
-            <div
-              key={i}
-              className="w-[180px] lg:w-[205px] h-[390px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] lg:bg-none lg:h-[420px] flex flex-col items-center text-center rounded-[10px] p-[1.5px]"
-            >
-              <img
-                src={jawan}
-                alt=""
-                className="w-full h-[267px] lg:h-[322px] rounded-tl-[10px] rounded-tr-[10px] bg-[#27272A]"
-              />
-
-              <p className="text-[14px] text-white font-[700] pt-[9px] bg-[#27272A] h-full rounded-b-[10px]">
-                Download Jawan (2023) Extended Cut Hindi Movie 480p | 720p |
-                1080p | 2160p WEB-DL ESub
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
+      <RelatedPost id={id} redirect={"/series"}/>
     </div>
   );
 };
 
 export default TvShowDetails;
-

@@ -8,7 +8,6 @@ const initialState = {
 };
 
 const userInfo = JSON.parse(localStorage.getItem("user-info"));
-console.log(`Bearer ${userInfo?.token}`);
 // =================>> SINGLE TV SHOW IMPORT <<===================
 
 export const singleTvShowImport = createAsyncThunk( "tvShows/singleTvShowImport", async (body, { dispatch }) => {

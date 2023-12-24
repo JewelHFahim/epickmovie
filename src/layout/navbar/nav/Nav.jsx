@@ -1,16 +1,16 @@
 import "./Nav.css";
 import home from "../../../assets/homeIcon.svg";
-import home2 from "../../../assets/home2.svg";
 import link from "../../../assets/link.svg";
 import calender from "../../../assets/calender.svg";
 import quality from "../../../assets/death.svg";
 import webSer from "../../../assets/www.svg";
 import bangla from "../../../assets/video.svg";
 import telegram from "../../../assets/telegram.svg";
-import { movieList } from "../../../utils/menu-list/menu-list";
 import {
+  useAudListClientQuery,
   useGenreListQuery,
-  useQualityListQuery,
+  usePixelQualityClientQuery,
+  usePrintQualityClientQuery,
   useYearListQuery,
 } from "../../../redux/features/movies/movieApi";
 import { useDispatch } from "react-redux";
@@ -26,7 +26,15 @@ const Nav = () => {
   const dispatch = useDispatch();
   const { data: genreList } = useGenreListQuery();
   const { data: yearList } = useYearListQuery();
-  const { data: qualityList } = useQualityListQuery();
+  const { data: pixelQualityList } = usePixelQualityClientQuery();
+  const { data: printQualityList } = usePrintQualityClientQuery();
+  const { data: audioList } = useAudListClientQuery();
+  
+  const pixel = pixelQualityList?.data;
+  const print = printQualityList?.data;
+  const combinedQuality = pixel?.concat(print);
+
+
 
   const itemsPerColumn = 20;
   const columns = [];
@@ -60,27 +68,24 @@ const Nav = () => {
           </a>
         </li>
 
+         {/* =========>> AUDIO <<========== */}
         <li className="main-menu">
-          <a href="/movies" className=" flex items-center gap-2">
-            {/* <img src={home} alt="" className="w-[25px] h-[25px]" /> */}
-            <BiMovie className="text-[25px]" />
-            Movies
-          </a>
-        </li>
-
-        {/* =========>> MOVIES <<========== */}
-        {/* <li className="main-menu">
           <a href="#" className=" flex items-center gap-2">
-            <img src={home2} alt="" className="w-[21px] h-[16px]" /> Home
+            <img src={home} alt="" className="w-[21px] h-[20px]" /> Home
           </a>
-          <ul>
-            {movieList?.map((item, i) => (
+          <ul className="grid">
+            {audioList?.data?.map((item, i) => (
               <li key={i}>
-                <a href="#">{item.title}</a>
+                <Link to="/filter-list" onClick={() => handleYear(item?.slug)}>
+                  {item.name}
+                </Link>
               </li>
             ))}
           </ul>
-        </li> */}
+        </li>
+
+
+
 
         {/* =========>> GENRE <<========== */}
         <li className="main-menu">
@@ -125,10 +130,13 @@ const Nav = () => {
             <img src={quality} alt="" className="w-[21px] h-[21px]" /> Quality
           </a>
           <ul>
-            {qualityList?.data?.map((item, i) => (
+            {combinedQuality?.map((item, i) => (
               <li key={i}>
-                <Link to="/filter-list" onClick={() => handleQuality(item?.slug)}>
-                  {item.name}
+                <Link
+                  to="/filter-list"
+                  onClick={() => handleQuality(item?.slug)}
+                >
+                  {item?.name}
                 </Link>
               </li>
             ))}
@@ -136,10 +144,7 @@ const Nav = () => {
         </li>
 
         <li className="main-menu">
-          <a
-            href="/tv-show"
-            className=" flex items-center gap-2"
-          >
+          <a href="/tv-show" className=" flex items-center gap-2">
             <img src={webSer} alt="" className="w-[22px] h-[22px]" /> Web Series
           </a>
         </li>

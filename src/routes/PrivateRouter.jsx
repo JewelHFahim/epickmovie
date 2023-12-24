@@ -8,7 +8,6 @@ const PrivateRouter = ({ children }) => {
   const { isLoading } = useSelector((state) => state.user);
   
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
-  console.log(userInfo?.token);
 
   if (isLoading) {
     return (

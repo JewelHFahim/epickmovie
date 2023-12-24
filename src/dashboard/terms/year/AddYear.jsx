@@ -1,12 +1,12 @@
-import Loading from "../../../utils/loading/Loading";
-import { useGenreListQuery } from "../../../redux/features/movies/movieApi";
 import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
+import Loading from "../../../utils/loading/Loading";
+import { useYearListQuery } from "../../../redux/features/movies/movieApi";
 
-const AddNetworks = () => {
-  
-  const { data: genreList, isLoading } = useGenreListQuery();
-  console.log(genreList);
+const AddYear = () => {
+
+  const { data: yearList, isLoading } = useYearListQuery();
+  console.log(yearList);
 
   return (
     <div className="flex w-full">
@@ -14,7 +14,7 @@ const AddNetworks = () => {
       <div className="bg-white w-[45%] border-r px-2  py-4">
 
         <div className="flex justify-center">
-          <h3 className="text-xl font-bold sm:text-2xl uppercase" >Add New Networks </h3>
+          <h3 className="text-xl font-bold sm:text-2xl uppercase">Add New Year</h3>
         </div>
 
         <form className="mt-6 bg-slate-50 p-6 rounded-md">
@@ -23,7 +23,7 @@ const AddNetworks = () => {
             <label>Name</label>
             <input
               type="text"
-              placeholder="add new Networks"
+              placeholder="add new year"
               className="border py-1 px-4 rounded-md bg-white focus:outline-blue-500"
             />
             <p className="text-xs text-gray-400">
@@ -45,7 +45,7 @@ const AddNetworks = () => {
           </div>
 
           <div className="mt-8">
-            <button className="bg-slate-700 px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-slate-800">Add New Networks</button>
+            <button className="bg-slate-700 px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-slate-800">Add New Year</button>
           </div>
         </form>
       </div>
@@ -54,17 +54,17 @@ const AddNetworks = () => {
         <div className="items-start justify-center md:flex">
           <div className="max-w-lg">
             <h3 className="text-xl font-bold sm:text-2xl uppercase">
-              Networks List
+              Year List
             </h3>
           </div>
         </div>
 
-        {/* ==============>> Networks LIST <<=============== */}
+        {/* ==============>> GENRE LIST <<=============== */}
         <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
           <table className="w-full table-auto text-sm text-left">
             <thead className="text-gray-600 font-medium border-b">
               <tr>
-                <th className="py-3 px-6">Networks</th>
+                <th className="py-3 px-6">Year</th>
                 <th className="text-center">Actions</th>
               </tr>
             </thead>
@@ -73,7 +73,7 @@ const AddNetworks = () => {
               <Loading />
             ) : (
               <tbody className="divide-y">
-                {genreList?.data?.map((item, idx) => (
+                {yearList?.data?.map((item, idx) => (
                   <tr key={idx} className="odd:bg-gray-50 even:bg-white">
                     <td className="px-6 py-4 font-medium flex items-center gap-x-2">
                       {item?.name}
@@ -96,9 +96,9 @@ const AddNetworks = () => {
           </table>
         </div>
       </div>
+      
     </div>
   );
-
 };
 
-export default AddNetworks;
+export default AddYear;

@@ -8,7 +8,6 @@ const initialState = {
 };
 
 const userInfo = JSON.parse(localStorage.getItem("user-info"));
-console.log(`Bearer ${userInfo?.token}`);
 
 // =================>> SINGLE IMPORT <<===================
 

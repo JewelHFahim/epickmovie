@@ -6,7 +6,7 @@ import { BsCameraReels } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
 import { GoQuestion } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
-import { FaRegTrashAlt, FaUsers } from "react-icons/fa";
+import { FaUsers } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/features/users/userSlice";
@@ -69,6 +69,7 @@ const Sidebar = () => {
   ];
 
   const navsFooter = [
+
     {
       href: "/admin/dashboard/users",
       name: "Users",
@@ -82,7 +83,7 @@ const Sidebar = () => {
     },
 
     {
-      href: "javascript:void(0)",
+      href: "/admin/dashboard/settings",
       name: "Settings",
       icon: <IoSettingsOutline />,
     },
@@ -90,28 +91,25 @@ const Sidebar = () => {
 
   const nestedMovie = [
     { name: "Movies", href: "/admin/dashboard/movies-db", icon: "" },
-    { name: "Add New Post", href: "/admin/dashboard/add-movie", icon: "" },
-    { name: "Audio", href: "/admin/dashboard/add-audio", icon: "" },
-    { name: "Tags", href: "/admin/dashboard/add-tags", icon: "" },
-    { name: "Genres", href: "/admin/dashboard/add-genre", icon: "" },
-    { name: "Quality", href: "/admin/dashboard/add-quality", icon: "" },
-    { name: "Cast", href: "/admin/dashboard/add-cast", icon: "" },
     { name: "Director", href: "/admin/dashboard/add-director", icon: "" },
-    { name: "Year", href: "/admin/dashboard/add-year", icon: "" },
   ];
 
   const nestedNavTV = [
     { name: "Tv Shows", href: "/admin/dashboard/db-series", icon: "" },
-    { name: "Add New Post", href: "/admin/dashboard/add-series", icon: "" },
-    { name: "Tags", href: "/admin/dashboard/add-tags", icon: "" },
-    { name: "Genres", href: "/admin/dashboard/add-genre", icon: "" },
-    { name: "Cast", href: "/admin/dashboard/add-cast", icon: "" },
     { name: "Creator", href: "/admin/dashboard/add-creator", icon: "" },
     { name: "Studio", href: "/admin/dashboard/add-studio", icon: "" },
     { name: "Networks", href: "/admin/dashboard/add-networks", icon: "" },
-    { name: "Year", href: "/admin/dashboard/add-year", icon: "" },
     { name: "Seasons", href: "/admin/dashboard/db-seasons", icon: "" },
     { name: "Episodes", href: "/admin/dashboard/episode", icon: "" },
+  ];
+
+  const nestedTerms = [
+    { name: "Tags", href: "/admin/dashboard/add-tags", icon: "" },
+    { name: "Quality", href: "/admin/dashboard/add-quality", icon: "" },
+    { name: "Genres", href: "/admin/dashboard/add-genre", icon: "" },
+    { name: "Cast", href: "/admin/dashboard/add-cast", icon: "" },
+    { name: "Audio", href: "/admin/dashboard/add-audio", icon: "" },
+    { name: "Year", href: "/admin/dashboard/add-year", icon: "" },
   ];
 
   const getUserName = localStorage.getItem("user-info");
@@ -156,6 +154,9 @@ const Sidebar = () => {
                 </Menu>
                 <Menu items={nestedNavTV}>
                   <TbMovie className="text-lg" /> TV Shows
+                </Menu>
+                <Menu items={nestedTerms}>
+                  <TbMovie className="text-lg" /> All Terms
                 </Menu>
               </li>
             </ul>

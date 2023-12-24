@@ -3,10 +3,10 @@ import calender from "../../../assets/calender.svg";
 import DownloadButton from "../../../utils/DownloadButton";
 import { useMovieDetailsQuery } from "../../../redux/features/movies/movieApi";
 import { useParams } from "react-router-dom";
-import RelatedPostMovie from "./RelatedPostMovie";
-import AdvertisementSection from "./AdvertisementSection";
 import JoinTelegramBtn from "../../../utils/JoinTelegramBtn";
 import DetailsPosterCard from "../../../components/details-poster-card/DetailsPosterCard";
+import RelatedPost from "../../../components/related-post/RelatedPost";
+import AdvertisementSection from "../../../components/advertisement/AdvertisementSection";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -23,6 +23,8 @@ const MovieDetails = () => {
 
   // Convert milliseconds to days
   const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+  
 
   return (
     <div className="bg-[#27272A]">
@@ -46,23 +48,26 @@ const MovieDetails = () => {
               </p>
             </div>
 
-            <div className="mt-[11px] lg:mt-[48px] max-w-[745px]">
-              <p className="text-[13px] lg:text-[15px]  text-white font-roboto">
-                {details?.post_content}
-              </p>
-            </div>
 
-            {/* Static Data */}
-            <div className="mt-[11px] lg:mt-[19px] max-w-[745px]">
-              <p className="text-[13px] lg:text-[15px]  text-white font-roboto">
-                <span className="font-[700]"> EpickMovies</span> Provide You
-                With Super Quality Of Movies and
-                <span className="font-[700]">WEB Series.</span> We Provide
-                Google Drive Direct Download Links For Fast And Secure
-                <span className="font-[700]">Download.</span> You Can Join us on
-                Telegram For the Latest Updates.
-              </p>
-            </div>
+            {details?.post_content ? (
+              <div className="mt-[11px] lg:mt-[48px] max-w-[745px]">
+                <p className="text-[13px] lg:text-[15px]  text-white font-roboto">
+                  {details?.post_content}
+                </p>
+              </div>
+            ) : (
+              <div className="mt-[11px] lg:mt-[19px] max-w-[745px]">
+                <p className="text-[13px] lg:text-[15px]  text-white font-roboto">
+                  <span className="font-[700]"> EpickMovies</span> Provide You
+                  With Super Quality Of Movies and
+                  <span className="font-[700]">WEB Series.</span> We Provide
+                  Google Drive Direct Download Links For Fast And Secure
+                  <span className="font-[700]">Download.</span> You Can Join us
+                  on Telegram For the Latest Updates.
+                </p>
+              </div>
+            )}
+
 
             <div className="my-[11px] lg:my-[15px]">
               <p className="text-[18px] lg:text-[24px] text-[#217703] font-[600] font-roboto">
@@ -98,7 +103,7 @@ const MovieDetails = () => {
 
           {/* ==========>> SCREEN SHOTS <<=============*/}
           <div className="flex flex-col gap-4 mt-3">
-            {details?.screenshots?.slice(0,3)?.map((item, i) => (
+            {details?.screenshots?.slice(0, 3)?.map((item, i) => (
               <img
                 key={i}
                 src={item}
@@ -131,7 +136,7 @@ const MovieDetails = () => {
       </section>
 
       {/* ===========>> RELETED POST <<=========== */}
-      <RelatedPostMovie />
+      <RelatedPost id={id} redirect={"/movie"}/>
     </div>
   );
 };

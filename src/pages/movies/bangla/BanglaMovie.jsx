@@ -1,11 +1,11 @@
 import MovieCard from "../../../components/movie-card/MovieCard";
-import { useBanglaMovieListQuery } from "../../../redux/features/movies/movieApi";
+import { useBengaliMovieListQuery } from "../../../redux/features/movies/movieApi";
 import Title from "../../../utils/Title";
 
 const BanglaMovie = () => {
 
 
-    const {data: banglaMovies} = useBanglaMovieListQuery();
+    const {data: banglaMovies} = useBengaliMovieListQuery();
 
     console.log(banglaMovies?.status)
 
@@ -15,7 +15,7 @@ const BanglaMovie = () => {
 
 
       {/* ==================>> Movies <<==================*/}
-      <div className="m-2"><Title>Bangla</Title></div>
+      <div className="m-2"><Title>Bengali</Title></div>
       
       {
         banglaMovies?.status === false ? 

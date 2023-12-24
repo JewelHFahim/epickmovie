@@ -5,6 +5,7 @@ import Loading from "../../../utils/loading/Loading";
 import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDeleteMovieSeriesMutation } from "../../../redux/features/trash/trashApi";
+import { FiTrash } from "react-icons/fi";
 
 const MoviesDB = () => {
   const [currentPage, setCurrentPage] = useState(1);
@@ -38,7 +39,16 @@ const MoviesDB = () => {
         </div>
       </div>
 
-      <div className="mt-10 shadow-sm border rounded-lg overflow-x-auto">
+      <div className="mt-8 w-[100px]">
+        <Link to="/admin/dashboard/trash">
+          <button className="flex items-center gap-1 border border-slate-700 rounded-lg text-slate-700 px-3 text-sm py-1 hover: hover:text-white hover:bg-red-400 hover:border-white">
+            <FiTrash />
+            Trash
+          </button>
+        </Link>
+      </div>
+
+      <div className="mt-2 shadow-sm border rounded-lg overflow-x-auto">
         <table className="w-full table-auto text-sm text-left">
           <thead className="text-gray-600 font-medium border-b">
             <tr>

@@ -1,9 +1,11 @@
-import { useUserListQuery } from "../../redux/features/users/userApi";
+import {
+  useUserListQuery,
+} from "../../redux/features/users/userApi";
 
 const Users = () => {
+  const { data: userList } = useUserListQuery();
 
-  const {data: userList} = useUserListQuery();
-  console.log(userList)
+  console.log(userList);
 
   return (
     <div className=" mx-auto p-10">
@@ -37,12 +39,9 @@ const Users = () => {
             {userList?.data?.map((item, idx) => (
               <tr key={idx}>
                 <td className="flex items-center gap-x-3 py-3 px-6 whitespace-nowrap">
-
                   <div className="w-10 h-10 rounded-full bg-slate-200">
                     {/* <img src={item.avatar} className="w-10 h-10 rounded-full" /> */}
-                    </div>
-
-                  
+                  </div>
 
                   <div>
                     <span className="block text-gray-700 text-sm font-medium">
@@ -51,7 +50,9 @@ const Users = () => {
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">{item.email}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{item.user_type}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  {item.user_type === 1 ? "Administrator" : "Editor"}
+                </td>
                 <td className="text-right px-6 whitespace-nowrap">
                   <a
                     href={`/admin/dashboard/users/${item?.id}`}
@@ -59,7 +60,6 @@ const Users = () => {
                   >
                     Edit
                   </a>
-
 
                   <button
                     href="javascript:void()"

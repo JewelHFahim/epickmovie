@@ -1,7 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 const getUserName = localStorage.getItem("user-info");
 const token = JSON.parse(getUserName)?.token;
-console.log(token)
 
 const apiSlice = createApi({
   reducerPath: "apiSlice",

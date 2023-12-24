@@ -1,14 +1,23 @@
 import apiSlice from "../api/apiSlice";
 
 const movieApi = apiSlice.injectEndpoints({
+
   endpoints: (builder) => ({
-    // ==========================>> ALL MOVIES <<===========================
+
+
+    // ========================>> ALL MOVIES <<===========================
     movieList: builder.query({
       query: () => "/movie-posts",
       providesTags: ["EpicMovies"],
     }),
 
-    // ========================>>  SINGLE/MOVIE DETAILS <<=======================
+    // =====================>> BENGALI MOVIES <<==========================
+    bengaliMovieList: builder.query({
+      query: () => "/get-bengali-post",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ======================>>  SINGLE/MOVIE DETAILS <<==================
     movieDetails: builder.query({
       query: (movieId) => `/movie-post/${movieId}`,
       providesTags: ["EpicMovies"],
@@ -26,23 +35,35 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-    // ==========================>> YEAR <<============================
+    // ==========================>> AUDIO <<===========================
+    audListClient: builder.query({
+      query: () => "/terms/audio-list",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ===========================>> YEAR <<=============================
     yearList: builder.query({
       query: () => "/terms/year-list",
       providesTags: ["EpicMovies"],
     }),
 
-    // ========================>> QUALITY <<=============================
-    qualityList: builder.query({
-      query: () => "/terms/quality-list",
+    // ======================>> PIXEL QUALITY <<==========================
+    pixelQualityClient: builder.query({
+      query: () => "/terms/px-quality-list",
       providesTags: ["EpicMovies"],
     }),
 
-    // ========================>> BANGLA <<=============================
-    banglaMovieList: builder.query({
-      query: () => "/sp-terms/bangla",
+    // ======================>> PRINT QUALITY <<=========================
+    printQualityClient: builder.query({
+      query: () => "/terms/pr-quality-list",
       providesTags: ["EpicMovies"],
     }),
+    // ========================>> COUNTRY <<=============================
+    countryListClient: builder.query({
+      query: () => "/terms/get-countries",
+      providesTags: ["EpicMovies"],
+    }),
+
 
     // ##################################################################
     // ############################## ADMIN ROUTES ######################
@@ -74,6 +95,11 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
+    // =========================>> GENRE LIST <<=============================
+    adminGenreList: builder.query({
+      query: () => `/admin/get-genre`,
+      providesTags: ["EpicMovies"],
+    }),
     // ========================>> CREATE GENRE <<=============================
     createGenre: builder.mutation({
       query: (data) => ({
@@ -152,7 +178,7 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-    // ====================>> DELETE ALL TERM (QUALITY/ GENRE/ AUDIO)  <<================================
+    // ============>> DELETE ALL TERM (QUALITY/ GENRE/ AUDIO)  <<=============
     deleteTerms: builder.mutation({
       query: (id) => ({
         method: "DELETE",
@@ -169,10 +195,8 @@ export const {
   usePerPgaeMovieQuery,
   useGenreListQuery,
   useYearListQuery,
-  useQualityListQuery,
   useSingleMovieImportMutation,
   useBulkMovieImportMutation,
-  useBanglaMovieListQuery,
   useAdminMovieDetailsQuery,
   useCreateGenreMutation,
   useGetAudioListQuery,
@@ -183,6 +207,13 @@ export const {
   usePixelQualityListQuery,
   usePrintQualityListQuery,
   useCreatePrintQualityMutation,
-  useDeleteTermsMutation
+  useDeleteTermsMutation,
+  useAdminGenreListQuery,
+  useBengaliMovieListQuery,
+  usePixelQualityClientQuery,
+  usePrintQualityClientQuery,
+  useAudListClientQuery,
+  useCountryListClientQuery
+  
 } = movieApi;
 export default movieApi;

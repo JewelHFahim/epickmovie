@@ -1,34 +1,39 @@
-import Loading from "../../../../utils/loading/Loading";
-import {
-  useCreatePixelQualityMutation,
-  useDeleteTermsMutation,
-  usePixelQualityListQuery,
-} from "../../../../redux/features/movies/movieApi";
 import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import PrintQuality from "./PrintQuality";
+import {
+  useCreatePixelQualityMutation,
+  useDeleteTermsMutation,
+  usePixelQualityListQuery,
+} from "../../../redux/features/movies/movieApi";
+import Loading from "../../../utils/loading/Loading";
 
-const AddQuality = () => {
+const PixelQuality = () => {
   const { data: pixelQualityList, isLoading } = usePixelQualityListQuery();
+  console.log(pixelQualityList);
   const [createPixelQuality] = useCreatePixelQualityMutation();
   const [deleteTerms] = useDeleteTermsMutation();
 
-  const { handleSubmit, formState: { errors }, register, reset } = useForm();
+  const {
+    handleSubmit,
+    formState: { errors },
+    register,
+    reset,
+  } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data)
-   const res =  createPixelQuality(data);
-   console.log(res)
+    console.log(data);
+    const res = createPixelQuality(data);
+    console.log(res);
     toast.success("Create Quality");
     reset();
   };
 
   const handleDelete = (id) => {
     deleteTerms(id);
-    toast.error("Deleted")
-  }
+    toast.error("Deleted");
+  };
 
   return (
     <div className="flex flex-col w-full">
@@ -70,10 +75,10 @@ const AddQuality = () => {
               </button>
             </div>
           </form>
+
         </div>
 
         <div className="mx-auto bg-white border w-[60%]  p-2">
-
           <div className="items-start justify-center md:flex">
             <div className="max-w-lg">
               <h3 className="text-xl font-bold sm:text-2xl uppercase">
@@ -96,7 +101,7 @@ const AddQuality = () => {
                 <Loading />
               ) : (
                 <tbody className="divide-y">
-                  {pixelQualityList?.data?.map((item,) => (
+                  {pixelQualityList?.data?.map((item) => (
                     <tr key={item?.id} className="odd:bg-gray-50 even:bg-white">
                       <td className="px-6 py-4 font-medium flex items-center gap-x-2">
                         {item?.name}
@@ -106,7 +111,7 @@ const AddQuality = () => {
                           <MdEditSquare />
                         </button>
                         <button
-                        onClick={()=> handleDelete(item?.id)}
+                          onClick={() => handleDelete(item?.id)}
                           className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
                         >
                           <FaTrashAlt />
@@ -118,16 +123,10 @@ const AddQuality = () => {
               )}
             </table>
           </div>
-
         </div>
       </div>
-
-      <hr className="my-10" />
-
-      {/* ================>> PRINT QUALITY <<==============*/}
-      <PrintQuality />
     </div>
   );
 };
 
-export default AddQuality;
+export default PixelQuality;

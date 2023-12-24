@@ -30,7 +30,7 @@ const Home = () => {
       {/* ==================>> Domains <<=================*/}
       <DomainList />
 
-      <HomePageSeeAllBtn total={totalMovies}>Movies</HomePageSeeAllBtn>
+      <HomePageSeeAllBtn total={totalMovies} redirect={"/movies"}>Movies</HomePageSeeAllBtn>
 
       {/* ==================>> Movies <<==================*/}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
@@ -43,7 +43,7 @@ const Home = () => {
         ))}
       </div>
 
-      <HomePageSeeAllBtn total={totalTvShow}>TV Show</HomePageSeeAllBtn>
+      <HomePageSeeAllBtn total={totalTvShow} redirect={"/tv-show"}>TV Show</HomePageSeeAllBtn>
 
       {/* ==================>> Movies <<==================*/}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">

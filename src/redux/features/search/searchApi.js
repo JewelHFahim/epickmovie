@@ -14,11 +14,20 @@ const tvShowApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-    // ===========>>  Filter By GENRE/YEAR/QUALITY  <<=============
+    // ===========>>  SEARCH By GENRE/YEAR/QUALITY  <<=============
     serachResults: builder.query({
       query: (searchTerm) => `/search/${searchTerm}`,
       providesTags: ["EpicMovies"],
     }),
+
+
+    // ==============>>  MOVIE / SERIES SUGGESSION <<===============
+    suggessionMovieSeries: builder.query({
+      query: (id) => `/get-post-suggession/${id}`,
+      providesTags: ["EpicMovies"],
+    }),
+
+
   }),
 });
 
@@ -26,5 +35,6 @@ export const {
   useFilterResultsQuery,
   useSerachResultsQuery,
   useFilteredResultsByPaginationQuery,
+  useSuggessionMovieSeriesQuery
 } = tvShowApi;
 export default tvShowApi;

@@ -1,9 +1,9 @@
-import Loading from "../../../../utils/loading/Loading";
-import { useGenreListQuery } from "../../../../redux/features/movies/movieApi";
 import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
+import { useGenreListQuery } from "../../../redux/features/movies/movieApi";
+import Loading from "../../../utils/loading/Loading";
 
-const AddDirector = () => {
+const AddCreator = () => {
   
   const { data: genreList, isLoading } = useGenreListQuery();
   console.log(genreList);
@@ -14,7 +14,7 @@ const AddDirector = () => {
       <div className="bg-white w-[45%] border-r px-2  py-4">
 
         <div className="flex justify-center">
-          <h3 className="text-xl font-bold sm:text-2xl uppercase" >Add New Director </h3>
+          <h3 className="text-xl font-bold sm:text-2xl uppercase" >Add New Creator </h3>
         </div>
 
         <form className="mt-6 bg-slate-50 p-6 rounded-md">
@@ -23,7 +23,7 @@ const AddDirector = () => {
             <label>Name</label>
             <input
               type="text"
-              placeholder="add new director"
+              placeholder="add new Creator"
               className="border py-1 px-4 rounded-md bg-white focus:outline-blue-500"
             />
             <p className="text-xs text-gray-400">
@@ -45,7 +45,7 @@ const AddDirector = () => {
           </div>
 
           <div className="mt-8">
-            <button className="bg-slate-700 px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-slate-800">Add New Director</button>
+            <button className="bg-slate-700 px-5 py-2 text-sm font-medium rounded-md text-white hover:bg-slate-800">Add New Creator</button>
           </div>
         </form>
       </div>
@@ -54,17 +54,17 @@ const AddDirector = () => {
         <div className="items-start justify-center md:flex">
           <div className="max-w-lg">
             <h3 className="text-xl font-bold sm:text-2xl uppercase">
-              Director List
+              Creator List
             </h3>
           </div>
         </div>
 
-        {/* ==============>> Director LIST <<=============== */}
+        {/* ==============>> Creator LIST <<=============== */}
         <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
           <table className="w-full table-auto text-sm text-left">
             <thead className="text-gray-600 font-medium border-b">
               <tr>
-                <th className="py-3 px-6">Genre</th>
+                <th className="py-3 px-6">Creator</th>
                 <th className="text-center">Actions</th>
               </tr>
             </thead>
@@ -98,6 +98,7 @@ const AddDirector = () => {
       </div>
     </div>
   );
+
 };
 
-export default AddDirector;
+export default AddCreator;

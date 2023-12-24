@@ -1,9 +1,10 @@
 import { useForm } from "react-hook-form";
-import Loading from "../../../../utils/loading/Loading";
 import toast from "react-hot-toast";
-import { useCreatePrintQualityMutation, useDeleteTermsMutation, usePrintQualityListQuery } from "../../../../redux/features/movies/movieApi";
+
 import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
+import Loading from "../../../utils/loading/Loading";
+import { useCreatePrintQualityMutation, useDeleteTermsMutation, usePrintQualityListQuery } from "../../../redux/features/movies/movieApi";
 
 const PrintQuality = () => {
     const { handleSubmit, register, formState: { errors }, reset} = useForm()
@@ -12,6 +13,8 @@ const PrintQuality = () => {
       const { data: printQualityList, isLoading } = usePrintQualityListQuery();  
       const [deleteTerms] = useDeleteTermsMutation();
 
+
+      console.log(printQualityList)
 
     const onSubmitPrint = (data) => {
         console.log(data);
