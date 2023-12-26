@@ -5,6 +5,7 @@ import DomainList from "../../components/domain-list/DomainList";
 import MovieCard from "../../components/movie-card/MovieCard";
 import HomePageSeeAllBtn from "../../utils/HomePageSeeAllBtn";
 import { useTvShowListQuery } from "../../redux/features/tv-show/tvShowApi";
+import { useListConfigQuery } from "../../redux/features/settings/settingApi";
 
 const Home = () => {
   const { data: movieList } = useMovieListQuery();
@@ -17,6 +18,9 @@ const Home = () => {
 
   console.log(tvShowList)
   
+
+  const { data: configList } = useListConfigQuery();
+  console.log(configList?.data[5]?.value);
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">

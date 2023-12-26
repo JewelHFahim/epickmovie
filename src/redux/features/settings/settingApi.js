@@ -1,13 +1,35 @@
 import apiSlice from "../api/apiSlice";
 
 const settingApi = apiSlice.injectEndpoints({
+
   endpoints: (builder) => ({
+    
     // ====================>> Create Config  <<=====================
     listConfig: builder.query({
       query: () => "/admin/get-all-config-value",
       providesTags: ["EpicMovies"],
     }),
 
+
+    // ====================>> Footer  <<=====================
+    footerConfig: builder.query({
+      query: () => "admin/get-config-value/site_footer",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> JOIN TELEGRAM  <<=====================
+    joinTelegramConfig: builder.query({
+      query: () => "/admin/get-config-value/telegram_link",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> SITE LOGO  <<=====================
+    siteLogoConfig: builder.query({
+      query: () => "/admin/get-config-value/site_logo",
+      providesTags: ["EpicMovies"],
+    }),
+
+    
     // ====================>> Create Config  <<=====================
     createConfig: builder.mutation({
       query: (data) => ({
@@ -17,8 +39,9 @@ const settingApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["EpicMovies"],
     }),
+
   }),
 });
 
-export const { useCreateConfigMutation } = settingApi;
+export const { useListConfigQuery, useCreateConfigMutation, useFooterConfigQuery, useJoinTelegramConfigQuery, useSiteLogoConfigQuery } = settingApi;
 export default settingApi;

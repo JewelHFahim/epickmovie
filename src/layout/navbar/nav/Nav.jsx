@@ -21,6 +21,7 @@ import {
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { BiMovie } from "react-icons/bi";
+import { useJoinTelegramConfigQuery } from "../../../redux/features/settings/settingApi";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -29,12 +30,11 @@ const Nav = () => {
   const { data: pixelQualityList } = usePixelQualityClientQuery();
   const { data: printQualityList } = usePrintQualityClientQuery();
   const { data: audioList } = useAudListClientQuery();
-  
+  const { data: joinTelegram } = useJoinTelegramConfigQuery();
+
   const pixel = pixelQualityList?.data;
   const print = printQualityList?.data;
   const combinedQuality = pixel?.concat(print);
-
-
 
   const itemsPerColumn = 20;
   const columns = [];
@@ -68,8 +68,16 @@ const Nav = () => {
           </a>
         </li>
 
-         {/* =========>> AUDIO <<========== */}
+        {/* =========>> MOVIE <<========== */}
         <li className="main-menu">
+          <a href="/movies" className=" flex items-center gap-2">
+            <BiMovie className="w-[25px] h-[25px]" />
+            Movie
+          </a>
+        </li>
+
+        {/* =========>> AUDIO <<========== */}
+        {/* <li className="main-menu">
           <a href="#" className=" flex items-center gap-2">
             <img src={home} alt="" className="w-[21px] h-[20px]" /> Home
           </a>
@@ -82,10 +90,7 @@ const Nav = () => {
               </li>
             ))}
           </ul>
-        </li>
-
-
-
+        </li> */}
 
         {/* =========>> GENRE <<========== */}
         <li className="main-menu">
@@ -155,10 +160,17 @@ const Nav = () => {
           </a>
         </li>
 
+
+
         <li className="main-menu">
-          <a href="#" className=" flex items-center gap-2">
-            <img src={telegram} alt="" className="w-[20px] h-[20px]" /> Join
-            Telegram
+          <a
+            href={joinTelegram?.data}
+            className="flex items-center gap-2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img src={telegram} alt="" className="w-[20px] h-[20px]" />
+            Join Telegram
           </a>
         </li>
       </ul>

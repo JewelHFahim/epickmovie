@@ -5,6 +5,7 @@ const initialState = {
   searchTerm: "",
   filteredTerm: "",
   pageNo: "",
+  searchMovieSeries: ""
 };
 
 export const searchSlice = createSlice({
@@ -22,9 +23,14 @@ export const searchSlice = createSlice({
     setPageNo: (state, action) => {
       state.pageNo = action.payload;
     },
+
+    getSearchMovieSeries: (state, action) => {
+      state.searchMovieSeries = action.payload;
+
+    }
   },
 });
 
-export const { collectSearchItem, collectFilteredItem, setPageNo } = searchSlice.actions;
+export const { collectSearchItem, collectFilteredItem, setPageNo, getSearchMovieSeries } = searchSlice.actions;
 
 export default searchSlice.reducer;

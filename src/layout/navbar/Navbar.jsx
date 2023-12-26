@@ -8,6 +8,8 @@ import { genreList } from "../../utils/menu-list/menu-list";
 const Navbar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+ 
+  
 
   return (
     <div className=" lg:h-[184px] bg-[#27272A] mx-2">

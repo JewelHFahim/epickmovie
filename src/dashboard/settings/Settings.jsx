@@ -2,10 +2,10 @@ import { useForm } from "react-hook-form";
 import { useCreateConfigMutation } from "../../redux/features/settings/settingApi";
 import toast from "react-hot-toast";
 import { Select, initTE } from "tw-elements";
-
+import MultiSelectMenu from "../../components/genere-select-menu/MultitSelect";
 
 const Settings = () => {
-    initTE({ Select });
+  initTE({ Select });
 
   const {
     handleSubmit,
@@ -85,33 +85,19 @@ const Settings = () => {
             />
           </div>
 
-          {/* <div>
-            <label className="text-gray-200">Quick Menu Order</label>
-            <input type="text" {...register("quick_menu_order")} placeholder=" quick menu_ order" className={inputStyle}
-            />
-          </div> */}
-
-          <select {...register("quick_menu_order")} multiple data-te-select-init>
-            <option hidden>Select Menus</option>
-            <option value="1">One</option>
-            <option value="2">Two</option>
-            <option value="3">Three</option>
-            <option value="4">Four</option>
-            <option value="5">Five</option>
-            <option value="6">Six</option>
-            <option value="7">Seven</option>
-            <option value="8">Eight</option>
-          </select>
-
-          <div className="flex justify-end mt-6">
+          <div className="flex items-center justify-center mt-8">
             <button
               type="submit"
-              className="px-8 py-2.5 leading-5 text-white transition-colors duration-300 transhtmlForm bg-gray-700 rounded-md hover:bg-gray-600 focus:outline-none focus:bg-gray-600"
+              className="w-[150px] border border-slate-600 h-[40px] text-white uppercase rounded-md bg-slate-900 hover:bg-slate-600"
             >
               Save
             </button>
           </div>
         </form>
+
+        <div className=" mt-[150px]">
+          <MultiSelectMenu />
+        </div>
       </section>
     </div>
   );

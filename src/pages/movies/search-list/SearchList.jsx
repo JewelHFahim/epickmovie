@@ -9,6 +9,7 @@ const SearchList = () => {
   const { searchTerm } = useSelector((state) => state.search);
   console.log(searchTerm)
   const { data: searchResults } = useSerachResultsQuery(searchTerm);
+  console.log(searchResults)
 
   return (
     <section className="min-h-screen">
@@ -23,9 +24,9 @@ const SearchList = () => {
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
         {searchResults?.data?.map((item) => (
           <MovieCard
-            key={item?.ID}
-            item={item}
-            redirect={`/movie/${item?.ID}`}
+            key={item?.id}
+            item={item} 
+            redirect={ item?.post_type === "tvshows" ? `/series/${item?.id}` : `/movie/${item?.id}`}
           ></MovieCard>
         ))}
       </div>

@@ -6,19 +6,28 @@ import Discovery from "./Discovery";
 import { useDispatch, useSelector } from "react-redux";
 import { bulkMovieImport } from "../../redux/features/movies/movieSlice";
 import { bulkTvShowImport } from "../../redux/features/tv-show/tvShowSlice";
+import { BsSearch } from "react-icons/bs";
+import { getSearchMovieSeries } from "../../redux/features/search/searchSlice";
+import { generatePath } from "react-router-dom";
 
 const DbMovies = () => {
+
   const { bulkData } = useSelector((state) => state.movie);
   const { bulkTvData } = useSelector((state) => state.tvShow);
   const [toggleState, setToggleState] = useState("movie");
   const dispatch = useDispatch();
+
   const handleState = (state) => {
     setToggleState(state);
   };
 
   const [genreList, setGenre] = useState();
+  console.log(genreList);
   useEffect(() => {
-    fetch(`${base_url}/genre/movie/list?${key}`)
+    // fetch(`${base_url}/genre/movie/list?${key}`)
+    fetch(`https://api.themoviedb.org/3/genre/movie/list?${key}`)
+    //      https://api.themoviedb.org/3/genre/movie/list?language=en' \
+
       .then((res) => res.json())
       .then((data) => setGenre(data));
   }, []);
@@ -31,21 +40,32 @@ const DbMovies = () => {
   };
 
   // ===================>> BULK MOVIE IMPORT <<====================
-  const handleBulkImport =  () => {
+  const handleBulkImport = () => {
     const res = dispatch(bulkMovieImport({ tmdb_ids: bulkData }));
     console.log(res);
-
   };
 
-  // ===================>> BULK TV SHOW IMPORT <<====================
+  // ===================>> BULK TV SHOW IMPORT <<==================
   const handleBulkTvShowImport = async () => {
-    const res = dispatch(bulkTvShowImport({tmdb_ids:bulkTvData}));
+    const res = dispatch(bulkTvShowImport({ tmdb_ids: bulkTvData }));
     console.log(res);
   };
+
+
+  const [searchParams, setSearchParams] = useState(null);
+  const handleSearch = (event) => {
+    setSearchParams(event.target.value);
+    console.log(event.target.value);
+    dispatch(getSearchMovieSeries(event.target.value))
+  }
+
+  const {searchMovieSeries} = useSelector(state => state.search);
+  console.log(searchMovieSeries, "from redux");
 
   return (
     <div className="w-full h-full">
       {/* ================>> Header Action Buttons and Filters <<=================*/}
+
       <div className="bg-slate-200 p-6">
         {/* Top Menus */}
 
@@ -78,6 +98,20 @@ const DbMovies = () => {
               Shows
             </button>
           </div>
+
+          <div className="flex items-center">
+            <input
+              type="text"
+              placeholder="search"
+              className="w-[200px] h-[30px] px-2 rounded-s-md focus:outline-none"
+              value={searchParams}
+              onChange={handleSearch}
+            />
+            <button className="w-[40px] h-[30px] border bg-slate-800 hover:bg-slate-600 text-white flex justify-center items-center rounded-e-md">
+              <BsSearch />
+            </button>
+          </div>
+          
         </div>
 
         <hr />
@@ -94,41 +128,23 @@ const DbMovies = () => {
             </button>
 
             {/* =====================>> SORT BY YEAR <<==============================*/}
-            <input
-              type="number"
-              {...register("year")}
-              placeholder="year"
-              className="border px-4 py-1 rounded-md w-[85px] focus:outline-blue-500"
-            />
+            <input type="number" {...register("year")} placeholder="year" className="border px-4 py-1 rounded-md w-[85px] focus:outline-blue-500"/>
+
 
             {/* =====================>> FILTER BY PAGE <<=============================*/}
-            <input
-              type="number"
-              {...register("page")}
-              placeholder="page"
-              className="border px-4 py-1 rounded-md w-[80px] focus:outline-blue-500"
+            <input type="number" {...register("page")} placeholder="page" className="border px-4 py-1 rounded-md w-[80px] focus:outline-blue-500"
             />
 
             {/* =====================>> SORT BY ASC/DSC <<=============================*/}
-            <select
-              {...register("sort")}
-              className="border px-4 py-1 rounded-md w-[170px] focus:outline-blue-500"
-            >
+            <select {...register("sort")} className="border px-4 py-1 rounded-md w-[170px] focus:outline-blue-500">
               <option value="popularity.desc">Popularity desc</option>
               <option value="popularity.asc">Popularity asc</option>
             </select>
 
-            {/* =====================>> SORT BY GENRE<<================================*/}
-            <select
-              data-te-select-init
-              {...register("genreId")}
-              className="border p-4 py-1 rounded-md w-[170px]  focus:outline-blue-500  "
-            >
+            {/* =====================>> SORT BY GENRE <<================================*/}
+            <select data-te-select-init {...register("genreId")} className="border p-4 py-1 rounded-md w-[170px] focus:outline-blue-500">
               {genreList?.genres?.map((item) => (
-                <option key={item?.id} value={item?.id}>
-                  {" "}
-                  {item?.name}{" "}
-                </option>
+                <option key={item?.id} value={item?.id}> {item?.name} </option>
               ))}
             </select>
 
@@ -158,7 +174,7 @@ const DbMovies = () => {
         </div>
       </div>
 
-      {/* ==========================>> Discovery <<================================*/}
+      {/* ==========================>> Discovery <<===============================*/}
 
       {filteredData?.genreId?.length > 0 ||
       filteredData?.sort?.length > 0 ||

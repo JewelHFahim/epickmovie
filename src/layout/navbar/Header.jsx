@@ -1,15 +1,16 @@
-import logo from "../../assets/logo.png";
 import search from "../../assets//Search Icon.svg";
 import { Link, useNavigate  } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
+import {  useSiteLogoConfigQuery } from "../../redux/features/settings/settingApi";
 
 const Header = () => {
+  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchTermState, setSearchTerm] = useState("");
-
+const {data: siteLogo} = useSiteLogoConfigQuery();
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -27,7 +28,7 @@ const Header = () => {
   return (
     <div className="w-full lg:h-[130px] flex flex-col lg:flex-row items-center justify-between py-2 lg:py-0 px-4 ">
       <Link to="/" className=" w-[173px] h-[60px] lg:w-[200px] lg:h-[75px]">
-        <img src={logo} alt="" className="w-full h-full object-fit" />
+        <img src={siteLogo?.data} alt="" className="w-full h-full object-fit" />
       </Link>
 
       <form

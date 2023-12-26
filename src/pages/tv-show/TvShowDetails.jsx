@@ -88,12 +88,8 @@ const TvShowDetails = () => {
 
             {/* ===============>> Poster Card <<=============== */}
             <div className=" lg:w-[715px] lg:min-h-[272px] lg:max-h-[100%] rounded-[20px] bg-[#1B1E21] p-[14px] flex flex-col lg:flex-row gap-[18px] lg:gap-[26px]">
-              <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] lg:min-w-[182px] h-[244px] p-[1.5px] rounded-[6px]">
-                <img
-                  src={details?.poster_image_url}
-                  alt=""
-                  className="w-full h-full rounded-[3px]"
-                />
+              <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] lg:min-w-[182px] lg:h-[250px] p-[1.5px] rounded-[6px]">
+                <img  src={details?.poster_image_url} alt="" className="w-full h-full rounded-[3px]"/>
               </div>
 
               <div className="font-roboto lg:w-[70%]">

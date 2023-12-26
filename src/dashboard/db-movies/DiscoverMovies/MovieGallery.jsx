@@ -94,7 +94,7 @@ const MovieGallery = ({ movies }) => {
         </div>
       )}
 
-      <div className=" w-full flex justify-between items-center pl-2 pr-[85px]">
+      <div className=" w-full flex justify-between items-center pl-2 pr-[30px]">
         <button className="text-[16px] lg:text-[32px] font-[700] text-slate-700 border-b-[1.4px] border-[#FF2345] p-0 mb-2">
           Movies
         </button>
@@ -131,15 +131,19 @@ const MovieGallery = ({ movies }) => {
             <img
               src={`${imgBaseUrl}${image?.poster_path}`}
               alt=""
-              style={{ width: "100px", height: "100px" }}
+              style={{ width: "120px", height: "150px" }}
             />
+            <div className="text-center">
+              <p>{image?.title?.slice(0,12)}</p>
+              <p className="text-sm">{image?.release_date}</p>
+            </div>
           </div>
         ))}
       </div>
 
-      <div>
+      {/* <div>
         <p>Selected Image IDs: [{selectedIds.join(", ")}]</p>
-      </div>
+      </div> */}
 
     </div>
   );

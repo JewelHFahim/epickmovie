@@ -121,14 +121,18 @@ const TvShowGallery = ({ tvShows }) => {
               </div>
             )}
 
-            <img src={`${imgBaseUrl}${image?.poster_path}`} alt="" style={{ width: "100px", height: "100px" }}/>
+            <img src={`${imgBaseUrl}${image?.poster_path}`} alt="" style={{ width: "120px", height: "150px" }}/>
+            <div className="text-center">
+              <p>{image?.name?.slice(0,12)}</p>
+              <p className="text-sm">{image?.first_air_date}</p>
+            </div>
 
           </div>
         ))}
       </div>
 
       <div>
-        {/* <p>Selected Image IDs: [{selectedIds.join(", ")}]</p> */}
+        <p>Selected Image IDs: [{selectedIds.join(", ")}]</p>
       </div>
 
     </div>

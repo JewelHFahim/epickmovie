@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import { base_url, key } from "../../../utils/Importants";
 import TvShowGallery from "./TvShowGallery";
+import { useSelector } from "react-redux";
 
 const DiscoverTvshows = ({filteredData}) => {
   const [tvShows, settvShows] = useState([]);
+  const {searchMovieSeries} = useSelector(state => state.search);
+  console.log(tvShows);
 
-  console.log(tvShows)
   
   const selectedGenreId = filteredData?.genreId;
   const selectedSort = filteredData?.sort;
@@ -20,19 +22,24 @@ const DiscoverTvshows = ({filteredData}) => {
 
   const sortByPage = `${key}&page=${selectedPage}`;
 
-  const URL = `${base_url}/tv?${key}`;
+  const searchSeries = `https://api.themoviedb.org/3/search/tv?include_adult=true&${key}&query=${searchMovieSeries}`;
+
+  const URL = `https://api.themoviedb.org/3/discover/tv?${key}`;
+
+  const currentURL = (searchMovieSeries === null || searchMovieSeries === "") ? URL : searchSeries;
+
 
   useEffect(() => {
-    fetch(URL)
+    fetch(currentURL)
       .then((res) => res.json())
       .then((data) => settvShows(data?.results));
-  }, [URL]);
+  }, [currentURL]);
 
   return (
     <div>
-       <div>
+     
       <TvShowGallery tvShows={tvShows} />
-    </div>
+
     </div>
   );
 };
