@@ -77,7 +77,7 @@ const Sidebar = () => {
     },
 
     {
-      href: "javascript:void(0)",
+      href: "/admin/dashboard/help",
       name: "Help",
       icon: <GoQuestion />,
     },

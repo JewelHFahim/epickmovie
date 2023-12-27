@@ -41,12 +41,6 @@ const MovieGallery = ({ movies }) => {
     selectedIds.includes(id);
   };
 
-  // ===================>> BULK DATA IMPORT <<====================
-  const handleBulkImport = async () => {
-    const data = { tmdb_ids: selectedIds};
-    const res = await dispatch(bulkMovieImport(data));
-    console.log(res);
-  };
 
   const notificationList = movies?.results?.filter((item) =>
     selectedIds.includes(item.id)
@@ -62,6 +56,7 @@ const MovieGallery = ({ movies }) => {
       {
         notificationList?.length > 0 && 
         <div className="w-full h-full p-5 bg-slate-200 flex flex-col gap-2">
+
         {notificationList?.map((item) => (
           <div
             key={item?.id}
@@ -85,10 +80,7 @@ const MovieGallery = ({ movies }) => {
 
       {notificationList?.length > 0 && (
         <div className="w-full h-[25px] flex justify-center items-center bg-slate-50">
-          <button
-            onClick={() => clearNotificationList()}
-            className="text-sm text-blue-700 font-medium"
-          >
+          <button onClick={() => clearNotificationList()} className="text-sm text-blue-700 font-medium" >
             Clear
           </button>
         </div>
@@ -99,10 +91,7 @@ const MovieGallery = ({ movies }) => {
           Movies
         </button>
 
-        <button
-          onClick={handleSelectAll}
-          className="border px-4 py-1 text-sm rounded-lg text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white transform duration-200"
-        >
+        <button onClick={handleSelectAll} className="border px-4 py-1 text-sm rounded-lg text-blue-500 border-blue-500 hover:bg-blue-500 hover:text-white transform duration-200">
           Select All
         </button>
 
@@ -113,13 +102,7 @@ const MovieGallery = ({ movies }) => {
           <div
             key={image.id}
             onClick={() => handleImageClick(image.id)}
-            style={{
-              border: isSelected(image.id)
-                ? "2px solid blue"
-                : "2px solid transparent",
-              margin: "8px",
-              cursor: "pointer",
-            }}
+            style={{ border: isSelected(image.id) ? "2px solid blue" : "2px solid transparent", margin: "8px", cursor: "pointer" }}
             className="relative"
           >
             {isLoading === true && parseInt(selectedIds) === image.id && (
@@ -128,11 +111,7 @@ const MovieGallery = ({ movies }) => {
               </div>
             )}
 
-            <img
-              src={`${imgBaseUrl}${image?.poster_path}`}
-              alt=""
-              style={{ width: "120px", height: "150px" }}
-            />
+            <img src={`${imgBaseUrl}${image?.poster_path}`} alt="" style={{ width: "120px", height: "150px" }}/>
             <div className="text-center">
               <p>{image?.title?.slice(0,12)}</p>
               <p className="text-sm">{image?.release_date}</p>
@@ -141,9 +120,9 @@ const MovieGallery = ({ movies }) => {
         ))}
       </div>
 
-      {/* <div>
-        <p>Selected Image IDs: [{selectedIds.join(", ")}]</p>
-      </div> */}
+      <div>
+        {/* <p>Selected Image IDs: [{selectedIds.join(", ")}]</p> */}
+      </div>
 
     </div>
   );

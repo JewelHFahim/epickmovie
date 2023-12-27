@@ -131,9 +131,9 @@ const TvShowGallery = ({ tvShows }) => {
         ))}
       </div>
 
-      <div>
+      {/* <div>
         <p>Selected Image IDs: [{selectedIds.join(", ")}]</p>
-      </div>
+      </div> */}
 
     </div>
   );

@@ -2,10 +2,13 @@ import { useEffect, useState } from "react";
 import { base_url, key } from "../../../utils/Importants";
 import MovieGallery from "./MovieGallery";
 import { useSelector } from "react-redux";
+import SearchResults from "./SearchResults";
 
 const DiscoverMovies = ({ filteredData }) => {
+  const date = new Date();
+  const year = date.getFullYear();
 
-  const {searchMovieSeries} = useSelector(state => state.search);
+  const { searchMovieSeries } = useSelector((state) => state.search);
   console.log(searchMovieSeries, "from redux");
 
   const selectedGenreId = filteredData?.genreId;
@@ -14,28 +17,28 @@ const DiscoverMovies = ({ filteredData }) => {
   const selectedPage = filteredData?.page;
 
   const [movies, setMovies] = useState([]);
-  console.log(movies)
+  console.log(movies);
 
-  const genreLink = `${key}&with_genres=${selectedGenreId}`;
+  const genreLink = selectedGenreId?.length > 0 ? `${key}&with_genres=${selectedGenreId}` : `${key}&with_genres=""`;
 
-  const sortAscDesc = `${key}&sort_by=${selectedSort}`;
+  const sortAscDesc = selectedSort?.length > 0 ? `${key}&sort_by=${selectedSort}` : `${key}&sort_by=popularity.desc`;
 
-  const yearFilt = `${key}&primary_release_year=${selectedYear}`;
+  const yearFilt = selectedYear?.length > 0 ? `${key}&primary_release_year=${selectedYear}` : `${key}&primary_release_year=${year}`;
 
-  const sortByPage = `${key}&page=${selectedPage}`;
+  const sortByPage = selectedPage?.length > 0 ? `${key}&page=${selectedPage}` : `${key}&page=1`;
 
   const URL = `${base_url}/movie?${sortAscDesc}&${yearFilt}&${genreLink}&${sortByPage}`;
 
   const searchMovie = `https://api.themoviedb.org/3/search/movie?include_adult=true&${key}&query=${searchMovieSeries}`;
-  
-  const currentURL =  ( searchMovieSeries  === null || searchMovieSeries === "") ? URL : searchMovie;
 
+  const currentURL =
+    searchMovieSeries === null || searchMovieSeries === "" ? URL : searchMovie;
 
   useEffect(() => {
     fetch(currentURL)
       .then((res) => res.json())
       .then((data) => setMovies(data));
-  }, [currentURL]);
+  }, [currentURL, searchMovieSeries]);
 
   return (
     <div>

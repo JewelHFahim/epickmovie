@@ -4,27 +4,29 @@ import TvShowGallery from "./TvShowGallery";
 import { useSelector } from "react-redux";
 
 const DiscoverTvshows = ({filteredData}) => {
+  const date = new Date();
+  const year = date.getFullYear();
+
   const [tvShows, settvShows] = useState([]);
   const {searchMovieSeries} = useSelector(state => state.search);
   console.log(tvShows);
 
-  
   const selectedGenreId = filteredData?.genreId;
   const selectedSort = filteredData?.sort;
   const selectedYear = filteredData?.year;
   const selectedPage = filteredData?.page;
 
-  const genreLink = `${key}&with_genres=${selectedGenreId}`;
+  const genreLink = selectedGenreId?.length > 0 ? `${key}&with_genres=${selectedGenreId}` : `${key}&with_genres=""`;
 
-  const sortAscDesc = `${key}&sort_by=${selectedSort}`;
+  const sortAscDesc = selectedSort?.length > 0 ? `${key}&sort_by=${selectedSort}` : `${key}&sort_by=popularity.desc` ;
 
-  const yearFilt = `${key}&primary_release_year=${selectedYear}`;
+  const yearFilt = selectedYear?.length > 0 ? `${key}&primary_release_year=${selectedYear}` : `${key}&primary_release_year=${year}`;
 
-  const sortByPage = `${key}&page=${selectedPage}`;
+  const sortByPage = selectedPage?.length > 0 ? `${key}&page=${selectedPage}` : `${key}&page=1`;
 
   const searchSeries = `https://api.themoviedb.org/3/search/tv?include_adult=true&${key}&query=${searchMovieSeries}`;
 
-  const URL = `https://api.themoviedb.org/3/discover/tv?${key}`;
+  const URL = `${base_url}/tv?${sortAscDesc}&${yearFilt}&${genreLink}&${sortByPage}`;
 
   const currentURL = (searchMovieSeries === null || searchMovieSeries === "") ? URL : searchSeries;
 
@@ -37,9 +39,7 @@ const DiscoverTvshows = ({filteredData}) => {
 
   return (
     <div>
-     
       <TvShowGallery tvShows={tvShows} />
-
     </div>
   );
 };

@@ -19,11 +19,13 @@ const {data: siteLogo} = useSiteLogoConfigQuery();
     e.preventDefault();
     console.log("Searching for:", searchTermState);
     const res = dispatch(collectSearchItem(searchTermState));
-    if(res.payload !== null){
+    // if(res.payload !== null){
+    //   return navigate("/search-list")
+    // }
+    if(res !== null){
       return navigate("/search-list")
     }
-  };
-
+  }
 
   return (
     <div className="w-full lg:h-[130px] flex flex-col lg:flex-row items-center justify-between py-2 lg:py-0 px-4 ">

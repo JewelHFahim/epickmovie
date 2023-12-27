@@ -3,8 +3,6 @@ import apiSlice from "../api/apiSlice";
 const movieApi = apiSlice.injectEndpoints({
 
   endpoints: (builder) => ({
-
-
     // ========================>> ALL MOVIES <<===========================
     movieList: builder.query({
       query: () => "/movie-posts",
@@ -29,7 +27,7 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-    // ==========================>> GENRE <<===========================
+    // ===========================>> GENRE <<=============================
     genreList: builder.query({
       query: () => "/terms/genres-list",
       providesTags: ["EpicMovies"],
@@ -64,10 +62,9 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-
-    // ##################################################################
-    // ############################## ADMIN ROUTES ######################
-    // ##################################################################
+    // #####################################################################
+    //   ############################## ADMIN ROUTES ######################
+    // ####################################333##############################
 
     // =====================>> SINGLE MOVIE IMPORT(MUTATION) <<==============
     singleMovieImport: builder.mutation({
@@ -100,6 +97,7 @@ const movieApi = apiSlice.injectEndpoints({
       query: () => `/admin/get-genre`,
       providesTags: ["EpicMovies"],
     }),
+
     // ========================>> CREATE GENRE <<=============================
     createGenre: builder.mutation({
       query: (data) => ({
@@ -213,7 +211,6 @@ export const {
   usePixelQualityClientQuery,
   usePrintQualityClientQuery,
   useAudListClientQuery,
-  useCountryListClientQuery
-  
+  useCountryListClientQuery,
 } = movieApi;
 export default movieApi;

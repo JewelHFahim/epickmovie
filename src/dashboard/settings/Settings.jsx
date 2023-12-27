@@ -1,26 +1,39 @@
 import { useForm } from "react-hook-form";
-import { useCreateConfigMutation } from "../../redux/features/settings/settingApi";
+import { useCreateConfigMutation, useFooterConfigQuery, useJoinTelegramConfigQuery, useSiteLogoConfigQuery, useSiteNameConfigQuery, useSiteNewsConfigQuery } from "../../redux/features/settings/settingApi";
 import toast from "react-hot-toast";
 import { Select, initTE } from "tw-elements";
 import MultiSelectMenu from "../../components/genere-select-menu/MultitSelect";
+import { useEffect } from "react";
 
 const Settings = () => {
   initTE({ Select });
 
-  const {
-    handleSubmit,
-    register,
-    reset,
-    formState: { error },
-  } = useForm();
+  const {  handleSubmit, register, reset, setValue} = useForm();
+
+  const {data: siteName} = useSiteNameConfigQuery()
+  const {data: siteLogo } = useSiteLogoConfigQuery();
+  const {data: siteFooter } = useFooterConfigQuery();
+  const {data: siteNews } = useSiteNewsConfigQuery();
+  const {data: siteTelegram} = useJoinTelegramConfigQuery();
+  console.log(siteName, siteLogo, siteFooter,siteNews, siteTelegram);
+
+
+  
+  useEffect(() => {
+    setValue('site_name', siteName?.data, { shouldDirty: false });
+    setValue('site_logo', siteLogo?.data, { shouldDirty: false });
+    setValue('site_footer', siteFooter?.data, { shouldDirty: false });
+    setValue('site_news', siteNews?.data, { shouldDirty: false });
+    setValue('telegram_link', siteTelegram?.data, { shouldDirty: false });
+  }, [setValue, siteName?.data, siteLogo?.data, siteFooter?.data, siteNews?.data, siteTelegram?.data]);
 
   const [createConfig] = useCreateConfigMutation();
 
   const onSubmit = (data) => {
     console.log(data);
-    // createConfig(data);
-    // toast.success("Submitted");
-    // reset();
+    createConfig(data);
+    toast.success("Submitted");
+    reset();
   };
 
   const inputStyle =
@@ -57,7 +70,8 @@ const Settings = () => {
 
           <div>
             <label className="text-gray-200"> Site News </label>
-            <input
+            <textarea
+            rows={4}
               type="text"
               {...register("site_news")}
               placeholder="site news"
@@ -67,7 +81,8 @@ const Settings = () => {
 
           <div>
             <label className="text-gray-200"> Site Footer </label>
-            <input
+            <textarea
+            rows={4}
               type="text"
               {...register("site_footer")}
               placeholder="site footer"
@@ -95,9 +110,10 @@ const Settings = () => {
           </div>
         </form>
 
-        <div className=" mt-[150px]">
+        <div className=" mt-[100px]">
           <MultiSelectMenu />
         </div>
+
       </section>
     </div>
   );

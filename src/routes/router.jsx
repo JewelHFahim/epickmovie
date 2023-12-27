@@ -36,6 +36,7 @@ import AddStudio from "../dashboard/terms/studio/AddStudio";
 import AddCreator from "../dashboard/terms/creator/AddCreator";
 import AddNetworks from "../dashboard/terms/networks/AddNetworks";
 import Settings from "../dashboard/settings/Settings";
+import Help from "../dashboard/help/Help";
 
 const router = createBrowserRouter([
   // ==========>> CLIENT ROUTES <<===========
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard/settings",
         element: <Settings />,
+      },
+      {
+        path: "/admin/dashboard/help",
+        element: <Help />,
       },
 
       {

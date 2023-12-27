@@ -5,13 +5,11 @@ import Pagination from "../../../components/pagination/Pagination";
 
 const FilterList = () => {
   const { filteredTerm, pageNo } = useSelector((state) => state.search);
-  // const { data: filteredResults } = useFilterResultsQuery(filteredTerm);
   const { data: filteredResults } = useFilteredResultsByPaginationQuery({
     filteredTerm,
     pageNo,
   });
-  console.log(filteredTerm);
-  console.log(filteredResults);
+
 
   return (
     <section className="min-h-screen">
@@ -25,7 +23,7 @@ const FilterList = () => {
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
         {filteredResults?.data?.data?.map((item) => (
           <MovieCard
-            key={item?.ID}
+            key={item?.id}
             item={item}
             redirect={ item?.post_type === "movies"? `/movie/${item?.id}` : `/series/${item?.id}`}
           ></MovieCard>

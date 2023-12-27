@@ -16,8 +16,7 @@ export const singleMovieImport = createAsyncThunk(
   async (body, { dispatch }) => {
     dispatch(setLoadingST(true));
     try {
-      const response = await fetch(
-        "https://fapi.epickmovies.online/api/admin/movie-import",
+      const response = await fetch( "https://fapi.epickmovies.online/api/admin/movie-import",
         {
           method: "POST",
           headers: {
@@ -63,8 +62,7 @@ export const bulkMovieImport = createAsyncThunk(
           headers: {
             "content-type": "application/json",
             "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
-            Authorization:
-              "Bearer 2|jmfnE005o9dl7RZNdUchCRooOxdiLeHA7SYxBFnv188d14e9",
+            "Authorization": `Bearer ${userInfo.token}`,
           },
           body: JSON.stringify(body),
         }

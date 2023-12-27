@@ -4,33 +4,49 @@ const settingApi = apiSlice.injectEndpoints({
 
   endpoints: (builder) => ({
     
-    // ====================>> Create Config  <<=====================
+    // ====================>> Config List  <<=====================
     listConfig: builder.query({
       query: () => "/admin/get-all-config-value",
       providesTags: ["EpicMovies"],
     }),
 
-
-    // ====================>> Footer  <<=====================
+    // ======================>> Footer <<=========================
     footerConfig: builder.query({
       query: () => "admin/get-config-value/site_footer",
       providesTags: ["EpicMovies"],
     }),
 
-    // ====================>> JOIN TELEGRAM  <<=====================
+    // ==================>> JOIN TELEGRAM  <<=====================
     joinTelegramConfig: builder.query({
       query: () => "/admin/get-config-value/telegram_link",
       providesTags: ["EpicMovies"],
     }),
 
-    // ====================>> SITE LOGO  <<=====================
+    // =====================>> SITE LOGO  <<======================
     siteLogoConfig: builder.query({
       query: () => "/admin/get-config-value/site_logo",
       providesTags: ["EpicMovies"],
     }),
 
-    
-    // ====================>> Create Config  <<=====================
+    // =====================>> SITE NAME  <<======================
+    siteNameConfig: builder.query({
+      query: () => "/admin/get-config-value/site_name",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ======================>> SITE NEWS  <<=====================
+    siteNewsConfig: builder.query({
+      query: () => "/admin/get-config-value/site_news",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ======================>> QUICK MENU  <<=====================
+    quickMenu: builder.query({
+      query: () => "/admin/get-quick-menu",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ===================>> CREATE CONFIG  <<=====================
     createConfig: builder.mutation({
       query: (data) => ({
         method: "POST",
@@ -40,8 +56,19 @@ const settingApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
+
+    // ===================>> CREATE MENU  <<=====================
+    createMenu: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: `/admin/create-quick-menu`,
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
   }),
 });
 
-export const { useListConfigQuery, useCreateConfigMutation, useFooterConfigQuery, useJoinTelegramConfigQuery, useSiteLogoConfigQuery } = settingApi;
+export const { useListConfigQuery, useCreateConfigMutation, useFooterConfigQuery, useJoinTelegramConfigQuery, useSiteLogoConfigQuery, useSiteNewsConfigQuery, useSiteNameConfigQuery, useCreateMenuMutation, useQuickMenuQuery } = settingApi;
 export default settingApi;
