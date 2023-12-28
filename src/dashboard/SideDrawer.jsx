@@ -66,10 +66,11 @@ const Sidebar = () => {
       name: "Dbmovies",
       icon: <BsCameraReels />,
     },
+
+    { href: "/admin/dashboard/movies-db", name: "Movies", icon: "" },
   ];
 
   const navsFooter = [
-
     {
       href: "/admin/dashboard/users",
       name: "Users",
@@ -89,11 +90,6 @@ const Sidebar = () => {
     },
   ];
 
-  const nestedMovie = [
-    { name: "Movies", href: "/admin/dashboard/movies-db", icon: "" },
-    { name: "Director", href: "/admin/dashboard/add-director", icon: "" },
-  ];
-
   const nestedNavTV = [
     { name: "Tv Shows", href: "/admin/dashboard/db-series", icon: "" },
     { name: "Creator", href: "/admin/dashboard/add-creator", icon: "" },
@@ -105,6 +101,7 @@ const Sidebar = () => {
 
   const nestedTerms = [
     { name: "Tags", href: "/admin/dashboard/add-tags", icon: "" },
+    { name: "Director", href: "/admin/dashboard/add-director", icon: "" },
     { name: "Quality", href: "/admin/dashboard/add-quality", icon: "" },
     { name: "Genres", href: "/admin/dashboard/add-genre", icon: "" },
     { name: "Cast", href: "/admin/dashboard/add-cast", icon: "" },
@@ -149,9 +146,6 @@ const Sidebar = () => {
 
               {/* ==================>> NESTED MENUES <<=====================*/}
               <li>
-                <Menu items={nestedMovie}>
-                  <MdMovieEdit className="text-lg" /> Movies
-                </Menu>
                 <Menu items={nestedNavTV}>
                   <TbMovie className="text-lg" /> TV Shows
                 </Menu>

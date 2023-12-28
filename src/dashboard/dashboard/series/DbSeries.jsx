@@ -1,23 +1,20 @@
 import { useState } from "react";
 import Pagination from "../../../components/pagination/Pagination";
-import {
-  useAdminTvShowListQuery,
-  usePerPgaeTvShowQuery,
-} from "../../../redux/features/tv-show/tvShowApi";
+import { usePerPgaeTvShowQuery} from "../../../redux/features/tv-show/tvShowApi";
 import { useDeleteMovieSeriesMutation } from "../../../redux/features/trash/trashApi";
 import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { FiTrash } from "react-icons/fi";
+import { Tooltip, initTE } from "tw-elements";
+
+
 
 const DbSeries = () => {
+  initTE({ Tooltip });
   const [currentPage, setCurrentPage] = useState(1);
   const { data: perPgaeMovie } = usePerPgaeTvShowQuery(currentPage);
-  console.log(perPgaeMovie);
-
-  const { data: alltvShows } = useAdminTvShowListQuery();
-  console.log(alltvShows);
-
   const [deleteMovieSeries] = useDeleteMovieSeriesMutation();
+
 
   const handleDeleteSeason = (id) => {
     deleteMovieSeries(id);
@@ -67,14 +64,16 @@ const DbSeries = () => {
           <tbody className="divide-y">
             {perPgaeMovie?.data?.data?.map((item, idx) => (
               <tr key={idx} className="odd:bg-gray-50 even:bg-white">
+
                 <td className="px-6 py-4 font-medium flex items-center gap-x-2">
-                  <img
-                    src={item?.poster_image_url}
-                    alt=""
-                    className="w-[50px] h-[50px] rounded-full"
-                  />
-                  {item?.post_title?.slice(0, 50)}
-                </td>
+                  <img  src={item?.poster_image_url}  alt="" className="w-[50px] h-[50px] rounded-full"/>
+
+                  <p data-te-toggle="tooltip"  title={ item?.post_title.length > 50 ? item?.post_title : ""}>
+                      {item?.post_title.length > 50 ? `${item?.post_title?.slice(0, 50)}...` : item?.post_title}
+                    </p>
+
+                </td> 
+
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item?.post_type}
                 </td>

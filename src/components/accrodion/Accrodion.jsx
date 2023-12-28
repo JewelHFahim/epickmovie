@@ -22,9 +22,7 @@ export default function Accrodion({ details }) {
               <h2 className="mb-0" id={`heading-${i}`}>
                 <button
                   className={`${
-                    activeElement === item &&
-                    "text-primary [box-shadow:inset_0_-1px_0_rgba(229,231,235)] dark:!text-primary-400 dark:[box-shadow:inset_0_-1px_0_rgba(75,85,99)]"
-                  } group relative flex w-1/2 mx-auto items-center rounded-lg border-0 bg-white px-5 py-2 text-left text-base text-slate-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none  `}
+                    activeElement === item && "text-primary"} group relative flex w-1/2 mx-auto items-center rounded-lg border-0 bg-white px-5 py-2 text-left text-slate-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none  `}
                   type="button"
                   onClick={() => handleClick(item)}
                   aria-expanded={activeElement === item}
@@ -62,10 +60,9 @@ export default function Accrodion({ details }) {
                 show={activeElement === item}
                 className=" mt-0 !rounded-b-none !shadow-none"
               >
-                <div className="px-5 py-4 flex flex-col gap-1">
+                <div className="px-5 flex flex-col gap-1">
                   {myArray[item]?.map((itm, i) => (
-                    // <p key={j}>{itm.label}</p>
-                    <DownloadButton key={i}>{itm?.label}</DownloadButton>
+                    <DownloadButton key={i}>Download {itm?.label}</DownloadButton>
                   ))}
                 </div>
               </TECollapse>

@@ -15,7 +15,7 @@ const Settings = () => {
   const {data: siteFooter } = useFooterConfigQuery();
   const {data: siteNews } = useSiteNewsConfigQuery();
   const {data: siteTelegram} = useJoinTelegramConfigQuery();
-  console.log(siteName, siteLogo, siteFooter,siteNews, siteTelegram);
+  // console.log(siteName, siteLogo, siteFooter,siteNews, siteTelegram);
 
 
   
@@ -39,6 +39,7 @@ const Settings = () => {
   const inputStyle =
     "block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring";
 
+    
   return (
     <div>
       <section className=" px-[20px] lg:px-[250px] py-[20px] lg:py-[50px] w-full h-screen mx-auto bg-gray-800">
@@ -113,6 +114,7 @@ const Settings = () => {
         <div className=" mt-[100px]">
           <MultiSelectMenu />
         </div>
+
 
       </section>
     </div>

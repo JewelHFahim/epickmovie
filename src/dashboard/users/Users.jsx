@@ -1,11 +1,9 @@
-import {
-  useUserListQuery,
-} from "../../redux/features/users/userApi";
+import { useUserListQuery } from "../../redux/features/users/userApi";
 
 const Users = () => {
   const { data: userList } = useUserListQuery();
-
-  console.log(userList);
+  const userInfo = JSON.parse(localStorage.getItem("user-info"));
+  console.log(userInfo?.user_type);
 
   return (
     <div className=" mx-auto p-10">
@@ -15,14 +13,17 @@ const Users = () => {
             Members
           </h3>
         </div>
-        <div className="mt-3 md:mt-0">
-          <a
-            href="/admin/dashboard/register"
-            className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
-          >
-            Add member
-          </a>
-        </div>
+
+        {userInfo?.user_type === 1 && (
+          <div className="mt-3 md:mt-0">
+            <a
+              href="/admin/dashboard/register"
+              className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
+            >
+              Add member
+            </a>
+          </div>
+        )}
       </div>
 
       <div className="mt-12 shadow-sm border rounded-lg overflow-x-auto">
@@ -53,21 +54,24 @@ const Users = () => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item.user_type === 1 ? "Administrator" : "Editor"}
                 </td>
-                <td className="text-right px-6 whitespace-nowrap">
-                  <a
-                    href={`/admin/dashboard/users/${item?.id}`}
-                    className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"
-                  >
-                    Edit
-                  </a>
 
-                  <button
-                    href="javascript:void()"
-                    className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
-                  >
-                    Delete
-                  </button>
-                </td>
+                {userInfo?.user_type === 1 && (
+                  <td className="text-right px-6 whitespace-nowrap">
+                    <a
+                      href={`/admin/dashboard/users/${item?.id}`}
+                      className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"
+                    >
+                      Edit
+                    </a>
+
+                    <button
+                      href="javascript:void()"
+                      className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
+                    >
+                      Delete
+                    </button>
+                  </td>
+                )}
               </tr>
             ))}
           </tbody>

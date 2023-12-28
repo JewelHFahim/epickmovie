@@ -2,14 +2,13 @@ import { useEffect, useState } from "react";
 import { base_url, key } from "../../../utils/Importants";
 import MovieGallery from "./MovieGallery";
 import { useSelector } from "react-redux";
-import SearchResults from "./SearchResults";
 
 const DiscoverMovies = ({ filteredData }) => {
+  
   const date = new Date();
   const year = date.getFullYear();
 
   const { searchMovieSeries } = useSelector((state) => state.search);
-  console.log(searchMovieSeries, "from redux");
 
   const selectedGenreId = filteredData?.genreId;
   const selectedSort = filteredData?.sort;
@@ -17,7 +16,6 @@ const DiscoverMovies = ({ filteredData }) => {
   const selectedPage = filteredData?.page;
 
   const [movies, setMovies] = useState([]);
-  console.log(movies);
 
   const genreLink = selectedGenreId?.length > 0 ? `${key}&with_genres=${selectedGenreId}` : `${key}&with_genres=""`;
 
@@ -31,8 +29,7 @@ const DiscoverMovies = ({ filteredData }) => {
 
   const searchMovie = `https://api.themoviedb.org/3/search/movie?include_adult=true&${key}&query=${searchMovieSeries}`;
 
-  const currentURL =
-    searchMovieSeries === null || searchMovieSeries === "" ? URL : searchMovie;
+  const currentURL = searchMovieSeries === null || searchMovieSeries === "" ? URL : searchMovie;
 
   useEffect(() => {
     fetch(currentURL)

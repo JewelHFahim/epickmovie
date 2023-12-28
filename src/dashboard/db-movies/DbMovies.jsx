@@ -8,6 +8,7 @@ import { bulkMovieImport } from "../../redux/features/movies/movieSlice";
 import { bulkTvShowImport } from "../../redux/features/tv-show/tvShowSlice";
 import { BsSearch } from "react-icons/bs";
 import { getSearchMovieSeries } from "../../redux/features/search/searchSlice";
+import ImportModal from "./import-modal/ImportModal";
 
 const DbMovies = () => {
 
@@ -63,8 +64,8 @@ const DbMovies = () => {
 
       <div className="bg-slate-200 p-6">
         {/* Top Menus */}
-
         <div className="flex justify-between items-center mb-3">
+
           <div className="flex items-center gap-x-4">
             <div className="flex items-center gap-1">
               <div className="w-[10px] h-[10px] bg-green-500 rounded-full"></div>
@@ -73,7 +74,7 @@ const DbMovies = () => {
 
             <button
               onClick={() => handleState("movie")}
-              className={`px-5 py-[3px] rounded-[4px] text-sm border ${
+              className={`px-5 py-[3px] rounded-[4px] text-sm border border-slate-400 ${
                 toggleState === "movie"
                   ? "bg-slate-700 text-white"
                   : "bg-white text-slate-700"
@@ -84,7 +85,7 @@ const DbMovies = () => {
 
             <button
               onClick={() => handleState("shows")}
-              className={`px-5 py-[3px] rounded-[4px] text-sm border ${
+              className={`px-5 py-[3px] rounded-[4px] text-sm border border-slate-400 ${
                 toggleState === "shows"
                   ? "bg-slate-700 text-white"
                   : "bg-white text-slate-700"
@@ -94,28 +95,29 @@ const DbMovies = () => {
             </button>
           </div>
 
+          <ImportModal toggleState={toggleState}/>
+
           <div className="flex items-center">
             <input
               type="text"
               placeholder="search"
-              className="w-[200px] h-[30px] px-2 rounded-s-md focus:outline-none"
+              className="w-[200px] h-[30px] px-2 rounded-s-md focus:outline-none border border-slate-500 border-r-0"
               value={searchParams}
               onChange={handleSearch}
             />
             <button
               type="submit"
-              className="w-[40px] h-[30px] border bg-slate-800 hover:bg-slate-600 text-white flex justify-center items-center rounded-e-md"
+              className="w-[40px] h-[30px] border border-slate-800 bg-slate-800 hover:bg-slate-600 text-white flex justify-center items-center rounded-e-md"
             >
               <BsSearch />
             </button>
           </div>
-          {/* <SearchMovie/> */}
+
         </div>
 
         <hr />
 
         {/* ============================>> FORM START <<============================ */}
-
         <div className="flex items-center gap-x-3">
           <form
             onSubmit={handleSubmit(onSubmit)}
@@ -130,7 +132,7 @@ const DbMovies = () => {
               type="number"
               {...register("year")}
               placeholder="year"
-              className="border px-4 py-1 rounded-md w-[85px] focus:outline-blue-500"
+              className="border border-slate-500 px-4 py-1 rounded-md w-[85px] focus:outline-blue-500"
             />
 
             {/* =====================>> FILTER BY PAGE <<=============================*/}
@@ -138,13 +140,13 @@ const DbMovies = () => {
               type="number"
               {...register("page")}
               placeholder="page"
-              className="border px-4 py-1 rounded-md w-[80px] focus:outline-blue-500"
+              className="border border-slate-500 px-4 py-1 rounded-md w-[80px] focus:outline-blue-500"
             />
 
             {/* =====================>> SORT BY ASC/DSC <<============================*/}
             <select
               {...register("sort")}
-              className="border px-4 py-1 rounded-md w-[170px] focus:outline-blue-500"
+              className="border border-slate-500 px-4 py-1 rounded-md w-[170px] focus:outline-blue-500"
             >
               <option value="popularity.desc">Popularity desc</option>
               <option value="popularity.asc">Popularity asc</option>
@@ -154,7 +156,7 @@ const DbMovies = () => {
             <select
               data-te-select-init
               {...register("genreId")}
-              className="border p-4 py-1 rounded-md w-[170px] focus:outline-blue-500"
+              className="border border-slate-500 p-4 py-1 rounded-md w-[170px] focus:outline-blue-500"
             >
               {genreList?.genres?.map((item) => (
                 <option key={item?.id} value={item?.id}>
@@ -189,9 +191,7 @@ const DbMovies = () => {
         </div>
       </div>
 
-      {/* ==========================>> Discovery <<===============================*/}
-
-
+      {/* ============================>> Discovery <<===============================*/}
       {searchMovieSeries.length > 0 && (
         <Discovery filteredData={filteredData} toggleState={toggleState} />
       )}

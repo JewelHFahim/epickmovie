@@ -7,13 +7,12 @@ import { useTvShowListQuery } from "../../redux/features/tv-show/tvShowApi";
 import { useQuickMenuQuery } from "../../redux/features/settings/settingApi";
 import { collectFilteredItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { data: movieList } = useMovieListQuery();
   const totalMovies = movieList?.data?.total;
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   console.log(movieList)
 
@@ -22,22 +21,22 @@ const Home = () => {
 
   const {data: quickMenu } = useQuickMenuQuery();
 
-  // const handleGenre = (data) => {
-  //  const res =  dispatch(collectFilteredItem(data));
-  //  if(res.ok){
-  //   navigate("/filter-list")
-  //  }
+  const handleQuickMenuNavigation = (data) => {
+    dispatch(collectFilteredItem(data));
+  };
 
-  // };
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">
+
       {/* ==================>> Submenus <<================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {quickMenu?.data?.map((menu, i) => (
-          <button key={i}
-          //  onClick={()=>handleGenre(menu?.slug)}
-           ><SubMenuButton >{menu.name}</SubMenuButton></button>
+          <Link key={i}
+          to="/filter-list"
+          onClick={() => handleQuickMenuNavigation(menu?.slug)}
+           ><SubMenuButton >{menu.name}</SubMenuButton>
+           </Link>
         ))}
       </div>
 

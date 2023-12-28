@@ -33,13 +33,13 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-    // ==========================>> AUDIO <<===========================
+    // ===========================>> AUDIO <<=============================
     audListClient: builder.query({
       query: () => "/terms/audio-list",
       providesTags: ["EpicMovies"],
     }),
 
-    // ===========================>> YEAR <<=============================
+    // ===========================>> YEAR <<==============================
     yearList: builder.query({
       query: () => "/terms/year-list",
       providesTags: ["EpicMovies"],
@@ -66,7 +66,7 @@ const movieApi = apiSlice.injectEndpoints({
     //   ############################## ADMIN ROUTES ######################
     // ####################################333##############################
 
-    // =====================>> SINGLE MOVIE IMPORT(MUTATION) <<==============
+    // =====================>> SINGLE MOVIE IMPORT(MUTATION) <<===============
     singleMovieImport: builder.mutation({
       query: (data) => ({
         method: "POST",
@@ -92,7 +92,7 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-    // =========================>> GENRE LIST <<=============================
+    // =========================>> GENRE LIST <<==============================
     adminGenreList: builder.query({
       query: () => `/admin/get-genre`,
       providesTags: ["EpicMovies"],
@@ -184,6 +184,14 @@ const movieApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["EpicMovies"],
     }),
+
+    // ================>> ALREADY UPLOADED MOVIE/SERIES <<====================
+    alreadyUploadedMovieSeriesIds: builder.query({
+      query: () => `/admin/get-active-tmdb-ids`,
+      providesTags: ["EpicMovies"],
+    }),
+
+
   }),
 });
 
@@ -212,5 +220,6 @@ export const {
   usePrintQualityClientQuery,
   useAudListClientQuery,
   useCountryListClientQuery,
+  useAlreadyUploadedMovieSeriesIdsQuery
 } = movieApi;
 export default movieApi;

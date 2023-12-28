@@ -7,7 +7,6 @@ import webSer from "../../../assets/www.svg";
 import bangla from "../../../assets/video.svg";
 import telegram from "../../../assets/telegram.svg";
 import {
-  useAudListClientQuery,
   useGenreListQuery,
   usePixelQualityClientQuery,
   usePrintQualityClientQuery,
@@ -29,7 +28,6 @@ const Nav = () => {
   const { data: yearList } = useYearListQuery();
   const { data: pixelQualityList } = usePixelQualityClientQuery();
   const { data: printQualityList } = usePrintQualityClientQuery();
-  const { data: audioList } = useAudListClientQuery();
   const { data: joinTelegram } = useJoinTelegramConfigQuery();
 
   const pixel = pixelQualityList?.data;
@@ -62,6 +60,7 @@ const Nav = () => {
   return (
     <nav className="menu bg-[#494949] w-full h-[54px]">
       <ul>
+
         <li className="main-menu">
           <a href="/" className=" flex items-center gap-2">
             <img src={home} alt="" className="w-[25px] h-[25px]" /> Home
@@ -76,22 +75,6 @@ const Nav = () => {
           </a>
         </li>
 
-        {/* =========>> AUDIO <<========== */}
-        {/* <li className="main-menu">
-          <a href="#" className=" flex items-center gap-2">
-            <img src={home} alt="" className="w-[21px] h-[20px]" /> Home
-          </a>
-          <ul className="grid">
-            {audioList?.data?.map((item, i) => (
-              <li key={i}>
-                <Link to="/filter-list" onClick={() => handleYear(item?.slug)}>
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </li> */}
-
         {/* =========>> GENRE <<========== */}
         <li className="main-menu">
           <a href="#" className=" flex items-center gap-2">
@@ -102,7 +85,6 @@ const Nav = () => {
               <li key={i}>
                 <Link
                   to="/filter-list"
-                  // onClick={()=> dispatch(collectFilteredItem(item?.slug))}>
                   onClick={() => handleGenre(item?.slug)}
                 >
                   {item?.name}
@@ -159,8 +141,6 @@ const Nav = () => {
             <img src={bangla} alt="" className="w-[20px] h-[20px]" /> Bangla
           </a>
         </li>
-
-
 
         <li className="main-menu">
           <a

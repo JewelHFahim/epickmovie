@@ -6,22 +6,30 @@ import {
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useUpdateUserMutation } from "../../redux/features/movies/movieApi";
+import { useEffect } from "react";
 
 const UserDetails = () => {
   const navigate = useNavigate();
-  const { handleSubmit, register } = useForm();
+  const { handleSubmit, register, setValue } = useForm();
 
   const { id } = useParams();
-  console.log(id)
   const { data: userDetails } = useSingleUserDetailsQuery(parseInt(id));
+  console.log(userDetails)
   const { data: userRoleList } = useUserRoleListQuery();
-
   const [updateUser] = useUpdateUserMutation();
+
+  const type = userDetails?.data?.user_type === 1 ? "Administrator" : "Editor";
+  console.log(type)
+
+  useEffect(() => {
+    setValue('name', userDetails?.data?.name, { shouldDirty: false });
+    setValue('email', userDetails?.data?.email, { shouldDirty: false });
+    setValue('user_type', type , { shouldDirty: false });
+  }, [setValue, userDetails?.data?.name, userDetails?.data?.email, type]);
 
   const onSubmit = (data) => {
     console.log({ data, id: parseInt(id) });
-    const res = updateUser({ data, id: parseInt(id) });
-    console.log(res)
+    updateUser({ data, id: parseInt(id) });
     navigate("/admin/dashboard/users");
   };
 
@@ -60,7 +68,7 @@ const UserDetails = () => {
               <input
                 type="email"
                 {...register("email")}
-                defaultValue={userDetails?.data?.email}
+                // defaultValue={userDetails?.data?.email}
                 placeholder="Email Address"
                 aria-label="Email Address"
                 className={inputStyle}
@@ -68,7 +76,7 @@ const UserDetails = () => {
             </div>
 
             <select {...register("user_type")} className={inputStyle}>
-              <option hidden>{userDetails?.data?.user_type}</option>
+              <option hidden>{type}</option>
 
               {Object.entries(rolesData ?? {}).map(([roleId, role]) => (
                 <option key={roleId} value={roleId}>
@@ -81,7 +89,7 @@ const UserDetails = () => {
               <input
                 type="password"
                 {...register("password")}
-                defaultValue={userDetails?.data?.email}
+                // defaultValue={userDetails?.data?.email}
                 placeholder="Password"
                 aria-label="Password"
                 className={inputStyle}

@@ -48,9 +48,10 @@
   font-weight: 600;
 }
 
-/* .menu ul li:hover{
+.menu ul li:hover{
     background: #323232;
-} */
+    transition: .2s all ease-in-out;
+}
 
 /* .menu ul li a {
   font-size: 14px;

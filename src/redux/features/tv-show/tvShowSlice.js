@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 const initialState = {
   isLoading: "",
   message: "",
+  status: null,
   bulkTvData: [],
 };
 
@@ -28,21 +29,18 @@ export const singleTvShowImport = createAsyncThunk( "tvShows/singleTvShowImport"
         }
       );
 
-      // Check if the response was successful
       if (!response.ok) {
         toast.error(setMessage());
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      // Extract the data from the response
       const data = await response.json();
-
-      console.log("Data after posting:", data?.message);
       dispatch(setMessage(data?.message));
+      dispatch(setStatus(data?.status));
       toast.success(data?.message);
       dispatch(setLoadingST(false));
 
-      return data; // Return the data instead of the entire response
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
@@ -98,6 +96,10 @@ export const tvShowSlice = createSlice({
       state.message = action.payload;
     },
 
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+
     setLoadingST: (state, action) => {
       state.isLoading = action.payload;
     },
@@ -108,6 +110,6 @@ export const tvShowSlice = createSlice({
   },
 });
 
-export const { setMessage, setLoadingST, setBulkData } = tvShowSlice.actions;
+export const { setMessage, setLoadingST, setBulkData, setStatus } = tvShowSlice.actions;
 
 export default tvShowSlice.reducer;

@@ -9,11 +9,9 @@ import AdvertisementSection from "../../components/advertisement/AdvertisementSe
 
 const TvShowDetails = () => {
   const { id } = useParams();
-  console.log(id);
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
-  console.log(details);
-
+  console.log(details)
 
   const currentDate = new Date();
   const givenDate = new Date(details?.updated_at);
@@ -44,7 +42,7 @@ const TvShowDetails = () => {
       </div>
 
       <section className=" p-2 lg:p-5 flex justify-between">
-        {/* Column One */}
+        {/* >>>>>>> Column One <<<<<<< */}
         <div className="w-full  lg:w-[70%]">
           <div>
             <h4 className=" text-[20px] lg:text-[24px] text-white font-aclonica max-w-[748px]">
@@ -204,8 +202,7 @@ const TvShowDetails = () => {
           <JoinTelegramBtn />
         </div>
 
-        {/* Column Two */}
-        {/* Advertisemen Section (Static Data) */}
+        {/* >>>>>>> Column Two <<<<<<<<*/}
         <AdvertisementSection />
       </section>
 

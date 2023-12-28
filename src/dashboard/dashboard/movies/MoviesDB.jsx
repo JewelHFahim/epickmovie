@@ -6,8 +6,10 @@ import { Link } from "react-router-dom";
 import toast from "react-hot-toast";
 import { useDeleteMovieSeriesMutation } from "../../../redux/features/trash/trashApi";
 import { FiTrash } from "react-icons/fi";
+import { Tooltip, initTE } from "tw-elements";
 
 const MoviesDB = () => {
+  initTE({ Tooltip });
   const [currentPage, setCurrentPage] = useState(1);
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
   console.log(perPgaeMovie);
@@ -66,12 +68,12 @@ const MoviesDB = () => {
               {perPgaeMovie?.data?.data?.map((item, idx) => (
                 <tr key={idx} className="odd:bg-gray-50 even:bg-white">
                   <td className="px-6 py-4 font-medium flex items-center gap-x-2">
-                    <img
-                      src={item?.poster_image_url}
-                      alt=""
-                      className="w-[50px] h-[50px] rounded-full"
-                    />
-                    {item?.post_title?.slice(0, 50)}
+                    <img src={item?.poster_image_url}  alt="" className="w-[50px] h-[50px] rounded-full"/>
+
+                    <p data-te-toggle="tooltip"  title={ item?.post_title.length > 50 ? item?.post_title : ""}>
+                      {item?.post_title.length > 50 ? `${item?.post_title?.slice(0, 50)}...` : item?.post_title}
+                    </p>
+
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">
                     {item?.post_type}

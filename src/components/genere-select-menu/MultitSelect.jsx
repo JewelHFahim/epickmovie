@@ -6,11 +6,13 @@ import {
   usePixelQualityListQuery,
   usePrintQualityListQuery,
 } from "../../redux/features/movies/movieApi";
-import { useCreateMenuMutation } from "../../redux/features/settings/settingApi";
+import { useCreateMenuMutation, useQuickMenuQuery } from "../../redux/features/settings/settingApi";
 import toast from "react-hot-toast";
 
 const MultiSelectMenu = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
+  const {data: quickMenuList} = useQuickMenuQuery();
+  console.log(quickMenuList)
 
   const { data: genreList } = useAdminGenreListQuery();
   const { data: audiList } = useGetAudioListQuery();
@@ -27,33 +29,23 @@ const MultiSelectMenu = () => {
   const handleSelectChange = (selectedOptions) => {
     setSelectedOptions(selectedOptions);
   };
-
+console.log(selectedOptions)
   const handleSubmit = () => {
-   const selected =  selectedOptions.map((option) => option.value);
+   const selected =  selectedOptions?.map((option) => option.value);
    createMenu({term_ids: selected})
    console.log({term_ids: selected});
    toast.success("Created")
   };
 
   const newArray = concatenatedList?.map(item => ({ value: item?.id, label: item?.name }));
-
-  // const options = [
-  //   { value: 1, label: "Bollywood" },
-  //   { value: 2, label: "Hollywood" },
-  //   { value: 3, label: "Dual Audio" },
-  //   { value: 4, label: "Tamil" },
-  //   { value: 5, label: "Telugu" },
-  //   { value: 6, label: "Korean" },
-  //   { value: 7, label: "[18+]Movie" },
-  //   { value: 8, label: "Join Telegram" },
-  // ];
+  const forDefaultMenu = quickMenuList?.data?.map(item => ({ value: item?.id, label: item?.name }));
 
   return (
     <div className="flex items-center gap-4">
       <Select
         isMulti
         options={newArray}
-        value={selectedOptions}
+        value={selectedOptions?.length > 0 ? selectedOptions : forDefaultMenu }
         onChange={handleSelectChange}
         placeholder="Select Menues"
         className="w-full"

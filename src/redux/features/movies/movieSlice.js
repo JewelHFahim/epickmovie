@@ -4,6 +4,7 @@ import toast from "react-hot-toast";
 const initialState = {
   isLoading: "",
   message: "",
+  status: null,
   bulkData: [],
 };
 
@@ -15,34 +16,35 @@ export const singleMovieImport = createAsyncThunk(
   "movies/singleMovieImport",
   async (body, { dispatch }) => {
     dispatch(setLoadingST(true));
+    console.log(body);
     try {
-      const response = await fetch( "https://fapi.epickmovies.online/api/admin/movie-import",
+      const response = await fetch(
+        "https://fapi.epickmovies.online/api/admin/movie-import",
         {
           method: "POST",
           headers: {
             "content-type": "application/json",
             "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
-            "Authorization": `Bearer ${userInfo.token}`,
+            Authorization: `Bearer ${userInfo.token}`,
           },
           body: JSON.stringify(body),
         }
       );
 
-      // Check if the response was successful
+      // console.log(response)
+
       if (!response.ok) {
         toast.error(setMessage());
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      // Extract the data from the response
       const data = await response.json();
-
-      console.log("Data after posting data:", data?.message);
       dispatch(setMessage(data?.message));
+      dispatch(setStatus(data?.status));
       toast.success(data?.message);
       dispatch(setLoadingST(false));
 
-      return data; // Return the data instead of the entire response
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
@@ -62,26 +64,24 @@ export const bulkMovieImport = createAsyncThunk(
           headers: {
             "content-type": "application/json",
             "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
-            "Authorization": `Bearer ${userInfo.token}`,
+            Authorization: `Bearer ${userInfo.token}`,
           },
           body: JSON.stringify(body),
         }
       );
 
-      // Check if the response was successful
       if (!response.ok) {
         toast.error(setMessage());
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      // Extract the data from the response
       const data = await response.json();
 
       console.log("Data after posting data:", data?.message);
       dispatch(setMessage(data?.message));
       toast.success(data?.message);
 
-      return data; // Return the data instead of the entire response
+      return data;
     } catch (error) {
       console.error(error);
       throw error;
@@ -97,6 +97,10 @@ export const movieSlice = createSlice({
       state.message = action.payload;
     },
 
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+
     setLoadingST: (state, action) => {
       state.isLoading = action.payload;
     },
@@ -107,6 +111,7 @@ export const movieSlice = createSlice({
   },
 });
 
-export const { setMessage, setLoadingST, setBulkData } = movieSlice.actions;
+export const { setMessage, setLoadingST, setBulkData, setStatus } =
+  movieSlice.actions;
 
 export default movieSlice.reducer;

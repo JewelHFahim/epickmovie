@@ -4,15 +4,13 @@ import { useDispatch, useSelector } from "react-redux";
 import ImageLoader from "../../../utils/loading/img-loader/ImageLoader";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { bulkTvShowImport, setBulkData, singleTvShowImport } from "../../../redux/features/tv-show/tvShowSlice";
+import { useAlreadyUploadedMovieSeriesIdsQuery } from "../../../redux/features/movies/movieApi";
 
 const TvShowGallery = ({ tvShows }) => {
-
-  console.log(tvShows)
-
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => state.movie);
+  const { isLoading, status } = useSelector((state) => state.movie);
   const [selectedIds, setSelectedIds] = useState([]);
-  console.log(selectedIds)
+  const {data: uploadedIds } = useAlreadyUploadedMovieSeriesIdsQuery();
 
   const handleImageClick = async (id) => {
     id = parseInt(id, 10);
@@ -24,7 +22,6 @@ const TvShowGallery = ({ tvShows }) => {
     }
 
     // ===============>> SINGLE DATA  IMPORT <<================
-
     const data = { tmdb_id: id };
     await dispatch(singleTvShowImport(data));
   };
@@ -60,7 +57,7 @@ const TvShowGallery = ({ tvShows }) => {
     <div>
 
       {
-        notificationList?.length > 0 && 
+        status && 
         <div className="w-full h-full p-5 bg-slate-200 flex flex-col gap-2">
         {notificationList?.map((item) => (
           <div
@@ -111,12 +108,17 @@ const TvShowGallery = ({ tvShows }) => {
 
         {tvShows?.map((image) => (
           <div key={image.id} 
-          onClick={() => handleImageClick(image.id)}
-            style={{ border: isSelected(image.id) ? "2px solid blue" : "2px solid transparent", margin: "8px", cursor: "pointer"}}
-            className="relative"
+          // onClick={() => handleImageClick(image.id)}
+          onClick={() => {
+            if (!uploadedIds?.data?.includes(image.id.toString())) {
+              handleImageClick(image.id);
+            }}}
+
+            style={{ border: isSelected(image.id) ? "2px solid blue" : "2px solid transparent"}}
+            className={`relative cursor-pointer ${ uploadedIds?.data?.includes(image.id.toString()) ? "cursor-not-allowed" : ""} m-[8px]`}
           >
-            {isLoading === true && parseInt(selectedIds) === image.id && (
-              <div className="absolute text-white right-0 bottom-0 bg-red-500 bg-opacity-[60%]">
+             {isLoading === true && parseInt(selectedIds) === image.id && (
+              <div className="absolute text-white right-5 bottom-5 bg-red-500 bg-opacity-[60%]">
                 <ImageLoader />
               </div>
             )}
@@ -125,7 +127,16 @@ const TvShowGallery = ({ tvShows }) => {
             <div className="text-center">
               <p>{image?.name?.slice(0,12)}</p>
               <p className="text-sm">{image?.first_air_date}</p>
+              <p className="text-sm">{image?.id}</p>
             </div>
+
+            {
+              uploadedIds?.data?.includes(image.id.toString()) && <div className="absolute w-full h-full bg-black bg-opacity-[40%] top-0 left-0">
+                <p className="text-white flex justify-end text-2xl p-4"><IoCheckmarkDoneCircleOutline />
+            </p>
+              </div>
+            }
+
 
           </div>
         ))}

@@ -9,7 +9,6 @@ const DiscoverTvshows = ({filteredData}) => {
 
   const [tvShows, settvShows] = useState([]);
   const {searchMovieSeries} = useSelector(state => state.search);
-  console.log(tvShows);
 
   const selectedGenreId = filteredData?.genreId;
   const selectedSort = filteredData?.sort;
@@ -20,16 +19,15 @@ const DiscoverTvshows = ({filteredData}) => {
 
   const sortAscDesc = selectedSort?.length > 0 ? `${key}&sort_by=${selectedSort}` : `${key}&sort_by=popularity.desc` ;
 
-  const yearFilt = selectedYear?.length > 0 ? `${key}&primary_release_year=${selectedYear}` : `${key}&primary_release_year=${year}`;
+  const yearFilt = selectedYear?.length > 0 ? `${key}&first_air_date_year=${selectedYear}` : `${key}&first_air_date_year=${year}`;
 
   const sortByPage = selectedPage?.length > 0 ? `${key}&page=${selectedPage}` : `${key}&page=1`;
 
   const searchSeries = `https://api.themoviedb.org/3/search/tv?include_adult=true&${key}&query=${searchMovieSeries}`;
 
-  const URL = `${base_url}/tv?${sortAscDesc}&${yearFilt}&${genreLink}&${sortByPage}`;
+  const URL = `${base_url}/tv?${sortAscDesc}&${yearFilt}&${sortByPage}?${genreLink}`;
 
   const currentURL = (searchMovieSeries === null || searchMovieSeries === "") ? URL : searchSeries;
-
 
   useEffect(() => {
     fetch(currentURL)

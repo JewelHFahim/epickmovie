@@ -1,20 +1,19 @@
 import { useState } from "react";
 import { imgBaseUrl } from "../../../utils/Importants";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  bulkMovieImport,
-  setBulkData,
-  singleMovieImport,
-} from "../../../redux/features/movies/movieSlice";
+import { setBulkData, singleMovieImport } from "../../../redux/features/movies/movieSlice";
 import ImageLoader from "../../../utils/loading/img-loader/ImageLoader";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
+import { useAlreadyUploadedMovieSeriesIdsQuery } from "../../../redux/features/movies/movieApi";
 
 const MovieGallery = ({ movies }) => {
 
-
   const dispatch = useDispatch();
-  const { isLoading } = useSelector((state) => state.movie);
+  
+  const { isLoading, status } = useSelector((state) => state.movie);
   const [selectedIds, setSelectedIds] = useState([]);
+  const {data: uploadedIds } = useAlreadyUploadedMovieSeriesIdsQuery();
+
 
   const handleImageClick = async (id) => {
     id = parseInt(id, 10);
@@ -25,7 +24,7 @@ const MovieGallery = ({ movies }) => {
       setSelectedIds([...selectedIds, id]);
     }
 
-    // ===============>> SINGLE DATA  IMPORT <<================
+    // ===============>> SINGLE DATA IMPORT <<================
 
     const data = { tmdb_id: id };
     await dispatch(singleMovieImport(data));
@@ -41,7 +40,6 @@ const MovieGallery = ({ movies }) => {
     selectedIds.includes(id);
   };
 
-
   const notificationList = movies?.results?.filter((item) =>
     selectedIds.includes(item.id)
   );
@@ -54,7 +52,7 @@ const MovieGallery = ({ movies }) => {
     <div>
 
       {
-        notificationList?.length > 0 && 
+        status && 
         <div className="w-full h-full p-5 bg-slate-200 flex flex-col gap-2">
 
         {notificationList?.map((item) => (
@@ -99,12 +97,16 @@ const MovieGallery = ({ movies }) => {
 
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {movies?.results?.map((image) => (
-          <div
-            key={image.id}
-            onClick={() => handleImageClick(image.id)}
-            style={{ border: isSelected(image.id) ? "2px solid blue" : "2px solid transparent", margin: "8px", cursor: "pointer" }}
-            className="relative"
+          <div key={image.id}
+            style={{ border: isSelected(image.id) ? "2px solid blue" : "2px solid transparent"}}
+            onClick={() => {
+              if (!uploadedIds?.data?.includes(image.id.toString())) {
+                handleImageClick(image.id);
+              }}}
+
+            className={`relative cursor-pointer ${ uploadedIds?.data?.includes(image.id.toString()) ? "cursor-not-allowed" : ""} m-[8px]`}
           >
+            
             {isLoading === true && parseInt(selectedIds) === image.id && (
               <div className="absolute text-white right-0 bottom-0 bg-red-500 bg-opacity-[60%]">
                 <ImageLoader />
@@ -115,7 +117,17 @@ const MovieGallery = ({ movies }) => {
             <div className="text-center">
               <p>{image?.title?.slice(0,12)}</p>
               <p className="text-sm">{image?.release_date}</p>
+              <p className="text-sm">{image?.id}</p>
             </div>
+
+            {
+              uploadedIds?.data?.includes(image.id.toString()) && <div className="absolute w-full h-full bg-black bg-opacity-[40%] top-0 left-0">
+                <p className="text-white flex justify-end text-2xl p-4"><IoCheckmarkDoneCircleOutline />
+            </p>
+              </div>
+            }
+
+
           </div>
         ))}
       </div>
