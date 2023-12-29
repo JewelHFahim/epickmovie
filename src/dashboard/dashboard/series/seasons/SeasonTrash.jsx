@@ -32,8 +32,15 @@ const SeasonTrash = () => {
 
   // ===============>>  ALL DELETE PARMANET <<===================
   const handleDeleteAll = () => {
-    deleteAllSeasonParmanet();
-    toast.success("Clear All")
+    const shouldDelete = window.confirm(
+      "Are you sure want to delete this Seasn Permanently"
+    );
+    if (shouldDelete) {
+      deleteAllSeasonParmanet();
+      toast.success("Clear All");
+    } else {
+      console.log("Deletion canceled by user");
+    }
   };
 
   return (

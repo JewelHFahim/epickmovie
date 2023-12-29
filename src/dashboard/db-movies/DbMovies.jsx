@@ -13,7 +13,8 @@ import ImportModal from "./import-modal/ImportModal";
 const DbMovies = () => {
 
   const { bulkData } = useSelector((state) => state.movie);
-  const { bulkTvData } = useSelector((state) => state.tvShow);
+  const { bulkTvData, isLoading } = useSelector((state) => state.tvShow);
+  console.log(isLoading)
   const { searchMovieSeries } = useSelector((state) => state.search);
 
   const [toggleState, setToggleState] = useState("movie");
@@ -34,15 +35,13 @@ const DbMovies = () => {
   const { handleSubmit, register } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     setFiltredData(data);
   };
 
   // ===================>> BULK MOVIE IMPORT <<====================
   const handleBulkImport = () => {
     const res = dispatch(bulkMovieImport({ tmdb_ids: bulkData }));
-    // console.log({ tmdb_ids: bulkData });
-    // console.log(res);
+    console.log(res);
   };
 
   // ===================>> BULK TV SHOW IMPORT <<==================
@@ -176,16 +175,17 @@ const DbMovies = () => {
           {toggleState === "movie" ? (
             <button
               onClick={() => handleBulkImport()}
-              className="border px-4 py-1 rounded-md text-blue-500 border-blue-500 mt-[12px]"
+              className="border px-4 py-1 rounded-md text-blue-500 border-blue-500 mt-[12px] hover:bg-blue-500 hover:text-white"
             >
               Bulk Import
             </button>
           ) : (
             <button
               onClick={() => handleBulkTvShowImport()}
-              className="border px-4 py-1 rounded-md text-blue-500 border-blue-500 mt-[12px]"
+              className="border px-4 py-1 rounded-md text-blue-500 border-blue-500 mt-[12px] hover:bg-blue-500 hover:text-white"
             >
-              Bulk Import
+              {isLoading ? "Importing..." : "Bulk Import"}
+              
             </button>
           )}
         </div>

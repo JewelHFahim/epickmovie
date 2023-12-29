@@ -56,10 +56,10 @@ export const singleMovieImport = createAsyncThunk(
 export const bulkMovieImport = createAsyncThunk(
   "movies/bulkMovieImport",
   async (body, { dispatch }) => {
+    setLoadingST(false);
     try {
-      const response = await fetch(
-        "https://fapi.epickmovies.online/api/admin/movie-bulk-import",
-        {
+      setLoadingST(true);
+      const response = await fetch( "https://fapi.epickmovies.online/api/admin/movie-bulk-import",{
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -76,10 +76,10 @@ export const bulkMovieImport = createAsyncThunk(
       }
 
       const data = await response.json();
-
-      console.log("Data after posting data:", data?.message);
+      // console.log("Data after posting data:", data?.message);
       dispatch(setMessage(data?.message));
       toast.success(data?.message);
+      setLoadingST(false);
 
       return data;
     } catch (error) {

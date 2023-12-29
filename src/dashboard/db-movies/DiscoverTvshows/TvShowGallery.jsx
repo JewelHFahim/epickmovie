@@ -3,7 +3,7 @@ import { imgBaseUrl } from "../../../utils/Importants";
 import { useDispatch, useSelector } from "react-redux";
 import ImageLoader from "../../../utils/loading/img-loader/ImageLoader";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
-import { bulkTvShowImport, setBulkData, singleTvShowImport } from "../../../redux/features/tv-show/tvShowSlice";
+import { setBulkData, singleTvShowImport } from "../../../redux/features/tv-show/tvShowSlice";
 import { useAlreadyUploadedMovieSeriesIdsQuery } from "../../../redux/features/movies/movieApi";
 
 const TvShowGallery = ({ tvShows }) => {
@@ -34,15 +34,7 @@ const TvShowGallery = ({ tvShows }) => {
 
   const isSelected = (id) => {
     selectedIds?.includes(id);
-  };
-
-  console.log(selectedIds);
-
-  // ===================>> BULK DATA IMPORT <<====================
-  const HandleBulkTvShowImport = async () => {
-    const data = { tmdb_ids: selectedIds};
-    const res = await dispatch(bulkTvShowImport(data));
-    console.log(res);
+    console.log(selectedIds?.includes(id));
   };
 
   const notificationList = tvShows?.results?.filter((item) =>
@@ -66,7 +58,7 @@ const TvShowGallery = ({ tvShows }) => {
           >
             <div className="flex items-center gap-x-8 text-sm">
               <p className="  font-medium text-green-600 uppercase">Imported</p>
-              <p className="uppercase">Movie</p>
+              <p className="uppercase">TV Show</p>
               <button className="border text-sm px-3 py-[2px] rounded-lg text-blue-700">
                 Edit
               </button>
@@ -91,7 +83,7 @@ const TvShowGallery = ({ tvShows }) => {
         </div>
       )}
 
-      <div className=" w-full flex justify-between items-center pl-2 pr-[85px]">
+      <div className=" w-full flex justify-between items-center pl-2 pr-[40px]">
         <button className="text-[16px] lg:text-[32px] font-[700] text-slate-700 border-b-[1.4px] border-[#FF2345] p-0 mb-2">
           Tv Shows
         </button>
@@ -108,14 +100,12 @@ const TvShowGallery = ({ tvShows }) => {
 
         {tvShows?.map((image) => (
           <div key={image.id} 
-          // onClick={() => handleImageClick(image.id)}
           onClick={() => {
             if (!uploadedIds?.data?.includes(image.id.toString())) {
               handleImageClick(image.id);
             }}}
-
-            style={{ border: isSelected(image.id) ? "2px solid blue" : "2px solid transparent"}}
-            className={`relative cursor-pointer ${ uploadedIds?.data?.includes(image.id.toString()) ? "cursor-not-allowed" : ""} m-[8px]`}
+            className={`relative cursor-pointer ${ uploadedIds?.data?.includes(image.id.toString()) ? "cursor-not-allowed" : ""} m-[8px]
+             ${selectedIds.includes(image.id) ? "border-2 border-green-900": "border-2 border-transparent"}`}
           >
              {isLoading === true && parseInt(selectedIds) === image.id && (
               <div className="absolute text-white right-5 bottom-5 bg-red-500 bg-opacity-[60%]">
@@ -136,16 +126,9 @@ const TvShowGallery = ({ tvShows }) => {
             </p>
               </div>
             }
-
-
           </div>
         ))}
       </div>
-
-      {/* <div>
-        <p>Selected Image IDs: [{selectedIds.join(", ")}]</p>
-      </div> */}
-
     </div>
   );
 };

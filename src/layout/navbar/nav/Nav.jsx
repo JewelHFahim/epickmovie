@@ -20,7 +20,7 @@ import {
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { BiMovie } from "react-icons/bi";
-import { useJoinTelegramConfigQuery } from "../../../redux/features/settings/settingApi";
+import { useJoinTelegramUserQuery } from "../../../redux/features/settings/settingApi";
 
 const Nav = () => {
   const dispatch = useDispatch();
@@ -28,7 +28,7 @@ const Nav = () => {
   const { data: yearList } = useYearListQuery();
   const { data: pixelQualityList } = usePixelQualityClientQuery();
   const { data: printQualityList } = usePrintQualityClientQuery();
-  const { data: joinTelegram } = useJoinTelegramConfigQuery();
+  const { data: joinTelegram } = useJoinTelegramUserQuery();
 
   const pixel = pixelQualityList?.data;
   const print = printQualityList?.data;

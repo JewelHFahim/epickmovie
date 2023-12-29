@@ -1,11 +1,11 @@
 import joinTelegran from "../../assets/join telegram.png";
 import ads from "../../assets/ads.png";
 import { useCountryListClientQuery } from "../../redux/features/movies/movieApi";
-import { useJoinTelegramConfigQuery } from "../../redux/features/settings/settingApi";
+import { useJoinTelegramUserQuery } from "../../redux/features/settings/settingApi";
 
 const AdvertisementSection = () => {
   const { data: countryList } = useCountryListClientQuery();
-  const { data: joinTelegram } = useJoinTelegramConfigQuery();
+  const { data: joinTelegram } = useJoinTelegramUserQuery();
 
   return (
     <div className="hidden lg:block  w-[30%] bg-[#1F1F22] p-4">

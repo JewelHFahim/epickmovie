@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
 const initialState = {
-  isLoading: "",
+  isLoading: false,
   message: "",
   status: null,
   bulkTvData: [],
@@ -13,9 +13,10 @@ const userInfo = JSON.parse(localStorage.getItem("user-info"));
 
 export const singleTvShowImport = createAsyncThunk( "tvShows/singleTvShowImport", async (body, { dispatch }) => {
 
-     dispatch(setLoadingST(true));
+     dispatch(setLoadingST(false));
 
     try {
+      dispatch(setLoadingST(true));
       const response = await fetch("https://fapi.epickmovies.online/api/admin/tv-import",
         {
           method: "POST",
@@ -23,7 +24,6 @@ export const singleTvShowImport = createAsyncThunk( "tvShows/singleTvShowImport"
             "content-type": "application/json",
             "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
             "Authorization": `Bearer ${userInfo.token}`,
-
           },
           body: JSON.stringify(body),
         }
@@ -102,6 +102,7 @@ export const tvShowSlice = createSlice({
 
     setLoadingST: (state, action) => {
       state.isLoading = action.payload;
+      console.log(action.payload)
     },
 
     setBulkData: (state, action) => {

@@ -12,7 +12,6 @@ import toast from "react-hot-toast";
 const MultiSelectMenu = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const {data: quickMenuList} = useQuickMenuQuery();
-  console.log(quickMenuList)
 
   const { data: genreList } = useAdminGenreListQuery();
   const { data: audiList } = useGetAudioListQuery();
@@ -29,7 +28,7 @@ const MultiSelectMenu = () => {
   const handleSelectChange = (selectedOptions) => {
     setSelectedOptions(selectedOptions);
   };
-console.log(selectedOptions)
+  
   const handleSubmit = () => {
    const selected =  selectedOptions?.map((option) => option.value);
    createMenu({term_ids: selected})

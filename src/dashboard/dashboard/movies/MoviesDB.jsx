@@ -15,13 +15,18 @@ const MoviesDB = () => {
   console.log(perPgaeMovie);
 
   const [deleteMovie] = useDeleteMovieSeriesMutation();
-
   const handleDeleteMovie = (id) => {
-    deleteMovie(id);
-    toast.error("Deleted");
-    console.log(id);
-  };
+    const shouldDelete = window.confirm('Are you sure you want to delete this movie?');
 
+    if (shouldDelete) {
+      deleteMovie(id);
+      toast.error('Deleted');
+      console.log(id);
+    } else {
+      console.log('Deletion canceled by user');
+    }
+  };
+  
   return (
     <div className="mx-auto bg-white border w-full h-full p-2">
       <div className="items-start justify-between md:flex">

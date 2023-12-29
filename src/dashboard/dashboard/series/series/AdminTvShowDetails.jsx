@@ -15,9 +15,15 @@ const AdminTvShowDetails = () => {
   const [deleteSeason] = useDeleteSeasonMutation();
 
   const handleDeleteSeason = (seasonId) => {
-    console.log(seasonId);
-    deleteSeason(seasonId);
-    toast.error("Deleted");
+    const shouldDelete = window.confirm(
+      "Are you sure want to delete this Season?"
+    );
+    if (shouldDelete) {
+      deleteSeason(seasonId);
+      toast.error("Deleted");
+    } else {
+      console.log("Deletion canceled by user");
+    }
   };
 
   const inputStyle =

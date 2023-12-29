@@ -22,20 +22,42 @@ const TrashList = () => {
 
   // ===============>> HANDLE SINGLE DELETE PARMANET <<================
   const handleDeleteSingle = (id) => {
-    deleteParmanet(id);
-    toast.error("Deleted");
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this movie permanently?"
+    );
+    if (shouldDelete) {
+      deleteParmanet(id);
+      toast.error("Deleted");
+    } else {
+      console.log("Deletion canceled by user");
+    }
   };
 
   // =====================>> HANDLE RESTORE <<=========================
   const handleRestoreMovieSeries = (id) => {
-    restoreMovieSeries(id);
-    toast.success("Restored");
+    const shouldRestore = window.confirm(
+      "Are you sure want to Restore this movie?"
+    );
+
+    if (shouldRestore) {
+      restoreMovieSeries(id);
+      toast.success("Restored");
+    } else {
+      console.log("Restore canceled by user");
+    }
   };
 
   // ===============>> HANDLE ALL DELETE PARMANETLY <<=================
   const handleDeleteAll = () => {
-    deleteAllMovieSeriesParmanet();
-    toast.success("All Clear");
+    const shouldDelete = window.confirm(
+      "Are you sure want to Delete All movie/series?"
+    );
+    if (shouldDelete) {
+      deleteAllMovieSeriesParmanet();
+      toast.success("All Clear");
+    } else {
+      console.log("Deletion canceled by user");
+    }
   };
 
   return (
@@ -121,7 +143,6 @@ const TrashList = () => {
             </tbody>
           </table>
         )}
-
       </div>
     </div>
   );

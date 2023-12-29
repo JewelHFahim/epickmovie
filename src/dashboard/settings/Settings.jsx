@@ -1,31 +1,44 @@
 import { useForm } from "react-hook-form";
-import { useCreateConfigMutation, useFooterConfigQuery, useJoinTelegramConfigQuery, useSiteLogoConfigQuery, useSiteNameConfigQuery, useSiteNewsConfigQuery } from "../../redux/features/settings/settingApi";
+import {
+  useCreateConfigMutation,
+  useFooterConfigQuery,
+  useJoinTelegramConfigQuery,
+  useSiteLogoConfigQuery,
+  useSiteNameConfigQuery,
+  useSiteNewsConfigQuery,
+} from "../../redux/features/settings/settingApi";
 import toast from "react-hot-toast";
 import { Select, initTE } from "tw-elements";
 import MultiSelectMenu from "../../components/genere-select-menu/MultitSelect";
 import { useEffect } from "react";
+import LogoUploader from "./LogoUploader";
 
 const Settings = () => {
   initTE({ Select });
 
-  const {  handleSubmit, register, reset, setValue} = useForm();
+  const { handleSubmit, register, reset, setValue } = useForm();
 
-  const {data: siteName} = useSiteNameConfigQuery()
-  const {data: siteLogo } = useSiteLogoConfigQuery();
-  const {data: siteFooter } = useFooterConfigQuery();
-  const {data: siteNews } = useSiteNewsConfigQuery();
-  const {data: siteTelegram} = useJoinTelegramConfigQuery();
+  const { data: siteName } = useSiteNameConfigQuery();
+  const { data: siteLogo } = useSiteLogoConfigQuery();
+  const { data: siteFooter } = useFooterConfigQuery();
+  const { data: siteNews } = useSiteNewsConfigQuery();
+  const { data: siteTelegram } = useJoinTelegramConfigQuery();
   // console.log(siteName, siteLogo, siteFooter,siteNews, siteTelegram);
 
-
-  
   useEffect(() => {
-    setValue('site_name', siteName?.data, { shouldDirty: false });
-    setValue('site_logo', siteLogo?.data, { shouldDirty: false });
-    setValue('site_footer', siteFooter?.data, { shouldDirty: false });
-    setValue('site_news', siteNews?.data, { shouldDirty: false });
-    setValue('telegram_link', siteTelegram?.data, { shouldDirty: false });
-  }, [setValue, siteName?.data, siteLogo?.data, siteFooter?.data, siteNews?.data, siteTelegram?.data]);
+    setValue("site_name", siteName?.data, { shouldDirty: false });
+    setValue("site_logo", siteLogo?.data, { shouldDirty: false });
+    setValue("site_footer", siteFooter?.data, { shouldDirty: false });
+    setValue("site_news", siteNews?.data, { shouldDirty: false });
+    setValue("telegram_link", siteTelegram?.data, { shouldDirty: false });
+  }, [
+    setValue,
+    siteName?.data,
+    siteLogo?.data,
+    siteFooter?.data,
+    siteNews?.data,
+    siteTelegram?.data,
+  ]);
 
   const [createConfig] = useCreateConfigMutation();
 
@@ -39,7 +52,6 @@ const Settings = () => {
   const inputStyle =
     "block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring";
 
-    
   return (
     <div>
       <section className=" px-[20px] lg:px-[250px] py-[20px] lg:py-[50px] w-full h-screen mx-auto bg-gray-800">
@@ -72,7 +84,7 @@ const Settings = () => {
           <div>
             <label className="text-gray-200"> Site News </label>
             <textarea
-            rows={4}
+              rows={4}
               type="text"
               {...register("site_news")}
               placeholder="site news"
@@ -83,7 +95,7 @@ const Settings = () => {
           <div>
             <label className="text-gray-200"> Site Footer </label>
             <textarea
-            rows={4}
+              rows={4}
               type="text"
               {...register("site_footer")}
               placeholder="site footer"
@@ -111,11 +123,13 @@ const Settings = () => {
           </div>
         </form>
 
-        <div className=" mt-[100px]">
-          <MultiSelectMenu />
+        <div className=" mt-[40px]">
+          <LogoUploader/>
         </div>
 
-
+        <div className=" mt-[60px]">
+          <MultiSelectMenu />
+        </div>
       </section>
     </div>
   );

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import logo from "../assets/logo.png";
-import { MdMovieEdit, MdOutlineDashboardCustomize } from "react-icons/md";
+import { MdOutlineDashboardCustomize } from "react-icons/md";
 import { TbMovie } from "react-icons/tb";
 import { BsCameraReels } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
@@ -11,6 +11,9 @@ import { FiLogOut } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/features/users/userSlice";
 import { useNavigate } from "react-router-dom";
+import { RiMovieLine } from "react-icons/ri";
+import { PiTerminalWindow } from "react-icons/pi";
+
 
 // NESTED MENUS
 const Menu = (props) => {
@@ -67,7 +70,11 @@ const Sidebar = () => {
       icon: <BsCameraReels />,
     },
 
-    { href: "/admin/dashboard/movies-db", name: "Movies", icon: "" },
+    {
+      href: "/admin/dashboard/movies-db",
+      name: "Movies",
+      icon: <RiMovieLine />,
+    },
   ];
 
   const navsFooter = [
@@ -92,9 +99,6 @@ const Sidebar = () => {
 
   const nestedNavTV = [
     { name: "Tv Shows", href: "/admin/dashboard/db-series", icon: "" },
-    { name: "Creator", href: "/admin/dashboard/add-creator", icon: "" },
-    { name: "Studio", href: "/admin/dashboard/add-studio", icon: "" },
-    { name: "Networks", href: "/admin/dashboard/add-networks", icon: "" },
     { name: "Seasons", href: "/admin/dashboard/db-seasons", icon: "" },
     { name: "Episodes", href: "/admin/dashboard/episode", icon: "" },
   ];
@@ -105,6 +109,9 @@ const Sidebar = () => {
     { name: "Quality", href: "/admin/dashboard/add-quality", icon: "" },
     { name: "Genres", href: "/admin/dashboard/add-genre", icon: "" },
     { name: "Cast", href: "/admin/dashboard/add-cast", icon: "" },
+    { name: "Studio", href: "/admin/dashboard/add-studio", icon: "" },
+    { name: "Networks", href: "/admin/dashboard/add-networks", icon: "" },
+    { name: "Creator", href: "/admin/dashboard/add-creator", icon: "" },
     { name: "Audio", href: "/admin/dashboard/add-audio", icon: "" },
     { name: "Year", href: "/admin/dashboard/add-year", icon: "" },
   ];
@@ -150,7 +157,7 @@ const Sidebar = () => {
                   <TbMovie className="text-lg" /> TV Shows
                 </Menu>
                 <Menu items={nestedTerms}>
-                  <TbMovie className="text-lg" /> All Terms
+                  <PiTerminalWindow className="text-lg" /> All Terms
                 </Menu>
               </li>
             </ul>

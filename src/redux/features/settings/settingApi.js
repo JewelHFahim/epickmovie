@@ -1,18 +1,55 @@
 import apiSlice from "../api/apiSlice";
 
 const settingApi = apiSlice.injectEndpoints({
-
   endpoints: (builder) => ({
-    
-    // ====================>> Config List  <<=====================
+    // ###################### CLIENT ROUTES #######################
+
+    // ==================>> JOIN TELEGRAM  <<=====================
+    joinTelegramUser: builder.query({
+      query: () => "/get-config-value/telegram_link",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ======================>> FOOTER <<=========================
+    footerUser: builder.query({
+      query: () => "/get-config-value/site_footer",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // =====================>> SITE LOGO  <<======================
+    siteLogoUser: builder.query({
+      query: () => "/get-config-value/site_logo",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // =====================>> SITE NAME  <<======================
+    siteNameUSer: builder.query({
+      query: () => "/get-config-value/site_name",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ======================>> SITE NEWS  <<=====================
+    siteNewsUser: builder.query({
+      query: () => "/get-config-value/site_news",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ======================>> QUICK MENU  <<=====================
+    quickMenuUser: builder.query({
+      query: () => "/get-quick-menu",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ###################### ADMIN ROUTES ########################
+    // ====================>> CONFIG LIST  <<=====================
     listConfig: builder.query({
       query: () => "/admin/get-all-config-value",
       providesTags: ["EpicMovies"],
     }),
 
-    // ======================>> Footer <<=========================
+    // ======================>> FOOTER <<=========================
     footerConfig: builder.query({
-      query: () => "admin/get-config-value/site_footer",
+      query: () => "/admin/get-config-value/site_footer",
       providesTags: ["EpicMovies"],
     }),
 
@@ -28,13 +65,13 @@ const settingApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-    // =====================>> SITE NAME  <<======================
+    // =====================>> SITE NAME  <<=======================
     siteNameConfig: builder.query({
       query: () => "/admin/get-config-value/site_name",
       providesTags: ["EpicMovies"],
     }),
 
-    // ======================>> SITE NEWS  <<=====================
+    // ======================>> SITE NEWS  <<======================
     siteNewsConfig: builder.query({
       query: () => "/admin/get-config-value/site_news",
       providesTags: ["EpicMovies"],
@@ -56,8 +93,7 @@ const settingApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-
-    // ===================>> CREATE MENU  <<=====================
+    // ===================>> CREATE MENU  <<=======================
     createMenu: builder.mutation({
       query: (data) => ({
         method: "POST",
@@ -67,8 +103,34 @@ const settingApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
+    // ===================>> LOGO UPLOAD  <<=======================
+    logoUpload: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: `/admin/upload-logo`,
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
   }),
 });
 
-export const { useListConfigQuery, useCreateConfigMutation, useFooterConfigQuery, useJoinTelegramConfigQuery, useSiteLogoConfigQuery, useSiteNewsConfigQuery, useSiteNameConfigQuery, useCreateMenuMutation, useQuickMenuQuery } = settingApi;
+export const {
+  useListConfigQuery,
+  useCreateConfigMutation,
+  useFooterConfigQuery,
+  useJoinTelegramConfigQuery,
+  useSiteLogoConfigQuery,
+  useSiteNewsConfigQuery,
+  useSiteNameConfigQuery,
+  useCreateMenuMutation,
+  useQuickMenuQuery,
+  useLogoUploadMutation,
+  useJoinTelegramUserQuery,
+  useFooterUserQuery,
+  useSiteLogoUserQuery,
+  useSiteNameUSerQuery,
+  useSiteNewsUserQuery,
+  useQuickMenuUserQuery
+} = settingApi;
 export default settingApi;

@@ -25,7 +25,7 @@ const DiscoverTvshows = ({filteredData}) => {
 
   const searchSeries = `https://api.themoviedb.org/3/search/tv?include_adult=true&${key}&query=${searchMovieSeries}`;
 
-  const URL = `${base_url}/tv?${sortAscDesc}&${yearFilt}&${sortByPage}?${genreLink}`;
+  const URL = `${base_url}/tv?${sortByPage}&${sortAscDesc}&${yearFilt}&${genreLink}`;
 
   const currentURL = (searchMovieSeries === null || searchMovieSeries === "") ? URL : searchSeries;
 

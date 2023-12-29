@@ -1,16 +1,17 @@
 import search from "../../assets//Search Icon.svg";
-import { Link, useNavigate  } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
-import {  useSiteLogoConfigQuery } from "../../redux/features/settings/settingApi";
+import { useSiteLogoUserQuery, useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 
 const Header = () => {
-  
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchTermState, setSearchTerm] = useState("");
-const {data: siteLogo} = useSiteLogoConfigQuery();
+  const { data: siteLogo } = useSiteLogoUserQuery();
+  console.log(siteLogo?.data)
+  const { data: siteName } = useSiteNameUSerQuery();
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -19,18 +20,18 @@ const {data: siteLogo} = useSiteLogoConfigQuery();
     e.preventDefault();
     console.log("Searching for:", searchTermState);
     const res = dispatch(collectSearchItem(searchTermState));
-    // if(res.payload !== null){
-    //   return navigate("/search-list")
-    // }
-    if(res !== null){
-      return navigate("/search-list")
+    if (res !== null) {
+      return navigate("/search-list");
     }
-  }
+  };
 
   return (
     <div className="w-full lg:h-[130px] flex flex-col lg:flex-row items-center justify-between py-2 lg:py-0 px-4 ">
       <Link to="/" className=" w-[173px] h-[60px] lg:w-[200px] lg:h-[75px]">
-        <img src={siteLogo?.data} alt="" className="w-full h-full object-fit" />
+           {/* <img src="https://fapi.epickmovies.online/storage/logos/1703864736ZFd3.jpg"  alt="Epic Movie Logo" className="w-full h-full object-fit"/> */}
+          {/* <h1 className="text-[25px] font-medium text-white">{siteName?.data}</h1> */}
+
+          <img src={siteLogo?.data} alt="" className="w-full h-full object-cover" />
       </Link>
 
       <form

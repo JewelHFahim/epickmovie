@@ -15,8 +15,6 @@ const AddSeasons = () => {
 
   const details = tvShowDetails?.data;
 
-  console.log(details);
-
   const onSubmit = (abc) => {
     const data = { season_no: parseInt(abc.season_no) };
     const res = addSeason({ data, id });

@@ -4,10 +4,11 @@ import DomainList from "../../components/domain-list/DomainList";
 import MovieCard from "../../components/movie-card/MovieCard";
 import HomePageSeeAllBtn from "../../utils/HomePageSeeAllBtn";
 import { useTvShowListQuery } from "../../redux/features/tv-show/tvShowApi";
-import { useQuickMenuQuery } from "../../redux/features/settings/settingApi";
+import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
 import { collectFilteredItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import JoinTelegramBtn from "../../utils/JoinTelegramBtn";
 
 const Home = () => {
   const { data: movieList } = useMovieListQuery();
@@ -19,7 +20,7 @@ const Home = () => {
   const { data: tvShowList } = useTvShowListQuery();
   const totalTvShow = tvShowList?.data?.total;  
 
-  const {data: quickMenu } = useQuickMenuQuery();
+  const {data: quickMenu } = useQuickMenuUserQuery();
 
   const handleQuickMenuNavigation = (data) => {
     dispatch(collectFilteredItem(data));
@@ -29,7 +30,7 @@ const Home = () => {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">
 
-      {/* ==================>> Submenus <<================*/}
+      {/* ==================>> Quick Menus <<================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {quickMenu?.data?.map((menu, i) => (
           <Link key={i}
@@ -62,7 +63,7 @@ const Home = () => {
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
         {tvShowList?.data?.data?.slice(0, 10)?.map((item) => (
           <MovieCard
-            key={item?.ID}
+            key={item?.id}
             item={item}
             redirect={`/series/${item?.id}`}
           ></MovieCard>

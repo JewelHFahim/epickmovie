@@ -1,4 +1,3 @@
-import Loading from "../../../../utils/loading/Loading";
 import { MdEditSquare } from "react-icons/md";
 import { FaTrashAlt } from "react-icons/fa";
 import {
@@ -14,16 +13,21 @@ import { FiTrash } from "react-icons/fi";
 const EpisodeList = () => {
   const { id } = useParams();
   const { handleSubmit, register, reset } = useForm();
-  const { data: episodeList, isLoading } = useEpisodeListQuery(id);
+  const { data: episodeList } = useEpisodeListQuery(id);
   const [deleteEpisode] = useDeleteEpisodeMutation();
   const [addEpisode] = useAddEpisodeMutation();
 
   console.log(episodeList);
 
   const handleDeleteEpisode = (epiId) => {
-    console.log(epiId);
-    deleteEpisode(epiId);
-    toast.error("Deleted");
+    const shouldDelete = window.confirm("Are you sure want delete this Episode?");
+    if(shouldDelete){
+      deleteEpisode(epiId);
+      toast.error("Deleted");
+    }else{
+      console.log("Deletion cancle by user")
+    }
+    
   };
 
   const onSubmit = (data) => {

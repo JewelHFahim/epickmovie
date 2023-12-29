@@ -52,13 +52,13 @@ const MovieGallery = ({ movies }) => {
     <div>
 
       {
-        status && 
+        status === true && 
         <div className="w-full h-full p-5 bg-slate-200 flex flex-col gap-2">
 
         {notificationList?.map((item) => (
           <div
             key={item?.id}
-            className="w-full bg-white hover:bg-slate-50 shadow-lg h-[50px] flex justify-between items-center px-5 rounded-lg"
+            className="w-full bg-white hover:bg-slate-50 shadow-lg h-[50px] flex justify-between items-center px-5 rounded-lg "
           >
             <div className="flex items-center gap-x-8 text-sm">
               <p className="  font-medium text-green-600 uppercase">Imported</p>
@@ -76,7 +76,7 @@ const MovieGallery = ({ movies }) => {
       </div>
       }
 
-      {notificationList?.length > 0 && (
+      {  (status === true &&  notificationList?.length > 0 ) && (
         <div className="w-full h-[25px] flex justify-center items-center bg-slate-50">
           <button onClick={() => clearNotificationList()} className="text-sm text-blue-700 font-medium" >
             Clear
@@ -98,13 +98,12 @@ const MovieGallery = ({ movies }) => {
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {movies?.results?.map((image) => (
           <div key={image.id}
-            style={{ border: isSelected(image.id) ? "2px solid blue" : "2px solid transparent"}}
             onClick={() => {
               if (!uploadedIds?.data?.includes(image.id.toString())) {
                 handleImageClick(image.id);
               }}}
 
-            className={`relative cursor-pointer ${ uploadedIds?.data?.includes(image.id.toString()) ? "cursor-not-allowed" : ""} m-[8px]`}
+            className={`relative cursor-pointer ${ uploadedIds?.data?.includes(image.id.toString()) ? "cursor-not-allowed" : ""} m-[8px] ${selectedIds.includes(image.id) ? "border-2 border-green-900": "border-2 border-transparent"}`}
           >
             
             {isLoading === true && parseInt(selectedIds) === image.id && (
@@ -130,10 +129,6 @@ const MovieGallery = ({ movies }) => {
 
           </div>
         ))}
-      </div>
-
-      <div>
-        {/* <p>Selected Image IDs: [{selectedIds.join(", ")}]</p> */}
       </div>
 
     </div>

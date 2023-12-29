@@ -1,3 +1,4 @@
+import AdminRedirect from "../components/admin-redirect/AdminRedirect";
 import Home from "../pages/home/Home";
 import BanglaMovie from "../pages/movies/bangla/BanglaMovie";
 import Category from "../pages/movies/category/Category";
@@ -61,7 +62,13 @@ import TvShowDetails from "../pages/tv-show/tvShowDetails";
     },
 
     {
+      path: "/admin",
+      element: <AdminRedirect />,
+    },
+
+    {
       path: "/not-found",
       element: <NotFound />,
     },
+
   ]
