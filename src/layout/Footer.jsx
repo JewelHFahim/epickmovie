@@ -10,7 +10,6 @@ const Footer = () => {
         <p className=" text-[10px] lg:text-[14px] font-inter font-[600] text-white text-center lg:text-left">
           {footerConfig?.data}
         </p>
-
       </div>
     </div>
   );

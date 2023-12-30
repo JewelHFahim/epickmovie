@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
 const initialState = {
-  isLoading: false,
+  isLoadingTv: false,
   message: "",
   status: null,
   bulkTvData: [],
@@ -10,20 +10,19 @@ const initialState = {
 
 const userInfo = JSON.parse(localStorage.getItem("user-info"));
 // =================>> SINGLE TV SHOW IMPORT <<===================
-
-export const singleTvShowImport = createAsyncThunk( "tvShows/singleTvShowImport", async (body, { dispatch }) => {
-
-     dispatch(setLoadingST(false));
-
+export const singleTvShowImport = createAsyncThunk(
+  "tvShows/singleTvShowImport",
+  async (body, { dispatch }) => {
+    dispatch(setLoadingST(true));
     try {
-      dispatch(setLoadingST(true));
-      const response = await fetch("https://fapi.epickmovies.online/api/admin/tv-import",
+      const response = await fetch(
+        "https://fapi.epickmovies.online/api/admin/tv-import",
         {
           method: "POST",
           headers: {
             "content-type": "application/json",
             "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
-            "Authorization": `Bearer ${userInfo.token}`,
+            Authorization: `Bearer ${userInfo.token}`,
           },
           body: JSON.stringify(body),
         }
@@ -42,30 +41,30 @@ export const singleTvShowImport = createAsyncThunk( "tvShows/singleTvShowImport"
 
       return data;
     } catch (error) {
+      dispatch(setLoadingST(false));
       console.error(error);
       throw error;
     }
   }
 );
 
-// ====================>> BULK IMPORT <<==================
-export const bulkTvShowImport = createAsyncThunk( "tvShows/bulkTvShowsImport", async (body, { dispatch }) => {
+// =======================>> BULK IMPORT <<=======================
+export const bulkTvShowImport = createAsyncThunk("tvShows/bulkTvShowsImport", async (body, { dispatch }) => {
 
     try {
-      const response = await fetch(
-        "https://fapi.epickmovies.online/api/admin/tv-bulk-import",
-        {
+      dispatch(setLoadingST(true));
+      const response = await fetch( "https://fapi.epickmovies.online/api/admin/tv-bulk-import", {
           method: "POST",
           headers: {
             "content-type": "application/json",
             "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
-            "Authorization": `Bearer ${userInfo.token}`,
+            Authorization: `Bearer ${userInfo.token}`,
           },
           body: JSON.stringify(body),
         }
       );
 
-      console.log(response)
+      // console.log(response);
 
       // Check if the response was successful
       if (!response.ok) {
@@ -79,9 +78,12 @@ export const bulkTvShowImport = createAsyncThunk( "tvShows/bulkTvShowsImport", a
       console.log("Data after posting data:", data?.message);
       dispatch(setMessage(data?.message));
       toast.success(data?.message);
+      dispatch(setLoadingST(false));
 
-      return data; // Return the data instead of the entire response
+
+      return data; 
     } catch (error) {
+      dispatch(setLoadingST(false));
       console.error(error);
       throw error;
     }
@@ -101,8 +103,7 @@ export const tvShowSlice = createSlice({
     },
 
     setLoadingST: (state, action) => {
-      state.isLoading = action.payload;
-      console.log(action.payload)
+      state.isLoadingTv = action.payload;
     },
 
     setBulkData: (state, action) => {
@@ -111,6 +112,7 @@ export const tvShowSlice = createSlice({
   },
 });
 
-export const { setMessage, setLoadingST, setBulkData, setStatus } = tvShowSlice.actions;
+export const { setMessage, setLoadingST, setBulkData, setStatus } =
+  tvShowSlice.actions;
 
 export default tvShowSlice.reducer;

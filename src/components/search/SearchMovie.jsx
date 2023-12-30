@@ -13,9 +13,6 @@ const SearchMovie = () => {
     console.log(data?.search);
     //   setFiltredData(data);
    const res =  dispatch(getSearchMovieSeries(data?.search));
-    // if(res.payload !== null){
-    //   return navigate("/admin/dashboard/help")
-    // }
     if(res !== null){
       return navigate("/admin/dashboard/help")
     }

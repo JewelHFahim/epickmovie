@@ -15,10 +15,8 @@ import {
 import { useDispatch } from "react-redux";
 import {
   collectFilteredItem,
-  setPageNo,
 } from "../../../redux/features/search/searchSlice";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { BiMovie } from "react-icons/bi";
 import { useJoinTelegramUserQuery } from "../../../redux/features/settings/settingApi";
 
@@ -40,11 +38,11 @@ const Nav = () => {
     columns.push(genreList?.data?.slice(i, i + itemsPerColumn));
   }
 
-  const [page, setPage] = useState(1);
+  // const [page, setPage] = useState(1);
   const handleGenre = (data) => {
-    console.log({ data, page });
+    console.log({ data });
     dispatch(collectFilteredItem(data));
-    dispatch(setPageNo(page));
+    // dispatch(setPageNo(page));
   };
 
   const handleYear = (year) => {
@@ -83,10 +81,7 @@ const Nav = () => {
           <ul>
             {genreList?.data?.map((item, i) => (
               <li key={i}>
-                <Link
-                  to="/filter-list"
-                  onClick={() => handleGenre(item?.slug)}
-                >
+                <Link  to="/filter-list" onClick={() => handleGenre(item?.slug)} >
                   {item?.name}
                 </Link>
               </li>
@@ -119,10 +114,7 @@ const Nav = () => {
           <ul>
             {combinedQuality?.map((item, i) => (
               <li key={i}>
-                <Link
-                  to="/filter-list"
-                  onClick={() => handleQuality(item?.slug)}
-                >
+                <Link to="/filter-list" onClick={() => handleQuality(item?.slug)} >
                   {item?.name}
                 </Link>
               </li>

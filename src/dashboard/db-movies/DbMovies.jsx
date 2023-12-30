@@ -9,12 +9,12 @@ import { bulkTvShowImport } from "../../redux/features/tv-show/tvShowSlice";
 import { BsSearch } from "react-icons/bs";
 import { getSearchMovieSeries } from "../../redux/features/search/searchSlice";
 import ImportModal from "./import-modal/ImportModal";
+import InnerloaderButton from "../../utils/InnerloaderButton";
 
 const DbMovies = () => {
-
-  const { bulkData } = useSelector((state) => state.movie);
-  const { bulkTvData, isLoading } = useSelector((state) => state.tvShow);
-  console.log(isLoading)
+  const { bulkData, isLoading } = useSelector((state) => state.movie);
+  const { bulkTvData, isLoadingTv } = useSelector((state) => state.tvShow);
+  console.log(isLoading);
   const { searchMovieSeries } = useSelector((state) => state.search);
 
   const [toggleState, setToggleState] = useState("movie");
@@ -50,7 +50,7 @@ const DbMovies = () => {
     console.log(res);
   };
 
-  const [searchParams, setSearchParams] = useState(null);
+  const [searchParams, setSearchParams] = useState("");
   const handleSearch = (event) => {
     setSearchParams(event.target.value);
     console.log(event.target.value);
@@ -64,7 +64,6 @@ const DbMovies = () => {
       <div className="bg-slate-200 p-6">
         {/* Top Menus */}
         <div className="flex justify-between items-center mb-3">
-
           <div className="flex items-center gap-x-4">
             <div className="flex items-center gap-1">
               <div className="w-[10px] h-[10px] bg-green-500 rounded-full"></div>
@@ -94,7 +93,7 @@ const DbMovies = () => {
             </button>
           </div>
 
-          <ImportModal toggleState={toggleState}/>
+          <ImportModal toggleState={toggleState} />
 
           <div className="flex items-center">
             <input
@@ -111,7 +110,6 @@ const DbMovies = () => {
               <BsSearch />
             </button>
           </div>
-
         </div>
 
         <hr />
@@ -177,15 +175,28 @@ const DbMovies = () => {
               onClick={() => handleBulkImport()}
               className="border px-4 py-1 rounded-md text-blue-500 border-blue-500 mt-[12px] hover:bg-blue-500 hover:text-white"
             >
-              Bulk Import
+              {isLoading ? (
+                <div className="flex items-center gap-1">
+                  <InnerloaderButton />
+                  Importing...
+                </div>
+              ) : (
+                "Bulk Import"
+              )}
             </button>
           ) : (
             <button
               onClick={() => handleBulkTvShowImport()}
               className="border px-4 py-1 rounded-md text-blue-500 border-blue-500 mt-[12px] hover:bg-blue-500 hover:text-white"
             >
-              {isLoading ? "Importing..." : "Bulk Import"}
-              
+              {isLoadingTv ? (
+                <div className="flex items-center gap-1">
+                  <InnerloaderButton />
+                  Importing...
+                </div>
+              ) : (
+                "Bulk Import"
+              )}
             </button>
           )}
         </div>

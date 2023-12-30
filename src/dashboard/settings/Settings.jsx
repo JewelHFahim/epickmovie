@@ -12,6 +12,7 @@ import { Select, initTE } from "tw-elements";
 import MultiSelectMenu from "../../components/genere-select-menu/MultitSelect";
 import { useEffect } from "react";
 import LogoUploader from "./LogoUploader";
+import ScriptUploader from "./ScriptUploader";
 
 const Settings = () => {
   initTE({ Select });
@@ -54,12 +55,12 @@ const Settings = () => {
 
   return (
     <div>
-      <section className=" px-[20px] lg:px-[250px] py-[20px] lg:py-[50px] w-full h-screen mx-auto bg-gray-800">
+      <section className="px-[20px] lg:px-[200px] py-[20px] lg:py-[20px] w-full h-full mx-auto bg-gray-800">
         <h2 className="text-lg font-semibold text-white">Account settings</h2>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2"
+          className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 p-4 border border-slate-700"
         >
           <div>
             <label className="text-gray-200"> Site Name </label>
@@ -121,15 +122,23 @@ const Settings = () => {
               Save
             </button>
           </div>
+
+
         </form>
 
-        <div className=" mt-[40px]">
+        <div className="flex justify-center mt-[40px] border border-slate-700 p-4">
           <LogoUploader/>
         </div>
 
-        <div className=" mt-[60px]">
+        <div className=" mt-[40px] border border-slate-700 p-4">
           <MultiSelectMenu />
         </div>
+
+        <div className=" mt-[40px] border border-slate-700 p-4">
+          <ScriptUploader />
+        </div>
+
+
       </section>
     </div>
   );

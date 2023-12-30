@@ -6,6 +6,7 @@ import JoinTelegramBtn from "../../utils/JoinTelegramBtn";
 import Accrodion from "../../components/accrodion/Accrodion";
 import RelatedPost from "../../components/related-post/RelatedPost";
 import AdvertisementSection from "../../components/advertisement/AdvertisementSection";
+import Breadcum from "../../utils/breadcum/Breadcum";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -37,9 +38,7 @@ const TvShowDetails = () => {
 
   return (
     <div className="bg-[#27272A]">
-      <div className="hidden  bg-[#18181a] text-[#727171] lg:flex items-center font-inter pt-[15px] pb-[20px] gap-[8px] font-[500] uppercase">
-        Home <AiOutlineDoubleRight /> TV Series
-      </div>
+      <Breadcum children1="TV Show" children2={details?.post_title}/>
 
       <section className=" p-2 lg:p-5 flex justify-between">
         {/* >>>>>>> Column One <<<<<<< */}

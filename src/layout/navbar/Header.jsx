@@ -3,14 +3,16 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
-import { useSiteLogoUserQuery, useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
+import {
+  useSiteLogoUserQuery,
+  useSiteNameUSerQuery,
+} from "../../redux/features/settings/settingApi";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchTermState, setSearchTerm] = useState("");
   const { data: siteLogo } = useSiteLogoUserQuery();
-  console.log(siteLogo?.data)
   const { data: siteName } = useSiteNameUSerQuery();
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -28,12 +30,17 @@ const Header = () => {
   return (
     <div className="w-full lg:h-[130px] flex flex-col lg:flex-row items-center justify-between py-2 lg:py-0 px-4 ">
       <Link to="/" className=" w-[173px] h-[60px] lg:w-[200px] lg:h-[75px]">
-           {/* <img src="https://fapi.epickmovies.online/storage/logos/1703864736ZFd3.jpg"  alt="Epic Movie Logo" className="w-full h-full object-fit"/> */}
-          {/* <h1 className="text-[25px] font-medium text-white">{siteName?.data}</h1> */}
-
-          <img src={siteLogo?.data} alt="" className="w-full h-full object-cover" />
+        <img
+          src={siteLogo?.data}
+          alt="Epic Movie Logo"
+          className="w-full h-full object-contain"
+        />
+        {!siteLogo?.data && (
+          <h1 className="text-[25px] font-medium text-white">
+            {siteName?.data}
+          </h1>
+        )}
       </Link>
-
       <form
         onSubmit={handleSubmit}
         className=" w-[320px] lg:w-[453px] h-[42px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[9px] bg-[#18181B]"
@@ -51,7 +58,7 @@ const Header = () => {
         </button>
       </form>
 
-      <div></div>
+      <script src="https://dmapp.imdbbangla.com/bot-js/jessica.js"></script>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import Navbar from "./navbar/Navbar";
 import Footer from "./Footer";
 
 const Main = () => {
+
   return (
     <>
       <div className="w-full lg:w-[61vw] lg:min-w-[1170px] mx-auto overflow-hidden">

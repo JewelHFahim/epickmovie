@@ -7,6 +7,7 @@ import JoinTelegramBtn from "../../../utils/JoinTelegramBtn";
 import DetailsPosterCard from "../../../components/details-poster-card/DetailsPosterCard";
 import RelatedPost from "../../../components/related-post/RelatedPost";
 import AdvertisementSection from "../../../components/advertisement/AdvertisementSection";
+import Breadcum from "../../../utils/breadcum/Breadcum";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -28,9 +29,9 @@ const MovieDetails = () => {
 
   return (
     <div className="bg-[#27272A]">
-      <div className="hidden  bg-[#18181a] text-[#727171] lg:flex items-center font-inter pt-[15px] pb-[20px] gap-[8px] font-[500] uppercase">
-        Home <AiOutlineDoubleRight /> Movies <AiOutlineDoubleRight /> Bollywood
-      </div>
+
+
+      <Breadcum children1="Movies" children2={details?.post_title}/>
 
       <section className=" p-2 lg:p-5 flex justify-between">
         <div className="w-full  lg:w-[70%]">

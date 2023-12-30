@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useSuggessionMovieSeriesQuery } from "../../redux/features/search/searchApi";
+import FeatureSticker from "../../utils/feature-sticker/FeatureSticker";
 
 const RelatedPost = ({ id, redirect }) => {
   const { data: suggessions } = useSuggessionMovieSeriesQuery(id);
@@ -12,10 +13,10 @@ const RelatedPost = ({ id, redirect }) => {
           RELATED POSTS
         </h3>
 
-        <div className="mt-[23px] grid grid-cols-2 lg:grid-cols-5 items-center gap-[18px]">
+        <div className="mt-[23px] grid grid-cols-2 lg:grid-cols-5 items-center gap-[18px] ">
           {suggessions?.data?.map((item, i) => (
             <a href={`${redirect}/${item?.id}`} key={i}>
-              <div className="w-[180px] lg:w-[205px] h-[390px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] lg:bg-none lg:h-[420px] flex flex-col items-center text-center rounded-[10px] p-[1.5px]">
+              <div className="w-[180px] lg:w-[205px] h-[390px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] lg:bg-none lg:h-[420px] flex flex-col items-center text-center rounded-[10px] p-[1.5px] relative">
                 <img
                   src={item?.poster_image_url}
                   alt=""
@@ -25,6 +26,11 @@ const RelatedPost = ({ id, redirect }) => {
                 <p className="text-[14px] text-white font-[700] pt-[9px] bg-[#27272A] h-full rounded-b-[10px]">
                   {item?.post_title}
                 </p>
+
+                <div className="absolute left-2 top-2">
+                  <FeatureSticker/>
+                </div>
+
               </div>
             </a>
           ))}

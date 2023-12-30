@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
 
 const initialState = {
-  isLoading: "",
+  isLoading: false,
   message: "",
   status: null,
   bulkData: [],
@@ -53,12 +53,9 @@ export const singleMovieImport = createAsyncThunk(
 );
 
 // ====================>> BULK IMPORT <<==================
-export const bulkMovieImport = createAsyncThunk(
-  "movies/bulkMovieImport",
-  async (body, { dispatch }) => {
-    setLoadingST(false);
+export const bulkMovieImport = createAsyncThunk( "movies/bulkMovieImport", async (body, { dispatch }) => {
+  dispatch(setLoadingST(true));
     try {
-      setLoadingST(true);
       const response = await fetch( "https://fapi.epickmovies.online/api/admin/movie-bulk-import",{
           method: "POST",
           headers: {
@@ -76,14 +73,14 @@ export const bulkMovieImport = createAsyncThunk(
       }
 
       const data = await response.json();
-      // console.log("Data after posting data:", data?.message);
       dispatch(setMessage(data?.message));
       toast.success(data?.message);
-      setLoadingST(false);
+      dispatch(setLoadingST(false));
 
       return data;
     } catch (error) {
       console.error(error);
+      dispatch(setLoadingST(false));
       throw error;
     }
   }
