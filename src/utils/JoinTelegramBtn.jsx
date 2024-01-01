@@ -4,7 +4,6 @@ import { useJoinTelegramUserQuery } from "../redux/features/settings/settingApi"
 const JoinTelegramBtn = () => {
 
   const { data: joinTelegram } = useJoinTelegramUserQuery();
-
   console.log(joinTelegram)
 
   return (

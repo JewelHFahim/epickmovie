@@ -14,9 +14,6 @@ const Movies = () => {
   const { data: perPgaeMovie } = usePerPgaeMovieQuery(currentPage);
   console.log(perPgaeMovie);
   
-
-  const abc = movies?.data?.data?.map((item) => console.log(item?.id))
-
   return (
     <div className="flex flex-col justify-center items-center">
       {/* ==================>> Domains <<=================*/}

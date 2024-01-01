@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
+import { adminHeader, base_url } from "../../../config/config";
 
 const initialState = {
   isLoading: false,
@@ -8,30 +9,18 @@ const initialState = {
   bulkData: [],
 };
 
-const userInfo = JSON.parse(localStorage.getItem("user-info"));
-
 // =================>> SINGLE IMPORT <<===================
-
 export const singleMovieImport = createAsyncThunk(
   "movies/singleMovieImport",
   async (body, { dispatch }) => {
     dispatch(setLoadingST(true));
     console.log(body);
     try {
-      const response = await fetch(
-        "https://fapi.epickmovies.online/api/admin/movie-import",
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
-            Authorization: `Bearer ${userInfo.token}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
-
-      // console.log(response)
+      const response = await fetch(`${base_url}/admin/movie-import`, {
+        method: "POST",
+        headers: adminHeader,
+        body: JSON.stringify(body),
+      });
 
       if (!response.ok) {
         toast.error(setMessage());
@@ -53,19 +42,16 @@ export const singleMovieImport = createAsyncThunk(
 );
 
 // ====================>> BULK IMPORT <<==================
-export const bulkMovieImport = createAsyncThunk( "movies/bulkMovieImport", async (body, { dispatch }) => {
-  dispatch(setLoadingST(true));
+export const bulkMovieImport = createAsyncThunk(
+  "movies/bulkMovieImport",
+  async (body, { dispatch }) => {
+    dispatch(setLoadingST(true));
     try {
-      const response = await fetch( "https://fapi.epickmovies.online/api/admin/movie-bulk-import",{
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-            "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
-            Authorization: `Bearer ${userInfo.token}`,
-          },
-          body: JSON.stringify(body),
-        }
-      );
+      const response = await fetch(`${base_url}/admin/movie-bulk-import`, {
+        method: "POST",
+        headers: adminHeader,
+        body: JSON.stringify(body),
+      });
 
       if (!response.ok) {
         toast.error(setMessage());

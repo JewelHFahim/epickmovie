@@ -40,6 +40,22 @@ const settingApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
+
+    // ====================>> GLOBAL HEADER  <<====================
+    globalHeader: builder.query({
+      query: () => "/get-config-value/global_header",
+      providesTags: ["EpicMovies"],
+    }),
+
+
+    // ====================>> GLOBAL FOOTER  <<====================
+    globalFooter: builder.query({
+      query: () => "/get-config-value/global_footer",
+      providesTags: ["EpicMovies"],
+    }),
+
+
+
     // ###################### ADMIN ROUTES ########################
     // ====================>> CONFIG LIST  <<=====================
     listConfig: builder.query({
@@ -87,7 +103,7 @@ const settingApi = apiSlice.injectEndpoints({
     createConfig: builder.mutation({
       query: (data) => ({
         method: "POST",
-        url: `/admin/set-config`,
+        url: "admin/set-config",
         body: data,
       }),
       invalidatesTags: ["EpicMovies"],
@@ -112,6 +128,7 @@ const settingApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["EpicMovies"],
     }),
+
   }),
 });
 
@@ -131,6 +148,8 @@ export const {
   useSiteLogoUserQuery,
   useSiteNameUSerQuery,
   useSiteNewsUserQuery,
-  useQuickMenuUserQuery
+  useQuickMenuUserQuery,
+  useGlobalHeaderQuery,
+  useGlobalFooterQuery
 } = settingApi;
 export default settingApi;

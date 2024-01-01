@@ -41,7 +41,7 @@ const AddSeasons = () => {
 
         <div className="px-8 bg-slate-100 p-5">
           <div className="flex flex-col mt-2">
-            <label className="">Serie Name</label>
+            <label className="">Series Name</label>
             <input
               type="text"
               name="title"

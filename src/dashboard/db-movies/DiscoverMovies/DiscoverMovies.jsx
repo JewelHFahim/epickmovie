@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { base_url, key } from "../../../utils/Importants";
 import MovieGallery from "./MovieGallery";
 import { useSelector } from "react-redux";
+import { tmdb_baseurl } from "../../../config/config";
 
 const DiscoverMovies = ({ filteredData }) => {
   
   const date = new Date();
   const year = date.getFullYear();
-
   const { searchMovieSeries } = useSelector((state) => state.search);
-
+  
   const selectedGenreId = filteredData?.genreId;
   const selectedSort = filteredData?.sort;
   const selectedYear = filteredData?.year;
@@ -27,7 +27,7 @@ const DiscoverMovies = ({ filteredData }) => {
 
   const URL = `${base_url}/movie?${sortAscDesc}&${yearFilt}&${genreLink}&${sortByPage}`;
 
-  const searchMovie = `https://api.themoviedb.org/3/search/movie?include_adult=true&${key}&query=${searchMovieSeries}`;
+  const searchMovie = `${tmdb_baseurl}/search/movie?include_adult=true&${key}&query=${searchMovieSeries}`;
 
   const currentURL = searchMovieSeries === null || searchMovieSeries === "" ? URL : searchMovie;
 

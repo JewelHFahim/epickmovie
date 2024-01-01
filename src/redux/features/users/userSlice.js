@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
+import { base_url } from "../../../config/config";
 
 const userInfo = JSON.parse(localStorage.getItem("user-info"));
 
@@ -16,14 +17,11 @@ export const loginUser = createAsyncThunk(
   "loginUser",
   async (body, { dispatch }) => {
     try {
-      const response = await fetch(
-        "https://fapi.epickmovies.online/api/admin/login",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        }
-      );
+      const response = await fetch(`${base_url}/admin/login`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
       if (response.ok) {
         const data = await response.json();
@@ -58,14 +56,11 @@ export const registerUser = createAsyncThunk(
   "registerUser",
   async (body, { dispatch }) => {
     try {
-      const res = await fetch(
-        "https://fapi.epickmovies.online/api/admin/signup",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(body),
-        }
-      );
+      const res = await fetch(`${base_url}/admin/signup`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+      });
 
       if (res.ok) {
         const registerRes = await res.json();
@@ -85,17 +80,14 @@ export const logoutUser = createAsyncThunk(
   "logoutUser",
   async (body, { dispatch }) => {
     try {
-      const res = await fetch(
-        "https://fapi.epickmovies.online/api/admin/logout",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${userInfo.token}`,
-          },
-          body: JSON.stringify({}),
-        }
-      );
+      const res = await fetch(`${base_url}/admin/logout`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${userInfo.token}`,
+        },
+        body: JSON.stringify({}),
+      });
 
       if (res.ok) {
         const logOut = await res.json();

@@ -15,6 +15,12 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
+    // =================>>PER PAGE BENGALI MOVIE<<========================
+    perPageBengaliMovieList: builder.query({
+      query: (page) => `/get-bengali-post?page=${page}`,
+      providesTags: ["EpicMovies"],
+    }),
+
     // ======================>>  SINGLE/MOVIE DETAILS <<==================
     movieDetails: builder.query({
       query: (movieId) => `/movie-post/${movieId}`,
@@ -216,6 +222,7 @@ export const {
   useDeleteTermsMutation,
   useAdminGenreListQuery,
   useBengaliMovieListQuery,
+  usePerPageBengaliMovieListQuery,
   usePixelQualityClientQuery,
   usePrintQualityClientQuery,
   useAudListClientQuery,

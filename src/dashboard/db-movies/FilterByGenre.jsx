@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { tmdb_baseurl } from "../../config/config";
 
 const FilterByGenre = ({ selectedGenreId, selectedSort }) => {
   const [filterByGenre, setFilterByGenre] = useState();
@@ -7,9 +8,8 @@ const FilterByGenre = ({ selectedGenreId, selectedSort }) => {
   const genreLink = `${key}&with_genres=${selectedGenreId}`;
   const sorAscDesc = `${key}&sort_by=${selectedSort}`;
   const yearFilt = `${key}&primary_release_year=2023`;
-  const base_url = "https://api.themoviedb.org/3/discover/movie";
+  const base_url = `${tmdb_baseurl}/discover/movie`;
   const imgBase_url = "https://image.tmdb.org/t/p/w500";
-  // const URL = `${base_url}?${genreLink}?${sorAscDesc}?${yearFilt}`;
   const URL = `${base_url}?${key}`;
 
   useEffect(() => {

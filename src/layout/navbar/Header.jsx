@@ -4,16 +4,24 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
 import {
+  useGlobalFooterQuery,
+  useGlobalHeaderQuery,
   useSiteLogoUserQuery,
   useSiteNameUSerQuery,
 } from "../../redux/features/settings/settingApi";
 
 const Header = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchTermState, setSearchTerm] = useState("");
   const { data: siteLogo } = useSiteLogoUserQuery();
   const { data: siteName } = useSiteNameUSerQuery();
+
+  const {data: globalHeader } = useGlobalHeaderQuery();
+  const {data: globalFooter } = useGlobalFooterQuery();
+
+  
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };
@@ -41,6 +49,7 @@ const Header = () => {
           </h1>
         )}
       </Link>
+
       <form
         onSubmit={handleSubmit}
         className=" w-[320px] lg:w-[453px] h-[42px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[9px] bg-[#18181B]"
@@ -58,7 +67,6 @@ const Header = () => {
         </button>
       </form>
 
-      <script src="https://dmapp.imdbbangla.com/bot-js/jessica.js"></script>
     </div>
   );
 };

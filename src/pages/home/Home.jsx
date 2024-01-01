@@ -8,19 +8,14 @@ import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi"
 import { collectFilteredItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import JoinTelegramBtn from "../../utils/JoinTelegramBtn";
 
 const Home = () => {
   const { data: movieList } = useMovieListQuery();
   const totalMovies = movieList?.data?.total;
+  const {data: quickMenu } = useQuickMenuUserQuery();
   const dispatch = useDispatch();
-
-  console.log(movieList)
-
   const { data: tvShowList } = useTvShowListQuery();
   const totalTvShow = tvShowList?.data?.total;  
-
-  const {data: quickMenu } = useQuickMenuUserQuery();
 
   const handleQuickMenuNavigation = (data) => {
     dispatch(collectFilteredItem(data));

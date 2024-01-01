@@ -2,13 +2,14 @@ import { useSelector } from "react-redux";
 import { useFilteredResultsByPaginationQuery } from "../../../redux/features/search/searchApi";
 import MovieCard from "../../../components/movie-card/MovieCard";
 import Pagination from "../../../components/pagination/Pagination";
+import { useState } from "react";
 
 const FilterList = () => {
   const { filteredTerm, pageNo } = useSelector((state) => state.search);
-  const { data: filteredResults } = useFilteredResultsByPaginationQuery({
-    filteredTerm,
-    pageNo,
-  });
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const { data: filteredResults } = useFilteredResultsByPaginationQuery({ filteredTerm, pageNo});
+  console.log(filteredResults)
 
 
   return (
@@ -31,9 +32,9 @@ const FilterList = () => {
       </div>
 
       <Pagination
-        // currentPage={pageNo}
-        // setCurrentPage={setCurrentPage}
-        // perPgaeMovie={perPgaeMovie}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        perPgaeMovie={filteredResults}
       />
     </section>
   );

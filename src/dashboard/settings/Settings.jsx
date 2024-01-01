@@ -2,8 +2,9 @@ import { useForm } from "react-hook-form";
 import {
   useCreateConfigMutation,
   useFooterConfigQuery,
+  useGlobalFooterQuery,
+  useGlobalHeaderQuery,
   useJoinTelegramConfigQuery,
-  useSiteLogoConfigQuery,
   useSiteNameConfigQuery,
   useSiteNewsConfigQuery,
 } from "../../redux/features/settings/settingApi";
@@ -12,36 +13,34 @@ import { Select, initTE } from "tw-elements";
 import MultiSelectMenu from "../../components/genere-select-menu/MultitSelect";
 import { useEffect } from "react";
 import LogoUploader from "./LogoUploader";
-import ScriptUploader from "./ScriptUploader";
 
 const Settings = () => {
   initTE({ Select });
-
   const { handleSubmit, register, reset, setValue } = useForm();
-
   const { data: siteName } = useSiteNameConfigQuery();
-  const { data: siteLogo } = useSiteLogoConfigQuery();
   const { data: siteFooter } = useFooterConfigQuery();
   const { data: siteNews } = useSiteNewsConfigQuery();
   const { data: siteTelegram } = useJoinTelegramConfigQuery();
-  // console.log(siteName, siteLogo, siteFooter,siteNews, siteTelegram);
+  const { data: globalHeader } = useGlobalHeaderQuery();
+  const { data: globalFooter } = useGlobalFooterQuery();
+  const [createConfig] = useCreateConfigMutation();
 
   useEffect(() => {
     setValue("site_name", siteName?.data, { shouldDirty: false });
-    setValue("site_logo", siteLogo?.data, { shouldDirty: false });
     setValue("site_footer", siteFooter?.data, { shouldDirty: false });
     setValue("site_news", siteNews?.data, { shouldDirty: false });
     setValue("telegram_link", siteTelegram?.data, { shouldDirty: false });
+    setValue("global_header", globalHeader?.data, { shouldDirty: false });
+    setValue("global_footer", globalFooter?.data, { shouldDirty: false });
   }, [
     setValue,
     siteName?.data,
-    siteLogo?.data,
     siteFooter?.data,
     siteNews?.data,
     siteTelegram?.data,
+    globalHeader?.data,
+    globalFooter?.data,
   ]);
-
-  const [createConfig] = useCreateConfigMutation();
 
   const onSubmit = (data) => {
     console.log(data);
@@ -73,11 +72,11 @@ const Settings = () => {
           </div>
 
           <div>
-            <label className="text-gray-200"> Site Logo</label>
+            <label className="text-gray-200"> Telegram Link </label>
             <input
               type="text"
-              {...register("site_logo")}
-              placeholder="site logo"
+              {...register("telegram_link")}
+              placeholder="telegram link"
               className={inputStyle}
             />
           </div>
@@ -105,40 +104,47 @@ const Settings = () => {
           </div>
 
           <div>
-            <label className="text-gray-200"> Telegram Link </label>
-            <input
+            <label className="text-gray-200"> Global Header </label>
+            <textarea
+              rows={4}
               type="text"
-              {...register("telegram_link")}
-              placeholder="telegram link"
+              {...register("global_header")}
+              placeholder="global header"
               className={inputStyle}
             />
           </div>
 
-          <div className="flex items-center justify-center mt-8">
+          <div>
+            <label className="text-gray-200"> Global Footer </label>
+            <textarea
+              rows={4}
+              type="text"
+              {...register("global_footer")}
+              placeholder="global footer"
+              className={inputStyle}
+            />
+          </div>
+
+          <div></div>
+
+          <div className="flex items-center justify-center mt-8 w-full">
             <button
               type="submit"
-              className="w-[150px] border border-slate-600 h-[40px] text-white uppercase rounded-md bg-slate-900 hover:bg-slate-600"
+              className="w-full border border-slate-600 h-[44px] text-white uppercase rounded-md bg-slate-900 hover:bg-slate-600"
             >
               Save
             </button>
           </div>
-
-
         </form>
 
         <div className="flex justify-center mt-[40px] border border-slate-700 p-4">
-          <LogoUploader/>
+          <LogoUploader />
         </div>
 
         <div className=" mt-[40px] border border-slate-700 p-4">
+          <label className="text-gray-200 pb-2"> Quick Menu</label>
           <MultiSelectMenu />
         </div>
-
-        <div className=" mt-[40px] border border-slate-700 p-4">
-          <ScriptUploader />
-        </div>
-
-
       </section>
     </div>
   );

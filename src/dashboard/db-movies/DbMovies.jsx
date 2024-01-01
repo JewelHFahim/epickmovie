@@ -10,6 +10,7 @@ import { BsSearch } from "react-icons/bs";
 import { getSearchMovieSeries } from "../../redux/features/search/searchSlice";
 import ImportModal from "./import-modal/ImportModal";
 import InnerloaderButton from "../../utils/InnerloaderButton";
+import { tmdb_baseurl } from "../../config/config";
 
 const DbMovies = () => {
   const { bulkData, isLoading } = useSelector((state) => state.movie);
@@ -26,7 +27,7 @@ const DbMovies = () => {
 
   const [genreList, setGenre] = useState();
   useEffect(() => {
-    fetch(`https://api.themoviedb.org/3/genre/movie/list?${key}`)
+    fetch(`${tmdb_baseurl}/genre/movie/list?${key}`)
       .then((res) => res.json())
       .then((data) => setGenre(data));
   }, []);

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { base_url, key } from "../../../utils/Importants";
 import TvShowGallery from "./TvShowGallery";
 import { useSelector } from "react-redux";
+import { tmdb_baseurl } from "../../../config/config";
 
 const DiscoverTvshows = ({filteredData}) => {
   const date = new Date();
@@ -23,7 +24,7 @@ const DiscoverTvshows = ({filteredData}) => {
 
   const sortByPage = selectedPage?.length > 0 ? `${key}&page=${selectedPage}` : `${key}&page=1`;
 
-  const searchSeries = `https://api.themoviedb.org/3/search/tv?include_adult=true&${key}&query=${searchMovieSeries}`;
+  const searchSeries = `${tmdb_baseurl}/search/tv?include_adult=true&${key}&query=${searchMovieSeries}`;
 
   const URL = `${base_url}/tv?${sortByPage}&${sortAscDesc}&${yearFilt}&${genreLink}`;
 

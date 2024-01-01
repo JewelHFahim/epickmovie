@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import toast from "react-hot-toast";
+import { adminHeader, base_url } from "../../../config/config";
 
 const initialState = {
   isLoadingTv: false,
@@ -8,7 +9,6 @@ const initialState = {
   bulkTvData: [],
 };
 
-const userInfo = JSON.parse(localStorage.getItem("user-info"));
 // =================>> SINGLE TV SHOW IMPORT <<===================
 export const singleTvShowImport = createAsyncThunk(
   "tvShows/singleTvShowImport",
@@ -16,14 +16,10 @@ export const singleTvShowImport = createAsyncThunk(
     dispatch(setLoadingST(true));
     try {
       const response = await fetch(
-        "https://fapi.epickmovies.online/api/admin/tv-import",
+        `${base_url}/admin/tv-import`,
         {
           method: "POST",
-          headers: {
-            "content-type": "application/json",
-            "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
-            Authorization: `Bearer ${userInfo.token}`,
-          },
+          headers: adminHeader,
           body: JSON.stringify(body),
         }
       );
@@ -53,18 +49,12 @@ export const bulkTvShowImport = createAsyncThunk("tvShows/bulkTvShowsImport", as
 
     try {
       dispatch(setLoadingST(true));
-      const response = await fetch( "https://fapi.epickmovies.online/api/admin/tv-bulk-import", {
+      const response = await fetch( `${base_url}/admin/tv-bulk-import`, {
           method: "POST",
-          headers: {
-            "content-type": "application/json",
-            "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
-            Authorization: `Bearer ${userInfo.token}`,
-          },
+          headers: adminHeader,
           body: JSON.stringify(body),
         }
       );
-
-      // console.log(response);
 
       // Check if the response was successful
       if (!response.ok) {

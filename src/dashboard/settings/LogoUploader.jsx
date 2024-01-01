@@ -1,11 +1,9 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { base_url } from "../../config/config";
 
 const LogoUploader = () => {
   const [selectedFile, setSelectedFile] = useState(null);
-
-  console.log(selectedFile);
-
   const getUserName = localStorage.getItem("user-info");
   const token = JSON.parse(getUserName)?.token;
 
@@ -16,10 +14,8 @@ const LogoUploader = () => {
   const handleUpload = () => {
     if (selectedFile) {
       const formData = new FormData();
-
       formData.append("site_logo", selectedFile);
-
-      fetch("https://fapi.epickmovies.online/api/admin/upload-logo", {
+      fetch(`${base_url}/admin/upload-logo`, {
         method: "POST",
         headers: {
           Authorization: `Bearer ${token}`,
@@ -35,6 +31,7 @@ const LogoUploader = () => {
         .then((data) => {
           console.log("File uploaded:", data);
           toast.success("Logo Uploaded");
+          setSelectedFile("");
         })
         .catch((error) => {
           console.error("There was a problem uploading the file:", error);
@@ -49,7 +46,7 @@ const LogoUploader = () => {
 
   return (
     <div className="w-full">
-      <label className="text-gray-200"> Telegram Link </label>
+      <label className="text-gray-200">Logo Upload </label>
 
       <div className="flex text-white items-cente w-full mt-2">
         <input type="file" onChange={handleFileChange} className={inputStyle} />
