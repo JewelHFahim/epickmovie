@@ -43,7 +43,6 @@ const Settings = () => {
   ]);
 
   const onSubmit = (data) => {
-    console.log(data);
     createConfig(data);
     toast.success("Submitted");
     reset();

@@ -6,11 +6,12 @@ import { MdRemoveRedEye } from "react-icons/md";
 import { useDeleteSeasonMutation } from "../../../../redux/features/trash/trashApi";
 import toast from "react-hot-toast";
 import { FiTrash } from "react-icons/fi";
+import Loading from "../../../../utils/loading/Loading";
 
 const AdminTvShowDetails = () => {
   const { id } = useParams();
   const { register } = useForm();
-  const { data: tvShowDetails } = useAdminTvShowDetailsQuery(id);
+  const { data: tvShowDetails, isLoading } = useAdminTvShowDetailsQuery(id);
   const details = tvShowDetails?.data;
   const [deleteSeason] = useDeleteSeasonMutation();
 
@@ -37,7 +38,10 @@ const AdminTvShowDetails = () => {
         </h3>
       </div>
 
-      <div className="space-y-5">
+      {
+        isLoading ? <Loading/> :
+
+        <div className="space-y-5">
         {/* ==================>> Tv Show INFO <<============== */}
         <h2 className="text-[20px]">Tv Show Info</h2>
         <div className="px-8 bg-slate-100 p-5">
@@ -189,6 +193,7 @@ const AdminTvShowDetails = () => {
           </div>
         </div>
       </div>
+      }
 
       <hr className="my-5" />
       {/* ===============>> SEASON LIST HERE <<============== */}
@@ -218,7 +223,9 @@ const AdminTvShowDetails = () => {
               +Add Season
             </Link>
           </div>
+
           <div className="shadow-sm border rounded-lg overflow-x-auto">
+
             <table className="w-full table-auto text-sm text-left">
               <thead className="text-gray-600 font-medium border-b">
                 <tr>
@@ -252,7 +259,9 @@ const AdminTvShowDetails = () => {
                 ))}
               </tbody>
             </table>
+
           </div>
+
         </div>
       </section>
     </main>

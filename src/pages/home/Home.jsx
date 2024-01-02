@@ -8,6 +8,7 @@ import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi"
 import { collectFilteredItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
+import ScriptPage from "../../dashboard/settings/ScriptPage";
 
 const Home = () => {
   const { data: movieList } = useMovieListQuery();
@@ -64,6 +65,8 @@ const Home = () => {
           ></MovieCard>
         ))}
       </div>
+
+      <ScriptPage/>
     </section>
   );
 };

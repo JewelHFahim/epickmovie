@@ -5,11 +5,9 @@ import Pagination from "../../../components/pagination/Pagination";
 import { useState } from "react";
 
 const FilterList = () => {
-  const { filteredTerm, pageNo } = useSelector((state) => state.search);
+  const { filteredTerm } = useSelector((state) => state.search);
   const [currentPage, setCurrentPage] = useState(1);
-
-  const { data: filteredResults } = useFilteredResultsByPaginationQuery({ filteredTerm, pageNo});
-  console.log(filteredResults)
+  const { data: filteredResults } = useFilteredResultsByPaginationQuery({filteredTerm, currentPage});
 
 
   return (

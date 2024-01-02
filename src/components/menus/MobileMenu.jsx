@@ -5,52 +5,35 @@ import movieIcon from "../../assets/movieIcon.svg"
 import homeIcon from "../../assets/homeIcon.svg"
 import webIcon from "../../assets/www.svg"
 import { FaMinus, FaPlus } from "react-icons/fa6";
+import { useGenreListQuery, useGetAudioListQuery, usePixelQualityClientQuery, usePrintQualityClientQuery, useYearListQuery } from '../../redux/features/movies/movieApi'
+import { collectFilteredItem } from '../../redux/features/search/searchSlice'
+import { useDispatch } from 'react-redux'
+import { Link } from 'react-router-dom'
 
-
-const dropdownNavs = [
-            {
-                title: "Hollywood",
-                path: "javascript:void(0)",
-                icon: homeIcon,
-            },
-            {
-                title: "Bollywood",
-                path: "javascript:void(0)",
-                icon: homeIcon,
-            },
-            {
-                title: "Dual Audio",
-                path: "javascript:void(0)",
-                icon: homeIcon,
-            },
-            {
-                title: "Tamil",
-                path: "javascript:void(0)",
-                icon: homeIcon,
-            },
-            {
-                title: "Telugu",
-                path: "javascript:void(0)",
-                icon: homeIcon,
-            },
-            {
-                title: "Bengali",
-                path: "javascript:void(0)",
-                icon: homeIcon,
-            },
-]
 
  const MobileMenu = () => {
+    const dispatch = useDispatch();
+    const { data: pixelQualityList } = usePixelQualityClientQuery();
+    const { data: printQualityList } = usePrintQualityClientQuery();
+    const { data: genreList } = useGenreListQuery();
+    const { data: yearList } = useYearListQuery();
+    const { data: audiList } = useGetAudioListQuery();
+
+  
+    const pixel = pixelQualityList?.data;
+    const print = printQualityList?.data;
+    const combinedQuality = pixel?.concat(print);
+    console.log(combinedQuality)
 
     const [state, setState] = useState(false)
     const [drapdownState, setDrapdownState] = useState({ isActive: false, idx: null })
 
     const navigation = [
-        { title: "Movies", path: "javascript:void(0)", isDrapdown: true, navs: dropdownNavs },
-        { title: "GENRE", path: "javascript:void(0)", isDrapdown: true, navs: dropdownNavs },
-        { title: "YEAR", path: "javascript:void(0)", isDrapdown: true, navs: dropdownNavs },
-        { title: "QUALITY", path: "javascript:void(0)", isDrapdown: true, navs: dropdownNavs },
-        { title: "Home", path: "javascript:void(0)", isDrapdown: false},
+        { title: "Movies", path: "", isDrapdown: true, navs: audiList?.data },
+        { title: "GENRE", path: "", isDrapdown: true, navs: genreList?.data },
+        { title: "YEAR", path: "", isDrapdown: true, navs: yearList?.data },
+        { title: "QUALITY", path: "", isDrapdown: true, navs: combinedQuality },
+        { title: "Home", path: "/", isDrapdown: false},
     ]
 
     useEffect(() => {
@@ -59,6 +42,12 @@ const dropdownNavs = [
             if (!target.closest(".nav-menu")) setDrapdownState({ isActive: false, idx: null });
         };
     }, [])
+
+    const handleTerms = (data, ) => {
+        console.log({ data });
+        dispatch(collectFilteredItem(data));
+        setState(false);
+      };
 
     return (
         <>
@@ -125,10 +114,10 @@ const dropdownNavs = [
                                                     <div className="">
                                                         <ul className=''>
                                                         {
-                                                            dropdownNavs?.map((item, i) => (
-                                                        <li key={i} className='flex  items-center gap-2 text-white px-2 py-1 border-b-[.5px] border-[#2D2C2C]'>
-                                                            <img src={item.icon} alt="" className='w-[21px] h-[21px]'/>
-                                                            <a href="" className='text-[18px] font-inter font-[600]'>{item.title}</a>
+                                                            item?.navs?.map((item, i) => (
+                                                        <li onClick={()=>handleTerms(item?.slug)} key={i} className='flex  items-center gap-2 text-white px-2 py-1 border-b-[.5px] border-[#2D2C2C]'>
+                                                            <img src={homeIcon} alt="" className='w-[21px] h-[21px]'/>
+                                                            <Link to="/filter-list" className='text-[18px] font-inter font-[500]'>{item.name}</Link>
                                                         </li>
                                                             ))
                                                         }
@@ -140,11 +129,8 @@ const dropdownNavs = [
                                     )
                                 })
                             }
-
                         </ul>
-
                     </div>
-
                 </div>
             </nav>
 

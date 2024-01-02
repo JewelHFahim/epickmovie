@@ -24,10 +24,9 @@ const Nav = () => {
   const dispatch = useDispatch();
   const { data: genreList } = useGenreListQuery();
   const { data: yearList } = useYearListQuery();
+  const { data: joinTelegram } = useJoinTelegramUserQuery();
   const { data: pixelQualityList } = usePixelQualityClientQuery();
   const { data: printQualityList } = usePrintQualityClientQuery();
-  const { data: joinTelegram } = useJoinTelegramUserQuery();
-
   const pixel = pixelQualityList?.data;
   const print = printQualityList?.data;
   const combinedQuality = pixel?.concat(print);

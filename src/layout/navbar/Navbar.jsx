@@ -8,18 +8,14 @@ import { genreList } from "../../utils/menu-list/menu-list";
 const Navbar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
- 
-  
 
   return (
     <div className=" lg:h-[184px] bg-[#27272A] mx-2">
-
       <Header />
 
       <div className="lg:hidden">
         <MobileMenu />
       </div>
-
 
       {/* =====>> Only For Mobile Device <<===== */}
       {currentPath === "/" && (
@@ -35,8 +31,6 @@ const Navbar = () => {
       <div className="hidden lg:block">
         <Nav />
       </div>
-
-
     </div>
   );
 };
