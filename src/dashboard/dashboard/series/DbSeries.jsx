@@ -27,11 +27,11 @@ const DbSeries = () => {
   };
 
   return (
-    <div className="mx-auto bg-white border w-full h-full p-2">
+    <div className="mx-auto bg-white border w-full h-full p-6">
       <div className="items-start justify-between md:flex">
         <div className="max-w-lg">
           <h3 className="text- text-xl text-slate-700 font-bold sm:text-2xl uppercase">
-            TV Series
+            TV Series - {perPgaeMovie?.data?.total}
           </h3>
         </div>
 
@@ -45,7 +45,7 @@ const DbSeries = () => {
         </div>
       </div>
 
-      <div className="mt-8 px-4 w-[100px]">
+      <div className="mt-8 w-[100px]">
         <Link to="/admin/dashboard/trash">
           <button className="flex items-center gap-1 border border-slate-700 rounded-lg text-slate-700 px-3 text-sm py-1 hover: hover:text-white hover:bg-red-400 hover:border-white">
             <FiTrash />

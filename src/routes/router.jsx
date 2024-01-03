@@ -17,9 +17,7 @@ import UserDetails from "../dashboard/users/UserDetails";
 import AdminTvShowDetails from "../dashboard/dashboard/series/series/AdminTvShowDetails";
 import AddSeries from "../dashboard/dashboard/series/series/AddSeries";
 import UpdateTvShow from "../dashboard/dashboard/series/series/UpdateTvShow";
-import Seasons from "../dashboard/dashboard/series/seasons/Seasons";
 import AddSeasons from "../dashboard/dashboard/series/seasons/AddSeason";
-import Episode from "../dashboard/dashboard/series/episode/Episode";
 import AddEpisode from "../dashboard/dashboard/series/episode/AddEpisode";
 import { clientRoutes } from "./clientRoutes";
 import TrashList from "../dashboard/trash/trash/TrashList";
@@ -55,7 +53,6 @@ const router = createBrowserRouter([
       </PrivateRouter>
     ),
     children: [
-
       {
         path: "/admin/dashboard",
         element: <Dashboard />,
@@ -183,18 +180,8 @@ const router = createBrowserRouter([
       },
 
       {
-        path: "/admin/dashboard/db-seasons",
-        element: <Seasons />,
-      },
-
-      {
         path: "/admin/dashboard/add-season/:id",
         element: <AddSeasons />,
-      },
-
-      {
-        path: "/admin/dashboard/episode",
-        element: <Episode />,
       },
 
       {

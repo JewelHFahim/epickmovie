@@ -1,11 +1,10 @@
-import SearchResults from "../db-movies/DiscoverMovies/SearchResults";
-
 const Help = () => {
     return (
-        <div>
-            <p>Help Section</p>
-            <SearchResults/>
-        </div>
+        <div className="w-full h-full">
+      <div className="w-[100%] h-[100%] bg-white text-[40px] text-slate-800 flex justify-center items-center underline">
+        Help Center
+      </div>
+    </div>
     );
 };
 

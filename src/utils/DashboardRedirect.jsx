@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Loading from "../../utils/loading/Loading";
+import Loading from "./loading/Loading";
 
-const AdminRedirect = () => {
+const DashboardRedirect = () => {
   
   const navigate = useNavigate();
 
@@ -24,4 +24,4 @@ const AdminRedirect = () => {
   );
 };
 
-export default AdminRedirect;
+export default DashboardRedirect;

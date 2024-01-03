@@ -28,11 +28,11 @@ const MoviesDB = () => {
   };
   
   return (
-    <div className="mx-auto bg-white border w-full h-full p-2">
+    <div className="mx-auto bg-white border w-full h-full p-6">
       <div className="items-start justify-between md:flex">
         <div className="max-w-lg">
           <h3 className="text-xl font-bold text-slate-700 sm:text-2xl uppercase">
-            Movies
+            Movies - {perPgaeMovie?.data?.total}
           </h3>
         </div>
 

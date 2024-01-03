@@ -20,7 +20,7 @@ const ScriptPage = () => {
         }
 
         const data = await response.json();
-        console.log("Fetched script data:", data?.data);
+        // console.log("Fetched script data:", data?.data);
         injectScript(data?.data);
       } catch (error) {
         console.error("Error fetching or injecting script:", error);

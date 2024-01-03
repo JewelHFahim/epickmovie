@@ -21,9 +21,12 @@ const MovieCard = ({ item, redirect }) => {
 
       </Link>
 
+      { 
+      item?.stickerLabel?.length > 0 && 
       <div className="absolute left-2 top-2">
-        <FeatureSticker />
+        <FeatureSticker item={item}/>
       </div>
+      }
 
     </div>
   );

@@ -19,11 +19,9 @@ import { Link } from 'react-router-dom'
     const { data: yearList } = useYearListQuery();
     const { data: audiList } = useGetAudioListQuery();
 
-  
     const pixel = pixelQualityList?.data;
     const print = printQualityList?.data;
     const combinedQuality = pixel?.concat(print);
-    console.log(combinedQuality)
 
     const [state, setState] = useState(false)
     const [drapdownState, setDrapdownState] = useState({ isActive: false, idx: null })

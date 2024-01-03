@@ -11,36 +11,38 @@ import { Link } from "react-router-dom";
 import ScriptPage from "../../dashboard/settings/ScriptPage";
 
 const Home = () => {
-  const { data: movieList } = useMovieListQuery();
-  const totalMovies = movieList?.data?.total;
-  const {data: quickMenu } = useQuickMenuUserQuery();
   const dispatch = useDispatch();
+  const { data: movieList } = useMovieListQuery();
+  const { data: quickMenu } = useQuickMenuUserQuery();
   const { data: tvShowList } = useTvShowListQuery();
-  const totalTvShow = tvShowList?.data?.total;  
+  const totalTvShow = tvShowList?.data?.total;
+  const totalMovies = movieList?.data?.total;
 
   const handleQuickMenuNavigation = (data) => {
     dispatch(collectFilteredItem(data));
   };
 
-
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">
-
       {/* ==================>> Quick Menus <<================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {quickMenu?.data?.map((menu, i) => (
-          <Link key={i}
-          to="/filter-list"
-          onClick={() => handleQuickMenuNavigation(menu?.slug)}
-           ><SubMenuButton >{menu.name}</SubMenuButton>
-           </Link>
+          <Link
+            key={i}
+            to="/filter-list"
+            onClick={() => handleQuickMenuNavigation(menu?.slug)}
+          >
+            <SubMenuButton>{menu.name}</SubMenuButton>
+          </Link>
         ))}
       </div>
 
       {/* ==================>> Domains <<=================*/}
       <DomainList />
 
-      <HomePageSeeAllBtn total={totalMovies} redirect={"/movies"}>Movies</HomePageSeeAllBtn>
+      <HomePageSeeAllBtn total={totalMovies} redirect={"/movies"}>
+        Movies
+      </HomePageSeeAllBtn>
 
       {/* ==================>> Movies <<==================*/}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
@@ -53,7 +55,9 @@ const Home = () => {
         ))}
       </div>
 
-      <HomePageSeeAllBtn total={totalTvShow} redirect={"/tv-show"}>TV Show</HomePageSeeAllBtn>
+      <HomePageSeeAllBtn total={totalTvShow} redirect={"/tv-show"}>
+        TV Show
+      </HomePageSeeAllBtn>
 
       {/* ==================>> Movies <<==================*/}
       <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
@@ -66,7 +70,7 @@ const Home = () => {
         ))}
       </div>
 
-      <ScriptPage/>
+      <ScriptPage />
     </section>
   );
 };

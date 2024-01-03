@@ -27,10 +27,11 @@ const RelatedPost = ({ id, redirect }) => {
                   {item?.post_title}
                 </p>
 
-                <div className="absolute left-2 top-2">
-                  <FeatureSticker/>
-                </div>
-
+                {item?.stickerLabel?.length > 0 && (
+                  <div className="absolute left-2 top-2">
+                    <FeatureSticker item={item} />
+                  </div>
+                )}
               </div>
             </a>
           ))}

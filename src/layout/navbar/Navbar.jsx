@@ -1,13 +1,21 @@
 import Header from "./Header";
 import MobileMenuButton from "../../utils/MobileMenuButton";
 import MobileMenu from "../../components/menus/MobileMenu";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import Nav from "./nav/Nav";
-import { genreList } from "../../utils/menu-list/menu-list";
+import { useDispatch } from "react-redux";
+import { collectFilteredItem } from "../../redux/features/search/searchSlice";
+import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
 
 const Navbar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
+  const dispatch = useDispatch();
+  const { data: quickMenu } = useQuickMenuUserQuery();
+
+  const handleQuickMenuNavigation = (data) => {
+    dispatch(collectFilteredItem(data));
+  };
 
   return (
     <div className=" lg:h-[184px] bg-[#27272A] mx-2">
@@ -19,10 +27,16 @@ const Navbar = () => {
 
       {/* =====>> Only For Mobile Device <<===== */}
       {currentPath === "/" && (
-        <div className="w-[95%] h-[100%] border border-black mx-auto mt-[34px] p-2 lg:hidden mb-[30px]">
-          <div className="grid grid-cols-5 gap-2">
-            {genreList.map((movie, i) => (
-              <MobileMenuButton key={i}>{movie.title}</MobileMenuButton>
+        <div className="w-[95%] h-[100%] mx-auto mt-[20px] p-2 lg:hidden mb-[30px]">
+          <div className="grid grid-cols-4 gap-2">
+            {quickMenu?.data?.map((menu, i) => (
+              <Link
+                key={i}
+                to="/filter-list"
+                onClick={() => handleQuickMenuNavigation(menu?.slug)}
+              >
+                <MobileMenuButton key={i}>{menu.name}</MobileMenuButton>{" "}
+              </Link>
             ))}
           </div>
         </div>

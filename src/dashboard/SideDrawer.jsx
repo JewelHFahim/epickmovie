@@ -14,7 +14,6 @@ import { useNavigate } from "react-router-dom";
 import { RiMovieLine } from "react-icons/ri";
 import { PiTerminalWindow } from "react-icons/pi";
 
-
 // NESTED MENUS
 const Menu = (props) => {
   const { children, items } = props;
@@ -75,6 +74,12 @@ const Sidebar = () => {
       name: "Movies",
       icon: <RiMovieLine />,
     },
+
+    {
+      name: "Tv Shows",
+      href: "/admin/dashboard/db-series",
+      icon: <RiMovieLine />,
+    },
   ];
 
   const navsFooter = [
@@ -95,12 +100,6 @@ const Sidebar = () => {
       name: "Settings",
       icon: <IoSettingsOutline />,
     },
-  ];
-
-  const nestedNavTV = [
-    { name: "Tv Shows", href: "/admin/dashboard/db-series", icon: "" },
-    { name: "Seasons", href: "/admin/dashboard/db-seasons", icon: "" },
-    { name: "Episodes", href: "/admin/dashboard/episode", icon: "" },
   ];
 
   const nestedTerms = [
@@ -153,9 +152,6 @@ const Sidebar = () => {
 
               {/* ==================>> NESTED MENUES <<=====================*/}
               <li>
-                <Menu items={nestedNavTV}>
-                  <TbMovie className="text-lg" /> TV Shows
-                </Menu>
                 <Menu items={nestedTerms}>
                   <PiTerminalWindow className="text-lg" /> All Terms
                 </Menu>

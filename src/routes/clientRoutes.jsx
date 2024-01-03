@@ -9,66 +9,70 @@ import SearchList from "../pages/movies/search-list/SearchList";
 import NotFound from "../pages/not-found/NotFound";
 import TvShow from "../pages/tv-show/TvShow";
 import TvShowDetails from "../pages/tv-show/tvShowDetails";
+import DashboardRedirect from "../utils/DashboardRedirect";
 
- 
- export const clientRoutes = [
-    {
-      path: "/",
-      element: <Home />,
-    },
+export const clientRoutes = [
+  {
+    path: "/",
+    element: <Home />,
+  },
 
-    {
-      path: "/",
-      element: <Home />,
-    },
-    {
-      path: "/movies",
-      element: <Movies />,
-    },
+  {
+    path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/movies",
+    element: <Movies />,
+  },
 
-    {
-      path: "/bangla",
-      element: <BanglaMovie />,
-    },
+  {
+    path: "/bangla",
+    element: <BanglaMovie />,
+  },
 
-    {
-      path: "/tv-show",
-      element: <TvShow />,
-    },
+  {
+    path: "/tv-show",
+    element: <TvShow />,
+  },
 
-    {
-      path: "/movie/:id",
-      element: <MovieDetails />,
-    },
+  {
+    path: "/movie/:id",
+    element: <MovieDetails />,
+  },
 
-    {
-      path: "/series/:id",
-      element: <TvShowDetails />,
-    },
+  {
+    path: "/series/:id",
+    element: <TvShowDetails />,
+  },
 
-    {
-      path: "/category",
-      element: <Category />,
-    },
+  {
+    path: "/category",
+    element: <Category />,
+  },
 
-    {
-      path: "/search-list",
-      element: <SearchList />,
-    },
+  {
+    path: "/search-list",
+    element: <SearchList />,
+  },
 
-    {
-      path: "/filter-list",
-      element: <FilterList />,
-    },
+  {
+    path: "/filter-list",
+    element: <FilterList />,
+  },
 
-    {
-      path: "/admin",
-      element: <AdminRedirect />,
-    },
+  {
+    path: "/admin",
+    element: <AdminRedirect />,
+  },
 
-    {
-      path: "/not-found",
-      element: <NotFound />,
-    },
+  {
+    path: "/dashboard",
+    element: <DashboardRedirect />,
+  },
 
-  ]
+  {
+    path: "/not-found",
+    element: <NotFound />,
+  },
+];
