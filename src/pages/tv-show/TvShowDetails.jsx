@@ -7,9 +7,12 @@ import Accrodion from "../../components/accrodion/Accrodion";
 import RelatedPost from "../../components/related-post/RelatedPost";
 import AdvertisementSection from "../../components/advertisement/AdvertisementSection";
 import Breadcum from "../../utils/breadcum/Breadcum";
+import { useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 
 const TvShowDetails = () => {
   const { id } = useParams();
+  const { data: siteName } = useSiteNameUSerQuery();
+
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
   console.log(details);
@@ -36,9 +39,11 @@ const TvShowDetails = () => {
   const keysList = Object?.keys(details?.download_links || {});
   console.log(keysList);
 
+  document.title = `${siteName?.data} || ${details?.post_title}`;
+
   return (
     <div className="bg-[#27272A]">
-      <Breadcum children1="TV Show" children2={details?.post_title} />
+      <Breadcum children1="TV Show" children2={details?.post_title} redirect={`/tv-show`} />
 
       <section className=" p-2 lg:p-5 flex justify-between">
         {/* >>>>>>> Column One <<<<<<< */}

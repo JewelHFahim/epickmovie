@@ -18,24 +18,24 @@ const Navbar = () => {
   };
 
   return (
-    <div className=" lg:h-[184px] bg-[#27272A] mx-2">
+    <div className=" lg:h-[184px] bg-[#27272A]">
       <Header />
 
       <div className="lg:hidden">
         <MobileMenu />
       </div>
 
-      {/* =====>> Only For Mobile Device <<===== */}
+      {/* =====>>Quick Menu Only For Mobile Device <<===== */}
       {currentPath === "/" && (
-        <div className="w-[95%] h-[100%] mx-auto mt-[20px] p-2 lg:hidden mb-[30px]">
-          <div className="grid grid-cols-4 gap-2">
+        <div className="w-[95%] h-[100%] mx-auto mt-[20px] p-2 lg:hidden">
+          <div className="grid grid-cols-5 gap-2">
             {quickMenu?.data?.map((menu, i) => (
               <Link
                 key={i}
                 to="/filter-list"
                 onClick={() => handleQuickMenuNavigation(menu?.slug)}
               >
-                <MobileMenuButton key={i}>{menu.name}</MobileMenuButton>{" "}
+                <MobileMenuButton key={i}>{menu.name}</MobileMenuButton>
               </Link>
             ))}
           </div>

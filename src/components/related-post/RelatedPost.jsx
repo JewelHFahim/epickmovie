@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useSuggessionMovieSeriesQuery } from "../../redux/features/search/searchApi";
 import FeatureSticker from "../../utils/feature-sticker/FeatureSticker";
 
@@ -15,7 +14,7 @@ const RelatedPost = ({ id, redirect }) => {
 
         <div className="mt-[23px] grid grid-cols-2 lg:grid-cols-5 items-center gap-[18px] ">
           {suggessions?.data?.map((item, i) => (
-            <a href={`${redirect}/${item?.id}`} key={i}>
+            <a href={`${redirect}/${item?.id}/${item?.post_title}`} key={i}>
               <div className="w-[180px] lg:w-[205px] h-[390px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] lg:bg-none lg:h-[420px] flex flex-col items-center text-center rounded-[10px] p-[1.5px] relative">
                 <img
                   src={item?.poster_image_url}

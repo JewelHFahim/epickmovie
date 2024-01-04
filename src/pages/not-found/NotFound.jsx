@@ -3,13 +3,9 @@ import ads from "../../assets/ads.png";
 import search from "../../assets/Search Icon.svg";
 
 const NotFound = () => {
-    
   return (
     <div className="bg-[#27272A] mt-[22px] min-h-screen">
-
-
       <section className=" p-[32px] lg:flex justify-between">
-
         <div className=" lg:w-[70%] font-inter">
           <h3 className="text-[32px] font-[700]  text-[#727171]">
             Error 404 Not Found
@@ -22,14 +18,13 @@ const NotFound = () => {
           </p>
 
           <div className=" w-[320px] lg:w-[453px] h-[42px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[9px] bg-[#18181B]">
-        <input
-          type="text"
-          placeholder="What are you looking for?"
-          className="w-full h-full bg-transparent border-0 focus:outline-none text-[12px] text-white px-5"
-        />
-        <img src={search} alt="" className="h-full cursor-pointer" />
-      </div>
-
+            <input
+              type="text"
+              placeholder="What are you looking for?"
+              className="w-full h-full bg-transparent border-0 focus:outline-none text-[12px] text-white px-5"
+            />
+            <img src={search} alt="" className="h-full cursor-pointer" />
+          </div>
         </div>
 
         <div className="hidden lg:block w-[30%] bg-[#1F1F22] p-4">
@@ -54,7 +49,10 @@ const NotFound = () => {
 
             <div className="px-4 py-2 grid grid-cols-4 gap-[8px]">
               {Array.from({ length: 32 }).map((item, i) => (
-                <button key={i} className="w-[53px] h-[20px] rounded-[4px] bg-[#f4f4f4c9] text-[10px] text-[#27272A] font-inter">
+                <button
+                  key={i}
+                  className="w-[53px] h-[20px] rounded-[4px] bg-[#f4f4f4c9] text-[10px] text-[#27272A] font-inter"
+                >
                   Bengali
                 </button>
               ))}
@@ -68,10 +66,7 @@ const NotFound = () => {
             <img src={ads} alt="" />
           </div>
         </div>
-
       </section>
-
-
     </div>
   );
 };

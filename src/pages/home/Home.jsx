@@ -9,12 +9,13 @@ import { collectFilteredItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import ScriptPage from "../../dashboard/settings/ScriptPage";
+import LazyLoading from "../../components/lazy-loading/LazyLoading";
 
 const Home = () => {
   const dispatch = useDispatch();
-  const { data: movieList } = useMovieListQuery();
+  const { data: movieList, isLoading: movieLoading } = useMovieListQuery();
   const { data: quickMenu } = useQuickMenuUserQuery();
-  const { data: tvShowList } = useTvShowListQuery();
+  const { data: tvShowList, isLoading: tvShowLoading } = useTvShowListQuery();
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
 
@@ -45,30 +46,38 @@ const Home = () => {
       </HomePageSeeAllBtn>
 
       {/* ==================>> Movies <<==================*/}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
-        {movieList?.data?.data?.slice(0, 10)?.map((item) => (
-          <MovieCard
-            key={item?.id}
-            item={item}
-            redirect={`/movie/${item?.id}`}
-          ></MovieCard>
-        ))}
-      </div>
+      {movieLoading ? (
+        <LazyLoading />
+      ) : (
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
+          {movieList?.data?.data?.slice(0, 10)?.map((item) => (
+            <MovieCard
+              key={item?.id}
+              item={item}
+              redirect={`/movie/${item?.id}/${item?.post_title}`}
+            ></MovieCard>
+          ))}
+        </div>
+      )}
 
       <HomePageSeeAllBtn total={totalTvShow} redirect={"/tv-show"}>
         TV Show
       </HomePageSeeAllBtn>
 
-      {/* ==================>> Movies <<==================*/}
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
-        {tvShowList?.data?.data?.slice(0, 10)?.map((item) => (
-          <MovieCard
-            key={item?.id}
-            item={item}
-            redirect={`/series/${item?.id}`}
-          ></MovieCard>
-        ))}
-      </div>
+      {/* ==================>> Tv Shows <<==================*/}
+      {tvShowLoading ? (
+        <LazyLoading />
+      ) : (
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
+          {tvShowList?.data?.data?.slice(0, 10)?.map((item) => (
+            <MovieCard
+              key={item?.id}
+              item={item}
+              redirect={`/series/${item?.id}/${item?.post_title}`}
+            ></MovieCard>
+          ))}
+        </div>
+      )}
 
       <ScriptPage />
     </section>

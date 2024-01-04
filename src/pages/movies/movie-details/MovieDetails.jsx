@@ -1,4 +1,3 @@
-import { AiOutlineDoubleRight } from "react-icons/ai";
 import calender from "../../../assets/calender.svg";
 import DownloadButton from "../../../utils/DownloadButton";
 import { useMovieDetailsQuery } from "../../../redux/features/movies/movieApi";
@@ -8,11 +7,14 @@ import DetailsPosterCard from "../../../components/details-poster-card/DetailsPo
 import RelatedPost from "../../../components/related-post/RelatedPost";
 import AdvertisementSection from "../../../components/advertisement/AdvertisementSection";
 import Breadcum from "../../../utils/breadcum/Breadcum";
+import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
 
 const MovieDetails = () => {
   const { id } = useParams();
+
   const { data: movieDetails } = useMovieDetailsQuery(id);
-  console.log(movieDetails);
+  const { data: siteName } = useSiteNameUSerQuery();
+
   const details = movieDetails?.data;
   console.log(details);
 
@@ -24,14 +26,14 @@ const MovieDetails = () => {
 
   // Convert milliseconds to days
   const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  document.title = `${siteName?.data} || ${details?.post_title}`;
 
-  
 
   return (
     <div className="bg-[#27272A]">
 
 
-      <Breadcum children1="Movies" children2={details?.post_title}/>
+      <Breadcum children1="Movies" children2={details?.post_title} redirect={"/movies"}/>
 
       <section className=" p-2 lg:p-5 flex justify-between">
         <div className="w-full  lg:w-[70%]">
@@ -123,7 +125,7 @@ const MovieDetails = () => {
           <div className=" max-w-[276px] lg:max-w-[399px] flex flex-col gap-3 mx-auto">
             {details?.download_links?.map((item, i) => (
               <DownloadButton key={i} url={item?.download_url}>
-                {item?.label} {item?.file_size}
+                {item?.label} {item?.px_quality} {item?.pr_quality} {item?.file_size}
               </DownloadButton>
             ))}
           </div>
@@ -138,6 +140,7 @@ const MovieDetails = () => {
 
       {/* ===========>> RELETED POST <<=========== */}
       <RelatedPost id={id} redirect={"/movie"}/>
+
     </div>
   );
 };

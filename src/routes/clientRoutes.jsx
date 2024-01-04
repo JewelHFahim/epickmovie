@@ -37,12 +37,12 @@ export const clientRoutes = [
   },
 
   {
-    path: "/movie/:id",
+    path: "/movie/:id/:title",
     element: <MovieDetails />,
   },
 
   {
-    path: "/series/:id",
+    path: "/series/:id/:title",
     element: <TvShowDetails />,
   },
 

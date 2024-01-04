@@ -11,10 +11,9 @@ const AdvertisementSection = () => {
   const { data: joinTelegram } = useJoinTelegramUserQuery();
   const dispatch = useDispatch();
 
-
   const handleCountry = (country) => {
     dispatch(collectFilteredItem(country));
-  }
+  };
 
   return (
     <div className="hidden lg:block  w-[30%] bg-[#1F1F22] p-4">
@@ -32,18 +31,19 @@ const AdvertisementSection = () => {
         </a>
       </div>
 
-      <div className="w-[299px]  bg-[#27272A] mt-[27px]">
-
+      <div className="w-[299px] bg-[#27272A] mt-[27px]">
         <p className="pl-[30px] pt-[15px] font-[500] font-inter text-[#F4F4F4C9] ">
           Countries
         </p>
 
         <hr className="w-full bg-[#494949] opacity-[.4]" />
 
-        <div className="w-full px-4 py-2 grid grid-cols-2 gap-[8px]">
+        <div className="w-full h-[412px] px-4 py-2 grid grid-cols-2 gap-[8px] overflow-y-auto">
           {countryList?.data?.map((item, i) => (
-            <Link key={i} to="/filter-list"
-            onClick={() => handleCountry(item?.slug)}
+            <Link
+              key={i}
+              to="/filter-list"
+              onClick={() => handleCountry(item?.slug)}
               className="px-4 py-[4px] rounded-[4px] bg-[#f4f4f4c9] hover:bg-slate-700 hover:text-white border hover:border-slate-400 transition-all duration-200 text-[10px] text-[#27272A] font-inter font-medium"
             >
               {item?.name}
