@@ -2,8 +2,6 @@ import apiSlice from "../api/apiSlice";
 
 const userApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
-
     userList: builder.query({
       query: () => "/admin/user-list",
       providesTags: ["EpicMovies"],
@@ -14,15 +12,17 @@ const userApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-
     userRoleList: builder.query({
       query: () => "/admin/role-list",
       providesTags: ["EpicMovies"],
     }),
 
-
   }),
 });
 
-export const { useUserListQuery, useUserRoleListQuery, useSingleUserDetailsQuery } = userApi;
+export const {
+  useUserListQuery,
+  useUserRoleListQuery,
+  useSingleUserDetailsQuery,
+} = userApi;
 export default userApi;

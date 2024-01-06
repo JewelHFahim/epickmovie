@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { useUpdateUserMutation } from "../../redux/features/movies/movieApi";
 import { useEffect } from "react";
+import toast from "react-hot-toast";
 
 const UserDetails = () => {
   const navigate = useNavigate();
@@ -14,17 +15,15 @@ const UserDetails = () => {
 
   const { id } = useParams();
   const { data: userDetails } = useSingleUserDetailsQuery(parseInt(id));
-  console.log(userDetails)
   const { data: userRoleList } = useUserRoleListQuery();
   const [updateUser] = useUpdateUserMutation();
 
   const type = userDetails?.data?.user_type === 1 ? "Administrator" : "Editor";
-  console.log(type)
 
   useEffect(() => {
-    setValue('name', userDetails?.data?.name, { shouldDirty: false });
-    setValue('email', userDetails?.data?.email, { shouldDirty: false });
-    setValue('user_type', type , { shouldDirty: false });
+    setValue("name", userDetails?.data?.name, { shouldDirty: false });
+    setValue("email", userDetails?.data?.email, { shouldDirty: false });
+    setValue("user_type", type, { shouldDirty: false });
   }, [setValue, userDetails?.data?.name, userDetails?.data?.email, type]);
 
   const onSubmit = (data) => {
@@ -32,11 +31,10 @@ const UserDetails = () => {
     updateUser({ data, id: parseInt(id) });
     navigate("/admin/dashboard/users");
   };
-
   const rolesData = userRoleList?.data;
 
   const inputStyle =
-    "block w-full px-4 py-1 mt-2 placeholder:text-sm placeholder-gray-500 bg-white border border-gray-500 focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300";
+    "block w-full px-2 py-1 mt-2 placeholder:text-sm placeholder-gray-500 bg-white border border-gray-500 focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300";
 
   return (
     <div className="w-full h-full flex justify-center items-center bg-white">
@@ -85,16 +83,21 @@ const UserDetails = () => {
               ))}
             </select>
 
-            <div className="w-full mt-4">
+            {/* <div className="w-full mt-4">
               <input
                 type="password"
                 {...register("password")}
-                // defaultValue={userDetails?.data?.email}
                 placeholder="Password"
                 aria-label="Password"
                 className={inputStyle}
               />
-            </div>
+            </div> */}
+
+            {/* <div className="flex justify-end">
+              <p className="text-sm text-blue-700 mt-2 hover:text-blue-800 hover:underline cursor-pointer">
+                Reset Password
+              </p>
+            </div> */}
 
             <div className="flex items-center justify-center mt-4">
               <button

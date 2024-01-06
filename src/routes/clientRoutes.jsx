@@ -21,6 +21,7 @@ export const clientRoutes = [
     path: "/",
     element: <Home />,
   },
+
   {
     path: "/movies",
     element: <Movies />,

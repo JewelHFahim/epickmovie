@@ -35,6 +35,8 @@ import AddCreator from "../dashboard/terms/creator/AddCreator";
 import AddNetworks from "../dashboard/terms/networks/AddNetworks";
 import Settings from "../dashboard/settings/Settings";
 import Help from "../dashboard/help/Help";
+import ResetPassword from "../dashboard/users/ResetPassword";
+import SetNewPass from "../dashboard/users/SetNewPass.jsx";
 
 const router = createBrowserRouter([
   // ==========>> CLIENT ROUTES <<===========
@@ -220,6 +222,16 @@ const router = createBrowserRouter([
   {
     path: "/admin/login",
     element: <Login />,
+  },
+
+  {
+    path: "/admin/reset-password",
+    element: <ResetPassword />,
+  },
+
+  {
+    path: "/admin/password-recovery/:string",
+    element: <SetNewPass />,
   },
 ]);
 

@@ -9,6 +9,7 @@ const initialState = {
   isLoading: false,
   token: "",
   message: "",
+  status: false
 };
 
 // ==================================>> LOGIN <<==============================
@@ -103,6 +104,58 @@ export const logoutUser = createAsyncThunk(
   }
 );
 
+// ===============================>> RESET PASSWORD <<=========================
+export const resetPassword = createAsyncThunk("resetPassword", async (body) => {
+  try {
+    const res = await fetch(`${base_url}/admin/password-recovery`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (res.ok) {
+      const data = await res.json();
+      console.log(data);
+      toast.success(`${data?.message}`);
+    } else {
+      return toast.error("Reset Failed");
+    }
+  } catch (error) {
+    console.log("Reset Failed");
+  }
+});
+
+// ===============================>> SET PASSWORD <<=========================
+export const setPassword = createAsyncThunk(
+  "resetPassword",
+  async ( {body, token}, { dispatch }) => {
+    console.log(body);
+    console.log(token);
+    try {
+      const res = await fetch(`${base_url}/admin/password-set/${token}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(body),
+      });
+
+      if (res.ok) {
+        const data = await res.json();
+        console.log(data);
+        dispatch(setStatus(data?.data?.staus))
+        toast.success(`${data?.message}`);
+      } else {
+        return toast.error("Set Failed");
+      }
+    } catch (error) {
+      console.log("Set Failed");
+    }
+  }
+);
+
 const userSlice = createSlice({
   name: "user",
   initialState,
@@ -114,14 +167,19 @@ const userSlice = createSlice({
 
     setToken: (state, action) => {
       state.token = action.payload;
-      // console.log("setToken", action.payload);
     },
 
     setMessage: (state, action) => {
       state.message = action.payload;
     },
+
+    setStatus: (state, action) => {
+      state.status = action.payload;
+    },
+
+
   },
 });
 
-export const { addToken, addLogout, setToken, setMessage } = userSlice.actions;
+export const { addToken, addLogout, setToken, setMessage, setStatus } = userSlice.actions;
 export default userSlice.reducer;

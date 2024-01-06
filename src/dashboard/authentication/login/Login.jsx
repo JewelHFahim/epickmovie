@@ -1,7 +1,8 @@
 import { useForm } from "react-hook-form";
 import { loginUser } from "../../../redux/features/users/userSlice";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,16 @@ const Login = () => {
       console.error("Error during login:", error);
     }
   };
+
+  // const handleReset = () => {
+  //   const resetShould = window.confirm("Are you sure want to reset password?");
+  //   if (resetShould) {
+  //     toast.success("Reset Password");
+  //     navigate(`/admin/reset-password`);
+  //   } else {
+  //     console.log("Reset cancled by user");
+  //   }
+  // };
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-white ">
@@ -71,18 +82,17 @@ const Login = () => {
             </div>
 
             <div className="flex items-center justify-between mt-4">
-              <a
-                href="#"
-                className="text-sm text-gray-600  hover:text-gray-500"
-              >
-                Forget Password?
-              </a>
+              <Link to="/admin/reset-password">
+                <button className="text-sm text-blue-600 hover:text-blue-600 hover:text-underline">
+                  Forget Password?
+                </button>
+              </Link>
 
               <button
                 type="submit"
                 className="px-6 py-2 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50"
               >
-                Sign In
+                Login
               </button>
             </div>
           </form>
