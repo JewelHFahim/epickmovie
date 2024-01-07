@@ -2,19 +2,13 @@ import { useState } from "react";
 import DomainList from "../../../components/domain-list/DomainList";
 import MovieCard from "../../../components/movie-card/MovieCard";
 import Pagination from "../../../components/pagination/Pagination";
-import {
-  useMovieListQuery,
-  usePerPgaeMovieQuery,
-} from "../../../redux/features/movies/movieApi";
+import { usePerPgaeMovieQuery } from "../../../redux/features/movies/movieApi";
 import Title from "../../../utils/Title";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 
 const Movies = () => {
-  const { data: movies, isLoading } = useMovieListQuery();
-  console.log(movies);
-
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: perPgaeMovie } = usePerPgaeMovieQuery(currentPage);
+  const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
   console.log(perPgaeMovie);
 
   return (
@@ -31,7 +25,7 @@ const Movies = () => {
         <LazyLoading />
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
-          {movies?.data?.data?.map((item) => (
+          {perPgaeMovie?.data?.data?.map((item) => (
             <MovieCard
               key={item?.id}
               item={item}
