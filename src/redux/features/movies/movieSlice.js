@@ -28,6 +28,8 @@ export const singleMovieImport = createAsyncThunk(
       }
 
       const data = await response.json();
+      console.log(data)
+
       dispatch(setMessage(data?.message));
       dispatch(setStatus(data?.status));
       toast.success(data?.message);

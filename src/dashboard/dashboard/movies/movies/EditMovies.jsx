@@ -1,7 +1,9 @@
 import { useForm } from "react-hook-form";
 import {
+  useAdminGenreListQuery,
   useMovieDetailsQuery,
   useUpdateMovieMutation,
+  useYearListQuery,
 } from "../../../../redux/features/movies/movieApi";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -10,6 +12,8 @@ const EditMovies = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: movieDetails } = useMovieDetailsQuery(id);
+  const { data: genreList } = useAdminGenreListQuery();
+  const { data: yearList } = useYearListQuery();
   const [updateMovie] = useUpdateMovieMutation();
 
   const onSubmit = (data) => {
@@ -59,6 +63,36 @@ const EditMovies = () => {
               className={`${inputStyle} py-2`}
             />
           </div>
+
+          <div className="flex items-center gap-4">
+            {/* =====================>> GENRE LIST <<===============================*/}
+          <div className="flex flex-col mt-2">
+            <label className="">Select Genre</label>
+          <select data-te-select-init {...register("genreIds")} className={inputStyle}>
+            <option hidden>Select Genre</option>
+            {genreList?.data?.map((item) => (
+              <option key={item?.id} value={item?.id}>
+                {item?.name}
+              </option>
+            ))}
+          </select>
+          </div>
+
+          {/* =====================>> YEAR LIST <<===============================*/}
+          <div className="flex flex-col mt-2">
+            <label className="">Select Year</label>
+          <select data-te-select-init {...register("yearId")} className={inputStyle}>
+            <option hidden>Select Year</option>
+            {yearList?.data?.map((item) => (
+              <option key={item?.id} value={item?.id}>
+                {item?.name}
+              </option>
+            ))}
+          </select>
+          </div>
+          </div>
+
+
         </div>
 
         {/* ================>> Submit Btn <<================= */}

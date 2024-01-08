@@ -26,8 +26,7 @@ const DbMovies = () => {
   };
 
   const [genreList, setGenre] = useState();
-  useEffect(() => {
-    fetch(`${tmdb_baseurl}/genre/movie/list?${key}`)
+  useEffect(() => { fetch(`${tmdb_baseurl}/genre/movie/list?${key}`)
       .then((res) => res.json())
       .then((data) => setGenre(data));
   }, []);

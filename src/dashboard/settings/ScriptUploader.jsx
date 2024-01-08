@@ -20,16 +20,11 @@ const ScriptUploader = () => {
 
       <div className="w-full">
         <label className="text-gray-200"> Script Text </label>
-        <input 
-        type="text" 
-          {...register("script_text")} 
-        placeholder="script text" className={inputStyle}/>
+        <input type="text" {...register("script_text")} placeholder="script text" className={inputStyle}/>
       </div>
 
       <div className="flex items-center justify-center mt-8">
-        <button
-          type="submit"
-          className="w-[150px] border border-slate-600 h-[43px] text-white uppercase rounded-e-md bg-slate-900 hover:bg-slate-600"
+        <button type="submit" className="w-[150px] border border-slate-600 h-[43px] text-white uppercase rounded-e-md bg-slate-900 hover:bg-slate-600"
         >
           Save
         </button>

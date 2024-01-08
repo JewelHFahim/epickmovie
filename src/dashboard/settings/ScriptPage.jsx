@@ -3,6 +3,8 @@ import { useEffect } from "react";
 import { base_url } from "../../config/config";
 
 const ScriptPage = () => {
+
+  
   useEffect(() => {
     const fetchScriptAndInject = async () => {
       try {

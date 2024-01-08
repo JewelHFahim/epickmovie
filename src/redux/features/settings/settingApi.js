@@ -63,6 +63,30 @@ const settingApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
+    // ====================>> TIME ZONE QUERY <<=====================
+    timeZone: builder.query({
+      query: () => "/admin/get-config-value/timezone",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> MOVIE SORT <<=====================
+    movieSort: builder.query({
+      query: () => "/admin/get-config-value/movie_order",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> TV SHOW SORT <<=====================
+    tvshowSort: builder.query({
+      query: () => "/admin/get-config-value/tv_order",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> CACHE TIME <<=====================
+    cacheTime: builder.query({
+      query: () => "/admin/get-config-value/cache_time",
+      providesTags: ["EpicMovies"],
+    }),
+
     // ======================>> FOOTER <<=========================
     footerConfig: builder.query({
       query: () => "/admin/get-config-value/site_footer",
@@ -150,6 +174,10 @@ export const {
   useSiteNewsUserQuery,
   useQuickMenuUserQuery,
   useGlobalHeaderQuery,
-  useGlobalFooterQuery
+  useGlobalFooterQuery,
+  useTimeZoneQuery,
+  useMovieSortQuery,
+  useTvshowSortQuery,
+  useCacheTimeQuery
 } = settingApi;
 export default settingApi;
