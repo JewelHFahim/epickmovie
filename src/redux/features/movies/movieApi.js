@@ -3,6 +3,8 @@ import apiSlice from "../api/apiSlice";
 const movieApi = apiSlice.injectEndpoints({
 
   endpoints: (builder) => ({
+
+    
     // ========================>> ALL MOVIES <<===========================
     movieList: builder.query({
       query: () => "/movie-posts",

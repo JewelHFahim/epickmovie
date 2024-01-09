@@ -9,8 +9,7 @@ import { useAlreadyUploadedMovieSeriesIdsQuery } from "../../../redux/features/m
 const MovieGallery = ({ movies }) => {
 
   const dispatch = useDispatch();
-  
-  const { isLoading, status } = useSelector((state) => state.movie);
+  const { isLoading, status, message } = useSelector((state) => state.movie);
   const [selectedIds, setSelectedIds] = useState([]);
   const {data: uploadedIds } = useAlreadyUploadedMovieSeriesIdsQuery();
 
@@ -36,12 +35,8 @@ const MovieGallery = ({ movies }) => {
     dispatch(setBulkData(allIds))
   };
 
-  const isSelected = (id) => {
-    selectedIds.includes(id);
-  };
-
   const notificationList = movies?.results?.filter((item) =>
-    selectedIds.includes(item.id)
+      selectedIds.includes(item.id)
   );
 
   const clearNotificationList = () => {
@@ -52,25 +47,17 @@ const MovieGallery = ({ movies }) => {
     <div>
 
       {
-        status === true && 
+        ( (status === true && isLoading === false) && message === "movies imported successfully." || message === "Import completed successfully.") && 
         <div className="w-full h-full p-5 bg-slate-200 flex flex-col gap-2">
-
         {notificationList?.map((item) => (
-          <div
-            key={item?.id}
-            className="w-full bg-white hover:bg-slate-50 shadow-lg h-[50px] flex justify-between items-center px-5 rounded-lg "
-          >
+          <div key={item?.id} className="w-full bg-white hover:bg-slate-50 shadow-lg h-[50px] flex justify-between items-center px-5 rounded-lg">
             <div className="flex items-center gap-x-8 text-sm">
               <p className="  font-medium text-green-600 uppercase">Imported</p>
               <p className="uppercase">Movie</p>
-              <button className="border text-sm px-3 py-[2px] rounded-lg text-blue-700">
-                Edit
-              </button>
+              <button className="border text-sm px-3 py-[2px] rounded-lg text-blue-700"> Edit </button>
               <p className="text-blue-700 ml-10">{item?.title.slice(0,15)}</p>
             </div>
-            <div>
-              <IoCheckmarkDoneCircleOutline className="text-green-500" />
-            </div>
+            <div> <IoCheckmarkDoneCircleOutline className="text-green-500" /> </div>
           </div>
         ))}
       </div>

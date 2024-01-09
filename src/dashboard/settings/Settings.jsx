@@ -20,6 +20,7 @@ import LogoUploader from "./LogoUploader";
 import TimeZone from "./TImeZone";
 import MovieSort from "./MovieSort";
 import TvshowSort from "./TvshowSort";
+import FavIconUpLoader from "./FavIcon";
 
 const Settings = () => {
   initTE({ Select });
@@ -35,9 +36,11 @@ const Settings = () => {
   const { data: tvshowSort } = useTvshowSortQuery();
   const { data: cacheTime } = useCacheTimeQuery();
   const [createConfig] = useCreateConfigMutation();
+
   const [selectedOption, setSelectedOption] = useState(timeZone?.data);
   const [selectedOptionTv, setSelectedOptionTv] = useState();
   const [selectedOptionMovie, setSelectedOptionMovie] = useState();
+
 
   useEffect(() => {
     setValue("site_name", siteName?.data, { shouldDirty: false });
@@ -214,7 +217,9 @@ const Settings = () => {
           </div>
         </form>
 
-        <div className="flex justify-center mt-[40px] border border-slate-700 p-4">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-4 mt-[40px] border border-slate-700 p-4">
+          <FavIconUpLoader />
+       
           <LogoUploader />
         </div>
 

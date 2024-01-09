@@ -7,6 +7,7 @@ const initialState = {
   message: "",
   status: null,
   bulkData: [],
+  movieList: [],
 };
 
 // =================>> SINGLE IMPORT <<===================
@@ -28,7 +29,7 @@ export const singleMovieImport = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log(data)
+      console.log(data);
 
       dispatch(setMessage(data?.message));
       dispatch(setStatus(data?.status));
@@ -74,6 +75,18 @@ export const bulkMovieImport = createAsyncThunk(
   }
 );
 
+// ====================>>TEST FOR CASHING MOVIE SLICE <<==================
+// export const fetchMovieList = createAsyncThunk(
+//   "movies/fetchMovieList",
+//   async (page) => {
+//     const response = await axios.get(`${base_url}/movie-posts?page=${page}`, {
+//       headers: adminHeader,
+//     });
+//     return response.data;
+//   }
+// );
+
+// ====================>> MOVIE SLICE <<==================
 export const movieSlice = createSlice({
   name: "movie",
   initialState,
@@ -94,6 +107,21 @@ export const movieSlice = createSlice({
       state.bulkData = action.payload;
     },
   },
+
+  // extraReducers: (builder) => {
+  //   builder
+  //     .addCase(fetchMovieList.pending, (state) => {
+  //       state.status = "loading";
+  //     })
+  //     .addCase(fetchMovieList.fulfilled, (state, action) => {
+  //       state.status = "succeeded";
+  //       state.movieList = action.payload;
+  //     })
+  //     .addCase(fetchMovieList.rejected, (state, action) => {
+  //       state.status = "failed";
+  //       state.error = action.error.message;
+  //     });
+  // },
 });
 
 export const { setMessage, setLoadingST, setBulkData, setStatus } =

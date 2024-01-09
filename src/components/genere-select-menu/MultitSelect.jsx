@@ -10,6 +10,7 @@ import { useCreateMenuMutation, useQuickMenuQuery } from "../../redux/features/s
 import toast from "react-hot-toast";
 
 const MultiSelectMenu = () => {
+  
   const [selectedOptions, setSelectedOptions] = useState([]);
   const {data: quickMenuList} = useQuickMenuQuery();
 

@@ -16,7 +16,6 @@ const DiscoverMovies = ({ filteredData }) => {
   const selectedYear = filteredData?.year;
   const selectedPage = filteredData?.page;
 
-  
   const genreLink = selectedGenreId?.length > 0 ? `${key}&with_genres=${selectedGenreId}` : `${key}&with_genres=""`;
   const sortAscDesc = selectedSort?.length > 0 ? `${key}&sort_by=${selectedSort}` : `${key}&sort_by=popularity.desc`;
   const yearFilt = selectedYear?.length > 0 ? `${key}&primary_release_year=${selectedYear}` : `${key}&primary_release_year=${year}`;

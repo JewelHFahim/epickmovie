@@ -6,6 +6,7 @@ import { usePerPgaeMovieQuery } from "../../../redux/features/movies/movieApi";
 import Title from "../../../utils/Title";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 
+
 const Movies = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
@@ -34,6 +35,7 @@ const Movies = () => {
           ))}
         </div>
       )}
+
 
       <Pagination
         currentPage={currentPage}

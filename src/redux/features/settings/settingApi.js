@@ -55,6 +55,13 @@ const settingApi = apiSlice.injectEndpoints({
     }),
 
 
+    // ====================>> FAVICON ICON <<====================
+    favIcon: builder.query({
+      query: () => "/get-config-value/fav_icon",
+      providesTags: ["EpicMovies"],
+    }),
+
+
 
     // ###################### ADMIN ROUTES ########################
     // ====================>> CONFIG LIST  <<=====================
@@ -178,6 +185,7 @@ export const {
   useTimeZoneQuery,
   useMovieSortQuery,
   useTvshowSortQuery,
-  useCacheTimeQuery
+  useCacheTimeQuery,
+  useFavIconQuery
 } = settingApi;
 export default settingApi;

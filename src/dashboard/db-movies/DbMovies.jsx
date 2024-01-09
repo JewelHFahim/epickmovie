@@ -15,7 +15,6 @@ import { tmdb_baseurl } from "../../config/config";
 const DbMovies = () => {
   const { bulkData, isLoading } = useSelector((state) => state.movie);
   const { bulkTvData, isLoadingTv } = useSelector((state) => state.tvShow);
-  console.log(isLoading);
   const { searchMovieSeries } = useSelector((state) => state.search);
 
   const [toggleState, setToggleState] = useState("movie");

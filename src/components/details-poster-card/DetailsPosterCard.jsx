@@ -51,17 +51,11 @@ const DetailsPosterCard = ({ details }) => {
           </p>
 
           <p className="text-[11px] text-[#AEABAB]">
-            Source:
-            <a href="" className="text-[#FFA113] font-[700]">
-              imdb.com
-            </a>
+            Source: <a href="" className="text-[#FFA113] font-[700]"> imdb.com </a>
           </p>
 
           <p className="text-[11px] text-[#AEABAB]">
-            IMBDb RATING:
-            <a href="" className="text-[#FFA113] font-[700]">
-              {details?.imdb_rating}
-            </a>
+            IMBDb RATING: <a href="" className="text-[#FFA113] font-[700]"> {details?.imdb_rating} </a>
           </p>
         </>
       </div>

@@ -8,11 +8,11 @@ import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi"
 import { collectFilteredItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import ScriptPage from "../../dashboard/settings/ScriptPage";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
 
 const Home = () => {
   const dispatch = useDispatch();
+  
   const { data: movieList, isLoading: movieLoading } = useMovieListQuery();
   const { data: quickMenu } = useQuickMenuUserQuery();
   const { data: tvShowList, isLoading: tvShowLoading } = useTvShowListQuery();
@@ -79,7 +79,6 @@ const Home = () => {
         </div>
       )}
 
-      <ScriptPage />
     </section>
   );
 };

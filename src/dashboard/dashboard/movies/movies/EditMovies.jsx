@@ -1,25 +1,34 @@
 import { useForm } from "react-hook-form";
 import {
-  useAdminGenreListQuery,
   useMovieDetailsQuery,
   useUpdateMovieMutation,
   useYearListQuery,
 } from "../../../../redux/features/movies/movieApi";
 import { useNavigate, useParams } from "react-router-dom";
+import toast from "react-hot-toast";
+import GenreListDrop from "./GenreListDrop";
+import { useState } from "react";
 
 const EditMovies = () => {
   const { register, handleSubmit, reset } = useForm();
   const { id } = useParams();
   const navigate = useNavigate();
   const { data: movieDetails } = useMovieDetailsQuery(id);
-  const { data: genreList } = useAdminGenreListQuery();
   const { data: yearList } = useYearListQuery();
   const [updateMovie] = useUpdateMovieMutation();
+  const [selectedOptions, setSelectedOptions] = useState([]);
+
+  const prevGenres = movieDetails?.data?.additional_data?.genres?.map(
+    (item) => ({ value: item?.term?.id, label: item?.term?.name })
+  );
 
   const onSubmit = (data) => {
-    console.log(data);
-    updateMovie({ data, id });
+    const selectedGeneres = selectedOptions?.map((item) => item?.value);
+    const updatedData = { ...data, genre_ids: selectedGeneres };
+    updateMovie({ updatedData, id });
+    console.log({ updatedData, id });
     reset();
+    toast.success("Updated");
     navigate("/admin/dashboard/movies-db");
   };
 
@@ -64,34 +73,32 @@ const EditMovies = () => {
             />
           </div>
 
-          <div className="flex items-center gap-4">
-            {/* =====================>> GENRE LIST <<===============================*/}
+          {/* =====================>> GENRE LIST <<===============================*/}
           <div className="flex flex-col mt-2">
             <label className="">Select Genre</label>
-          <select data-te-select-init {...register("genreIds")} className={inputStyle}>
-            <option hidden>Select Genre</option>
-            {genreList?.data?.map((item) => (
-              <option key={item?.id} value={item?.id}>
-                {item?.name}
-              </option>
-            ))}
-          </select>
+            <GenreListDrop
+              selectedOptions={selectedOptions}
+              setSelectedOptions={setSelectedOptions}
+              prevGenres={prevGenres}
+            />
           </div>
 
           {/* =====================>> YEAR LIST <<===============================*/}
           <div className="flex flex-col mt-2">
-            <label className="">Select Year</label>
-          <select data-te-select-init {...register("yearId")} className={inputStyle}>
-            <option hidden>Select Year</option>
-            {yearList?.data?.map((item) => (
-              <option key={item?.id} value={item?.id}>
-                {item?.name}
-              </option>
-            ))}
-          </select>
-          </div>
-          </div>
-
+              <label className="">Select Year</label>
+              <select
+                data-te-select-init
+                {...register("yearId")}
+                className={inputStyle}
+              >
+                <option hidden>Select Year</option>
+                {yearList?.data?.map((item) => (
+                  <option key={item?.id} value={item?.id}>
+                    {item?.name}
+                  </option>
+                ))}
+              </select>
+            </div>
 
         </div>
 

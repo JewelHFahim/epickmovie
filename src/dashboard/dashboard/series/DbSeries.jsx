@@ -6,12 +6,22 @@ import toast from "react-hot-toast";
 import { Link } from "react-router-dom";
 import { FiTrash } from "react-icons/fi";
 import { Tooltip, initTE } from "tw-elements";
+import { useForm } from "react-hook-form";
+import { collectSearchItem } from "../../../redux/features/search/searchSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { useSerachResultsQuery } from "../../../redux/features/search/searchApi";
+
 
 const DbSeries = () => {
   initTE({ Tooltip });
+  const { handleSubmit } = useForm();
   const [currentPage, setCurrentPage] = useState(1);
   const { data: perPgaeMovie } = usePerPgaeTvShowQuery(currentPage);
   const [deleteMovieSeries] = useDeleteMovieSeriesMutation();
+  const { searchTerm } = useSelector((state) => state.search);
+  const { data: searchResults } = useSerachResultsQuery(searchTerm);
+  const dispatch = useDispatch();
+
 
   const handleDeleteSeason = (id) => {
     const shouldDelete = window.confirm(
@@ -26,6 +36,20 @@ const DbSeries = () => {
     console.log(id);
   };
 
+  const [search, setSearch] = useState("");
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+  };
+
+  const onSubmit = () => {
+    const res = dispatch(collectSearchItem(search));
+    console.log(res);
+  };
+
+  const results = (searchTerm !== null && searchTerm !== "") ? searchResults : perPgaeMovie?.data;
+
+
+
   return (
     <div className="mx-auto bg-white border w-full h-full p-6">
       <div className="items-start justify-between md:flex">
@@ -35,14 +59,24 @@ const DbSeries = () => {
           </h3>
         </div>
 
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg flex">
+          <input value={search} onChange={handleSearch} type="text" placeholder="Search Tv Show" 
+          className="border px-2 py-[4px] outline-none rounded-s-md text-sm"/>
+
+          <button type="submit" className="px-4 bg-slate-700 hover:bg-slate-600 text-white border border-slate-700 rounded-e-md text-sm">
+            Search
+          </button>
+        </form>
+
         <div className="mt-3 md:mt-0">
           <a
             href="/admin/dashboard/add-series"
-            className="inline-block px-4 py-2 text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
+            className="inline-block px-4 py-[6px] text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
           >
             Add Series
           </a>
         </div>
+
       </div>
 
       <div className="mt-8 w-[100px]">
@@ -66,7 +100,7 @@ const DbSeries = () => {
           </thead>
 
           <tbody className="divide-y">
-            {perPgaeMovie?.data?.data?.map((item, idx) => (
+            {results?.data?.map((item, idx) => (
               <tr key={idx} className="odd:bg-gray-50 even:bg-white">
                 <td className="px-6 py-4 font-medium flex items-center gap-x-2">
                   <img
@@ -116,11 +150,15 @@ const DbSeries = () => {
           </tbody>
         </table>
 
-        <Pagination
-          currentPage={currentPage}
-          setCurrentPage={setCurrentPage}
-          perPgaeMovie={perPgaeMovie}
-        />
+{
+  (searchTerm === null && searchTerm === "") &&
+  <Pagination
+  currentPage={currentPage}
+  setCurrentPage={setCurrentPage}
+  perPgaeMovie={perPgaeMovie}
+/>
+}
+       
       </div>
     </div>
   );
