@@ -3,7 +3,6 @@ import FeatureSticker from "../../utils/feature-sticker/FeatureSticker";
 
 const RelatedPost = ({ id, redirect }) => {
   const { data: suggessions } = useSuggessionMovieSeriesQuery(id);
-  console.log(suggessions);
 
   return (
     <div>

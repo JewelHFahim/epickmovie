@@ -13,19 +13,21 @@ const MovieDetails = () => {
   const { id } = useParams();
 
   const { data: movieDetails } = useMovieDetailsQuery(id);
+  
   const { data: siteName } = useSiteNameUSerQuery();
 
   const details = movieDetails?.data;
+
   console.log(details);
 
   const currentDate = new Date();
+
   const givenDate = new Date(details?.updated_at);
 
-  // Calculate time difference in milliseconds
   const timeDifference = currentDate.getTime() - givenDate.getTime();
 
-  // Convert milliseconds to days
   const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+  
   document.title = `${siteName?.data} || ${details?.post_title}`;
 
 

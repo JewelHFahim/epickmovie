@@ -3,17 +3,18 @@ import toast from "react-hot-toast";
 import { base_url } from "../../../config/config";
 
 const userInfo = JSON.parse(localStorage.getItem("user-info"));
+const getUserName = localStorage.getItem("user-info");
+const token = JSON.parse(getUserName)?.token;
 
 const initialState = {
   email: "",
   isLoading: false,
   token: "",
   message: "",
-  status: false
+  status: false,
 };
 
 // ==================================>> LOGIN <<==============================
-
 export const loginUser = createAsyncThunk(
   "loginUser",
   async (body, { dispatch }) => {
@@ -59,12 +60,17 @@ export const registerUser = createAsyncThunk(
     try {
       const res = await fetch(`${base_url}/admin/signup`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify(body),
       });
 
       if (res.ok) {
         const registerRes = await res.json();
+        console.log(registerRes);
+
         dispatch(setMessage(registerRes?.message));
         toast.success(`${registerRes?.message}`);
       } else {
@@ -130,7 +136,7 @@ export const resetPassword = createAsyncThunk("resetPassword", async (body) => {
 // ===============================>> SET PASSWORD <<=========================
 export const setPassword = createAsyncThunk(
   "resetPassword",
-  async ( {body, token}, { dispatch }) => {
+  async ({ body, token }, { dispatch }) => {
     console.log(body);
     console.log(token);
     try {
@@ -145,7 +151,7 @@ export const setPassword = createAsyncThunk(
       if (res.ok) {
         const data = await res.json();
         console.log(data);
-        dispatch(setStatus(data?.data?.staus))
+        dispatch(setStatus(data?.data?.staus));
         toast.success(`${data?.message}`);
       } else {
         return toast.error("Set Failed");
@@ -176,10 +182,9 @@ const userSlice = createSlice({
     setStatus: (state, action) => {
       state.status = action.payload;
     },
-
-
   },
 });
 
-export const { addToken, addLogout, setToken, setMessage, setStatus } = userSlice.actions;
+export const { addToken, addLogout, setToken, setMessage, setStatus } =
+  userSlice.actions;
 export default userSlice.reducer;

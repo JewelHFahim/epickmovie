@@ -24,7 +24,7 @@ const SearchList = () => {
           <MovieCard
             key={item?.id}
             item={item} 
-            redirect={ item?.post_type === "tvshows" ? `/series/${item?.id}/${item?.post_title}` : `/movie/${item?.id}/${item?.post_title}`}
+            redirect={ item?.post_type === "tvshows" ? `/series/${item?.id}` : `/movie/${item?.id}`}
           ></MovieCard>
         ))}
       </div>

@@ -14,12 +14,11 @@ const Movies = () => {
 
   return (
     <div className="flex flex-col justify-center items-center">
+      
       {/* ==================>> Domains <<=================*/}
       <DomainList />
 
-      <div className="w-full flex justify-start mt-[22px] ml-12">
-        <Title>Movies</Title>
-      </div>
+      <div className="w-full flex justify-start mt-[22px] ml-12"> <Title>Movies</Title> </div>
 
       {/* ==================>> Movies <<==================*/}
       {isLoading ? (
@@ -27,11 +26,7 @@ const Movies = () => {
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
           {perPgaeMovie?.data?.data?.map((item) => (
-            <MovieCard
-              key={item?.id}
-              item={item}
-              redirect={`/movie/${item?.id}/${item?.post_title}`}
-            ></MovieCard>
+            <MovieCard key={item?.id} item={item} redirect={`/movie/${item?.id}`}></MovieCard>
           ))}
         </div>
       )}

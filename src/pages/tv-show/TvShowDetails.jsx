@@ -1,4 +1,3 @@
-import { AiOutlineDoubleRight } from "react-icons/ai";
 import calender from "../../assets/calender.svg";
 import { useParams } from "react-router-dom";
 import { useSeriesDetailsQuery } from "../../redux/features/tv-show/tvShowApi";
@@ -36,14 +35,18 @@ const TvShowDetails = () => {
     day: "numeric",
   });
 
-  const keysList = Object?.keys(details?.download_links || {});
-  console.log(keysList);
+  // const keysList = Object?.keys(details?.download_links || {});
 
   document.title = `${siteName?.data} || ${details?.post_title}`;
 
   return (
     <div className="bg-[#27272A]">
-      <Breadcum children1="TV Show" children2={details?.post_title} redirect={`/tv-show`} />
+
+      <Breadcum
+        children1="TV Show"
+        children2={details?.post_title}
+        redirect={`/tv-show`}
+      />
 
       <section className=" p-2 lg:p-5 flex justify-between">
         {/* >>>>>>> Column One <<<<<<< */}
@@ -122,7 +125,7 @@ const TvShowDetails = () => {
 
                 {/* Nedd Summery*/}
                 <p className="text-[13px] text-[#AEABAB] font-[700] max-w-[455px]">
-                  Summary:{" "}
+                  Summary:
                   <a href="" className="text-white font-[400]">
                     A high-octane action thriller which outlines the emotional
                     journey of a man who is set to rectify the wrongs in the
@@ -135,24 +138,21 @@ const TvShowDetails = () => {
                   <p className="text-[11px] text-[#AEABAB] mt-[22px]">
                     Countries:
                     <span className="text-white ">
-                      {" "}
                       {details?.country !== null ? details?.country : "N/A"}
                     </span>
                   </p>
 
                   <p className="text-[11px] text-[#AEABAB]">
-                    Source:{" "}
+                    Source:
                     <a href="" className="text-[#FFA113] font-[700]">
-                      {" "}
-                      imdb.com{" "}
+                      imdb.com
                     </a>
                   </p>
 
                   <p className="text-[11px] text-[#AEABAB]">
-                    IMBDb RATING:{" "}
+                    IMBDb RATING:
                     <a href="" className="text-[#FFA113] font-[700]">
-                      {" "}
-                      {details?.imdb_rating}{" "}
+                      {details?.imdb_rating}
                     </a>
                   </p>
                 </>
@@ -205,7 +205,7 @@ const TvShowDetails = () => {
 
           {/* ==========>> DOWNLOAD BUTTOJN <<=============*/}
           <div className="max-w-[400px] mx-auto">
-            <Accrodion details={details} />
+            <Accrodion details={details} url={"jkj"}/>
           </div>
 
           {/* ===========>> TELEGRAM BUTTON <<=============*/}
