@@ -15,6 +15,8 @@ const AdminMovieDetails = () => {
 
   return (
     <main className="w-full bg-white p-10">
+
+      
       <div className="flex justify-center">
         <h3 className="text-xl font-bold sm:text-2xl uppercase">
           Add New Movie
@@ -23,6 +25,8 @@ const AdminMovieDetails = () => {
 
       {/* ==================>> FORM DATA <<================= */}
       <div className="space-y-5 mb-12">
+
+
         {/* ==================>> MOVIE INFO <<============== */}
         <h2 className="text-[20px]">Movies Info</h2>
         <div className="px-8 bg-slate-100 p-5">
@@ -242,6 +246,9 @@ const AdminMovieDetails = () => {
 
       {/* =================>> VEDIO PLAYER<<================= */}
       <VedioPlayer />
+
+
+
     </main>
   );
 };

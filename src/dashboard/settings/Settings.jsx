@@ -87,7 +87,7 @@ const Settings = () => {
 
   return (
     <div>
-      <section className="px-[20px] lg:px-[200px] py-[20px] lg:py-[20px] w-full h-full mx-auto bg-gray-800">
+      <section className="px-[20px] lg:px-[200px] py-[20px] lg:py-[20px] lg:pb-[70px] w-full h-full mx-auto bg-gray-800">
         <h2 className="text-lg font-semibold text-white">Account settings</h2>
 
         <form

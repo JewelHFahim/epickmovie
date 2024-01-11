@@ -7,11 +7,7 @@ const CardRelatedPost = ({ item }) => {
   useEffect(() => {
     const encodedTitle = encodeURIComponent(item?.post_title);
     const cleanedTitle = encodedTitle.replace(/%20/g, "-").toLowerCase();
-    setUrl(
-      `${item?.post_type === "movies" ? `/movie` : `/series`}/${
-        item?.id
-      }/${cleanedTitle}`
-    );
+    setUrl(`${item?.post_type === "movies" ? `/movie` : `/series`}/${item?.id}/${cleanedTitle}`);
   }, [item]);
 
   return (

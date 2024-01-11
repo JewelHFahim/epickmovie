@@ -90,12 +90,6 @@ const Sidebar = () => {
     },
 
     {
-      href: "/admin/dashboard/help",
-      name: "Help",
-      icon: <GoQuestion />,
-    },
-
-    {
       href: "/admin/dashboard/settings",
       name: "Settings",
       icon: <IoSettingsOutline />,

@@ -63,10 +63,18 @@ const MoviesDB = () => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg flex">
-          <input value={search} onChange={handleSearch} type="text" placeholder="Search Movie" 
-          className="border px-2 py-[4px] outline-none rounded-s-md text-sm"/>
+          <input
+            value={search}
+            onChange={handleSearch}
+            type="text"
+            placeholder="Search Movie"
+            className="border px-2 py-[4px] outline-none rounded-s-md text-sm"
+          />
 
-          <button type="submit" className="px-4 bg-slate-700 hover:bg-slate-600 text-white border border-slate-700 rounded-e-md text-sm">
+          <button
+            type="submit"
+            className="px-4 bg-slate-700 hover:bg-slate-600 text-white border border-slate-700 rounded-e-md text-sm"
+          >
             Search
           </button>
         </form>
@@ -97,7 +105,7 @@ const MoviesDB = () => {
               <th className="py-3 px-6">Poster & Title</th>
               <th className="py-3 px-6">Type</th>
               <th className="py-3 px-6">Published</th>
-              <th className="text-center">Actions</th>
+              {/* <th className="text-center">Actions</th> */}
             </tr>
           </thead>
 
@@ -111,19 +119,27 @@ const MoviesDB = () => {
                     <img
                       src={item?.poster_image_url}
                       alt=""
-                      className="w-[50px] h-[50px] rounded-full"
+                      className="w-[50px] h-[70px] object-cover"
                     />
 
-                    <p
-                      data-te-toggle="tooltip"
-                      title={
-                        item?.post_title.length > 50 ? item?.post_title : ""
-                      }
-                    >
-                      {item?.post_title.length > 50
-                        ? `${item?.post_title?.slice(0, 50)}...`
-                        : item?.post_title}
-                    </p>
+                    <div className="flex flex-col">
+                      <p
+                        data-te-toggle="tooltip"
+                        title={
+                          item?.post_title.length > 70 ? item?.post_title : ""
+                        }
+                      >
+                        {item?.post_title.length > 70
+                          ? `${item?.post_title?.slice(0, 0)}...`
+                          : item?.post_title}
+                      </p>
+                      <div className="flex items-center gap-2 mt-2 text-sm text-green-500">
+                        <p className="text-orange-500">Preview</p>
+                        <p>Details</p>
+                        <p className="text-violet-500">Edit</p>
+                        <p className="text-red-500">Delete</p>
+                      </div>
+                    </div>
                   </td>
 
                   <td className="px-6 py-4 whitespace-nowrap">
@@ -132,7 +148,7 @@ const MoviesDB = () => {
                   <td className="px-6 py-4 whitespace-nowrap">
                     {item?.release_date?.slice(0, 10)}
                   </td>
-
+                  {/* 
                   <td className="text-right px-6 whitespace-nowrap">
                     <a
                       href={`/admin/dashboard/details/${item?.id}`}
@@ -152,21 +168,20 @@ const MoviesDB = () => {
                     >
                       Delete
                     </button>
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
           )}
         </table>
 
-        {
-          (searchTerm === null && searchTerm === "") &&
+        {searchTerm === null && searchTerm === "" && (
           <Pagination
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             perPgaeMovie={perPgaeMovie}
           />
-        }
+        )}
       </div>
     </div>
   );

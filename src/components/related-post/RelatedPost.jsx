@@ -1,5 +1,6 @@
 import { useSuggessionMovieSeriesQuery } from "../../redux/features/search/searchApi";
-import CardRelatedPost from "./CardRelatedPost";
+import CardRelatedPost from "./CardRelatedPost"
+
 
 const RelatedPost = ({ id }) => {
   const { data: suggessions } = useSuggessionMovieSeriesQuery(id);
@@ -13,7 +14,7 @@ const RelatedPost = ({ id }) => {
 
         <div className="mt-[23px] grid grid-cols-2 lg:grid-cols-5 items-center gap-[18px] ">
           {suggessions?.data?.map((item, i) => (
-            <CardRelatedPost item={item} key={i} />
+            <CardRelatedPost item={item} key={i}/>
           ))}
         </div>
       </section>

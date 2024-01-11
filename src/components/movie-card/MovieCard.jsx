@@ -5,21 +5,48 @@ import { FaPlay } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 const MovieCard = ({ item, redirect }) => {
+  
   const [url, setUrl] = useState();
 
   useEffect(() => {
-    const encodedTitle = encodeURIComponent(item?.post_title);
-    const cleanedTitle = encodedTitle.replace(/%20/g, "-").toLowerCase();
-    setUrl(`${redirect}/${cleanedTitle}`);
+    const generateCleanedTitle = (title) => {
+      const cleanedTitle = title
+        .replace(/[^\w\s]|_/g, "")
+        .replace(/\s+/g, "-")       
+        .replace(/-+/g, "-")         
+        .replace(/:/g, "-")         
+        .replace(/(\d{1,2})a/g, "$1")
+        .toLowerCase();
+  
+      return cleanedTitle;
+    };
+  
+    if (item?.post_title) {
+      const cleanedTitle = generateCleanedTitle(item.post_title);
+      setUrl(`${redirect}/${cleanedTitle}`);
+    }
+  
   }, [redirect, item?.post_title]);
 
   return (
     <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] w-[180px] min-h-[100%] lg:w-[205px] lg:h-[460px] p-[1.5px] lg:p-[2px] rounded-[10px] relative playBtnCont">
-      
-      <Link to={url} className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative`}>
-        <img src={item?.poster_image_url} alt="" className="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg"/>
-        <p className="text-center text-[14px] text-white font-[700] p-2 font-alef"> {item?.post_title} </p>
-        <div className="playBtn"> <FaPlay className="text-[50px] text-white" /> </div>
+      <Link
+        to={url}
+        className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative`}
+      >
+        <img
+          src={item?.poster_image_url}
+          alt=""
+          className="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg"
+        />
+        <p className="text-center text-[14px] text-white font-[700] p-2 font-alef">
+          {" "}
+          {item?.post_title}{" "}
+        </p>
+        <div className="playBtn">
+          {" "}
+          <FaPlay className="text-[50px] text-white" />{" "}
+        </div>
       </Link>
 
       {item?.stickerLabel?.length > 0 && (

@@ -107,7 +107,8 @@ const MovieGallery = ({ movies }) => {
             </div>
 
             {
-              uploadedIds?.data?.includes(image.id.toString()) && <div className="absolute w-full h-full bg-black bg-opacity-[40%] top-0 left-0">
+              uploadedIds?.data?.includes(image.id.toString()) && <div className="absolute w-full h-full bg-black bg-opacity-[70%] top-0 left-0 border-4 
+              border-[#FFA113]">
                 <p className="text-white flex justify-end text-2xl p-4"><IoCheckmarkDoneCircleOutline />
             </p>
               </div>

@@ -127,7 +127,7 @@ const MovieDetails = () => {
           <div className=" max-w-[276px] lg:max-w-[399px] flex flex-col gap-3 mx-auto">
             {details?.download_links?.map((item, i) => (
               <DownloadButton key={i} url={item?.download_url}>
-                {item?.label} {item?.px_quality} {item?.pr_quality} {item?.file_size}
+                {item?.label} {item?.px_quality} {item?.file_size}
               </DownloadButton>
             ))}
           </div>

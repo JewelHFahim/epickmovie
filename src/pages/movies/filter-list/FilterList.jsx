@@ -15,7 +15,7 @@ const FilterList = () => {
     <section className="min-h-screen">
       <div className="mt-2 mb-[32px]">
         <h1 className="text-[12px] lg:text-[32px] font-[700] font-roboto text-white">
-          Search Results for: {filteredTerm}
+          Filter By: {filteredTerm}
         </h1>
       </div>
 
