@@ -141,7 +141,7 @@ const MovieDetails = () => {
       </section>
 
       {/* ===========>> RELETED POST <<=========== */}
-      <RelatedPost id={id} redirect={"/movie"}/>
+      <RelatedPost id={id} redirect={`/movie`}/>
 
     </div>
   );

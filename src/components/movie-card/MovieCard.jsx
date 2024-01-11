@@ -8,8 +8,9 @@ const MovieCard = ({ item, redirect }) => {
   const [url, setUrl] = useState();
 
   useEffect(() => {
-    const encodedTitle = encodeURIComponent(item?.post_title).toLowerCase();
-    setUrl(`${redirect}/${encodedTitle}`);
+    const encodedTitle = encodeURIComponent(item?.post_title);
+    const cleanedTitle = encodedTitle.replace(/%20/g, "-").toLowerCase();
+    setUrl(`${redirect}/${cleanedTitle}`);
   }, [redirect, item?.post_title]);
 
   return (

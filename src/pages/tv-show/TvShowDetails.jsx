@@ -10,6 +10,7 @@ import { useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 
 const TvShowDetails = () => {
   const { id } = useParams();
+  console.log(id)
   const { data: siteName } = useSiteNameUSerQuery();
 
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
@@ -217,7 +218,7 @@ const TvShowDetails = () => {
       </section>
 
       {/* ===========>> RELETED POST <<=========== */}
-      <RelatedPost id={id} redirect={"/series"} />
+      <RelatedPost id={id} redirect={`/series`} />
     </div>
   );
 };

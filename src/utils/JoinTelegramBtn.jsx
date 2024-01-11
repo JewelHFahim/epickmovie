@@ -3,7 +3,6 @@ import { useJoinTelegramUserQuery } from "../redux/features/settings/settingApi"
 
 const JoinTelegramBtn = () => {
   const { data: joinTelegram } = useJoinTelegramUserQuery();
-  console.log(joinTelegram);
 
   return (
     <div className="flex justify-center mt-[21px] lg:mt-[36px]">

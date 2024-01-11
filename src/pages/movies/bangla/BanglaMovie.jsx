@@ -7,12 +7,12 @@ import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 
 const BanglaMovie = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const { data: perPgaeMovie, isLoading } = usePerPageBengaliMovieListQuery(currentPage);
+  const { data: perPgaeMovie, isLoading } =
+    usePerPageBengaliMovieListQuery(currentPage);
   console.log(perPgaeMovie);
 
   return (
     <div className="min-h-screen">
-
       {/* ==================>> MOVIES <<==================*/}
       <div className="m-2">
         <Title>Bengali</Title>
@@ -27,13 +27,14 @@ const BanglaMovie = () => {
       ) : (
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
           {perPgaeMovie?.data?.data?.map((item) => (
-            <MovieCard key={item?.id} item={item} 
-
-            // redirect={`/movie/${item?.id}`}
-
-            redirect={ item?.post_type === "movies" ? `/movie/${item?.id}` : `/series/${item?.id}`}
-
-            
+            <MovieCard
+              key={item?.id}
+              item={item}
+              redirect={
+                item?.post_type === "movies"
+                  ? `/movie/${item?.id}`
+                  : `/series/${item?.id}`
+              }
             ></MovieCard>
           ))}
         </div>
