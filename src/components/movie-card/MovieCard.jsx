@@ -5,27 +5,25 @@ import { FaPlay } from "react-icons/fa";
 import { useEffect, useState } from "react";
 
 const MovieCard = ({ item, redirect }) => {
-  
   const [url, setUrl] = useState();
 
   useEffect(() => {
     const generateCleanedTitle = (title) => {
       const cleanedTitle = title
         .replace(/[^\w\s]|_/g, "")
-        .replace(/\s+/g, "-")       
-        .replace(/-+/g, "-")         
-        .replace(/:/g, "-")         
+        .replace(/\s+/g, "-")
+        .replace(/-+/g, "-")
+        .replace(/:/g, "-")
         .replace(/(\d{1,2})a/g, "$1")
         .toLowerCase();
-  
+
       return cleanedTitle;
     };
-  
+
     if (item?.post_title) {
       const cleanedTitle = generateCleanedTitle(item.post_title);
       setUrl(`${redirect}/${cleanedTitle}`);
     }
-  
   }, [redirect, item?.post_title]);
 
   return (
@@ -40,12 +38,10 @@ const MovieCard = ({ item, redirect }) => {
           className="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg"
         />
         <p className="text-center text-[14px] text-white font-[700] p-2 font-alef">
-          {" "}
-          {item?.post_title}{" "}
+          {item?.post_title}
         </p>
         <div className="playBtn">
-          {" "}
-          <FaPlay className="text-[50px] text-white" />{" "}
+          <FaPlay className="text-[50px] text-white" />
         </div>
       </Link>
 

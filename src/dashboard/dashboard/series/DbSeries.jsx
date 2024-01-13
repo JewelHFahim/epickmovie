@@ -93,9 +93,8 @@ const DbSeries = () => {
           <thead className="text-gray-600 font-medium border-b">
             <tr>
               <th className="py-3 px-6">Poster & Title</th>
-              <th className="py-3 px-6">Genre</th>
+              <th className="py-3 px-6">Type</th>
               <th className="py-3 px-6">Published</th>
-              <th className="text-center">Actions</th>
             </tr>
           </thead>
 
@@ -103,62 +102,37 @@ const DbSeries = () => {
             {results?.data?.map((item, idx) => (
               <tr key={idx} className="odd:bg-gray-50 even:bg-white">
                 <td className="px-6 py-4 font-medium flex items-center gap-x-2">
-                  <img
-                    src={item?.poster_image_url}
-                    alt=""
-                    className="w-[50px] h-[50px] rounded-full"
-                  />
+                  <img src={item?.poster_image_url} alt="" className="w-[50px] h-[70px] object-cover"/>
+                    <div className="flex flex-col">
+                      <p data-te-toggle="tooltip" title={ item?.post_title.length > 70 ? item?.post_title : ""}>
+                        {item?.post_title.length > 70 ? `${item?.post_title?.slice(0, 70)}...` : item?.post_title}
+                      </p>
 
-                  <p
-                    data-te-toggle="tooltip"
-                    title={item?.post_title.length > 50 ? item?.post_title : ""}
-                  >
-                    {item?.post_title.length > 50
-                      ? `${item?.post_title?.slice(0, 50)}...`
-                      : item?.post_title}
-                  </p>
+                      <div className="flex items-center gap-x-3 mt-2 text-xs text-green-500">
+                        <a href={`/series/${item?.id}/${item?.post_title}`} target="_blank" rel="noopener noreferrer" 
+                        className="text-orange-500">Preview</a>
+                        <a href={`/admin/dashboard/tvshow-details/${item?.id}`}>Details</a>
+                        <a href={`/admin/dashboard/update-tvShow/${item?.id}`} className="text-violet-500">Edit</a>
+                        <button onClick={() => handleDeleteSeason(item?.id)} className="text-red-500">Delete</button>
+                      </div>
+                    </div>
                 </td>
 
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item?.post_type}
                 </td>
+
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item?.release_date?.slice(0, 10)}
                 </td>
-                <td className="text-right px-6 whitespace-nowrap">
-                  <a
-                    href={`/admin/dashboard/tvshow-details/${item?.id}`}
-                    className="py-2 px-3 font-medium text-green-600 hover:text-green-500 duration-150 hover:bg-gray-50 rounded-lg"
-                  >
-                    Preview
-                  </a>
-                  <a
-                    href={`/admin/dashboard/update-tvShow/${item?.id}`}
-                    className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"
-                  >
-                    Edit
-                  </a>
-                  <button
-                    onClick={() => handleDeleteSeason(item?.id)}
-                    className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
-                  >
-                    Delete
-                  </button>
-                </td>
+
               </tr>
             ))}
           </tbody>
         </table>
 
-{
-  (searchTerm === null && searchTerm === "") &&
-  <Pagination
-  currentPage={currentPage}
-  setCurrentPage={setCurrentPage}
-  perPgaeMovie={perPgaeMovie}
-/>
-}
-       
+        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} perPgaeMovie={perPgaeMovie}/>
+
       </div>
     </div>
   );
