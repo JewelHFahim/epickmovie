@@ -234,6 +234,7 @@ const router = createBrowserRouter([
     path: "/admin/password-recovery/:string",
     element: <SetNewPass />,
   },
+
 ]);
 
 export default router;
