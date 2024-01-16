@@ -8,6 +8,8 @@ import RelatedPost from "../../../components/related-post/RelatedPost";
 import AdvertisementSection from "../../../components/advertisement/AdvertisementSection";
 import Breadcum from "../../../utils/breadcum/Breadcum";
 import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
+import UploadedDate from "../../../utils/uploaded-date/UploadedDate";
+import StaticContent from "../../../utils/Content/StaticContent";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -20,20 +22,11 @@ const MovieDetails = () => {
 
   console.log(details);
 
-  const currentDate = new Date();
-
-  const givenDate = new Date(details?.updated_at);
-
-  const timeDifference = currentDate.getTime() - givenDate.getTime();
-
-  const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-  
   document.title = `${siteName?.data} || ${details?.post_title}`;
 
 
   return (
     <div className="bg-[#27272A]">
-
 
       <Breadcum children1="Movies" children2={details?.post_title} redirect={"/movies"}/>
 
@@ -46,11 +39,7 @@ const MovieDetails = () => {
 
             <div className=" flex items-center gap-2 mt-2">
               <img src={calender} alt="" className="w-[12px] h-[12px]" />
-              <p className="text-[13px] text-white font-roboto">
-                {daysDifference === 0
-                  ? "Today Uploaded"
-                  : `${daysDifference} Days Ago`}
-              </p>
+              <UploadedDate details={details} ></UploadedDate>
             </div>
 
 
@@ -61,16 +50,7 @@ const MovieDetails = () => {
                 </p>
               </div>
             ) : (
-              <div className="mt-[11px] lg:mt-[19px] max-w-[745px]">
-                <p className="text-[13px] lg:text-[15px]  text-white font-roboto">
-                  <span className="font-[700]"> EpickMovies</span> Provide You
-                  With Super Quality Of Movies and
-                  <span className="font-[700]">WEB Series.</span> We Provide
-                  Google Drive Direct Download Links For Fast And Secure
-                  <span className="font-[700]">Download.</span> You Can Join us
-                  on Telegram For the Latest Updates.
-                </p>
-              </div>
+              <StaticContent/>
             )}
 
 
