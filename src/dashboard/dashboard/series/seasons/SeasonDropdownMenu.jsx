@@ -71,14 +71,9 @@ const SeasonDropdownMenu = () => {
           icon: <FaUsers />,
         },
     
-        {
-          href: "javascript:void(0)",
-          name: "Help",
-          icon: <GoQuestion />,
-        },
     
         {
-          href: "javascript:void(0)",
+          href: "",
           name: "Settings",
           icon: <IoSettingsOutline />,
         },

@@ -27,8 +27,6 @@ export const loginUser = createAsyncThunk(
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
-
         dispatch(setToken(data?.data?.token));
         const info = {
           token: data?.data?.token,
@@ -37,16 +35,13 @@ export const loginUser = createAsyncThunk(
         };
         localStorage.setItem("user-info", JSON.stringify(info));
 
-        data?.status === true
-          ? toast.success(data?.message)
-          : toast.error(data?.message);
+        data?.status === true ? toast.success(data?.message) : toast.error(data?.message);
 
         return data?.data?.token;
       } else {
         toast.error("Login Failed");
       }
     } catch (error) {
-      // console.error(error);
       toast.error("Login Failed");
       throw error;
     }

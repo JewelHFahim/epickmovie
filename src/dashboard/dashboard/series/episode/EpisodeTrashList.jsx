@@ -14,28 +14,42 @@ const EpisodeTrashList = () => {
     episodetrashList?.data !== "Empty list." ? episodetrashList?.data : [];
 
   const [restoreEpisode] = useRestoreEpisodeMutation();
-
   const [deleteEpisodeParmanet] = useDeleteEpisodeParmanetMutation();
   const [deleteAllEpisodeParmanet] = useDeleteAllEpisodeParmanetMutation();
 
   // ===============>> HANDLE SINGLE DELETE PARMANET <<================
   const handleDeleteSingle = (id) => {
-    deleteEpisodeParmanet(id);
-    toast.error("Deleted");
+    const shouldDelete = window.confirm("Are you sure want delete this Episode?");
+    if (shouldDelete) {
+      deleteEpisodeParmanet(id);
+      toast.error("Deleted");
+    } else {
+      console.log("Deletion cancle by user");
+    }
   };
 
   // =====================>> HANDLE RESTORE <<=========================
   const handleRestoreSeason = (id) => {
-    restoreEpisode(id);
-    console.log(id);
-    toast.success("Restored");
+    const shouldDelete = window.confirm("Are you sure want Restore?");
+    if (shouldDelete) {
+      restoreEpisode(id);
+      toast.success("Restored");
+    } else {
+      console.log("Restored cancle by user");
+    }
   };
-
+  
   // ==================>>  ALL DELETE PARMANET <<======================
   const handleDeleteAll = () => {
-    deleteAllEpisodeParmanet();
-    toast.success("Clear All");
+    const shouldDelete = window.confirm("Are you sure want delete All Episode?");
+    if (shouldDelete) {
+      deleteAllEpisodeParmanet();
+      toast.error("Deleted");
+    } else {
+      console.log("Deletion cancle by user");
+    }
   };
+  
 
   return (
     <div className="mx-auto bg-white border w-full h-full py-6 px-2">

@@ -10,6 +10,7 @@ import { useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 import UploadedDate from "../../utils/uploaded-date/UploadedDate";
 import StaticContent from "../../utils/Content/StaticContent";
 import DetailsPosterCard from "../../components/details-poster-card/DetailsPosterCard";
+import { Helmet } from "react-helmet";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -19,10 +20,18 @@ const TvShowDetails = () => {
   const details = seriesDetails?.data;
   console.log(details);
 
-  document.title = `${siteName?.data} || ${details?.post_title}`;
+  // document.title = `${siteName?.data} || ${details?.post_title}`;
 
   return (
     <div className="bg-[#27272A]">
+      
+        <Helmet>
+          <title> {`${siteName?.data} || ${details?.post_title} `}</title>
+          <meta name="description" content={details?.post_content} />
+          <meta name="keywords" content="tvshows" />
+        </Helmet>
+
+
       <Breadcum
         children1="TV Show"
         children2={details?.post_title}
@@ -30,7 +39,6 @@ const TvShowDetails = () => {
       />
 
       <section className=" p-2 lg:p-5 flex justify-between">
-
         {/* >>>>>>> Column One <<<<<<< */}
         <div className="w-full  lg:w-[70%]">
           <div>

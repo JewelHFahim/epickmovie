@@ -1,13 +1,36 @@
 /* eslint-disable react/prop-types */
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import Loading from "../utils/loading/Loading";
+import { useEffect, useRef } from "react";
 
 const PrivateRouter = ({ children }) => {
   const location = useLocation();
+  const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.user);
-  
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
+
+  const isMounted = useRef(true);
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (isMounted.current) {
+        localStorage.removeItem("user-info");
+        dispatch(userInfo?.token(null));
+      }
+    }, 24 * 60 * 60 * 1000);
+
+    return () => {
+      if (isMounted.current) {
+        clearTimeout();
+      }
+    };
+  }, [dispatch, userInfo]);
 
   if (isLoading) {
     return (

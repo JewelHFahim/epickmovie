@@ -2,11 +2,12 @@ import { useForm } from "react-hook-form";
 import { loginUser } from "../../../redux/features/users/userSlice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+import { useSiteLogoUserQuery } from "../../../redux/features/settings/settingApi";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { data: logo } = useSiteLogoUserQuery();
 
   const {
     handleSubmit,
@@ -25,27 +26,16 @@ const Login = () => {
       console.error("Error during login:", error);
     }
   };
-
-  // const handleReset = () => {
-  //   const resetShould = window.confirm("Are you sure want to reset password?");
-  //   if (resetShould) {
-  //     toast.success("Reset Password");
-  //     navigate(`/admin/reset-password`);
-  //   } else {
-  //     console.log("Reset cancled by user");
-  //   }
-  // };
+  
+  const inputFieldStyle =
+    "block w-full px-4 py-2 mt-2  placeholder-gray-500 bg-white border border-gray-500 rounded-lg focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300";
 
   return (
     <div className="w-screen h-screen flex justify-center items-center bg-white ">
       <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-xl border">
         <div className="px-6 py-4">
           <div className="flex justify-center mx-auto">
-            <img
-              className="w-auto h-7 sm:h-8"
-              src="https://epickmovies.online/wp-content/uploads/2023/12/cropped-EpickMovies-Favicone.png"
-              alt=""
-            />
+            <img className="w-auto h-7 sm:h-8" src={logo?.data} alt="" />
           </div>
 
           <h3 className="mt-3 text-xl font-medium text-center">Welcome Back</h3>
@@ -56,11 +46,15 @@ const Login = () => {
             <div className="w-full mt-4">
               <input
                 type="email"
-                {...register("email")}
+                {...register("email", { required: true })}
                 placeholder="Email Address"
-                aria-label="Email Address"
-                className="block w-full px-4 py-2 mt-2  placeholder-gray-500 bg-white border border-gray-500 rounded-lg focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+                className={inputFieldStyle}
               />
+              {errors.email && (
+                <p role="alert" className="text-sm text-red-400">
+                  Email Required
+                </p>
+              )}
             </div>
 
             <div className="w-full mt-4">
@@ -71,12 +65,11 @@ const Login = () => {
                   minLength: 8,
                 })}
                 placeholder="Password"
-                aria-label="Password"
-                className="block w-full px-4 py-2 mt-2  placeholder-gray-500 bg-white border border-gray-500 rounded-lg focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300"
+                className={inputFieldStyle}
               />
               {errors.password && (
                 <p role="alert" className="text-sm text-red-400">
-                  minimum length 8 char
+                  Minimum length 8 char
                 </p>
               )}
             </div>

@@ -56,7 +56,7 @@ import { Link } from 'react-router-dom'
 
                     <div className="flex justify-between items-center p-2 border-b-[.5px] border-[#2D2C2C]">
 
-                        <a href="javascript:void(0)" className="text-[14px] font-[600] font-inter text-[#BDBBBB]"> MENU </a>
+                        <a href="" className="text-[14px] font-[600] font-inter text-[#BDBBBB]"> MENU </a>
 
                         <div className="md:hidden">
                             <button onClick={() => setState(!state)} className='flex justify-center items-center'>

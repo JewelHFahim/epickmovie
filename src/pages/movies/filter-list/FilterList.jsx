@@ -28,8 +28,7 @@ const FilterList = () => {
             <MovieCard
               key={item?.id}
               item={item}
-              redirect={ item?.post_type === "movies" ? `/movie/${item?.id}` : `/series/${item?.id}`
-              }
+              redirect={ item?.post_type === "movies" ? `/movie/${item?.id}` : `/series/${item?.id}` }
             ></MovieCard>
           ))}
         </div>

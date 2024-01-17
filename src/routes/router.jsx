@@ -18,7 +18,6 @@ import AdminTvShowDetails from "../dashboard/dashboard/series/series/AdminTvShow
 import AddSeries from "../dashboard/dashboard/series/series/AddSeries";
 import UpdateTvShow from "../dashboard/dashboard/series/series/UpdateTvShow";
 import AddSeasons from "../dashboard/dashboard/series/seasons/AddSeason";
-import AddEpisode from "../dashboard/dashboard/series/episode/AddEpisode";
 import { clientRoutes } from "./clientRoutes";
 import TrashList from "../dashboard/trash/trash/TrashList";
 import SeasonTrash from "../dashboard/dashboard/series/seasons/SeasonTrash";
@@ -195,11 +194,6 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard/episode-trash",
         element: <EpisodeTrashList />,
-      },
-
-      {
-        path: "/admin/dashboard/add-episode",
-        element: <AddEpisode />,
       },
 
       {

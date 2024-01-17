@@ -5,14 +5,21 @@ import Pagination from "../../components/pagination/Pagination";
 import Title from "../../utils/Title";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
+import { Helmet } from "react-helmet";
+import { useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 
 const TvShow = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data: perPgaeMovie, isLoading } = usePerPgaeTvShowQuery(currentPage);
-  console.log(perPgaeMovie);
+  const { data: siteName } = useSiteNameUSerQuery();
 
   return (
     <div className="min-h-screen flex flex-col items-center">
+
+        <Helmet>
+          <title>{siteName?.data}</title>
+          <meta name="description" content="Unlimited Tv Shows and Latest Collections" />
+        </Helmet>
 
       {/* ==================>> Domains <<=================*/}
       <DomainList />

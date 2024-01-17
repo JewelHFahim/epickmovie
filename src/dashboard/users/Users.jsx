@@ -7,21 +7,15 @@ const Users = () => {
 
   return (
     <div className=" mx-auto p-10">
+      
       <div className="items-start justify-between md:flex">
         <div className="max-w-lg">
-          <h3 className="text-gray-800 text-xl font-bold sm:text-2xl">
-            Members
-          </h3>
+          <h3 className="text-gray-800 text-xl font-bold sm:text-2xl"> Members </h3>
         </div>
 
         {userInfo?.user_type === 1 && (
           <div className="mt-3 md:mt-0">
-            <a
-              href="/admin/dashboard/register"
-              className="inline-block px-4 py-2 text-white duration-150 font-medium bg-indigo-600 rounded-lg hover:bg-indigo-500 active:bg-indigo-700 md:text-sm"
-            >
-              Add member
-            </a>
+            <a href="/admin/dashboard/register" className="text-blue-600 hover:text-blue-700 font-medium"> +Add member </a>
           </div>
         )}
       </div>
@@ -36,13 +30,12 @@ const Users = () => {
               <th className="py-3 px-6 text-center"></th>
             </tr>
           </thead>
+
           <tbody className="text-gray-600 divide-y">
             {userList?.data?.map((item, idx) => (
               <tr key={idx}>
                 <td className="flex items-center gap-x-3 py-3 px-6 whitespace-nowrap">
-                  <div className="w-10 h-10 rounded-full bg-slate-200">
-                    {/* <img src={item.avatar} className="w-10 h-10 rounded-full" /> */}
-                  </div>
+                  <div className="w-10 h-10 rounded-full bg-slate-200"></div>
 
                   <div>
                     <span className="block text-gray-700 text-sm font-medium">

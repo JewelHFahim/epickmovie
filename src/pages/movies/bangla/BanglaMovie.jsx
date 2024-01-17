@@ -4,15 +4,24 @@ import Pagination from "../../../components/pagination/Pagination";
 import { usePerPageBengaliMovieListQuery } from "../../../redux/features/movies/movieApi";
 import Title from "../../../utils/Title";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
+import { Helmet } from "react-helmet";
+import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
 
 const BanglaMovie = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data: perPgaeMovie, isLoading } =
     usePerPageBengaliMovieListQuery(currentPage);
-  console.log(perPgaeMovie);
+    const { data: siteName } = useSiteNameUSerQuery();
+
 
   return (
     <div className="min-h-screen">
+
+        <Helmet>
+          <title>{siteName?.data}</title>
+          <meta name="description" content="Unlimited Bangla Movies and Latest Collections" />
+        </Helmet>
+
       {/* ==================>> MOVIES <<==================*/}
       <div className="m-2">
         <Title>Bengali</Title>

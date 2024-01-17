@@ -5,15 +5,22 @@ import Pagination from "../../../components/pagination/Pagination";
 import { usePerPgaeMovieQuery } from "../../../redux/features/movies/movieApi";
 import Title from "../../../utils/Title";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
+import { Helmet } from "react-helmet";
+import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
 
 
 const Movies = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
-  console.log(perPgaeMovie);
+  const { data: siteName } = useSiteNameUSerQuery();
 
   return (
     <div className="flex flex-col justify-center items-center">
+
+        <Helmet>
+          <title>{siteName?.data}</title>
+          <meta name="description" content="Unlimited Movies and Latest Collections" />
+        </Helmet>
       
       {/* ==================>> Domains <<=================*/}
       <DomainList />

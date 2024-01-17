@@ -1,13 +1,47 @@
+import { useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
-import router from "./routes/router";
 import { Toaster } from "react-hot-toast";
+import { HelmetProvider, Helmet } from "react-helmet-async";
+import router from "./routes/router";
+import { useSiteNameUSerQuery } from "./redux/features/settings/settingApi";
+import { base_url, userHeader } from "./config/config";
 
 const App = () => {
+  const { data: siteName } = useSiteNameUSerQuery();
+
+// Dynamic Favicon Icon Set
+  useEffect(() => {
+    const fetchFavicon = async () => {
+      try {
+        const response = await fetch(`${base_url}/get-config-value/fav_icon`, {
+          headers: userHeader,
+        });
+
+        const data = await response.json();
+        const faviconLink = document.getElementById("dynamic-favicon");
+        faviconLink.href = data?.data || "/default-favicon.ico";
+      } catch (error) {
+        console.error("Error fetching favicon:", error);
+      }
+    };
+
+    fetchFavicon();
+
+    // No need to clean up, as this effect runs once on mount
+  }, []);
+
   return (
-    <div className=" bg-[#27272A] lg:bg-[#18181a] ">
-      <RouterProvider router={router} />
-      <Toaster/>
-    </div>
+    <HelmetProvider>
+      <div className=" bg-[#27272A] lg:bg-[#18181a]">
+        <Helmet>
+          <title>{siteName?.data}</title>
+          <meta name="description" content="entertainment unlimited" />
+        </Helmet>
+
+        <RouterProvider router={router} />
+        <Toaster />
+      </div>
+    </HelmetProvider>
   );
 };
 
