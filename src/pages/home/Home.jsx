@@ -9,7 +9,7 @@ import { collectFilteredItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
-// import { Helmet } from "react-helmet";
+import { Helmet } from "react-helmet";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -26,18 +26,14 @@ const Home = () => {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">
 
-      {/* <Helmet>
-        <title>My Title</title>
-      </Helmet> */}
+      <Helmet>
+        <title>EpicMovies</title>
+      </Helmet>
 
       {/* ==================>> Quick Menus <<================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {quickMenu?.data?.map((menu, i) => (
-          <Link
-            key={i}
-            to="/filter-list"
-            onClick={() => handleQuickMenuNavigation(menu?.slug)}
-          >
+          <Link key={i} to="/filter-list" onClick={() => handleQuickMenuNavigation(menu?.slug)}>
             <SubMenuButton>{menu.name}</SubMenuButton>
           </Link>
         ))}
@@ -54,13 +50,9 @@ const Home = () => {
       {movieLoading ? (
         <LazyLoading />
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
           {movieList?.data?.data?.slice(0, 10)?.map((item) => (
-            <MovieCard
-              key={item?.id}
-              item={item}
-              redirect={`/movie/${item?.id}`}
-            ></MovieCard>
+            <MovieCard key={item?.id} item={item} redirect={`/movie/${item?.id}`}></MovieCard>
           ))}
         </div>
       )}
@@ -73,16 +65,13 @@ const Home = () => {
       {tvShowLoading ? (
         <LazyLoading />
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
           {tvShowList?.data?.data?.slice(0, 10)?.map((item) => (
-            <MovieCard
-              key={item?.id}
-              item={item}
-              redirect={`/series/${item?.id}`}
-            ></MovieCard>
+            <MovieCard key={item?.id} item={item} redirect={`/series/${item?.id}`}></MovieCard>
           ))}
         </div>
       )}
+
     </section>
   );
 };

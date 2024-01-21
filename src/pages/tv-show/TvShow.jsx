@@ -30,7 +30,7 @@ const TvShow = () => {
       {isLoading ? (
         <LazyLoading />
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] md:gap-auto my-[18px]">
           {perPgaeMovie?.data?.data?.map((item) => (
             <MovieCard key={item?.id} item={item} redirect={`/series/${item?.id}`}></MovieCard>
           ))}

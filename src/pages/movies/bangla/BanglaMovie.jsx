@@ -27,6 +27,7 @@ const BanglaMovie = () => {
         <Title>Bengali</Title>
       </div>
 
+      <div className="flex justify-center items-center">
       {perPgaeMovie?.status === false ? (
         <div className="w-full flex justify-center my-5">
           <p className="text-[35px] text-white font-medium">No Data Found</p>
@@ -34,20 +35,13 @@ const BanglaMovie = () => {
       ) : isLoading ? (
         <LazyLoading />
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] md:gap-auto my-[18px]">
           {perPgaeMovie?.data?.data?.map((item) => (
-            <MovieCard
-              key={item?.id}
-              item={item}
-              redirect={
-                item?.post_type === "movies"
-                  ? `/movie/${item?.id}`
-                  : `/series/${item?.id}`
-              }
-            ></MovieCard>
+            <MovieCard key={item?.id} item={item} redirect={ item?.post_type === "movies" ? `/movie/${item?.id}` : `/series/${item?.id}`}></MovieCard>
           ))}
         </div>
       )}
+      </div>
 
       <Pagination
         currentPage={currentPage}

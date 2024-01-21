@@ -1,17 +1,23 @@
 import { useEffect, useState } from 'react'
 import { IoClose } from 'react-icons/io5'
 import menuIcon from "../../assets/menu icon.svg"
-import movieIcon from "../../assets/movieIcon.svg"
 import homeIcon from "../../assets/homeIcon.svg"
-import webIcon from "../../assets/www.svg"
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { useGenreListQuery, useGetAudioListQuery, usePixelQualityClientQuery, usePrintQualityClientQuery, useYearListQuery } from '../../redux/features/movies/movieApi'
 import { collectFilteredItem } from '../../redux/features/search/searchSlice'
 import { useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { IoMdHome } from "react-icons/io";
+import { MdOutlineMovieFilter } from "react-icons/md";
+import { RiListIndefinite } from "react-icons/ri";
+import { FaCalendarAlt } from "react-icons/fa";
+import { MdOutlineHighQuality } from "react-icons/md";
+import { FaGlobe } from "react-icons/fa6";
+
 
 
  const MobileMenu = () => {
+
     const dispatch = useDispatch();
     const { data: pixelQualityList } = usePixelQualityClientQuery();
     const { data: printQualityList } = usePrintQualityClientQuery();
@@ -27,11 +33,13 @@ import { Link } from 'react-router-dom'
     const [drapdownState, setDrapdownState] = useState({ isActive: false, idx: null })
 
     const navigation = [
-        { title: "Movies", path: "", isDrapdown: true, navs: audiList?.data },
-        { title: "GENRE", path: "", isDrapdown: true, navs: genreList?.data },
-        { title: "YEAR", path: "", isDrapdown: true, navs: yearList?.data },
-        { title: "QUALITY", path: "", isDrapdown: true, navs: combinedQuality },
-        { title: "Home", path: "/", isDrapdown: false},
+        { title: "Home", path: "/", isDrapdown: false, icon: <IoMdHome />},
+        { title: "Movies", path: "", isDrapdown: true, navs: audiList?.data, icon: <MdOutlineMovieFilter />},
+        { title: "GENRE", path: "", isDrapdown: true, navs: genreList?.data, icon: <RiListIndefinite />},
+        { title: "YEAR", path: "", isDrapdown: true, navs: yearList?.data, icon: <FaCalendarAlt />},
+        { title: "QUALITY", path: "", isDrapdown: true, navs: combinedQuality, icon: <MdOutlineHighQuality />},
+        { title: "Home", path: "/", isDrapdown: false, icon: <FaGlobe />
+    },
     ]
 
     useEffect(() => {
@@ -52,14 +60,11 @@ import { Link } from 'react-router-dom'
             <nav className={`mt-[15px] relative z-20 bg-white w-full md:static md:text-sm md:border-none 
             ${state ? "shadow-lg rounded-b-xl md:shadow-none" : ""}`}>
 
-                <div className="items-center gap-x-14 px- max-w-screen-xl mx-auto md:flex md:px-8 bg-[#464646]">
+                <div className="items-center gap-x-14 max-w-screen-xl mx-auto md:flex md:px-8 bg-[#464646]">
 
-                    <div className="flex justify-between items-center p-2 border-b-[.5px] border-[#2D2C2C]">
-
-                        <a href="" className="text-[14px] font-[600] font-inter text-[#BDBBBB]"> MENU </a>
-
-                        <div className="md:hidden">
-                            <button onClick={() => setState(!state)} className='flex justify-center items-center'>
+                    <div  className={`flex justify-between items-center p-2 border-b-[.5px] border-[#2D2C2C] ${state && "hidden"}`}>
+                        <div onClick={() => setState(!state)} className="lg:hidden">
+                            <button  className='flex justify-center items-center'>
                                 {
                                     state ? (
                                         <IoClose className='text-[20px] text-[#BDBBBB]'/>
@@ -86,10 +91,10 @@ import { Link } from 'react-router-dom'
                                                     <button className="w-full h-[46px] flex items-center justify-between text-white text-[14px] font-inter font-[600] border-b-[.5px] border-[#2D2C2C]"
                                                         onClick={() => setDrapdownState({ idx, isActive: !drapdownState.isActive })}
                                                     >
-                                                        <span className='ml-2 flex items-center gap-3 border-r border-[#2D2C2C] w-[93%] h-full text-[14px] font-[600] font-inter'> 
-                                                        <img src={movieIcon} alt="" className='w-[26px] h-[20px]'/>
-                                                         {item.title}
-                                                         </span>
+                                                        <div className='ml-2 flex items-center gap-3 border-r border-[#2D2C2C] w-[93%] h-full text-[14px] font-[600] font-inter'> 
+                                                        <p className='text-[28px]'>{item?.icon}</p>
+                                                         <p>{item.title}</p>
+                                                         </div>
 
                                                         {
                                                             drapdownState.idx == idx && drapdownState.isActive ? (
@@ -101,7 +106,7 @@ import { Link } from 'react-router-dom'
                                                     </button>
                                                 ) : (
                                                     <a href={item.path} className="flex items-center gap-2 p-2 text-[18px] font-inter font-[600] text-white">
-                                                        <img src={webIcon} alt="" className='w-[22px] h-[22px]'/>
+                                                        <p className='text-[25px]'>{item?.icon}</p>
                                                         {item.title}
                                                     </a>
                                                 )
@@ -136,7 +141,8 @@ import { Link } from 'react-router-dom'
                 state ? (
                     <div
                         className="z-10 fixed top-0 w-screen h-screen bg-black/20 backdrop-blur-sm md:hidden"
-                        onClick={() => setState(false)}></div>
+                        onClick={() => setState(false)} 
+                        ></div>
                 ) : ""
             }
         </>

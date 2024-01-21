@@ -12,7 +12,7 @@ const FilterList = () => {
     useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
 
   return (
-    <section className="min-h-screen">
+    <section className="min-h-screen ">
       <div className="mt-2 mb-[32px]">
         <h1 className="text-[12px] lg:text-[32px] font-[700] font-roboto text-white">
           Filter By: {filteredTerm}
@@ -20,19 +20,17 @@ const FilterList = () => {
       </div>
 
       {/* ===========>> Filter Results <<===========*/}
+      <div className="flex justify-center items-center">
       {isLoading ? (
         <LazyLoading />
       ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
+        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[30px] my-[18px]">
           {filteredResults?.data?.data?.map((item) => (
-            <MovieCard
-              key={item?.id}
-              item={item}
-              redirect={ item?.post_type === "movies" ? `/movie/${item?.id}` : `/series/${item?.id}` }
-            ></MovieCard>
+            <MovieCard key={item?.id} item={item} redirect={ item?.post_type === "movies" ? `/movie/${item?.id}` : `/series/${item?.id}` }></MovieCard>
           ))}
         </div>
       )}
+      </div>
 
       <Pagination
         currentPage={currentPage}
