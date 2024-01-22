@@ -5,8 +5,7 @@ const ScriptUploader = () => {
     const {handleSubmit, register, reset} = useForm();
 
 
-    const onSubmit = (data) => {
-        console.log(data);
+    const onSubmit = () => {
         toast.success("Script Posted");
         reset();
     }

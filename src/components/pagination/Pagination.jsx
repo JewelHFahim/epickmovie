@@ -11,7 +11,6 @@ const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
   // Function to handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
-    console.log(page);
   };
 
   // Function to generate page numbers

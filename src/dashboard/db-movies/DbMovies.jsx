@@ -39,20 +39,17 @@ const DbMovies = () => {
 
   // ===================>> BULK MOVIE IMPORT <<====================
   const handleBulkImport = () => {
-    const res = dispatch(bulkMovieImport({ tmdb_ids: bulkData }));
-    console.log(res);
+   dispatch(bulkMovieImport({ tmdb_ids: bulkData }));
   };
 
   // ===================>> BULK TV SHOW IMPORT <<==================
   const handleBulkTvShowImport = async () => {
-    const res = dispatch(bulkTvShowImport({ tmdb_ids: bulkTvData }));
-    console.log(res);
+    dispatch(bulkTvShowImport({ tmdb_ids: bulkTvData }));
   };
 
   const [searchParams, setSearchParams] = useState("");
   const handleSearch = (event) => {
     setSearchParams(event.target.value);
-    console.log(event.target.value);
     dispatch(getSearchMovieSeries(event.target.value));
   };
 

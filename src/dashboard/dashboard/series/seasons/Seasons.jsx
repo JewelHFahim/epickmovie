@@ -1,11 +1,8 @@
 import { FiTrash } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { useAdminTvShowListQuery } from "../../../../redux/features/tv-show/tvShowApi";
 
 const Seasons = () => {
 
-  const {data: allTvShow} = useAdminTvShowListQuery();
-  console.log(allTvShow)
 
 
   return (

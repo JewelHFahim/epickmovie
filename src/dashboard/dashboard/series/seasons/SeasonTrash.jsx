@@ -26,7 +26,6 @@ const SeasonTrash = () => {
   // =====================>> HANDLE RESTORE <<=========================
   const handleRestoreSeason = (id) => {
     restoreSeason(id);
-    console.log(id);
     toast.success("Restored");
   };
 

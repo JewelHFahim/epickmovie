@@ -37,20 +37,15 @@ const Nav = () => {
     columns.push(genreList?.data?.slice(i, i + itemsPerColumn));
   }
 
-  // const [page, setPage] = useState(1);
   const handleGenre = (data) => {
-    console.log({ data });
     dispatch(collectFilteredItem(data));
-    // dispatch(setPageNo(page));
   };
 
   const handleYear = (year) => {
-    console.log(year);
     dispatch(collectFilteredItem(year));
   };
 
   const handleQuality = (quality) => {
-    console.log(quality);
     dispatch(collectFilteredItem(quality));
   };
 
@@ -64,7 +59,7 @@ const Nav = () => {
           </a>
         </li>
 
-        {/* =========>> MOVIE <<========== */}
+        {/* =========>> MOVIE <<=========== */}
         <li className="main-menu">
           <a href="/movies" className=" flex items-center gap-2">
             <BiMovie className="w-[25px] h-[25px]" />
@@ -72,7 +67,7 @@ const Nav = () => {
           </a>
         </li>
 
-        {/* =========>> GENRE <<========== */}
+        {/* =========>> GENRE <<=========== */}
         <li className="main-menu">
           <a href="#" className=" flex items-center gap-2">
             <img src={link} alt="" className="w-[23px] h-[23px]" /> Genre
@@ -88,7 +83,7 @@ const Nav = () => {
           </ul>
         </li>
 
-        {/* =========>> YEAR <<========== */}
+        {/* ==========>> YEAR <<=========== */}
         <li className="main-menu">
           <a href="#" className=" flex items-center gap-2">
             <img src={calender} alt="" className="w-[21px] h-[20px]" /> Year
@@ -105,7 +100,7 @@ const Nav = () => {
           </ul>
         </li>
 
-        {/* =========>> QUALITY <<========== */}
+        {/* =========>> QUALITY <<========= */}
         <li className="main-menu">
           <a href="#" className=" flex items-center gap-2">
             <img src={quality} alt="" className="w-[21px] h-[21px]" /> Quality
@@ -134,12 +129,7 @@ const Nav = () => {
         </li>
 
         <li className="main-menu">
-          <a
-            href={joinTelegram?.data}
-            className="flex items-center gap-2"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+          <a href={joinTelegram?.data} className="flex items-center gap-2" target="_blank" rel="noopener noreferrer">
             <img src={telegram} alt="" className="w-[20px] h-[20px]" />
             Join Telegram
           </a>

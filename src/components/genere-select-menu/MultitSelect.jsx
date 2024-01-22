@@ -33,7 +33,6 @@ const MultiSelectMenu = () => {
   const handleSubmit = () => {
    const selected =  selectedOptions?.map((option) => option.value);
    createMenu({term_ids: selected})
-   console.log({term_ids: selected});
    toast.success("Created")
   };
 

@@ -8,7 +8,6 @@ const AdminMovieDetails = () => {
   const { id } = useParams();
   const { data: movieDetails, isLoading } = useAdminMovieDetailsQuery(id);
   const details = movieDetails?.data;
-  console.log(details);
 
   const inputStyle ="py-1 focus:outline-blue-500 border px-4 placeholder:text-sm border bg-white";
 

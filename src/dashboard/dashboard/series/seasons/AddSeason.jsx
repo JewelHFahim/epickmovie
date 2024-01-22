@@ -17,8 +17,7 @@ const AddSeasons = () => {
 
   const onSubmit = (abc) => {
     const data = { season_no: parseInt(abc.season_no) };
-    const res = addSeason({ data, id });
-    console.log(res);
+    addSeason({ data, id });
     reset();
     toast.success("Season Added");
     navigate(`/admin/dashboard/tvshow-details/${id}`)

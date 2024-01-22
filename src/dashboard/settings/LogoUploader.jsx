@@ -29,7 +29,6 @@ const LogoUploader = () => {
           throw new Error("Network response was not ok.");
         })
         .then((data) => {
-          console.log("File uploaded:", data);
           toast.success("Logo Uploaded");
           setSelectedFile("");
         })

@@ -10,25 +10,39 @@ const PrivateRouter = ({ children }) => {
   const { isLoading } = useSelector((state) => state.user);
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
 
-  const isMounted = useRef(true);
-  useEffect(() => {
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
+  // const isMounted = useRef(true);
+
+  // useEffect(() => {
+  //   return () => {
+  //     isMounted.current = false;
+  //   };
+  // }, []);
+
+  // useEffect(() => {
+  // const timeoutId =  setTimeout(() => {
+  //     if (isMounted.current) {
+  //       localStorage.removeItem("user-info");
+  //       dispatch(userInfo?.token(null));
+  //     }
+
+  //   }, 1 * 1000);
+
+  //   return () => {
+  //     if (isMounted.current) {
+  //       clearTimeout(timeoutId);
+  //     }
+  //   };
+  // }, [dispatch, userInfo]);
 
   useEffect(() => {
-    setTimeout(() => {
-      if (isMounted.current) {
+    const timeoutId = setTimeout(() => {
         localStorage.removeItem("user-info");
         dispatch(userInfo?.token(null));
-      }
+      
     }, 24 * 60 * 60 * 1000);
 
     return () => {
-      if (isMounted.current) {
-        clearTimeout();
-      }
+        clearTimeout(timeoutId);
     };
   }, [dispatch, userInfo]);
 

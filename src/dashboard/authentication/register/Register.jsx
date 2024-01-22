@@ -27,8 +27,6 @@ const Register = () => {
       role_type: parseInt(data.user_role),
     };
 
-    console.log(userData);
-
     dispatch(registerUser(userData));
     navigate("/admin/dashboard/users");
   };

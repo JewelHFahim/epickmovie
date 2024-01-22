@@ -14,10 +14,8 @@ const PrintQuality = () => {
       const [deleteTerms] = useDeleteTermsMutation();
 
 
-      console.log(printQualityList)
 
     const onSubmitPrint = (data) => {
-        console.log(data);
         createPrintQuality(data);
         toast.success("Create Quality");
         reset();

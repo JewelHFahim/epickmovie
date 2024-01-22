@@ -3,7 +3,6 @@ import { useUserListQuery } from "../../redux/features/users/userApi";
 const Users = () => {
   const { data: userList } = useUserListQuery();
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
-  console.log(userInfo?.user_type);
 
   return (
     <div className=" mx-auto p-10">

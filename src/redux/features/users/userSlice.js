@@ -64,8 +64,6 @@ export const registerUser = createAsyncThunk(
 
       if (res.ok) {
         const registerRes = await res.json();
-        console.log(registerRes);
-
         dispatch(setMessage(registerRes?.message));
         toast.success(`${registerRes?.message}`);
       } else {
@@ -94,7 +92,6 @@ export const logoutUser = createAsyncThunk(
       if (res.ok) {
         const logOut = await res.json();
         dispatch(setMessage(logOut?.message));
-        // console.log(logOut);
         toast.success(`${logOut?.message}`);
       } else {
         return toast.error("Logout Failed");
@@ -132,8 +129,6 @@ export const resetPassword = createAsyncThunk("resetPassword", async (body) => {
 export const setPassword = createAsyncThunk(
   "resetPassword",
   async ({ body, token }, { dispatch }) => {
-    console.log(body);
-    console.log(token);
     try {
       const res = await fetch(`${base_url}/admin/password-set/${token}`, {
         method: "POST",
@@ -145,7 +140,6 @@ export const setPassword = createAsyncThunk(
 
       if (res.ok) {
         const data = await res.json();
-        console.log(data);
         dispatch(setStatus(data?.data?.staus));
         toast.success(`${data?.message}`);
       } else {

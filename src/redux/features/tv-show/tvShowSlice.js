@@ -65,7 +65,6 @@ export const bulkTvShowImport = createAsyncThunk("tvShows/bulkTvShowsImport", as
       // Extract the data from the response
       const data = await response.json();
 
-      console.log("Data after posting data:", data?.message);
       dispatch(setMessage(data?.message));
       toast.success(data?.message);
       dispatch(setLoadingST(false));

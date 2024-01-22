@@ -11,7 +11,6 @@ import {
 
 const AddGenre = () => {
   const { data: genreList, isLoading } = useAdminGenreListQuery();
-  console.log(genreList);
   const [createGenre] = useCreateGenreMutation();
   const [deleteTerms] = useDeleteTermsMutation();
 
@@ -23,7 +22,6 @@ const AddGenre = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     createGenre(data);
     toast.success("Create Genre");
     reset();

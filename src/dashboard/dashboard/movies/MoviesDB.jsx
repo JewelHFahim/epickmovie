@@ -30,7 +30,6 @@ const MoviesDB = () => {
     if (shouldDelete) {
       deleteMovie(id);
       toast.error("Deleted");
-      console.log(id);
     } else {
       console.log("Deletion canceled by user");
     }
@@ -42,8 +41,7 @@ const MoviesDB = () => {
   };
 
   const onSubmit = () => {
-    const res = dispatch(collectSearchItem(search));
-    console.log(res);
+    dispatch(collectSearchItem(search));
   };
 
   const results =
@@ -51,7 +49,6 @@ const MoviesDB = () => {
       ? searchResults
       : perPgaeMovie?.data;
 
-  console.log(results);
 
   return (
     <div className="mx-auto bg-white border w-full h-full p-6">

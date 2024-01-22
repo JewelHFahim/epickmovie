@@ -5,7 +5,6 @@ import { collectSearchItem } from "../../redux/features/search/searchSlice";
 import { useSiteLogoUserQuery, useSiteNameUSerQuery} from "../../redux/features/settings/settingApi";
 import { IoSearch } from "react-icons/io5";
 
-
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -19,7 +18,6 @@ const Header = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Searching for:", searchTermState);
     const res = dispatch(collectSearchItem(searchTermState));
     if (res !== null) {
       return navigate("/search-list");

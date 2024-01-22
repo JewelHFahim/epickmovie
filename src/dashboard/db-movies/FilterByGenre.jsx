@@ -18,7 +18,6 @@ const FilterByGenre = ({ selectedGenreId, selectedSort }) => {
       .then((data) => setFilterByGenre(data));
   }, [URL]);
 
-  console.log(filterByGenre);
 
   return (
     <div className="p-10">

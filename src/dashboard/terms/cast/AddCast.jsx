@@ -6,7 +6,6 @@ import { FaTrashAlt } from "react-icons/fa";
 const AddCast = () => {
   
   const { data: genreList, isLoading } = useGenreListQuery();
-  console.log(genreList);
 
   return (
     <div className="flex w-full">

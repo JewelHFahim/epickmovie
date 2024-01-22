@@ -19,7 +19,6 @@ const AddAudio = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     createAudio(data);
     toast.success("Create Audio");
     reset();

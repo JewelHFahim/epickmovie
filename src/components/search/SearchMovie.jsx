@@ -10,8 +10,6 @@ const SearchMovie = () => {
   const navigate= useNavigate();
 
   const onSubmit = (data) => {
-    console.log(data?.search);
-    //   setFiltredData(data);
    const res =  dispatch(getSearchMovieSeries(data?.search));
     if(res !== null){
       return navigate("/admin/dashboard/help")

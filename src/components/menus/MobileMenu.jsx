@@ -50,7 +50,6 @@ import { FaGlobe } from "react-icons/fa6";
     }, [])
 
     const handleTerms = (data, ) => {
-        console.log({ data });
         dispatch(collectFilteredItem(data));
         setState(false);
       };

@@ -6,7 +6,6 @@ import Loading from "../../../utils/loading/Loading";
 const AddNetworks = () => {
   
   const { data: genreList, isLoading } = useGenreListQuery();
-  console.log(genreList);
 
   return (
     <div className="flex w-full">

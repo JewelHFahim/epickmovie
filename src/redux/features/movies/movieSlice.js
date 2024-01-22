@@ -15,7 +15,6 @@ export const singleMovieImport = createAsyncThunk(
   "movies/singleMovieImport",
   async (body, { dispatch }) => {
     dispatch(setLoadingST(true));
-    console.log(body);
     try {
       const response = await fetch(`${base_url}/admin/movie-import`, {
         method: "POST",
@@ -29,7 +28,6 @@ export const singleMovieImport = createAsyncThunk(
       }
 
       const data = await response.json();
-      console.log(data);
 
       dispatch(setMessage(data?.message));
       dispatch(setStatus(data?.status));

@@ -19,7 +19,6 @@ const AddEpisodeModal = ({id}) => {
 
   const onSubmit = (data) => {
       addEpisode({  data, id: parseInt(id) });
-      console.log({ data, id: parseInt(id) });
     toast.success("Added Episode");
     reset();
   };

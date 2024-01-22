@@ -6,7 +6,6 @@ import Loading from "../../../utils/loading/Loading";
 const AddCreator = () => {
   
   const { data: genreList, isLoading } = useGenreListQuery();
-  console.log(genreList);
 
   return (
     <div className="flex w-full">

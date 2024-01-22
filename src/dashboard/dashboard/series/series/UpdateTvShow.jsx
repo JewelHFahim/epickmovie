@@ -14,7 +14,6 @@ const UpdateTvShow = () => {
   const [updateMovie] = useUpdateMovieMutation();
 
   const onSubmit = (data) => {
-    console.log(data);
     updateMovie({ data, id });
     reset();
     navigate("/admin/dashboard/movies-db");

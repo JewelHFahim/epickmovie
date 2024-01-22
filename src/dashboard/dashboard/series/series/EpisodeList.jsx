@@ -11,7 +11,6 @@ const EpisodeList = () => {
   const { data: episodeList } = useEpisodeListQuery(id);
   const [deleteEpisode] = useDeleteEpisodeMutation();
 
-  console.log(episodeList);
 
   const handleDeleteEpisode = (epiId) => {
     const shouldDelete = window.confirm("Are you sure want delete this Episode?");

@@ -14,7 +14,6 @@ const TvShowGallery = ({ tvShows }) => {
 
   const handleImageClick = async (id) => {
     id = parseInt(id, 10);
-    console.log(id)
     if (selectedIds.includes(id)) {
       setSelectedIds(selectedIds.filter((selectedId) => selectedId !== id));
     } else {
@@ -34,7 +33,6 @@ const TvShowGallery = ({ tvShows }) => {
 
   const isSelected = (id) => {
     selectedIds?.includes(id);
-    console.log(selectedIds?.includes(id));
   };
 
   const notificationList = tvShows?.results?.filter((item) =>

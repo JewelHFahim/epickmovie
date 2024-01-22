@@ -8,7 +8,6 @@ import {
 
 const EpisodeTrashList = () => {
   const { data: episodetrashList } = useEpisodeTrashListQuery();
-  console.log(episodetrashList);
 
   const trashListData =
     episodetrashList?.data !== "Empty list." ? episodetrashList?.data : [];

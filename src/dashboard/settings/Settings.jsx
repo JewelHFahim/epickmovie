@@ -64,12 +64,6 @@ const Settings = () => {
   ]);
 
   const onSubmit = (data) => {
-    console.log({
-      ...data,
-      timezone: selectedOption?.value,
-      movie_order: selectedOptionMovie?.value,
-      tv_order: selectedOptionTv?.value,
-    });
 
     createConfig({
       ...data,

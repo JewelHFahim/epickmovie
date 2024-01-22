@@ -27,7 +27,6 @@ const UserDetails = () => {
   }, [setValue, userDetails?.data?.name, userDetails?.data?.email, type]);
 
   const onSubmit = (data) => {
-    console.log({ data, id: parseInt(id) });
     updateUser({ data, id: parseInt(id) });
     navigate("/admin/dashboard/users");
   };

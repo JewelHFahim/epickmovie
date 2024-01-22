@@ -3,8 +3,7 @@ import { useForm } from "react-hook-form";
 const AddSeries = () => {
   const { register, handleSubmit, reset } = useForm();
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit = () => {
     reset();
   };
 

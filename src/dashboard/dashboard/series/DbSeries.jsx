@@ -33,7 +33,6 @@ const DbSeries = () => {
     } else {
       console.log("Deletion canceled by user");
     }
-    console.log(id);
   };
 
   const [search, setSearch] = useState("");
@@ -42,8 +41,7 @@ const DbSeries = () => {
   };
 
   const onSubmit = () => {
-    const res = dispatch(collectSearchItem(search));
-    console.log(res);
+    dispatch(collectSearchItem(search));
   };
 
   const results = (searchTerm !== null && searchTerm !== "") ? searchResults : perPgaeMovie?.data;

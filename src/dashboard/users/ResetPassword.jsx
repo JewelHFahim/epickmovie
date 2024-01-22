@@ -18,7 +18,6 @@ const ResetPassword = () => {
   const { data: logo } = useSiteLogoUserQuery();
 
   const onSubmit = (data) => {
-    console.log(data);
     dispatch(resetPassword(data));
     reset();
   };

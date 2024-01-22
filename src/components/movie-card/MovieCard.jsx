@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import FeatureSticker from "../../utils/feature-sticker/FeatureSticker";
 import "./MovieCard.css";

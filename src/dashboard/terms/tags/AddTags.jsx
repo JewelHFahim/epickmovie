@@ -5,7 +5,6 @@ import { useGenreListQuery } from "../../../redux/features/movies/movieApi";
 
 const AddTags = () => {
   const { data: genreList, isLoading } = useGenreListQuery();
-  console.log(genreList);
 
   return (
     <div className="flex w-full">

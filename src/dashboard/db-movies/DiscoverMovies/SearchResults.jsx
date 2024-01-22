@@ -6,7 +6,6 @@ import { tmdb_baseurl } from "../../../config/config";
 
 const SearchResults = () => {
   const [movies, setMovies] = useState([]);
-  console.log(movies);
   const { searchMovieSeries } = useSelector((state) => state.search);
   const searchMovie = `${tmdb_baseurl}/search/movie?include_adult=true&${key}&query=${searchMovieSeries}`;
 

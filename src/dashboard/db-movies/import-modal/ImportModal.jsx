@@ -21,7 +21,6 @@ const ImportMOdal = ({ toggleState }) => {
       selectedValue === "imdb"
         ? { imdb_id: (data.dataId) }
         : { tmdb_id: parseInt(data.dataId) };
-    console.log(ids);
     toggleState === "movie"
       ? dispatch(singleMovieImport(ids))
       : dispatch(singleTvShowImport(ids));

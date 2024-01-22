@@ -26,7 +26,6 @@ const EditMovies = () => {
     const selectedGeneres = selectedOptions?.map((item) => item?.value);
     const updatedData = { ...data, genre_ids: selectedGeneres };
     updateMovie({ updatedData, id });
-    console.log({ updatedData, id });
     reset();
     toast.success("Updated");
     navigate("/admin/dashboard/movies-db");

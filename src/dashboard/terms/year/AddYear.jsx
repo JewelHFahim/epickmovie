@@ -6,7 +6,6 @@ import { useYearListQuery } from "../../../redux/features/movies/movieApi";
 const AddYear = () => {
 
   const { data: yearList, isLoading } = useYearListQuery();
-  console.log(yearList);
 
   return (
     <div className="flex w-full">

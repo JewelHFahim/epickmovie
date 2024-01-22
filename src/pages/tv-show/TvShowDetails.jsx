@@ -18,7 +18,6 @@ const TvShowDetails = () => {
 
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
-  console.log(details);
 
   // document.title = `${siteName?.data} || ${details?.post_title}`;
 

@@ -21,10 +21,6 @@ const MovieDetails = () => {
 
   const details = movieDetails?.data;
 
-  console.log(details);
-
-  // document.title = `${siteName?.data} || ${details?.post_title}`;
-
   return (
       <div className="bg-[#27272A]">
 

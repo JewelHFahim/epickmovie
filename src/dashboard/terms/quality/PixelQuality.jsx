@@ -11,7 +11,6 @@ import Loading from "../../../utils/loading/Loading";
 
 const PixelQuality = () => {
   const { data: pixelQualityList, isLoading } = usePixelQualityListQuery();
-  console.log(pixelQualityList);
   const [createPixelQuality] = useCreatePixelQualityMutation();
   const [deleteTerms] = useDeleteTermsMutation();
 
@@ -23,9 +22,7 @@ const PixelQuality = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
-    const res = createPixelQuality(data);
-    console.log(res);
+    createPixelQuality(data);
     toast.success("Create Quality");
     reset();
   };

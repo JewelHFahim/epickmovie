@@ -39,38 +39,42 @@ const Home = () => {
         ))}
       </div>
 
-      {/* ==================>> Domains <<=================*/}
+      {/* ====================>> Domains <<===================*/}
       <DomainList />
 
       <HomePageSeeAllBtn total={totalMovies} redirect={"/movies"}>
         Movies
       </HomePageSeeAllBtn>
 
-      {/* ==================>> Movies <<==================*/}
+      {/* ====================>> Movies <<====================*/}
+     <div>
       {movieLoading ? (
-        <LazyLoading />
-      ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
-          {movieList?.data?.data?.slice(0, 10)?.map((item) => (
-            <MovieCard key={item?.id} item={item} redirect={`/movie/${item?.id}`}></MovieCard>
-          ))}
-        </div>
-      )}
+          <LazyLoading />
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
+            {movieList?.data?.data?.slice(0, 10)?.map((item) => (
+              <MovieCard key={item?.id} item={item} redirect={`/movie/${item?.id}`}></MovieCard>
+            ))}
+          </div>
+        )}
+     </div>
 
       <HomePageSeeAllBtn total={totalTvShow} redirect={"/tv-show"}>
         TV Show
       </HomePageSeeAllBtn>
 
       {/* ==================>> Tv Shows <<==================*/}
-      {tvShowLoading ? (
-        <LazyLoading />
-      ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
-          {tvShowList?.data?.data?.slice(0, 10)?.map((item) => (
-            <MovieCard key={item?.id} item={item} redirect={`/series/${item?.id}`}></MovieCard>
-          ))}
-        </div>
-      )}
+      <div>
+        {tvShowLoading ? (
+          <LazyLoading />
+        ) : (
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
+            {tvShowList?.data?.data?.slice(0, 10)?.map((item) => (
+              <MovieCard key={item?.id} item={item} redirect={`/series/${item?.id}`}></MovieCard>
+            ))}
+          </div>
+        )}
+      </div>
 
     </section>
   );
