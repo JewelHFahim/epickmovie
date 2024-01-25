@@ -1,24 +1,20 @@
 import { FaTrashAlt } from "react-icons/fa";
 import { MdEditSquare } from "react-icons/md";
 import Loading from "../loading/Loading";
-import { useDeleteTermsMutation } from "../../redux/features/movies/movieApi";
 import toast from "react-hot-toast";
 
-const TableContent = ({ currentItems, isLoading }) => {
-    const [deleteTerms] = useDeleteTermsMutation();
-
-    
+const TableContent = ({ currentItems, isLoading, deletetm, thead }) => {
   const handleDelete = (id) => {
-    deleteTerms(id);
+    deletetm(id);
     toast.error("Deleted");
   };
-  
+
   return (
     <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
       <table className="w-full table-auto text-sm text-left">
         <thead className="text-gray-600 font-medium border-b">
           <tr>
-            <th className="py-3 px-6">Quality</th>
+            <th className="py-3 px-6">{thead}</th>
             <th className="text-center">Actions</th>
           </tr>
         </thead>
@@ -37,7 +33,7 @@ const TableContent = ({ currentItems, isLoading }) => {
                     <MdEditSquare />
                   </button>
                   <button
-                      onClick={() => handleDelete(item?.id)}
+                    onClick={() => handleDelete(item?.id)}
                     className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
                   >
                     <FaTrashAlt />
@@ -49,7 +45,6 @@ const TableContent = ({ currentItems, isLoading }) => {
         )}
       </table>
     </div>
-
   );
 };
 

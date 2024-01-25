@@ -1,11 +1,17 @@
-import { MdEditSquare } from "react-icons/md";
-import { FaTrashAlt } from "react-icons/fa";
-import Loading from "../../../utils/loading/Loading";
 import { useYearListQuery } from "../../../redux/features/movies/movieApi";
+import PaginatedItems from "../../../utils/pagination-frontend/PaginatedItems";
 
 const AddYear = () => {
 
   const { data: yearList, isLoading } = useYearListQuery();
+
+  const datas = {
+    items: yearList,
+    isLoading: isLoading,
+    thead: "Year",
+    // deleteAction: deleteTerms,
+  };
+
 
   return (
     <div className="flex w-full">
@@ -59,41 +65,8 @@ const AddYear = () => {
         </div>
 
         {/* ==============>> GENRE LIST <<=============== */}
-        <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
-          <table className="w-full table-auto text-sm text-left">
-            <thead className="text-gray-600 font-medium border-b">
-              <tr>
-                <th className="py-3 px-6">Year</th>
-                <th className="text-center">Actions</th>
-              </tr>
-            </thead>
+        <PaginatedItems datas={datas}/>
 
-            {isLoading ? (
-              <Loading />
-            ) : (
-              <tbody className="divide-y">
-                {yearList?.data?.map((item, idx) => (
-                  <tr key={idx} className="odd:bg-gray-50 even:bg-white">
-                    <td className="px-6 py-4 font-medium flex items-center gap-x-2">
-                      {item?.name}
-                    </td>
-                    <td className="text-center px-6 ">
-                      <button className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
-                        <MdEditSquare />
-                      </button>
-                      <button
-                        href="javascript:void()"
-                        className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
-                      >
-                        <FaTrashAlt />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            )}
-          </table>
-        </div>
       </div>
       
     </div>

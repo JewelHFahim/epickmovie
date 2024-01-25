@@ -1,13 +1,11 @@
-import { MdEditSquare } from "react-icons/md";
-import { FaTrashAlt } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import Loading from "../../../utils/loading/Loading";
 import {
   useAdminGenreListQuery,
   useCreateGenreMutation,
   useDeleteTermsMutation,
 } from "../../../redux/features/movies/movieApi";
+import PaginatedItems from "../../../utils/pagination-frontend/PaginatedItems";
 
 const AddGenre = () => {
   const { data: genreList, isLoading } = useAdminGenreListQuery();
@@ -27,10 +25,13 @@ const AddGenre = () => {
     reset();
   };
 
-  const handleDeleteGenre = (id) => {
-    deleteTerms(id)
-    toast.error("Deleted")
+  const datas = {
+    items: genreList,
+    isLoading: isLoading,
+    thead: "Genre",
+    deleteAction: deleteTerms,
   };
+
 
   return (
     <div className="flex w-full">
@@ -83,41 +84,8 @@ const AddGenre = () => {
         </div>
 
         {/* ==============>> GENRE LIST <<=============== */}
-        <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
-          <table className="w-full table-auto text-sm text-left">
-            <thead className="text-gray-600 font-medium border-b">
-              <tr>
-                <th className="py-3 px-6">Genre</th>
-                <th className="text-center">Actions</th>
-              </tr>
-            </thead>
+        <PaginatedItems datas={datas} />
 
-            {isLoading ? (
-              <Loading />
-            ) : (
-              <tbody className="divide-y">
-                {genreList?.data?.map((item, idx) => (
-                  <tr key={idx} className="odd:bg-gray-50 even:bg-white">
-                    <td className="px-6 py-4 font-medium flex items-center gap-x-2">
-                      {item?.name}
-                    </td>
-                    <td className="text-center px-6 ">
-                      <button className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
-                        <MdEditSquare />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteGenre(item?.id)}
-                        className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
-                      >
-                        <FaTrashAlt />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            )}
-          </table>
-        </div>
       </div>
     </div>
   );

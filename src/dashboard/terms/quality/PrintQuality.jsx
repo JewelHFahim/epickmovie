@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import {
   useCreatePrintQualityMutation,
+  useDeleteTermsMutation,
   usePrintQualityListQuery,
 } from "../../../redux/features/movies/movieApi";
 import PaginatedItems from "../../../utils/pagination-frontend/PaginatedItems";
@@ -16,11 +17,19 @@ const PrintQuality = () => {
 
   const [createPrintQuality] = useCreatePrintQualityMutation();
   const { data: printQualityList, isLoading } = usePrintQualityListQuery();
+  const [deleteTerms] = useDeleteTermsMutation();
 
   const onSubmitPrint = (data) => {
     createPrintQuality(data);
     toast.success("Create Quality");
     reset();
+  };
+
+  const datas = {
+    items: printQualityList,
+    isLoading: isLoading,
+    thead: "Quality",
+    deleteAction: deleteTerms,
   };
 
   return (
@@ -75,11 +84,7 @@ const PrintQuality = () => {
           </div>
 
           {/* ==============>> GENRE LIST <<=============== */}
-          <PaginatedItems
-            itemsPerPage={8}
-            printQualityList={printQualityList}
-            isLoading={isLoading}
-          />
+          <PaginatedItems datas={datas} />
         </div>
       </div>
     </div>
