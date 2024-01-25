@@ -1,35 +1,30 @@
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-
-import { MdEditSquare } from "react-icons/md";
-import { FaTrashAlt } from "react-icons/fa";
-import Loading from "../../../utils/loading/Loading";
-import { useCreatePrintQualityMutation, useDeleteTermsMutation, usePrintQualityListQuery } from "../../../redux/features/movies/movieApi";
+import {
+  useCreatePrintQualityMutation,
+  usePrintQualityListQuery,
+} from "../../../redux/features/movies/movieApi";
+import PaginatedItems from "../../../utils/pagination-frontend/PaginatedItems";
 
 const PrintQuality = () => {
-    const { handleSubmit, register, formState: { errors }, reset} = useForm()
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+    reset,
+  } = useForm();
 
-      const [createPrintQuality] = useCreatePrintQualityMutation();
-      const { data: printQualityList, isLoading } = usePrintQualityListQuery();  
-      const [deleteTerms] = useDeleteTermsMutation();
+  const [createPrintQuality] = useCreatePrintQualityMutation();
+  const { data: printQualityList, isLoading } = usePrintQualityListQuery();
 
+  const onSubmitPrint = (data) => {
+    createPrintQuality(data);
+    toast.success("Create Quality");
+    reset();
+  };
 
-
-    const onSubmitPrint = (data) => {
-        createPrintQuality(data);
-        toast.success("Create Quality");
-        reset();
-      };
-
-
-      const handleDelete = (id) => {
-        deleteTerms(id);
-        toast.error("Deleted")
-      }
-    
-    return (
-        <div>
-            
+  return (
+    <div>
       {/* ================>> PRINT QUALITY <<==============*/}
       <div className="flex">
         <div className="bg-white w-[45%] border-r px-2  py-4">
@@ -80,45 +75,15 @@ const PrintQuality = () => {
           </div>
 
           {/* ==============>> GENRE LIST <<=============== */}
-          <div className="mt-8 shadow-sm border rounded-lg overflow-x-auto">
-            <table className="w-full table-auto text-sm text-left">
-              <thead className="text-gray-600 font-medium border-b">
-                <tr>
-                  <th className="py-3 px-6">Quality</th>
-                  <th className="text-center">Actions</th>
-                </tr>
-              </thead>
-
-              {isLoading ? (
-                <Loading />
-              ) : (
-                <tbody className="divide-y">
-                  {printQualityList?.data?.map((item) => (
-                    <tr key={item?.id} className="odd:bg-gray-50 even:bg-white">
-                      <td className="px-6 py-4 font-medium flex items-center gap-x-2">
-                        {item?.name}
-                      </td>
-                      <td className="text-center px-6 ">
-                        <button className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg">
-                          <MdEditSquare />
-                        </button>
-                        <button
-                          onClick={()=>handleDelete(item?.id)}
-                          className="py-2 leading-none px-3 font-medium text-red-600 hover:text-red-500 duration-150 hover:bg-gray-50 rounded-lg"
-                        >
-                          <FaTrashAlt />
-                        </button>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              )}
-            </table>
-          </div>
+          <PaginatedItems
+            itemsPerPage={8}
+            printQualityList={printQualityList}
+            isLoading={isLoading}
+          />
         </div>
       </div>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default PrintQuality;

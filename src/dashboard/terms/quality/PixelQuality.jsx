@@ -11,6 +11,7 @@ import Loading from "../../../utils/loading/Loading";
 
 const PixelQuality = () => {
   const { data: pixelQualityList, isLoading } = usePixelQualityListQuery();
+  console.log(pixelQualityList);
   const [createPixelQuality] = useCreatePixelQualityMutation();
   const [deleteTerms] = useDeleteTermsMutation();
 
@@ -72,7 +73,6 @@ const PixelQuality = () => {
               </button>
             </div>
           </form>
-
         </div>
 
         <div className="mx-auto bg-white border w-[60%]  p-2">
@@ -122,6 +122,7 @@ const PixelQuality = () => {
           </div>
         </div>
       </div>
+
     </div>
   );
 };
