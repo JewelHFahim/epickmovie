@@ -3,10 +3,14 @@ import AreaChart from "../../components/charts/AreaChart";
 import PiChart from "../../components/charts/PiChart";
 import { useMovieListQuery } from "../../redux/features/movies/movieApi";
 import { useTvShowListQuery } from "../../redux/features/tv-show/tvShowApi";
+import { Link } from "react-router-dom";
+import { useWebsiteLinkQuery } from "../../redux/features/settings/settingApi";
 
 const Dashboard = () => {
   const { data: movieList } = useMovieListQuery();
   const { data: tvshowList } = useTvShowListQuery();
+  const { data: websiteLink } = useWebsiteLinkQuery();
+
 
   const datas = [
     {
@@ -41,10 +45,10 @@ const Dashboard = () => {
   return (
     <div className="w-full h-full p-6">
       <div className="bg-slate-50 p-4">
-        <div className="mb-2">
-          <p className="underline text-[20px] font-[500] text-slate-900">
-            Dashboard
-          </p>
+
+        <div className="w-full mb-2 pr-2 flex items-center justify-between">
+          <p className="underline text-[20px] font-[500] text-slate-900"> Dashboard </p>
+          <Link to={websiteLink?.data} target="_blank" className="font-medium text-sm text-blue-600 border transition-all duration-200 border-blue-600 px-4 py-1 rounded-md hover:bg-blue-600 hover:text-white">Live Website</Link>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-5 rounded-lg">

@@ -40,13 +40,11 @@ const settingApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-
     // ====================>> GLOBAL HEADER  <<====================
     globalHeader: builder.query({
       query: () => "/get-config-value/global_header",
       providesTags: ["EpicMovies"],
     }),
-
 
     // ====================>> GLOBAL FOOTER  <<====================
     globalFooter: builder.query({
@@ -54,19 +52,22 @@ const settingApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-
     // ====================>> FAVICON ICON <<====================
     favIcon: builder.query({
       query: () => "/get-config-value/fav_icon",
       providesTags: ["EpicMovies"],
     }),
 
-
-
     // ###################### ADMIN ROUTES ########################
     // ====================>> CONFIG LIST  <<=====================
     listConfig: builder.query({
       query: () => "/admin/get-all-config-value",
+      providesTags: ["EpicMovies"],
+    }),
+
+    // ====================>> WEBSITE LINK <<=====================
+    websiteLink: builder.query({
+      query: () => "/admin/get-config-value/website_link",
       providesTags: ["EpicMovies"],
     }),
 
@@ -159,7 +160,6 @@ const settingApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["EpicMovies"],
     }),
-
   }),
 });
 
@@ -173,6 +173,7 @@ export const {
   useSiteNameConfigQuery,
   useCreateMenuMutation,
   useQuickMenuQuery,
+  useWebsiteLinkQuery,
   useLogoUploadMutation,
   useJoinTelegramUserQuery,
   useFooterUserQuery,
@@ -186,6 +187,6 @@ export const {
   useMovieSortQuery,
   useTvshowSortQuery,
   useCacheTimeQuery,
-  useFavIconQuery
+  useFavIconQuery,
 } = settingApi;
 export default settingApi;

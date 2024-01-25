@@ -11,11 +11,12 @@ import {
   useSiteNewsConfigQuery,
   useTimeZoneQuery,
   useTvshowSortQuery,
+  useWebsiteLinkQuery,
 } from "../../redux/features/settings/settingApi";
 import toast from "react-hot-toast";
 import { Select, initTE } from "tw-elements";
-import MultiSelectMenu from "../../components/genere-select-menu/MultitSelect";
 import { useEffect, useState } from "react";
+import MultiSelectMenu from "../../components/genere-select-menu/MultitSelect";
 import LogoUploader from "./LogoUploader";
 import TimeZone from "./TImeZone";
 import MovieSort from "./MovieSort";
@@ -35,12 +36,12 @@ const Settings = () => {
   const { data: movieSort } = useMovieSortQuery();
   const { data: tvshowSort } = useTvshowSortQuery();
   const { data: cacheTime } = useCacheTimeQuery();
+  const { data: websiteLink } = useWebsiteLinkQuery();
   const [createConfig] = useCreateConfigMutation();
 
   const [selectedOption, setSelectedOption] = useState(timeZone?.data);
   const [selectedOptionTv, setSelectedOptionTv] = useState();
   const [selectedOptionMovie, setSelectedOptionMovie] = useState();
-
 
   useEffect(() => {
     setValue("site_name", siteName?.data, { shouldDirty: false });
@@ -51,6 +52,7 @@ const Settings = () => {
     setValue("global_footer", globalFooter?.data, { shouldDirty: false });
     setValue("timezone", timeZone?.data, { shouldDirty: false });
     setValue("cache_time", cacheTime?.data, { shouldDirty: false });
+    setValue("website_link", websiteLink?.data, { shouldDirty: false });
   }, [
     setValue,
     siteName?.data,
@@ -61,10 +63,10 @@ const Settings = () => {
     globalFooter?.data,
     timeZone?.data,
     cacheTime?.data,
+    websiteLink?.data,
   ]);
 
   const onSubmit = (data) => {
-
     createConfig({
       ...data,
       timezone: selectedOption?.value,
@@ -82,8 +84,11 @@ const Settings = () => {
   return (
     <div>
       <section className="px-[20px] lg:px-[200px] py-[20px] lg:py-[20px] lg:pb-[70px] w-full h-full mx-auto bg-gray-800">
+
         <h2 className="text-lg font-semibold text-white">Account settings</h2>
 
+
+          {/* ====================>> FORM START <<================== */}
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 p-4 border border-slate-700"
@@ -110,7 +115,7 @@ const Settings = () => {
             />
           </div>
 
-        {/* ======================>> Cache Time <<======================= */}
+          {/* ======================>> Cache Time <<======================= */}
           <div>
             <label className="text-gray-200"> Cache Time </label>
             <input
@@ -123,7 +128,9 @@ const Settings = () => {
 
           {/* =======================>> Time Zone <<======================= */}
           <div className="mt-2 w-full">
-            <label className="text-gray-200"> Select Timezone- {timeZone?.data}</label>
+            <label className="text-gray-200">
+              Select Timezone- {timeZone?.data}
+            </label>
             <TimeZone
               selectedOption={selectedOption}
               setSelectedOption={setSelectedOption}
@@ -133,7 +140,9 @@ const Settings = () => {
 
           {/* ======================>> Movie Sort <<======================= */}
           <div className="mt-2 w-full">
-            <label className="text-gray-200"> Movie Sort- {movieSort?.data} </label>
+            <label className="text-gray-200">
+              Movie Sort- {movieSort?.data}
+            </label>
             <MovieSort
               selectedOptionMovie={selectedOptionMovie}
               setSelectedOptionMovie={setSelectedOptionMovie}
@@ -141,9 +150,11 @@ const Settings = () => {
             />
           </div>
 
-          {/* =======================>> TV Sort <<======================= */}
+          {/* =======================>> TV Sort <<========================= */}
           <div className="mt-2 w-full">
-            <label className="text-gray-200"> Tv Show Sort- {movieSort?.data} </label>
+            <label className="text-gray-200">
+              Tv Show Sort- {movieSort?.data}
+            </label>
             <TvshowSort
               selectedOptionTv={selectedOptionTv}
               setSelectedOptionTv={setSelectedOptionTv}
@@ -199,24 +210,35 @@ const Settings = () => {
             />
           </div>
 
-          <div></div>
+          {/* =====================>> Live Website Link <<================= */}
+          <div>
+            <label className="text-gray-200"> Live Website Link </label>
+            <input
+              type="text"
+              {...register("website_link")}
+              placeholder="live website link"
+              className={inputStyle}
+            />
+          </div>
 
+          {/* ======================>> Submit Button <<==================== */}
           <div className="flex items-center justify-center mt-8 w-full">
             <button
               type="submit"
               className="w-full border border-slate-600 h-[44px] text-white uppercase rounded-md bg-slate-900 hover:bg-slate-600"
             >
-              Save
+              Submit
             </button>
           </div>
         </form>
 
+        {/* ======================>> Fav Icon <<==================== */}
         <div className="flex flex-col lg:flex-row justify-between items-center gap-4 mt-[40px] border border-slate-700 p-4">
           <FavIconUpLoader />
-       
           <LogoUploader />
         </div>
 
+        {/* =====================>> Quick Menu <<=================== */}
         <div className=" mt-[40px] border border-slate-700 p-4">
           <label className="text-gray-200 pb-2"> Quick Menu</label>
           <MultiSelectMenu />
