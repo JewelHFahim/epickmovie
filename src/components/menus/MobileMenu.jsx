@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import homeIcon from "../../assets/homeIcon.svg";
-import { FaGlobe, FaMinus, FaPlus } from "react-icons/fa6";
+import { FaMinus, FaPlus } from "react-icons/fa6";
 import {
   useGenreListQuery,
   useGetAudioListQuery,
@@ -12,12 +12,21 @@ import {
 import { collectFilteredItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { IoMdHome } from "react-icons/io";
 import { MdOutlineMovieFilter } from "react-icons/md";
 import { RiListIndefinite } from "react-icons/ri";
-import { FaCalendarAlt } from "react-icons/fa";
 import { MdOutlineHighQuality } from "react-icons/md";
 import { GiHamburgerMenu } from "react-icons/gi";
+import { RiHome2Line } from "react-icons/ri";
+import { CiCalendarDate } from "react-icons/ci";
+import { GoGlobe } from "react-icons/go";
+import { RiMovie2Line } from "react-icons/ri";
+import { LiaTelegramPlane } from "react-icons/lia";
+import { useJoinTelegramUserQuery } from "../../redux/features/settings/settingApi";
+
+
+
+
+
 
 const MobileMenu = () => {
   const dispatch = useDispatch();
@@ -26,6 +35,8 @@ const MobileMenu = () => {
   const { data: genreList } = useGenreListQuery();
   const { data: yearList } = useYearListQuery();
   const { data: audiList } = useGetAudioListQuery();
+  const { data: joinTelegram } = useJoinTelegramUserQuery();
+
 
   const pixel = pixelQualityList?.data;
   const print = printQualityList?.data;
@@ -38,7 +49,7 @@ const MobileMenu = () => {
   });
 
   const navigation = [
-    { title: "Home", path: "/", isDrapdown: false, icon: <IoMdHome /> },
+    { title: "Home", path: "/", isDrapdown: false, icon: <RiHome2Line /> },
     {
       title: "Movies",
       path: "",
@@ -58,7 +69,7 @@ const MobileMenu = () => {
       path: "",
       isDrapdown: true,
       navs: yearList?.data,
-      icon: <FaCalendarAlt />,
+      icon: <CiCalendarDate />,
     },
     {
       title: "QUALITY",
@@ -67,7 +78,9 @@ const MobileMenu = () => {
       navs: combinedQuality,
       icon: <MdOutlineHighQuality />,
     },
-    { title: "Bangla", path: "/bangla", isDrapdown: false, icon: <FaGlobe /> },
+    { title: "Web Series", path: "/tv-show", isDrapdown: false, icon: <GoGlobe /> },
+    { title: "Bangla", path: "/bangla", isDrapdown: false, icon: <RiMovie2Line /> },
+    { title: "Join Telegram", path: `${joinTelegram?.data}`, isDrapdown: false, icon: <LiaTelegramPlane /> },
   ];
 
   useEffect(() => {
@@ -100,43 +113,42 @@ const MobileMenu = () => {
           </div>
 
           <div className={`w-full nav-menu flex-1 pb-3 ${state ? "block" : "hidden"}`}>
-            <ul className="flex flex-col gap-y-2">
+            <ul className="flex flex-col gap-y-">
               {navigation.map((item, idx) => {
                 return (
                   <li key={idx}>
                     {item.isDrapdown ? (
 // ======================>> WITH SUB MENUS <=========================
-                      <button className="w-full h-[55px]  flex items-center justify-between text-white font-inter font-[600] border-b-[.5px] border-[#2D2C2C]" onClick={() => setDrapdownState({ idx, isActive: !drapdownState.isActive,})}>
+                      <button className="w-full flex items-center justify-between text-white font-inter font-[600] border-b-[.5px] border-[#2D2C2C]"
+                       onClick={() => setDrapdownState({ idx, isActive: !drapdownState.isActive})}>
 
-                        <div className="ml-2 flex items-center gap-3 border-r border-[#2D2C2C] w-[93%] h-full text-[21px] font-[600]">
-                          <p className="text-[33px]">{item?.icon}</p>
+                        <div className="ml-2 flex items-center gap-3 border-r border-[#2D2C2C] w-[93%] py-8 text-[30px] font-[600]">
+                          <p className="text-[40px]">{item?.icon}</p>
                           <p>{item.title}</p>
                         </div>
 
-                        {drapdownState.idx == idx && drapdownState.isActive ? (
-                          <FaMinus className="text-[26px] mx-2 w-[7%]" />
+                        {(drapdownState.idx == idx && drapdownState.isActive) ? (
+                          <FaMinus className="text-[45px] mx-2 w-[10%]" />
                         ) : (
-                          <FaPlus className="text-[26px] mx-2  w-[7%]" />
+                          <FaPlus className="text-[45px] mx-2  w-[10%]" />
                         )}
                       </button>
                     ) : (
 // ======================>> WITHOUT SUB MENUS <========================= 
-                      <a href={item.path} className="flex items-center gap-3 p-2 text-[21px] font-inter font-[600] text-white border-b-[.5px border-[#2D2C2C]">
-                        <p className="text-[37px]">{item?.icon}</p>
+                      <a href={item.path} className="pl-2 flex items-center gap-3 py-8 text-[30px] font-inter font-[600] text-white border-b-[.5px border-[#2D2C2C]">
+                        <p className="text-[40px]">{item?.icon}</p>
                         {item.title}
                       </a>
                     )}
 {/* ==========================>> SUB MENUS <============================ */}
-                    {item.isDrapdown &&
-                    drapdownState.idx == idx &&
-                    drapdownState.isActive ? (
+  {item.isDrapdown && drapdownState.idx == idx && drapdownState.isActive ? (
                       <div className="">
                         <ul className="flex flex-col gap-y-4 mx-10">
                           {item?.navs?.map((item, i) => (
                             <li onClick={() => handleTerms(item?.slug)}
-                              key={i} className="flex items-center gap-2 text-white px-2 py-1 border-b-[.5px] border-[#2D2C2C] my-1">
-                              <img src={homeIcon} alt="" className="w-[25px] h-[25px]"/>
-                              <Link to="/filter-list" className="text-[20px] font-inter font-[600]">
+                              key={i} className="flex items-center gap-2 text-white px-2 py-4 border-b-[.5px] border-[#2D2C2C] my-2">
+                              <img src={homeIcon} alt="" className="w-[40px] h-[40px]"/>
+                              <Link to="/filter-list" className="text-[30px] font-inter font-[600]">
                                 {item.name}
                               </Link>
                             </li>

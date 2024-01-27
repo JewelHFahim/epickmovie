@@ -29,7 +29,7 @@ const Header = () => {
       {isLoading ? (
         <div className="w-[150px] h-[40px] lg:w-[200px] lg:h-[65px] bg-slate-700 rounded-lg animate-pulse "></div>
       ) : (
-        <Link to="/" className="w-[410px] lg:w-[240px] h-[80px] flex justify-center items-center">
+        <Link to="/" className="w-[440px] lg:w-[240px] h-[80px] flex justify-center items-center">
           <img src={siteLogo?.data} alt="Epic Movie Logo" className="object-cover"/>
           {!siteLogo?.data && (
             <h1 className="text-[25px] font-medium text-white">
@@ -41,17 +41,17 @@ const Header = () => {
 
       <form
         onSubmit={handleSubmit}
-        className=" w-[70%] h-[70px] lg:w-[453px] lg:h-[40px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[9px] "
+        className=" w-[70%] h-[80px] lg:w-[453px] lg:h-[40px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[15px] border border-slate-600"
       >
         <input
           type="text"
           value={searchTermState}
           onChange={handleInputChange}
           placeholder="Search Movie/TV Shows"
-          className="w-full h-full border-0 focus:outline-none text-white px-5 bg-[#18181B] rounded-s-md text-[20px] placeholder:text-[16px]"
+          className="w-full h-full border-0 focus:outline-none text-white px-5 bg-[#18181B] rounded-s-[15px] text-[30px] placeholder:text-[20px]"
         />
 
-        <button type="submit" className="text-[28px] text-white px-6 lg:px-4 h-full bg-slate-700 rounded-e-md">
+        <button type="submit" className="text-[28px] text-white px-6 lg:px-4 h-full bg-slate-700 rounded-e-[15px]">
           <IoSearch />
         </button>
         
