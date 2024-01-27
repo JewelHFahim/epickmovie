@@ -74,7 +74,7 @@ const Nav = () => {
           </a>
           <ul>
             {genreList?.data?.map((item, i) => (
-              <li key={i}>
+              <li key={i} className="">
                 <Link  to="/filter-list" onClick={() => handleGenre(item?.slug)} >
                   {item?.name}
                 </Link>

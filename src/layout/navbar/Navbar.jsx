@@ -27,8 +27,8 @@ const Navbar = () => {
 
       {/* =====>>Quick Menu Only For Mobile Device <<===== */}
       {currentPath === "/" && (
-        <div className="w-[95%] h-[100%] mx-auto mt-[20px] p-2 lg:hidden">
-          <div className="grid grid-cols-5 gap-2">
+        <div className="w-[94%] h-[100%] mx-auto mt-[20px] p-2 lg:hidden">
+          <div className="grid grid-cols-5 gap-3">
             {quickMenu?.data?.map((menu, i) => (
               <Link key={i} to="/filter-list" onClick={() => handleQuickMenuNavigation(menu?.slug)}>
                 <MobileMenuButton key={i}>{menu.name}</MobileMenuButton>

@@ -1,10 +1,7 @@
 import { useState } from "react";
-import logo from "../assets/logo.png";
 import { MdOutlineDashboardCustomize } from "react-icons/md";
-import { TbMovie } from "react-icons/tb";
 import { BsCameraReels } from "react-icons/bs";
 import { IoIosArrowDown } from "react-icons/io";
-import { GoQuestion } from "react-icons/go";
 import { IoSettingsOutline } from "react-icons/io5";
 import { FaUsers } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
@@ -13,6 +10,10 @@ import { logoutUser } from "../redux/features/users/userSlice";
 import { useNavigate } from "react-router-dom";
 import { RiMovieLine } from "react-icons/ri";
 import { PiTerminalWindow } from "react-icons/pi";
+import {
+  useSiteLogoUserQuery,
+  useSiteNameUSerQuery,
+} from "../redux/features/settings/settingApi";
 
 // NESTED MENUS
 const Menu = (props) => {
@@ -55,6 +56,8 @@ const Menu = (props) => {
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { data: siteLogo } = useSiteLogoUserQuery();
+  const { data: siteName } = useSiteNameUSerQuery();
 
   const navigation = [
     {
@@ -125,7 +128,13 @@ const Sidebar = () => {
         <div className="flex flex-col h-full px-4 overflow-y-auto border relative">
           {/* ============================>> LOGO <<=======================*/}
           <div className="h-20 flex items-center pl-2">
-            <img src={logo} alt="" className="object-cover" />
+            {siteLogo?.data ? (
+              <img src={siteLogo?.data} alt="" className="object-cover" />
+            ) : (
+              <h1 className="text-[22px] font-bold text-slate-800">
+                {siteName?.name}EpicMovies
+              </h1>
+            )}
           </div>
 
           {/* ========================>> MENUES <<=========================*/}

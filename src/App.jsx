@@ -32,26 +32,29 @@ const App = () => {
   useEffect(() => {
     const fetchScriptContent = async () => {
       try {
-        const response = await fetch(`${base_url}/get-config-value/global_header`,{
-          headers: userHeader,
-        });
+        const response = await fetch(
+          `${base_url}/get-config-value/global_header`,
+          {
+            headers: userHeader,
+          }
+        );
 
         const data = await response.json();
+        console.log(data?.data);
 
         if (data) {
-          const script = document.createElement('script');
-          script.type = 'text/javascript';
+          const script = document.createElement("script");
+          script.type = "text/javascript";
           script.innerHTML = data?.data;
 
-          document.head.appendChild(script);
+          document.head.appendChild(data?.data);
 
-          // Cleanup if needed
           return () => {
-            document.head.removeChild(script);
+            document.head.removeChild(data?.data);
           };
         }
       } catch (error) {
-        console.error('Error fetching script content:', error);
+        console.error("Error fetching script content:", error);
       }
     };
 
@@ -61,7 +64,6 @@ const App = () => {
   return (
     <HelmetProvider>
       <div className=" bg-[#27272A] lg:bg-[#18181a]">
-
         <Helmet>
           <title>{siteName?.data}</title>
           <meta name="description" content="entertainment unlimited" />
@@ -70,7 +72,6 @@ const App = () => {
         <RouterProvider router={router} />
 
         <Toaster />
-
       </div>
     </HelmetProvider>
   );

@@ -1,8 +1,7 @@
-import { useFooterUserQuery, useGlobalFooterQuery } from "../redux/features/settings/settingApi";
+import { useFooterUserQuery } from "../redux/features/settings/settingApi";
 
 const Footer = () => {
   const { data: footerConfig } = useFooterUserQuery();
-  const { data: globalFooter } = useGlobalFooterQuery();
 
 
   return (
@@ -14,7 +13,6 @@ const Footer = () => {
           </p>
         </div>
       </div>
-      {globalFooter?.data}
     </div>
   );
 };

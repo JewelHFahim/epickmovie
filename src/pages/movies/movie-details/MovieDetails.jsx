@@ -36,7 +36,7 @@ const MovieDetails = () => {
           redirect={"/movies"}
         />
 
-        <section className=" p-2 lg:p-5 flex justify-between">
+        <section className="py-4 px-10 lg:py-2 lg:px-5 flex justify-between">
           <div className="w-full  lg:w-[70%]">
             <div>
               <h4 className=" text-[20px] lg:text-[24px] text-white font-aclonica max-w-[748px]">

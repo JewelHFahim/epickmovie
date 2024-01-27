@@ -37,7 +37,7 @@ const TvShowDetails = () => {
         redirect={`/tv-show`}
       />
 
-      <section className=" p-2 lg:p-5 flex justify-between">
+      <section className=" py-4 px-10 lg:py-2 lg:px-5 flex justify-between">
         {/* >>>>>>> Column One <<<<<<< */}
         <div className="w-full  lg:w-[70%]">
           <div>
