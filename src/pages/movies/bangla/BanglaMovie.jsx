@@ -23,7 +23,7 @@ const BanglaMovie = () => {
         </Helmet>
 
       {/* ==================>> MOVIES <<==================*/}
-      <div className="m-2">
+      <div className="px-10 py-5">
         <Title>Bengali</Title>
       </div>
 

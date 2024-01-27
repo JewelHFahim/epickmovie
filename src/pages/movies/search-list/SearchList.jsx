@@ -9,7 +9,7 @@ const SearchList = () => {
   return (
     <section className="min-h-screen px-[50px] py-[20px] lg:px-0 lg:py-5">
       <div className="mt-2 mb-[32px]">
-        <h1 className="text-[12px] lg:text-[32px] font-[700] font-roboto text-white">
+        <h1 className="text-[28px] lg:text-[32px] font-[700] font-roboto text-white">
           Search Results for: {searchTerm}
         </h1>
       </div>

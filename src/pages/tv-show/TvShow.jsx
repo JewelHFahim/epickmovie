@@ -24,7 +24,7 @@ const TvShow = () => {
       {/* ==================>> Domains <<=================*/}
       <DomainList />
 
-      <div className="w-full flex justify-start mt-[22px] ml-12"> <Title>TV Series</Title> </div>
+      <div className="w-full flex justify-start mt-[22px] ml-20 lg:ml-0"> <Title>TV Series</Title> </div>
 
       {/* ==================>> TV Shows <<==================*/}
       {isLoading ? (

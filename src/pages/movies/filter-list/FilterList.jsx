@@ -12,9 +12,9 @@ const FilterList = () => {
     useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
 
   return (
-    <section className="min-h-screen ">
-      <div className="mt-2 mb-[32px]">
-        <h1 className="text-[12px] lg:text-[32px] font-[700] font-roboto text-white">
+    <section className="min-h-screen">
+      <div className=" ml-10 lg:ml-0 my-5">
+        <h1 className="text-[28px] lg:text-[32px] font-[700] font-roboto text-white">
           Filter By: {filteredTerm}
         </h1>
       </div>

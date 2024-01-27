@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import homeIcon from "../../assets/homeIcon.svg";
-import { FaMinus, FaPlus } from "react-icons/fa6";
+import { FaGlobe, FaMinus, FaPlus } from "react-icons/fa6";
 import {
   useGenreListQuery,
   useGetAudioListQuery,
@@ -67,7 +67,7 @@ const MobileMenu = () => {
       navs: combinedQuality,
       icon: <MdOutlineHighQuality />,
     },
-    // { title: "Home", path: "/", isDrapdown: false, icon: <FaGlobe /> },
+    { title: "Bangla", path: "/bangla", isDrapdown: false, icon: <FaGlobe /> },
   ];
 
   useEffect(() => {
@@ -100,14 +100,16 @@ const MobileMenu = () => {
           </div>
 
           <div className={`w-full nav-menu flex-1 pb-3 ${state ? "block" : "hidden"}`}>
-            <ul className="items-center">
+            <ul className="flex flex-col gap-y-2">
               {navigation.map((item, idx) => {
                 return (
                   <li key={idx}>
                     {item.isDrapdown ? (
-                      <button className="w-full h-[55px] flex items-center justify-between text-white font-inter font-[600] border-b-[.5px] border-[#2D2C2C]" onClick={() => setDrapdownState({ idx, isActive: !drapdownState.isActive,})}>
-                        <div className="ml-2 flex items-center gap-3 border-r border-[#2D2C2C] w-[93%] h-full text-[18px] font-[600]">
-                          <p className="text-[28px]">{item?.icon}</p>
+// ======================>> WITH SUB MENUS <=========================
+                      <button className="w-full h-[55px]  flex items-center justify-between text-white font-inter font-[600] border-b-[.5px] border-[#2D2C2C]" onClick={() => setDrapdownState({ idx, isActive: !drapdownState.isActive,})}>
+
+                        <div className="ml-2 flex items-center gap-3 border-r border-[#2D2C2C] w-[93%] h-full text-[21px] font-[600]">
+                          <p className="text-[33px]">{item?.icon}</p>
                           <p>{item.title}</p>
                         </div>
 
@@ -118,22 +120,23 @@ const MobileMenu = () => {
                         )}
                       </button>
                     ) : (
-                      <a href={item.path} className="flex items-center gap-3 p-2 text-[18px] font-inter font-[600] text-white border-b-[.5px] border-[#2D2C2C]">
-                        <p className="text-[25px]">{item?.icon}</p>
+// ======================>> WITHOUT SUB MENUS <========================= 
+                      <a href={item.path} className="flex items-center gap-3 p-2 text-[21px] font-inter font-[600] text-white border-b-[.5px border-[#2D2C2C]">
+                        <p className="text-[37px]">{item?.icon}</p>
                         {item.title}
                       </a>
                     )}
-
+{/* ==========================>> SUB MENUS <============================ */}
                     {item.isDrapdown &&
                     drapdownState.idx == idx &&
                     drapdownState.isActive ? (
                       <div className="">
-                        <ul className="">
+                        <ul className="flex flex-col gap-y-4 mx-10">
                           {item?.navs?.map((item, i) => (
                             <li onClick={() => handleTerms(item?.slug)}
-                              key={i} className="flex  items-center gap-2 text-white px-2 py-1 border-b-[.5px] border-[#2D2C2C]">
-                              <img src={homeIcon} alt="" className="w-[21px] h-[21px]"/>
-                              <Link to="/filter-list" className="text-[18px] font-inter font-[500]">
+                              key={i} className="flex items-center gap-2 text-white px-2 py-1 border-b-[.5px] border-[#2D2C2C] my-1">
+                              <img src={homeIcon} alt="" className="w-[25px] h-[25px]"/>
+                              <Link to="/filter-list" className="text-[20px] font-inter font-[600]">
                                 {item.name}
                               </Link>
                             </li>

@@ -47,10 +47,12 @@ const App = () => {
           script.type = "text/javascript";
           script.innerHTML = data?.data;
 
-          document.head.appendChild(data?.data);
+          // Append the script element to the document head
+          document.head.appendChild(script);
 
           return () => {
-            document.head.removeChild(data?.data);
+            // Remove the script element from the document head
+            document.head.removeChild(script);
           };
         }
       } catch (error) {

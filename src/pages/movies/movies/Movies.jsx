@@ -25,7 +25,7 @@ const Movies = () => {
       {/* ==================>> Domains <<=================*/}
       <DomainList />
 
-      <div className="w-full flex justify-start mt-[22px] ml-12"> <Title>Movies</Title> </div>
+      <div className="w-full flex justify-start mt-[22px] ml-20 lg:ml-0"> <Title>Movies</Title> </div>
 
       {/* ==================>> Movies <<==================*/}
       {isLoading ? (

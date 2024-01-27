@@ -48,7 +48,7 @@ const Header = () => {
           value={searchTermState}
           onChange={handleInputChange}
           placeholder="Search Movie/TV Shows"
-          className="w-full h-full border-0 focus:outline-none text-[12px] text-white px-5 bg-[#18181B] rounded-s-md text-lg placeholder:text-[16px]"
+          className="w-full h-full border-0 focus:outline-none text-white px-5 bg-[#18181B] rounded-s-md text-[20px] placeholder:text-[16px]"
         />
 
         <button type="submit" className="text-[28px] text-white px-6 lg:px-4 h-full bg-slate-700 rounded-e-md">
