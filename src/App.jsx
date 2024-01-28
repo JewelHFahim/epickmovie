@@ -29,39 +29,36 @@ const App = () => {
   }, []);
 
   // Dynamic Set Global Header
-  useEffect(() => {
-    const fetchScriptContent = async () => {
-      try {
-        const response = await fetch(
-          `${base_url}/get-config-value/global_header`,
-          {
-            headers: userHeader,
-          }
-        );
+  // useEffect(() => {
+  //   const fetchScriptContent = async () => {
+  //     try {
+  //       const response = await fetch(
+  //         `${base_url}/get-config-value/global_header`,
+  //         {
+  //           headers: userHeader,
+  //         }
+  //       );
 
-        const data = await response.json();
-        console.log(data?.data);
+  //       const data = await response.json();
 
-        if (data) {
-          const script = document.createElement("script");
-          script.type = "text/javascript";
-          script.innerHTML = data?.data;
+  //       if (data) {
+  //         const script = document.createElement("script");
+  //         script.type = "text/javascript";
+  //         script.innerHTML = data?.data;
 
-          // Append the script element to the document head
-          document.head.appendChild(script);
+  //         document.head.appendChild(script);
 
-          return () => {
-            // Remove the script element from the document head
-            document.head.removeChild(script);
-          };
-        }
-      } catch (error) {
-        console.error("Error fetching script content:", error);
-      }
-    };
+  //         return () => {
+  //           document.head.removeChild(script);
+  //         };
+  //       }
+  //     } catch (error) {
+  //       console.error("Error fetching script content:", error);
+  //     }
+  //   };
 
-    fetchScriptContent();
-  }, []);
+  //   fetchScriptContent();
+  // }, []);
 
   return (
     <HelmetProvider>

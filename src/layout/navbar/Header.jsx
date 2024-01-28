@@ -41,17 +41,17 @@ const Header = () => {
 
       <form
         onSubmit={handleSubmit}
-        className=" w-[70%] h-[80px] lg:w-[453px] lg:h-[40px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[15px] border border-slate-600"
+        className=" w-[80%] h-[90px] lg:w-[453px] lg:h-[40px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[15px] lg:rounded-[8px] border border-slate-600"
       >
         <input
           type="text"
           value={searchTermState}
           onChange={handleInputChange}
           placeholder="Search Movie/TV Shows"
-          className="w-full h-full border-0 focus:outline-none text-white px-5 bg-[#18181B] rounded-s-[15px] text-[30px] placeholder:text-[20px]"
+          className="w-full h-full border-0 focus:outline-none px-5 bg-[#18181B] rounded-s-[15px] lg:rounded-s-[8px] text-[27px] placeholder:text-[24px] lg:placeholder:text-[16px] lg:text-[14px] text-slate-300"
         />
 
-        <button type="submit" className="text-[28px] text-white px-6 lg:px-4 h-full bg-slate-700 rounded-e-[15px]">
+        <button type="submit" className="text-[40px] lg:text-[24px] text-white px-6 lg:px-4 h-full bg-slate-700 rounded-e-[15px] lg:rounded-e-[8px]">
           <IoSearch />
         </button>
         

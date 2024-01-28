@@ -55,7 +55,8 @@ const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
   };
 
   return (
-    <div className="bg-[#27272A] w-full h-[87px] px-[23px] flex items-center gap-2">
+    <div className="bg-[#27272A] mt-8 w-full pl-16 lg:pl-0 flex items-center gap-4 lg:gap-2">
+
       <PaginationButton
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -78,12 +79,14 @@ const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
           )}
         </React.Fragment>
       ))}
+
       <PaginationButton
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
         Next
       </PaginationButton>
+
     </div>
   );
 };

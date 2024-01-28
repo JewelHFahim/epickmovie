@@ -8,7 +8,7 @@ const DateFormate = ({date}) => {
     day: "numeric",
   });
 
-  return <p className="text-[10px] text-white">{formattedDate}</p>;
+  return <p className="mt-2 text-[20px] lg:text-[10px] text-white">{formattedDate}</p>;
 };
 
 export default DateFormate;

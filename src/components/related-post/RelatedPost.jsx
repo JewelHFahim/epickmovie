@@ -9,7 +9,7 @@ const RelatedPost = ({ id }) => {
   return (
     <div>
       <section className="mt-[33px] p-5">
-        <h3 className="text-[18px] lg:text-[22px] text-[#AEABAB] font-[700] font-roboto">
+        <h3 className="text-[50px] lg:text-[24px] text-[#AEABAB] font-[700] font-roboto">
           RELATED POSTS
         </h3>
 

@@ -10,7 +10,7 @@ const UploadedDate = ({details}) => {
     const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
     return (
-        <p className="text-[13px] text-white font-roboto"> { daysDifference === 0 ? "Today Uploaded" : `${daysDifference} Days Ago`}</p>
+        <p className="text-[20px] lg:text-[13px] text-white font-roboto"> { daysDifference === 0 ? "Today Uploaded" : `${daysDifference} Days Ago`}</p>
     );
 };
 

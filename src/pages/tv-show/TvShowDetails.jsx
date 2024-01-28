@@ -41,19 +41,19 @@ const TvShowDetails = () => {
         {/* >>>>>>> Column One <<<<<<< */}
         <div className="w-full  lg:w-[70%]">
           <div>
-            <h4 className=" text-[20px] lg:text-[24px] text-white font-aclonica max-w-[748px]">
+            <h4 className=" text-[50px] lg:text-[24px] text-white font-aclonica lg:max-w-[748px]">
               {details?.post_title}
             </h4>
 
             <div className=" flex items-center gap-2 mt-2">
-              <img src={calender} alt="" className="w-[12px] h-[12px]" />
+              <img src={calender} alt="" className="w-[20px] h-[20px] lg:w-[12px] lg:h-[12px]" />
               <UploadedDate details={details} />
             </div>
 
             {/* Post Content */}
             {details?.post_content ? (
-              <div className="mt-[11px] lg:mt-[48px] max-w-[745px]">
-                <p className="text-[13px] lg:text-[15px]  text-white font-roboto">
+              <div className="mt-[11px] lg:mt-[48px] lg:max-w-[745px]">
+                <p className="text-[30px] lg:text-[15px]  text-white font-roboto">
                   {details?.post_content}
                 </p>
               </div>
@@ -62,7 +62,7 @@ const TvShowDetails = () => {
             )}
 
             <div className="my-[11px] lg:my-[15px]">
-              <p className="text-[18px] lg:text-[24px] text-[#217703] font-[600] font-roboto">
+              <p className="text-[50px] lg:text-[24px] text-[#217703] font-[600] font-roboto">
                 Series Details :
               </p>
             </div>
@@ -70,24 +70,24 @@ const TvShowDetails = () => {
             {/* ============>> Poster Card <<============ */}
             <DetailsPosterCard details={details} />
 
-            <div className="max-w-[715px] mt-[13px]">
-              <h3 className="text-[18px] lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center">
+            <div className="lg:max-w-[715px] mt-[13px]">
+              <h3 className="text-[50px] leading-none lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center">
                 <a href={details?.guid}> {details?.post_title} ~ EpicSeries </a>
               </h3>
             </div>
 
             {/* Static Data */}
-            <div className="max-w-[715px] mt-[13px] lg:mt-[30px] font-roboto">
-              <h3 className="text-[18px] lg:text-[24px] font-[600] text-[#217703]">
+            <div className="lg:max-w-[715px] mt-[13px] lg:mt-[30px] font-roboto">
+              <h3 className="text-[50px] lg:text-[24px] font-[600] text-[#217703]">
                 Storyline:
               </h3>
-              <p className="text-white text-[16px] lg:text-[20px] mt-4">
+              <p className="text-white text-[30px] lg:text-[20px] mt-4">
                 {details?.post_content}
               </p>
             </div>
 
             <div className="mt-[13px] lg:mt-[30px] font-roboto">
-              <h3 className="text-[18px] lg:text-[24px] font-[600] text-[#217703] text-center lg:text-left">
+              <h3 className="text-[50px] lg:text-[24px] font-[600] text-[#217703] text-center lg:text-left">
                 Screenshots:
               </h3>
             </div>
@@ -96,23 +96,18 @@ const TvShowDetails = () => {
           {/* ==========>> SCREEN SHOTS <<=============*/}
           <div className="flex flex-col gap-4 mt-3">
             {details?.screenshots?.slice(0, 3)?.map((item, i) => (
-              <img
-                key={i}
-                src={item}
-                alt=""
-                className="w-full h-[156px] lg:h-[400px] object-cover"
-              />
+              <img key={i} src={item} alt="" className="w-full h-[400px] object-cover"/>
             ))}
           </div>
 
-          <div className="max-w-[745px] my-[28px]">
-            <p className="text-[16px] lg:text-[20px] text-white font-roboto font-[700] text-center">
+          <div className="lg:max-w-[745px] my-[28px]">
+            <p className="text-[30px] text-white font-roboto font-[700] text-center">
               {details?.post_title}
             </p>
           </div>
 
           {/* ==========>> DOWNLOAD BUTTOJN <<=============*/}
-          <div className="max-w-[400px] mx-auto">
+          <div className="w-[70%] lg:max-w-[400px] mx-auto">
             <Accrodion details={details} url={"jkj"} />
           </div>
 

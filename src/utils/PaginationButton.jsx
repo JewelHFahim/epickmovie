@@ -5,7 +5,7 @@ const PaginationButton = ({ children, className, ...proops }) => {
     <button
       {...proops}
       className={twMerge(
-        "flex justify-center items-center bg-[#494949] rounded-[6px] p-[16px] lg:p-5 min-w-[8px] h-[15px] text-[12px] font-[600] text-white",
+        "flex justify-center items-center bg-[#494949] rounded-[6px] w-[80px] h-[80px] lg:w-[50px] lg:h-[50px]  text-[30px] lg:text-[16px] font-[600] text-white",
         className
       )}
     >

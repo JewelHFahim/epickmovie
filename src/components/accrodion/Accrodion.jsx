@@ -24,7 +24,7 @@ export default function Accrodion({ details }) {
                 <button
                   className={`${
                     activeElement === item && "text-primary"
-                  } group relative flex w-full mx-auto items-center rounded-lg border-0 hover:bg-gradient-to-t from-[#ff1818] to-[#fdd506]  hover:text-white bg-white px-5 py-2 text-left text-slate-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none`}
+                  } group relative flex w-full mx-auto items-center rounded-lg border-0 hover:bg-gradient-to-t from-[#ff1818] to-[#fdd506]  hover:text-white bg-white px-5 text-left text-slate-800 transition [overflow-anchor:none] hover:z-[2] focus:z-[3] focus:outline-none text-[30px] lg:text-[16px] font-semibold py-5 lg:py-2`}
                   type="button"
                   onClick={() => handleClick(item)}
                   aria-expanded={activeElement === item}
@@ -33,21 +33,14 @@ export default function Accrodion({ details }) {
                   {item}
 
                   <span
-                    className={`${
-                      activeElement === item
-                        ? "rotate-[-180deg] -mr-1"
-                        : "rotate-0 fill-[#212529]  dark:fill-white"
-                    } ml-auto h-5 w-5 shrink-0 fill-[#336dec] transition-transform duration-200 ease-in-out motion-reduce:transition-none dark:fill-blue-300`}
+                    className={`${activeElement === item ? "rotate-[-180deg] -mr-1" : "rotate-0 fill-[#212529]  dark:fill-white"} ml-auto h-8 w-8 shrink-0 fill-[#336dec] transition-transform duration-200 ease-in-out motion-reduce:transition-none dark:fill-blue-300 `}
                   >
-                    <IoIosArrowDown className="h-6 w-6" />
+                    <IoIosArrowDown/>
                   </span>
                 </button>
               </h2>
 
-              <TECollapse
-                show={activeElement === item}
-                className=" mt-0 !rounded-b-none !shadow-none"
-              >
+              <TECollapse show={activeElement === item} className=" mt-0 !rounded-b-none !shadow-none" style={{height: "90px"}}>
                 <div className="px-5 flex flex-col gap-1">
                   {myArray[item]?.map((itm, i) => (
                     <DownloadButton key={i} url={itm?.download_link}>

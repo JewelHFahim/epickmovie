@@ -10,10 +10,10 @@ const JoinTelegramBtn = () => {
         href={joinTelegram?.data}
         target="_blank"
         rel="noopener noreferrer"
-        className="flex justify-center items-center gap-2 w-[211px] h-[43px] transition duration-200 hover:bg-gradient-to-t from-[#4fbf98] to-[#39add3] bg-[#FCD8FF] rounded-[9px]"
+        className="flex justify-center items-center gap-4 lg:gap-2 w-[60%] h-[90px] lg:w-[211px] lg:h-[43px] transition-transform ease-in-out duration-200 hover:bg-gradient-to-t from-[#4fbf98] to-[#39add3] bg-[#FCD8FF] rounded-[9px] text-black hover:text-white"
       >
-        <img src={telegraqm} alt="" className="w-[22px] h-[22px]" />
-        <p className="text-[15px] text-black font-[700] font-roboto">
+        <img src={telegraqm} alt="" className="w-[50px] h-[50px] lg:w-[22px] lg:h-[22px]" />
+        <p className="text-[30px] lg:text-[15px]  hover:text-white font-[700] font-roboto">
           Join Our Telegram
         </p>
       </a>
