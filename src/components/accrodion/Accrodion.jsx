@@ -40,7 +40,7 @@ export default function Accrodion({ details }) {
                 </button>
               </h2>
 
-              <TECollapse show={activeElement === item} className=" mt-0 !rounded-b-none !shadow-none" style={{height: "90px"}}>
+              <TECollapse show={activeElement === item} className=" mt-0 !rounded-b-none !shadow-none" style={{height: "100px"}}>
                 <div className="px-5 flex flex-col gap-1">
                   {myArray[item]?.map((itm, i) => (
                     <DownloadButton key={i} url={itm?.download_link}>

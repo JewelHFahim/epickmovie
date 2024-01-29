@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import PaginationButton from "../../utils/PaginationButton";
+import PaginationButton from "../../../utils/PaginationButton";
 
-const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
+const MoviePagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
 
   const totalData = perPgaeMovie?.data?.total;
 
@@ -14,7 +14,7 @@ const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("currentPage", JSON.stringify(currentPage || 1));
+    localStorage.setItem("MovieCurrentPage", JSON.stringify(currentPage || 1));
   }, [currentPage]);
 
 
@@ -60,7 +60,7 @@ const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
   };
 
   return (
-    <div className="bg-[#27272A] mt-8 w-full px-4 lg:pl-0 flex items-center gap-4 lg:gap-2">
+    <div className="bg-[#27272A] mt-8 w-full p-4  flex flex-wrap items-center gap-5 lg:gap-2">
 
       <PaginationButton
         onClick={() => handlePageChange(currentPage - 1)}
@@ -94,6 +94,7 @@ const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
 
     </div>
   );
+
 };
 
-export default Pagination;
+export default MoviePagination;

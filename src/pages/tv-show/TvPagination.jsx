@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import PaginationButton from "../../utils/PaginationButton";
 
-const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
+const TvPagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
 
   const totalData = perPgaeMovie?.data?.total;
 
@@ -14,7 +14,7 @@ const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
   };
 
   useEffect(() => {
-    localStorage.setItem("currentPage", JSON.stringify(currentPage || 1));
+    localStorage.setItem("tvCurrentPage", JSON.stringify(currentPage));
   }, [currentPage]);
 
 
@@ -96,4 +96,4 @@ const Pagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
   );
 };
 
-export default Pagination;
+export default TvPagination;

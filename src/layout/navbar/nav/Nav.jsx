@@ -13,9 +13,7 @@ import {
   useYearListQuery,
 } from "../../../redux/features/movies/movieApi";
 import { useDispatch } from "react-redux";
-import {
-  collectFilteredItem,
-} from "../../../redux/features/search/searchSlice";
+import { collectFilteredItem } from "../../../redux/features/search/searchSlice";
 import { Link } from "react-router-dom";
 import { BiMovie } from "react-icons/bi";
 import { useJoinTelegramUserQuery } from "../../../redux/features/settings/settingApi";
@@ -52,7 +50,6 @@ const Nav = () => {
   return (
     <nav className="menu bg-[#494949] w-full h-[54px]">
       <ul>
-
         <li className="main-menu">
           <a href="/" className=" flex items-center gap-2">
             <img src={home} alt="" className="w-[25px] h-[25px]" /> Home
@@ -75,7 +72,7 @@ const Nav = () => {
           <ul>
             {genreList?.data?.map((item, i) => (
               <li key={i} className="">
-                <Link  to="/filter-list" onClick={() => handleGenre(item?.slug)} >
+                <Link to="/filter-list" onClick={() => handleGenre(item?.slug)}>
                   {item?.name}
                 </Link>
               </li>
@@ -108,7 +105,10 @@ const Nav = () => {
           <ul>
             {combinedQuality?.map((item, i) => (
               <li key={i}>
-                <Link to="/filter-list" onClick={() => handleQuality(item?.slug)} >
+                <Link
+                  to="/filter-list"
+                  onClick={() => handleQuality(item?.slug)}
+                >
                   {item?.name}
                 </Link>
               </li>
@@ -129,7 +129,12 @@ const Nav = () => {
         </li>
 
         <li className="main-menu">
-          <a href={joinTelegram?.data} className="flex items-center gap-2" target="_blank" rel="noopener noreferrer">
+          <a
+            href={joinTelegram?.data}
+            className="flex items-center gap-2"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img src={telegram} alt="" className="w-[20px] h-[20px]" />
             Join Telegram
           </a>

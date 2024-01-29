@@ -11,6 +11,7 @@ import UploadedDate from "../../utils/uploaded-date/UploadedDate";
 import StaticContent from "../../utils/Content/StaticContent";
 import DetailsPosterCard from "../../components/details-poster-card/DetailsPosterCard";
 import { Helmet } from "react-helmet";
+import CountryList from "../../components/advertisement/CountryList";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -107,12 +108,21 @@ const TvShowDetails = () => {
           </div>
 
           {/* ==========>> DOWNLOAD BUTTOJN <<=============*/}
-          <div className="w-[70%] lg:max-w-[400px] mx-auto">
+          <div className="w-[80%] lg:max-w-[400px] mx-auto">
             <Accrodion details={details} url={"jkj"} />
           </div>
 
           {/* ===========>> TELEGRAM BUTTON <<=============*/}
           <JoinTelegramBtn />
+
+          {/* =============>> COUNTRY LIST <<===============*/}
+
+          <div className="mt-16 lg:hidden ">
+            <h2 className="text-white text-[40px] font-medium px-4">Browse By Country:</h2>
+          <div className="bg-[#1b1b1e] p-4  h-[300px] overflow-y-auto  grid grid-cols-3 gap-4">
+            <CountryList />
+          </div>
+          </div>
         </div>
 
         {/* >>>>>>> Column Two <<<<<<<<*/}

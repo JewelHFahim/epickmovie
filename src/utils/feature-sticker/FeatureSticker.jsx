@@ -1,6 +1,6 @@
 const FeatureSticker = ({ item }) => {
   return (
-    <div className={` max-w-[170px] px-2 py-[6px] bg-[#ff1818]  text-white text-[10px] rounded-[5px] shadow-2xl`}>
+    <div className={`w-[200px] h-[50px] lg:w-[120px] lg:h-[30px] bg-[#ff1818]  text-white text-[18px] lg:text-[12px] rounded-[5px] shadow-2xl flex justify-center items-center font-[700]`}>
       {item?.stickerLabel}
     </div>
   );

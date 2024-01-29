@@ -5,7 +5,7 @@ const JoinTelegramBtn = () => {
   const { data: joinTelegram } = useJoinTelegramUserQuery();
 
   return (
-    <div className="flex justify-center mt-[21px] lg:mt-[36px]">
+    <div className="flex justify-center mt-[50px] lg:mt-[36px]">
       <a
         href={joinTelegram?.data}
         target="_blank"
