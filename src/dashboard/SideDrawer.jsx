@@ -14,6 +14,8 @@ import {
   useSiteLogoUserQuery,
   useSiteNameUSerQuery,
 } from "../redux/features/settings/settingApi";
+import { GrGallery } from "react-icons/gr";
+
 
 // NESTED MENUS
 const Menu = (props) => {
@@ -83,6 +85,14 @@ const Sidebar = () => {
       href: "/admin/dashboard/db-series",
       icon: <RiMovieLine />,
     },
+
+    {
+      name: "Gallery",
+      href: "/admin/dashboard/gallery",
+      icon: <GrGallery />,
+    }
+
+
   ];
 
   const navsFooter = [
@@ -153,7 +163,7 @@ const Sidebar = () => {
                 </li>
               ))}
 
-              {/* ==================>> NESTED MENUES <<=====================*/}
+              {/* ==================>> NESTED MENUES <<======================*/}
               <li>
                 <Menu items={nestedTerms}>
                   <PiTerminalWindow className="text-lg" /> All Terms
@@ -161,7 +171,7 @@ const Sidebar = () => {
               </li>
             </ul>
 
-            {/* =====================>> FOOTER MENUES <<======================*/}
+            {/* =====================>> FOOTER MENUES <<=====================*/}
             <div className="pt-2 mt-2 border-t">
               <ul className="text-sm font-medium">
                 {navsFooter.map((item, idx) => (

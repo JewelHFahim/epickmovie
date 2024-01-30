@@ -8,17 +8,20 @@ import { Helmet } from "react-helmet";
 import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
 import MoviePagination from "./MoviePagination";
 
+
 const Movies = () => {
+
   const storedPage = JSON.parse(localStorage.getItem("MovieCurrentPage")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
 
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
   const { data: siteName } = useSiteNameUSerQuery();
 
-  console.log(perPgaeMovie);
-
   useEffect(() => {
     localStorage.setItem("MovieCurrentPage", JSON.stringify(currentPage));
+    return () => {
+      localStorage.removeItem("MovieCurrentPage");
+    };
   }, [currentPage]);
 
   return (

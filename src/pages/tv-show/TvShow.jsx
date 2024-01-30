@@ -17,6 +17,9 @@ const TvShow = () => {
 
   useEffect(() => {
     localStorage.setItem("tvCurrentPage", JSON.stringify(currentPage));
+    return () => {
+      localStorage.removeItem("tvCurrentPage");
+    };
   }, [currentPage]);
 
   return (

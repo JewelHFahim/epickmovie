@@ -22,7 +22,7 @@
   border-radius: 5px;
 }
 
-.menu ul li ul li {
+.menu ul li ul .subM {
   z-index: 999;
   min-width: 150px;
   background-color: #000000;
@@ -30,8 +30,9 @@
   color: rgb(200, 197, 197);
 }
 
-.menu ul li ul li:hover {
+.menu ul li ul .subM:hover {
   background-color: #1f1f23;
+  color: blue;
 }
 
 .menu ul li ul li a {
@@ -39,11 +40,6 @@
   min-width: 100%;
   font-size: 16px;
   font-weight: 600;
-}
-
-.menu ul li ul li:hover {
-  color: blue;
-  transition-duration: 0.1s;
 }
 
 .menu ul li:hover {
@@ -58,11 +54,7 @@
   display: none;
   flex-direction: column;
   border-radius: 0;
-  max-height: 650px;
-}
-
-.menu ul ul li {
-  min-width: 100%;
+  max-height: 550px;
 }
 
 .menu ul li:hover > ul {

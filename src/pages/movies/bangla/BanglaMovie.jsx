@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import MovieCard from "../../../components/movie-card/MovieCard";
-import Pagination from "../../../components/pagination/Pagination";
 import { usePerPageBengaliMovieListQuery } from "../../../redux/features/movies/movieApi";
 import Title from "../../../utils/Title";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
 import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
+import BanglaMoviePagination from "./BanglaMoviePagination";
 
 const BanglaMovie = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-  const { data: perPgaeMovie, isLoading } =
-    usePerPageBengaliMovieListQuery(currentPage);
-    const { data: siteName } = useSiteNameUSerQuery();
+  const storedPage = JSON.parse(localStorage.getItem("banglaPagination")) || 1;
+  const [currentPage, setCurrentPage] = useState(storedPage || 1);
+
+  const { data: perPgaeMovie, isLoading } = usePerPageBengaliMovieListQuery(currentPage);
+  const { data: siteName } = useSiteNameUSerQuery();
+
+  useEffect(() => {
+    localStorage.setItem("banglaPagination", JSON.stringify(currentPage));
+    return () => {
+      localStorage.removeItem("banglaPagination");
+    };
+  }, [currentPage]);
 
 
   return (
@@ -23,7 +31,7 @@ const BanglaMovie = () => {
         </Helmet>
 
       {/* ==================>> MOVIES <<==================*/}
-      <div className="px-10 py-5">
+      <div className="px-10 lg:px-0 py-5">
         <Title>Bengali</Title>
       </div>
 
@@ -43,11 +51,11 @@ const BanglaMovie = () => {
       )}
       </div>
 
-      <Pagination
+      <BanglaMoviePagination
         currentPage={currentPage}
         setCurrentPage={setCurrentPage}
         perPgaeMovie={perPgaeMovie}
-      ></Pagination>
+      />
     </div>
   );
 };

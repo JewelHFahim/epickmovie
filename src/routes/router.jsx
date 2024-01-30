@@ -36,6 +36,7 @@ import Settings from "../dashboard/settings/Settings";
 import Help from "../dashboard/help/Help";
 import ResetPassword from "../dashboard/users/ResetPassword";
 import SetNewPass from "../dashboard/users/SetNewPass.jsx";
+import Gallery from "../dashboard/dashboard/gallery/Gallery.jsx";
 
 const router = createBrowserRouter([
   
@@ -209,6 +210,11 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard/season-trash",
         element: <SeasonTrash />,
+      },
+
+      {
+        path: "/admin/dashboard/gallery",
+        element: <Gallery />,
       },
     ],
   },

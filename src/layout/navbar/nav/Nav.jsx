@@ -6,6 +6,7 @@ import quality from "../../../assets/death.svg";
 import webSer from "../../../assets/www.svg";
 import bangla from "../../../assets/video.svg";
 import telegram from "../../../assets/telegram.svg";
+import movie from "../../../assets/home2.svg";
 import {
   useGenreListQuery,
   usePixelQualityClientQuery,
@@ -15,7 +16,6 @@ import {
 import { useDispatch } from "react-redux";
 import { collectFilteredItem } from "../../../redux/features/search/searchSlice";
 import { Link } from "react-router-dom";
-import { BiMovie } from "react-icons/bi";
 import { useJoinTelegramUserQuery } from "../../../redux/features/settings/settingApi";
 
 const Nav = () => {
@@ -35,110 +35,55 @@ const Nav = () => {
     columns.push(genreList?.data?.slice(i, i + itemsPerColumn));
   }
 
-  const handleGenre = (data) => {
-    dispatch(collectFilteredItem(data));
+  const handleFilteredItem = (FilteredItem) => {
+    console.log(FilteredItem)
+    dispatch(collectFilteredItem(FilteredItem));
   };
 
-  const handleYear = (year) => {
-    dispatch(collectFilteredItem(year));
-  };
-
-  const handleQuality = (quality) => {
-    dispatch(collectFilteredItem(quality));
-  };
+  const menus = [
+    { title: "Home", path: "/", isDrapdown: false, icon: home },
+    { title: "Movie", path: "/movies", isDrapdown: false, icon: movie },
+    { title: "Genre", path: "", isDrapdown: true, subMenu: genreList?.data, icon: link },
+    { title: "Year", path: "", isDrapdown: true, subMenu: yearList?.data, icon: calender },
+    { title: "Quality", path: "",  isDrapdown: true, subMenu: combinedQuality, icon: quality },
+    { title: "Web Series", path: "/tv-show", isDrapdown: false, icon: webSer },
+    { title: "Bangla", path: "/bangla", isDrapdown: false, icon: bangla },
+    { title: "Join Telegram", path: `${joinTelegram?.data}`, isDrapdown: false, icon: telegram , newTab: true},
+  ];
 
   return (
     <nav className="menu bg-[#494949] w-full h-[54px]">
       <ul>
-        <li className="main-menu">
-          <a href="/" className=" flex items-center gap-2">
-            <img src={home} alt="" className="w-[25px] h-[25px]" /> Home
-          </a>
-        </li>
+        {menus.map((item, i) => (
+          <li key={i} className="main-menu">
 
-        {/* =========>> MOVIE <<=========== */}
-        <li className="main-menu">
-          <a href="/movies" className=" flex items-center gap-2">
-            <BiMovie className="w-[25px] h-[25px]" />
-            Movie
-          </a>
-        </li>
+            {item?.isDrapdown ? (
+              <Link to={item?.path} className=" flex items-center gap-2">
+                <img src={item?.icon} alt="" className="w-[23px] h-[23px]" />
+                {item?.title}
+              </Link>
+            ) : item.newTab ? (
+              <a href={item?.path} target="_blank" rel="noreferrer" className=" flex items-center gap-2">
+                <img src={item?.icon} alt="" className="w-[23px] h-[23px]" />
+                {item?.title}
+              </a>
+            ) : (
+              <a href={item?.path} className=" flex items-center gap-2">
+                <img src={item?.icon} alt="" className="w-[23px] h-[23px]" />
+                {item?.title}
+              </a>
+            )
+          }
 
-        {/* =========>> GENRE <<=========== */}
-        <li className="main-menu">
-          <a href="#" className=" flex items-center gap-2">
-            <img src={link} alt="" className="w-[23px] h-[23px]" /> Genre
-          </a>
-          <ul>
-            {genreList?.data?.map((item, i) => (
-              <li key={i} className="">
-                <Link to="/filter-list" onClick={() => handleGenre(item?.slug)}>
+            <ul>
+              {item?.subMenu?.map((item, i) => (
+                <Link key={i} to="/filter-list" onClick={() => handleFilteredItem(item?.slug)} className="subM">
                   {item?.name}
                 </Link>
-              </li>
-            ))}
-          </ul>
-        </li>
-
-        {/* ==========>> YEAR <<=========== */}
-        <li className="main-menu">
-          <a href="#" className=" flex items-center gap-2">
-            <img src={calender} alt="" className="w-[21px] h-[20px]" /> Year
-          </a>
-
-          <ul className="grid">
-            {yearList?.data?.map((item, i) => (
-              <li key={i}>
-                <Link to="/filter-list" onClick={() => handleYear(item?.slug)}>
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </li>
-
-        {/* =========>> QUALITY <<========= */}
-        <li className="main-menu">
-          <a href="#" className=" flex items-center gap-2">
-            <img src={quality} alt="" className="w-[21px] h-[21px]" /> Quality
-          </a>
-          <ul>
-            {combinedQuality?.map((item, i) => (
-              <li key={i}>
-                <Link
-                  to="/filter-list"
-                  onClick={() => handleQuality(item?.slug)}
-                >
-                  {item?.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </li>
-
-        <li className="main-menu">
-          <a href="/tv-show" className=" flex items-center gap-2">
-            <img src={webSer} alt="" className="w-[22px] h-[22px]" /> Web Series
-          </a>
-        </li>
-
-        <li className="main-menu">
-          <a href="/bangla" className=" flex items-center gap-2">
-            <img src={bangla} alt="" className="w-[20px] h-[20px]" /> Bangla
-          </a>
-        </li>
-
-        <li className="main-menu">
-          <a
-            href={joinTelegram?.data}
-            className="flex items-center gap-2"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <img src={telegram} alt="" className="w-[20px] h-[20px]" />
-            Join Telegram
-          </a>
-        </li>
+              ))}
+            </ul>
+          </li>
+        ))}
       </ul>
     </nav>
   );

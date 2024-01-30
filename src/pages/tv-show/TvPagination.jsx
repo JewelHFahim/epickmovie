@@ -11,6 +11,7 @@ const TvPagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
   // Function to handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   useEffect(() => {
@@ -60,7 +61,7 @@ const TvPagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
   };
 
   return (
-    <div className="bg-[#27272A] mt-8 w-full px-4 lg:pl-0 flex items-center gap-4 lg:gap-2">
+    <div className="bg-[#27272A] mt-8 w-full pl-10 lg:pl-4 p-0 lg:p-4  flex flex-wrap items-center gap-5 lg:gap-2">
 
       <PaginationButton
         onClick={() => handlePageChange(currentPage - 1)}

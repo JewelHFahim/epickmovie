@@ -14,11 +14,20 @@ const RelatedPost = ({ id }) => {
         </h3>
 
         <div className="flex justify-center items-center">
-        <div className="mt-[23px] grid grid-cols-2 lg:grid-cols-5 items-center gap-[25px] ">
+
+        <div className="hidden mt-[23px] lg:grid grid-cols-5 items-center gap-[25px] ">
           {suggessions?.data?.map((item, i) => (
             <CardRelatedPost item={item} key={i}/>
           ))}
         </div>
+
+        <div className=" mt-[23px] lg:hidden grid grid-cols-2 items-center gap-[25px] ">
+          {suggessions?.data?.slice(0,2)?.map((item, i) => (
+            <CardRelatedPost item={item} key={i}/>
+          ))}
+        </div>
+
+
         </div>
       </section>
     </div>
