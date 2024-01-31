@@ -17,7 +17,7 @@ const CardRelatedPost = ({ item }) => {
 
         <img src={item?.poster_image_url} alt="" className="w-full h-full rounded-tl-[10px] rounded-tr-[10px] bg-[#27272A]"/>
         <p className="text-[30px] lg:text-[14px] text-white font-[700] py-4 px-2  bg-[#27272A] h-full rounded-b-[10px]"> {
-        item?.post_title?.length <= 80 ? item?.post_title : item?.post_title.slice(0,80) 
+        item?.post_title?.length <= 70 ? item?.post_title : item?.post_title.slice(0,70) 
         }</p>
 
         {item?.stickerLabel?.length > 0 && (

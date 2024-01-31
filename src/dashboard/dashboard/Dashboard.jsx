@@ -43,8 +43,8 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="w-full h-full p-6">
-      <div className="bg-slate-50 p-4">
+    <div className="w-full h-full p-8">
+      <div className="bg-gray-100 p-2 shadow-md rounded-md">
 
         <div className="w-full mb-2 pr-2 flex items-center justify-between">
           <p className="underline text-[20px] font-[500] text-slate-900"> Dashboard </p>

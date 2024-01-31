@@ -4,14 +4,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { setBulkData, singleMovieImport } from "../../../redux/features/movies/movieSlice";
 import ImageLoader from "../../../utils/loading/img-loader/ImageLoader";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
-import { useAlreadyUploadedMovieSeriesIdsQuery } from "../../../redux/features/movies/movieApi";
+import { useAlreadyUploadedMoviesQuery } from "../../../redux/features/movies/movieApi";
 
 const MovieGallery = ({ movies }) => {
 
   const dispatch = useDispatch();
   const { isLoading, status, message } = useSelector((state) => state.movie);
   const [selectedIds, setSelectedIds] = useState([]);
-  const {data: uploadedIds } = useAlreadyUploadedMovieSeriesIdsQuery();
+  const {data: uploadedIds } = useAlreadyUploadedMoviesQuery();
+  console.log(uploadedIds);
 
 
   const handleImageClick = async (id) => {
@@ -84,8 +85,7 @@ const MovieGallery = ({ movies }) => {
 
       <div style={{ display: "flex", flexWrap: "wrap" }}>
         {movies?.results?.map((image) => (
-          <div key={image.id}
-            onClick={() => {
+          <div key={image.id} onClick={() => {
               if (!uploadedIds?.data?.includes(image.id.toString())) {
                 handleImageClick(image.id);
               }}}

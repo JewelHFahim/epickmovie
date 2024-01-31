@@ -19,6 +19,7 @@ const Register = () => {
   const { data: logo } = useSiteLogoUserQuery();
 
 
+
   const onSubmit = (data) => {
     const userData = {
       full_name: data.full_name,
@@ -42,7 +43,7 @@ const Register = () => {
         <div className="px-10 py-4">
 
           <div className="flex justify-center mx-auto">
-            <img className="w-auto h-7 sm:h-8" src={logo} alt=""/>
+            <img className="w-auto h-7 sm:h-8" src={logo.data} alt=""/>
           </div>
 
           <p className="mt-1 text-center">Register here</p>

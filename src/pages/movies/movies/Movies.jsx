@@ -16,6 +16,7 @@ const Movies = () => {
 
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
   const { data: siteName } = useSiteNameUSerQuery();
+  console.log(perPgaeMovie)
 
   useEffect(() => {
     localStorage.setItem("MovieCurrentPage", JSON.stringify(currentPage));

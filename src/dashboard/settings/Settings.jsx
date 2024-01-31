@@ -79,18 +79,18 @@ const Settings = () => {
   };
 
   const inputStyle =
-    "block w-full px-4 py-2 mt-2 text-gray-700 bg-white border border-gray-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring";
+    "block w-full px-4 py-2 mt-2 text-slate-300 border border-slate-500 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring bg-slate-800";
 
   return (
     <div>
+
       <section className="px-[20px] lg:px-[200px] py-[20px] lg:py-[20px] lg:pb-[70px] w-full h-full mx-auto bg-gray-800">
+
         <h2 className="text-lg font-semibold text-white">Account settings</h2>
 
         {/* ====================>> FORM START <<================== */}
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 p-4 border border-slate-700"
-        >
+        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 p-4 border shadow-md bg-slate-700 border-slate-600">
+
           {/* =====================>> SITE NAME <<======================= */}
           <div>
             <label className="text-gray-200"> Site Name </label>
@@ -231,17 +231,19 @@ const Settings = () => {
         </form>
 
         {/* ======================>> Fav Icon <<==================== */}
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-4 mt-[40px] border border-slate-700 p-4">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-4 mt-[40px] border shadow-md bg-slate-800 border-slate-600 p-4">
           <FavIconUpLoader />
           <LogoUploader />
         </div>
 
         {/* =====================>> Quick Menu <<=================== */}
-        <div className=" mt-[40px] border border-slate-700 p-4">
+        <div className=" mt-[40px] shadow-md bg-slate-800 border border-slate-600 p-4">
           <label className="text-gray-200 pb-2"> Quick Menu</label>
           <MultiSelectMenu />
         </div>
+
       </section>
+
     </div>
   );
 };

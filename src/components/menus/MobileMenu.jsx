@@ -120,8 +120,12 @@ const MobileMenu = () => {
           <div className={`w-full flex justify-between items-center p-2  border-[#2D2C2C] borde`}>
             <div onClick={() => setState(!state)} className="w-full py-2">
               <button className="w-full flex justify-between items-center text-white">
-                <GiHamburgerMenu className="text-[50px]" />
-                {state && <IoClose className="text-[50px]" />}
+                {/* <GiHamburgerMenu className="text-[50px]" /> */}
+                <p className="text-[35px] font-medium">MENU</p>
+                
+
+                {state ? <IoClose className="text-[50px]" /> : <GiHamburgerMenu className="text-[50px]" /> }
+
               </button>
             </div>
           </div>

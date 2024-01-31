@@ -4,13 +4,14 @@ import { useDispatch, useSelector } from "react-redux";
 import ImageLoader from "../../../utils/loading/img-loader/ImageLoader";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { setBulkData, singleTvShowImport } from "../../../redux/features/tv-show/tvShowSlice";
-import { useAlreadyUploadedMovieSeriesIdsQuery } from "../../../redux/features/movies/movieApi";
+import { useAlreadyUploadedTvShowsQuery } from "../../../redux/features/movies/movieApi";
 
 const TvShowGallery = ({ tvShows }) => {
   const dispatch = useDispatch();
   const { isLoading, status } = useSelector((state) => state.movie);
   const [selectedIds, setSelectedIds] = useState([]);
-  const {data: uploadedIds } = useAlreadyUploadedMovieSeriesIdsQuery();
+  const {data: uploadedIds } = useAlreadyUploadedTvShowsQuery();
+  console.log(uploadedIds)
 
   const handleImageClick = async (id) => {
     id = parseInt(id, 10);

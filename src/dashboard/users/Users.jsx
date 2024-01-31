@@ -5,8 +5,8 @@ const Users = () => {
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
 
   return (
-    <div className=" mx-auto p-10">
-      
+    <div className=" mx-auto p-8">
+      <div className="p-2 shadow-md rounded-md border">
       <div className="items-start justify-between md:flex">
         <div className="max-w-lg">
           <h3 className="text-gray-800 text-xl font-bold sm:text-2xl"> Members </h3>
@@ -68,6 +68,7 @@ const Users = () => {
             ))}
           </tbody>
         </table>
+      </div>
       </div>
     </div>
   );

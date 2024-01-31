@@ -4,7 +4,6 @@ const movieApi = apiSlice.injectEndpoints({
 
   endpoints: (builder) => ({
 
-    
     // ========================>> ALL MOVIES <<===========================
     movieList: builder.query({
       query: () => "/movie-posts",
@@ -73,6 +72,16 @@ const movieApi = apiSlice.injectEndpoints({
     // #####################################################################
     //   ############################## ADMIN ROUTES ######################
     // ####################################333##############################
+
+    // =====================>> CREATE MOVIE <<===============
+    createMovie: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: "/admin/create-movie",
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
 
     // =====================>> SINGLE MOVIE IMPORT(MUTATION) <<===============
     singleMovieImport: builder.mutation({
@@ -194,8 +203,13 @@ const movieApi = apiSlice.injectEndpoints({
     }),
 
     // ================>> ALREADY UPLOADED MOVIE/SERIES <<====================
-    alreadyUploadedMovieSeriesIds: builder.query({
-      query: () => `/admin/get-active-tmdb-ids`,
+    alreadyUploadedMovies: builder.query({
+      query: () => `/admin/movie-active-tmdb-ids`,
+      providesTags: ["EpicMovies"],
+    }),
+
+    alreadyUploadedTvShows: builder.query({
+      query: () => `/admin/tvshow-active-tmdb-ids`,
       providesTags: ["EpicMovies"],
     }),
 
@@ -209,6 +223,7 @@ export const {
   usePerPgaeMovieQuery,
   useGenreListQuery,
   useYearListQuery,
+  useCreateMovieMutation,
   useSingleMovieImportMutation,
   useBulkMovieImportMutation,
   useAdminMovieDetailsQuery,
@@ -229,6 +244,7 @@ export const {
   usePrintQualityClientQuery,
   useAudListClientQuery,
   useCountryListClientQuery,
-  useAlreadyUploadedMovieSeriesIdsQuery
+  useAlreadyUploadedMoviesQuery,
+  useAlreadyUploadedTvShowsQuery,
 } = movieApi;
 export default movieApi;

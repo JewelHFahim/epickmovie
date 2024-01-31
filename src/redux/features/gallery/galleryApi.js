@@ -11,9 +11,10 @@ const galleryApi = apiSlice.injectEndpoints({
 
     // ===================>> DELETE IMAGE <<=======================
     deleteImage: builder.mutation({
-      query: (url) => ({
-        method: "DELETE",
-        url: `/admin/delete-image/${url}`,
+      query: (data) => ({
+        method: "POST",
+        url: `/admin/delete-image`,
+        body: data
       }),
       invalidatesTags: ["EpicMovies"],
     }),

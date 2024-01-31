@@ -23,7 +23,9 @@ const EditMovies = () => {
   );
 
   const onSubmit = (data) => {
+
     const selectedGeneres = selectedOptions?.map((item) => item?.value);
+    
     const updatedData = { ...data, genre_ids: selectedGeneres };
     updateMovie({ updatedData, id });
     reset();
