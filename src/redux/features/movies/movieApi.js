@@ -1,9 +1,7 @@
 import apiSlice from "../api/apiSlice";
 
 const movieApi = apiSlice.injectEndpoints({
-
   endpoints: (builder) => ({
-
     // ========================>> ALL MOVIES <<===========================
     movieList: builder.query({
       query: () => "/movie-posts",
@@ -78,6 +76,16 @@ const movieApi = apiSlice.injectEndpoints({
       query: (data) => ({
         method: "POST",
         url: "/admin/create-movie",
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+    // =======================>> CREATE MOVIE LINK<<=========================
+    createMovieLink: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: "/admin/add-movie-link",
         body: data,
       }),
       invalidatesTags: ["EpicMovies"],
@@ -212,8 +220,6 @@ const movieApi = apiSlice.injectEndpoints({
       query: () => `/admin/tvshow-active-tmdb-ids`,
       providesTags: ["EpicMovies"],
     }),
-
-
   }),
 });
 
@@ -224,6 +230,7 @@ export const {
   useGenreListQuery,
   useYearListQuery,
   useCreateMovieMutation,
+  useCreateMovieLinkMutation,
   useSingleMovieImportMutation,
   useBulkMovieImportMutation,
   useAdminMovieDetailsQuery,

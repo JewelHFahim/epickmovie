@@ -22,6 +22,9 @@ const MovieDetails = () => {
 
   const details = movieDetails?.data;
 
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+
   return (
     <div className="bg-[#27272A]">
       <Helmet>

@@ -15,8 +15,6 @@ const MainBackdropModal = ({ setSelectedMainback }) => {
   };
 
   const handleSelect = (images) => {
-    // const selectedImages = Array.isArray(images) ? images : [images];
-    // setSelectedMainback((prevSelected) => [...prevSelected, ...selectedImages]);
     setSelectedMainback(images)
     toast.success("Image(s) Added");
   };
@@ -58,7 +56,7 @@ const MainBackdropModal = ({ setSelectedMainback }) => {
                 <div className="grid grid-cols-5 lg:grid-cols-8 gap-x-7 gap-y-5">
                   {galleryList?.data?.map((item, i) => (
                     <div
-                      onClick={() => handleSelect(item)}
+                    onClick={() => handleSelect({ id: `image_${1+i}`, url: item })}
                       key={i}
                       className="w-[120px] h-[170px]  border-[3px] border-orange-500 flex flex-col justify-between shadow-lg overflow-hidden cursor-pointer"
                     >

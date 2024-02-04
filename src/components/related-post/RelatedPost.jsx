@@ -9,6 +9,7 @@ const RelatedPost = ({ id }) => {
   return (
     <div>
       <section className="mt-[33px] p-5">
+        
         <h3 className="text-[50px] lg:text-[24px] text-[#AEABAB] font-[700] font-roboto">
           RELATED POSTS
         </h3>
@@ -21,7 +22,7 @@ const RelatedPost = ({ id }) => {
           ))}
         </div>
 
-        <div className=" mt-[23px] lg:hidden grid grid-cols-2 items-center gap-[25px] ">
+        <div className=" mt-[23px] lg:hidden grid grid-cols-2 gap-[25px] ">
           {suggessions?.data?.slice(0,2)?.map((item, i) => (
             <CardRelatedPost item={item} key={i}/>
           ))}

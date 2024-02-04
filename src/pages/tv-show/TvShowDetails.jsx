@@ -20,7 +20,8 @@ const TvShowDetails = () => {
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
 
-  // document.title = `${siteName?.data} || ${details?.post_title}`;
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
 
   return (
     <div className="bg-[#27272A]">

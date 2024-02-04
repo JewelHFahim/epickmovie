@@ -18,6 +18,9 @@ const AddMovies = () => {
   const [selectedMainback, setSelectedMainback] = useState();
   const [selectedBackdrops, setSelectedbackdrops] = useState([]);
 
+  console.log(selectedPoster)
+  console.log(selectedMainback);
+  console.log(selectedBackdrops);
 
   const onSubmit = async (data) => {
     try {
@@ -30,8 +33,6 @@ const AddMovies = () => {
         imagenes: selectedBackdrops,
         genre_ids: selectedGeneres,
       };
-
-      console.log(allDatas);
       const res = await createMovie(allDatas);
 
       if (res && res.data) {
@@ -49,6 +50,10 @@ const AddMovies = () => {
 
   const inputStyle =
     "py-1 focus:outline-blue-500 border px-4 placeholder:text-sm";
+
+  const handleRemove = (imgId) => {
+    setSelectedbackdrops(selectedBackdrops?.filter((img) => img.id !== imgId));
+  };
 
   return (
     <main className="w-full  p-10">
@@ -102,13 +107,9 @@ const AddMovies = () => {
               selectedPoster={selectedPoster}
               setSelectedPoster={setSelectedPoster}
             />
-            {selectedPoster?.length > 0 && (
+            {selectedPoster && (
               <div className="bg-white flex flex-wrap gap-x-2 p-2">
-                <img
-                  src={selectedPoster}
-                  alt=""
-                  className="w-[60px] h-[60px] object-cover border"
-                />
+                <img src={selectedPoster?.url} alt="" className="w-[60px] h-[60px] object-cover border"/>
               </div>
             )}
           </div>
@@ -116,10 +117,10 @@ const AddMovies = () => {
           <div className="flex flex-col mt-2">
             <label className="">Main Backdrops</label>
             <MainBackdropModal setSelectedMainback={setSelectedMainback} />
-            {selectedMainback?.length > 0 && (
+            {selectedMainback && (
               <div className="bg-white flex flex-wrap gap-x-2 p-2">
                 <img
-                  src={selectedMainback}
+                  src={selectedMainback?.url}
                   alt=""
                   className="w-[60px] h-[60px] object-cover border"
                 />
@@ -129,16 +130,21 @@ const AddMovies = () => {
 
           <div className="flex flex-col mt-2">
             <label className="">Backdrops</label>
-            <BackdropsModal setSelectedbackdrops={setSelectedbackdrops} />
+            <BackdropsModal
+              selectedBackdrops={selectedBackdrops}
+              setSelectedbackdrops={setSelectedbackdrops}
+            />
             {selectedBackdrops?.length > 0 && (
-              <div className="bg-white flex flex-wrap gap-x-2 p-2">
+              <div className="bg-white flex flex-wrap gap-x-2 p-2 ">
                 {selectedBackdrops?.map((item, i) => (
-                  <img
-                    key={i}
-                    src={item}
-                    alt=""
-                    className="w-[60px] h-[60px] object-cover border"
-                  />
+                  <div key={i} className="relative">
+                    <img src={item?.url} alt="" className="w-[60px] h-[60px] object-cover border"/>
+                    <div className="absolute right-0 top-0 w-[15px] h-[15px] hover:scale-[1.3] hover bg-red-200 rounded-full flex justify-center items-center p-[3px] transition-transform duration-300">
+                      <button onClick={() => handleRemove(item.id)} className="text-red-600">
+                        X
+                      </button>
+                    </div>
+                  </div>
                 ))}
               </div>
             )}

@@ -4,7 +4,7 @@ import {
   useUpdateMovieMutation,
   useYearListQuery,
 } from "../../../../redux/features/movies/movieApi";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import toast from "react-hot-toast";
 import GenreListDrop from "./GenreListDrop";
 import { useState } from "react";
@@ -17,6 +17,8 @@ const EditMovies = () => {
   const { data: yearList } = useYearListQuery();
   const [updateMovie] = useUpdateMovieMutation();
   const [selectedOptions, setSelectedOptions] = useState([]);
+
+  console.log(movieDetails)
 
   const prevGenres = movieDetails?.data?.additional_data?.genres?.map(
     (item) => ({ value: item?.term?.id, label: item?.term?.name })
@@ -46,7 +48,17 @@ const EditMovies = () => {
       {/* =============>> FORM DATA <<=========== */}
       <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
         {/* ==================>> MOVIE INFO <<============== */}
+
+        <div className="flex justify-between items-center">
         <h2 className="text-[20px]">Movie Info</h2>
+        <div className="mt-3 md:mt-0">
+          <Link to={`/admin/dashboard/add-movie-link/${id}`}
+            className="inline-block px-4 py-[6px] text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
+          >
+            Add Movie Link
+          </Link>
+        </div>
+        </div>
 
         <div className="px-8 bg-slate-100 p-5">
           <div className="flex flex-col">
@@ -87,12 +99,8 @@ const EditMovies = () => {
           {/* =====================>> YEAR LIST <<===============================*/}
           <div className="flex flex-col mt-2">
               <label className="">Select Year</label>
-              <select
-                data-te-select-init
-                {...register("yearId")}
-                className={inputStyle}
-              >
-                <option hidden>Select Year</option>
+              <select data-te-select-init {...register("yearId")} className={inputStyle}>
+                <option hidden>{ movieDetails?.data?.release_date ?  movieDetails?.data?.release_date : "Select Year "}</option>
                 {yearList?.data?.map((item) => (
                   <option key={item?.id} value={item?.id}>
                     {item?.name}

@@ -37,6 +37,7 @@ import Help from "../dashboard/help/Help";
 import ResetPassword from "../dashboard/users/ResetPassword";
 import SetNewPass from "../dashboard/users/SetNewPass.jsx";
 import Gallery from "../dashboard/dashboard/gallery/Gallery.jsx";
+import AddMovieLink from "../dashboard/dashboard/movies/movies/AddMovieLink.jsx";
 
 const router = createBrowserRouter([
   
@@ -216,6 +217,13 @@ const router = createBrowserRouter([
         path: "/admin/dashboard/gallery",
         element: <Gallery />,
       },
+
+      {
+        path: "/admin/dashboard/add-movie-link/:id",
+        element: <AddMovieLink />,
+      },
+
+
     ],
   },
 
