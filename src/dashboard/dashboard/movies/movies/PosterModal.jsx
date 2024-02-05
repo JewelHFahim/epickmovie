@@ -1,10 +1,9 @@
 import { useState } from "react";
-import { useGalleryListQuery } from "../../../../redux/features/gallery/galleryApi";
 import toast from "react-hot-toast";
 
-const PosterModal = ({ setSelectedPoster }) => {
+const PosterModal = ({ setSelectedPoster, newGallery }) => {
+  
   const [isOpen, setIsOpen] = useState(false);
-  const { data: galleryList } = useGalleryListQuery();
 
   const openModal = () => {
     setIsOpen(true);
@@ -41,11 +40,13 @@ const PosterModal = ({ setSelectedPoster }) => {
             </span>
 
             <div className="relative inline-block overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl w-[80%] h-[90%] align-middle p-5">
+
               <div onClick={closeModal} className="absolute right-4 top-4">
                 <button className="text-xl font-medium w-[40px] h-[40px] border border-red-400 rounded-full text-red-600 hover:bg-red-400 hover:text-white transition-all duration-200">
                   X
                 </button>
               </div>
+
               <div className="flex justify-center">
                 <h3 className="text-xl border-b-2 border-red-600 font-medium">
                   Select Images
@@ -54,13 +55,12 @@ const PosterModal = ({ setSelectedPoster }) => {
 
               <div className="mt-6 flex justify-center items-center">
                 <div className="grid grid-cols-5 lg:grid-cols-8 gap-x-7 gap-y-5">
-                  {galleryList?.data?.map((item, i) => (
-                    <div
-                    onClick={() => handleSelect({ id: `image_${i}`, url: item })}
-                      key={i}
+                  {newGallery?.map((item) => (
+                    <div onClick={()=>handleSelect(item)}
+                      key={item?.id}
                       className="w-[120px] h-[170px]  border-[3px] border-orange-500 flex flex-col justify-between shadow-lg overflow-hidden cursor-pointer"
                     >
-                      <img src={item} alt=""
+                      <img src={item?.url} alt=""
                         className="w-full h-full object-cover border hover:scale-[1.2] transition-transform duration-150 ease-in-out"
                       />
                     </div>

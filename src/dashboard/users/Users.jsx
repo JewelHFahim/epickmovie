@@ -2,6 +2,9 @@ import { useUserListQuery } from "../../redux/features/users/userApi";
 
 const Users = () => {
   const { data: userList } = useUserListQuery();
+
+  console.log(userList)
+
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
 
   return (

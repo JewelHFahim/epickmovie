@@ -1,7 +1,9 @@
 import apiSlice from "../api/apiSlice";
 
 const tvShowApi = apiSlice.injectEndpoints({
+
   endpoints: (builder) => ({
+
     // ==========================>> CLIENT ALL TV Shows <<===========================
     tvShowList: builder.query({
       query: () => "/tv-posts",
@@ -33,6 +35,16 @@ const tvShowApi = apiSlice.injectEndpoints({
     }),
 
     // ===============================>> ADD SEASON <<==============================
+    addTvShow: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: `/admin/create-tvshow`,
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
+    // ===============================>> ADD SEASON <<==============================
     addSeason: builder.mutation({
       query: ({ data, id }) => ({
         method: "POST",
@@ -41,7 +53,6 @@ const tvShowApi = apiSlice.injectEndpoints({
       }),
       invalidatesTags: ["EpicMovies"],
     }),
-
 
     // ===============================>> ADD EPISODE <<==============================
     addEpisode: builder.mutation({
@@ -71,6 +82,7 @@ export const {
   useAdminTvShowDetailsQuery,
   useAddSeasonMutation,
   useEpisodeListQuery,
-  useAddEpisodeMutation
+  useAddEpisodeMutation,
+  useAddTvShowMutation
 } = tvShowApi;
 export default tvShowApi;

@@ -42,7 +42,7 @@ const LogoUploader = () => {
   };
 
   const inputStyle =
-    "block w-full px-4 py-2 mt- text-gray-700 bg-white border border-e-0 border-gray-200 rounded-s-md dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring";
+    "block w-full px-4 py-2 mt- text-gray-700 bg-white border border-e-0 border-gray-200 rounded-s-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring";
 
   return (
     <div className="w-full">
@@ -53,7 +53,7 @@ const LogoUploader = () => {
 
         <button
           onClick={handleUpload}
-          className="w-[150px] border border-slate-600  text-white uppercase rounded-e-md bg-slate-900 hover:bg-slate-600"
+          className="w-[150px] border border-slate-600  text-white uppercase rounded-e-md bg-slate-600 hover:bg-slate-800"
         >
           Upload
         </button>

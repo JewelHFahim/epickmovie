@@ -15,13 +15,11 @@ import {
 } from "../../redux/features/settings/settingApi";
 import toast from "react-hot-toast";
 import { Select, initTE } from "tw-elements";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import MultiSelectMenu from "../../components/genere-select-menu/MultitSelect";
 import LogoUploader from "./LogoUploader";
-import TimeZone from "./TImeZone";
-import MovieSort from "./MovieSort";
-import TvshowSort from "./TvshowSort";
 import FavIconUpLoader from "./FavIcon";
+import { movieSortDatas, timeZoneDatas } from "../../utils/StaticData";
 
 const Settings = () => {
   initTE({ Select });
@@ -39,10 +37,6 @@ const Settings = () => {
   const { data: websiteLink } = useWebsiteLinkQuery();
   const [createConfig] = useCreateConfigMutation();
 
-  const [selectedOption, setSelectedOption] = useState(timeZone?.data);
-  const [selectedOptionTv, setSelectedOptionTv] = useState();
-  const [selectedOptionMovie, setSelectedOptionMovie] = useState();
-
   useEffect(() => {
     setValue("site_name", siteName?.data, { shouldDirty: false });
     setValue("site_footer", siteFooter?.data, { shouldDirty: false });
@@ -51,6 +45,8 @@ const Settings = () => {
     setValue("global_header", globalHeader?.data, { shouldDirty: false });
     setValue("global_footer", globalFooter?.data, { shouldDirty: false });
     setValue("timezone", timeZone?.data, { shouldDirty: false });
+    setValue("movie_order", movieSort?.data, { shouldDirty: false });
+    setValue("tv_order", tvshowSort?.data, { shouldDirty: false });
     setValue("cache_time", cacheTime?.data, { shouldDirty: false });
     setValue("website_link", websiteLink?.data, { shouldDirty: false });
   }, [
@@ -64,36 +60,35 @@ const Settings = () => {
     timeZone?.data,
     cacheTime?.data,
     websiteLink?.data,
+    movieSort?.data,
+    tvshowSort?.data,
   ]);
 
   const onSubmit = (data) => {
-    createConfig({
-      ...data,
-      timezone: selectedOption?.value,
-      movie_order: selectedOptionMovie?.value,
-      tv_order: selectedOptionTv?.value,
-    });
-
+    createConfig(data);
+    console.log(data);
     toast.success("Submitted");
     reset();
   };
 
   const inputStyle =
-    "block w-full px-4 py-2 mt-2 text-slate-300 border border-slate-500 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring bg-slate-800";
+    "block w-full px-4 py-2 mt-2 text-black border border-slate-500 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring bg-white";
 
   return (
     <div>
+      <section className="px-[20px] lg:px-[80px] py-[20px] lg:py-[20px] lg:pb-[70px] w-full h-full mx-auto">
+        <h2 className="text-2xl underline font-semibold text-slate-800">
+          Account Settings
+        </h2>
 
-      <section className="px-[20px] lg:px-[200px] py-[20px] lg:py-[20px] lg:pb-[70px] w-full h-full mx-auto bg-gray-800">
-
-        <h2 className="text-lg font-semibold text-white">Account settings</h2>
-
-        {/* ====================>> FORM START <<================== */}
-        <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 p-4 border shadow-md bg-slate-700 border-slate-600">
-
+        {/* =======================>> FORM START <<====================== */}
+        <form
+          onSubmit={handleSubmit(onSubmit)}
+          className="grid grid-cols-1 gap-6 mt-4 sm:grid-cols-2 p-4 border shadow-md bg-slate-200"
+        >
           {/* =====================>> SITE NAME <<======================= */}
           <div>
-            <label className="text-gray-200"> Site Name </label>
+            <label className="text-gray-900"> Site Name </label>
             <input
               type="text"
               {...register("site_name")}
@@ -104,7 +99,7 @@ const Settings = () => {
 
           {/* =====================>> Telegram Link <<==================== */}
           <div>
-            <label className="text-gray-200"> Telegram Link </label>
+            <label className="text-gray-900"> Telegram Link </label>
             <input
               type="text"
               {...register("telegram_link")}
@@ -115,7 +110,7 @@ const Settings = () => {
 
           {/* ======================>> Cache Time <<======================= */}
           <div>
-            <label className="text-gray-200"> Cache Time </label>
+            <label className="text-gray-900"> Cache Time </label>
             <input
               type="number"
               {...register("cache_time")}
@@ -125,44 +120,57 @@ const Settings = () => {
           </div>
 
           {/* =======================>> Time Zone <<======================= */}
-          <div className="mt-2 w-full">
-            <label className="text-gray-200">
-              Select Timezone- {timeZone?.data}
-            </label>
-            <TimeZone
-              selectedOption={selectedOption}
-              setSelectedOption={setSelectedOption}
-              timezone={timeZone}
-            />
+          <div>
+            <label className="text-gray-900">Select Timezone</label>
+            <select {...register("timezone")} className={inputStyle}>
+              <option hidden className="uppercase">
+                {" "}
+                {timeZone?.data}
+              </option>
+              {timeZoneDatas?.map((item, i) => (
+                <option key={i} value={item?.value}>
+                  {" "}
+                  {item?.label}{" "}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* ======================>> Movie Sort <<======================= */}
-          <div className="mt-2 w-full">
-            <label className="text-gray-200">
-              Movie Sort- {movieSort?.data}
-            </label>
-            <MovieSort
-              selectedOptionMovie={selectedOptionMovie}
-              setSelectedOptionMovie={setSelectedOptionMovie}
-              movie_order={movieSort?.data}
-            />
+          <div>
+            <label className="text-gray-900">Select Movie Sort</label>
+            <select {...register("movie_order")} className={inputStyle}>
+              <option hidden className="uppercase">
+                {" "}
+                {movieSort?.data}{" "}
+              </option>
+              {movieSortDatas?.map((item, i) => (
+                <option key={i} value={item?.value}>
+                  {item?.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* =======================>> TV Sort <<========================= */}
-          <div className="mt-2 w-full">
-            <label className="text-gray-200">
-              Tv Show Sort- {movieSort?.data}
-            </label>
-            <TvshowSort
-              selectedOptionTv={selectedOptionTv}
-              setSelectedOptionTv={setSelectedOptionTv}
-              tv_order={tvshowSort?.data}
-            />
+          <div>
+            <label className="text-gray-900">Select TV Sort</label>
+            <select {...register("tv_order")} className={inputStyle}>
+              <option hidden value="">
+                {" "}
+                {tvshowSort?.data}{" "}
+              </option>
+              {movieSortDatas?.map((item, i) => (
+                <option key={i} value={item?.value}>
+                  {item?.label}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* =======================>> Site News <<======================= */}
           <div>
-            <label className="text-gray-200"> Site News </label>
+            <label className="text-gray-900"> Site News </label>
             <textarea
               rows={4}
               type="text"
@@ -174,7 +182,7 @@ const Settings = () => {
 
           {/* ======================>> Site Footer <<====================== */}
           <div>
-            <label className="text-gray-200"> Site Footer </label>
+            <label className="text-gray-900"> Site Footer </label>
             <textarea
               rows={4}
               type="text"
@@ -186,7 +194,7 @@ const Settings = () => {
 
           {/* ====================>> Global Header <<====================== */}
           <div>
-            <label className="text-gray-200"> Global Header </label>
+            <label className="text-gray-900"> Global Header </label>
             <textarea
               rows={4}
               type="text"
@@ -198,7 +206,7 @@ const Settings = () => {
 
           {/* =====================>> Global Footer <<===================== */}
           <div>
-            <label className="text-gray-200"> Global Footer </label>
+            <label className="text-gray-900"> Global Footer </label>
             <textarea
               rows={4}
               type="text"
@@ -210,7 +218,7 @@ const Settings = () => {
 
           {/* =====================>> Live Website Link <<================= */}
           <div>
-            <label className="text-gray-200"> Live Website Link </label>
+            <label className="text-gray-900"> Live Website Link </label>
             <input
               type="text"
               {...register("website_link")}
@@ -223,7 +231,7 @@ const Settings = () => {
           <div className="flex items-center justify-center mt-8 w-full">
             <button
               type="submit"
-              className="w-full border border-slate-600 h-[44px] text-white uppercase rounded-md bg-slate-900 hover:bg-slate-600"
+              className="w-full border border-slate-600 h-[44px] text-white uppercase rounded-md bg-slate-600 hover:bg-slate-800"
             >
               Submit
             </button>
@@ -231,19 +239,17 @@ const Settings = () => {
         </form>
 
         {/* ======================>> Fav Icon <<==================== */}
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-4 mt-[40px] border shadow-md bg-slate-800 border-slate-600 p-4">
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-4 mt-[40px] border shadow-md bg-slate-200 p-4">
           <FavIconUpLoader />
           <LogoUploader />
         </div>
 
         {/* =====================>> Quick Menu <<=================== */}
-        <div className=" mt-[40px] shadow-md bg-slate-800 border border-slate-600 p-4">
+        <div className=" mt-[40px] shadow-md bg-slate-200 border p-4">
           <label className="text-gray-200 pb-2"> Quick Menu</label>
           <MultiSelectMenu />
         </div>
-
       </section>
-
     </div>
   );
 };

@@ -10,7 +10,7 @@ import { useForm } from "react-hook-form";
 import { collectSearchItem } from "../../../redux/features/search/searchSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useSerachResultsQuery } from "../../../redux/features/search/searchApi";
-
+import { FaCopy } from "react-icons/fa";
 
 const DbSeries = () => {
   initTE({ Tooltip });
@@ -21,7 +21,6 @@ const DbSeries = () => {
   const { searchTerm } = useSelector((state) => state.search);
   const { data: searchResults } = useSerachResultsQuery(searchTerm);
   const dispatch = useDispatch();
-
 
   const handleDeleteSeason = (id) => {
     const shouldDelete = window.confirm(
@@ -44,9 +43,29 @@ const DbSeries = () => {
     dispatch(collectSearchItem(search));
   };
 
-  const results = (searchTerm !== null && searchTerm !== "") ? searchResults : perPgaeMovie?.data;
+  const results =
+    searchTerm !== null && searchTerm !== ""
+      ? searchResults
+      : perPgaeMovie?.data;
 
+  const [isCopied, setIsCopied] = useState(false);
+  console.log(isCopied);
+  const handleCopyClick = (textToCopy) => {
+    const tempInput = document.createElement("input");
+    tempInput.value = textToCopy;
+    document.body.appendChild(tempInput);
 
+    tempInput.select();
+    document.execCommand("copy");
+    document.body.removeChild(tempInput);
+
+    setIsCopied(true);
+    toast.success("Copied");
+
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
+  };
 
   return (
     <div className="mx-auto bg-white border w-full h-full p-6">
@@ -58,10 +77,18 @@ const DbSeries = () => {
         </div>
 
         <form onSubmit={handleSubmit(onSubmit)} className="max-w-lg flex">
-          <input value={search} onChange={handleSearch} type="text" placeholder="Search Tv Show" 
-          className="border px-2 py-[4px] outline-none rounded-s-md text-sm"/>
+          <input
+            value={search}
+            onChange={handleSearch}
+            type="text"
+            placeholder="Search Tv Show"
+            className="border px-2 py-[4px] outline-none rounded-s-md text-sm"
+          />
 
-          <button type="submit" className="px-4 bg-slate-700 hover:bg-slate-600 text-white border border-slate-700 rounded-e-md text-sm">
+          <button
+            type="submit"
+            className="px-4 bg-slate-700 hover:bg-slate-600 text-white border border-slate-700 rounded-e-md text-sm"
+          >
             Search
           </button>
         </form>
@@ -74,7 +101,6 @@ const DbSeries = () => {
             Add Series
           </a>
         </div>
-
       </div>
 
       <div className="mt-8 w-[100px]">
@@ -90,6 +116,7 @@ const DbSeries = () => {
         <table className="w-full table-auto text-sm text-left">
           <thead className="text-gray-600 font-medium border-b">
             <tr>
+              <th className="py-3 px-3">ID</th>
               <th className="py-3 px-6">Poster & Title</th>
               <th className="py-3 px-6">Type</th>
               <th className="py-3 px-6">Published</th>
@@ -99,21 +126,59 @@ const DbSeries = () => {
           <tbody className="divide-y">
             {results?.data?.map((item, idx) => (
               <tr key={idx} className="odd:bg-gray-50 even:bg-white">
-                <td className="px-6 py-4 font-medium flex items-center gap-x-2">
-                  <img src={item?.poster_image_url} alt="" className="w-[50px] h-[70px] object-cover"/>
-                    <div className="flex flex-col">
-                      <p data-te-toggle="tooltip" title={ item?.post_title.length > 70 ? item?.post_title : ""}>
-                        {item?.post_title.length > 70 ? `${item?.post_title?.slice(0, 70)}...` : item?.post_title}
-                      </p>
+                <td className="px-3 font-medium">
+                  <p
+                    onClick={() => handleCopyClick(item?.id)}
+                    className="flex items-center gap-1 font-medium cursor-pointer"
+                  >
+                    <FaCopy /> {item?.id}
+                  </p>
+                </td>
 
-                      <div className="flex items-center gap-x-3 mt-2 text-xs text-green-500">
-                        <a href={`/series/${item?.id}/${item?.post_title}`} target="_blank" rel="noopener noreferrer" 
-                        className="text-orange-500">Preview</a>
-                        <a href={`/admin/dashboard/tvshow-details/${item?.id}`}>Details</a>
-                        <a href={`/admin/dashboard/update-tvShow/${item?.id}`} className="text-violet-500">Edit</a>
-                        <button onClick={() => handleDeleteSeason(item?.id)} className="text-red-500">Delete</button>
-                      </div>
+                <td className="px-6 py-4 font-medium flex items-center gap-x-2">
+                  <img
+                    src={item?.poster_image_url}
+                    alt=""
+                    className="w-[50px] h-[70px] object-cover"
+                  />
+                  <div className="flex flex-col">
+                    <p
+                      data-te-toggle="tooltip"
+                      title={
+                        item?.post_title.length > 70 ? item?.post_title : ""
+                      }
+                    >
+                      {item?.post_title.length > 70
+                        ? `${item?.post_title?.slice(0, 70)}...`
+                        : item?.post_title}
+                    </p>
+
+                    <div className="flex items-center gap-x-3 mt-2 text-xs text-green-500">
+                      <a
+                        href={`/series/${item?.id}/${item?.post_title}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-orange-500"
+                      >
+                        Preview
+                      </a>
+                      <a href={`/admin/dashboard/tvshow-details/${item?.id}`}>
+                        Details
+                      </a>
+                      <a
+                        href={`/admin/dashboard/update-tvShow/${item?.id}`}
+                        className="text-violet-500"
+                      >
+                        Edit
+                      </a>
+                      <button
+                        onClick={() => handleDeleteSeason(item?.id)}
+                        className="text-red-500"
+                      >
+                        Delete
+                      </button>
                     </div>
+                  </div>
                 </td>
 
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -123,14 +188,16 @@ const DbSeries = () => {
                 <td className="px-6 py-4 whitespace-nowrap">
                   {item?.release_date?.slice(0, 10)}
                 </td>
-
               </tr>
             ))}
           </tbody>
         </table>
 
-        <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} perPgaeMovie={perPgaeMovie}/>
-
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          perPgaeMovie={perPgaeMovie}
+        />
       </div>
     </div>
   );

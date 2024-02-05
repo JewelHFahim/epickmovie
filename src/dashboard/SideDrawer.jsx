@@ -142,7 +142,7 @@ const Sidebar = () => {
               <img src={siteLogo?.data} alt="" className="object-cover" />
             ) : (
               <h1 className="text-[22px] font-bold text-slate-800">
-                {siteName?.name}EpicMovies
+                {siteName?.name}
               </h1>
             )}
           </div>

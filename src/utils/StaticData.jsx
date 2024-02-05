@@ -1,6 +1,4 @@
-import Select from "react-select";
-
-const options = [
+export const timeZoneDatas = [
   { label: "Dateline Standard Time", value: "Etc/GMT+12" },
   { label: "UTC-11", value: "Etc/GMT+11" },
   { label: "Aleutian Standard Time", value: "America/Adak" },
@@ -140,19 +138,9 @@ const options = [
   { label: "Line Islands Standard Time", value: "Pacific/Kiritimati" },
 ];
 
-
-
-export default function TimeZone({ selectedOption, setSelectedOption, timezone }) {
-
-  return (
-    <div>
-      <Select
-        defaultInputValue={timezone?.data}
-        defaultValue={timezone?.data}
-        onChange={setSelectedOption}
-        options={options}
-        className="w-full"
-      />
-    </div>
-  );
-}
+export const movieSortDatas = [
+  { label: "ASC", value: "asc" },
+  { label: "DESC", value: "desc" },
+  { label: "Release Date ASC", value: "release_date_asc" },
+  { label: "Release Date DESC", value: "release_date_desc" },
+];

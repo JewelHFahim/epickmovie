@@ -7,6 +7,7 @@ import { useState } from "react";
 import PosterModal from "./PosterModal";
 import MainBackdropModal from "./MainBackdropModal";
 import BackdropsModal from "./BackdropsModal";
+import { useGalleryListQuery } from "../../../../redux/features/gallery/galleryApi";
 
 const AddMovies = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -18,21 +19,36 @@ const AddMovies = () => {
   const [selectedMainback, setSelectedMainback] = useState();
   const [selectedBackdrops, setSelectedbackdrops] = useState([]);
 
-  console.log(selectedPoster)
-  console.log(selectedMainback);
-  console.log(selectedBackdrops);
+  const { data: galleryList } = useGalleryListQuery();
+
+  const newGallery = galleryList?.data?.map((img, i) => ({
+    id: i + 1,
+    url: img,
+  }));
+
+  const remainigImg = newGallery?.filter(
+    (img) => img.id !== selectedPoster?.id
+  );
+
+  const remainigImg2 = remainigImg?.filter(
+    (img) => img.id !== selectedMainback?.id
+  );
 
   const onSubmit = async (data) => {
     try {
       const selectedGeneres = selectedOptions?.map((item) => item?.value);
+      const imgUrls = selectedGeneres?.map((item) => item?.url);
 
       const allDatas = {
         ...data,
-        dt_poster: selectedPoster,
-        dt_backdrop: selectedMainback,
-        imagenes: selectedBackdrops,
+        dt_poster: selectedPoster?.url,
+        dt_backdrop: selectedMainback?.url,
+        imagenes: imgUrls,
         genre_ids: selectedGeneres,
       };
+
+      console.log(allDatas);
+
       const res = await createMovie(allDatas);
 
       if (res && res.data) {
@@ -106,17 +122,25 @@ const AddMovies = () => {
             <PosterModal
               selectedPoster={selectedPoster}
               setSelectedPoster={setSelectedPoster}
+              newGallery={newGallery}
             />
             {selectedPoster && (
               <div className="bg-white flex flex-wrap gap-x-2 p-2">
-                <img src={selectedPoster?.url} alt="" className="w-[60px] h-[60px] object-cover border"/>
+                <img
+                  src={selectedPoster?.url}
+                  alt=""
+                  className="w-[60px] h-[60px] object-cover border"
+                />
               </div>
             )}
           </div>
 
           <div className="flex flex-col mt-2">
             <label className="">Main Backdrops</label>
-            <MainBackdropModal setSelectedMainback={setSelectedMainback} />
+            <MainBackdropModal
+              remainigImg={remainigImg}
+              setSelectedMainback={setSelectedMainback}
+            />
             {selectedMainback && (
               <div className="bg-white flex flex-wrap gap-x-2 p-2">
                 <img
@@ -131,6 +155,7 @@ const AddMovies = () => {
           <div className="flex flex-col mt-2">
             <label className="">Backdrops</label>
             <BackdropsModal
+              remainigImg={remainigImg2}
               selectedBackdrops={selectedBackdrops}
               setSelectedbackdrops={setSelectedbackdrops}
             />
@@ -138,9 +163,16 @@ const AddMovies = () => {
               <div className="bg-white flex flex-wrap gap-x-2 p-2 ">
                 {selectedBackdrops?.map((item, i) => (
                   <div key={i} className="relative">
-                    <img src={item?.url} alt="" className="w-[60px] h-[60px] object-cover border"/>
+                    <img
+                      src={item?.url}
+                      alt=""
+                      className="w-[60px] h-[60px] object-cover border"
+                    />
                     <div className="absolute right-0 top-0 w-[15px] h-[15px] hover:scale-[1.3] hover bg-red-200 rounded-full flex justify-center items-center p-[3px] transition-transform duration-300">
-                      <button onClick={() => handleRemove(item.id)} className="text-red-600">
+                      <button
+                        onClick={() => handleRemove(item.id)}
+                        className="text-red-600"
+                      >
                         X
                       </button>
                     </div>

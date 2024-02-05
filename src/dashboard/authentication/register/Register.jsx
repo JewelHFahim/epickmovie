@@ -22,10 +22,10 @@ const Register = () => {
 
   const onSubmit = (data) => {
     const userData = {
-      full_name: data.full_name,
-      email: data.email,
-      password: data.password,
-      role_type: parseInt(data.user_role),
+      full_name: data?.full_name,
+      email: data?.email,
+      password: data?.password,
+      role_type: parseInt(data?.user_role),
     };
 
     dispatch(registerUser(userData));
@@ -33,6 +33,8 @@ const Register = () => {
   };
 
   const rolesData = userRoleList?.data;
+
+  console.log(rolesData)
 
   const inputStyle =
     "block w-full px-4 py-1 mt-2 placeholder:text-sm placeholder-gray-500 bg-white border border-gray-500 focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300";
@@ -43,7 +45,7 @@ const Register = () => {
         <div className="px-10 py-4">
 
           <div className="flex justify-center mx-auto">
-            <img className="w-auto h-7 sm:h-8" src={logo.data} alt=""/>
+            <img className="w-auto h-7 sm:h-8" src={logo?.data} alt=""/>
           </div>
 
           <p className="mt-1 text-center">Register here</p>

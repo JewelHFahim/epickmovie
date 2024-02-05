@@ -33,7 +33,7 @@ export default function Accrodion({ details }) {
                   {item}
 
                   <span
-                    className={`${activeElement === item ? "rotate-[-180deg] -mr-1" : "rotate-0 fill-[#212529]  dark:fill-white"} ml-auto h-8 w-8 shrink-0 fill-[#336dec] transition-transform duration-200 ease-in-out motion-reduce:transition-none dark:fill-blue-300 `}
+                    className={`${activeElement === item ? "rotate-[-180deg] -mr-1" : "rotate-0 fill-[#212529]  dark:fill-white"} ml-auto shrink-0 fill-[#336dec] transition-transform duration-200 ease-in-out motion-reduce:transition-none dark:fill-blue-300 `}
                   >
                     <IoIosArrowDown/>
                   </span>

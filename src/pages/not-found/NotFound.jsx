@@ -1,10 +1,40 @@
 import joinTelegran from "../../assets/join telegram.png";
 import ads from "../../assets/ads.png";
-import search from "../../assets/Search Icon.svg";
+import { Link, useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
+import { IoSearch } from "react-icons/io5";
+import { collectSearchItem } from "../../redux/features/search/searchSlice";
+import { useDispatch } from "react-redux";
+import { useState } from "react";
 
 const NotFound = () => {
+  const { data: siteName } = useSiteNameUSerQuery();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [searchTermState, setSearchTerm] = useState("");
+
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const res = dispatch(collectSearchItem(searchTermState));
+    if (res !== null) {
+      return navigate("/search-list");
+    }
+  };
+
   return (
-    <div className="bg-[#27272A] mt-[22px] min-h-screen">
+    <div className="bg-[#27272A] min-h-screen">
+
+      <Helmet>
+        <title> {`${siteName?.data} || 404`}</title>
+      </Helmet>
+
       <section className=" p-[32px] lg:flex justify-between">
         <div className=" lg:w-[70%] font-inter">
           <h3 className="text-[32px] font-[700]  text-[#727171]">
@@ -17,13 +47,30 @@ const NotFound = () => {
             Please check your URL or use the search form below.
           </p>
 
-          <div className=" w-[320px] lg:w-[453px] h-[42px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[9px] bg-[#18181B]">
-            <input
-              type="text"
-              placeholder="What are you looking for?"
-              className="w-full h-full bg-transparent border-0 focus:outline-none text-[12px] text-white px-5"
-            />
-            <img src={search} alt="" className="h-full cursor-pointer" />
+          <form
+        onSubmit={handleSubmit}
+        className=" w-[80%] h-[90px] lg:w-[453px] lg:h-[40px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[15px] lg:rounded-[8px] border border-slate-600"
+      >
+        <input
+          type="text"
+          value={searchTermState}
+          onChange={handleInputChange}
+          placeholder="Search Movie/TV Shows"
+          className="w-full h-full border-0 focus:outline-none px-5 bg-[#18181B] rounded-s-[15px] lg:rounded-s-[8px] text-[27px] placeholder:text-[24px] lg:placeholder:text-[16px] lg:text-[14px] text-slate-300"
+        />
+
+        <button type="submit" className="text-[40px] lg:text-[24px] text-white px-6 lg:px-4 h-full bg-slate-700 rounded-e-[15px] lg:rounded-e-[8px]">
+          <IoSearch />
+        </button>
+        
+      </form>
+
+          <div className="m-10 ml-20">
+            <Link to="/">
+              <button className="border border-slate-60 text-whit px-[80px] py-2 rounded-md text-blue-600 border-blue-600 hover:bg-slate-600 hover:text-white hover:border-slate-600">
+                Back To Home
+              </button>
+            </Link>
           </div>
         </div>
 

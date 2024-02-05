@@ -1,10 +1,12 @@
 import { useState } from "react";
-import { useGalleryListQuery } from "../../../../redux/features/gallery/galleryApi";
 import toast from "react-hot-toast";
 
-const BackdropsModal = ({selectedBackdrops, setSelectedbackdrops }) => {
+const BackdropsModal = ({
+  selectedBackdrops,
+  setSelectedbackdrops,
+  remainigImg,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { data: galleryList } = useGalleryListQuery();
 
   const openModal = () => {
     setIsOpen(true);
@@ -14,10 +16,11 @@ const BackdropsModal = ({selectedBackdrops, setSelectedbackdrops }) => {
     setIsOpen(false);
   };
 
-
   const usedIds = new Set();
   const handleSelect = (selectedImage) => {
-    const alreadySelected = selectedBackdrops.find((image) => image.id === selectedImage.id);
+    const alreadySelected = selectedBackdrops.find(
+      (image) => image.id === selectedImage.id
+    );
 
     if (!alreadySelected) {
       setSelectedbackdrops((prevSelected) => [...prevSelected, selectedImage]);
@@ -30,7 +33,10 @@ const BackdropsModal = ({selectedBackdrops, setSelectedbackdrops }) => {
 
   return (
     <div className="relative flex justify-center">
-      <button onClick={openModal} className="w-full py-2 uppercase border-2 border-dashed border-slate-500 bg-slate-100 rounded-md text-black font-medium mb-2">
+      <button
+        onClick={openModal}
+        className="w-full py-2 uppercase border-2 border-dashed border-slate-500 bg-slate-100 rounded-md text-black font-medium mb-2"
+      >
         Add Image
       </button>
 
@@ -63,10 +69,16 @@ const BackdropsModal = ({selectedBackdrops, setSelectedbackdrops }) => {
 
               <div className="mt-6 flex justify-center items-center">
                 <div className="grid grid-cols-5 lg:grid-cols-8 gap-x-7 gap-y-5">
-                  {galleryList?.data?.map((item, i) => (
-                    <div onClick={() => handleSelect({ id: `image_${2+i}`, url: item })} key={i} 
-                    className="w-[120px] h-[170px]  border-[3px] border-orange-500 flex flex-col justify-between shadow-lg overflow-hidden cursor-pointer">
-                      <img src={item} alt="" className="w-full h-full object-cover border hover:scale-[1.2] transition-transform duration-150 ease-in-out"
+                  {remainigImg.map((item, i) => (
+                    <div
+                      onClick={() => handleSelect(item)}
+                      key={i}
+                      className="w-[120px] h-[170px]  border-[3px] border-orange-500 flex flex-col justify-between shadow-lg overflow-hidden cursor-pointer"
+                    >
+                      <img
+                        src={item?.url}
+                        alt=""
+                        className="w-full h-full object-cover border hover:scale-[1.2] transition-transform duration-150 ease-in-out"
                       />
                     </div>
                   ))}

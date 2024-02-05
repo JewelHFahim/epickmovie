@@ -4,7 +4,7 @@ import DomainList from "../../components/domain-list/DomainList";
 import MovieCard from "../../components/movie-card/MovieCard";
 import HomePageSeeAllBtn from "../../utils/HomePageSeeAllBtn";
 import { useTvShowListQuery } from "../../redux/features/tv-show/tvShowApi";
-import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
+import { useQuickMenuUserQuery, useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 import { collectFilteredItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
@@ -18,6 +18,8 @@ const Home = () => {
   const { data: quickMenu } = useQuickMenuUserQuery();
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
+  const { data: siteName } = useSiteNameUSerQuery();
+
 
   const handleQuickMenuNavigation = (data) => {
     dispatch(collectFilteredItem(data));
@@ -27,7 +29,7 @@ const Home = () => {
     <section className="min-h-screen flex flex-col justify-center items-center">
 
       <Helmet>
-        <title>EpicMovies</title>
+        <title>{siteName?.data}</title>
       </Helmet>
 
       {/* ==================>> Quick Menus <<================*/}

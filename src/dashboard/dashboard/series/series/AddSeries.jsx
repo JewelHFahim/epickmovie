@@ -1,200 +1,214 @@
 import { useForm } from "react-hook-form";
+import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import GenreListDrop from "../../movies/movies/GenreListDrop";
+import PosterModal from "../../movies/movies/PosterModal";
+import MainBackdropModal from "../../movies/movies/MainBackdropModal";
+import BackdropsModal from "../../movies/movies/BackdropsModal";
+import { useAddTvShowMutation } from "../../../../redux/features/tv-show/tvShowApi";
+import { useGalleryListQuery } from "../../../../redux/features/gallery/galleryApi";
 
-const AddSeries = () => {
+const AddTvShow = () => {
+
   const { register, handleSubmit, reset } = useForm();
+  const [createTvShow] = useAddTvShowMutation();
+  const navigate = useNavigate();
+  const [selectedOptions, setSelectedOptions] = useState([]);
+  const { data: galleryList } = useGalleryListQuery();
 
-  const onSubmit = () => {
-    reset();
+
+  const [selectedPoster, setSelectedPoster] = useState();
+  const [selectedMainback, setSelectedMainback] = useState();
+  const [selectedBackdrops, setSelectedbackdrops] = useState([]);
+
+  const newGallery = galleryList?.data?.map((img, i) => ({
+    id: i + 1,
+    url: img,
+  }));
+
+
+  const remainigImg = newGallery?.filter(
+    (img) => img.id !== selectedPoster?.id
+  );
+
+  const remainigImg2 = remainigImg?.filter(
+    (img) => img.id !== selectedMainback?.id
+  );
+
+
+  const onSubmit = async (data) => {
+    try {
+      const selectedGeneres = selectedOptions?.map((item) => item?.value);
+      const imgUrls = selectedGeneres?.map(item => item?.url);
+
+      const allDatas = {
+        ...data,
+        dt_poster: selectedPoster?.url,
+        dt_backdrop: selectedMainback?.url,
+        imagenes: imgUrls,
+        genre_ids: selectedGeneres,
+      };
+
+      console.log(allDatas)
+
+      const res = await createTvShow(allDatas);
+
+      if (res && res.data) {
+        const { message } = res.data;
+        toast.success(message);
+      } else {
+        console.error("Invalid response format");
+      }
+      reset();
+      navigate("/admin/dashboard/db-series");
+    } catch (error) {
+      console.error("Error:", error);
+    }
   };
+
 
   const inputStyle =
     "py-1 focus:outline-blue-500 border px-4 placeholder:text-sm";
 
+  const handleRemove = (imgId) => {
+    setSelectedbackdrops(selectedBackdrops?.filter((img) => img.id !== imgId));
+  };
+
   return (
-    <main className="w-full bg-white p-10">
+    <main className="w-full  p-10">
       <div className="flex justify-center">
-        <h3 className="text-xl font-bold sm:text-2xl uppercase">
-          Add New Series
+        <h3 className="text-xl font-bold sm:text-2xl uppercase ">
+          Add New Tv Show
         </h3>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-        {/* ==================>> Tv Show INFO <<============== */}
-        <h2 className="text-[20px]">Tv Show Info</h2>
-        <div className="px-8 bg-slate-100 p-5">
+      {/* =============>> FORM DATA <<=========== */}
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        {/* ==================>> MOVIE INFO <<============== */}
+        <h2 className="text-[20px] ">TV Show Info</h2>
+        <div className="px-8 bg-slate-300 p-5">
           <div className="flex flex-col">
-            <label className="">Series Title</label>
+            <label className="">Tv Show Title</label>
             <input
               type="text"
-              name="title"
-              {...register("title")}
-              placeholder="Movie Title"
+              {...register("post_title", { required: true })}
+              placeholder="TV Show Title"
               className={inputStyle}
             />
           </div>
 
           <div className="flex flex-col mt-2">
-            <label className="">Poster</label>
-            <input
+            <label className="">Post Content</label>
+            <textarea
+              rows={3}
               type="text"
-              name="poster"
-              {...register("poster")}
-              placeholder="Add Img URL"
+              {...register("post_content", { required: true })}
+              placeholder="Post Content"
               className={inputStyle}
             />
+          </div>
+
+          <div className="flex flex-col mt-2">
+            <label className="">Select Genre</label>
+            <GenreListDrop
+              selectedOptions={selectedOptions}
+              setSelectedOptions={setSelectedOptions}
+            />
+          </div>
+        </div>
+
+        {/* ==================>> Images and trailer <<============== */}
+        <h2 className="text-[20px] "> Images and Trailer </h2>
+        <div className="px-8 bg-slate-300 p-5">
+          <div className="flex flex-col mt-2">
+            <label className="">Poster</label>
+            <PosterModal
+            newGallery={newGallery}
+              selectedPoster={selectedPoster}
+              setSelectedPoster={setSelectedPoster}
+            />
+            {selectedPoster && (
+              <div className="bg-white flex flex-wrap gap-x-2 p-2">
+                <img src={selectedPoster?.url} alt="" className="w-[60px] h-[60px] object-cover border"/>
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col mt-2">
             <label className="">Main Backdrops</label>
-            <input
-              type="text"
-              name="main_backdrops"
-              {...register("main_backdrops")}
-              placeholder="Add url image"
-              className={inputStyle}
-            />
+            <MainBackdropModal remainigImg={remainigImg} setSelectedMainback={setSelectedMainback} />
+            {selectedMainback && (
+              <div className="bg-white flex flex-wrap gap-x-2 p-2">
+                <img
+                  src={selectedMainback?.url}
+                  alt=""
+                  className="w-[60px] h-[60px] object-cover border"
+                />
+              </div>
+            )}
           </div>
 
           <div className="flex flex-col mt-2">
             <label className="">Backdrops</label>
-            <textarea
-              type="text"
-              name="backdrops"
-              {...register("backdrops")}
-              placeholder="Place each image url below another"
-              className={inputStyle}
+            <BackdropsModal
+            remainigImg={remainigImg2}
+              selectedBackdrops={selectedBackdrops}
+              setSelectedbackdrops={setSelectedbackdrops}
             />
+            {selectedBackdrops?.length > 0 && (
+              <div className="bg-white flex flex-wrap gap-x-2 p-2 ">
+                {selectedBackdrops?.map((item, i) => (
+                  <div key={i} className="relative">
+                    <img
+                      src={item?.url}
+                      alt=""
+                      className="w-[60px] h-[60px] object-cover border"
+                    />
+                    <div className="absolute right-0 top-0 w-[15px] h-[15px] hover:scale-[1.3] hover bg-red-200 rounded-full flex justify-center items-center p-[3px] transition-transform duration-300">
+                      <button
+                        onClick={() => handleRemove(item.id)}
+                        className="text-red-600"
+                      >
+                        X
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
 
-          <div className="flex flex-col lg:w-1/2 mt-2">
+          <div className="flex flex-col mt-2 lg:w-1/2">
             <label className="">Video Trailer</label>
             <input
               type="text"
-              name="video_trailer"
-              {...register("video_trailer")}
+              {...register("video_tutorial", { required: true })}
               placeholder="Add id Youtube video"
               className={inputStyle}
             />
           </div>
         </div>
 
-        {/* ==================>> More Data <<================== */}
-        <h2 className="text-[20px]">More Data</h2>
-        <div className="px-8 bg-slate-100 p-5 gap-5">
-          <div className="flex flex-col mt-2">
-            <label className="">Original Name</label>
-            <input
-              type="text"
-              name="original_title"
-              {...register("original_title")}
-              placeholder="Original title"
-              className={inputStyle}
-            />
-          </div>
-
+        {/* ===============>> Themoviedb Data <<============ */}
+        <h2 className="text-[20px] ">Themoviedb.org data</h2>
+        <div className="px-8 bg-slate-300 p-5 gap-5">
           <div className="flex flex-col mt-2 lg:w-1/2">
-            <label className="">First Air Date</label>
+            <label className="">Release Date</label>
             <input
               type="date"
-              name="first_air_date"
-              {...register("first_air_date")}
-              placeholder="Tag line"
-              className={inputStyle}
-            />
-          </div>
-
-          <div className="flex flex-col mt-2 lg:w-1/2">
-            <label className="">Last Air Date</label>
-            <input
-              type="date"
-              name="last_air_date"
-              {...register("last_air_date")}
-              placeholder="Tag line"
-              className={inputStyle}
-            />
-          </div>
-
-          <div className="flex flex-col mt-2 lg:w-1/2">
-            <label className="">Content Total Posted</label>
-            <div className="flex items-center gap-5 w-full">
-              <input
-                type="text"
-                name="content_total1"
-                {...register("content_total1")}
-                placeholder="Seasons / Episodes"
-                className={`${inputStyle} w-1/2`}
-              />
-
-              <input
-                type="text"
-                name="content_total2"
-                {...register("content_total2")}
-                placeholder="Seasons / Episodes"
-                className={`${inputStyle} w-1/2`}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col mt-2 lg:w-1/2">
-            <label className="">Rating TMDb</label>
-            <div className="flex items-center gap-5 w-full">
-              <input
-                type="text"
-                name="rating_timd1"
-                {...register("rating_timd1")}
-                placeholder="Rating TMDb"
-                className={`${inputStyle} w-1/2`}
-              />
-
-              <input
-                type="text"
-                name="rating_timd2"
-                {...register("rating_timd2")}
-                placeholder="Rating TMDb"
-                className={`${inputStyle} w-1/2`}
-              />
-            </div>
-          </div>
-
-          <div className="flex flex-col mt-2 lg:w-1/2">
-            <label className="">Episode Runtime</label>
-            <input
-              type="text"
-              name="episode_runtime"
-              {...register("episode_runtime")}
-              placeholder="episode runtime"
-              className={inputStyle}
-            />
-          </div>
-
-          <div className="flex flex-col mt-2">
-            <label className="">Cast</label>
-            <textarea
-              type="text"
-              name="cast"
-              {...register("cast")}
-              placeholder="Cast"
-              className={inputStyle}
-            />
-          </div>
-
-          <div className="flex flex-col mt-2">
-            <label className="">Creator</label>
-            <input
-              type="text"
-              name="creator"
-              {...register("creator")}
-              placeholder="Creator"
-              className={inputStyle}
+              {...register("release_year", { required: true })}
+              placeholder="Release Date"
+              className={`${inputStyle} text-slate-400`}
             />
           </div>
         </div>
 
-        {/* ==================>> Submit Btn <<================= */}
+        {/* ================>> Submit Btn <<================= */}
         <div className="w-full flex justify-center">
           <button
             type="submit"
-            className="px-32 py-2 rounded-lg text-white uppercase font-medium bg-slate-700 hover:bg-slate-800 transform duration-150"
+            className="px-32 py-2 rounded-lg text-white uppercase font-medium bg-slate-600 hover:bg-slate-900 transform duration-150 border"
           >
             Submit
           </button>
@@ -204,4 +218,4 @@ const AddSeries = () => {
   );
 };
 
-export default AddSeries;
+export default AddTvShow;

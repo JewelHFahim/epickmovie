@@ -11,8 +11,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { collectSearchItem } from "../../../redux/features/search/searchSlice";
 import { useForm } from "react-hook-form";
 import { useSerachResultsQuery } from "../../../redux/features/search/searchApi";
+import { FaCopy } from "react-icons/fa";
 
 const MoviesDB = () => {
+
   initTE({ Tooltip });
   const dispatch = useDispatch();
   const [currentPage, setCurrentPage] = useState(1);
@@ -50,6 +52,26 @@ const MoviesDB = () => {
       : perPgaeMovie?.data;
 
 
+        const [isCopied, setIsCopied] = useState(false);
+        console.log(isCopied);
+        const handleCopyClick = (textToCopy) => {
+          const tempInput = document.createElement('input');
+          tempInput.value = textToCopy;
+          document.body.appendChild(tempInput);
+      
+          tempInput.select();
+          document.execCommand('copy');
+          document.body.removeChild(tempInput);
+      
+          setIsCopied(true);
+          toast.success("Copied")
+      
+          setTimeout(() => {
+            setIsCopied(false);
+          }, 2000);
+        };
+
+
   return (
     <div className="mx-auto bg-white border w-full h-full p-6">
       <div className="items-start justify-between md:flex">
@@ -77,7 +99,8 @@ const MoviesDB = () => {
         </form>
 
         <div className="mt-3 md:mt-0">
-          <Link to="/admin/dashboard/add-movie"
+          <Link
+            to="/admin/dashboard/add-movie"
             className="inline-block px-4 py-[6px] text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
           >
             Add Movie
@@ -98,6 +121,7 @@ const MoviesDB = () => {
         <table className="w-full table-auto text-sm text-left">
           <thead className="text-gray-600 font-medium border-b">
             <tr>
+              <th className="py-3 px-3">ID</th>
               <th className="py-3 px-6">Poster & Title</th>
               <th className="py-3 px-6">Type</th>
               <th className="py-3 px-6">Published</th>
@@ -110,20 +134,55 @@ const MoviesDB = () => {
             <tbody className="divide-y">
               {results?.data?.map((item, idx) => (
                 <tr key={idx} className="odd:bg-gray-50 even:bg-white">
+                  <td className="px-3 py-4 ">
+                    <p onClick={()=>handleCopyClick(item?.id)} className="flex items-center gap-1 font-medium cursor-pointer">
+                      <FaCopy /> {item?.id}
+                    </p>
+                  </td>
+
                   <td className="px-6 py-4 font-medium flex items-center gap-x-2">
-                    <img src={item?.poster_image_url} alt="" className="w-[50px] h-[70px] object-cover"/>
+                    <img
+                      src={item?.poster_image_url}
+                      alt=""
+                      className="w-[50px] h-[70px] object-cover"
+                    />
 
                     <div className="flex flex-col">
-                      <p data-te-toggle="tooltip" title={ item?.post_title.length > 70 ? item?.post_title : ""}>
-                        {item?.post_title.length > 70 ? `${item?.post_title?.slice(0, 70)}...` : item?.post_title}
+                      <p
+                        data-te-toggle="tooltip"
+                        title={
+                          item?.post_title.length > 70 ? item?.post_title : ""
+                        }
+                      >
+                        {item?.post_title.length > 70
+                          ? `${item?.post_title?.slice(0, 70)}...`
+                          : item?.post_title}
                       </p>
 
                       <div className="flex items-center gap-x-3 mt-2 text-xs text-green-500">
-                        <a href={`/movie/${item?.id}/${item?.post_title}`} target="_blank" rel="noopener noreferrer" 
-                        className="text-orange-500">Preview</a>
-                        <a href={`/admin/dashboard/details/${item?.id}`}>Details</a>
-                        <a href={`/admin/dashboard/edit-movie/${item?.id}`} className="text-violet-500">Edit</a>
-                        <button onClick={() => handleDeleteMovie(item?.id)} className="text-red-500">Delete</button>
+                        <a
+                          href={`/movie/${item?.id}/${item?.post_title}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-orange-500"
+                        >
+                          Preview
+                        </a>
+                        <a href={`/admin/dashboard/details/${item?.id}`}>
+                          Details
+                        </a>
+                        <a
+                          href={`/admin/dashboard/edit-movie/${item?.id}`}
+                          className="text-violet-500"
+                        >
+                          Edit
+                        </a>
+                        <button
+                          onClick={() => handleDeleteMovie(item?.id)}
+                          className="text-red-500"
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </td>
@@ -141,9 +200,11 @@ const MoviesDB = () => {
           )}
         </table>
 
-        {/* {searchTerm === null && searchTerm === "" && ( */}
-          <Pagination currentPage={currentPage} setCurrentPage={setCurrentPage} perPgaeMovie={perPgaeMovie}/>
-        {/* )} */}
+        <Pagination
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+          perPgaeMovie={perPgaeMovie}
+        />
       </div>
     </div>
   );

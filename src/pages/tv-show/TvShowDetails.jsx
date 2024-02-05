@@ -1,5 +1,5 @@
 import calender from "../../assets/calender.svg";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSeriesDetailsQuery } from "../../redux/features/tv-show/tvShowApi";
 import JoinTelegramBtn from "../../utils/JoinTelegramBtn";
 import Accrodion from "../../components/accrodion/Accrodion";
@@ -8,17 +8,24 @@ import AdvertisementSection from "../../components/advertisement/AdvertisementSe
 import Breadcum from "../../utils/breadcum/Breadcum";
 import { useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 import UploadedDate from "../../utils/uploaded-date/UploadedDate";
-import StaticContent from "../../utils/Content/StaticContent";
 import DetailsPosterCard from "../../components/details-poster-card/DetailsPosterCard";
 import { Helmet } from "react-helmet";
 import CountryList from "../../components/advertisement/CountryList";
+import { useEffect } from "react";
 
 const TvShowDetails = () => {
   const { id } = useParams();
   const { data: siteName } = useSiteNameUSerQuery();
+  const navigate = useNavigate();
 
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
+
+  useEffect(() => {
+    if (seriesDetails?.status === false) {
+      navigate('/404');
+    }
+  }, [seriesDetails, navigate]);
 
   window.scrollTo({ top: 0, behavior: 'smooth' });
 
@@ -60,7 +67,7 @@ const TvShowDetails = () => {
                 </p>
               </div>
             ) : (
-              <StaticContent />
+              <p>N/A</p>
             )}
 
             <div className="my-[11px] lg:my-[15px]">

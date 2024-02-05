@@ -38,6 +38,7 @@ import ResetPassword from "../dashboard/users/ResetPassword";
 import SetNewPass from "../dashboard/users/SetNewPass.jsx";
 import Gallery from "../dashboard/dashboard/gallery/Gallery.jsx";
 import AddMovieLink from "../dashboard/dashboard/movies/movies/AddMovieLink.jsx";
+import NotFound from "../pages/not-found/NotFound.jsx";
 
 const router = createBrowserRouter([
   
@@ -241,6 +242,11 @@ const router = createBrowserRouter([
   {
     path: "/admin/password-recovery/:string",
     element: <SetNewPass />,
+  },
+  
+  {
+    path: "*",
+    element: <NotFound />,
   },
 
 ]);

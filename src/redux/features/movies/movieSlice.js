@@ -8,6 +8,7 @@ const initialState = {
   status: null,
   bulkData: [],
   movieList: [],
+  tempImgs: []
 };
 
 // =================>> SINGLE IMPORT <<===================
@@ -73,16 +74,6 @@ export const bulkMovieImport = createAsyncThunk(
   }
 );
 
-// ====================>>TEST FOR CASHING MOVIE SLICE <<==================
-// export const fetchMovieList = createAsyncThunk(
-//   "movies/fetchMovieList",
-//   async (page) => {
-//     const response = await axios.get(`${base_url}/movie-posts?page=${page}`, {
-//       headers: adminHeader,
-//     });
-//     return response.data;
-//   }
-// );
 
 // ====================>> MOVIE SLICE <<==================
 export const movieSlice = createSlice({
@@ -104,25 +95,15 @@ export const movieSlice = createSlice({
     setBulkData: (state, action) => {
       state.bulkData = action.payload;
     },
+
+    tempImages: (state, action) => {
+      state.tempImages = action.payload;
+    },
   },
 
-  // extraReducers: (builder) => {
-  //   builder
-  //     .addCase(fetchMovieList.pending, (state) => {
-  //       state.status = "loading";
-  //     })
-  //     .addCase(fetchMovieList.fulfilled, (state, action) => {
-  //       state.status = "succeeded";
-  //       state.movieList = action.payload;
-  //     })
-  //     .addCase(fetchMovieList.rejected, (state, action) => {
-  //       state.status = "failed";
-  //       state.error = action.error.message;
-  //     });
-  // },
 });
 
-export const { setMessage, setLoadingST, setBulkData, setStatus } =
+export const { setMessage, setLoadingST, setBulkData, setStatus, tempImages } =
   movieSlice.actions;
 
 export default movieSlice.reducer;

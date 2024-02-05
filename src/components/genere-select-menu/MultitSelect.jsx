@@ -52,7 +52,7 @@ const MultiSelectMenu = () => {
 
       <button
         onClick={handleSubmit}
-        className="w-[150px] h-[39px] border border-slate-600 rounded-md text-white bg-slate-900 hover:bg-slate-600"
+        className="w-[150px] h-[39px] border border-slate-600 rounded-md text-white bg-slate-600 hover:bg-slate-800"
       >
         Submit
       </button>

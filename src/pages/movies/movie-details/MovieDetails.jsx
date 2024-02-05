@@ -1,7 +1,7 @@
 import calender from "../../../assets/calender.svg";
 import DownloadButton from "../../../utils/DownloadButton";
 import { useMovieDetailsQuery } from "../../../redux/features/movies/movieApi";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import JoinTelegramBtn from "../../../utils/JoinTelegramBtn";
 import DetailsPosterCard from "../../../components/details-poster-card/DetailsPosterCard";
 import RelatedPost from "../../../components/related-post/RelatedPost";
@@ -9,21 +9,25 @@ import AdvertisementSection from "../../../components/advertisement/Advertisemen
 import Breadcum from "../../../utils/breadcum/Breadcum";
 import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
 import UploadedDate from "../../../utils/uploaded-date/UploadedDate";
-import StaticContent from "../../../utils/Content/StaticContent";
 import { Helmet } from "react-helmet";
 import CountryList from "../../../components/advertisement/CountryList";
+import { useEffect } from "react";
 
 const MovieDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const { data: movieDetails } = useMovieDetailsQuery(id);
 
+  useEffect(() => {
+    if (movieDetails?.status === false) {
+      navigate('/404');
+    }
+  }, [movieDetails, navigate]);
+
   const { data: siteName } = useSiteNameUSerQuery();
-
   const details = movieDetails?.data;
-
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <div className="bg-[#27272A]">
@@ -62,7 +66,7 @@ const MovieDetails = () => {
                 </p>
               </div>
             ) : (
-              <StaticContent />
+              <p>N/A</p>
             )}
 
             <div className="my-[11px] lg:my-[15px]">
@@ -76,7 +80,10 @@ const MovieDetails = () => {
 
             <div className="lg:max-w-[715px] mt-[13px]">
               <h3 className="text-[50px] lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center leading-none">
-                <a href={details?.guid}> {details?.post_title} ~ EpicMovies </a>
+                <a href={details?.guid}>
+                  {" "}
+                  {details?.post_title} ~ {siteName?.data}{" "}
+                </a>
               </h3>
             </div>
 
@@ -127,10 +134,12 @@ const MovieDetails = () => {
           <JoinTelegramBtn />
 
           <div className="mt-16 lg:hidden ">
-            <h2 className="text-white text-[40px] font-medium px-4">Browse By Country:</h2>
-          <div className="bg-[#1b1b1e] p-4 h-[300px] overflow-y-auto  grid grid-cols-3 gap-4">
-            <CountryList />
-          </div>
+            <h2 className="text-white text-[40px] font-medium px-4">
+              Browse By Country:
+            </h2>
+            <div className="bg-[#1b1b1e] p-4 h-[300px] overflow-y-auto  grid grid-cols-3 gap-4">
+              <CountryList />
+            </div>
           </div>
         </div>
 
@@ -140,7 +149,7 @@ const MovieDetails = () => {
 
       {/* ===========>> RELETED POST <<=========== */}
       <div className="px-10">
-      <RelatedPost id={id} redirect={`/movie`} />
+        <RelatedPost id={id} redirect={`/movie`} />
       </div>
     </div>
   );
