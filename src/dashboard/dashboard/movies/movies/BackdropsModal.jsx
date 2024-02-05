@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 const BackdropsModal = ({
   selectedBackdrops,
   setSelectedbackdrops,
-  remainigImg,
+  newGallery
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -69,7 +69,7 @@ const BackdropsModal = ({
 
               <div className="mt-6 flex justify-center items-center">
                 <div className="grid grid-cols-5 lg:grid-cols-8 gap-x-7 gap-y-5">
-                  {remainigImg.map((item, i) => (
+                  {newGallery.map((item, i) => (
                     <div
                       onClick={() => handleSelect(item)}
                       key={i}

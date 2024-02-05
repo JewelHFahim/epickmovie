@@ -26,14 +26,6 @@ const AddMovies = () => {
     url: img,
   }));
 
-  const remainigImg = newGallery?.filter(
-    (img) => img.id !== selectedPoster?.id
-  );
-
-  const remainigImg2 = remainigImg?.filter(
-    (img) => img.id !== selectedMainback?.id
-  );
-
   const onSubmit = async (data) => {
     try {
       const selectedGeneres = selectedOptions?.map((item) => item?.value);
@@ -138,7 +130,7 @@ const AddMovies = () => {
           <div className="flex flex-col mt-2">
             <label className="">Main Backdrops</label>
             <MainBackdropModal
-              remainigImg={remainigImg}
+              newGallery={newGallery}
               setSelectedMainback={setSelectedMainback}
             />
             {selectedMainback && (
@@ -155,7 +147,7 @@ const AddMovies = () => {
           <div className="flex flex-col mt-2">
             <label className="">Backdrops</label>
             <BackdropsModal
-              remainigImg={remainigImg2}
+              newGallery={newGallery}
               selectedBackdrops={selectedBackdrops}
               setSelectedbackdrops={setSelectedbackdrops}
             />
@@ -196,7 +188,7 @@ const AddMovies = () => {
         {/* ===============>> Themoviedb Data <<============ */}
         <h2 className="text-[20px] ">Themoviedb.org data</h2>
         <div className="px-8 bg-slate-300 p-5 gap-5">
-          <div className="flex flex-col mt-2 lg:w-1/2">
+          <div className="flex flex-col mt-2 lg:w-[220px]">
             <label className="">Release Date</label>
             <input
               type="date"

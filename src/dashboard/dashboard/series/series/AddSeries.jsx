@@ -10,14 +10,11 @@ import { useAddTvShowMutation } from "../../../../redux/features/tv-show/tvShowA
 import { useGalleryListQuery } from "../../../../redux/features/gallery/galleryApi";
 
 const AddTvShow = () => {
-
   const { register, handleSubmit, reset } = useForm();
   const [createTvShow] = useAddTvShowMutation();
   const navigate = useNavigate();
   const [selectedOptions, setSelectedOptions] = useState([]);
   const { data: galleryList } = useGalleryListQuery();
-
-
   const [selectedPoster, setSelectedPoster] = useState();
   const [selectedMainback, setSelectedMainback] = useState();
   const [selectedBackdrops, setSelectedbackdrops] = useState([]);
@@ -27,20 +24,10 @@ const AddTvShow = () => {
     url: img,
   }));
 
-
-  const remainigImg = newGallery?.filter(
-    (img) => img.id !== selectedPoster?.id
-  );
-
-  const remainigImg2 = remainigImg?.filter(
-    (img) => img.id !== selectedMainback?.id
-  );
-
-
   const onSubmit = async (data) => {
     try {
       const selectedGeneres = selectedOptions?.map((item) => item?.value);
-      const imgUrls = selectedGeneres?.map(item => item?.url);
+      const imgUrls = selectedGeneres?.map((item) => item?.url);
 
       const allDatas = {
         ...data,
@@ -50,7 +37,7 @@ const AddTvShow = () => {
         genre_ids: selectedGeneres,
       };
 
-      console.log(allDatas)
+      console.log(allDatas);
 
       const res = await createTvShow(allDatas);
 
@@ -66,7 +53,6 @@ const AddTvShow = () => {
       console.error("Error:", error);
     }
   };
-
 
   const inputStyle =
     "py-1 focus:outline-blue-500 border px-4 placeholder:text-sm";
@@ -124,20 +110,27 @@ const AddTvShow = () => {
           <div className="flex flex-col mt-2">
             <label className="">Poster</label>
             <PosterModal
-            newGallery={newGallery}
+              newGallery={newGallery}
               selectedPoster={selectedPoster}
               setSelectedPoster={setSelectedPoster}
             />
             {selectedPoster && (
               <div className="bg-white flex flex-wrap gap-x-2 p-2">
-                <img src={selectedPoster?.url} alt="" className="w-[60px] h-[60px] object-cover border"/>
+                <img
+                  src={selectedPoster?.url}
+                  alt=""
+                  className="w-[60px] h-[60px] object-cover border"
+                />
               </div>
             )}
           </div>
 
           <div className="flex flex-col mt-2">
             <label className="">Main Backdrops</label>
-            <MainBackdropModal remainigImg={remainigImg} setSelectedMainback={setSelectedMainback} />
+            <MainBackdropModal
+              newGallery={newGallery}
+              setSelectedMainback={setSelectedMainback}
+            />
             {selectedMainback && (
               <div className="bg-white flex flex-wrap gap-x-2 p-2">
                 <img
@@ -152,7 +145,7 @@ const AddTvShow = () => {
           <div className="flex flex-col mt-2">
             <label className="">Backdrops</label>
             <BackdropsModal
-            remainigImg={remainigImg2}
+              newGallery={newGallery}
               selectedBackdrops={selectedBackdrops}
               setSelectedbackdrops={setSelectedbackdrops}
             />
@@ -193,7 +186,7 @@ const AddTvShow = () => {
         {/* ===============>> Themoviedb Data <<============ */}
         <h2 className="text-[20px] ">Themoviedb.org data</h2>
         <div className="px-8 bg-slate-300 p-5 gap-5">
-          <div className="flex flex-col mt-2 lg:w-1/2">
+          <div className="flex flex-col mt-2 lg:w-[220px]">
             <label className="">Release Date</label>
             <input
               type="date"
