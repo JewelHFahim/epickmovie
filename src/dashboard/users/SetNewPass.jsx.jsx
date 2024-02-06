@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useForm } from "react-hook-form";
-import { useSiteLogoUserQuery } from "../../redux/features/settings/settingApi";
 import toast from "react-hot-toast";
 import { setPassword } from "../../redux/features/users/userSlice";
 import { useDispatch } from "react-redux";
+import { LogoCached } from "../../utils/CallFromCenter/CallFromCenter";
 
 const SetNewPass = () => {
   const {
@@ -15,7 +15,6 @@ const SetNewPass = () => {
   } = useForm();
   const { string } = useParams();
   const dispatch = useDispatch();
-  const { data: logo } = useSiteLogoUserQuery();
 
   const [newPassword, setNewPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -38,7 +37,7 @@ const SetNewPass = () => {
     <div className="w-screen h-screen flex justify-center items-center bg-white border border-red-500">
       <div className="w-[450px] mx-auto overflow-hidden bg-white border shadow-xl">
         <div className="px-10 pb-8">
-          <img src={logo?.data} alt="" className="p-8" />
+          <LogoCached imgStyle="w-[200px] mx-auto my-5"/>
           <p className="mt-1 text-center">Set your password</p>
 
           <form onSubmit={handleSubmit(onSubmit)}>

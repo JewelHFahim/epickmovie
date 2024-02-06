@@ -2,12 +2,11 @@ import { useForm } from "react-hook-form";
 import { loginUser } from "../../../redux/features/users/userSlice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useSiteLogoUserQuery } from "../../../redux/features/settings/settingApi";
+import { LogoCached } from "../../../utils/CallFromCenter/CallFromCenter";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data: logo } = useSiteLogoUserQuery();
 
   const {
     handleSubmit,
@@ -35,7 +34,7 @@ const Login = () => {
       <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-xl border">
         <div className="px-6 py-4">
           <div className="flex justify-center mx-auto">
-            <img className="w-auto h-7 sm:h-8" src={logo?.data} alt="" />
+            <LogoCached imgStyle="w-auto h-7 sm:h-8"/>
           </div>
 
           <h3 className="mt-3 text-xl font-medium text-center">Welcome Back</h3>

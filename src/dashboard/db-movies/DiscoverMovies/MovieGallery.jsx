@@ -12,9 +12,7 @@ const MovieGallery = ({ movies }) => {
   const { isLoading, status, message } = useSelector((state) => state.movie);
   const [selectedIds, setSelectedIds] = useState([]);
   const {data: uploadedIds } = useAlreadyUploadedMoviesQuery();
-  console.log(uploadedIds);
-
-
+  
   const handleImageClick = async (id) => {
     id = parseInt(id, 10);
 
@@ -113,7 +111,6 @@ const MovieGallery = ({ movies }) => {
             </p>
               </div>
             }
-
 
           </div>
         ))}

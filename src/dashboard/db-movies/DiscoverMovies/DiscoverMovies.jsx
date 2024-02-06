@@ -5,24 +5,23 @@ import { useSelector } from "react-redux";
 import { tmdb_baseurl } from "../../../config/config";
 
 const DiscoverMovies = ({ filteredData }) => {
-  
+
   const date = new Date();
   const [movies, setMovies] = useState([]);
   const year = date.getFullYear();
   const { searchMovieSeries } = useSelector((state) => state.search);
-  
+
   const selectedGenreId = filteredData?.genreId;
   const selectedSort = filteredData?.sort;
   const selectedYear = filteredData?.year;
   const selectedPage = filteredData?.page;
 
-  const genreLink = selectedGenreId?.length > 0 ? `${key}&with_genres=${selectedGenreId}` : `${key}&with_genres=""`;
-  const sortAscDesc = selectedSort?.length > 0 ? `${key}&sort_by=${selectedSort}` : `${key}&sort_by=popularity.desc`;
-  const yearFilt = selectedYear?.length > 0 ? `${key}&primary_release_year=${selectedYear}` : `${key}&primary_release_year=${year}`;
-  const sortByPage = selectedPage?.length > 0 ? `${key}&page=${selectedPage}` : `${key}&page=1`;
-  const URL = `${base_url}/movie?${sortAscDesc}&${yearFilt}&${genreLink}&${sortByPage}`;
+  const genreLink = selectedGenreId?.length > 0 ? `with_genres=${selectedGenreId}` : `with_genres=`;
+  const sortAscDesc = selectedSort?.length > 0 ? `sort_by=${selectedSort}` : `sort_by=popularity.desc`;
+  const yearFilt = selectedYear?.length > 0 ? `primary_release_year=${selectedYear}` : `primary_release_year=${year}`;
+  const sortByPage = selectedPage?.length > 0 ? `page=${selectedPage}` : `page=1`;
+  const URL = `${base_url}/movie?${key}&include_adult=true&${sortByPage}&${sortAscDesc}&${yearFilt}&${genreLink}`;
   const searchMovie = `${tmdb_baseurl}/search/movie?include_adult=true&${key}&query=${searchMovieSeries}`;
-
   const currentURL = searchMovieSeries === null || searchMovieSeries === "" ? URL : searchMovie;
 
   useEffect(() => {

@@ -71,6 +71,16 @@ const tvShowApi = apiSlice.injectEndpoints({
     }),
 
 
+     // ===============================>> ADD SEASON <<==============================
+     importSingleTvshow: builder.mutation({
+      query: (data) => ({
+        method: "POST",
+        url: `/admin/tv-import`,
+        body: data,
+      }),
+      invalidatesTags: ["EpicMovies"],
+    }),
+
   }),
 });
 
@@ -83,6 +93,7 @@ export const {
   useAddSeasonMutation,
   useEpisodeListQuery,
   useAddEpisodeMutation,
-  useAddTvShowMutation
+  useAddTvShowMutation,
+  useImportSingleTvshowMutation
 } = tvShowApi;
 export default tvShowApi;

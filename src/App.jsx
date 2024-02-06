@@ -7,7 +7,9 @@ import { useSiteNameUSerQuery } from "./redux/features/settings/settingApi";
 import { base_url, userHeader } from "./config/config";
 
 const App = () => {
+
   const { data: siteName } = useSiteNameUSerQuery();
+
 
   // Dynamic Favicon Icon Set
   useEffect(() => {
@@ -59,6 +61,7 @@ const App = () => {
 
   //   fetchScriptContent();
   // }, []);
+
 
   return (
     <HelmetProvider>

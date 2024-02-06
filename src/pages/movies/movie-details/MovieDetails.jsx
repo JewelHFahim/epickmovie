@@ -51,11 +51,7 @@ const MovieDetails = () => {
             </h4>
 
             <div className="flex items-center gap-2 mt-2">
-              <img
-                src={calender}
-                alt=""
-                className="w-[18px] h-[18px] lg:w-[12px] lg:h-[12px]"
-              />
+              <img src={calender} alt="" className="w-[18px] h-[18px] lg:w-[12px] lg:h-[12px]" />
               <UploadedDate details={details}></UploadedDate>
             </div>
 

@@ -7,23 +7,28 @@ import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
 import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
 import MoviePagination from "./MoviePagination";
-
+import { useLocation } from "react-router-dom";
 
 const Movies = () => {
-
+  const location = useLocation();
+  const currentRoute = location.pathname;
   const storedPage = JSON.parse(localStorage.getItem("MovieCurrentPage")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
-
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
   const { data: siteName } = useSiteNameUSerQuery();
-  console.log(perPgaeMovie)
+
 
   useEffect(() => {
     localStorage.setItem("MovieCurrentPage", JSON.stringify(currentPage));
     return () => {
-      localStorage.removeItem("MovieCurrentPage");
+      if (currentRoute === "/movies") {
+        localStorage.removeItem("tvCurrentPage");
+        localStorage.removeItem("banglaPagination");
+        localStorage.removeItem("filterPagination");
+      }
     };
-  }, [currentPage]);
+  }, [currentPage, currentRoute]);
+
 
   return (
     <div className="flex flex-col justify-center items-center">

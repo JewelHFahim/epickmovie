@@ -1,11 +1,14 @@
 import DateFormate from "../../utils/DateFormate";
+import CachedImage from "../../utils/cache-img/CachedImage";
 
 const DetailsPosterCard = ({ details }) => {
+  const imgStyle = "w-full h-full rounded-[3px]"
   return (
     <div className=" lg:w-[715px] lg:min-h-[272px] lg:max-h-[100%] rounded-[20px] bg-[#1B1E21] p-10 px-16 lg:px-0 lg:p-[14px] flex flex-col lg:flex-row gap-[18px] lg:gap-[26px]">
 
       <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] lg:min-w-[182px] lg:h-[250px] p-[4px] lg:p-[2px] rounded-[6px]">
-        <img src={details?.poster_image_url} alt="" className="w-full h-full rounded-[3px]" />
+        {/* <img src={details?.poster_image_url} alt="" className="w-full h-full rounded-[3px]" /> */}
+        <CachedImage src={details?.poster_image_url} imgStyle={imgStyle} />
       </div>
 
       <div className="font-roboto lg:w-[70%]">

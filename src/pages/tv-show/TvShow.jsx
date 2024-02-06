@@ -7,6 +7,7 @@ import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
 import { useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 import TvPagination from "./TvPagination";
+import { useLocation } from "react-router-dom";
 
 const TvShow = () => {
   const storedPage = JSON.parse(localStorage.getItem("tvCurrentPage")) || 1;
@@ -15,12 +16,19 @@ const TvShow = () => {
   const { data: perPgaeMovie, isLoading } = usePerPgaeTvShowQuery(currentPage);
   const { data: siteName } = useSiteNameUSerQuery();
 
+  const location = useLocation();
+  const currentRoute = location.pathname;
+
   useEffect(() => {
     localStorage.setItem("tvCurrentPage", JSON.stringify(currentPage));
     return () => {
-      localStorage.removeItem("tvCurrentPage");
+      if (currentRoute === "/tv-show") {
+        localStorage.removeItem("MovieCurrentPage");
+        localStorage.removeItem("banglaPagination");
+        localStorage.removeItem("filterPagination");
+      }
     };
-  }, [currentPage]);
+  }, [currentPage, currentRoute]);
 
   return (
     <div className="min-h-screen flex flex-col items-center">

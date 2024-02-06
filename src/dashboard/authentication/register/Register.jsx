@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 // import { Select, initTE } from "tw-elements";
 import { useNavigate } from "react-router-dom";
 import { useUserRoleListQuery } from "../../../redux/features/users/userApi";
-import { useSiteLogoUserQuery } from "../../../redux/features/settings/settingApi";
+import { LogoCached } from "../../../utils/CallFromCenter/CallFromCenter";
 
 const Register = () => {
   // initTE({ Select });
@@ -16,7 +16,6 @@ const Register = () => {
     formState: { errors },
   } = useForm();
   const { data: userRoleList } = useUserRoleListQuery();
-  const { data: logo } = useSiteLogoUserQuery();
 
 
 
@@ -45,7 +44,7 @@ const Register = () => {
         <div className="px-10 py-4">
 
           <div className="flex justify-center mx-auto">
-            <img className="w-auto h-7 sm:h-8" src={logo?.data} alt=""/>
+            <LogoCached imgStyle="w-auto h-7 sm:h-8"/>
           </div>
 
           <p className="mt-1 text-center">Register here</p>
@@ -57,10 +56,6 @@ const Register = () => {
 
             <div className="w-full mt-4">
               <input type="email" {...register("email")} placeholder="Email Address" className={inputStyle}/>
-            </div>
-
-            <div className="w-full mt-4">
-              <input type="number" {...register("phone")} placeholder="Phone Number" className={inputStyle}/>
             </div>
 
             <select data-te-select-init {...register("user_role")} className={inputStyle}>

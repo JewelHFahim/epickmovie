@@ -1,12 +1,25 @@
 import { useSelector } from "react-redux";
 import { useSerachResultsQuery } from "../../../redux/features/search/searchApi";
 import MovieCard from "../../../components/movie-card/MovieCard";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const SearchList = () => {
   const { searchTerm } = useSelector((state) => state.search);
   const { data: searchResults, isLoading } = useSerachResultsQuery(searchTerm);
 
-  console.log(searchResults)
+  const location = useLocation();
+  const currentRoute = location.pathname;
+
+  useEffect(() => {
+    if(currentRoute === "/search-list"){
+      localStorage.removeItem("tvCurrentPage");
+      localStorage.removeItem("banglaPagination");
+      localStorage.removeItem("filterPagination");
+      localStorage.removeItem("MovieCurrentPage");
+    }
+  }, [currentRoute]);
+
 
   return (
     <section className="min-h-screen px-[50px] py-[20px] lg:px-0 lg:py-5">

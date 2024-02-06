@@ -4,9 +4,9 @@ import MovieCard from "../../../components/movie-card/MovieCard";
 import { useEffect, useState } from "react";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import FilterPagination from "./FilterPagination";
+import { useLocation } from "react-router-dom";
 
 const FilterList = () => {
-  
   const { filteredTerm } = useSelector((state) => state.search);
   const storedPage = JSON.parse(localStorage.getItem("filterPagination")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
@@ -14,16 +14,22 @@ const FilterList = () => {
   const { data: filteredResults, isLoading } =
     useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
 
-  useEffect(() => {
+  const location = useLocation();
+  const currentRoute = location.pathname;
 
+  useEffect(() => {
     localStorage.setItem("filterPagination", JSON.stringify(currentPage));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.scrollTo({ top: 0, behavior: "smooth" });
 
     return () => {
-      localStorage.removeItem("filterPagination");
+      if (currentRoute === "/filter-list") {
+        localStorage.removeItem("tvCurrentPage");
+        localStorage.removeItem("banglaPagination");
+        localStorage.removeItem("MovieCurrentPage");
+      }
     };
-  }, [currentPage]);
-
+  }, [currentPage, currentRoute]);
+  
 
   return (
     <section className="min-h-screen">
@@ -59,7 +65,6 @@ const FilterList = () => {
         setCurrentPage={setCurrentPage}
         perPgaeMovie={filteredResults}
       />
-
     </section>
   );
 };

@@ -129,7 +129,7 @@ const DbSeries = () => {
                 <td className="px-3 font-medium">
                   <p
                     onClick={() => handleCopyClick(item?.id)}
-                    className="flex items-center gap-1 font-medium cursor-pointer"
+                    className="flex items-center gap-1 font-medium cursor-pointer hover:text-green-800"
                   >
                     <FaCopy /> {item?.id}
                   </p>

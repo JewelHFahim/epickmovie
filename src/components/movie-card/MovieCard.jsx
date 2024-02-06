@@ -4,6 +4,9 @@ import FeatureSticker from "../../utils/feature-sticker/FeatureSticker";
 import "./MovieCard.css";
 import { FaPlay } from "react-icons/fa";
 import { useEffect, useState } from "react";
+import CachedImage from "../../utils/cache-img/CachedImage";
+import ImageWithPlaceholder from "../../utils/ImageWithPlaceholder/ImageWithPlaceholder";
+import LazyLoadedImage from "../../utils/LazyLoadedImage/LazyLoadedImage";
 
 const MovieCard = ({ item, redirect }) => {
   const [url, setUrl] = useState();
@@ -27,13 +30,22 @@ const MovieCard = ({ item, redirect }) => {
     }
   }, [redirect, item?.post_title]);
 
+  const imgStyle = "w-full rounded-tr-[10px] rounded-tl-[10px] posterImg"
+
   return (
     <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] w-[401px] lg:w-full min-h-[635px] h-full lg:min-h-[460px] p-[4px] lg:p-[2px] rounded-[10px] relative playBtnCont">
       <Link
         to={url}
         className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative`}
       >
-        <img src={item?.poster_image_url} alt="" className="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg"/>
+        {/* <img src={item?.poster_image_url} alt="" className="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg"/> */}
+
+        <CachedImage src={item?.poster_image_url} imgStyle={imgStyle} />
+
+        {/* <LazyLoadedImage src={item?.poster_image_url} imgStyle={imgStyle} /> */}
+
+        {/* <ImageWithPlaceholder src={item?.poster_image_url} imgStyle={imgStyle}/> */}
+
         <p className="text-center  text-white font-[700] text-[33px] lg:text-[16px] p-4 lg:p-2 font-alef">
           { item?.post_title?.length <= 80 ?  item?.post_title : (item?.post_title)?.slice(0,80) }
         </p>

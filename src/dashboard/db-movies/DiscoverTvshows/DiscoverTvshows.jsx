@@ -16,17 +16,12 @@ const DiscoverTvshows = ({filteredData}) => {
   const selectedYear = filteredData?.year;
   const selectedPage = filteredData?.page;
 
-  const genreLink = selectedGenreId?.length > 0 ? `${key}&with_genres=${selectedGenreId}` : `${key}&with_genres=""`;
-
-  const sortAscDesc = selectedSort?.length > 0 ? `${key}&sort_by=${selectedSort}` : `${key}&sort_by=popularity.desc` ;
-
-  const yearFilt = selectedYear?.length > 0 ? `${key}&first_air_date_year=${selectedYear}` : `${key}&first_air_date_year=${year}`;
-
-  const sortByPage = selectedPage?.length > 0 ? `${key}&page=${selectedPage}` : `${key}&page=1`;
-
+  const genreLink = selectedGenreId?.length > 0 ? `with_genres=${selectedGenreId}` : `with_genres=`;
+  const sortAscDesc = selectedSort?.length > 0 ? `sort_by=${selectedSort}` : `sort_by=popularity.desc` ;
+  const yearFilt = selectedYear?.length > 0 ? `first_air_date_year=${selectedYear}` : `first_air_date_year=${year}`;
+  const sortByPage = selectedPage?.length > 0 ? `page=${selectedPage}` : `page=1`;
   const searchSeries = `${tmdb_baseurl}/search/tv?include_adult=true&${key}&query=${searchMovieSeries}`;
-
-  const URL = `${base_url}/tv?${sortByPage}&${sortAscDesc}&${yearFilt}&${genreLink}`;
+  const URL = `${base_url}/tv?${key}&include_adult=true&${sortByPage}&${sortAscDesc}&${yearFilt}&${genreLink}`;
 
   const currentURL = (searchMovieSeries === null || searchMovieSeries === "") ? URL : searchSeries;
 

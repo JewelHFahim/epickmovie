@@ -17,6 +17,8 @@ const DbMovies = () => {
   const { bulkTvData, isLoadingTv } = useSelector((state) => state.tvShow);
   const { searchMovieSeries } = useSelector((state) => state.search);
 
+  console.log(bulkData)
+
   const [toggleState, setToggleState] = useState("movie");
   const dispatch = useDispatch();
 
@@ -45,6 +47,7 @@ const DbMovies = () => {
   // ===================>> BULK TV SHOW IMPORT <<==================
   const handleBulkTvShowImport = async () => {
     dispatch(bulkTvShowImport({ tmdb_ids: bulkTvData }));
+    console.log({ tmdb_ids: bulkTvData })
   };
 
   const [searchParams, setSearchParams] = useState("");
@@ -196,6 +199,7 @@ const DbMovies = () => {
             </button>
           )}
         </div>
+
       </div>
 
       {/* ============================>> Discovery <<===============================*/}

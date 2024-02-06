@@ -10,11 +10,8 @@ import { logoutUser } from "../redux/features/users/userSlice";
 import { useNavigate } from "react-router-dom";
 import { RiMovieLine } from "react-icons/ri";
 import { PiTerminalWindow } from "react-icons/pi";
-import {
-  useSiteLogoUserQuery,
-  useSiteNameUSerQuery,
-} from "../redux/features/settings/settingApi";
 import { GrGallery } from "react-icons/gr";
+import { LogoCached } from "../utils/CallFromCenter/CallFromCenter";
 
 
 // NESTED MENUS
@@ -58,8 +55,6 @@ const Menu = (props) => {
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { data: siteLogo } = useSiteLogoUserQuery();
-  const { data: siteName } = useSiteNameUSerQuery();
 
   const navigation = [
     {
@@ -137,14 +132,8 @@ const Sidebar = () => {
       <nav className="full h-screen border-r bg-white space-y-8">
         <div className="flex flex-col h-full px-4 overflow-y-auto border relative">
           {/* ============================>> LOGO <<=======================*/}
-          <div className="h-20 flex items-center pl-2">
-            {siteLogo?.data ? (
-              <img src={siteLogo?.data} alt="" className="object-cover" />
-            ) : (
-              <h1 className="text-[22px] font-bold text-slate-800">
-                {siteName?.name}
-              </h1>
-            )}
+          <div className="h-20 flex items-center p-5 pl-0">
+            <LogoCached imgStyle="object-cover w-[180px]"/>
           </div>
 
           {/* ========================>> MENUES <<=========================*/}

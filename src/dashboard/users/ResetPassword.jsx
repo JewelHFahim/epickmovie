@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
 import { useSingleUserDetailsQuery } from "../../redux/features/users/userApi";
 import { useForm } from "react-hook-form";
-import { useSiteLogoUserQuery } from "../../redux/features/settings/settingApi";
 import { resetPassword } from "../../redux/features/users/userSlice";
 import { useDispatch } from "react-redux";
+import { LogoCached } from "../../utils/CallFromCenter/CallFromCenter";
 
 const ResetPassword = () => {
   const {
@@ -15,7 +15,6 @@ const ResetPassword = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
   const { data: userDetails } = useSingleUserDetailsQuery(parseInt(id));
-  const { data: logo } = useSiteLogoUserQuery();
 
   const onSubmit = (data) => {
     dispatch(resetPassword(data));
@@ -29,7 +28,7 @@ const ResetPassword = () => {
     <div className="w-screen h-screen flex justify-center items-center bg-white border border-red-500">
       <div className="w-[450px] mx-auto overflow-hidden bg-white border shadow-xl">
         <div className="px-10 pb-8">
-          <img src={logo?.data} alt="" className="p-8" />
+          <LogoCached imgStyle="w-[200px] mx-auto my-5"/>
           <p className="mt-1 text-center">Reset your password</p>
 
           <form onSubmit={handleSubmit(onSubmit)}>

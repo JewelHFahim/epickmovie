@@ -10,14 +10,12 @@ const initialState = {
 };
 
 // =================>> SINGLE TV SHOW IMPORT <<===================
-export const singleTvShowImport = createAsyncThunk(
-  "tvShows/singleTvShowImport",
-  async (body, { dispatch }) => {
+export const singleTvShowImport = createAsyncThunk("tvShows/singleTvShowImport", async (body, { dispatch }) => {
+
+
     dispatch(setLoadingST(true));
     try {
-      const response = await fetch(
-        `${base_url}/admin/tv-import`,
-        {
+      const response = await fetch(`${base_url}/admin/tv-import`,{
           method: "POST",
           headers: adminHeader,
           body: JSON.stringify(body),
@@ -33,6 +31,7 @@ export const singleTvShowImport = createAsyncThunk(
       dispatch(setMessage(data?.message));
       dispatch(setStatus(data?.status));
       toast.success(data?.message);
+      
       dispatch(setLoadingST(false));
 
       return data;
@@ -47,6 +46,8 @@ export const singleTvShowImport = createAsyncThunk(
 // =======================>> BULK IMPORT <<=======================
 export const bulkTvShowImport = createAsyncThunk("tvShows/bulkTvShowsImport", async (body, { dispatch }) => {
 
+  console.log(body)
+
     try {
       dispatch(setLoadingST(true));
       const response = await fetch( `${base_url}/admin/tv-bulk-import`, {
@@ -56,19 +57,16 @@ export const bulkTvShowImport = createAsyncThunk("tvShows/bulkTvShowsImport", as
         }
       );
 
-      // Check if the response was successful
       if (!response.ok) {
         toast.error(setMessage());
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
 
-      // Extract the data from the response
       const data = await response.json();
 
       dispatch(setMessage(data?.message));
       toast.success(data?.message);
       dispatch(setLoadingST(false));
-
 
       return data; 
     } catch (error) {

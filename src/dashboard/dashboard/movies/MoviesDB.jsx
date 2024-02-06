@@ -135,7 +135,7 @@ const MoviesDB = () => {
               {results?.data?.map((item, idx) => (
                 <tr key={idx} className="odd:bg-gray-50 even:bg-white">
                   <td className="px-3 py-4 ">
-                    <p onClick={()=>handleCopyClick(item?.id)} className="flex items-center gap-1 font-medium cursor-pointer">
+                    <p onClick={()=>handleCopyClick(item?.id)} className="flex items-center gap-1 font-medium cursor-pointer hover:text-green-800">
                       <FaCopy /> {item?.id}
                     </p>
                   </td>

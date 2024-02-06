@@ -11,7 +11,6 @@ const MoviePagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
   // Function to handle page change
   const handlePageChange = (page) => {
     setCurrentPage(page);
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
