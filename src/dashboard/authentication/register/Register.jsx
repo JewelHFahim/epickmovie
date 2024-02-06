@@ -4,12 +4,14 @@ import { useDispatch } from "react-redux";
 // import { Select, initTE } from "tw-elements";
 import { useNavigate } from "react-router-dom";
 import { useUserRoleListQuery } from "../../../redux/features/users/userApi";
-import { LogoCached } from "../../../utils/CallFromCenter/CallFromCenter";
+import { useSiteLogoUserQuery, useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
 
 const Register = () => {
   // initTE({ Select });
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { data: siteLogo, isLoading } = useSiteLogoUserQuery();
+  const { data: siteName } = useSiteNameUSerQuery();
   const {
     handleSubmit,
     register,
@@ -44,7 +46,20 @@ const Register = () => {
         <div className="px-10 py-4">
 
           <div className="flex justify-center mx-auto">
-            <LogoCached imgStyle="w-auto h-7 sm:h-8"/>
+            {isLoading ? (
+            <div className="w-[150px] h-[40px] lg:w-[200px] lg:h-[65px] bg-slate-700 rounded-lg animate-pulse" />
+          ) : (
+            <img
+              src={siteLogo?.data}
+              alt={siteName?.data}
+              className="w-auto h-7 sm:h-8"
+            />
+          )}
+          {!siteLogo?.data && (
+            <h1 className="text-[25px] font-medium text-white">
+              {siteName?.data}
+            </h1>
+          )}
           </div>
 
           <p className="mt-1 text-center">Register here</p>

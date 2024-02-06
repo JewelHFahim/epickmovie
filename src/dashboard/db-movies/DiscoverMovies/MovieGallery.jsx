@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { imgBaseUrl } from "../../../utils/Importants";
 import { useDispatch, useSelector } from "react-redux";
 import { setBulkData, singleMovieImport } from "../../../redux/features/movies/movieSlice";
 import ImageLoader from "../../../utils/loading/img-loader/ImageLoader";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
 import { useAlreadyUploadedMoviesQuery } from "../../../redux/features/movies/movieApi";
+import { tmdb_img_url } from "../../../config/config";
 
 const MovieGallery = ({ movies }) => {
 
@@ -97,7 +97,7 @@ const MovieGallery = ({ movies }) => {
               </div>
             )}
 
-            <img src={`${imgBaseUrl}${image?.poster_path}`} alt="" style={{ width: "120px", height: "150px" }}/>
+            <img src={`${tmdb_img_url}${image?.poster_path}`} alt="" style={{ width: "120px", height: "150px" }}/>
             <div className="text-center">
               <p>{image?.title?.slice(0,12)}</p>
               <p className="text-sm">{image?.release_date}</p>

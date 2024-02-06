@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form";
 import { loginUser } from "../../../redux/features/users/userSlice";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { LogoCached } from "../../../utils/CallFromCenter/CallFromCenter";
+import { useSiteLogoUserQuery, useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
 
 const Login = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { data: siteLogo, isLoading } = useSiteLogoUserQuery();
+  const { data: siteName } = useSiteNameUSerQuery();
 
   const {
     handleSubmit,
@@ -34,7 +36,20 @@ const Login = () => {
       <div className="w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-xl border">
         <div className="px-6 py-4">
           <div className="flex justify-center mx-auto">
-            <LogoCached imgStyle="w-auto h-7 sm:h-8"/>
+            {isLoading ? (
+            <div className="w-[150px] h-[40px] lg:w-[200px] lg:h-[65px] bg-slate-700 rounded-lg animate-pulse" />
+          ) : (
+            <img
+              src={siteLogo?.data}
+              alt={siteName?.data}
+              className="w-auto h-7 sm:h-8"
+            />
+          )}
+          {!siteLogo?.data && (
+            <h1 className="text-[25px] font-medium text-white">
+              {siteName?.data}
+            </h1>
+          )}
           </div>
 
           <h3 className="mt-3 text-xl font-medium text-center">Welcome Back</h3>

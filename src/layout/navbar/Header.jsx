@@ -2,15 +2,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
-import { useSiteLogoUserQuery} from "../../redux/features/settings/settingApi";
+import { useSiteLogoUserQuery, useSiteNameUSerQuery} from "../../redux/features/settings/settingApi";
 import { IoSearch } from "react-icons/io5";
-import { LogoCached } from "../../utils/CallFromCenter/CallFromCenter";
 
 const Header = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchTermState, setSearchTerm] = useState("");
   const { data: siteLogo, isLoading } = useSiteLogoUserQuery();
+  const { data: siteName } = useSiteNameUSerQuery();
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -30,7 +30,16 @@ const Header = () => {
         <div className="w-[150px] h-[40px] lg:w-[200px] lg:h-[65px] bg-slate-700 rounded-lg animate-pulse "></div>
       ) : (
         <Link to="/" className="w-[440px] lg:w-[240px] h-[80px] flex justify-center items-center">
-          <LogoCached alt="Epic Movie Logo" imgStyle={'object-cover'}/>
+          {isLoading ? (
+            <div className="w-[150px] h-[40px] lg:w-[200px] lg:h-[65px] bg-slate-700 rounded-lg animate-pulse" />
+          ) : (
+            <img src={siteLogo?.data} alt={siteName?.data} className="object-cover"/>
+          )}
+          {!siteLogo?.data && (
+            <h1 className="text-[25px] font-medium text-white">
+              {siteName?.data}
+            </h1>
+          )}
         </Link>
       )}
 

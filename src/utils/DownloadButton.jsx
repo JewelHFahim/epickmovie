@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 const DownloadButton = ({ children, url }) => {
 
- 
   return (
     <Link to={url} target="_blank" rel="noopener noreferrer">
       <button className="w-full mx-auto py-[25px] lg:py-[8px] text-[35px] lg:text-[20px] font-[700] text-white flex justify-center items-center 

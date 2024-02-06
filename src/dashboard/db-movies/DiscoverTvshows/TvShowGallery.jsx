@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { imgBaseUrl } from "../../../utils/Importants";
 import { useDispatch, useSelector } from "react-redux";
 import ImageLoader from "../../../utils/loading/img-loader/ImageLoader";
 import { IoCheckmarkDoneCircleOutline } from "react-icons/io5";
@@ -9,7 +8,7 @@ import {
 } from "../../../redux/features/tv-show/tvShowSlice";
 import { useAlreadyUploadedTvShowsQuery } from "../../../redux/features/movies/movieApi";
 import { useImportSingleTvshowMutation } from "../../../redux/features/tv-show/tvShowApi";
-import toast from "react-hot-toast";
+import { tmdb_img_url } from "../../../config/config";
 
 const TvShowGallery = ({ tvShows }) => {
   const dispatch = useDispatch();
@@ -140,7 +139,7 @@ const TvShowGallery = ({ tvShows }) => {
             )}
 
             <img
-              src={`${imgBaseUrl}${image?.poster_path}`}
+              src={`${tmdb_img_url}${image?.poster_path}`}
               alt=""
               style={{ width: "120px", height: "150px" }}
             />

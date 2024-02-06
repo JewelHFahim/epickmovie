@@ -1,14 +1,12 @@
 import { useEffect, useState } from 'react';
-import { base_url } from '../../config/config';
+import { adminHeader, base_url } from '../../config/config';
 
 const DynamicScript = () => {
     const [script, setScript] = useState();
 
   useEffect(() => {
     fetch(`${base_url}/admin/upload-logo`, {
-        headers: {
-        //   Authorization: `Bearer ${token}`,
-        },
+        headers: adminHeader,
       })
         .then((response) => {
           if (response.ok) {

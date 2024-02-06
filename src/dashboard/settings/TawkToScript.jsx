@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { base_url } from "../../config/config";
+import { base_url, userHeader } from "../../config/config";
 
 const TawkToScript = () => {
 
@@ -10,7 +10,7 @@ const TawkToScript = () => {
     const fetchScriptAndInject = async () => {
       try {
         const response = await fetch(`${base_url}/get-config-value/global_header`,{
-            headers: { "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ" },
+            headers: userHeader,
           }
         );
 

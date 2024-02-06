@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import MovieGallery from "./MovieGallery";
-import { key } from "../../../utils/Importants";
-import { tmdb_baseurl } from "../../../config/config";
+import { key, tmdb_baseurl } from "../../../config/config";
 
 const SearchResults = () => {
   const [movies, setMovies] = useState([]);

@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
-import { base_url, key } from "../../../utils/Importants";
 import TvShowGallery from "./TvShowGallery";
 import { useSelector } from "react-redux";
-import { tmdb_baseurl } from "../../../config/config";
+import { key, tmdb_baseurl } from "../../../config/config";
 
 const DiscoverTvshows = ({filteredData}) => {
   const date = new Date();
@@ -21,7 +20,7 @@ const DiscoverTvshows = ({filteredData}) => {
   const yearFilt = selectedYear?.length > 0 ? `first_air_date_year=${selectedYear}` : `first_air_date_year=${year}`;
   const sortByPage = selectedPage?.length > 0 ? `page=${selectedPage}` : `page=1`;
   const searchSeries = `${tmdb_baseurl}/search/tv?include_adult=true&${key}&query=${searchMovieSeries}`;
-  const URL = `${base_url}/tv?${key}&include_adult=true&${sortByPage}&${sortAscDesc}&${yearFilt}&${genreLink}`;
+  const URL = `${tmdb_baseurl}/discover/tv?${key}&include_adult=true&${sortByPage}&${sortAscDesc}&${yearFilt}&${genreLink}`;
 
   const currentURL = (searchMovieSeries === null || searchMovieSeries === "") ? URL : searchSeries;
 

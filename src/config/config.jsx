@@ -1,6 +1,10 @@
 const userInfo = JSON.parse(localStorage.getItem("user-info"));
 
-export const base_url = "https://fapi.epickmovies.online/api";
+export const tmdb_baseurl = import.meta.env.VITE_tmdb_base_url;
+export const tmdb_img_url = import.meta.env.VITE_tmdb_img_url;
+export const user_api_key = import.meta.env.VITE_user_api_key;
+export const key = import.meta.env.VITE_tmdb_api_key;
+export const base_url = import.meta.env.VITE_base_url;
 
 export const adminHeader = {
   "content-type": "application/json",
@@ -8,9 +12,6 @@ export const adminHeader = {
 };
 
 export const userHeader = {
-  "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ",
+  "X-API-KEY": user_api_key,
   "Content-Type": "application/json",
 };
-
-
-export const tmdb_baseurl = "https://api.themoviedb.org/3";
