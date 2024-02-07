@@ -3,7 +3,6 @@ import { useFooterUserQuery } from "../redux/features/settings/settingApi";
 const Footer = () => {
   const { data: footerConfig } = useFooterUserQuery();
 
-
   return (
     <div>
       <div className="w-full h-[100%] lg:h-[100px] bg-[#343437] lg:bg-[#27272A] mt-[43px] flex justify-center items-center px-4 py-2 lg:p-0">

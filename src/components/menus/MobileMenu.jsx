@@ -2,15 +2,8 @@ import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { LuFolderInput } from "react-icons/lu";
 import { FaMinus, FaPlus } from "react-icons/fa6";
-import {
-  useGenreListQuery,
-  usePixelQualityClientQuery,
-  usePrintQualityClientQuery,
-  useYearListQuery,
-} from "../../redux/features/movies/movieApi";
-import { collectFilteredItem } from "../../redux/features/search/searchSlice";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useGenreListQuery, usePixelQualityClientQuery, usePrintQualityClientQuery, useYearListQuery } from "../../redux/features/movies/movieApi";
+import { Link, useLocation } from "react-router-dom";
 import { MdOutlineMovieFilter } from "react-icons/md";
 import { RiListIndefinite } from "react-icons/ri";
 import { MdOutlineHighQuality } from "react-icons/md";
@@ -23,7 +16,7 @@ import { LiaTelegramPlane } from "react-icons/lia";
 import { useJoinTelegramUserQuery } from "../../redux/features/settings/settingApi";
 
 const MobileMenu = () => {
-  const dispatch = useDispatch();
+  const location = useLocation();
   const { data: pixelQualityList } = usePixelQualityClientQuery();
   const { data: printQualityList } = usePrintQualityClientQuery();
   const { data: genreList } = useGenreListQuery();
@@ -35,11 +28,7 @@ const MobileMenu = () => {
   const combinedQuality = pixel?.concat(print);
 
   const [state, setState] = useState(false);
-  const [drapdownState, setDrapdownState] = useState({
-    isActive: false,
-    idx: null,
-  });
-
+  const [drapdownState, setDrapdownState] = useState({ isActive: false, idx: null});
 
   const navigation = [
     { title: "Home", path: "/", isDrapdown: false, icon: <RiHome2Line /> },
@@ -101,10 +90,9 @@ const MobileMenu = () => {
     };
   }, []);
 
-  const handleTerms = (data) => {
-    dispatch(collectFilteredItem(data));
+  useEffect(() => {
     setState(false);
-  };
+  }, [location]);
 
   const handleSubMenuClick = (idx) => {
     setDrapdownState((prevState) => ({ idx, isActive: prevState.idx === idx ? !prevState.isActive : true, }));
@@ -120,12 +108,8 @@ const MobileMenu = () => {
           <div className={`w-full flex justify-between items-center p-2  border-[#2D2C2C] borde`}>
             <div onClick={() => setState(!state)} className="w-full py-2">
               <button className="w-full flex justify-between items-center text-white">
-                {/* <GiHamburgerMenu className="text-[50px]" /> */}
                 <p className="text-[35px] font-medium">MENU</p>
-                
-
                 {state ? <IoClose className="text-[50px]" /> : <GiHamburgerMenu className="text-[50px]" /> }
-
               </button>
             </div>
           </div>
@@ -136,7 +120,7 @@ const MobileMenu = () => {
                 return (
                   <li key={idx}>
                     {item.isDrapdown ? (
-                      // ======================>> WITH SUB MENUS <=========================
+                      // =======================>> WITH SUB MENUS <===========================
                       <button
                         className="w-full flex items-center justify-between text-white font-inter font-[600] border-b-[.5px] border-[#2D2C2C] relative"
                         onClick={() => handleSubMenuClick(idx)}
@@ -154,14 +138,15 @@ const MobileMenu = () => {
                       </button>
                     ) : (
                       // ======================>> WITHOUT SUB MENUS <=========================
-                      <a
-                        href={item.path}
+                      <Link
+                        to={item.path}
                         className="pl-2 flex items-center gap-3 py-8 text-[30px] font-inter font-[600] text-white border-b-[.5px border-[#2D2C2C] uppercase"
                       >
                         <p className="text-[40px]">{item?.icon}</p>
                         {item.title}
-                      </a>
+                      </Link>
                     )}
+
                     {/* ==========================>> SUB MENUS <============================ */}
                     {item.isDrapdown &&
                       drapdownState.idx === idx &&
@@ -169,17 +154,11 @@ const MobileMenu = () => {
                         <div>
                           <ul className="flex flex-col gap-y-4 mx-10">
                             {item?.navs?.map((item, i) => (
-                              <li
-                                onClick={() => handleTerms(item?.slug)}
-                                key={i}
-                                className="flex items-center gap-2 text-white px-2 py-4 border-b-[.5px] border-[#2D2C2C] my-2"
-                              >
+                              <Link to={`/sp-terms/${item?.slug}`} key={i}
+                                className="flex items-center gap-2 text-white px-2 py-4 border-b-[.5px] border-[#2D2C2C] my-2">
                                 <LuFolderInput className="w-[30px] h-[30px]"/>
-
-                                <Link to="/filter-list" className="text-[30px] font-inter font-[600]">
-                                  {item.name}
-                                </Link>
-                              </li>
+                                <p className="text-[30px] font-inter font-[600]"> {item.name} </p>
+                              </Link>
                             ))}
                           </ul>
                         </div>

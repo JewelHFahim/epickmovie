@@ -2,6 +2,7 @@ import joinTelegran from "../../assets/join telegram.png";
 import ads from "../../assets/ads.png";
 import { useJoinTelegramUserQuery } from "../../redux/features/settings/settingApi";
 import CountryList from "./CountryList";
+import { Link } from "react-router-dom";
 
 const AdvertisementSection = () => {
   const { data: joinTelegram } = useJoinTelegramUserQuery();
@@ -14,13 +15,13 @@ const AdvertisementSection = () => {
           Join Our Telegram
         </p>
         <hr className="w-full bg-[#494949] opacity-[.4]" />
-        <a href={joinTelegram?.data} target="_blank" rel="noopener noreferrer">
+        <Link to={joinTelegram?.data} target="_blank" rel="noopener noreferrer">
           <img
             src={joinTelegran}
             alt=""
             className="mt-[10px] w-[268px] h-[104px] mx-auto"
           />
-        </a>
+        </Link>
       </div>
 
       <div className="w-[299px] bg-[#27272A] mt-[27px]">

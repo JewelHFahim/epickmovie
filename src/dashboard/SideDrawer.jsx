@@ -7,7 +7,7 @@ import { FaUsers } from "react-icons/fa";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { logoutUser } from "../redux/features/users/userSlice";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { RiMovieLine } from "react-icons/ri";
 import { PiTerminalWindow } from "react-icons/pi";
 import { GrGallery } from "react-icons/gr";
@@ -36,13 +36,13 @@ const Menu = (props) => {
         <ul className="mx-4 px-2 border-l text-xs">
           {items.map((item, idx) => (
             <li key={idx}>
-              <a
-                href={item.href}
+              <Link
+                to={item.href}
                 className="flex items-center p-1  hover:bg-gray-200 duration-150"
               >
                 {item.icon ? <div>{item.icon}</div> : ""}
                 {item.name}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -109,13 +109,8 @@ const Sidebar = () => {
 
   const nestedTerms = [
     { name: "Tags", href: "/admin/dashboard/add-tags", icon: "" },
-    { name: "Director", href: "/admin/dashboard/add-director", icon: "" },
     { name: "Quality", href: "/admin/dashboard/add-quality", icon: "" },
     { name: "Genres", href: "/admin/dashboard/add-genre", icon: "" },
-    { name: "Cast", href: "/admin/dashboard/add-cast", icon: "" },
-    { name: "Studio", href: "/admin/dashboard/add-studio", icon: "" },
-    { name: "Networks", href: "/admin/dashboard/add-networks", icon: "" },
-    { name: "Creator", href: "/admin/dashboard/add-creator", icon: "" },
     { name: "Audio", href: "/admin/dashboard/add-audio", icon: "" },
     { name: "Year", href: "/admin/dashboard/add-year", icon: "" },
   ];
@@ -158,13 +153,12 @@ const Sidebar = () => {
             <ul className="text-sm font-medium flex-1">
               {navigation.map((item, idx) => (
                 <li key={idx}>
-                  <a
-                    href={item.href}
+                  <Link to={item.href}
                     className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                   >
                     <div className="text-gray-500 text-lg">{item.icon}</div>
                     {item.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
 
@@ -181,13 +175,12 @@ const Sidebar = () => {
               <ul className="text-sm font-medium">
                 {navsFooter.map((item, idx) => (
                   <li key={idx}>
-                    <a
-                      href={item.href}
+                    <Link to={item.href}
                       className="flex items-center gap-x-2 text-gray-600 p-2 rounded-lg  hover:bg-gray-50 active:bg-gray-100 duration-150"
                     >
                       <div className="text-gray-500">{item.icon}</div>
                       {item.name}
-                    </a>
+                    </Link>
                   </li>
                 ))}
               </ul>
@@ -204,10 +197,8 @@ const Sidebar = () => {
               </div>
             </div>
 
-            <button
-              onClick={() => handleLogout()}
-              className="flex items-center gap-1 ml-7 hover:text-red-300 transform duration-150 cursor-pointer"
-            >
+            <button onClick={() => handleLogout()}
+              className="flex items-center gap-1 ml-7 hover:text-red-300 transform duration-150 cursor-pointer">
               <FiLogOut className="text-xl" />
               <p>Logout</p>
             </button>

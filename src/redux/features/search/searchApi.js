@@ -10,8 +10,7 @@ const tvShowApi = apiSlice.injectEndpoints({
 
     // ===========>>  Filter By GENRE/YEAR/QUALITY  <<=============
     filteredResultsByPagination: builder.query({
-      query: ({ filteredTerm, currentPage }) =>
-        `/sp-terms/${filteredTerm}?page=${currentPage}`,
+      query: ({ filteredTerm, currentPage }) => `/sp-terms/${filteredTerm}?page=${currentPage}`,
       providesTags: ["EpicMovies"],
     }),
 

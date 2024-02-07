@@ -210,12 +210,13 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-    // ================>> ALREADY UPLOADED MOVIE/SERIES <<====================
+    // ================>> ALREADY UPLOADED MOVIE <<====================
     alreadyUploadedMovies: builder.query({
       query: () => `/admin/movie-active-tmdb-ids`,
       providesTags: ["EpicMovies"],
     }),
 
+    // ================>> ALREADY UPLOADED SERIES <<====================
     alreadyUploadedTvShows: builder.query({
       query: () => `/admin/tvshow-active-tmdb-ids`,
       providesTags: ["EpicMovies"],

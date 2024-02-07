@@ -18,7 +18,7 @@ import AdminTvShowDetails from "../dashboard/dashboard/series/series/AdminTvShow
 import AddSeries from "../dashboard/dashboard/series/series/AddSeries";
 import UpdateTvShow from "../dashboard/dashboard/series/series/UpdateTvShow";
 import AddSeasons from "../dashboard/dashboard/series/seasons/AddSeason";
-import { clientRoutes } from "./clientRoutes";
+import { clientRoutes } from "./ClientRoutes.jsx";
 import TrashList from "../dashboard/trash/trash/TrashList";
 import SeasonTrash from "../dashboard/dashboard/series/seasons/SeasonTrash";
 import EpisodeList from "../dashboard/dashboard/series/series/EpisodeList";
@@ -33,7 +33,6 @@ import AddStudio from "../dashboard/terms/studio/AddStudio";
 import AddCreator from "../dashboard/terms/creator/AddCreator";
 import AddNetworks from "../dashboard/terms/networks/AddNetworks";
 import Settings from "../dashboard/settings/Settings";
-import Help from "../dashboard/help/Help";
 import ResetPassword from "../dashboard/users/ResetPassword";
 import SetNewPass from "../dashboard/users/SetNewPass.jsx";
 import Gallery from "../dashboard/dashboard/gallery/Gallery.jsx";
@@ -66,10 +65,6 @@ const router = createBrowserRouter([
       {
         path: "/admin/dashboard/settings",
         element: <Settings />,
-      },
-      {
-        path: "/admin/dashboard/help",
-        element: <Help />,
       },
 
       {

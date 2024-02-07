@@ -46,7 +46,7 @@ const LogoUploader = () => {
 
   return (
     <div className="w-full">
-      <label className="text-gray-200">Logo Upload </label>
+      <label className="text-gray-800">Logo Upload </label>
 
       <div className="flex text-white items-cente w-full mt-2">
         <input type="file" onChange={handleFileChange} className={inputStyle} />

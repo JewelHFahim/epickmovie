@@ -7,9 +7,7 @@ import { useSiteNameUSerQuery } from "./redux/features/settings/settingApi";
 import { base_url, userHeader } from "./config/config";
 
 const App = () => {
-
   const { data: siteName } = useSiteNameUSerQuery();
-
 
   // Dynamic Favicon Icon Set
   useEffect(() => {
@@ -62,7 +60,6 @@ const App = () => {
   //   fetchScriptContent();
   // }, []);
 
-
   return (
     <HelmetProvider>
       <div className=" bg-[#27272A] lg:bg-[#18181a]">
@@ -70,9 +67,7 @@ const App = () => {
           <title>{siteName?.data}</title>
           <meta name="description" content="entertainment unlimited" />
         </Helmet>
-
         <RouterProvider router={router} />
-
         <Toaster />
       </div>
     </HelmetProvider>

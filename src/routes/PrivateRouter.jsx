@@ -1,26 +1,25 @@
 /* eslint-disable react/prop-types */
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { Navigate, useLocation } from "react-router-dom";
 import Loading from "../utils/loading/Loading";
-import { useEffect } from "react";
 
 const PrivateRouter = ({ children }) => {
   const location = useLocation();
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.user);
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
 
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-        localStorage.removeItem("user-info");
-        dispatch(userInfo?.token(null));
+  // useEffect(() => {
+  //   const timeoutId = setTimeout(() => {
+  //       localStorage.removeItem("user-info");
+  //       dispatch(userInfo?.token(null));
       
-    }, 24 * 60 * 60 * 1000);
+  //   }, 24 * 60 * 60 * 1000);
 
-    return () => {
-        clearTimeout(timeoutId);
-    };
-  }, [dispatch, userInfo]);
+  //   return () => {
+  //       clearTimeout(timeoutId);
+  //   };
+  // }, [dispatch, userInfo]);
 
   if (isLoading) {
     return (

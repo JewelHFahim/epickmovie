@@ -160,23 +160,21 @@ const MoviesDB = () => {
                       </p>
 
                       <div className="flex items-center gap-x-3 mt-2 text-xs text-green-500">
-                        <a
-                          href={`/movie/${item?.id}/${item?.post_title}`}
+                        <Link
+                          to={`/movie/${item?.id}/${item?.post_title}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-orange-500"
                         >
                           Preview
-                        </a>
-                        <a href={`/admin/dashboard/details/${item?.id}`}>
+                        </Link>
+                        <Link to={`/admin/dashboard/details/${item?.id}`}>
                           Details
-                        </a>
-                        <a
-                          href={`/admin/dashboard/edit-movie/${item?.id}`}
-                          className="text-violet-500"
-                        >
+                        </Link>
+                        <Link to={`/admin/dashboard/edit-movie/${item?.id}`}
+                          className="text-violet-500">
                           Edit
-                        </a>
+                        </Link>
                         <button
                           onClick={() => handleDeleteMovie(item?.id)}
                           className="text-red-500"

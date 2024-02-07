@@ -25,8 +25,6 @@ const PixelQuality = () => {
     reset();
   };
 
-
-
   const datas = {
     items: pixelQualityList,
     isLoading: isLoading,

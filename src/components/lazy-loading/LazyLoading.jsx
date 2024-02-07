@@ -1,7 +1,6 @@
 const LazyLoading = () => {
   return (
     <section>
-
       <div className="px-6 py-10 mx-auto animate-pulse">
         <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
           {Array.from({ length: 20 })?.map((item, i) => (
@@ -16,6 +15,7 @@ const LazyLoading = () => {
         </div>
       </div>
 
+ 
     </section>
   );
 };

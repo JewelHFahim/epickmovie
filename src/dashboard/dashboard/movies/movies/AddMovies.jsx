@@ -178,7 +178,7 @@ const AddMovies = () => {
             <label className="">Video Trailer</label>
             <input
               type="text"
-              {...register("video_tutorial", { required: true })}
+              {...register("video_tutorial")}
               placeholder="Add id Youtube video"
               className={inputStyle}
             />

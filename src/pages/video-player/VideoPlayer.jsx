@@ -1,4 +1,3 @@
-import { useState, useEffect, useRef } from "react";
 // import ReactJWPlayer from "react-jw-player";
 
 export default function VideoPlayer() {

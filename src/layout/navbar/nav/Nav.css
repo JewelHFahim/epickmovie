@@ -10,15 +10,18 @@
   all: unset;
   list-style: none;
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   flex-wrap: wrap;
   color: #fff;
   font-family: "Inter" sans-serif;
+  width: 100%;
 }
 
 .menu ul .main-menu {
   position: relative;
   border-right: 0.5px solid #aeabab;
-  padding: 8px 28px;
+  padding: 8px 24px;
   border-radius: 5px;
 }
 

@@ -17,7 +17,6 @@ const Movies = () => {
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
   const { data: siteName } = useSiteNameUSerQuery();
 
-
   useEffect(() => {
     localStorage.setItem("MovieCurrentPage", JSON.stringify(currentPage));
     return () => {
@@ -28,7 +27,6 @@ const Movies = () => {
       }
     };
   }, [currentPage, currentRoute]);
-
 
   return (
     <div className="flex flex-col justify-center items-center">

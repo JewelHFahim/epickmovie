@@ -8,10 +8,12 @@ import { useNavigate } from "react-router-dom";
 import { useUpdateUserMutation } from "../../redux/features/movies/movieApi";
 import { useEffect } from "react";
 import toast from "react-hot-toast";
+import { useSiteLogoUserQuery } from "../../redux/features/settings/settingApi";
 
 const UserDetails = () => {
   const navigate = useNavigate();
   const { handleSubmit, register, setValue } = useForm();
+  const { data: siteLogo } = useSiteLogoUserQuery();
 
   const { id } = useParams();
   const { data: userDetails } = useSingleUserDetailsQuery(parseInt(id));
@@ -26,9 +28,18 @@ const UserDetails = () => {
     setValue("user_type", type, { shouldDirty: false });
   }, [setValue, userDetails?.data?.name, userDetails?.data?.email, type]);
 
-  const onSubmit = (data) => {
-    updateUser({ data, id: parseInt(id) });
-    navigate("/admin/dashboard/users");
+  const onSubmit = async (data) => {
+    try {
+      const res = await updateUser({ data, id: parseInt(id) });
+      console.log(res);
+      if (res && res.data) {
+        const { message } = res.data;
+        toast.success(message);
+        navigate("/admin/dashboard/users");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   const rolesData = userRoleList?.data;
 
@@ -40,11 +51,7 @@ const UserDetails = () => {
       <div className="w-[450px] mx-auto overflow-hidden bg-white border shadow-xl">
         <div className="px-10 py-4">
           <div className="flex justify-center mx-auto">
-            <img
-              className="w-auto h-7 sm:h-8"
-              src="https://epickmovies.online/wp-content/uploads/2023/12/cropped-EpickMovies-Favicone.png"
-              alt=""
-            />
+            <img className="w-auto h-7 sm:h-8" src={siteLogo?.data} alt="" />
           </div>
 
           <p className="mt-1 text-center">Update User</p>
@@ -54,9 +61,7 @@ const UserDetails = () => {
               <input
                 type="text"
                 {...register("name")}
-                defaultValue={userDetails?.data?.name}
                 placeholder="Full Name"
-                aria-label="Full Name"
                 className={inputStyle}
               />
             </div>
@@ -65,9 +70,7 @@ const UserDetails = () => {
               <input
                 type="email"
                 {...register("email")}
-                // defaultValue={userDetails?.data?.email}
                 placeholder="Email Address"
-                aria-label="Email Address"
                 className={inputStyle}
               />
             </div>
@@ -81,22 +84,6 @@ const UserDetails = () => {
                 </option>
               ))}
             </select>
-
-            {/* <div className="w-full mt-4">
-              <input
-                type="password"
-                {...register("password")}
-                placeholder="Password"
-                aria-label="Password"
-                className={inputStyle}
-              />
-            </div> */}
-
-            {/* <div className="flex justify-end">
-              <p className="text-sm text-blue-700 mt-2 hover:text-blue-800 hover:underline cursor-pointer">
-                Reset Password
-              </p>
-            </div> */}
 
             <div className="flex items-center justify-center mt-4">
               <button

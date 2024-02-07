@@ -1,5 +1,5 @@
 import calender from "../../assets/calender.svg";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSeriesDetailsQuery } from "../../redux/features/tv-show/tvShowApi";
 import JoinTelegramBtn from "../../utils/JoinTelegramBtn";
 import Accrodion from "../../components/accrodion/Accrodion";
@@ -12,6 +12,7 @@ import DetailsPosterCard from "../../components/details-poster-card/DetailsPoste
 import { Helmet } from "react-helmet";
 import CountryList from "../../components/advertisement/CountryList";
 import { useEffect } from "react";
+import CachedImage from "../../utils/cache-img/CachedImage";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -62,12 +63,12 @@ const TvShowDetails = () => {
             {/* Post Content */}
             {details?.post_content ? (
               <div className="mt-[11px] lg:mt-[48px] lg:max-w-[745px]">
-                <p className="text-[30px] lg:text-[15px]  text-white font-roboto">
+                <p className="text-[30px] lg:text-[15px] text-white font-roboto">
                   {details?.post_content}
                 </p>
               </div>
             ) : (
-              <p>N/A</p>
+              <p className="text-white ">N/A</p>
             )}
 
             <div className="my-[11px] lg:my-[15px]">
@@ -81,7 +82,7 @@ const TvShowDetails = () => {
 
             <div className="lg:max-w-[715px] mt-[13px]">
               <h3 className="text-[50px] leading-none lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center">
-                <a href={details?.guid}> {details?.post_title} ~ EpicSeries </a>
+                <Link to={details?.guid}> {details?.post_title} ~ EpicSeries </Link>
               </h3>
             </div>
 
@@ -105,7 +106,7 @@ const TvShowDetails = () => {
           {/* ==========>> SCREEN SHOTS <<=============*/}
           <div className="flex flex-col gap-4 mt-3">
             {details?.screenshots?.slice(0, 3)?.map((item, i) => (
-              <img key={i} src={item} alt="" className="w-full h-[400px] object-cover"/>
+              <CachedImage key={i} src={item} imgStyle="w-full h-[400px] object-cover"/>
             ))}
           </div>
 

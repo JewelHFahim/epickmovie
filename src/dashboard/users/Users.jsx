@@ -1,10 +1,8 @@
+import { Link } from "react-router-dom";
 import { useUserListQuery } from "../../redux/features/users/userApi";
 
 const Users = () => {
   const { data: userList } = useUserListQuery();
-
-  console.log(userList)
-
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
 
   return (
@@ -17,7 +15,7 @@ const Users = () => {
 
         {userInfo?.user_type === 1 && (
           <div className="mt-3 md:mt-0">
-            <a href="/admin/dashboard/register" className="text-blue-600 hover:text-blue-700 font-medium"> +Add member </a>
+            <Link to="/admin/dashboard/register" className="text-blue-600 hover:text-blue-700 font-medium"> +Add member </Link>
           </div>
         )}
       </div>
@@ -52,12 +50,12 @@ const Users = () => {
 
                 {userInfo?.user_type === 1 && (
                   <td className="text-right px-6 whitespace-nowrap">
-                    <a
-                      href={`/admin/dashboard/users/${item?.id}`}
+                    <Link
+                      to={`/admin/dashboard/users/${item?.id}`}
                       className="py-2 px-3 font-medium text-indigo-600 hover:text-indigo-500 duration-150 hover:bg-gray-50 rounded-lg"
                     >
                       Edit
-                    </a>
+                    </Link>
 
                     <button
                       href="javascript:void()"

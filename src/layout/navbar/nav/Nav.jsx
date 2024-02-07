@@ -13,13 +13,10 @@ import {
   usePrintQualityClientQuery,
   useYearListQuery,
 } from "../../../redux/features/movies/movieApi";
-import { useDispatch } from "react-redux";
-import { collectFilteredItem } from "../../../redux/features/search/searchSlice";
 import { Link } from "react-router-dom";
 import { useJoinTelegramUserQuery } from "../../../redux/features/settings/settingApi";
 
 const Nav = () => {
-  const dispatch = useDispatch();
   const { data: genreList } = useGenreListQuery();
   const { data: yearList } = useYearListQuery();
   const { data: joinTelegram } = useJoinTelegramUserQuery();
@@ -35,20 +32,39 @@ const Nav = () => {
     columns.push(genreList?.data?.slice(i, i + itemsPerColumn));
   }
 
-  const handleFilteredItem = (FilteredItem) => {
-    console.log(FilteredItem)
-    dispatch(collectFilteredItem(FilteredItem));
-  };
-
   const menus = [
     { title: "Home", path: "/", isDrapdown: false, icon: home },
     { title: "Movie", path: "/movies", isDrapdown: false, icon: movie },
-    { title: "Genre", path: "", isDrapdown: true, subMenu: genreList?.data, icon: link },
-    { title: "Year", path: "", isDrapdown: true, subMenu: yearList?.data, icon: calender },
-    { title: "Quality", path: "",  isDrapdown: true, subMenu: combinedQuality, icon: quality },
+    {
+      title: "Genre",
+      path: "#",
+      isDrapdown: true,
+      subMenu: genreList?.data,
+      icon: link,
+    },
+    {
+      title: "Year",
+      path: "#",
+      isDrapdown: true,
+      subMenu: yearList?.data,
+      icon: calender,
+    },
+    {
+      title: "Quality",
+      path: "#",
+      isDrapdown: true,
+      subMenu: combinedQuality,
+      icon: quality,
+    },
     { title: "Web Series", path: "/tv-show", isDrapdown: false, icon: webSer },
     { title: "Bangla", path: "/bangla", isDrapdown: false, icon: bangla },
-    { title: "Join Telegram", path: `${joinTelegram?.data}`, isDrapdown: false, icon: telegram , newTab: true},
+    {
+      title: "Join Telegram",
+      path: `${joinTelegram?.data}`,
+      isDrapdown: false,
+      icon: telegram,
+      newTab: true,
+    },
   ];
 
   return (
@@ -56,28 +72,31 @@ const Nav = () => {
       <ul>
         {menus.map((item, i) => (
           <li key={i} className="main-menu">
-
             {item?.isDrapdown ? (
               <Link to={item?.path} className=" flex items-center gap-2">
                 <img src={item?.icon} alt="" className="w-[23px] h-[23px]" />
                 {item?.title}
               </Link>
             ) : item.newTab ? (
-              <a href={item?.path} target="_blank" rel="noreferrer" className=" flex items-center gap-2">
+              <Link
+                to={item?.path}
+                target="_blank"
+                rel="noreferrer"
+                className=" flex items-center gap-2"
+              >
                 <img src={item?.icon} alt="" className="w-[23px] h-[23px]" />
                 {item?.title}
-              </a>
+              </Link>
             ) : (
-              <a href={item?.path} className=" flex items-center gap-2">
+              <Link to={item?.path} className=" flex items-center gap-2">
                 <img src={item?.icon} alt="" className="w-[23px] h-[23px]" />
                 {item?.title}
-              </a>
-            )
-          }
+              </Link>
+            )}
 
             <ul>
               {item?.subMenu?.map((item, i) => (
-                <Link key={i} to="/filter-list" onClick={() => handleFilteredItem(item?.slug)} className="subM">
+                <Link key={i} to={`/sp-terms/${item?.slug}`} className="subM">
                   {item?.name}
                 </Link>
               ))}

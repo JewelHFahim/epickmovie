@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { useFilteredResultsByPaginationQuery } from "../../../redux/features/search/searchApi";
 import MovieCard from "../../../components/movie-card/MovieCard";
 import { useEffect, useState } from "react";
@@ -7,15 +6,13 @@ import FilterPagination from "./FilterPagination";
 import { useLocation } from "react-router-dom";
 
 const FilterList = () => {
-  const { filteredTerm } = useSelector((state) => state.search);
+  const location = useLocation();
+  const currentRoute = location.pathname;
   const storedPage = JSON.parse(localStorage.getItem("filterPagination")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
 
-  const { data: filteredResults, isLoading } =
-    useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
-
-  const location = useLocation();
-  const currentRoute = location.pathname;
+  const filteredTerm = currentRoute?.slice(10)
+  const { data: filteredResults, isLoading } = useFilteredResultsByPaginationQuery({filteredTerm, currentPage });
 
   useEffect(() => {
     localStorage.setItem("filterPagination", JSON.stringify(currentPage));
@@ -29,7 +26,6 @@ const FilterList = () => {
       }
     };
   }, [currentPage, currentRoute]);
-  
 
   return (
     <section className="min-h-screen">

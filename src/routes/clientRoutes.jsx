@@ -18,11 +18,6 @@ export const clientRoutes = [
   },
 
   {
-    path: "/",
-    element: <Home />,
-  },
-
-  {
     path: "/movies",
     element: <Movies />,
   },
@@ -53,8 +48,13 @@ export const clientRoutes = [
     element: <SearchList />,
   },
 
+  // {
+  //   path: "/filter-list/",
+  //   element: <FilterList />,
+  // },
+  
   {
-    path: "/filter-list",
+    path: "/sp-terms/:string",
     element: <FilterList />,
   },
 

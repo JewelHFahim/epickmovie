@@ -94,12 +94,12 @@ const DbSeries = () => {
         </form>
 
         <div className="mt-3 md:mt-0">
-          <a
-            href="/admin/dashboard/add-series"
+          <Link
+            to="/admin/dashboard/add-series"
             className="inline-block px-4 py-[6px] text-white duration-150 font-medium bg-slate-700 rounded-lg hover:bg-slate-600 md:text-sm"
           >
             Add Series
-          </a>
+          </Link>
         </div>
       </div>
 
@@ -154,23 +154,23 @@ const DbSeries = () => {
                     </p>
 
                     <div className="flex items-center gap-x-3 mt-2 text-xs text-green-500">
-                      <a
-                        href={`/series/${item?.id}/${item?.post_title}`}
+                      <Link
+                        to={`/series/${item?.id}/${item?.post_title}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-orange-500"
                       >
                         Preview
-                      </a>
-                      <a href={`/admin/dashboard/tvshow-details/${item?.id}`}>
+                      </Link>
+                      <Link to={`/admin/dashboard/tvshow-details/${item?.id}`}>
                         Details
-                      </a>
-                      <a
-                        href={`/admin/dashboard/update-tvShow/${item?.id}`}
+                      </Link>
+                      <Link
+                        to={`/admin/dashboard/update-tvShow/${item?.id}`}
                         className="text-violet-500"
                       >
                         Edit
-                      </a>
+                      </Link>
                       <button
                         onClick={() => handleDeleteSeason(item?.id)}
                         className="text-red-500"

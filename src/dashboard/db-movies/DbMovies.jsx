@@ -9,14 +9,15 @@ import { BsSearch } from "react-icons/bs";
 import { getSearchMovieSeries } from "../../redux/features/search/searchSlice";
 import ImportModal from "./import-modal/ImportModal";
 import InnerloaderButton from "../../utils/InnerloaderButton";
-import {  key, tmdb_baseurl } from "../../config/config";
+import { key, tmdb_baseurl } from "../../config/config";
 
 const DbMovies = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+
   const { bulkData, isLoading } = useSelector((state) => state.movie);
   const { bulkTvData, isLoadingTv } = useSelector((state) => state.tvShow);
   const { searchMovieSeries } = useSelector((state) => state.search);
-
-  console.log(bulkData)
 
   const [toggleState, setToggleState] = useState("movie");
   const dispatch = useDispatch();
@@ -26,7 +27,8 @@ const DbMovies = () => {
   };
 
   const [genreList, setGenre] = useState();
-  useEffect(() => { fetch(`${tmdb_baseurl}/genre/movie/list?${key}`)
+  useEffect(() => {
+    fetch(`${tmdb_baseurl}/genre/movie/list?${key}`)
       .then((res) => res.json())
       .then((data) => setGenre(data));
   }, []);
@@ -40,13 +42,13 @@ const DbMovies = () => {
 
   // ===================>> BULK MOVIE IMPORT <<====================
   const handleBulkImport = () => {
-   dispatch(bulkMovieImport({ tmdb_ids: bulkData }));
+    dispatch(bulkMovieImport({ tmdb_ids: bulkData }));
   };
 
   // ===================>> BULK TV SHOW IMPORT <<==================
   const handleBulkTvShowImport = async () => {
     dispatch(bulkTvShowImport({ tmdb_ids: bulkTvData }));
-    console.log({ tmdb_ids: bulkTvData })
+    console.log({ tmdb_ids: bulkTvData });
   };
 
   const [searchParams, setSearchParams] = useState("");
@@ -126,7 +128,7 @@ const DbMovies = () => {
             <input
               type="number"
               {...register("year")}
-              placeholder="year"
+              placeholder={year}
               className="border border-slate-500 px-4 py-1 rounded-md w-[85px] focus:outline-blue-500"
             />
 
@@ -134,8 +136,8 @@ const DbMovies = () => {
             <input
               type="number"
               {...register("page")}
-              placeholder="page"
-              className="border border-slate-500 px-4 py-1 rounded-md w-[80px] focus:outline-blue-500"
+              placeholder="1"
+              className="border border-slate-500 px-4 py-1 rounded-md w-[85px] focus:outline-blue-500"
             />
 
             {/* =====================>> SORT BY ASC/DSC <<============================*/}
@@ -198,7 +200,6 @@ const DbMovies = () => {
             </button>
           )}
         </div>
-
       </div>
 
       {/* ============================>> Discovery <<===============================*/}

@@ -66,7 +66,6 @@ const Settings = () => {
 
   const onSubmit = (data) => {
     createConfig(data);
-    console.log(data);
     toast.success("Submitted");
     reset();
   };
@@ -246,7 +245,7 @@ const Settings = () => {
 
         {/* =====================>> Quick Menu <<=================== */}
         <div className=" mt-[40px] shadow-md bg-slate-200 border p-4">
-          <label className="text-gray-200 pb-2"> Quick Menu</label>
+          <label className="text-gray-800 pb-2"> Quick Menu</label>
           <MultiSelectMenu />
         </div>
       </section>

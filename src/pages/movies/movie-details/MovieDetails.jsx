@@ -1,7 +1,7 @@
 import calender from "../../../assets/calender.svg";
 import DownloadButton from "../../../utils/DownloadButton";
 import { useMovieDetailsQuery } from "../../../redux/features/movies/movieApi";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import JoinTelegramBtn from "../../../utils/JoinTelegramBtn";
 import DetailsPosterCard from "../../../components/details-poster-card/DetailsPosterCard";
 import RelatedPost from "../../../components/related-post/RelatedPost";
@@ -12,6 +12,7 @@ import UploadedDate from "../../../utils/uploaded-date/UploadedDate";
 import { Helmet } from "react-helmet";
 import CountryList from "../../../components/advertisement/CountryList";
 import { useEffect } from "react";
+import CachedImage from "../../../utils/cache-img/CachedImage";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -62,7 +63,7 @@ const MovieDetails = () => {
                 </p>
               </div>
             ) : (
-              <p>N/A</p>
+              <p className="text-whit">N/A</p>
             )}
 
             <div className="my-[11px] lg:my-[15px]">
@@ -76,14 +77,13 @@ const MovieDetails = () => {
 
             <div className="lg:max-w-[715px] mt-[13px]">
               <h3 className="text-[50px] lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center leading-none">
-                <a href={details?.guid}>
-                  {" "}
-                  {details?.post_title} ~ {siteName?.data}{" "}
-                </a>
+                <Link to={details?.guid}>
+                  {details?.post_title} ~ {siteName?.data}
+                </Link>
               </h3>
             </div>
 
-            {/* Static Data */}
+            {/* Post Content*/}
             <div className="lg:max-w-[715px] mt-[13px] lg:mt-[30px] font-roboto">
               <h3 className="text-[50px] lg:text-[24px] font-[600] text-[#217703]">
                 Storyline:
@@ -103,12 +103,7 @@ const MovieDetails = () => {
           {/* ==========>> SCREEN SHOTS <<=============*/}
           <div className="flex flex-col gap-5 mt-3">
             {details?.screenshots?.slice(0, 3)?.map((item, i) => (
-              <img
-                key={i}
-                src={item}
-                alt=""
-                className="w-full h-[400px] object-cover"
-              />
+              <CachedImage key={i} src={item} imgStyle="w-full h-[400px] object-cover"/>
             ))}
           </div>
 

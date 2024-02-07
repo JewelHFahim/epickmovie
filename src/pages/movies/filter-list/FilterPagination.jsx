@@ -19,7 +19,6 @@ const FilterPagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
     localStorage.setItem("filterPagination", JSON.stringify(currentPage));
   }, [currentPage]);
 
-
   // Function to generate page numbers
   const generatePageNumbers = () => {
     const pageNumbers = [];

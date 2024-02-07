@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Title from "./Title";
 
 const HomePageSeeAllBtn = ({children, total , redirect}) => {
@@ -6,9 +7,9 @@ const HomePageSeeAllBtn = ({children, total , redirect}) => {
         <Title>{children}</Title>
         <div className="flex items-center gap-2 lg:gap-4">
           <p className="text-[32px] lg:text-[28px] font-[700] text-white"> {total} </p>
-          <a href={`${redirect}`} className="px-6 lg:px-10 py-[5px] lg:py-2 rounded-[6px] bg-[#FF2345] text-[24px] lg:text-[16px] font-[700] text-white uppercase font-roboto">
+          <Link to={`${redirect}`} className="px-6 lg:px-10 py-[5px] lg:py-2 rounded-[6px] bg-[#FF2345] text-[24px] lg:text-[16px] font-[700] text-white uppercase font-roboto">
             See All
-          </a>
+          </Link>
         </div>
       </div>
     );

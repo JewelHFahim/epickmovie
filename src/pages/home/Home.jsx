@@ -1,6 +1,5 @@
 import { useQuickMenuUserQuery, useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
-import { collectFilteredItem } from "../../redux/features/search/searchSlice";
 import { usePerPgaeMovieQuery } from "../../redux/features/movies/movieApi";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import DomainList from "../../components/domain-list/DomainList";
@@ -13,7 +12,9 @@ import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 
 const Home = () => {
+  
   const dispatch = useDispatch();
+  const userInfo = JSON.parse(localStorage.getItem("user-info"));
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
   const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
 
@@ -25,9 +26,6 @@ const Home = () => {
   const location = useLocation();
   const currentRoute = location.pathname;
 
-  const handleQuickMenuNavigation = (data) => {
-    dispatch(collectFilteredItem(data));
-  };
 
   useEffect(() => {
     if (currentRoute === "/") {
@@ -38,6 +36,20 @@ const Home = () => {
     }
   }, [currentRoute]);
 
+
+  // auto logout after 24hr
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+        localStorage.removeItem("user-info");
+        dispatch(userInfo?.token(null));
+      
+    }, 24 * 60 * 60 * 1000);
+
+    return () => {
+        clearTimeout(timeoutId);
+    };
+  }, [dispatch, userInfo]);
+
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">
       <Helmet>
@@ -47,7 +59,7 @@ const Home = () => {
       {/* ==================>> Quick Menus <<================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {quickMenu?.data?.map((menu, i) => (
-          <Link key={i} to="/filter-list" onClick={() => handleQuickMenuNavigation(menu?.slug)}>
+          <Link key={i} to={`/sp-terms/${menu?.slug}`} >
             <SubMenuButton>{menu.name}</SubMenuButton>
           </Link>
         ))}
