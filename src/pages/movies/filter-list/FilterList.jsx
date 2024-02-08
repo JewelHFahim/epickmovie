@@ -11,7 +11,7 @@ const FilterList = () => {
   const storedPage = JSON.parse(localStorage.getItem("filterPagination")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
 
-  const filteredTerm = currentRoute?.slice(10)
+  const filteredTerm = currentRoute?.slice(7)
   const { data: filteredResults, isLoading } = useFilteredResultsByPaginationQuery({filteredTerm, currentPage });
 
   useEffect(() => {

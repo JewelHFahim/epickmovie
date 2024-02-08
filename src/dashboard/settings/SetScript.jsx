@@ -1,25 +1,24 @@
-import { useEffect, useState } from 'react';
-import { adminHeader, base_url } from '../../config/config';
+import { useEffect, useState } from "react";
+import { adminHeader, base_url } from "../../config/config";
 
 const DynamicScript = () => {
-    const [script, setScript] = useState();
+  const [script, setScript] = useState();
 
   useEffect(() => {
     fetch(`${base_url}/admin/upload-logo`, {
-        headers: adminHeader,
+      headers: adminHeader,
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error("Network response was not ok.");
       })
-        .then((response) => {
-          if (response.ok) {
-            return response.json();
-          }
-          throw new Error("Network response was not ok.");
-        })
-        .then((data) => {
-            setScript("jhf");
-        })
+      .then((data) => {
+        setScript(data?.data);
+      });
 
-
-    const script = document.createElement('script');
+    const script = document.createElement("script");
     script.src = script;
     script.async = true;
 

@@ -154,7 +154,7 @@ const MobileMenu = () => {
                         <div>
                           <ul className="flex flex-col gap-y-4 mx-10">
                             {item?.navs?.map((item, i) => (
-                              <Link to={`/sp-terms/${item?.slug}`} key={i}
+                              <Link to={`/terms/${item?.slug}`} key={i}
                                 className="flex items-center gap-2 text-white px-2 py-4 border-b-[.5px] border-[#2D2C2C] my-2">
                                 <LuFolderInput className="w-[30px] h-[30px]"/>
                                 <p className="text-[30px] font-inter font-[600]"> {item.name} </p>

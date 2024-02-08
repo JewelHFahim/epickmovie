@@ -1,12 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import AddImgModal from "../../gallery/AddImgModal";
+import { useGalleryListQuery } from "../../../../redux/features/gallery/galleryApi";
 
-const BackdropsModal = ({
-  selectedBackdrops,
-  setSelectedbackdrops,
-  newGallery
-}) => {
+const BackdropsModal = ({ selectedBackdrops, setSelectedbackdrops }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data: galleryList, refetch: refetchGalleryList } = useGalleryListQuery();
+  
+  const [reFetch, setRefetch] = useState("");
+  useEffect(() => {
+      refetchGalleryList();
+  }, [reFetch, refetchGalleryList]);
+
+
+  const newGallery = galleryList?.data?.map((img, i) => ({
+    id: i + 1,
+    url: img,
+  }))
 
   const openModal = () => {
     setIsOpen(true);
@@ -61,10 +72,12 @@ const BackdropsModal = ({
                   X
                 </button>
               </div>
-              <div className="flex justify-center">
+
+              <div className="flex flex-col justify-center items-center gap-y-2">
                 <h3 className="text-xl border-b-2 border-red-600 font-medium">
                   Select Images
                 </h3>
+                <AddImgModal setRefetch={setRefetch}/>
               </div>
 
               <div className="mt-6 flex justify-center items-center">

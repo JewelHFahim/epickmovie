@@ -2,11 +2,13 @@ import { useForm } from "react-hook-form";
 import {
   useCacheTimeQuery,
   useCreateConfigMutation,
+  useFavIconQuery,
   useFooterConfigQuery,
   useGlobalFooterQuery,
   useGlobalHeaderQuery,
   useJoinTelegramConfigQuery,
   useMovieSortQuery,
+  useSiteLogoUserQuery,
   useSiteNameConfigQuery,
   useSiteNewsConfigQuery,
   useTimeZoneQuery,
@@ -15,7 +17,7 @@ import {
 } from "../../redux/features/settings/settingApi";
 import toast from "react-hot-toast";
 import { Select, initTE } from "tw-elements";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import MultiSelectMenu from "../../components/genere-select-menu/MultitSelect";
 import LogoUploader from "./LogoUploader";
 import FavIconUpLoader from "./FavIcon";
@@ -35,7 +37,16 @@ const Settings = () => {
   const { data: tvshowSort } = useTvshowSortQuery();
   const { data: cacheTime } = useCacheTimeQuery();
   const { data: websiteLink } = useWebsiteLinkQuery();
+  const { data: siteLogo, refetch: logoRefetch } = useSiteLogoUserQuery();
+  const { data: favIcon, refetch: fevIconRefetch } = useFavIconQuery();
   const [createConfig] = useCreateConfigMutation();
+
+  const [favReFetch, setFavReFetch] = useState("");
+  const [logoReFetch, setLogoReFetch] = useState("");
+  useEffect(() => {
+    fevIconRefetch();
+    logoRefetch();
+  }, [favReFetch, fevIconRefetch, logoReFetch, logoRefetch]);
 
   useEffect(() => {
     setValue("site_name", siteName?.data, { shouldDirty: false });
@@ -238,9 +249,9 @@ const Settings = () => {
         </form>
 
         {/* ======================>> Fav Icon <<==================== */}
-        <div className="flex flex-col lg:flex-row justify-between items-center gap-4 mt-[40px] border shadow-md bg-slate-200 p-4">
-          <FavIconUpLoader />
-          <LogoUploader />
+        <div className="flex flex-col lg:flex-row justify-between items-center gap-8 mt-[40px] border shadow-md bg-slate-200 p-4">
+          <FavIconUpLoader favIcon={favIcon} setFavReFetch={setFavReFetch} />
+          <LogoUploader siteLogo={siteLogo} setLogoReFetch={setLogoReFetch} />
         </div>
 
         {/* =====================>> Quick Menu <<=================== */}

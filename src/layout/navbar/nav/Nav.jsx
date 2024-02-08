@@ -96,7 +96,7 @@ const Nav = () => {
 
             <ul>
               {item?.subMenu?.map((item, i) => (
-                <Link key={i} to={`/sp-terms/${item?.slug}`} className="subM">
+                <Link key={i} to={`/terms/${item?.slug}`} className="subM">
                   {item?.name}
                 </Link>
               ))}

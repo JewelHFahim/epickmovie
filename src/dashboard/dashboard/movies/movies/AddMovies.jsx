@@ -7,24 +7,17 @@ import { useState } from "react";
 import PosterModal from "./PosterModal";
 import MainBackdropModal from "./MainBackdropModal";
 import BackdropsModal from "./BackdropsModal";
-import { useGalleryListQuery } from "../../../../redux/features/gallery/galleryApi";
 
 const AddMovies = () => {
+  
   const { register, handleSubmit, reset } = useForm();
   const [createMovie] = useCreateMovieMutation();
   const navigate = useNavigate();
   const [selectedOptions, setSelectedOptions] = useState([]);
-
   const [selectedPoster, setSelectedPoster] = useState();
   const [selectedMainback, setSelectedMainback] = useState();
   const [selectedBackdrops, setSelectedbackdrops] = useState([]);
 
-  const { data: galleryList } = useGalleryListQuery();
-
-  const newGallery = galleryList?.data?.map((img, i) => ({
-    id: i + 1,
-    url: img,
-  }));
 
   const onSubmit = async (data) => {
     try {
@@ -38,8 +31,6 @@ const AddMovies = () => {
         imagenes: imgUrls,
         genre_ids: selectedGeneres,
       };
-
-      console.log(allDatas);
 
       const res = await createMovie(allDatas);
 
@@ -114,15 +105,10 @@ const AddMovies = () => {
             <PosterModal
               selectedPoster={selectedPoster}
               setSelectedPoster={setSelectedPoster}
-              newGallery={newGallery}
             />
             {selectedPoster && (
               <div className="bg-white flex flex-wrap gap-x-2 p-2">
-                <img
-                  src={selectedPoster?.url}
-                  alt=""
-                  className="w-[60px] h-[60px] object-cover border"
-                />
+                <img src={selectedPoster?.url} alt="" className="w-[60px] h-[60px] object-cover border" />
               </div>
             )}
           </div>
@@ -130,7 +116,6 @@ const AddMovies = () => {
           <div className="flex flex-col mt-2">
             <label className="">Main Backdrops</label>
             <MainBackdropModal
-              newGallery={newGallery}
               setSelectedMainback={setSelectedMainback}
             />
             {selectedMainback && (
@@ -147,7 +132,6 @@ const AddMovies = () => {
           <div className="flex flex-col mt-2">
             <label className="">Backdrops</label>
             <BackdropsModal
-              newGallery={newGallery}
               selectedBackdrops={selectedBackdrops}
               setSelectedbackdrops={setSelectedbackdrops}
             />

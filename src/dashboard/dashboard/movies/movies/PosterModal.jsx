@@ -1,9 +1,23 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import AddImgModal from "../../gallery/AddImgModal";
+import { useGalleryListQuery } from "../../../../redux/features/gallery/galleryApi";
 
-const PosterModal = ({ setSelectedPoster, newGallery }) => {
-  
+const PosterModal = ({ setSelectedPoster }) => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const { data: galleryList, refetch: refetchGalleryList } = useGalleryListQuery();
+  
+  const [reFetch, setRefetch] = useState("");
+  useEffect(() => {
+      refetchGalleryList();
+  }, [reFetch, refetchGalleryList]);
+
+
+  const newGallery = galleryList?.data?.map((img, i) => ({
+    id: i + 1,
+    url: img,
+  }));
 
   const openModal = () => {
     setIsOpen(true);
@@ -14,13 +28,16 @@ const PosterModal = ({ setSelectedPoster, newGallery }) => {
   };
 
   const handleSelect = (images) => {
-    setSelectedPoster(images)
+    setSelectedPoster(images);
     toast.success("Image(s) Added");
   };
 
   return (
     <div className="relative flex justify-center">
-      <button onClick={openModal} className="w-full py-2 uppercase border-2 border-dashed border-slate-500 bg-slate-100 rounded-md text-black font-medium mb-2">
+      <button
+        onClick={openModal}
+        className="w-full py-2 uppercase border-2 border-dashed border-slate-500 bg-slate-100 rounded-md text-black font-medium mb-2"
+      >
         Add Image
       </button>
 
@@ -40,27 +57,30 @@ const PosterModal = ({ setSelectedPoster, newGallery }) => {
             </span>
 
             <div className="relative inline-block overflow-hidden text-left transition-all transform bg-white rounded-lg shadow-xl w-[80%] h-[90%] align-middle p-5">
-
               <div onClick={closeModal} className="absolute right-4 top-4">
                 <button className="text-xl font-medium w-[40px] h-[40px] border border-red-400 rounded-full text-red-600 hover:bg-red-400 hover:text-white transition-all duration-200">
                   X
                 </button>
               </div>
 
-              <div className="flex justify-center">
+              <div className="flex flex-col justify-center items-center gap-y-2">
                 <h3 className="text-xl border-b-2 border-red-600 font-medium">
                   Select Images
                 </h3>
+                <AddImgModal setRefetch={setRefetch}/>
               </div>
 
               <div className="mt-6 flex justify-center items-center">
                 <div className="grid grid-cols-5 lg:grid-cols-8 gap-x-7 gap-y-5">
                   {newGallery?.map((item) => (
-                    <div onClick={()=>handleSelect(item)}
+                    <div
+                      onClick={() => handleSelect(item)}
                       key={item?.id}
                       className="w-[120px] h-[170px]  border-[3px] border-orange-500 flex flex-col justify-between shadow-lg overflow-hidden cursor-pointer"
                     >
-                      <img src={item?.url} alt=""
+                      <img
+                        src={item?.url}
+                        alt=""
                         className="w-full h-full object-cover border hover:scale-[1.2] transition-transform duration-150 ease-in-out"
                       />
                     </div>

@@ -12,7 +12,6 @@ const initialState = {
 // =================>> SINGLE TV SHOW IMPORT <<===================
 export const singleTvShowImport = createAsyncThunk("tvShows/singleTvShowImport", async (body, { dispatch }) => {
 
-
     dispatch(setLoadingST(true));
     try {
       const response = await fetch(`${base_url}/admin/tv-import`,{
@@ -43,11 +42,8 @@ export const singleTvShowImport = createAsyncThunk("tvShows/singleTvShowImport",
   }
 );
 
-// =======================>> BULK IMPORT <<=======================
+// ===================>> BULK TV SHOW IMPORT <<===================
 export const bulkTvShowImport = createAsyncThunk("tvShows/bulkTvShowsImport", async (body, { dispatch }) => {
-
-  console.log(body)
-
     try {
       dispatch(setLoadingST(true));
       const response = await fetch( `${base_url}/admin/tv-bulk-import`, {

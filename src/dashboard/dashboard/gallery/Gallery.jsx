@@ -2,16 +2,19 @@ import { useDeleteImageMutation, useGalleryListQuery } from "../../../redux/feat
 import toast from "react-hot-toast";
 import AddImgModal from "./AddImgModal";
 import { FaTrashAlt } from "react-icons/fa";
+import { useEffect, useState } from "react";
 
 
 const Gallery = () => {
-  const { data: galleryList } = useGalleryListQuery();
-  const [deleteImage] = useDeleteImageMutation()
-
+  
+  const [deleteImage] = useDeleteImageMutation();
+  const { data: galleryList, refetch: refetchGalleryList } = useGalleryListQuery();
+  const [reFetch, setRefetch] = useState("");
+  useEffect(() => {
+      refetchGalleryList();
+  }, [reFetch, refetchGalleryList]);
 
   const handleDelete = (url) => {
-    console.log({path: url})
-
     const shouldDelete =  window.confirm("Are you sure want to delete this image?");
     if (shouldDelete) {
         deleteImage({path: url});
@@ -19,9 +22,7 @@ const Gallery = () => {
     } else {
         console.log("Deletion canceled by user");
     }
-
   }
-
 
   return (
     <div className="p-8">
@@ -30,7 +31,7 @@ const Gallery = () => {
           <button className="text-[16px] lg:text-[32px] font-[700] text-slate-700 border-b-[1.4px] border-[#FF2345] p-0 mb-2 leading-[42px]">
             Gallery
           </button>
-          <AddImgModal/>
+          <AddImgModal  setRefetch={setRefetch}/>
         </div>
 
         <div className="mt-6 flex justify-center items-center">

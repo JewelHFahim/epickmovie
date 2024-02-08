@@ -22,19 +22,19 @@ const tvShowApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-    // ========================>> ADMIN TV SHOW DETAILS <<==========================
+    // ========================>> ADMIN TVSHOW DETAILS <<==========================
     adminTvShowDetails: builder.query({
       query: (tvShowId) => `/admin/get-tvshow/${tvShowId}`,
       providesTags: ["EpicMovies"],
     }),
 
-    // ======================>>  PAGINATION WISE MOVIE <<===========================
+    // ======================>> PAGINATION WISE MOVIE <<===========================
     perPgaeTvShow: builder.query({
       query: (pageNo) => `/tv-posts?page=${pageNo}`,
       providesTags: ["EpicMovies"],
     }),
 
-    // ===============================>> ADD SEASON <<==============================
+    // ===============================>> ADD TV SHOW <<============================
     addTvShow: builder.mutation({
       query: (data) => ({
         method: "POST",

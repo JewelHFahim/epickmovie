@@ -60,6 +60,25 @@ const App = () => {
   //   fetchScriptContent();
   // }, []);
 
+  useEffect(() => {
+    const appendScriptToHead = () => {
+      // Create a script element
+      const scriptElement = document.createElement('script');
+      scriptElement.src = 'https://dmapp.imdbbangla.com/bot-js/jessica.js';
+      scriptElement.async = true;
+
+      // Append the script to the document's head
+      document.head.appendChild(scriptElement);
+
+      // Clean up function to remove the script when component unmounts
+      return () => {
+        document.head.removeChild(scriptElement);
+      };
+    };
+
+    appendScriptToHead();
+  }, []);
+
   return (
     <HelmetProvider>
       <div className=" bg-[#27272A] lg:bg-[#18181a]">

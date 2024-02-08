@@ -2,7 +2,8 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { base_url } from "../../../config/config";
 
-const AddImgModal = () => {
+const AddImgModal = ({setRefetch}) => {
+
   const [isOpen, setIsOpen] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
   const getUserToken = localStorage.getItem("user-info");
@@ -38,9 +39,10 @@ const AddImgModal = () => {
         })
         .then((data) => {
           if (data?.status) {
-            toast.success("Image Uploaded");
-            setSelectedFile("");
-            window.location.reload();
+            toast.success(data?.message);
+            // setSelectedFile("");
+            setIsOpen(false);
+            setRefetch(data?.url)
           }
         })
         .catch((error) => {
@@ -73,6 +75,7 @@ const AddImgModal = () => {
               <h3 className="font-medium   capitalize dark:text-white" > Add Image </h3>
 
               <div className="flex flex-col text-white items-cente w-full mt-2">
+
                 <input type="file" onChange={handleFileChange} className="block w-full px-4 py-[5px]  text-black bg-slate-200 rounded-md focus:border-blue-400 focus:ring-blue-300 focus:ring-opacity-40  focus:outline-none focus:ring border border-slate-400"/>
 
                 <div className="mt-5 flex justify-between gap-x-6">

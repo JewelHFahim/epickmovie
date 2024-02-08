@@ -91,30 +91,10 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-    // =====================>> SINGLE MOVIE IMPORT(MUTATION) <<===============
-    singleMovieImport: builder.mutation({
-      query: (data) => ({
-        method: "POST",
-        url: "/admin/movie-import",
-        body: data,
-      }),
-      invalidatesTags: ["EpicMovies"],
-    }),
-
     // =====================>> SINGLE MOVIE DETAILS<<=========================
     adminMovieDetails: builder.query({
       query: (id) => `/admin/get-movie/${id}`,
       providesTags: ["EpicMovies"],
-    }),
-
-    // ===================>> BULK MOVIE IMPORT(MUTATION) <<===================
-    bulkMovieImport: builder.mutation({
-      query: (data) => ({
-        method: "POST",
-        url: "/admin/movie-bulk-import",
-        body: data,
-      }),
-      invalidatesTags: ["EpicMovies"],
     }),
 
     // =========================>> GENRE LIST <<==============================
@@ -210,13 +190,13 @@ const movieApi = apiSlice.injectEndpoints({
       invalidatesTags: ["EpicMovies"],
     }),
 
-    // ================>> ALREADY UPLOADED MOVIE <<====================
+    // ================>> ALREADY UPLOADED MOVIE <<===========================
     alreadyUploadedMovies: builder.query({
       query: () => `/admin/movie-active-tmdb-ids`,
       providesTags: ["EpicMovies"],
     }),
 
-    // ================>> ALREADY UPLOADED SERIES <<====================
+    // ================>> ALREADY UPLOADED SERIES <<==========================
     alreadyUploadedTvShows: builder.query({
       query: () => `/admin/tvshow-active-tmdb-ids`,
       providesTags: ["EpicMovies"],
@@ -232,8 +212,6 @@ export const {
   useYearListQuery,
   useCreateMovieMutation,
   useCreateMovieLinkMutation,
-  useSingleMovieImportMutation,
-  useBulkMovieImportMutation,
   useAdminMovieDetailsQuery,
   useCreateGenreMutation,
   useGetAudioListQuery,

@@ -59,7 +59,7 @@ const Home = () => {
       {/* ==================>> Quick Menus <<================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {quickMenu?.data?.map((menu, i) => (
-          <Link key={i} to={`/sp-terms/${menu?.slug}`} >
+          <Link key={i} to={`/terms/${menu?.slug}`} >
             <SubMenuButton>{menu.name}</SubMenuButton>
           </Link>
         ))}
