@@ -60,24 +60,21 @@ const App = () => {
   //   fetchScriptContent();
   // }, []);
 
-  useEffect(() => {
-    const appendScriptToHead = () => {
-      // Create a script element
-      const scriptElement = document.createElement('script');
-      scriptElement.src = 'https://dmapp.imdbbangla.com/bot-js/jessica.js';
-      scriptElement.async = true;
+  // useEffect(() => {
+  //   const appendScriptToHead = () => {
+  //     const scriptElement = document.createElement('script');
+  //     scriptElement.src = 'https://dmapp.imdbbangla.com/bot-js/jessica.js';
+  //     scriptElement.async = true;
 
-      // Append the script to the document's head
-      document.head.appendChild(scriptElement);
+  //     document.head.appendChild(scriptElement);
 
-      // Clean up function to remove the script when component unmounts
-      return () => {
-        document.head.removeChild(scriptElement);
-      };
-    };
+  //     return () => {
+  //       document.head.removeChild(scriptElement);
+  //     };
+  //   };
 
-    appendScriptToHead();
-  }, []);
+  //   appendScriptToHead();
+  // }, []);
 
   return (
     <HelmetProvider>

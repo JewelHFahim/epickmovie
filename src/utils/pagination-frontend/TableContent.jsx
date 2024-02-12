@@ -23,8 +23,8 @@ const TableContent = ({ currentItems, isLoading, deletetm, thead }) => {
           <Loading />
         ) : (
           <tbody className="divide-y">
-            {currentItems?.map((item) => (
-              <tr key={item?.id} className="odd:bg-gray-50 even:bg-white">
+            {currentItems?.map((item, i) => (
+              <tr key={i} className="odd:bg-gray-50 even:bg-white">
                 <td className="px-6 py-4 font-medium flex items-center gap-x-2">
                   {item?.name}
                 </td>

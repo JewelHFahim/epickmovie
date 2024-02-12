@@ -10,6 +10,7 @@ import PaginatedItems from "../../../utils/pagination-frontend/PaginatedItems";
 const AddGenre = () => {
   const { data: genreList, isLoading } = useAdminGenreListQuery();
   const [createGenre] = useCreateGenreMutation();
+  console.log(genreList)
   const [deleteTerms] = useDeleteTermsMutation();
 
   const {

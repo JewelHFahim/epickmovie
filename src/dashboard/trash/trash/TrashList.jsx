@@ -9,6 +9,8 @@ import {
 const TrashList = () => {
   const { data: trashList } = useTrashListQuery();
 
+  console.log(trashList)
+
   const trashListData =
     trashList?.data !== "Empty list." ? trashList?.data : [];
 

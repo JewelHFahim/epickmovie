@@ -8,7 +8,7 @@ const initialState = {
   status: null,
   bulkData: [],
   movieList: [],
-  tempImgs: []
+  tempImgs: [],
 };
 
 // =================>> SINGLE IMPORT <<===================
@@ -74,9 +74,10 @@ export const bulkMovieImport = createAsyncThunk(
   }
 );
 
-
 // ====================>> MOVIE SLICE <<==================
 export const movieSlice = createSlice({
+
+
   name: "movie",
   initialState,
   reducers: {
@@ -101,7 +102,12 @@ export const movieSlice = createSlice({
     },
   },
 
+
 });
+
+
+
+
 
 export const { setMessage, setLoadingST, setBulkData, setStatus, tempImages } =
   movieSlice.actions;

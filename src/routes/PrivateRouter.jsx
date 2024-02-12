@@ -5,21 +5,8 @@ import Loading from "../utils/loading/Loading";
 
 const PrivateRouter = ({ children }) => {
   const location = useLocation();
-  // const dispatch = useDispatch();
   const { isLoading } = useSelector((state) => state.user);
   const userInfo = JSON.parse(localStorage.getItem("user-info"));
-
-  // useEffect(() => {
-  //   const timeoutId = setTimeout(() => {
-  //       localStorage.removeItem("user-info");
-  //       dispatch(userInfo?.token(null));
-      
-  //   }, 24 * 60 * 60 * 1000);
-
-  //   return () => {
-  //       clearTimeout(timeoutId);
-  //   };
-  // }, [dispatch, userInfo]);
 
   if (isLoading) {
     return (
