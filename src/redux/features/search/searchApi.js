@@ -1,6 +1,7 @@
 import apiSlice from "../api/apiSlice";
 
 const tvShowApi = apiSlice.injectEndpoints({
+
   endpoints: (builder) => ({
     // ===========>>  Filter By GENRE/YEAR/QUALITY  <<=============
     filterResults: builder.query({
@@ -25,6 +26,7 @@ const tvShowApi = apiSlice.injectEndpoints({
       query: (id) => `/get-post-suggession/${id}`,
       providesTags: ["EpicMovies"],
     }),
+    
   }),
 });
 

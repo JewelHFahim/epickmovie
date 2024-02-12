@@ -73,7 +73,7 @@ const Nav = () => {
         {menus.map((item, i) => (
           <li key={i} className="main-menu">
             {item?.isDrapdown ? (
-              <Link to={item?.path} className=" flex items-center gap-2">
+              <Link to={item?.path} className="flex items-center gap-2">
                 <img src={item?.icon} alt="" className="w-[23px] h-[23px]" />
                 {item?.title}
               </Link>

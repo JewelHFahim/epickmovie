@@ -63,7 +63,7 @@ const MovieDetails = () => {
                 </p>
               </div>
             ) : (
-              <p className="text-whit">N/A</p>
+              <p className="text-white">N/A</p>
             )}
 
             <div className="my-[11px] lg:my-[15px]">

@@ -1,4 +1,4 @@
-import AdminRedirect from "../components/admin-redirect/AdminRedirect";
+// import AdminRedirect from "../components/admin-redirect/AdminRedirect";
 import Home from "../pages/home/Home";
 import BanglaMovie from "../pages/movies/bangla/BanglaMovie";
 import FilterList from "../pages/movies/filter-list/FilterList";
@@ -9,7 +9,7 @@ import NotFound from "../pages/not-found/NotFound";
 import TvShow from "../pages/tv-show/TvShow";
 import TvShowDetails from "../pages/tv-show/tvShowDetails";
 import VideoPlayer from "../pages/video-player/VideoPlayer";
-import DashboardRedirect from "../utils/DashboardRedirect";
+// import DashboardRedirect from "../utils/DashboardRedirect";
 
 export const clientRoutes = [
   {
@@ -55,15 +55,15 @@ export const clientRoutes = [
     element: <FilterList />,
   },
 
-  {
-    path: "/admin",
-    element: <AdminRedirect />,
-  },
+  // {
+  //   path: "/admin",
+  //   element: <AdminRedirect />,
+  // },
 
-  {
-    path: "/dashboard",
-    element: <DashboardRedirect />,
-  },
+  // {
+  //   path: "/dashboard",
+  //   element: <DashboardRedirect />,
+  // },
 
   {
     path: "/video-player",

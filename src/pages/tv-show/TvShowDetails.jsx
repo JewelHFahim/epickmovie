@@ -51,7 +51,7 @@ const TvShowDetails = () => {
         {/* >>>>>>> Column One <<<<<<< */}
         <div className="w-full  lg:w-[70%]">
           <div>
-            <h4 className=" text-[50px] lg:text-[24px] text-white font-aclonica lg:max-w-[748px]">
+            <h4 className="text-[50px] lg:text-[24px] text-white font-aclonica lg:max-w-[748px]">
               {details?.post_title}
             </h4>
 
