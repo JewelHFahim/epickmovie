@@ -22,7 +22,7 @@ const RelatedPost = ({ id }) => {
           ))}
         </div>
 
-        <div className=" mt-[23px] lg:hidden grid grid-cols-2 gap-[25px] ">
+        <div className="mt-[23px] lg:hidden grid grid-cols-2 gap-[25px] ">
           {suggessions?.data?.slice(0,2)?.map((item, i) => (
             <CardRelatedPost item={item} key={i}/>
           ))}
