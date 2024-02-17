@@ -14,6 +14,7 @@ import { useDispatch } from "react-redux";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
+import FeatureLazy from "../../components/featured-movies/FeatureLazy";
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -75,7 +76,7 @@ const Home = () => {
       </HomePageSeeAllBtn>
 
       <div className="my-[18px]">
-        <FeaturedMovies movieList={movieList} />
+        {movieLoading ? <FeatureLazy /> : <FeaturedMovies movieList={movieList} />}
       </div>
 
       <HomePageSeeAllBtn total={totalMovies} redirect={"/movies"}>
@@ -119,7 +120,6 @@ const Home = () => {
           </div>
         )}
       </div>
-      
     </section>
   );
 };
