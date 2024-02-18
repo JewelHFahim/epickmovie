@@ -4,25 +4,23 @@ import "swiper/css/pagination";
 import "swiper/css/navigation";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "./FeaturedMovies.css";
-import MovieCard from "../movie-card/MovieCard";
 import { Link } from "react-router-dom";
-import CachedImage from "../../utils/cache-img/CachedImage";
 import { FaPlay } from "react-icons/fa";
-import FeatureSticker from "../../utils/feature-sticker/FeatureSticker";
 
-export default function FeaturedMovies({ movieList }) {
+export default function FeaturedMovies({ featuredPosts }) {
+
+  console.log(featuredPosts)
+
   return (
     <>
       <Swiper
         breakpoints={{
           600: {
             slidesPerView: 1,
-            // spaceBetween: 30,
           },
 
           768: {
             slidesPerView: 1,
-            // spaceBetween: 30,
           },
 
           1024: {
@@ -41,11 +39,12 @@ export default function FeaturedMovies({ movieList }) {
         modules={[Autoplay, Pagination, Navigation]}
         className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]"
       >
-        {movieList?.data?.data?.map((item, i) => (
+
+
+        {featuredPosts?.data?.map((item, i) => (
           <SwiperSlide key={i}>
             <div className="lg:bg-gradient-to-t from-[#ff1818] to-[#fdd506] h-[460px] p-[4px] lg:p-[2px] rounded-[10px] relative playBtnCont px-5 lg:px-[2px]">
-              <Link
-                to={`/movie/${item?.id}/${item?.post_title}`}
+              <Link to={item?.post_type === "movies" ? `/movie/${item?.id}/${item?.post_title}` : `/series/${item?.id}/${item?.post_title}`} 
                 className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative`}
               >
                 <img

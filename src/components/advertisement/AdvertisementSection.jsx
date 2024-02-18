@@ -10,6 +10,7 @@ const AdvertisementSection = () => {
 
   return (
     <div className="hidden lg:block  w-[30%] bg-[#1F1F22] p-4">
+      
       {/* Join Telegram */}
       <div className="w-[299px] h-[193px] bg-[#27272A] flex flex-col">
         <p className="text-white font-inter font-[500] mt-[39px] ml-[18px]">
@@ -49,6 +50,7 @@ const AdvertisementSection = () => {
         </p>
         <img src={ads} alt="" />
       </div>
+
     </div>
   );
 };

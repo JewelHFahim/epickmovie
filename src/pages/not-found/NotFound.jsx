@@ -5,10 +5,8 @@ import { IoSearch } from "react-icons/io5";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import AdvertisementSection from "../../components/advertisement/AdvertisementSection";
 
 const NotFound = () => {
-  
   const { data: siteName } = useSiteNameUSerQuery();
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -32,8 +30,9 @@ const NotFound = () => {
         <title> {`${siteName?.data} || 404`}</title>
       </Helmet>
 
-      <section className=" p-[32px] lg:flex justify-between">
-        <div className=" lg:w-[70%] font-inter">
+      <section className=" p-[32px] flex justify-center items-center h-screen">
+
+        <div className="font-inter">
           <h3 className="text-[32px] font-[700]  text-[#727171]">
             Error 404 Not Found
           </h3>
@@ -73,9 +72,6 @@ const NotFound = () => {
           </div>
         </div>
 
-        <div className="hidden lg:block  bg-[#1F1F22] p-4">
-          <AdvertisementSection />
-        </div>
       </section>
     </div>
   );

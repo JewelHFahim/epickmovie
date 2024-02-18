@@ -3,7 +3,10 @@ import {
   useSiteNameUSerQuery,
 } from "../../redux/features/settings/settingApi";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
-import { usePerPgaeMovieQuery } from "../../redux/features/movies/movieApi";
+import {
+  useFeaturedPostsQuery,
+  usePerPgaeMovieQuery,
+} from "../../redux/features/movies/movieApi";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import DomainList from "../../components/domain-list/DomainList";
 import MovieCard from "../../components/movie-card/MovieCard";
@@ -22,11 +25,12 @@ const Home = () => {
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
   const { data: tvShowList, isLoading: tvShowLoading } =
     usePerPgaeTvShowQuery(1);
-
   const { data: quickMenu } = useQuickMenuUserQuery();
+  const { data: siteName } = useSiteNameUSerQuery();
+  const { data: featuredPosts } = useFeaturedPostsQuery();
+
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
-  const { data: siteName } = useSiteNameUSerQuery();
 
   const location = useLocation();
   const currentRoute = location.pathname;
@@ -71,12 +75,14 @@ const Home = () => {
       <DomainList />
 
       {/* ================>> Featured Movies <<================*/}
-      <HomePageSeeAllBtn redirect={"/movies"}>
-        Featured Movies
-      </HomePageSeeAllBtn>
+      <HomePageSeeAllBtn>Featured Movies</HomePageSeeAllBtn>
 
       <div className="my-[18px]">
-        {movieLoading ? <FeatureLazy /> : <FeaturedMovies movieList={movieList} />}
+        {movieLoading ? (
+          <FeatureLazy />
+        ) : (
+          <FeaturedMovies featuredPosts={featuredPosts} />
+        )}
       </div>
 
       <HomePageSeeAllBtn total={totalMovies} redirect={"/movies"}>

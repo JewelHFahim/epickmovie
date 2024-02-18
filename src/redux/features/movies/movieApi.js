@@ -61,11 +61,21 @@ const movieApi = apiSlice.injectEndpoints({
       query: () => "/terms/pr-quality-list",
       providesTags: ["EpicMovies"],
     }),
+
+
     // ========================>> COUNTRY <<=============================
     countryListClient: builder.query({
       query: () => "/terms/get-countries",
       providesTags: ["EpicMovies"],
     }),
+
+    // =====================>> FEATURED POSTS <<=========================
+    featuredPosts: builder.query({
+      query: () => "/get-feathers-posts",
+      providesTags: ["EpicMovies"],
+    }),
+
+
   }),
 });
 
@@ -81,5 +91,6 @@ export const {
   usePrintQualityClientQuery,
   useAudListClientQuery,
   useCountryListClientQuery,
+  useFeaturedPostsQuery
 } = movieApi;
 export default movieApi;
