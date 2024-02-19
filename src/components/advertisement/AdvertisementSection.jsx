@@ -1,12 +1,15 @@
 import joinTelegran from "../../assets/join telegram.png";
 import ads from "../../assets/ads.png";
-import { useJoinTelegramUserQuery } from "../../redux/features/settings/settingApi";
+import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
 import CountryList from "./CountryList";
 import { Link } from "react-router-dom";
 import LatestMoviesCard from "../latest-movies/LatestMoviesCard";
 
 const AdvertisementSection = () => {
-  const { data: joinTelegram } = useJoinTelegramUserQuery();
+  const {data: allConfig} = useAllConfigQuery();
+  const telegramLink = allConfig?.data[1]?.value;
+
+
 
   return (
     <div className="hidden lg:block  w-[30%] bg-[#1F1F22] p-4">
@@ -17,7 +20,7 @@ const AdvertisementSection = () => {
           Join Our Telegram
         </p>
         <hr className="w-full bg-[#494949] opacity-[.4]" />
-        <Link to={joinTelegram?.data} target="_blank" rel="noopener noreferrer">
+        <Link to={telegramLink} target="_blank" rel="noopener noreferrer">
           <img
             src={joinTelegran}
             alt=""

@@ -3,16 +3,20 @@ import MobileMenuButton from "../../utils/MobileMenuButton";
 import MobileMenu from "../../components/menus/MobileMenu";
 import { Link, useLocation } from "react-router-dom";
 import Nav from "./nav/Nav";
-import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
+import { useAllConfigQuery, useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
 
 const Navbar = () => {
   const location = useLocation();
   const currentPath = location.pathname;
   const { data: quickMenu } = useQuickMenuUserQuery();
+  const { data: allConfig, isLoading: configLoading } = useAllConfigQuery();
+
+  console.log(allConfig)
+
 
   return (
     <div className="lg:h-[184px] bg-[#27272A]">
-      <Header />
+      <Header allConfig={allConfig} configLoading={configLoading}/>
 
       <div className="lg:hidden">
         <MobileMenu />
@@ -32,7 +36,7 @@ const Navbar = () => {
       )}
 
       <div className="hidden lg:block">
-        <Nav />
+        <Nav allConfig={allConfig}/>
       </div>
     </div>
   );

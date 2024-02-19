@@ -14,17 +14,19 @@ import {
   useYearListQuery,
 } from "../../../redux/features/movies/movieApi";
 import { Link } from "react-router-dom";
-import { useJoinTelegramUserQuery } from "../../../redux/features/settings/settingApi";
 
-const Nav = () => {
+const Nav = ({allConfig}) => {
+
   const { data: genreList } = useGenreListQuery();
   const { data: yearList } = useYearListQuery();
-  const { data: joinTelegram } = useJoinTelegramUserQuery();
   const { data: pixelQualityList } = usePixelQualityClientQuery();
   const { data: printQualityList } = usePrintQualityClientQuery();
+  
   const pixel = pixelQualityList?.data;
   const print = printQualityList?.data;
   const combinedQuality = pixel?.concat(print);
+
+  const telegramLink = allConfig?.data[1]?.value;
 
   const itemsPerColumn = 20;
   const columns = [];
@@ -60,7 +62,7 @@ const Nav = () => {
     { title: "Bangla", path: "/bangla", isDrapdown: false, icon: bangla },
     {
       title: "Join Telegram",
-      path: `${joinTelegram?.data}`,
+      path: telegramLink,
       isDrapdown: false,
       icon: telegram,
       newTab: true,

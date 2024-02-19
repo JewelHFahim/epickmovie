@@ -1,8 +1,13 @@
 import apiSlice from "../api/apiSlice";
 
 const settingApi = apiSlice.injectEndpoints({
-  
   endpoints: (builder) => ({
+
+    // ====================>> ALL CONFIGS <<======================
+    allConfig: builder.query({
+      query: () => "/get-all-config-value",
+      providesTags: ["EpicMovies"],
+    }),
 
     // ==================>> JOIN TELEGRAM  <<=====================
     joinTelegramUser: builder.query({
@@ -61,6 +66,7 @@ const settingApi = apiSlice.injectEndpoints({
 });
 
 export const {
+  useAllConfigQuery,
   useJoinTelegramUserQuery,
   useFooterUserQuery,
   useSiteLogoUserQuery,

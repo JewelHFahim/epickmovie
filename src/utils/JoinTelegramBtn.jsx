@@ -1,14 +1,17 @@
 import { Link } from "react-router-dom";
 import telegraqm from "../assets/telegram.svg";
-import { useJoinTelegramUserQuery } from "../redux/features/settings/settingApi";
+import { useAllConfigQuery } from "../redux/features/settings/settingApi";
 
 const JoinTelegramBtn = () => {
-  const { data: joinTelegram } = useJoinTelegramUserQuery();
+  const {data: allConfig} = useAllConfigQuery();
+  const telegramLink = allConfig?.data[1]?.value;
+
+
 
   return (
     <div className="flex justify-center mt-[50px] lg:mt-[36px]">
       <Link
-        to={joinTelegram?.data}
+        to={telegramLink}
         target="_blank"
         rel="noopener noreferrer"
         className="flex justify-center items-center gap-4 lg:gap-2 w-[60%] h-[90px] lg:w-[211px] lg:h-[43px] transition-transform ease-in-out duration-200 hover:bg-gradient-to-t from-[#4fbf98] to-[#39add3] bg-[#FCD8FF] rounded-[9px] text-black hover:text-white"

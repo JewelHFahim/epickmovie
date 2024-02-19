@@ -13,7 +13,8 @@ import { CiCalendarDate } from "react-icons/ci";
 import { GoGlobe } from "react-icons/go";
 import { RiMovie2Line } from "react-icons/ri";
 import { LiaTelegramPlane } from "react-icons/lia";
-import { useJoinTelegramUserQuery } from "../../redux/features/settings/settingApi";
+
+import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
 
 const MobileMenu = () => {
   const location = useLocation();
@@ -21,7 +22,9 @@ const MobileMenu = () => {
   const { data: printQualityList } = usePrintQualityClientQuery();
   const { data: genreList } = useGenreListQuery();
   const { data: yearList } = useYearListQuery();
-  const { data: joinTelegram } = useJoinTelegramUserQuery();
+  const {data: allConfig} = useAllConfigQuery();
+  const telegramLink = allConfig?.data[1]?.value;
+
 
   const pixel = pixelQualityList?.data;
   const print = printQualityList?.data;
@@ -75,7 +78,7 @@ const MobileMenu = () => {
 
     {
       title: "Join Telegram",
-      path: `${joinTelegram?.data}`,
+      path: telegramLink,
       isDrapdown: false,
       icon: <LiaTelegramPlane />,
     },

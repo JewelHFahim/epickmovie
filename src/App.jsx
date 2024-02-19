@@ -3,30 +3,29 @@ import { RouterProvider } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import router from "./routes/router";
-import { useSiteNameUSerQuery } from "./redux/features/settings/settingApi";
+import { useAllConfigQuery } from "./redux/features/settings/settingApi";
 import { base_url, userHeader } from "./config/config";
 
 const App = () => {
-  const { data: siteName } = useSiteNameUSerQuery();
+
+  const { data: allConfig } = useAllConfigQuery();
+  const siteName = allConfig?.data[0]?.value;
+  const favIcon = allConfig?.data[13]?.value;
 
   // Dynamic Favicon Icon Set
   useEffect(() => {
-    const fetchFavicon = async () => {
+    const fetchFavicon = () => {
       try {
-        const response = await fetch(`${base_url}/get-config-value/fav_icon`, {
-          headers: userHeader,
-        });
-
-        const data = await response.json();
         const faviconLink = document.getElementById("dynamic-favicon");
-        faviconLink.href = data?.data || "/default-favicon.ico";
+        faviconLink.href = favIcon || "/default-favicon.ico";
       } catch (error) {
         console.error("Error fetching favicon:", error);
       }
     };
 
     fetchFavicon();
-  }, []);
+  }, [favIcon]);
+
 
   // Dynamic Set Global Header
   // useEffect(() => {
@@ -83,7 +82,9 @@ const App = () => {
           <title>{siteName?.data}</title>
           <meta name="description" content="entertainment unlimited" />
         </Helmet>
+
         <RouterProvider router={router} />
+
         <Toaster />
       </div>
     </HelmetProvider>

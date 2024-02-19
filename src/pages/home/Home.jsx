@@ -1,6 +1,6 @@
 import {
+  useAllConfigQuery,
   useQuickMenuUserQuery,
-  useSiteNameUSerQuery,
 } from "../../redux/features/settings/settingApi";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import {
@@ -13,21 +13,22 @@ import MovieCard from "../../components/movie-card/MovieCard";
 import HomePageSeeAllBtn from "../../utils/HomePageSeeAllBtn";
 import SubMenuButton from "../../utils/SubMenuButton";
 import { Link, useLocation } from "react-router-dom";
-import { useDispatch } from "react-redux";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
 import FeatureLazy from "../../components/featured-movies/FeatureLazy";
 
 const Home = () => {
-  const dispatch = useDispatch();
-  const userInfo = JSON.parse(localStorage.getItem("user-info"));
+
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
-  const { data: tvShowList, isLoading: tvShowLoading } =
-    usePerPgaeTvShowQuery(1);
+  const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
+  const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
   const { data: quickMenu } = useQuickMenuUserQuery();
-  const { data: siteName } = useSiteNameUSerQuery();
-  const { data: featuredPosts } = useFeaturedPostsQuery();
+  const {data: allConfig} = useAllConfigQuery();
+
+  console.log(allConfig);
+
+  const siteName = allConfig?.data[0]?.value;
 
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
@@ -43,18 +44,6 @@ const Home = () => {
       localStorage.removeItem("filterPagination");
     }
   }, [currentRoute]);
-
-  // auto logout after 24hr
-  useEffect(() => {
-    const timeoutId = setTimeout(() => {
-      localStorage.removeItem("user-info");
-      dispatch(userInfo?.token(null));
-    }, 24 * 60 * 60 * 1000);
-
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [dispatch, userInfo]);
 
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">
@@ -72,18 +61,21 @@ const Home = () => {
       </div>
 
       {/* ====================>> Domains <<===================*/}
-      <DomainList />
+      <DomainList allConfig={allConfig} />
 
       {/* ================>> Featured Movies <<================*/}
-      <HomePageSeeAllBtn>Featured Movies</HomePageSeeAllBtn>
-
-      <div className="my-[18px]">
-        {movieLoading ? (
-          <FeatureLazy />
-        ) : (
-          <FeaturedMovies featuredPosts={featuredPosts} />
-        )}
-      </div>
+      {featuredPosts?.data && (
+        <>
+          <HomePageSeeAllBtn>Featured Movies</HomePageSeeAllBtn>
+          <div className="my-[18px]">
+            {featureLoading ? (
+              <FeatureLazy />
+            ) : (
+              <FeaturedMovies featuredPosts={featuredPosts} />
+            )}
+          </div>
+        </>
+      )}
 
       <HomePageSeeAllBtn total={totalMovies} redirect={"/movies"}>
         Movies
@@ -106,11 +98,11 @@ const Home = () => {
         )}
       </div>
 
+      {/* ==================>> Tv Shows <<==================*/}
       <HomePageSeeAllBtn total={totalTvShow} redirect={"/tv-show"}>
         TV Show
       </HomePageSeeAllBtn>
 
-      {/* ==================>> Tv Shows <<==================*/}
       <div>
         {tvShowLoading ? (
           <LazyLoading />

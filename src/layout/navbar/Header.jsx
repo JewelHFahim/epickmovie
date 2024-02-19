@@ -2,15 +2,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
-import { useSiteLogoUserQuery, useSiteNameUSerQuery} from "../../redux/features/settings/settingApi";
 import { IoSearch } from "react-icons/io5";
 
-const Header = () => {
+const Header = ({ allConfig, configLoading }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchTermState, setSearchTerm] = useState("");
-  const { data: siteLogo, isLoading } = useSiteLogoUserQuery();
-  const { data: siteName } = useSiteNameUSerQuery();
+
+  // const siteLogo = allConfig?.data?.filter((config) => {
+  //   if (config.name === "site_logo") {
+  //     const sitelogo = config[0].value;
+  //     return sitelogo
+  //   }
+  // });
+
+  // console.log(siteLogo);
+
+  const siteLogo = allConfig?.data[11]?.value;
+  const siteName = allConfig?.data[0]?.value;
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -26,19 +35,20 @@ const Header = () => {
 
   return (
     <div className="w-full lg:h-[130px] flex flex-col lg:flex-row items-center justify-between py-5 lg:py-0 px-4 ">
-      {isLoading ? (
+      {configLoading ? (
         <div className="w-[150px] h-[40px] lg:w-[200px] lg:h-[65px] bg-slate-700 rounded-lg animate-pulse "></div>
       ) : (
-        <Link to="/" className="w-[440px] lg:w-[240px] h-[80px] flex justify-center items-center">
-          {isLoading ? (
+        <Link
+          to="/"
+          className="w-[440px] lg:w-[240px] h-[80px] flex justify-center items-center"
+        >
+          {configLoading ? (
             <div className="w-[150px] h-[40px] lg:w-[200px] lg:h-[65px] bg-slate-700 rounded-lg animate-pulse" />
           ) : (
-            <img src={siteLogo?.data} alt={siteName?.data} className="object-cover"/>
+            <img src={siteLogo} alt={siteName} className="object-cover" />
           )}
-          {!siteLogo?.data && (
-            <h1 className="text-[25px] font-medium text-white">
-              {siteName?.data}
-            </h1>
+          {!siteLogo && (
+            <h1 className="text-[25px] font-medium text-white"> {siteName} </h1>
           )}
         </Link>
       )}
@@ -55,12 +65,13 @@ const Header = () => {
           className="w-full h-full border-0 focus:outline-none px-5 bg-[#18181B] rounded-s-[15px] lg:rounded-s-[8px] text-[27px] placeholder:text-[24px] lg:placeholder:text-[16px] lg:text-[14px] text-slate-300"
         />
 
-        <button type="submit" className="text-[40px] lg:text-[24px] text-white px-6 lg:px-4 h-full bg-slate-700 rounded-e-[15px] lg:rounded-e-[8px]">
+        <button
+          type="submit"
+          className="text-[40px] lg:text-[24px] text-white px-6 lg:px-4 h-full bg-slate-700 rounded-e-[15px] lg:rounded-e-[8px]"
+        >
           <IoSearch />
         </button>
-        
       </form>
-      
     </div>
   );
 };

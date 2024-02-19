@@ -9,7 +9,7 @@ const LatestMoviesCard = () => {
 
   return (
     <div className="bg-[#27272A] p-2 flex flex-col gap-y-3">
-      {(movieList?.data?.data).slice(0,5)?.map((item, i) => (
+      {(movieList?.data?.data)?.slice(0,5)?.map((item, i) => (
         <Link to={item?.post_type === "movies" ? `/movie/${item?.id}/${item?.post_title}` : `/series/${item?.id}/${item?.post_title}`} 
           key={i}
           className="flex items-center gap-x-3 bg-[#202020] p-1 shadow-md"

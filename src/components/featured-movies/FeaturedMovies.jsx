@@ -6,10 +6,8 @@ import { Autoplay, Pagination, Navigation } from "swiper/modules";
 import "./FeaturedMovies.css";
 import { Link } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
-
 export default function FeaturedMovies({ featuredPosts }) {
-
-  console.log(featuredPosts)
+  console.log(featuredPosts);
 
   return (
     <>
@@ -35,16 +33,19 @@ export default function FeaturedMovies({ featuredPosts }) {
         }}
         pagination={false}
         loop={true}
-        navigation={false}
+        navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]"
+        className="grid grid-cols-1 lg:grid-cols-5 gap-[25px] my-[18px] mainSlider"
       >
-
-
         {featuredPosts?.data?.map((item, i) => (
           <SwiperSlide key={i}>
             <div className="lg:bg-gradient-to-t from-[#ff1818] to-[#fdd506] h-[460px] p-[4px] lg:p-[2px] rounded-[10px] relative playBtnCont px-5 lg:px-[2px]">
-              <Link to={item?.post_type === "movies" ? `/movie/${item?.id}/${item?.post_title}` : `/series/${item?.id}/${item?.post_title}`} 
+              <Link
+                to={
+                  item?.post_type === "movies"
+                    ? `/movie/${item?.id}/${item?.post_title}`
+                    : `/series/${item?.id}/${item?.post_title}`
+                }
                 className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative`}
               >
                 <img
