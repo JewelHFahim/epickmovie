@@ -11,8 +11,6 @@ const Navbar = () => {
   const { data: quickMenu } = useQuickMenuUserQuery();
   const { data: allConfig, isLoading: configLoading } = useAllConfigQuery();
 
-  console.log(allConfig)
-
 
   return (
     <div className="lg:h-[184px] bg-[#27272A]">

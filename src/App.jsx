@@ -4,13 +4,17 @@ import { Toaster } from "react-hot-toast";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import router from "./routes/router";
 import { useAllConfigQuery } from "./redux/features/settings/settingApi";
-import { base_url, userHeader } from "./config/config";
 
 const App = () => {
 
   const { data: allConfig } = useAllConfigQuery();
-  const siteName = allConfig?.data[0]?.value;
-  const favIcon = allConfig?.data[13]?.value;
+
+  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
+  const siteName = getSiteName ? getSiteName.value : null;
+
+  const getSiteFav = allConfig?.data?.find( (config) => config.name === "fav_icon");
+  const favIcon = getSiteFav ? getSiteFav.value : null;
+
 
   // Dynamic Favicon Icon Set
   useEffect(() => {
@@ -79,7 +83,7 @@ const App = () => {
     <HelmetProvider>
       <div className=" bg-[#27272A] lg:bg-[#18181a]">
         <Helmet>
-          <title>{siteName?.data}</title>
+          <title>{siteName}</title>
           <meta name="description" content="entertainment unlimited" />
         </Helmet>
 

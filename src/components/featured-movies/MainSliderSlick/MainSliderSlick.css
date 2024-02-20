@@ -1,0 +1,28 @@
+.slick-next:before,
+.slick-prev:before {
+  font-size: 35px;
+}
+
+.slick-next {
+  right: 50px;
+  z-index: 9999;
+}
+
+.slick-prev {
+  left: 10px !important;
+  z-index: 9999;
+}
+
+.mainSlider {
+  width: 215px !important;
+}
+
+@media only screen and (max-width: 1024px) {
+  .mainSlider {
+    width: 100% !important;  
+  }
+
+  .mainSlider img{
+    object-fit: contain !important;
+  }
+}

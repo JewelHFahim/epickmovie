@@ -7,7 +7,7 @@ import DetailsPosterCard from "../../../components/details-poster-card/DetailsPo
 import RelatedPost from "../../../components/related-post/RelatedPost";
 import AdvertisementSection from "../../../components/advertisement/AdvertisementSection";
 import Breadcum from "../../../utils/breadcum/Breadcum";
-import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
+import { useAllConfigQuery } from "../../../redux/features/settings/settingApi";
 import UploadedDate from "../../../utils/uploaded-date/UploadedDate";
 import { Helmet } from "react-helmet";
 import CountryList from "../../../components/advertisement/CountryList";
@@ -19,6 +19,8 @@ const MovieDetails = () => {
   const navigate = useNavigate();
 
   const { data: movieDetails } = useMovieDetailsQuery(id);
+  const {data: allConfig} = useAllConfigQuery();
+
 
   useEffect(() => {
     if (movieDetails?.status === false) {
@@ -26,14 +28,17 @@ const MovieDetails = () => {
     }
   }, [movieDetails, navigate]);
 
-  const { data: siteName } = useSiteNameUSerQuery();
+
+  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
+  const siteName = getSiteName ? getSiteName.value : null;
+
   const details = movieDetails?.data;
   window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <div className="bg-[#27272A]">
       <Helmet>
-        <title> {`${siteName?.data} || ${details?.post_title} `}</title>
+        <title> {`${siteName} || ${details?.post_title} `}</title>
         <meta name="description" content={details?.post_content} />
         <meta name="keywords" content="movies" />
       </Helmet>
@@ -78,7 +83,7 @@ const MovieDetails = () => {
             <div className="lg:max-w-[715px] mt-[13px]">
               <h3 className="text-[50px] lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center leading-none">
                 <Link to={details?.guid}>
-                  {details?.post_title} ~ {siteName?.data}
+                  {details?.post_title} ~ {siteName}
                 </Link>
               </h3>
             </div>

@@ -1,16 +1,19 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
+import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
 import { IoSearch } from "react-icons/io5";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
 
 const NotFound = () => {
-  const { data: siteName } = useSiteNameUSerQuery();
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const {data: allConfig} = useAllConfigQuery();
   const [searchTermState, setSearchTerm] = useState("");
+
+  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
+  const siteName = getSiteName ? getSiteName.value : null;
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
@@ -27,7 +30,7 @@ const NotFound = () => {
   return (
     <div className="bg-[#27272A] min-h-screen">
       <Helmet>
-        <title> {`${siteName?.data} || 404`}</title>
+        <title> {`${siteName} || 404`}</title>
       </Helmet>
 
       <section className=" p-[32px] flex justify-center items-center h-screen">

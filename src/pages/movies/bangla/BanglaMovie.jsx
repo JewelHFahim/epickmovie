@@ -4,17 +4,21 @@ import { usePerPageBengaliMovieListQuery } from "../../../redux/features/movies/
 import Title from "../../../utils/Title";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
-import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
+import { useAllConfigQuery } from "../../../redux/features/settings/settingApi";
 import BanglaMoviePagination from "./BanglaMoviePagination";
 import { useLocation } from "react-router-dom";
 
 const BanglaMovie = () => {
   const storedPage = JSON.parse(localStorage.getItem("banglaPagination")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
+  const {data: allConfig} = useAllConfigQuery();
+
 
   const { data: perPgaeMovie, isLoading } =
     usePerPageBengaliMovieListQuery(currentPage);
-  const { data: siteName } = useSiteNameUSerQuery();
+
+  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
+  const siteName = getSiteName ? getSiteName.value : null;
 
   const location = useLocation();
   const currentRoute = location.pathname;
@@ -33,7 +37,7 @@ const BanglaMovie = () => {
   return (
     <div className="min-h-screen">
       <Helmet>
-        <title>{siteName?.data}</title>
+        <title>{siteName}</title>
         <meta
           name="description"
           content="Unlimited Bangla Movies and Latest Collections"

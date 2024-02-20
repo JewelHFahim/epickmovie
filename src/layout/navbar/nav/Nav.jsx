@@ -26,7 +26,8 @@ const Nav = ({allConfig}) => {
   const print = printQualityList?.data;
   const combinedQuality = pixel?.concat(print);
 
-  const telegramLink = allConfig?.data[1]?.value;
+  const getTelegramLink = allConfig?.data?.find( (config) => config.name === "telegram_link");
+  const telegramLink = getTelegramLink ? getTelegramLink.value : null;
 
   const itemsPerColumn = 20;
   const columns = [];

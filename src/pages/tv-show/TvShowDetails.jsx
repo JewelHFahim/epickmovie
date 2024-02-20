@@ -6,21 +6,24 @@ import Accrodion from "../../components/accrodion/Accrodion";
 import RelatedPost from "../../components/related-post/RelatedPost";
 import AdvertisementSection from "../../components/advertisement/AdvertisementSection";
 import Breadcum from "../../utils/breadcum/Breadcum";
-import { useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 import UploadedDate from "../../utils/uploaded-date/UploadedDate";
 import DetailsPosterCard from "../../components/details-poster-card/DetailsPosterCard";
 import { Helmet } from "react-helmet";
 import CountryList from "../../components/advertisement/CountryList";
 import { useEffect } from "react";
 import CachedImage from "../../utils/cache-img/CachedImage";
+import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
 
 const TvShowDetails = () => {
   const { id } = useParams();
-  const { data: siteName } = useSiteNameUSerQuery();
   const navigate = useNavigate();
+  const {data: allConfig} = useAllConfigQuery();
 
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
+
+  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
+  const siteName = getSiteName ? getSiteName.value : null;
 
   useEffect(() => {
     if (seriesDetails?.status === false) {
@@ -35,7 +38,7 @@ const TvShowDetails = () => {
     <div className="bg-[#27272A]">
       
         <Helmet>
-          <title> {`${siteName?.data} || ${details?.post_title} `}</title>
+          <title> {`${siteName} || ${details?.post_title} `}</title>
           <meta name="description" content={details?.post_content} />
           <meta name="keywords" content="tvshows" />
         </Helmet>

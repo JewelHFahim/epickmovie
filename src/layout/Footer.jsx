@@ -3,7 +3,9 @@ import { useAllConfigQuery } from "../redux/features/settings/settingApi";
 const Footer = () => {
   
   const { data: allConfig, isLoading } = useAllConfigQuery();
-  const footer = allConfig?.data[1]?.value;
+
+  const getSiteFooter = allConfig?.data?.find( (config) => config.name === "site_footer");
+  const siteFooter = getSiteFooter ? getSiteFooter.value : null;
 
   return (
     <div>
@@ -15,7 +17,7 @@ const Footer = () => {
             ></div>
           ) : (
             <p className=" text-[20px] p-5 lg:text-[14px] font-inter font-[600] text-white text-center lg:text-left">
-              {footer}
+              {siteFooter}
             </p>
           )}
         </div>

@@ -1,20 +1,24 @@
 import { useEffect, useState } from "react";
-import DomainList from "../../components/domain-list/DomainList";
 import MovieCard from "../../components/movie-card/MovieCard";
 import Title from "../../utils/Title";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
-import { useSiteNameUSerQuery } from "../../redux/features/settings/settingApi";
 import TvPagination from "./TvPagination";
 import { useLocation } from "react-router-dom";
+import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
+import SiteNews from "../../components/SiteNews/SiteNews";
+
 
 const TvShow = () => {
+  const {data: allConfig} = useAllConfigQuery();
   const storedPage = JSON.parse(localStorage.getItem("tvCurrentPage")) || 1;
 
   const [currentPage, setCurrentPage] = useState(storedPage);
   const { data: perPgaeMovie, isLoading } = usePerPgaeTvShowQuery(currentPage);
-  const { data: siteName } = useSiteNameUSerQuery();
+
+  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
+  const siteName = getSiteName ? getSiteName.value : null;
 
   const location = useLocation();
   const currentRoute = location.pathname;
@@ -33,7 +37,7 @@ const TvShow = () => {
   return (
     <div className="min-h-screen flex flex-col items-center">
       <Helmet>
-        <title>{siteName?.data}</title>
+        <title>{siteName}</title>
         <meta
           name="description"
           content="Unlimited Tv Shows and Latest Collections"
@@ -41,7 +45,7 @@ const TvShow = () => {
       </Helmet>
 
       {/* ==================>> Domains <<=================*/}
-      <DomainList />
+      <SiteNews allConfig={allConfig} />
 
       <div className="w-full flex justify-start mt-[22px] ml-20 lg:ml-0">
         <Title>TV Series</Title>

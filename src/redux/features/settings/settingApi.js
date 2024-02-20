@@ -71,6 +71,8 @@ export const {
   useFooterUserQuery,
   useSiteLogoUserQuery,
   useSiteNameUSerQuery,
+
+  
   useSiteNewsUserQuery,
   useQuickMenuUserQuery,
   useGlobalHeaderQuery,

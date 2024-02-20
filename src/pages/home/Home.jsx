@@ -8,7 +8,6 @@ import {
   usePerPgaeMovieQuery,
 } from "../../redux/features/movies/movieApi";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
-import DomainList from "../../components/domain-list/DomainList";
 import MovieCard from "../../components/movie-card/MovieCard";
 import HomePageSeeAllBtn from "../../utils/HomePageSeeAllBtn";
 import SubMenuButton from "../../utils/SubMenuButton";
@@ -17,6 +16,7 @@ import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
 import FeatureLazy from "../../components/featured-movies/FeatureLazy";
+import SiteNews from "../../components/SiteNews/SiteNews";
 
 const Home = () => {
 
@@ -26,9 +26,8 @@ const Home = () => {
   const { data: quickMenu } = useQuickMenuUserQuery();
   const {data: allConfig} = useAllConfigQuery();
 
-  console.log(allConfig);
-
-  const siteName = allConfig?.data[0]?.value;
+  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
+  const siteName = getSiteName ? getSiteName.value : null;
 
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
@@ -48,7 +47,7 @@ const Home = () => {
   return (
     <section className="min-h-screen flex flex-col justify-center items-center">
       <Helmet>
-        <title>{siteName?.data}</title>
+        <title>{siteName}</title>
       </Helmet>
 
       {/* ==================>> Quick Menus <<================*/}
@@ -61,27 +60,19 @@ const Home = () => {
       </div>
 
       {/* ====================>> Domains <<===================*/}
-      <DomainList allConfig={allConfig} />
+      <SiteNews allConfig={allConfig} />
 
       {/* ================>> Featured Movies <<================*/}
-      {featuredPosts?.data && (
         <>
           <HomePageSeeAllBtn>Featured Movies</HomePageSeeAllBtn>
-          <div className="my-[18px]">
-            {featureLoading ? (
-              <FeatureLazy />
-            ) : (
-              <FeaturedMovies featuredPosts={featuredPosts} />
-            )}
-          </div>
+          <div className="my-[18px]"> <FeaturedMovies /></div>
         </>
-      )}
 
+      {/* ====================>> Movies <<====================*/}
       <HomePageSeeAllBtn total={totalMovies} redirect={"/movies"}>
         Movies
       </HomePageSeeAllBtn>
 
-      {/* ====================>> Movies <<====================*/}
       <div>
         {movieLoading ? (
           <LazyLoading />

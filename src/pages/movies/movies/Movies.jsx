@@ -1,21 +1,24 @@
 import { useEffect, useState } from "react";
-import DomainList from "../../../components/domain-list/DomainList";
 import MovieCard from "../../../components/movie-card/MovieCard";
 import { usePerPgaeMovieQuery } from "../../../redux/features/movies/movieApi";
 import Title from "../../../utils/Title";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
-import { useSiteNameUSerQuery } from "../../../redux/features/settings/settingApi";
+import { useAllConfigQuery } from "../../../redux/features/settings/settingApi";
 import MoviePagination from "./MoviePagination";
 import { useLocation } from "react-router-dom";
+import SiteNews from "../../../components/SiteNews/SiteNews";
 
 const Movies = () => {
   const location = useLocation();
   const currentRoute = location.pathname;
+  const {data: allConfig} = useAllConfigQuery();
   const storedPage = JSON.parse(localStorage.getItem("MovieCurrentPage")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
-  const { data: siteName } = useSiteNameUSerQuery();
+  
+  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
+  const siteName = getSiteName ? getSiteName.value : null;
 
 
   useEffect(() => {
@@ -32,7 +35,7 @@ const Movies = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <Helmet>
-        <title>{siteName?.data}</title>
+        <title>{siteName}</title>
         <meta
           name="description"
           content="Unlimited Movies and Latest Collections"
@@ -40,7 +43,7 @@ const Movies = () => {
       </Helmet>
 
       {/* ==================>> Domains <<=================*/}
-      <DomainList />
+      <SiteNews allConfig={allConfig} />
 
       <div className="w-full flex justify-start mt-[22px] mb-[20px] lg:mb-0 ml-20 lg:ml-0">
         <Title>Movies</Title>
