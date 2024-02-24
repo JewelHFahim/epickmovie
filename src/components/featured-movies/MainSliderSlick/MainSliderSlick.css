@@ -1,6 +1,12 @@
 .slick-next:before,
 .slick-prev:before {
   font-size: 35px;
+  display: none;
+}
+
+.slider-container:hover .slick-next:before,
+.slider-container:hover .slick-prev:before {
+  display: block;
 }
 
 .slick-next {
@@ -19,10 +25,10 @@
 
 @media only screen and (max-width: 1024px) {
   .mainSlider {
-    width: 100% !important;  
+    width: 100% !important;
   }
 
-  .mainSlider img{
+  .mainSlider img {
     object-fit: contain !important;
   }
 }

@@ -44,7 +44,7 @@ const BanglaMovie = () => {
         />
       </Helmet>
 
-      {/* ==================>> MOVIES <<==================*/}
+      {/* ==================>> BENGALI MOVIES <<==================*/}
       <div className="px-10 lg:px-0 py-5">
         <Title>Bengali</Title>
       </div>

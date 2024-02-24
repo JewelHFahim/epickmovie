@@ -15,18 +15,19 @@ import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
-import FeatureLazy from "../../components/featured-movies/FeatureLazy";
 import SiteNews from "../../components/SiteNews/SiteNews";
 
 const Home = () => {
-
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
   const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
   const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
-  const { data: quickMenu } = useQuickMenuUserQuery();
-  const {data: allConfig} = useAllConfigQuery();
 
-  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
+  const { data: quickMenu } = useQuickMenuUserQuery();
+  const { data: allConfig } = useAllConfigQuery();
+
+  const getSiteName = allConfig?.data?.find(
+    (config) => config.name === "site_name"
+  );
   const siteName = getSiteName ? getSiteName.value : null;
 
   const totalTvShow = tvShowList?.data?.total;
@@ -34,6 +35,8 @@ const Home = () => {
 
   const location = useLocation();
   const currentRoute = location.pathname;
+
+
 
   useEffect(() => {
     if (currentRoute === "/") {
@@ -45,7 +48,7 @@ const Home = () => {
   }, [currentRoute]);
 
   return (
-    <section className="min-h-screen flex flex-col justify-center items-center">
+    <section className="bg-[#27272A] lg:bg-[#18181a] min-h-screen flex flex-col justify-center items-center">
       <Helmet>
         <title>{siteName}</title>
       </Helmet>
@@ -63,10 +66,15 @@ const Home = () => {
       <SiteNews allConfig={allConfig} />
 
       {/* ================>> Featured Movies <<================*/}
-        <>
-          <HomePageSeeAllBtn>Featured Movies</HomePageSeeAllBtn>
-          <div className="my-[18px]"> <FeaturedMovies /></div>
-        </>
+      <>
+        <HomePageSeeAllBtn>Featured Movies</HomePageSeeAllBtn>
+        <div className="my-[18px]">
+          <FeaturedMovies
+            featuredPosts={featuredPosts}
+            featureLoading={featureLoading}
+          />
+        </div>
+      </>
 
       {/* ====================>> Movies <<====================*/}
       <HomePageSeeAllBtn total={totalMovies} redirect={"/movies"}>
@@ -77,7 +85,7 @@ const Home = () => {
         {movieLoading ? (
           <LazyLoading />
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
             {movieList?.data?.data?.slice(0, 10)?.map((item) => (
               <MovieCard
                 key={item?.id}
@@ -98,7 +106,7 @@ const Home = () => {
         {tvShowLoading ? (
           <LazyLoading />
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
+          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
             {tvShowList?.data?.data?.slice(0, 10)?.map((item) => (
               <MovieCard
                 key={item?.id}

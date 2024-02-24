@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import FeatureSticker from "../../utils/feature-sticker/FeatureSticker";
 import { Link } from "react-router-dom";
+import { RedirectAdPage } from "../../utils/RedirectAdPage";
 
 const CardRelatedPost = ({ item }) => {
   const [url, setUrl] = useState();
@@ -13,7 +14,7 @@ const CardRelatedPost = ({ item }) => {
   }, [item]);
 
   return (
-    <Link to={url} key={item?.id}>
+    <Link to={url} key={item?.id} onClick={()=> RedirectAdPage()}>
       <div className=" w-[401px] lg:w-full min-h-[635px] h-full lg:min-h-[460px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] lg:bg-none  flex flex-col items-center  text-center rounded-[10px] p-[1.5px] relative">
 
         <img src={item?.poster_image_url} alt="" className="w-full h-full rounded-tl-[10px] rounded-tr-[10px] bg-[#27272A]"/>

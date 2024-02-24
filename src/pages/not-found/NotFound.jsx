@@ -35,7 +35,7 @@ const NotFound = () => {
 
       <section className=" p-[32px] flex justify-center items-center h-screen">
 
-        <div className="font-inter">
+        <div className="font-inter text-center">
           <h3 className="text-[32px] font-[700]  text-[#727171]">
             Error 404 Not Found
           </h3>

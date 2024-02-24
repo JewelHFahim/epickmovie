@@ -4,6 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { Link } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
 import "./MainSliderSlick.css";
+import { RedirectAdPage } from "../../../utils/RedirectAdPage";
 
 function MainSliderSlick({ featuredPosts }) {
 
@@ -47,22 +48,29 @@ function MainSliderSlick({ featuredPosts }) {
           slidesToScroll: 1,
         },
       },
-
-
     ],
   };
+
   return (
     <div className="slider-container w-[1170px] ml-4">
       <Slider {...settings}>
         {featuredPosts?.data?.map((item, i) => (
-          <div key={i} className="mainSlider lg:bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[1.5px] h-[460px] rounded-[10px] relative playBtnCont"
+          <div
+            key={i}
+            className="mainSlider bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[1.5px] h-[460px] rounded-[10px] relative playBtnCont"
           >
             <Link
-              to={item?.post_type === "movies" ? `/movie/${item?.id}/${item?.post_title}` : `/series/${item?.id}/${item?.post_title}`}
+              to={
+                item?.post_type === "movies"
+                  ? `/movie/${item?.id}/${item?.post_title}`
+                  : `/series/${item?.id}/${item?.post_title}`
+              }
+              onClick={() => RedirectAdPage()}
               className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative`}
             >
-              <img src={item?.poster_image_url}
-                className="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg"
+              <img
+                src={item?.poster_image_url}
+                className="w-full  rounded-tr-[10px] rounded-tl-[10px] posterImg"
               />
 
               <p className="hidden lg:block text-center  text-white font-[700] text-[33px] lg:text-[16px] p-4 lg:p-2 font-alef">
@@ -80,8 +88,6 @@ function MainSliderSlick({ featuredPosts }) {
               <div className="playBtn">
                 <FaPlay className="text-[50px] text-white" />
               </div>
-
-              
             </Link>
           </div>
         ))}

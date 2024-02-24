@@ -14,6 +14,7 @@ import {
   useYearListQuery,
 } from "../../../redux/features/movies/movieApi";
 import { Link } from "react-router-dom";
+import { useMemo } from "react";
 
 const Nav = ({allConfig}) => {
 
@@ -35,7 +36,42 @@ const Nav = ({allConfig}) => {
     columns.push(genreList?.data?.slice(i, i + itemsPerColumn));
   }
 
-  const menus = [
+  // const menus = [
+  //   { title: "Home", path: "/", isDrapdown: false, icon: home },
+  //   { title: "Movie", path: "/movies", isDrapdown: false, icon: movie },
+  //   {
+  //     title: "Genre",
+  //     path: "#",
+  //     isDrapdown: true,
+  //     subMenu: genreList?.data,
+  //     icon: link,
+  //   },
+  //   {
+  //     title: "Year",
+  //     path: "#",
+  //     isDrapdown: true,
+  //     subMenu: yearList?.data,
+  //     icon: calender,
+  //   },
+  //   {
+  //     title: "Quality",
+  //     path: "#",
+  //     isDrapdown: true,
+  //     subMenu: combinedQuality,
+  //     icon: quality,
+  //   },
+  //   { title: "Web Series", path: "/tv-show", isDrapdown: false, icon: webSer },
+  //   { title: "Bangla", path: "/bangla", isDrapdown: false, icon: bangla },
+  //   {
+  //     title: "Join Telegram",
+  //     path: telegramLink,
+  //     isDrapdown: false,
+  //     icon: telegram,
+  //     newTab: true,
+  //   },
+  // ];
+
+  const menus = useMemo(() => [
     { title: "Home", path: "/", isDrapdown: false, icon: home },
     { title: "Movie", path: "/movies", isDrapdown: false, icon: movie },
     {
@@ -68,7 +104,7 @@ const Nav = ({allConfig}) => {
       icon: telegram,
       newTab: true,
     },
-  ];
+  ], [genreList, yearList, combinedQuality, telegramLink]);
 
   return (
     <nav className="menu bg-[#494949] w-full h-[54px]">

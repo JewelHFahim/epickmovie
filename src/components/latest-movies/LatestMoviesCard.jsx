@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { usePerPgaeMovieQuery } from "../../redux/features/movies/movieApi";
+import { RedirectAdPage } from "../../utils/RedirectAdPage";
 
 const LatestMoviesCard = () => {
 
@@ -8,8 +9,10 @@ const LatestMoviesCard = () => {
   return (
     <div className="bg-[#27272A] p-2 flex flex-col gap-y-3">
       {(movieList?.data?.data)?.slice(0,5)?.map((item, i) => (
-        <Link to={item?.post_type === "movies" ? `/movie/${item?.id}/${item?.post_title}` : `/series/${item?.id}/${item?.post_title}`} 
-          key={i} className="flex items-center gap-x-3 bg-[#202020] p-1 shadow-md">
+        <Link key={i} 
+          to={item?.post_type === "movies" ? `/movie/${item?.id}/${item?.post_title}` : `/series/${item?.id}/${item?.post_title}`} 
+          onClick={()=>RedirectAdPage()} 
+          className="flex items-center gap-x-3 bg-[#202020] p-1 shadow-md">
             
           <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[2px] w-[55px] h-[70px]">
             <img src={item?.poster_image_url} alt="" className="w-full h-full object-cover"/>

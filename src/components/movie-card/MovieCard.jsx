@@ -5,6 +5,7 @@ import "./MovieCard.css";
 import { FaPlay } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import CachedImage from "../../utils/cache-img/CachedImage";
+import { RedirectAdPage } from "../../utils/RedirectAdPage";
 
 const MovieCard = ({ item, redirect }) => {
   const [url, setUrl] = useState();
@@ -31,7 +32,11 @@ const MovieCard = ({ item, redirect }) => {
 
   return (
     <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] w-[401px] lg:w-full min-h-[635px] h-full lg:min-h-[460px] p-[4px] lg:p-[2px] rounded-[10px] relative playBtnCont">
-      <Link to={url} className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative`}>
+
+      <Link 
+      to={url} 
+      onClick={() => RedirectAdPage()}
+      className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative`}>
 
         <CachedImage src={item?.poster_image_url} imgStyle="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg" />
 
@@ -48,6 +53,7 @@ const MovieCard = ({ item, redirect }) => {
           <FeatureSticker item={item} />
         </div>
       )}
+
     </div>
   );
 };

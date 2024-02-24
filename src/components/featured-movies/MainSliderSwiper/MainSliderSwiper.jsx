@@ -89,6 +89,7 @@ import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";
+import "./MainSliderSwiper.css"
 
 const MainSliderSwiper = ({ featuredPosts }) => {
   return (
