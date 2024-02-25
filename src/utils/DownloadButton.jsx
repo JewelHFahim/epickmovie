@@ -1,13 +1,23 @@
+import { useState } from "react";
 import { ad_url } from "../config/config";
 
 const DownloadButton = ({ children, url }) => {
+  const [initialVisite, setInitialVisite] = useState(1);
+
   const handleRedirect = () => {
-    const newTab = window.open(ad_url, "_blank");
-    if (newTab) {
-      newTab.focus();
+
+    if (initialVisite > 1) {
+      window.open(url, "_blank");
+    } else {
+      window.open(ad_url, "_blank")
     }
-    window.location.href = url;
+    setTimeout(() => {
+      setInitialVisite(1);
+    }, 50000);
+    
+    setInitialVisite(initialVisite + 1);
   };
+
 
   return (
     <div>

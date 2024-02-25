@@ -2,6 +2,7 @@ import apiSlice from "../api/apiSlice";
 
 const movieApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+
     // ========================>> ALL MOVIES <<===========================
     movieList: builder.query({
       query: () => "/movie-posts",
@@ -14,19 +15,19 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-    // =================>>PER PAGE BENGALI MOVIE<<========================
+    // =================>>PER PAGE BENGALI MOVIE <<========================
     perPageBengaliMovieList: builder.query({
       query: (page) => `/get-bengali-post?page=${page}`,
       providesTags: ["EpicMovies"],
     }),
 
-    // ======================>>  SINGLE/MOVIE DETAILS <<==================
+    // ======================>> SINGLE MOVIE DETAILS <<===================
     movieDetails: builder.query({
       query: (movieId) => `/movie-post/${movieId}`,
       providesTags: ["EpicMovies"],
     }),
 
-    // ===================>>  PAGINATION WISE MOVIE <<====================
+    // ===================>> PAGINATION WISE MOVIE <<=====================
     perPgaeMovie: builder.query({
       query: (pageNo) => `/movie-posts?page=${pageNo}`,
       providesTags: ["EpicMovies"],
@@ -74,7 +75,6 @@ const movieApi = apiSlice.injectEndpoints({
       query: () => "/get-feathers-posts",
       providesTags: ["EpicMovies"],
     }),
-
 
   }),
 });

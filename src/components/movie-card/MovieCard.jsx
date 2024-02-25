@@ -5,7 +5,7 @@ import "./MovieCard.css";
 import { FaPlay } from "react-icons/fa";
 import { useEffect, useState } from "react";
 import CachedImage from "../../utils/cache-img/CachedImage";
-import { RedirectAdPage } from "../../utils/RedirectAdPage";
+import { ad_url } from "../../config/config";
 
 const MovieCard = ({ item, redirect }) => {
   const [url, setUrl] = useState();
@@ -30,13 +30,30 @@ const MovieCard = ({ item, redirect }) => {
   }, [redirect, item?.post_title]);
 
 
+  // Redirect Add Page
+  const [initialVisite, setInitialVisite] = useState(1);
+  const handleRedirect = () => {
+
+    if (initialVisite > 1) {
+      window.open(url, "_blank");
+    } else {
+      window.open(ad_url, "_blank")
+    }
+
+    setTimeout(() => {
+      setInitialVisite(1);
+    }, 50000);
+    
+    setInitialVisite(initialVisite + 1);
+  };
+
   return (
     <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] w-[401px] lg:w-full min-h-[635px] h-full lg:min-h-[460px] p-[4px] lg:p-[2px] rounded-[10px] relative playBtnCont">
 
-      <Link 
-      to={url} 
-      onClick={() => RedirectAdPage()}
-      className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative`}>
+      <button 
+      // to={url} 
+      onClick={() => handleRedirect()}
+      className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative cursor-pointer`}>
 
         <CachedImage src={item?.poster_image_url} imgStyle="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg" />
 
@@ -46,7 +63,7 @@ const MovieCard = ({ item, redirect }) => {
         <div className="playBtn">
           <FaPlay className="text-[50px] text-white" />
         </div>
-      </Link>
+      </button>
 
       {item?.stickerLabel?.length > 0 && (
         <div className="absolute left-2 top-4">

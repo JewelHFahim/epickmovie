@@ -38,7 +38,7 @@ const MovieDetails = () => {
   return (
     <div className="bg-[#27272A]">
       <Helmet>
-        <title> {`${siteName} || ${details?.post_title} `}</title>
+        <title> {`${siteName} || ${ details?.post_title ? details?.post_title : "" } `}</title>
         <meta name="description" content={details?.post_content} />
         <meta name="keywords" content="movies" />
       </Helmet>

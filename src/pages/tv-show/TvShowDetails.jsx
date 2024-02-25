@@ -17,32 +17,33 @@ import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
 const TvShowDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const {data: allConfig} = useAllConfigQuery();
+  const { data: allConfig } = useAllConfigQuery();
 
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
 
-  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
+  const getSiteName = allConfig?.data?.find(
+    (config) => config.name === "site_name"
+  );
   const siteName = getSiteName ? getSiteName.value : null;
 
   useEffect(() => {
     if (seriesDetails?.status === false) {
-      navigate('/404');
+      navigate("/404");
     }
   }, [seriesDetails, navigate]);
 
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-
+  window.scrollTo({ top: 0, behavior: "smooth" });
 
   return (
     <div className="bg-[#27272A]">
-      
-        <Helmet>
-          <title> {`${siteName} || ${details?.post_title} `}</title>
-          <meta name="description" content={details?.post_content} />
-          <meta name="keywords" content="tvshows" />
-        </Helmet>
-
+      <Helmet>
+        <title>
+          {`${siteName} || ${details?.post_title ? details?.post_title : ""} `}
+        </title>
+        <meta name="description" content={details?.post_content} />
+        <meta name="keywords" content="tvshows" />
+      </Helmet>
 
       <Breadcum
         children1="TV Show"
@@ -51,7 +52,7 @@ const TvShowDetails = () => {
       />
 
       <section className=" py-4 px-10 lg:py-2 lg:px-5 flex justify-between">
-        {/* >>>>>>> Column One <<<<<<< */}
+        {/* >>>>>>> COLUMN ONE <<<<<<< */}
         <div className="w-full  lg:w-[70%]">
           <div>
             <h4 className="text-[50px] lg:text-[24px] text-white font-aclonica lg:max-w-[748px]">
@@ -59,7 +60,11 @@ const TvShowDetails = () => {
             </h4>
 
             <div className=" flex items-center gap-2 mt-2">
-              <img src={calender} alt="" className="w-[20px] h-[20px] lg:w-[12px] lg:h-[12px]" />
+              <img
+                src={calender}
+                alt=""
+                className="w-[20px] h-[20px] lg:w-[12px] lg:h-[12px]"
+              />
               <UploadedDate details={details} />
             </div>
 
@@ -85,7 +90,10 @@ const TvShowDetails = () => {
 
             <div className="lg:max-w-[715px] mt-[13px]">
               <h3 className="text-[50px] leading-none lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center">
-                <Link to={details?.guid}> {details?.post_title} ~ EpicSeries </Link>
+                <Link to={details?.guid}>
+                  {" "}
+                  {details?.post_title} ~ EpicSeries{" "}
+                </Link>
               </h3>
             </div>
 
@@ -109,7 +117,11 @@ const TvShowDetails = () => {
           {/* ==========>> SCREEN SHOTS <<=============*/}
           <div className="flex flex-col gap-4 mt-3">
             {details?.screenshots?.slice(0, 3)?.map((item, i) => (
-              <CachedImage key={i} src={item} imgStyle="w-full h-[400px] object-cover"/>
+              <CachedImage
+                key={i}
+                src={item}
+                imgStyle="w-full h-[400px] object-cover"
+              />
             ))}
           </div>
 
@@ -130,14 +142,16 @@ const TvShowDetails = () => {
           {/* =============>> COUNTRY LIST <<===============*/}
 
           <div className="mt-16 lg:hidden ">
-            <h2 className="text-white text-[40px] font-medium px-4">Browse By Country:</h2>
-          <div className="bg-[#1b1b1e] p-4  h-[300px] overflow-y-auto  grid grid-cols-3 gap-4">
-            <CountryList />
-          </div>
+            <h2 className="text-white text-[40px] font-medium px-4">
+              Browse By Country:
+            </h2>
+            <div className="bg-[#1b1b1e] p-4  h-[300px] overflow-y-auto  grid grid-cols-3 gap-4">
+              <CountryList />
+            </div>
           </div>
         </div>
 
-        {/* >>>>>>> Column Two <<<<<<<<*/}
+        {/* >>>>>>> COLUMN TWO <<<<<<<<*/}
         <AdvertisementSection />
       </section>
 

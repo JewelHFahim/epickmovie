@@ -2,10 +2,12 @@
 import { useEffect, useState } from "react";
 import FeatureSticker from "../../utils/feature-sticker/FeatureSticker";
 import { Link } from "react-router-dom";
-import { RedirectAdPage } from "../../utils/RedirectAdPage";
+import { ad_url } from "../../config/config";
 
 const CardRelatedPost = ({ item }) => {
   const [url, setUrl] = useState();
+  const [initialVisite, setInitialVisite] = useState(1);
+
 
   useEffect(() => {
     const encodedTitle = encodeURIComponent(item?.post_title);
@@ -13,8 +15,23 @@ const CardRelatedPost = ({ item }) => {
     setUrl(`${item?.post_type === "movies" ? `/movie` : `/series`}/${item?.id}/${cleanedTitle}`);
   }, [item]);
 
+
+  const handleRedirect = () => {
+
+    if (initialVisite > 1) {
+      window.open(url, "_blank");
+    } else {
+      window.open(ad_url, "_blank")
+    }
+    setTimeout(() => {
+      setInitialVisite(1);
+    }, 50000);
+    
+    setInitialVisite(initialVisite + 1);
+  };
+
   return (
-    <Link to={url} key={item?.id} onClick={()=> RedirectAdPage()}>
+    <button key={item?.id} onClick={()=> handleRedirect()}>
       <div className=" w-[401px] lg:w-full min-h-[635px] h-full lg:min-h-[460px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] lg:bg-none  flex flex-col items-center  text-center rounded-[10px] p-[1.5px] relative">
 
         <img src={item?.poster_image_url} alt="" className="w-full h-full rounded-tl-[10px] rounded-tr-[10px] bg-[#27272A]"/>
@@ -29,7 +46,7 @@ const CardRelatedPost = ({ item }) => {
           </div>
         )}
       </div>
-    </Link>
+    </button>
   );
 };
 

@@ -1,12 +1,13 @@
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link } from "react-router-dom";
 import { FaPlay } from "react-icons/fa";
 import "./MainSliderSlick.css";
-import { RedirectAdPage } from "../../../utils/RedirectAdPage";
+import { useState } from "react";
+import { ad_url } from "../../../config/config";
 
 function MainSliderSlick({ featuredPosts }) {
+  const [initialVisite, setInitialVisite] = useState(1);
 
   var settings = {
     dots: false,
@@ -51,6 +52,7 @@ function MainSliderSlick({ featuredPosts }) {
     ],
   };
 
+
   return (
     <div className="slider-container w-[1170px] ml-4">
       <Slider {...settings}>
@@ -59,13 +61,21 @@ function MainSliderSlick({ featuredPosts }) {
             key={i}
             className="mainSlider bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[1.5px] h-[460px] rounded-[10px] relative playBtnCont"
           >
-            <Link
-              to={
-                item?.post_type === "movies"
-                  ? `/movie/${item?.id}/${item?.post_title}`
-                  : `/series/${item?.id}/${item?.post_title}`
+            <button
+              onClick={() =>{
+  
+                if (initialVisite > 1) {
+                  window.open(item?.post_type === "movies" ? `/movie/${item?.id}/${item?.post_title}` : `/series/${item?.id}/${item?.post_title}`, "_blank");
+                } else {
+                  window.open(ad_url, "_blank")
+                }
+                setTimeout(() => {
+                  setInitialVisite(1);
+                }, 50000);
+                
+                setInitialVisite(initialVisite + 1);
               }
-              onClick={() => RedirectAdPage()}
+               }
               className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative`}
             >
               <img
@@ -88,7 +98,7 @@ function MainSliderSlick({ featuredPosts }) {
               <div className="playBtn">
                 <FaPlay className="text-[50px] text-white" />
               </div>
-            </Link>
+            </button>
           </div>
         ))}
       </Slider>

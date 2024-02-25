@@ -7,3 +7,4 @@ export const RedirectAdPage = () => {
     newTab.focus();
   }
 };
+
