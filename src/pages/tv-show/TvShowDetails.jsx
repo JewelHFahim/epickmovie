@@ -12,20 +12,16 @@ import { Helmet } from "react-helmet";
 import CountryList from "../../components/advertisement/CountryList";
 import { useEffect } from "react";
 import CachedImage from "../../utils/cache-img/CachedImage";
-import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
+import { useSiteName } from "../../utils/configHooks/ConfigHooks";
 
 const TvShowDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: allConfig } = useAllConfigQuery();
 
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
 
-  const getSiteName = allConfig?.data?.find(
-    (config) => config.name === "site_name"
-  );
-  const siteName = getSiteName ? getSiteName.value : null;
+  const siteName = useSiteName();
 
   useEffect(() => {
     if (seriesDetails?.status === false) {

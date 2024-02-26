@@ -1,22 +1,8 @@
-import { useState } from "react";
-import { ad_url } from "../config/config";
+import { useMaskLink, useRedirect } from "./configHooks/ConfigHooks";
 
 const DownloadButton = ({ children, url }) => {
-  const [initialVisite, setInitialVisite] = useState(1);
-
-  const handleRedirect = () => {
-
-    if (initialVisite > 1) {
-      window.open(url, "_blank");
-    } else {
-      window.open(ad_url, "_blank")
-    }
-    setTimeout(() => {
-      setInitialVisite(1);
-    }, 50000);
-    
-    setInitialVisite(initialVisite + 1);
-  };
+  const maskLink = useMaskLink()
+  const handleRedirect = useRedirect(url, maskLink);
 
 
   return (

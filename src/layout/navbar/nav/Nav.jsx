@@ -15,11 +15,12 @@ import {
 } from "../../../redux/features/movies/movieApi";
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
+import { useTelegramLink } from "../../../utils/configHooks/ConfigHooks";
 
-const Nav = ({allConfig}) => {
+const Nav = () => {
 
-  const { data: genreList } = useGenreListQuery();
   const { data: yearList } = useYearListQuery();
+  const { data: genreList } = useGenreListQuery();
   const { data: pixelQualityList } = usePixelQualityClientQuery();
   const { data: printQualityList } = usePrintQualityClientQuery();
   
@@ -27,49 +28,13 @@ const Nav = ({allConfig}) => {
   const print = printQualityList?.data;
   const combinedQuality = pixel?.concat(print);
 
-  const getTelegramLink = allConfig?.data?.find( (config) => config.name === "telegram_link");
-  const telegramLink = getTelegramLink ? getTelegramLink.value : null;
+  const telegramLink = useTelegramLink();
 
   const itemsPerColumn = 20;
   const columns = [];
   for (let i = 0; i < genreList?.data?.length; i += itemsPerColumn) {
     columns.push(genreList?.data?.slice(i, i + itemsPerColumn));
   }
-
-  // const menus = [
-  //   { title: "Home", path: "/", isDrapdown: false, icon: home },
-  //   { title: "Movie", path: "/movies", isDrapdown: false, icon: movie },
-  //   {
-  //     title: "Genre",
-  //     path: "#",
-  //     isDrapdown: true,
-  //     subMenu: genreList?.data,
-  //     icon: link,
-  //   },
-  //   {
-  //     title: "Year",
-  //     path: "#",
-  //     isDrapdown: true,
-  //     subMenu: yearList?.data,
-  //     icon: calender,
-  //   },
-  //   {
-  //     title: "Quality",
-  //     path: "#",
-  //     isDrapdown: true,
-  //     subMenu: combinedQuality,
-  //     icon: quality,
-  //   },
-  //   { title: "Web Series", path: "/tv-show", isDrapdown: false, icon: webSer },
-  //   { title: "Bangla", path: "/bangla", isDrapdown: false, icon: bangla },
-  //   {
-  //     title: "Join Telegram",
-  //     path: telegramLink,
-  //     isDrapdown: false,
-  //     icon: telegram,
-  //     newTab: true,
-  //   },
-  // ];
 
   const menus = useMemo(() => [
     { title: "Home", path: "/", isDrapdown: false, icon: home },

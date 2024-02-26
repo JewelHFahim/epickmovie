@@ -1,12 +1,10 @@
 import { Link } from "react-router-dom";
 import telegraqm from "../assets/telegram.svg";
-import { useAllConfigQuery } from "../redux/features/settings/settingApi";
+import { useTelegramLink } from "../utils/configHooks/ConfigHooks";
 
 const JoinTelegramBtn = () => {
-  const {data: allConfig} = useAllConfigQuery();
-  const telegramLink = allConfig?.data[1]?.value;
 
-
+  const telegramLink = useTelegramLink();
 
   return (
     <div className="flex justify-center mt-[50px] lg:mt-[36px]">

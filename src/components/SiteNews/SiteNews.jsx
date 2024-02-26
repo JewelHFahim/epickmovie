@@ -1,10 +1,8 @@
 import Marquee from "react-fast-marquee";
+import { useSiteNews } from "../../utils/configHooks/ConfigHooks";
 
-const SiteNews = ({allConfig}) => {
-
-const getSiteNews = allConfig?.data?.find( (config) => config.name === "site_news");
-const siteNews = getSiteNews ? getSiteNews.value : null;
-
+const SiteNews = () => {
+const siteNews = useSiteNews();
 
   return (
     <div className="w-[90%] h-[28px] hidden lg:flex justify-center items-center bg-[#5C1EC2] mt-[8px]">

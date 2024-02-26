@@ -1,21 +1,16 @@
-import {
-  useAllConfigQuery,
-  useQuickMenuUserQuery,
-} from "../../redux/features/settings/settingApi";
+import { useFeaturedPostsQuery, usePerPgaeMovieQuery } from "../../redux/features/movies/movieApi";
+import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
-import {
-  useFeaturedPostsQuery,
-  usePerPgaeMovieQuery,
-} from "../../redux/features/movies/movieApi";
+import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
+import { useSiteName } from "../../utils/configHooks/ConfigHooks";
 import MovieCard from "../../components/movie-card/MovieCard";
 import HomePageSeeAllBtn from "../../utils/HomePageSeeAllBtn";
+import SiteNews from "../../components/SiteNews/SiteNews";
 import SubMenuButton from "../../utils/SubMenuButton";
 import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
-import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
-import SiteNews from "../../components/SiteNews/SiteNews";
 
 const Home = () => {
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
@@ -23,20 +18,13 @@ const Home = () => {
   const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
 
   const { data: quickMenu } = useQuickMenuUserQuery();
-  const { data: allConfig } = useAllConfigQuery();
-
-  const getSiteName = allConfig?.data?.find(
-    (config) => config.name === "site_name"
-  );
-  const siteName = getSiteName ? getSiteName.value : null;
+  const siteName = useSiteName();
 
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
 
   const location = useLocation();
   const currentRoute = location.pathname;
-
-
 
   useEffect(() => {
     if (currentRoute === "/") {
@@ -53,7 +41,7 @@ const Home = () => {
         <title>{siteName}</title>
       </Helmet>
 
-      {/* ==================>> Quick Menus <<================*/}
+      {/* ===================>> Quick Menus <<=================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {quickMenu?.data?.map((menu, i) => (
           <Link key={i} to={`/terms/${menu?.slug}`}>
@@ -62,8 +50,8 @@ const Home = () => {
         ))}
       </div>
 
-      {/* ====================>> Domains <<===================*/}
-      <SiteNews allConfig={allConfig} />
+      {/* =====================>> Domains <<===================*/}
+      <SiteNews/>
 
       {/* ================>> Featured Movies <<================*/}
       <>
@@ -117,6 +105,7 @@ const Home = () => {
           </div>
         )}
       </div>
+
     </section>
   );
 };

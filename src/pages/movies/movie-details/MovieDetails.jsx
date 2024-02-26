@@ -7,19 +7,18 @@ import DetailsPosterCard from "../../../components/details-poster-card/DetailsPo
 import RelatedPost from "../../../components/related-post/RelatedPost";
 import AdvertisementSection from "../../../components/advertisement/AdvertisementSection";
 import Breadcum from "../../../utils/breadcum/Breadcum";
-import { useAllConfigQuery } from "../../../redux/features/settings/settingApi";
 import UploadedDate from "../../../utils/uploaded-date/UploadedDate";
 import { Helmet } from "react-helmet";
 import CountryList from "../../../components/advertisement/CountryList";
 import { useEffect } from "react";
 import CachedImage from "../../../utils/cache-img/CachedImage";
+import { useSiteName } from "../../../utils/configHooks/ConfigHooks";
 
 const MovieDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const { data: movieDetails } = useMovieDetailsQuery(id);
-  const {data: allConfig} = useAllConfigQuery();
 
 
   useEffect(() => {
@@ -28,9 +27,7 @@ const MovieDetails = () => {
     }
   }, [movieDetails, navigate]);
 
-
-  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
-  const siteName = getSiteName ? getSiteName.value : null;
+  const siteName = useSiteName();
 
   const details = movieDetails?.data;
   window.scrollTo({ top: 0, behavior: "smooth" });

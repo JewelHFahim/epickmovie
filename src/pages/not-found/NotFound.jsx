@@ -1,19 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
 import { IoSearch } from "react-icons/io5";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
+import { useSiteName } from "../../utils/configHooks/ConfigHooks";
 
 const NotFound = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const {data: allConfig} = useAllConfigQuery();
   const [searchTermState, setSearchTerm] = useState("");
 
-  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
-  const siteName = getSiteName ? getSiteName.value : null;
+  const siteName = useSiteName();
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);

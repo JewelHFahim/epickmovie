@@ -1,34 +1,11 @@
 /* eslint-disable react/prop-types */
-import { useEffect, useState } from "react";
 import FeatureSticker from "../../utils/feature-sticker/FeatureSticker";
-import { Link } from "react-router-dom";
-import { ad_url } from "../../config/config";
+import { useCleanedTitle, useMaskLink, useRedirect } from "../../utils/configHooks/ConfigHooks";
 
 const CardRelatedPost = ({ item }) => {
-  const [url, setUrl] = useState();
-  const [initialVisite, setInitialVisite] = useState(1);
-
-
-  useEffect(() => {
-    const encodedTitle = encodeURIComponent(item?.post_title);
-    const cleanedTitle = encodedTitle.replace(/%20/g, "-").toLowerCase();
-    setUrl(`${item?.post_type === "movies" ? `/movie` : `/series`}/${item?.id}/${cleanedTitle}`);
-  }, [item]);
-
-
-  const handleRedirect = () => {
-
-    if (initialVisite > 1) {
-      window.open(url, "_blank");
-    } else {
-      window.open(ad_url, "_blank")
-    }
-    setTimeout(() => {
-      setInitialVisite(1);
-    }, 50000);
-    
-    setInitialVisite(initialVisite + 1);
-  };
+  const { url } = useCleanedTitle(item);
+  const maskLink = useMaskLink();
+  const handleRedirect = useRedirect(url, maskLink);
 
   return (
     <button key={item?.id} onClick={()=> handleRedirect()}>

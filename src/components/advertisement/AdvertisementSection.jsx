@@ -1,14 +1,12 @@
 import joinTelegran from "../../assets/join telegram.png";
 import ads from "../../assets/ads.png";
-import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
 import CountryList from "./CountryList";
 import { Link } from "react-router-dom";
 import LatestMoviesCard from "../latest-movies/LatestMoviesCard";
+import { useTelegramLink } from "../../utils/configHooks/ConfigHooks";
 
 const AdvertisementSection = () => {
-  const {data: allConfig} = useAllConfigQuery();
-  const getTelegramLink = allConfig?.data?.find( (config) => config.name === "telegram_link");
-  const telegramLink = getTelegramLink ? getTelegramLink.value : null;
+  const telegramLink = useTelegramLink();
 
   return (
     <div className="hidden lg:block  w-[30%] bg-[#1F1F22] p-4">

@@ -6,19 +6,17 @@ import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
 import TvPagination from "./TvPagination";
 import { useLocation } from "react-router-dom";
-import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
 import SiteNews from "../../components/SiteNews/SiteNews";
+import { useSiteName } from "../../utils/configHooks/ConfigHooks";
 
 
 const TvShow = () => {
-  const {data: allConfig} = useAllConfigQuery();
   const storedPage = JSON.parse(localStorage.getItem("tvCurrentPage")) || 1;
 
   const [currentPage, setCurrentPage] = useState(storedPage);
   const { data: perPgaeMovie, isLoading } = usePerPgaeTvShowQuery(currentPage);
 
-  const getSiteName = allConfig?.data?.find( (config) => config.name === "site_name");
-  const siteName = getSiteName ? getSiteName.value : null;
+  const siteName = useSiteName();
 
   const location = useLocation();
   const currentRoute = location.pathname;
@@ -45,7 +43,7 @@ const TvShow = () => {
       </Helmet>
 
       {/* ==================>> Domains <<=================*/}
-      <SiteNews allConfig={allConfig} />
+      <SiteNews/>
 
       <div className="w-full flex justify-start mt-[22px] ml-20 lg:ml-0">
         <Title>TV Series</Title>

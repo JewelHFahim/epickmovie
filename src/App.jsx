@@ -1,23 +1,14 @@
 import { useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
-import { Toaster } from "react-hot-toast";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import router from "./routes/router";
-import { useAllConfigQuery } from "./redux/features/settings/settingApi";
+import { useFavIcon, useSiteName } from "./utils/configHooks/ConfigHooks";
 
 
 const App = () => {
-  const { data: allConfig } = useAllConfigQuery();
-  const getSiteName = allConfig?.data?.find(
-    (config) => config.name === "site_name"
-  );
-  const siteName = getSiteName ? getSiteName.value : null;
-
-  const getSiteFav = allConfig?.data?.find(
-    (config) => config.name === "fav_icon"
-  );
-  const favIcon = getSiteFav ? getSiteFav.value : null;
-
+  const siteName = useSiteName();
+  const favIcon = useFavIcon();
+  
   // Dynamic Favicon Icon Set
   useEffect(() => {
     const fetchFavicon = () => {
@@ -32,7 +23,6 @@ const App = () => {
     fetchFavicon();
   }, [favIcon]);
 
-
   return (
     <HelmetProvider>
       <div className=" bg-[#27272A] lg:bg-[#18181a]">
@@ -42,7 +32,6 @@ const App = () => {
         </Helmet>
         
         <RouterProvider router={router} />
-        <Toaster />
       </div>
     </HelmetProvider>
   );
