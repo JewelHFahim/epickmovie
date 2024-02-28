@@ -2,11 +2,6 @@ import apiSlice from "../api/apiSlice";
 
 const tvShowApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-    // ==========================>> CLIENT ALL TV Shows <<========================
-    tvShowList: builder.query({
-      query: () => "/tv-posts",
-      providesTags: ["EpicMovies"],
-    }),
 
     // ========================>> CLIENT TV SHOW DETAILS <<=======================
     seriesDetails: builder.query({
@@ -23,7 +18,6 @@ const tvShowApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useTvShowListQuery,
   useSeriesDetailsQuery,
   usePerPgaeTvShowQuery,
 } = tvShowApi;

@@ -3,18 +3,6 @@ import apiSlice from "../api/apiSlice";
 const movieApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
 
-    // ========================>> ALL MOVIES <<===========================
-    movieList: builder.query({
-      query: () => "/movie-posts",
-      providesTags: ["EpicMovies"],
-    }),
-
-    // =====================>> BENGALI MOVIES <<==========================
-    bengaliMovieList: builder.query({
-      query: () => "/get-bengali-post",
-      providesTags: ["EpicMovies"],
-    }),
-
     // =================>>PER PAGE BENGALI MOVIE <<========================
     perPageBengaliMovieList: builder.query({
       query: (page) => `/get-bengali-post?page=${page}`,
@@ -36,12 +24,6 @@ const movieApi = apiSlice.injectEndpoints({
     // ===========================>> GENRE <<=============================
     genreList: builder.query({
       query: () => "/terms/genres-list",
-      providesTags: ["EpicMovies"],
-    }),
-
-    // ===========================>> AUDIO <<=============================
-    audListClient: builder.query({
-      query: () => "/terms/audio-list",
       providesTags: ["EpicMovies"],
     }),
 
@@ -80,17 +62,14 @@ const movieApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useMovieListQuery,
+  useYearListQuery,
+  useGenreListQuery,
   useMovieDetailsQuery,
   usePerPgaeMovieQuery,
-  useGenreListQuery,
-  useYearListQuery,
-  useBengaliMovieListQuery,
-  usePerPageBengaliMovieListQuery,
-  usePixelQualityClientQuery,
-  usePrintQualityClientQuery,
-  useAudListClientQuery,
+  useFeaturedPostsQuery,
   useCountryListClientQuery,
-  useFeaturedPostsQuery
+  usePrintQualityClientQuery,
+  usePixelQualityClientQuery,
+  usePerPageBengaliMovieListQuery,
 } = movieApi;
 export default movieApi;

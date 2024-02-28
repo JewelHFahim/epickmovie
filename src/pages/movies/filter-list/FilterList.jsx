@@ -4,9 +4,12 @@ import { useEffect, useState } from "react";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import FilterPagination from "./FilterPagination";
 import { useLocation } from "react-router-dom";
+import { Helmet } from "react-helmet";
+import { useSiteName } from "../../../utils/configHooks/ConfigHooks";
 
 const FilterList = () => {
   const location = useLocation();
+  const siteName = useSiteName();
   const currentRoute = location.pathname;
   const storedPage = JSON.parse(localStorage.getItem("filterPagination")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
@@ -29,6 +32,14 @@ const FilterList = () => {
 
   return (
     <section className="min-h-screen">
+      <Helmet>
+        <title>{siteName} || {filteredTerm}</title>
+        <meta
+          name="description"
+          content="Unlimited Bangla Movies and Latest Collections"
+        />
+      </Helmet>
+
       <div className=" ml-10 lg:ml-0 my-5">
         <h1 className="text-[28px] lg:text-[32px] font-[700] font-roboto text-white">
           Filter By: {filteredTerm}

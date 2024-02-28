@@ -1,6 +1,5 @@
-import { useFeaturedPostsQuery, usePerPgaeMovieQuery } from "../../redux/features/movies/movieApi";
+import { useFeaturedPostsQuery } from "../../redux/features/movies/movieApi";
 import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
-import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import { useSiteName } from "../../utils/configHooks/ConfigHooks";
@@ -11,10 +10,11 @@ import SubMenuButton from "../../utils/SubMenuButton";
 import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
+import { useMovieList, useTvShowList } from "../../utils/hooks/api-hooks/ApiHooks";
 
 const Home = () => {
-  const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
-  const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
+  const { movieList, isLoading: movieLoading } = useMovieList(1);
+  const { tvShowList, isLoading: tvShowLoading } = useTvShowList(1);
   const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
 
   const { data: quickMenu } = useQuickMenuUserQuery();

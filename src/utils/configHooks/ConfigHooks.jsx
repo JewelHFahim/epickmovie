@@ -4,13 +4,10 @@ import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
 // ====================>> Site Name <<=======================
 export const useSiteName = () => {
   const { data: allConfig } = useAllConfigQuery();
-
   const getSiteName = allConfig?.data?.find(
     (config) => config.name === "site_name"
   );
-
-  const siteName = getSiteName ? getSiteName.value : null;
-
+  const siteName = getSiteName ? getSiteName.value : "loading";
   return siteName;
 };
 
@@ -21,7 +18,7 @@ export const useSiteLogo = () => {
   const getSiteLogo = allConfig?.data?.find(
     (config) => config.name === "site_logo"
   );
-  const siteLogo = getSiteLogo ? getSiteLogo.value : null;
+  const siteLogo = getSiteLogo ? getSiteLogo.value : "loading";
 
   return { siteLogo, isLoading };
 };
@@ -45,7 +42,7 @@ export const useSiteNews = () => {
   const getSiteNews = allConfig?.data?.find(
     (config) => config.name === "site_news"
   );
-  const siteNews = getSiteNews ? getSiteNews.value : null;
+  const siteNews = getSiteNews ? getSiteNews.value : "loading";
 
   return siteNews;
 };
@@ -81,7 +78,7 @@ export const useSiteFooter = () => {
   const getSiteFooter = allConfig?.data?.find(
     (config) => config.name === "site_footer"
   );
-  const siteFooter = getSiteFooter ? getSiteFooter.value : null;
+  const siteFooter = getSiteFooter ? getSiteFooter.value : "loading";
 
   return siteFooter;
 };

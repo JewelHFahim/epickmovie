@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import MovieCard from "../../../components/movie-card/MovieCard";
-import { usePerPgaeMovieQuery } from "../../../redux/features/movies/movieApi";
 import Title from "../../../utils/Title";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
@@ -8,16 +7,16 @@ import MoviePagination from "./MoviePagination";
 import { useLocation } from "react-router-dom";
 import SiteNews from "../../../components/SiteNews/SiteNews";
 import { useSiteName } from "../../../utils/configHooks/ConfigHooks";
+import { useMovieList } from "../../../utils/hooks/api-hooks/ApiHooks";
 
 const Movies = () => {
   const location = useLocation();
+  const siteName = useSiteName();
   const currentRoute = location.pathname;
   const storedPage = JSON.parse(localStorage.getItem("MovieCurrentPage")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
-  const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
+  const { movieList:perPgaeMovie, isLoading } = useMovieList(currentPage);
   
-  const siteName = useSiteName();
-
 
   useEffect(() => {
     localStorage.setItem("MovieCurrentPage", JSON.stringify(currentPage));
@@ -33,7 +32,7 @@ const Movies = () => {
   return (
     <div className="flex flex-col justify-center items-center">
       <Helmet>
-        <title>{siteName}</title>
+        <title>{siteName} || Movies</title>
         <meta
           name="description"
           content="Unlimited Movies and Latest Collections"

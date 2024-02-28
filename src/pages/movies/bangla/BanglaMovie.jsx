@@ -34,7 +34,7 @@ const BanglaMovie = () => {
   return (
     <div className="min-h-screen">
       <Helmet>
-        <title>{siteName}</title>
+        <title>{siteName} || Bangla</title>
         <meta
           name="description"
           content="Unlimited Bangla Movies and Latest Collections"

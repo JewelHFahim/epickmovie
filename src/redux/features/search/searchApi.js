@@ -3,11 +3,6 @@ import apiSlice from "../api/apiSlice";
 const tvShowApi = apiSlice.injectEndpoints({
 
   endpoints: (builder) => ({
-    // ===========>>  Filter By GENRE/YEAR/QUALITY  <<=============
-    filterResults: builder.query({
-      query: (filteredTerm) => `/sp-terms/${filteredTerm}`,
-      providesTags: ["EpicMovies"],
-    }),
 
     // ===========>>  Filter By GENRE/YEAR/QUALITY  <<=============
     filteredResultsByPagination: builder.query({
@@ -31,7 +26,6 @@ const tvShowApi = apiSlice.injectEndpoints({
 });
 
 export const {
-  useFilterResultsQuery,
   useSerachResultsQuery,
   useFilteredResultsByPaginationQuery,
   useSuggessionMovieSeriesQuery,
