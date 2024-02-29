@@ -17,9 +17,7 @@ import { useSiteName } from "../../../utils/configHooks/ConfigHooks";
 const MovieDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const { data: movieDetails } = useMovieDetailsQuery(id);
-
 
   useEffect(() => {
     if (movieDetails?.status === false) {
@@ -137,7 +135,7 @@ const MovieDetails = () => {
         </div>
 
         {/* ===========>> ADVERTISEMENT <<=========== */}
-        <AdvertisementSection />
+        <AdvertisementSection details={details}/>
       </section>
 
       {/* ===========>> RELETED POST <<=========== */}

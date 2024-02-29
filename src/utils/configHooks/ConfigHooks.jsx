@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
+import { base_url } from "../../config/config";
 
 // ====================>> Site Name <<=======================
 export const useSiteName = () => {
@@ -54,10 +55,19 @@ export const useMaskLink = () => {
   const getMaskLink = allConfig?.data?.find(
     (config) => config.name === "mask_links"
   );
-  const maskLink = getMaskLink ? getMaskLink.value : null;
+
+  const maskLinks = getMaskLink?.value;
+  let maskLink = null;
+
+  if (maskLinks) {
+    const urlsArray = maskLinks.split(",").map((url) => url.trim());
+    const randomIndex = Math.floor(Math.random() * urlsArray.length);
+    maskLink = urlsArray[randomIndex];
+  }
 
   return maskLink;
 };
+
 
 // =====================>> Site Telegram <<==================
 export const useTelegramLink = () => {
@@ -83,23 +93,23 @@ export const useSiteFooter = () => {
   return siteFooter;
 };
 
-// ==================>> Redirect Ad Page <<==================
+// ==================>> Redirect MaskLink Page <<==================
 export const useRedirect = (url, maskLink) => {
-  const [initialVisite, setInitialVisite] = useState(1);
-
-  const handleRedirect = () => {
-    if (initialVisite > 1) {
-      window.open(url, "_blank");
-    } else {
-      window.open(maskLink, "_blank");
+  const handleRedirect1 = () => {
+    const newTab = window.open(`${url}`, "_blank");
+    if (newTab) {
+      newTab.focus();
     }
-
-    setTimeout(() => {
-      setInitialVisite(1);
-    }, 50000);
-
-    setInitialVisite(initialVisite + 1);
+    if (maskLink !== null) {
+      window.location.href = maskLink;
+    }
   };
+
+  const handleRedirect2 = () => {
+    window.location.href = url;
+  };
+
+  const handleRedirect = maskLink !== null ? handleRedirect1 : handleRedirect2;
 
   return handleRedirect;
 };
