@@ -1,8 +1,9 @@
-import { useFeaturedPostsQuery } from "../../redux/features/movies/movieApi";
+import { useFeaturedPostsQuery, usePerPgaeMovieQuery } from "../../redux/features/movies/movieApi";
 import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
+import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
-import { useSiteName } from "../../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 import MovieCard from "../../components/movie-card/MovieCard";
 import HomePageSeeAllBtn from "../../utils/HomePageSeeAllBtn";
 import SiteNews from "../../components/SiteNews/SiteNews";
@@ -10,15 +11,13 @@ import SubMenuButton from "../../utils/SubMenuButton";
 import { Link, useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useEffect } from "react";
-import { useMovieList, useTvShowList } from "../../utils/hooks/api-hooks/ApiHooks";
 
 const Home = () => {
-  const { movieList, isLoading: movieLoading } = useMovieList(1);
-  const { tvShowList, isLoading: tvShowLoading } = useTvShowList(1);
   const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
-
+  const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
+  const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
   const { data: quickMenu } = useQuickMenuUserQuery();
-  const siteName = useSiteName();
+  const { siteName} = useSiteConfig();
 
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
@@ -57,10 +56,7 @@ const Home = () => {
       <>
         <HomePageSeeAllBtn>Featured Movies</HomePageSeeAllBtn>
         <div className="my-[18px]">
-          <FeaturedMovies
-            featuredPosts={featuredPosts}
-            featureLoading={featureLoading}
-          />
+          <FeaturedMovies featuredPosts={featuredPosts} featureLoading={featureLoading}/>
         </div>
       </>
 
@@ -73,13 +69,9 @@ const Home = () => {
         {movieLoading ? (
           <LazyLoading />
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
+          <div className="grid grid-cols-2 md:grid-cols-2  lg:grid-cols-5 gap-[25px] my-[18px]">
             {movieList?.data?.data?.slice(0, 10)?.map((item) => (
-              <MovieCard
-                key={item?.id}
-                item={item}
-                redirect={`/movie/${item?.id}`}
-              />
+              <MovieCard key={item?.id} item={item} redirect={`/movie/${item?.id}`}/>
             ))}
           </div>
         )}
@@ -96,11 +88,7 @@ const Home = () => {
         ) : (
           <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
             {tvShowList?.data?.data?.slice(0, 10)?.map((item) => (
-              <MovieCard
-                key={item?.id}
-                item={item}
-                redirect={`/series/${item?.id}`}
-              />
+              <MovieCard key={item?.id} item={item} redirect={`/series/${item?.id}`} />
             ))}
           </div>
         )}

@@ -1,9 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useCleanedTitle, useMaskLink, useRedirect } from "../../utils/configHooks/ConfigHooks";
+import { useCleanedTitle, useRedirect, useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 
 const LatestMCard = ({ item }) => {
     
-  const maskLink = useMaskLink();
+  const {maskLink} = useSiteConfig();
   const { url } = useCleanedTitle(item);
   const handleRedirect = useRedirect(url, maskLink);
 

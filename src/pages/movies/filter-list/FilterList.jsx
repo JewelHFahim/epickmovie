@@ -5,11 +5,11 @@ import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import FilterPagination from "./FilterPagination";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { useSiteName } from "../../../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const FilterList = () => {
   const location = useLocation();
-  const siteName = useSiteName();
+  const {siteName} = useSiteConfig();
   const currentRoute = location.pathname;
   const storedPage = JSON.parse(localStorage.getItem("filterPagination")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);

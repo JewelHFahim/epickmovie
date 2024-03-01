@@ -15,7 +15,7 @@ import {
 } from "../../../redux/features/movies/movieApi";
 import { Link } from "react-router-dom";
 import { useMemo } from "react";
-import { useTelegramLink } from "../../../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const Nav = () => {
 
@@ -28,7 +28,7 @@ const Nav = () => {
   const print = printQualityList?.data;
   const combinedQuality = pixel?.concat(print);
 
-  const telegramLink = useTelegramLink();
+  const {telegramLink} = useSiteConfig();
 
   const itemsPerColumn = 20;
   const columns = [];

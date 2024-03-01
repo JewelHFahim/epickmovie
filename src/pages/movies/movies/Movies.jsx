@@ -6,17 +6,16 @@ import { Helmet } from "react-helmet";
 import MoviePagination from "./MoviePagination";
 import { useLocation } from "react-router-dom";
 import SiteNews from "../../../components/SiteNews/SiteNews";
-import { useSiteName } from "../../../utils/configHooks/ConfigHooks";
-import { useMovieList } from "../../../utils/hooks/api-hooks/ApiHooks";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
+import { usePerPgaeMovieQuery } from "../../../redux/features/movies/movieApi";
 
 const Movies = () => {
   const location = useLocation();
-  const siteName = useSiteName();
+  const {siteName} = useSiteConfig();
   const currentRoute = location.pathname;
   const storedPage = JSON.parse(localStorage.getItem("MovieCurrentPage")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
-  const { movieList:perPgaeMovie, isLoading } = useMovieList(currentPage);
-  
+  const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
 
   useEffect(() => {
     localStorage.setItem("MovieCurrentPage", JSON.stringify(currentPage));

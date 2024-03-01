@@ -4,13 +4,13 @@ import MovieCard from "../../../components/movie-card/MovieCard";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
-import { useSiteName } from "../../../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const SearchList = () => {
   const { searchTerm } = useSelector((state) => state.search);
   const { data: searchResults, isLoading } = useSerachResultsQuery(searchTerm);
 
-  const siteName = useSiteName();
+  const {siteName} = useSiteConfig();
   const location = useLocation();
   const currentRoute = location.pathname;
 

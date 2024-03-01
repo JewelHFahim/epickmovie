@@ -1,12 +1,12 @@
-import {
-  useMovieList,
-  useTvShowList,
-} from "../../utils/hooks/api-hooks/ApiHooks";
+import { usePerPgaeMovieQuery } from "../../redux/features/movies/movieApi";
+import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import LatestMCard from "./LatestMCard";
 
 const LatestMoviesCard = ({ details }) => {
-  const { movieList } = useMovieList(1);
-  const { tvShowList } = useTvShowList(1);
+
+  const { data: movieList } = usePerPgaeMovieQuery(1);
+  const { data: tvShowList } = usePerPgaeTvShowQuery(1);
+
 
   const latestDatas = details?.post_type === "movies" ? movieList : tvShowList;
 

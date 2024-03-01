@@ -12,7 +12,7 @@ import { Helmet } from "react-helmet";
 import CountryList from "../../components/advertisement/CountryList";
 import { useEffect } from "react";
 import CachedImage from "../../utils/cache-img/CachedImage";
-import { useSiteName } from "../../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -20,8 +20,7 @@ const TvShowDetails = () => {
 
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
-
-  const siteName = useSiteName();
+  const { siteName } = useSiteConfig();
 
   useEffect(() => {
     if (seriesDetails?.status === false) {

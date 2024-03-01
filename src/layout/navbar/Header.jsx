@@ -3,16 +3,14 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
 import { IoSearch } from "react-icons/io5";
-import { useSiteLogo, useSiteName } from "../../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 
 const Header = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [searchTermState, setSearchTerm] = useState("");
-
-  const {siteLogo, isLoading} = useSiteLogo();
-  const siteName = useSiteName();
+  const {siteLogo, siteName, isLoading} = useSiteConfig();
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);

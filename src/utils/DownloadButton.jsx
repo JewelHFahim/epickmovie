@@ -1,9 +1,9 @@
-import { useMaskLink, useRedirect } from "./configHooks/ConfigHooks";
+import { useRedirect, useSiteConfig } from "./configHooks/ConfigHooks";
 
 const DownloadButton = ({ children, url }) => {
-  const maskLink = useMaskLink()
-  const handleRedirect = useRedirect(url, maskLink);
 
+  const {maskLink} = useSiteConfig();
+  const handleRedirect = useRedirect(url, maskLink);
 
   return (
     <div>

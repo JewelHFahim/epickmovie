@@ -1,10 +1,11 @@
 import { Link } from "react-router-dom";
 import telegraqm from "../assets/telegram.svg";
-import { useTelegramLink } from "../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../utils/configHooks/ConfigHooks";
 
 const JoinTelegramBtn = () => {
 
-  const telegramLink = useTelegramLink();
+  const {telegramLink} = useSiteConfig();
+
 
   return (
     <div className="flex justify-center mt-[50px] lg:mt-[36px]">

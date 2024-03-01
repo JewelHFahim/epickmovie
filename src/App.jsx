@@ -2,13 +2,12 @@ import { useEffect } from "react";
 import { RouterProvider } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import router from "./routes/router";
-import { useFavIcon, useSiteName } from "./utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "./utils/configHooks/ConfigHooks";
 
 
 const App = () => {
-  const siteName = useSiteName();
-  const favIcon = useFavIcon();
-  
+  const { siteName, favIcon} = useSiteConfig();
+
   // Dynamic Favicon Icon Set
   useEffect(() => {
     const fetchFavicon = () => {

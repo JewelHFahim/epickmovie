@@ -4,14 +4,13 @@ import { IoSearch } from "react-icons/io5";
 import { collectSearchItem } from "../../redux/features/search/searchSlice";
 import { useDispatch } from "react-redux";
 import { useState } from "react";
-import { useSiteName } from "../../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 
 const NotFound = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [searchTermState, setSearchTerm] = useState("");
-
-  const siteName = useSiteName();
+  const {siteName} = useSiteConfig();
 
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);

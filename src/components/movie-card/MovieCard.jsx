@@ -5,14 +5,13 @@ import { FaPlay } from "react-icons/fa";
 import CachedImage from "../../utils/cache-img/CachedImage";
 import {
   useCleanedTitle,
-  useMaskLink,
   useRedirect,
+  useSiteConfig,
 } from "../../utils/configHooks/ConfigHooks";
 
 const MovieCard = ({ item }) => {
-  const maskLink = useMaskLink();
-  console.log(maskLink);
 
+  const {maskLink} = useSiteConfig();
   const { url } = useCleanedTitle(item);
   const handleRedirect = useRedirect(url, maskLink);
 
@@ -22,15 +21,10 @@ const MovieCard = ({ item }) => {
         onClick={() => handleRedirect()}
         className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative cursor-pointer`}
       >
-        <CachedImage
-          src={item?.poster_image_url}
-          imgStyle="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg"
-        />
+        <CachedImage src={item?.poster_image_url} imgStyle="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg"/>
 
         <p className="text-center  text-white font-[700] text-[33px] lg:text-[16px] p-4 lg:p-2 font-alef">
-          {item?.post_title?.length <= 80
-            ? item?.post_title
-            : item?.post_title?.slice(0, 80)}
+          {item?.post_title?.length <= 80 ? item?.post_title : item?.post_title?.slice(0, 80)}
         </p>
 
         <div className="playBtn">

@@ -6,16 +6,13 @@ import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
 import BanglaMoviePagination from "./BanglaMoviePagination";
 import { useLocation } from "react-router-dom";
-import { useSiteName } from "../../../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const BanglaMovie = () => {
   const storedPage = JSON.parse(localStorage.getItem("banglaPagination")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
-
-  const { data: perPgaeMovie, isLoading } =
-    usePerPageBengaliMovieListQuery(currentPage);
-
-  const siteName = useSiteName();
+  const { data: perPgaeMovie, isLoading } = usePerPageBengaliMovieListQuery(currentPage);
+  const { siteName} = useSiteConfig();
 
   const location = useLocation();
   const currentRoute = location.pathname;

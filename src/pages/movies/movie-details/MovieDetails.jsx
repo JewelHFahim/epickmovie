@@ -12,7 +12,7 @@ import { Helmet } from "react-helmet";
 import CountryList from "../../../components/advertisement/CountryList";
 import { useEffect } from "react";
 import CachedImage from "../../../utils/cache-img/CachedImage";
-import { useSiteName } from "../../../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -25,7 +25,7 @@ const MovieDetails = () => {
     }
   }, [movieDetails, navigate]);
 
-  const siteName = useSiteName();
+  const {siteName} = useSiteConfig();
 
   const details = movieDetails?.data;
   window.scrollTo({ top: 0, behavior: "smooth" });

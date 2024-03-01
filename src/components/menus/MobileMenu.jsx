@@ -13,7 +13,7 @@ import { CiCalendarDate } from "react-icons/ci";
 import { GoGlobe } from "react-icons/go";
 import { RiMovie2Line } from "react-icons/ri";
 import { LiaTelegramPlane } from "react-icons/lia";
-import { useTelegramLink } from "../../utils/configHooks/ConfigHooks";
+import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 
 const MobileMenu = () => {
   const location = useLocation();
@@ -21,7 +21,8 @@ const MobileMenu = () => {
   const { data: printQualityList } = usePrintQualityClientQuery();
   const { data: genreList } = useGenreListQuery();
   const { data: yearList } = useYearListQuery();
-  const telegramLink = useTelegramLink();
+  const {telegramLink} = useSiteConfig();
+
 
   const pixel = pixelQualityList?.data;
   const print = printQualityList?.data;

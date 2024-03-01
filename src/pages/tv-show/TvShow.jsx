@@ -1,22 +1,21 @@
 import { useEffect, useState } from "react";
-import MovieCard from "../../components/movie-card/MovieCard";
 import Title from "../../utils/Title";
-import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
 import TvPagination from "./TvPagination";
 import { useLocation } from "react-router-dom";
 import SiteNews from "../../components/SiteNews/SiteNews";
-import { useSiteName } from "../../utils/configHooks/ConfigHooks";
-import { useTvShowList } from "../../utils/hooks/api-hooks/ApiHooks";
+import MovieCard from "../../components/movie-card/MovieCard";
+import LazyLoading from "../../components/lazy-loading/LazyLoading";
+import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
+import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 
 
 const TvShow = () => {
   const storedPage = JSON.parse(localStorage.getItem("tvCurrentPage")) || 1;
 
   const [currentPage, setCurrentPage] = useState(storedPage);
-  const { tvShowList:perPgaeMovie, isLoading } = useTvShowList(currentPage);
-
-  const siteName = useSiteName();
+  const { data: perPgaeMovie, isLoading} = usePerPgaeTvShowQuery(currentPage);
+  const {siteName} = useSiteConfig();
 
   const location = useLocation();
   const currentRoute = location.pathname;

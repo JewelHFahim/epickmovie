@@ -3,13 +3,13 @@ import { FaPlay } from "react-icons/fa";
 import "./SliderCard.css";
 import {
   useCleanedTitle,
-  useMaskLink,
   useRedirect,
+  useSiteConfig,
 } from "../../../utils/configHooks/ConfigHooks";
 
 const SliderCard = ({ item }) => {
   const { url } = useCleanedTitle(item);
-  const maskLink = useMaskLink();
+  const {maskLink} = useSiteConfig();
   const handleRedirect = useRedirect(url, maskLink);
 
   return (

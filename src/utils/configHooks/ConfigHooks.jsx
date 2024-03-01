@@ -1,99 +1,28 @@
 import { useEffect, useState } from "react";
 import { useAllConfigQuery } from "../../redux/features/settings/settingApi";
-import { base_url } from "../../config/config";
-
-// ====================>> Site Name <<=======================
-export const useSiteName = () => {
-  const { data: allConfig } = useAllConfigQuery();
-  const getSiteName = allConfig?.data?.find(
-    (config) => config.name === "site_name"
-  );
-  const siteName = getSiteName ? getSiteName.value : "loading";
-  return siteName;
-};
-
-// ====================>> Site Logo <<=======================
-export const useSiteLogo = () => {
-  const { data: allConfig, isLoading } = useAllConfigQuery();
-
-  const getSiteLogo = allConfig?.data?.find(
-    (config) => config.name === "site_logo"
-  );
-  const siteLogo = getSiteLogo ? getSiteLogo.value : "loading";
-
-  return { siteLogo, isLoading };
-};
-
-// ==================>> Site Fav Icon <<=====================
-export const useFavIcon = () => {
-  const { data: allConfig } = useAllConfigQuery();
-
-  const getFavIcon = allConfig?.data?.find(
-    (config) => config.name === "fav_icon"
-  );
-  const favIcon = getFavIcon ? getFavIcon.value : null;
-
-  return favIcon;
-};
-
-// ====================>> Site News <<=======================
-export const useSiteNews = () => {
-  const { data: allConfig } = useAllConfigQuery();
-
-  const getSiteNews = allConfig?.data?.find(
-    (config) => config.name === "site_news"
-  );
-  const siteNews = getSiteNews ? getSiteNews.value : "loading";
-
-  return siteNews;
-};
 
 // ====================>> Site Mask Link <<==================
-export const useMaskLink = () => {
-  const { data: allConfig } = useAllConfigQuery();
+// export const useMaskLink = () => {
+//   const { data: allConfig } = useAllConfigQuery();
 
-  const getMaskLink = allConfig?.data?.find(
-    (config) => config.name === "mask_links"
-  );
+//   const getMaskLink = allConfig?.data?.find(
+//     (config) => config.name === "mask_links"
+//   );
 
-  const maskLinks = getMaskLink?.value;
-  let maskLink = null;
+//   const maskLinks = getMaskLink?.value;
+//   let maskLink = null;
 
-  if (maskLinks) {
-    const urlsArray = maskLinks.split(",").map((url) => url.trim());
-    const randomIndex = Math.floor(Math.random() * urlsArray.length);
-    maskLink = urlsArray[randomIndex];
-  }
+//   if (maskLinks) {
+//     const urlsArray = maskLinks.split(",").map((url) => url.trim());
+//     const randomIndex = Math.floor(Math.random() * urlsArray.length);
+//     maskLink = urlsArray[randomIndex];
+//   }
 
-  return maskLink;
-};
+//   return maskLink;
+// };
 
 
-// =====================>> Site Telegram <<==================
-export const useTelegramLink = () => {
-  const { data: allConfig } = useAllConfigQuery();
-
-  const getTelegramLink = allConfig?.data?.find(
-    (config) => config.name === "telegram_link"
-  );
-  const telegramLink = getTelegramLink ? getTelegramLink.value : null;
-
-  return telegramLink;
-};
-
-// ======================>> Site Footer <<===================
-export const useSiteFooter = () => {
-  const { data: allConfig } = useAllConfigQuery();
-
-  const getSiteFooter = allConfig?.data?.find(
-    (config) => config.name === "site_footer"
-  );
-  const siteFooter = getSiteFooter ? getSiteFooter.value : "loading";
-
-  return siteFooter;
-};
-
-// ==================>> Redirect MaskLink Page <<==================
+// ===============>> Redirect MaskLink Page <<===============
 export const useRedirect = (url, maskLink) => {
   const handleRedirect1 = () => {
     const newTab = window.open(`${url}`, "_blank");
@@ -132,14 +61,41 @@ export const useCleanedTitle = (item) => {
   useEffect(() => {
     if (item?.post_title) {
       const cleanedTitle = generateCleanedTitle(item.post_title);
-      setUrl(
-        item?.post_type === "movies"
-          ? `/movie/${item?.id}/${cleanedTitle}`
-          : `/series/${item?.id}/${cleanedTitle}`,
-        "_blank"
-      );
+      setUrl( item?.post_type === "movies" ? `/movie/${item?.id}/${cleanedTitle}` : `/series/${item?.id}/${cleanedTitle}`, "_blank" );
     }
   }, [item?.post_title, item?.post_type, item?.id]);
 
   return { url };
+};
+
+
+// ===================>> CONFIG DATAS <<======================
+import { useMemo } from 'react';
+
+export const useSiteConfig = () => {
+  const { data: allConfig, isLoading } = useAllConfigQuery();
+
+  const getSiteConfig = useMemo(() => {
+    return ({
+      siteName: allConfig?.data?.find((config) => config.name === 'site_name')?.value ?? 'loading',
+      siteLogo: allConfig?.data?.find((config) => config.name === 'site_logo')?.value ?? 'loading',
+      favIcon: allConfig?.data?.find((config) => config.name === 'fav_icon')?.value ?? null,
+      siteNews: allConfig?.data?.find((config) => config.name === 'site_news')?.value ?? 'loading',
+      telegramLink: allConfig?.data?.find((config) => config.name === 'telegram_link')?.value ?? null,
+      siteFooter: allConfig?.data?.find((config) => config.name === 'site_footer')?.value ?? 'loading',
+
+      maskLink: (() => {
+        const maskLinks = allConfig?.data?.find((config) => config.name === 'mask_links')?.value;
+        if (maskLinks) {
+          const urlsArray = maskLinks.split(',').map((url) => url.trim());
+          const randomIndex = Math.floor(Math.random() * urlsArray.length);
+          return urlsArray[randomIndex];
+        }
+        return null;
+      })(),
+
+    });
+  }, [allConfig]);
+
+  return { ...getSiteConfig, isLoading };
 };

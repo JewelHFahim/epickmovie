@@ -1,10 +1,10 @@
 /* eslint-disable react/prop-types */
 import FeatureSticker from "../../utils/feature-sticker/FeatureSticker";
-import { useCleanedTitle, useMaskLink, useRedirect } from "../../utils/configHooks/ConfigHooks";
+import { useCleanedTitle, useRedirect, useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 
 const CardRelatedPost = ({ item }) => {
   const { url } = useCleanedTitle(item);
-  const maskLink = useMaskLink();
+  const {maskLink} = useSiteConfig();
   const handleRedirect = useRedirect(url, maskLink);
 
   return (
