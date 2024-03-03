@@ -16,6 +16,7 @@ const Home = () => {
   const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
   const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
+  
   const { data: quickMenu } = useQuickMenuUserQuery();
   const { siteName} = useSiteConfig();
 

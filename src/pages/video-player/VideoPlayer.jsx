@@ -1,44 +1,44 @@
 // import ReactJWPlayer from "react-jw-player";
 
-export default function VideoPlayer() {
-  // const [ready, setReady] = useState(false);
-  // const readyEvent = useRef();
+// export default function VideoPlayer() {
+//   const [ready, setReady] = useState(false);
+//   const readyEvent = useRef();
 
-  // useEffect(() => {
-  //   readyEvent.current = setReady;
+//   useEffect(() => {
+//     readyEvent.current = setReady;
 
-  //   return () => {
-  //     readyEvent.current = null;
-  //   };
-  // }, []);
+//     return () => {
+//       readyEvent.current = null;
+//     };
+//   }, []);
 
-  // const handleReady = () => {
-  //   if (readyEvent.current) {
-  //     readyEvent.current(true);
-  //   }
-  // };
+//   const handleReady = () => {
+//     if (readyEvent.current) {
+//       readyEvent.current(true);
+//     }
+//   };
 
-  return (
-    <div>
+//   return (
+//     <div>
 
-      {/* <div
-        className="jw-video-container"
-        data-mediaid="TAITbudl"
-        style={{ height: "100%", width: "100%" }}
-      >
-        <ReactJWPlayer
-          playerId="TAITbudl"
-          playerScript="https://content.jwplatform.com/libraries/j9BLvpMc.js"
-          playlist="https://cdn.jwplayer.com/v2/media/TAITbudl"
-          onReady={handleReady}
-        />
-      </div> */}
+//       <div
+//         className="jw-video-container"
+//         data-mediaid="TAITbudl"
+//         style={{ height: "100%", width: "100%" }}
+//       >
+//         <ReactJWPlayer
+//           playerId="TAITbudl"
+//           playerScript="https://content.jwplatform.com/libraries/j9BLvpMc.js"
+//           playlist="https://cdn.jwplayer.com/v2/media/TAITbudl"
+//           onReady={handleReady}
+//         />
+//       </div>
 
-    </div>
-  );
-}
+//     </div>
+//   );
+// }
 
-// ****************>> With Sub Title <<***************
+// // ****************>> With Sub Title <<***************
 // import React, { useEffect } from 'react';
 
 // const JWPlayer = () => {

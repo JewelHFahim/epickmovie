@@ -75,27 +75,39 @@ import { useMemo } from 'react';
 export const useSiteConfig = () => {
   const { data: allConfig, isLoading } = useAllConfigQuery();
 
-  const getSiteConfig = useMemo(() => {
-    return ({
-      siteName: allConfig?.data?.find((config) => config.name === 'site_name')?.value ?? 'loading',
-      siteLogo: allConfig?.data?.find((config) => config.name === 'site_logo')?.value ?? 'loading',
-      favIcon: allConfig?.data?.find((config) => config.name === 'fav_icon')?.value ?? null,
-      siteNews: allConfig?.data?.find((config) => config.name === 'site_news')?.value ?? 'loading',
-      telegramLink: allConfig?.data?.find((config) => config.name === 'telegram_link')?.value ?? null,
-      siteFooter: allConfig?.data?.find((config) => config.name === 'site_footer')?.value ?? 'loading',
-
-      maskLink: (() => {
-        const maskLinks = allConfig?.data?.find((config) => config.name === 'mask_links')?.value;
-        if (maskLinks) {
-          const urlsArray = maskLinks.split(',').map((url) => url.trim());
-          const randomIndex = Math.floor(Math.random() * urlsArray.length);
-          return urlsArray[randomIndex];
-        }
-        return null;
-      })(),
-
-    });
+  const siteName = useMemo(() => {
+    return allConfig?.data?.find((config) => config.name === 'site_name')?.value ?? 'loading';
   }, [allConfig]);
 
-  return { ...getSiteConfig, isLoading };
+  const siteLogo = useMemo(() => {
+    return allConfig?.data?.find((config) => config.name === 'site_logo')?.value ?? 'loading';
+  }, [allConfig]);
+
+  const favIcon = useMemo(() => {
+    return allConfig?.data?.find((config) => config.name === 'fav_icon')?.value ?? null;
+  }, [allConfig]);
+
+  const siteNews = useMemo(() => {
+    return allConfig?.data?.find((config) => config.name === 'site_news')?.value ?? 'loading';
+  }, [allConfig]);
+
+  const telegramLink = useMemo(() => {
+    return allConfig?.data?.find((config) => config.name === 'telegram_link')?.value ?? null;
+  }, [allConfig]);
+
+  const siteFooter = useMemo(() => {
+    return allConfig?.data?.find((config) => config.name === 'site_footer')?.value ?? 'loading';
+  }, [allConfig]);
+
+  const maskLink = useMemo(() => {
+    const maskLinks = allConfig?.data?.find((config) => config.name === 'mask_links')?.value;
+    if (maskLinks) {
+      const urlsArray = maskLinks.split(',').map((url) => url.trim());
+      const randomIndex = Math.floor(Math.random() * urlsArray.length);
+      return urlsArray[randomIndex];
+    }
+    return null;
+  }, [allConfig]);
+
+  return { siteName, siteLogo, favIcon, siteNews, telegramLink,siteFooter, maskLink, isLoading };
 };

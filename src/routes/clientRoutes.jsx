@@ -1,4 +1,3 @@
-// import AdminRedirect from "../components/admin-redirect/AdminRedirect";
 import Home from "../pages/home/Home";
 import BanglaMovie from "../pages/movies/bangla/BanglaMovie";
 import FilterList from "../pages/movies/filter-list/FilterList";
@@ -8,8 +7,6 @@ import SearchList from "../pages/movies/search-list/SearchList";
 import NotFound from "../pages/not-found/NotFound";
 import TvShow from "../pages/tv-show/TvShow";
 import TvShowDetails from "../pages/tv-show/tvShowDetails";
-import VideoPlayer from "../pages/video-player/VideoPlayer";
-// import DashboardRedirect from "../utils/DashboardRedirect";
 
 export const clientRoutes = [
   {
@@ -42,32 +39,14 @@ export const clientRoutes = [
     element: <TvShowDetails />,
   },
 
-
   {
     path: "/search-list",
     element: <SearchList />,
   },
-
-
   
   {
     path: "/terms/:string",
     element: <FilterList />,
-  },
-
-  // {
-  //   path: "/admin",
-  //   element: <AdminRedirect />,
-  // },
-
-  // {
-  //   path: "/dashboard",
-  //   element: <DashboardRedirect />,
-  // },
-
-  {
-    path: "/video-player",
-    element: <VideoPlayer />,
   },
 
   {

@@ -12,7 +12,6 @@ const FilterPagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-
   };
 
   useEffect(() => {

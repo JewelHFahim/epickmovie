@@ -20,7 +20,7 @@ const FilterList = () => {
   useEffect(() => {
     localStorage.setItem("filterPagination", JSON.stringify(currentPage));
     window.scrollTo({ top: 0, behavior: "smooth" });
-
+    
     return () => {
       if (currentRoute === "/filter-list") {
         localStorage.removeItem("tvCurrentPage");

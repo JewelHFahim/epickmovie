@@ -12,9 +12,8 @@ const SearchMovie = () => {
   const onSubmit = (data) => {
    const res =  dispatch(getSearchMovieSeries(data?.search));
     if(res !== null){
-      return navigate("/admin/dashboard/help")
+      return navigate("/admin/dashboard")
     }
-
   };
 
   return (

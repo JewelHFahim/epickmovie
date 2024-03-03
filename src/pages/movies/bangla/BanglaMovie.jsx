@@ -9,6 +9,7 @@ import { useLocation } from "react-router-dom";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const BanglaMovie = () => {
+  
   const storedPage = JSON.parse(localStorage.getItem("banglaPagination")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
   const { data: perPgaeMovie, isLoading } = usePerPageBengaliMovieListQuery(currentPage);

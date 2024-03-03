@@ -19,6 +19,7 @@ import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const Nav = () => {
 
+  const {telegramLink} = useSiteConfig();
   const { data: yearList } = useYearListQuery();
   const { data: genreList } = useGenreListQuery();
   const { data: pixelQualityList } = usePixelQualityClientQuery();
@@ -27,8 +28,6 @@ const Nav = () => {
   const pixel = pixelQualityList?.data;
   const print = printQualityList?.data;
   const combinedQuality = pixel?.concat(print);
-
-  const {telegramLink} = useSiteConfig();
 
   const itemsPerColumn = 20;
   const columns = [];

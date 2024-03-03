@@ -17,7 +17,10 @@ import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 const MovieDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const {siteName} = useSiteConfig();
   const { data: movieDetails } = useMovieDetailsQuery(id);
+  const details = movieDetails?.data;
+  console.log(details)
 
   useEffect(() => {
     if (movieDetails?.status === false) {
@@ -25,10 +28,11 @@ const MovieDetails = () => {
     }
   }, [movieDetails, navigate]);
 
-  const {siteName} = useSiteConfig();
 
-  const details = movieDetails?.data;
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+  
 
   return (
     <div className="bg-[#27272A]">
@@ -114,11 +118,16 @@ const MovieDetails = () => {
           </div>
 
           <div className="max-w-[80%] lg:max-w-[399px] flex flex-col gap-5 lg:gap-3 mx-auto">
-            {details?.download_links?.map((item, i) => (
+          {
+            details?.download_links.length > 0 ? 
+            details?.download_links?.map((item, i) => (
               <DownloadButton key={i} url={item?.download_url} >
                 {item?.label} {item?.px_quality} {item?.file_size}
               </DownloadButton>
-            ))}
+            ))
+          :
+          <p className="text-[18px] font-medium text-slate-500 text-center"> No Download Link </p>
+          }
           </div>
 
           {/* ===========>> JOIN TELEGRAM <<=========== */}

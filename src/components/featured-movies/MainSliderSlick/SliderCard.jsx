@@ -8,6 +8,7 @@ import {
 } from "../../../utils/configHooks/ConfigHooks";
 
 const SliderCard = ({ item }) => {
+  
   const { url } = useCleanedTitle(item);
   const {maskLink} = useSiteConfig();
   const handleRedirect = useRedirect(url, maskLink);

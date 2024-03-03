@@ -7,7 +7,6 @@ const LatestMoviesCard = ({ details }) => {
   const { data: movieList } = usePerPgaeMovieQuery(1);
   const { data: tvShowList } = usePerPgaeTvShowQuery(1);
 
-
   const latestDatas = details?.post_type === "movies" ? movieList : tvShowList;
 
   return (

@@ -20,6 +20,7 @@ const TvShowDetails = () => {
 
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
+  console.log(details)
   const { siteName } = useSiteConfig();
 
   useEffect(() => {
@@ -28,7 +29,11 @@ const TvShowDetails = () => {
     }
   }, [seriesDetails, navigate]);
 
-  window.scrollTo({ top: 0, behavior: "smooth" });
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+  
+
 
   return (
     <div className="bg-[#27272A]">
@@ -86,7 +91,6 @@ const TvShowDetails = () => {
             <div className="lg:max-w-[715px] mt-[13px]">
               <h3 className="text-[50px] leading-none lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center">
                 <Link to={details?.guid}>
-                  {" "}
                   {details?.post_title} ~ EpicSeries{" "}
                 </Link>
               </h3>
@@ -128,7 +132,13 @@ const TvShowDetails = () => {
 
           {/* ==========>> DOWNLOAD BUTTOJN <<=============*/}
           <div className="w-[80%] lg:max-w-[400px] mx-auto">
+            {
+              details?.download_links?.length > 0 ?
             <Accrodion details={details} url={"jkj"} />
+            :
+            <p className="text-[18px] font-medium text-slate-500 text-center"> No Download Link</p>
+            }
+
           </div>
 
           {/* ===========>> TELEGRAM BUTTON <<=============*/}

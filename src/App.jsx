@@ -22,6 +22,8 @@ const App = () => {
     fetchFavicon();
   }, [favIcon]);
 
+  
+
   return (
     <HelmetProvider>
       <div className=" bg-[#27272A] lg:bg-[#18181a]">

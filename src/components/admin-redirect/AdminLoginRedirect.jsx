@@ -3,6 +3,7 @@ import Loading from "../../utils/loading/Loading";
 import { admin_base_url } from "../../config/config";
 
 const AdminLoginRedirect = () => {
+  
   useEffect(() => {
     const redirectTimer = setTimeout(() => {
       window.location.href = admin_base_url;
