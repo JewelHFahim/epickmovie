@@ -20,7 +20,6 @@ const MovieDetails = () => {
   const {siteName} = useSiteConfig();
   const { data: movieDetails } = useMovieDetailsQuery(id);
   const details = movieDetails?.data;
-  console.log(details)
 
   useEffect(() => {
     if (movieDetails?.status === false) {

@@ -4,41 +4,6 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/x-icon" id="dynamic-favicon" href="/default-favicon.ico" />
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-NX3TH8G627"></script>
-
-
-<!-- <script>
-  async function fetchGTagId() {
-    try {
-      const response = await fetch('https://testepick.emdb.online/api/get-config-value/site_name');
-      const data = await response.json();
-      return data.gTagId; 
-    } catch (error) {
-      console.error('Error fetching gTag ID:', error);
-      return null;
-    }
-  }
-
-  async function setGTagId() {
-    const gTagId = await fetchGTagId();
-    if (gTagId) {
-      const script = document.createElement('script');
-      script.async = true;
-      script.src = `https://www.googletagmanager.com/gtag/js?id=${gTagId}`;
-      document.head.appendChild(script);
-
-      window.dataLayer = window.dataLayer || [];
-      function gtag() { dataLayer.push(arguments); }
-      gtag('js', new Date());
-      gtag('config', gTagId);
-    }
-  }
-
-  setGTagId();
-
-
-</script> -->
-
 </head>
 
 <body>

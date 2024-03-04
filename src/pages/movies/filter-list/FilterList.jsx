@@ -47,6 +47,11 @@ const FilterList = () => {
       </div>
 
       {/* ===========>> Filter Results <<===========*/}
+      { (filteredResults?.status === false) && (
+          <h1 className="text-[28px] font-medium text-slate-600 text-center">
+            Requested Data Not Found !!
+          </h1>
+        )}
       <div className="flex justify-center items-center">
         {isLoading ? (
           <LazyLoading />

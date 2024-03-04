@@ -12,7 +12,7 @@ const tvShowApi = apiSlice.injectEndpoints({
 
     // ===========>>  SEARCH By GENRE/YEAR/QUALITY  <<=============
     serachResults: builder.query({
-      query: (searchTerm) => `/search/${searchTerm}`,
+      query: (searchTerm) => `/search/${searchTerm}`,      
       providesTags: ["EpicMovies"],
     }),
 
