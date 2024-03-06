@@ -17,26 +17,26 @@ import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 const MovieDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const {siteName} = useSiteConfig();
+  const { siteName } = useSiteConfig();
   const { data: movieDetails } = useMovieDetailsQuery(id);
   const details = movieDetails?.data;
 
   useEffect(() => {
     if (movieDetails?.status === false) {
-      navigate('/404');
+      navigate("/404");
     }
   }, [movieDetails, navigate]);
-
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
-  
 
   return (
     <div className="bg-[#27272A]">
       <Helmet>
-        <title> {`${siteName} || ${ details?.post_title ? details?.post_title : "" } `}</title>
+        <title>
+          {`${siteName} || ${details?.post_title ? details?.post_title : ""} `}
+        </title>
         <meta name="description" content={details?.post_content} />
         <meta name="keywords" content="movies" />
       </Helmet>
@@ -55,7 +55,11 @@ const MovieDetails = () => {
             </h4>
 
             <div className="flex items-center gap-2 mt-2">
-              <img src={calender} alt="" className="w-[18px] h-[18px] lg:w-[12px] lg:h-[12px]" />
+              <img
+                src={calender}
+                alt=""
+                className="w-[18px] h-[18px] lg:w-[12px] lg:h-[12px]"
+              />
               <UploadedDate details={details}></UploadedDate>
             </div>
 
@@ -106,7 +110,11 @@ const MovieDetails = () => {
           {/* ==========>> SCREEN SHOTS <<=============*/}
           <div className="flex flex-col gap-5 mt-3">
             {details?.screenshots?.slice(0, 3)?.map((item, i) => (
-              <CachedImage key={i} src={item} imgStyle="w-full h-[400px] object-cover"/>
+              <CachedImage
+                key={i}
+                src={item}
+                imgStyle="w-full h-[400px] object-cover"
+              />
             ))}
           </div>
 
@@ -117,16 +125,18 @@ const MovieDetails = () => {
           </div>
 
           <div className="max-w-[80%] lg:max-w-[399px] flex flex-col gap-5 lg:gap-3 mx-auto">
-          {
-            details?.download_links.length > 0 ? 
-            details?.download_links?.map((item, i) => (
-              <DownloadButton key={i} url={item?.download_url} >
-                {item?.label} {item?.px_quality} {item?.file_size}
-              </DownloadButton>
-            ))
-          :
-          <p className="text-[18px] font-medium text-slate-500 text-center"> No Download Link </p>
-          }
+            {details?.download_links.length > 0 ? (
+              details?.download_links?.map((item, i) => (
+                <DownloadButton key={i} url={item?.download_url}>
+                  {item?.label} {item?.px_quality} {item?.file_size}
+                </DownloadButton>
+              ))
+            ) : (
+              <p className="text-[18px] font-medium text-slate-500 text-center">
+                {" "}
+                No Download Link{" "}
+              </p>
+            )}
           </div>
 
           {/* ===========>> JOIN TELEGRAM <<=========== */}
@@ -143,7 +153,7 @@ const MovieDetails = () => {
         </div>
 
         {/* ===========>> ADVERTISEMENT <<=========== */}
-        <AdvertisementSection details={details}/>
+        <AdvertisementSection details={details} />
       </section>
 
       {/* ===========>> RELETED POST <<=========== */}

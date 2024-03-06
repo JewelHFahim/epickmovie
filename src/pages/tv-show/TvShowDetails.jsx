@@ -17,10 +17,8 @@ import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 const TvShowDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
   const { data: seriesDetails } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
-  console.log(details)
   const { siteName } = useSiteConfig();
 
   useEffect(() => {
@@ -130,15 +128,19 @@ const TvShowDetails = () => {
             </p>
           </div>
 
-          {/* ==========>> DOWNLOAD BUTTOJN <<=============*/}
+          {/* ==========>> DOWNLOAD BUTTON <<=============*/}
           <div className="w-[80%] lg:max-w-[400px] mx-auto">
+
             {
-              details?.download_links?.length > 0 ?
-            <Accrodion details={details} url={"jkj"} />
-            :
-            <p className="text-[18px] font-medium text-slate-500 text-center"> No Download Link</p>
+              details?.download_links?.length === 0 && 
+              <p className="text-[18px] font-medium text-slate-500 text-center"> No Download Link {details?.download_links?.length }</p>
             }
 
+            { 
+            details?.download_links && Object.keys(details?.download_links)  &&
+            <Accrodion details={details} url={"jkj"} />
+            }
+            
           </div>
 
           {/* ===========>> TELEGRAM BUTTON <<=============*/}

@@ -3,6 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import router from "./routes/router";
 import { useSiteConfig } from "./utils/configHooks/ConfigHooks";
+import { base_url } from "./config/config";
 
 const App = () => {
   const { siteName, favIcon } = useSiteConfig();
@@ -25,8 +26,7 @@ const App = () => {
   useEffect(() => {
     const fetchGtagId = async () => {
       try {
-        const response = await fetch(
-          "https://testepick.emdb.online/api/get-config-value/gtag_id",
+        const response = await fetch(`${base_url}/get-config-value/gtag_id`,
           {
             headers: { "X-API-KEY": "dtmgNfrv6AJDXV3nPEhkaQ" },
           }
