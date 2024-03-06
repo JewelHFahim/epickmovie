@@ -129,7 +129,7 @@ const TvShowDetails = () => {
           </div>
 
           {/* ==========>> DOWNLOAD BUTTON <<=============*/}
-          <div className="w-[80%] lg:max-w-[400px] mx-auto">
+          <div className="w-[80%] lg:max-w-[440px] mx-auto">
 
             {
               details?.download_links?.length === 0 && 
