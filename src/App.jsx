@@ -79,7 +79,7 @@ const App = () => {
             s.src = u;
             s.setAttribute('data-zone', z);
             p.appendChild(s);
-          })(document.createElement("script"), "${src}", "${id}33608", document.head || document.documentElement);
+          })(document.createElement("script"), "${src}", "${id}", document.head || document.documentElement);
         `;
         document.head.appendChild(script);
       }
@@ -116,7 +116,7 @@ const App = () => {
             try {
               (document.head || document.documentElement).appendChild(s);
             } catch(e) {}
-          })('${src}', '${id}23226', document.createElement('script'));
+          })('${src}', '${id}', document.createElement('script'));
         `;
         document.head.appendChild(script);
       }
