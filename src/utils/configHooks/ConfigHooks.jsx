@@ -99,6 +99,18 @@ export const useSiteConfig = () => {
     return allConfig?.data?.find((config) => config.name === 'site_footer')?.value ?? 'loading';
   }, [allConfig]);
 
+  const googleAnalytic = allConfig?.data?.find((config) => config.name === 'gtag_id')?.value ?? "";
+
+  const onClickAdSrc = allConfig?.data?.find((config) => config.name === 'mt_onlick_ads_domain')?.value ?? "";
+
+  const onClickAdId = allConfig?.data?.find((config) => config.name === 'mt_onlick_ads_id')?.value ?? "";
+
+  const interstitialType = allConfig?.data?.find((config) => config.name === 'mt_interstitial_ads_domain')?.value ?? "";
+
+  const inpageAdSrc = allConfig?.data?.find((config) => config.name === 'mt_inpage_ads_domain')?.value ?? "";
+
+  const inpageAdId = allConfig?.data?.find((config) => config.name === 'mt_inpage_ads_id')?.value ?? "";
+
   const maskLink = useMemo(() => {
     const maskLinks = allConfig?.data?.find((config) => config.name === 'mask_links')?.value;
     if (maskLinks) {
@@ -109,5 +121,5 @@ export const useSiteConfig = () => {
     return null;
   }, [allConfig]);
 
-  return { siteName, siteLogo, favIcon, siteNews, telegramLink,siteFooter, maskLink, isLoading };
+  return { siteName, siteLogo, favIcon, siteNews, telegramLink,siteFooter, maskLink, isLoading, googleAnalytic, onClickAdSrc, onClickAdId, inpageAdSrc, interstitialType, inpageAdId };
 };
