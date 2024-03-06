@@ -2,7 +2,6 @@ import calender from "../../assets/calender.svg";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useSeriesDetailsQuery } from "../../redux/features/tv-show/tvShowApi";
 import JoinTelegramBtn from "../../utils/JoinTelegramBtn";
-import Accrodion from "../../components/accrodion/Accrodion";
 import RelatedPost from "../../components/related-post/RelatedPost";
 import AdvertisementSection from "../../components/advertisement/AdvertisementSection";
 import Breadcum from "../../utils/breadcum/Breadcum";
@@ -13,6 +12,7 @@ import CountryList from "../../components/advertisement/CountryList";
 import { useEffect } from "react";
 import CachedImage from "../../utils/cache-img/CachedImage";
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
+import DownloadSeason from "./DownloadSeason";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -138,7 +138,9 @@ const TvShowDetails = () => {
 
             { 
             details?.download_links && Object.keys(details?.download_links)  &&
-            <Accrodion details={details} url={"jkj"} />
+            // <Accrodion details={details} url={"jkj"} />
+            <DownloadSeason details={details}/>
+
             }
             
           </div>

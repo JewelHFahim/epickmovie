@@ -37,7 +37,7 @@ const MovieDetails = () => {
         <title>
           {`${siteName} || ${details?.post_title ? details?.post_title : ""} `}
         </title>
-        <meta name="description" content={details?.post_content} />
+        <meta name={ details?.post_title ? details?.post_title : ""} content={details?.post_content} />
         <meta name="keywords" content="movies" />
       </Helmet>
 
