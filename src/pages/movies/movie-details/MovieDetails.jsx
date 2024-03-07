@@ -31,6 +31,8 @@ const MovieDetails = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
+
+
   return (
     <div className="bg-[#27272A]">
       <Helmet>
@@ -46,6 +48,8 @@ const MovieDetails = () => {
         children2={details?.post_title}
         redirect={"/movies"}
       />
+
+
 
       <section className="py-4 px-10 lg:py-2 lg:px-5 flex justify-between">
         <div className="w-full  lg:w-[70%]">

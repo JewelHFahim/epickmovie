@@ -133,12 +133,11 @@ const TvShowDetails = () => {
 
             {
               details?.download_links?.length === 0 && 
-              <p className="text-[18px] font-medium text-slate-500 text-center"> No Download Link {details?.download_links?.length }</p>
+              <p className="text-[18px] font-medium text-slate-500 text-center"> No Download Link</p>
             }
 
             { 
             details?.download_links && Object.keys(details?.download_links)  &&
-            // <Accrodion details={details} url={"jkj"} />
             <DownloadSeason details={details}/>
 
             }
