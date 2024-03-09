@@ -1,11 +1,19 @@
 import { Link } from "react-router-dom";
 
-const IndexTable = ({ urls }) => {
-  console.log(urls);
-
+const IndexTable = ({ urls, downloadFn }) => {
   return (
     <div className="w-[80%] mx-auto">
-      <div className="mt-6 shadow-sm border rounded-lg overflow-x-auto">
+      <div className="flex justify-end">
+        <button
+          type="button"
+           onClick={()=>downloadFn()}
+          className="border border-blue-700 text-blue-700 px-6 py-1 rounded-md hover:bg-blue-700 hover:text-white transition-all duration-200"
+        >
+          Download
+        </button>
+      </div>
+
+      <div className="mt-2 shadow-sm border rounded-lg overflow-x-auto">
         <table className="w-full table-auto text-sm text-left bg-[#0f0f10]">
           <thead className="bg-slate-800 text-gray-100 font-medium border-b">
             <tr className="divide-x">
@@ -15,6 +23,7 @@ const IndexTable = ({ urls }) => {
               <th className="py-3 px-6">Priority</th>
             </tr>
           </thead>
+
           <tbody className="text-gray-100 divide-y">
             {urls?.map((item, idx) => (
               <tr key={idx} className="divide-x">

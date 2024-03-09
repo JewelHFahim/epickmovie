@@ -1,18 +1,20 @@
 import { useEffect, useState } from "react";
+import { usePerPageBengaliMovieListQuery } from "../../redux/features/movies/movieApi";
 import IndexTable from "./IndexTable";
+import SitemapHeader from "./SitemapHeader";
 
-const SitemapGenerator = ({ dynamicUrls }) => {
+const BanglaPost = () => {
+  const { data: perPgaeMovie } = usePerPageBengaliMovieListQuery();  
   const [urls, setUrls] = useState([]);
   const [download, setDwonload] = useState();
+
 
   useEffect(() => {
     const xmlData = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${dynamicUrls
-        ?.map(
-          (url) => `
+      ${perPgaeMovie?.data?.data?.map( (url) => `
         <url>
-          <loc>http://localhost:3000${url}</loc>
+          <loc>http://localhost:3000/${url?.post_type === "movies" ? "movie" : "series"}/${url?.id}/${url?.post_im_title}</loc>
           <lastmod>${new Date().toISOString()}</lastmod>
           <changefreq>daily</changefreq>
           <priority>0.8</priority>
@@ -21,8 +23,8 @@ const SitemapGenerator = ({ dynamicUrls }) => {
         )
         .join("")}
     </urlset>`;
-
     setDwonload(xmlData)
+
 
     const parser = new DOMParser();
     const xmlDoc = parser.parseFromString(xmlData, "text/xml");
@@ -40,33 +42,33 @@ const SitemapGenerator = ({ dynamicUrls }) => {
 
       parsedUrls.push({ loc, lastmod, changefreq, priority });
     }
-
+  
     setUrls(parsedUrls);
-  }, [dynamicUrls]);
+  }, [perPgaeMovie?.data?.data]);
 
   const handleDownload = () => {
-    // Create a Blob from the XML data
-    const blob = new Blob([download], { type: 'text/xml' });
-    const url = window.URL.createObjectURL(blob);
-
-    // Create a link element and trigger a click event to download the file
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'sitemap.xml';
-    document.body.appendChild(a);
-    a.click();
-
-    // Cleanup
-    window.URL.revokeObjectURL(url);
-    document.body.removeChild(a);
-}
-
+        // Create a Blob from the XML data
+        const blob = new Blob([download], { type: 'text/xml' });
+        const url = window.URL.createObjectURL(blob);
+    
+        // Create a link element and trigger a click event to download the file
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'sitemap.xml';
+        document.body.appendChild(a);
+        a.click();
+    
+        // Cleanup
+        window.URL.revokeObjectURL(url);
+        document.body.removeChild(a);
+  }
 
   return (
     <div className="mb-10">
-      <IndexTable urls={urls}  downloadFn={handleDownload}/>
+     <SitemapHeader/>
+      <IndexTable urls={urls} downloadFn={handleDownload} />
     </div>
   );
 };
 
-export default SitemapGenerator;
+export default BanglaPost;

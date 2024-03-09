@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
-import IndexTable from "./IndexTable";
+import IndexTable from "../IndexTable";
+import SitemapHeader from "../SitemapHeader";
 
-const SitemapGenerator = ({ dynamicUrls }) => {
-  const [urls, setUrls] = useState([]);
+const TermPost = ({termUrl}) => {
   const [download, setDwonload] = useState();
+  const [urls, setUrls] = useState([]);
 
   useEffect(() => {
     const xmlData = `<?xml version="1.0" encoding="UTF-8"?>
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${dynamicUrls
-        ?.map(
-          (url) => `
+      ${termUrl?.map(
+          (genre) => `
         <url>
-          <loc>http://localhost:3000${url}</loc>
+          <loc>http://localhost:3000/terms/${genre?.slug}</loc>
           <lastmod>${new Date().toISOString()}</lastmod>
           <changefreq>daily</changefreq>
           <priority>0.8</priority>
@@ -21,7 +21,6 @@ const SitemapGenerator = ({ dynamicUrls }) => {
         )
         .join("")}
     </urlset>`;
-
     setDwonload(xmlData)
 
     const parser = new DOMParser();
@@ -41,8 +40,9 @@ const SitemapGenerator = ({ dynamicUrls }) => {
       parsedUrls.push({ loc, lastmod, changefreq, priority });
     }
 
+
     setUrls(parsedUrls);
-  }, [dynamicUrls]);
+  }, [termUrl]);
 
   const handleDownload = () => {
     // Create a Blob from the XML data
@@ -64,9 +64,10 @@ const SitemapGenerator = ({ dynamicUrls }) => {
 
   return (
     <div className="mb-10">
-      <IndexTable urls={urls}  downloadFn={handleDownload}/>
+       <SitemapHeader/>
+      <IndexTable urls={urls} downloadFn={handleDownload} />
     </div>
   );
 };
 
-export default SitemapGenerator;
+export default TermPost;
