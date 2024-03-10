@@ -50,41 +50,6 @@ const router = createBrowserRouter([
     path: "/quality-post.xml",
     element: <QualityPost />,
   },
-  // {
-  //   path: "/sitemap-xml",
-  //   element: <SitemapHomePage />,
-  //   children: [
-  //     {
-  //       path: "/sitemap-xml",
-  //       element: <HomeRoutes />,
-  //     },
-  //     {
-  //       path: "/movie-post.xml",
-  //       element: <MoviePost />,
-  //     },
-  //     {
-  //       path: "/tv-post.xml",
-  //       element: <TvShowPost />,
-  //     },
-  //     {
-  //       path: "/bengali-post.xml",
-  //       element: <BanglaPost />,
-  //     },
-  //     {
-  //       path: "/genre-post.xml",
-  //       element: <GenrePost />,
-  //     },
-  //     {
-  //       path: "/year-post.xml",
-  //       element: <YearPost />,
-  //     },
-  //     {
-  //       path: "/quality-post.xml",
-  //       element: <QualityPost />,
-  //     },
-  //   ],
-  // },
-
   {
     path: "*",
     element: <NotFound />,

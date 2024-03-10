@@ -8,17 +8,14 @@ import { useLocation } from "react-router-dom";
 import SiteNews from "../../../components/SiteNews/SiteNews";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 import { usePerPgaeMovieQuery } from "../../../redux/features/movies/movieApi";
-import { useDetectAdBlock } from "adblock-detect-react";
-
 
 const Movies = () => {
   const location = useLocation();
-  const {siteName} = useSiteConfig();
+  const { siteName } = useSiteConfig();
   const currentRoute = location.pathname;
   const storedPage = JSON.parse(localStorage.getItem("MovieCurrentPage")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
-
 
   useEffect(() => {
     localStorage.setItem("MovieCurrentPage", JSON.stringify(currentPage));
@@ -31,18 +28,15 @@ const Movies = () => {
     };
   }, [currentPage, currentRoute]);
 
-
-  const adBlockDetected = useDetectAdBlock();
-  useEffect(() => {
-    if (adBlockDetected) {
-      window.alert("ad block detected");
-    }
-  }, [adBlockDetected]);
+  // const adBlockDetected = useDetectAdBlock();
+  // useEffect(() => {
+  //   if (adBlockDetected) {
+  //     window.alert("Ads Blocker Need to Deactivate");
+  //   }
+  // }, [adBlockDetected]);
 
   return (
-   
     <div className="flex flex-col justify-center items-center">
-
       <Helmet>
         <title>{siteName} || Movies</title>
         <meta
@@ -50,12 +44,9 @@ const Movies = () => {
           content="Unlimited Movies and Latest Collections"
         />
       </Helmet>
-
-      {/* {adBlockDetected  && <AdBlockerPopup adBlockDetected={adBlockDetected} isOpen={isOpen} setIsOpen={setIsOpen}/>} */}
-
+      
       {/* ==================>> Domains <<=================*/}
-      <SiteNews/>
-
+      <SiteNews />
 
       {/* ==================>> Movies <<==================*/}
 
@@ -83,7 +74,6 @@ const Movies = () => {
         perPgaeMovie={perPgaeMovie}
       />
     </div>
-    
   );
 };
 

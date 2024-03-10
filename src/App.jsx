@@ -30,7 +30,7 @@ const App = () => {
     fetchFavicon();
   }, [favIcon]);
 
-  // Google Analytics ID 
+  // Google Analytics ID
   useEffect(() => {
     const setupGtag = async () => {
       const dynamicId = await googleAnalytic;
@@ -86,7 +86,7 @@ const App = () => {
     };
 
     setupGtag();
-  }, [onClickAdSrc,onClickAdId]);
+  }, [onClickAdSrc, onClickAdId]);
 
   // Interstitial
   useEffect(() => {
@@ -124,6 +124,27 @@ const App = () => {
 
     setupGtag();
   }, [inpageAdSrc, inpageAdId]);
+
+  // Script Setup End Here
+
+  // const adBlockDetected = useDetectAdBlock();
+  // const [intervalId, setIntervalId] = useState(null);
+
+  // useEffect(() => {
+  //   if (adBlockDetected) {
+  //     window.alert("Ads Blocker Need to Deactivate");
+
+  //     const id = setInterval(() => {
+  //       window.alert("Ads Blocker Need to Deactivate");
+  //     }, 60000);
+
+  //     setIntervalId(id);
+  //   } else {
+  //     clearInterval(intervalId);
+  //   }
+
+  //   return () => clearInterval(intervalId);
+  // }, [adBlockDetected]);
 
   return (
     <HelmetProvider>
