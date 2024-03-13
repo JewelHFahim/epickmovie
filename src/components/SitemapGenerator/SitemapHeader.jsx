@@ -1,14 +1,6 @@
-import { useState } from "react";
 import BreadcumSitemap from "./BreadcumSitemap";
-import "./Style.css";
 
 const SitemapHeader = () => {
-  const [primaryColor, setPrimaryColor] = useState("#007bff");
-
-  const handleColorChange = (newColor) => {
-    document.documentElement.style.setProperty("--primary-color", newColor);
-    setPrimaryColor(newColor);
-  };
 
   return (
     <div>
@@ -24,11 +16,6 @@ const SitemapHeader = () => {
             You can find more information about XML Sitemaps at example.org.
           </p>
 
-          <input
-            type="color"
-            value={primaryColor}
-            onChange={(e) => handleColorChange(e.target.value)}
-          />
         </div>
       </div>
 
