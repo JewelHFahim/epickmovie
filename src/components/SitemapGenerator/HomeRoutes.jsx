@@ -1,101 +1,41 @@
-import { Link } from "react-router-dom";
-import SitemapHeader from "./SitemapHeader";
-import {
-  useGenreListQuery,
-  usePerPageBengaliMovieListQuery,
-  usePerPgaeMovieQuery,
-  usePixelQualityClientQuery,
-  usePrintQualityClientQuery,
-  useYearListQuery,
-} from "../../redux/features/movies/movieApi";
-import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
+import { useEffect, useState } from "react";
+import { base_url } from "../../config/config";
 
-const HomeRoutes = () => {
+const DownloadButton = () => {
+  const [xmlData, setXMLData] = useState();
 
-  const { data: yearList } = useYearListQuery();
-  const { data: genreList } = useGenreListQuery();
-  const { data: tvShow } = usePerPgaeTvShowQuery();
-  const { data: allMovie } = usePerPgaeMovieQuery();
-  const { data: banglaMovie } = usePerPageBengaliMovieListQuery();
-  const { data: pixelQualityList } = usePixelQualityClientQuery();
-  const { data: printQualityList } = usePrintQualityClientQuery();
+  useEffect(() => {
+    fetch(`${base_url}/admin/sitemap-download`, {
+      headers: {
+        Authorization:
+          "Bearer 118|6VN3HiB3RvtPAdGlZyGlqjVuj9svWBBIqtUZgjRi0d25a0d8",
+      },
+    })
+      .then((res) => res.text())
+      .then((data) => setXMLData(data));
+  }, []);
 
-  const pixel = pixelQualityList?.data;
-  const print = printQualityList?.data;
-  const combinedQuality = pixel?.concat(print);
-
-
-  const siteHomeUrls = [
-    {
-      loc: "http://localhost:3000/movie-post.xml",
-      urlCount: allMovie?.data?.total,
-      changefreq: "",
-      priority: "",
-    },
-    {
-      loc: "http://localhost:3000/tv-post.xml",
-      urlCount: tvShow?.data?.total,
-      changefreq: "",
-      priority: "",
-    },
-    {
-      loc: "http://localhost:3000/bengali-post.xml",
-      urlCount: banglaMovie?.data?.total,
-      changefreq: "",
-      priority: "",
-    },
-    {
-      loc: "http://localhost:3000/genre-post.xml",
-      urlCount: genreList?.data?.length,
-      changefreq: "",
-      priority: "",
-    },
-    {
-      loc: "http://localhost:3000/year-post.xml",
-      urlCount: yearList?.data?.length,
-      changefreq: "",
-      priority: "",
-    },
-    {
-      loc: "http://localhost:3000/quality-post.xml",
-      urlCount: combinedQuality?.length,
-      changefreq: "",
-      priority: "",
-    },
-  ];
+  const handleDownloadAndSave = () => {
+    const blob = new Blob([xmlData], { type: "application/xml" });
+    const reader = new FileReader();
+    reader.onload = function () {
+      const dataUrl = reader.result;
+      const a = document.createElement("a");
+      a.href = dataUrl;
+      a.download = "sitemap.xml";
+      a.style.display = "none";
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+    };
+    reader.readAsDataURL(blob);
+  };
 
   return (
-    <div className="mx-auto">
-      <SitemapHeader />
-
-      <div className="w-[80%] mx-auto mt-6 shadow-sm border rounded-lg overflow-x-auto">
-        <table className="w-full table-auto text-sm text-left bg-[#0f0f10]">
-          <thead className="bg-slate-800 text-gray-100 font-medium border-b">
-            <tr className="divide-x">
-              <th className="py-3 px-6">URL</th>
-              <th className="py-3 px-6"> URL Count</th>
-              <th className="py-3 px-6">Last Updated</th>
-            </tr>
-          </thead>
-          <tbody className="text-gray-100 divide-y">
-            {siteHomeUrls?.map((item, idx) => (
-              <tr key={idx} className="divide-x">
-                <td className="px-6 py-4 whitespace-nowrap flex items-center gap-x-6">
-                  <Link to={item.loc} className="text-blue-400">
-                    {item.loc}
-                  </Link>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">{item.urlCount}</td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  {item.changefreq}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+    <div className="w-screen h-screen flex justify-center items-center">
+      <button onClick={handleDownloadAndSave} className="text-blue-500 border border-blue-500 hover:bg-blue-600 hover:text-white px-8 py-1.5 transform duration-200">Download and Save XML</button>
     </div>
   );
 };
 
-export default HomeRoutes;
+export default DownloadButton;

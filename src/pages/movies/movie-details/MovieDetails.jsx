@@ -13,6 +13,10 @@ import CountryList from "../../../components/advertisement/CountryList";
 import { useEffect } from "react";
 import CachedImage from "../../../utils/cache-img/CachedImage";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
+import { FaCheckSquare } from "react-icons/fa";
+import { space } from "postcss/lib/list";
+import DownloadInfos from "./DownloadInfos";
+import StoryTitle from "./StoryTitle";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -20,6 +24,8 @@ const MovieDetails = () => {
   const { siteName } = useSiteConfig();
   const { data: movieDetails } = useMovieDetailsQuery(id);
   const details = movieDetails?.data;
+
+  console.log(details);
 
   useEffect(() => {
     if (movieDetails?.status === false) {
@@ -31,15 +37,16 @@ const MovieDetails = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-
-
   return (
     <div className="bg-[#27272A]">
       <Helmet>
         <title>
           {`${siteName} || ${details?.post_title ? details?.post_title : ""} `}
         </title>
-        <meta name={ details?.post_title ? details?.post_title : ""} content={details?.post_content} />
+        <meta
+          name={details?.post_title ? details?.post_title : ""}
+          content={details?.post_content}
+        />
         <meta name="keywords" content="movies" />
       </Helmet>
 
@@ -48,8 +55,6 @@ const MovieDetails = () => {
         children2={details?.post_title}
         redirect={"/movies"}
       />
-
-
 
       <section className="py-4 px-10 lg:py-2 lg:px-5 flex justify-between">
         <div className="w-full  lg:w-[70%]">
@@ -67,15 +72,7 @@ const MovieDetails = () => {
               <UploadedDate details={details}></UploadedDate>
             </div>
 
-            {details?.post_content ? (
-              <div className="mt-[11px] lg:mt-[48px] lg:max-w-[745px]">
-                <p className="text-[30px] lg:text-[15px]  text-white font-roboto">
-                  {details?.post_content}
-                </p>
-              </div>
-            ) : (
-              <p className="text-white">N/A</p>
-            )}
+            <StoryTitle details={details}/>
 
             <div className="my-[11px] lg:my-[15px]">
               <p className="text-[50px] lg:text-[24px] text-[#217703] font-[600] font-roboto">
@@ -104,22 +101,7 @@ const MovieDetails = () => {
               </p>
             </div>
 
-            <div className="mt-[13px] lg:mt-[30px] font-roboto">
-              <h3 className="text-[50px] lg:text-[24px] font-[600] text-[#217703] text-center lg:text-left">
-                Screenshots:
-              </h3>
-            </div>
-          </div>
-
-          {/* ==========>> SCREEN SHOTS <<=============*/}
-          <div className="flex flex-col gap-5 mt-3">
-            {details?.screenshots?.slice(0, 3)?.map((item, i) => (
-              <CachedImage
-                key={i}
-                src={item}
-                imgStyle="w-full h-[400px] object-cover"
-              />
-            ))}
+            <DownloadInfos details={details}/>
           </div>
 
           <div className="my-[28px]">
@@ -137,8 +119,7 @@ const MovieDetails = () => {
               ))
             ) : (
               <p className="text-[18px] font-medium text-slate-500 text-center">
-                {" "}
-                No Download Link{" "}
+                No Download Link
               </p>
             )}
           </div>
