@@ -13,17 +13,21 @@ const settingApi = apiSlice.injectEndpoints({
       query: () => "/get-quick-menu",
       providesTags: ["EpicMovies"],
     }),
+
+
+
     // ======================>> Site Map URLS <<====================
-    siteMapDownload: builder.query({
-      query: () => "/admin/sitemap-download",
+    websiteLink: builder.query({
+      query: () => "",
       providesTags: ["EpicMovies"],
     }),
+
+
   }),
 });
 
 export const {
   useAllConfigQuery,
   useQuickMenuUserQuery,
-  useSiteMapDownloadQuery,
 } = settingApi;
 export default settingApi;

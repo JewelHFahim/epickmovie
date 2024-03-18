@@ -79,6 +79,10 @@ export const useSiteConfig = () => {
     return allConfig?.data?.find((config) => config.name === 'site_name')?.value ?? 'loading';
   }, [allConfig]);
 
+  const websiteLink = useMemo(() => {
+    return allConfig?.data?.find((config) => config.name === 'website_link')?.value ?? 'loading';
+  }, [allConfig]);
+
   const siteLogo = useMemo(() => {
     return allConfig?.data?.find((config) => config.name === 'site_logo')?.value ?? 'loading';
   }, [allConfig]);
@@ -121,5 +125,5 @@ export const useSiteConfig = () => {
     return null;
   }, [allConfig]);
 
-  return { siteName, siteLogo, favIcon, siteNews, telegramLink,siteFooter, maskLink, isLoading, googleAnalytic, onClickAdSrc, onClickAdId, inpageAdSrc, interstitialType, inpageAdId };
+  return { siteName, siteLogo, favIcon, siteNews, telegramLink,siteFooter, maskLink, isLoading, googleAnalytic, onClickAdSrc, onClickAdId, inpageAdSrc, interstitialType, inpageAdId, websiteLink };
 };

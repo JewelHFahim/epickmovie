@@ -11,12 +11,11 @@ import UploadedDate from "../../../utils/uploaded-date/UploadedDate";
 import { Helmet } from "react-helmet";
 import CountryList from "../../../components/advertisement/CountryList";
 import { useEffect } from "react";
-import CachedImage from "../../../utils/cache-img/CachedImage";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
-import { FaCheckSquare } from "react-icons/fa";
-import { space } from "postcss/lib/list";
-import DownloadInfos from "./DownloadInfos";
-import StoryTitle from "./StoryTitle";
+import DownloadInfos from "../../../components/seo-related-content/DownloadInfos";
+import StoryTitle from "../../../components/seo-related-content/StoryTitle";
+import TagsList from "../../../components/seo-related-content/TagsList";
+import MobileStoryTitle from "../../../components/seo-related-content/MobileStoryTitle";
 
 const MovieDetails = () => {
   const { id } = useParams();
@@ -72,7 +71,12 @@ const MovieDetails = () => {
               <UploadedDate details={details}></UploadedDate>
             </div>
 
-            <StoryTitle details={details}/>
+            <div className="hidden lg:block">
+              <StoryTitle details={details} />
+            </div>
+            <div className="lg:hidden">
+              <MobileStoryTitle details={details} />
+            </div>
 
             <div className="my-[11px] lg:my-[15px]">
               <p className="text-[50px] lg:text-[24px] text-[#217703] font-[600] font-roboto">
@@ -101,7 +105,7 @@ const MovieDetails = () => {
               </p>
             </div>
 
-            <DownloadInfos details={details}/>
+            <DownloadInfos details={details} />
           </div>
 
           <div className="my-[28px]">
@@ -126,6 +130,8 @@ const MovieDetails = () => {
 
           {/* ===========>> JOIN TELEGRAM <<=========== */}
           <JoinTelegramBtn />
+
+          <TagsList />
 
           <div className="mt-16 lg:hidden ">
             <h2 className="text-white text-[40px] font-medium px-4">
