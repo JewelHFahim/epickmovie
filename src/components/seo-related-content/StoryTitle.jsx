@@ -1,6 +1,9 @@
 import { FaCheckSquare } from "react-icons/fa";
+import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 
 const StoryTitle = ({ details }) => {
+  const { siteName } = useSiteConfig();
+
   return (
     <div className="mt-[11px] lg:mt-[30px] lg:max-w-[745px] text-white font-roboto flex flex-wrap">
       <p className="text-[30px] lg:text-[15px]">
@@ -41,7 +44,7 @@ const StoryTitle = ({ details }) => {
         )}
         This Movie is Available in
         {details?.additional_data?.dtaudio?.map((item, i) => (
-          <span key={i} className="mx-1 text-[#fa00d2">
+          <span key={i} className="mx-1 text-[#fa00d2]">
             {item.term.name}
           </span>
         ))}
@@ -57,13 +60,13 @@ const StoryTitle = ({ details }) => {
 
       <p className="text-[30px] lg:text-[15px] mt-2">
         <span className="text-[#ffba07] font-semibold underline mr-1">
-          EpicMovies.buzz
+          {siteName}
         </span>
         is the bes online platform for downloading
         <span className="text-[#adff00]"> Hollywood, Bollywood, Bengali </span>
         Movies and <span className="text-[#adff00]"> WEB-Series </span>. We
         provide direct G-Drive download links for fast and secure downloading.
-        Click on the download button below and follow the steps tostart
+        Click on the download button below and follow the steps to start
         downloading.
       </p>
     </div>
