@@ -1,5 +1,6 @@
 import { FaCheckSquare } from "react-icons/fa";
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
+import { Link } from "react-router-dom";
 
 const StoryTitle = ({ details }) => {
   const { siteName } = useSiteConfig();
@@ -15,9 +16,9 @@ const StoryTitle = ({ details }) => {
         {details?.additional_data?.genres &&
           details?.additional_data?.genres?.map((item, i) => (
             <span key={i}>
-              <span className="text-red-600 font-semibold mx-1 underline">
+              <Link to={`/terms/${item?.term?.slug}`} className="text-red-600 font-semibold mx-1 underline">
                 {item.term.name}
-              </span>
+              </Link>
               ,
             </span>
           ))}
@@ -25,9 +26,9 @@ const StoryTitle = ({ details }) => {
           <>
             This Movie is available in
             {details?.additional_data?.pxquality?.map((item, i) => (
-              <span key={i} className="text-yellow-500 font-semibold mx-1">
+              <Link to={`/terms/${item?.term?.slug}`} key={i} className="text-yellow-500 font-semibold mx-1">
                 {item.term.name}
-              </span>
+              </Link>
             ))}
           </>
         )}
@@ -35,33 +36,33 @@ const StoryTitle = ({ details }) => {
           <>
             qualities with
             {details?.additional_data?.prquality?.map((item, i) => (
-              <span key={i} className="text-green-600 font-semibold ml-1">
+              <Link to={`/terms/${item?.term?.slug}`} key={i} className="text-green-600 font-semibold ml-1">
                 {item.term.name}
-              </span>
+              </Link >
             ))}
             .
           </>
         )}
         This Movie is Available in
         {details?.additional_data?.dtaudio?.map((item, i) => (
-          <span key={i} className="mx-1 text-[#fa00d2]">
+          <span key={i} className="mx-1">
             {item.term.name}
           </span>
         ))}
-        with <span className="text-[#fa00d2]">English</span> Subtitles. This
+        with <span>English</span> Subtitles. This
         Movie Is Now Available In
         {details?.additional_data?.dtaudio?.map((item, i) => (
-          <span key={i} className="text-[#ff007a] font-semibold ml-1">
+          <Link to={`/terms/${item?.term?.slug}`} key={i} className="text-[#ff007a] font-semibold ml-1">
             {item.term.name}
-          </span>
+          </Link>
         ))}
         .
       </p>
 
       <p className="text-[30px] lg:text-[15px] mt-2">
-        <span className="text-[#ffba07] font-semibold underline mr-1">
+        <Link to="/" className="text-[#ffba07] font-semibold underline mr-1">
           {siteName}
-        </span>
+        </Link>
         is the bes online platform for downloading
         <span className="text-[#adff00]"> Hollywood, Bollywood, Bengali </span>
         Movies and <span className="text-[#adff00]"> WEB-Series </span>. We

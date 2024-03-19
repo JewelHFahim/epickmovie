@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 
 const DownloadInfos = ({ details }) => {
-  const { siteName } = useSiteConfig();
+  const { siteName, telegramLink } = useSiteConfig();
 
   return (
     <div className="mt-[13px] lg:mt-[30px] font-roboto text-white pr-4">
@@ -26,7 +26,10 @@ const DownloadInfos = ({ details }) => {
           download
           <span className="mx-1">{details?.post_im_title}</span>
           Movie from this Telegram Channel-
-          <Link to="" className="text-[#fa00d2] ml-1">
+          <Link
+            to={telegramLink}
+            className="text-[#fa00d2] hover:underline ml-1"
+          >
             Click Here
           </Link>
           .
@@ -78,9 +81,14 @@ const DownloadInfos = ({ details }) => {
           movie is a one or two-click process. But if you really dont&apos;t
           know how to download this movie. Don&apos;t worry, you can easily
           download it. First, go to the Telegram search section and type this
-          &quot;@epicmovies&quot; channel name that should be available for this
-          movie. After that, open the channel that you search for. Finally,
-          there you will get the
+          <Link
+            to={telegramLink}
+            className="text-green-500 hover:underline px-1"
+          >
+            &quot;@epicmovies&quot;
+          </Link>
+          channel name that should be available for this movie. After that, open
+          the channel that you search for. Finally, there you will get the
           <span className="mx-1">{details?.post_im_title}</span>
           movie download link or icon.
         </p>
@@ -106,13 +114,19 @@ const DownloadInfos = ({ details }) => {
       {/* ============== FIVE ============= */}
       <div>
         <h1 className="text-[35px] lg:text-[30px] font-semibold leading-none">
-          <span className="mr-1 ">{details?.post_im_title}</span>
-          Full Movie Download {siteName}
+          <span className="mr-1">{details?.post_im_title}</span>
+          Full Movie Download
+          <Link to="/" className="hover:underline px-1 underline">
+            {siteName}
+          </Link>
         </h1>
         <p className="text-[22px] lg:text-[16px]">
-          {siteName}is also a famous pirated movie downloading site, this site
-          also works exactly like MLcbd.fun, and on this site, you will get to
-          download all types of movies in good quality.
+          <Link to="/" className="px-1 text-yellow-500 underline">
+            {siteName}
+          </Link>
+          is also a famous pirated movie downloading site, this site also works
+          exactly like <Link to="https://mlcbd.fun/" className="pl-1 text-yellow-500 underline">MLCBD.FUN</Link>, and on this site, you will get to download all
+          types of movies in good quality.
         </p>
       </div>
       <br />
@@ -127,11 +141,13 @@ const DownloadInfos = ({ details }) => {
         <p className="text-[22px] lg:text-[16px]">
           Actually, there are many sites on the internet from where you can
           download <span className="ml-1">{details?.post_im_title}</span>, out
-          of which we have talked about the famous 2 sites {siteName} and MLCBD
+          of which we have talked about the famous 2 sites <Link to="/" className="px-1 text-yellow-500 underline">
+            {siteName}
+          </Link> and <Link to="https://mlcbd.fun/" className="px-1 text-yellow-500 underline">MLCBD.FUN</Link>
           site. If <span className="mx-1">{details?.post_im_title}</span> is not
           available on these sites then you can request for this movie on
           telegram-
-          <Link to="" className="text-[#fa00d2] ml-1 hover:underline">
+          <Link to={telegramLink} className="text-[#fa00d2] ml-1 hover:underline">
             Request Here
           </Link>
         </p>
@@ -147,7 +163,7 @@ const DownloadInfos = ({ details }) => {
         <p className="text-[22px] lg:text-[16px]">
           If you search <span className="mx-1">{details?.post_im_title}</span>
           movie google drive download link then you are in right place. Beacuse
-          <Link to="" className="font-semibold underline px-1">
+          <Link to="/" className="font-semibold text-yellow-500 underline px-1 text-">
             {siteName}
           </Link>
           provide direct Google Drive download links for fast and secure
@@ -160,7 +176,7 @@ const DownloadInfos = ({ details }) => {
       {/* ============== EIGHT ============= */}
       <div>
         <h1 className="text-[35px] lg:text-[30px] font-semibold leading-none">
-          Hollywood Hindi Dubbed Movies Download {siteName}
+          Hollywood Hindi Dubbed Movies Download <Link to="/" className="underline">{siteName}</Link>
         </h1>
         <p className="text-[22px] lg:text-[16px]">
           Hollywood Hindi dubbed movies download: Are you a Hollywood movie
@@ -196,7 +212,9 @@ const DownloadInfos = ({ details }) => {
         </h1>
         <p className="text-[22px] lg:text-[16px]">
           There are many sites on the internet where you can watch Hollywood
-          movies in Hindi, among them the famous sites are {siteName} and MLcBD.
+          movies in Hindi, among them the famous sites are <Link to="/" className="px-1 text-yellow-500 underline">
+            {siteName}
+          </Link> and <Link to="https://mlcbd.fun/" className="px-1 text-yellow-500 underline">MLCBD.FUN</Link>.
         </p>
       </div>
       <br />
@@ -208,8 +226,12 @@ const DownloadInfos = ({ details }) => {
         </h1>
         <p className="text-[22px] lg:text-[16px]">
           There are so many movie download sites but they provide so many ads
-          with download links. But {siteName} does not provide any ads with
-          download links. So {siteName} is the best website to download the
+          with download links. But <Link to="/" className="px-1 text-yellow-500 underline">
+            {siteName}
+          </Link> does not provide any ads with
+          download links. So <Link to="/" className="px-1 text-yellow-500 underline">
+            {siteName}
+          </Link> is the best website to download the
           latest movies for free.
         </p>
       </div>
