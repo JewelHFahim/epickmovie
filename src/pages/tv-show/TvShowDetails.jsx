@@ -13,6 +13,9 @@ import { useEffect } from "react";
 import CachedImage from "../../utils/cache-img/CachedImage";
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 import DownloadSeason from "./DownloadSeason";
+import StoryTitle from "../../components/seo-related-content/StoryTitle";
+import MobileStoryTitle from "../../components/seo-related-content/MobileStoryTitle";
+import DownloadInfos from "../../components/seo-related-content/DownloadInfos";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -30,8 +33,6 @@ const TvShowDetails = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
-  
-
 
   return (
     <div className="bg-[#27272A]">
@@ -66,16 +67,13 @@ const TvShowDetails = () => {
               <UploadedDate details={details} />
             </div>
 
-            {/* Post Content */}
-            {details?.post_content ? (
-              <div className="mt-[11px] lg:mt-[48px] lg:max-w-[745px]">
-                <p className="text-[30px] lg:text-[15px] text-white font-roboto">
-                  {details?.post_content}
-                </p>
-              </div>
-            ) : (
-              <p className="text-white ">N/A</p>
-            )}
+            <div className="hidden lg:block">
+              <StoryTitle details={details} type={"Web-Series"} />
+            </div>
+
+            <div className="lg:hidden">
+              <MobileStoryTitle details={details} type={"Web-Series"}/>
+            </div>
 
             <div className="my-[11px] lg:my-[15px]">
               <p className="text-[50px] lg:text-[24px] text-[#217703] font-[600] font-roboto">
@@ -103,24 +101,10 @@ const TvShowDetails = () => {
                 {details?.post_content}
               </p>
             </div>
-
-            <div className="mt-[13px] lg:mt-[30px] font-roboto">
-              <h3 className="text-[50px] lg:text-[24px] font-[600] text-[#217703] text-center lg:text-left">
-                Screenshots:
-              </h3>
-            </div>
           </div>
 
-          {/* ==========>> SCREEN SHOTS <<=============*/}
-          <div className="flex flex-col gap-4 mt-3">
-            {details?.screenshots?.slice(0, 3)?.map((item, i) => (
-              <CachedImage
-                key={i}
-                src={item}
-                imgStyle="w-full h-[400px] object-cover"
-              />
-            ))}
-          </div>
+          {/* ==========>> Download Infos <<=============*/}
+          <DownloadInfos details={details} type="Web-Series" />
 
           <div className="lg:max-w-[745px] my-[28px]">
             <p className="text-[30px] text-white font-roboto font-[700] text-center">
@@ -130,18 +114,17 @@ const TvShowDetails = () => {
 
           {/* ==========>> DOWNLOAD BUTTON <<=============*/}
           <div className="w-[80%] lg:max-w-[440px] mx-auto">
+            {details?.download_links?.length === 0 && (
+              <p className="text-[18px] font-medium text-slate-500 text-center">
+                {" "}
+                No Download Link
+              </p>
+            )}
 
-            {
-              details?.download_links?.length === 0 && 
-              <p className="text-[18px] font-medium text-slate-500 text-center"> No Download Link</p>
-            }
-
-            { 
-            details?.download_links && Object.keys(details?.download_links)  &&
-            <DownloadSeason details={details}/>
-
-            }
-            
+            {details?.download_links &&
+              Object.keys(details?.download_links) && (
+                <DownloadSeason details={details} />
+              )}
           </div>
 
           {/* ===========>> TELEGRAM BUTTON <<=============*/}

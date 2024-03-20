@@ -72,10 +72,10 @@ const MovieDetails = () => {
             </div>
 
             <div className="hidden lg:block">
-              <StoryTitle details={details} />
+              <StoryTitle details={details} type={"Movies"}/>
             </div>
             <div className="lg:hidden">
-              <MobileStoryTitle details={details} />
+              <MobileStoryTitle details={details} type={"Movies"}/>
             </div>
 
             <div className="my-[11px] lg:my-[15px]">
@@ -105,7 +105,7 @@ const MovieDetails = () => {
               </p>
             </div>
 
-            <DownloadInfos details={details} />
+            <DownloadInfos details={details} type="Movies" />
           </div>
 
           <div className="my-[28px]">
@@ -131,7 +131,7 @@ const MovieDetails = () => {
           {/* ===========>> JOIN TELEGRAM <<=========== */}
           <JoinTelegramBtn />
 
-          <TagsList />
+          <TagsList details={details} />
 
           <div className="mt-16 lg:hidden ">
             <h2 className="text-white text-[40px] font-medium px-4">
