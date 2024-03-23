@@ -131,7 +131,7 @@ const MovieDetails = () => {
           {/* ===========>> JOIN TELEGRAM <<=========== */}
           <JoinTelegramBtn />
 
-          <TagsList details={details} />
+          <TagsList details={details} title="Movie"/>
 
           <div className="mt-16 lg:hidden ">
             <h2 className="text-white text-[40px] font-medium px-4">

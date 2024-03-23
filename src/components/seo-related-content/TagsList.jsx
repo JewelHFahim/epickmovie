@@ -1,60 +1,56 @@
 import { FaSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const TagsList = ({ details }) => {
-  const movieTitle = details?.post_im_title;
-  const releaseDate = details?.release_date?.slice(0, 4);
-
+const TagsList = ({ details,title }) => {
+  
   const tagsList = [
-    { title: `Download ${movieTitle} ${releaseDate}`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Download Filmyzilla`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Download HDMovies`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Download Bolly4u`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Download Bolly4u`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Download Pagalmovies`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Download Filmyhit`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Download Filmywap`, url: "" },
+    { title: `Download Filmyzilla`, url: "" },
+    { title: `Download HDMovies`, url: "" },
+    { title: `Download Bolly4u`, url: "" },
+    { title: `Download Bolly4u`, url: "" },
+    { title: `Download Pagalmovies`, url: "" },
+    { title: `Download Filmyhit`, url: "" },
+    { title: `Download Filmywap`, url: "" },
     {
-      title: `${movieTitle} ${releaseDate} Movie Download EpickMovies`,
+      title: `${title} Download EpickMovies`,
       url: "",
     },
-    { title: `${movieTitle} ${releaseDate} Movie Download MoviesHub`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Download Pagalworld`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Download Kuttymovies`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Download HDFriday`, url: "" },
+    { title: `${title} Download MoviesHub`, url: "" },
+    { title: `Download Pagalworld`, url: "" },
+    { title: `Download Kuttymovies`, url: "" },
+    { title: `Download HDFriday`, url: "" },
     {
-      title: `${movieTitle} ${releaseDate} Movie Download Trends on Google`,
-      url: "",
-    },
-    {
-      title: `${movieTitle} ${releaseDate} Movie Download Filmyzilla`,
+      title: `${title} Download Trends on Google`,
       url: "",
     },
     {
-      title: `${movieTitle} ${releaseDate} Movie Download Tamilrockers`,
-      url: "",
-    },
-    { title: `${movieTitle} ${releaseDate} Movie Download Filmymeet`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Movie Download Isaimini`, url: "" },
-    { title: `${movieTitle} ${releaseDate} Movie Download 7starhd`, url: "" },
-    {
-      title: `${movieTitle} ${releaseDate} Movie Download MoviesFlix`,
+      title: `${title} Download Filmyzilla`,
       url: "",
     },
     {
-      title: `${movieTitle} ${releaseDate} Movie Download Khatrimaza`,
+      title: `${title} Download Tamilrockers`,
+      url: "",
+    },
+    { title: `${title} Download Filmymeet`, url: "" },
+    { title: `${title} Download Isaimini`, url: "" },
+    { title: `${title} Download 7starhd`, url: "" },
+    {
+      title: `${title} Download MoviesFlix`,
       url: "",
     },
     {
-      title: `${movieTitle} ${releaseDate} Movie Download Coolmoviez`,
+      title: `${title} Download Khatrimaza`,
       url: "",
     },
-    { title: `${movieTitle} ${releaseDate} Movie Download Tamilyogi`, url: "" },
     {
-      title: `${movieTitle} ${releaseDate} Movie Download mkvcinemas`,
+      title: `${title} Download Coolmoviez`,
       url: "",
     },
-    { title: `Impact of Downloading Movies from Torrent Websites`, url: "" },
+    { title: `${title} Download Tamilyogi`, url: "" },
+    {
+      title: `${title} Download mkvcinemas`,
+      url: "",
+    },
   ];
 
   return (
@@ -63,12 +59,22 @@ const TagsList = ({ details }) => {
         <FaSquare className="text-green-500 text-2xl" /> Tags:
       </p>
 
-      <div className="inline-block-flex ml-7 mt-5 text-white text-sm font-semibold text-justify">
+      <div className="inline-block-flex ml-7 mt-5 text-white text-sm font-semibold text-justif">
+        <Link to="" className="hover:underline pr-1">
+          Download {details?.post_im_title} (
+          {details?.release_date?.slice(0, 4)}),
+        </Link>
         {tagsList.map((item, i) => (
           <Link key={i} className="hover:underline pr-1">
-            {item.title},
+            <span>
+              <span>{details?.post_im_title}</span>
+              <span className="mx-1">({details?.release_date?.slice(0, 4)})</span>
+              <span>{item.title}</span>
+            </span>
+            ,
           </Link>
         ))}
+        <span>Impact of Downloading {title} from Torrent Websites</span>
       </div>
     </div>
   );

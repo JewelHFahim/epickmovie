@@ -16,6 +16,7 @@ import DownloadSeason from "./DownloadSeason";
 import StoryTitle from "../../components/seo-related-content/StoryTitle";
 import MobileStoryTitle from "../../components/seo-related-content/MobileStoryTitle";
 import DownloadInfos from "../../components/seo-related-content/DownloadInfos";
+import TagsList from "../../components/seo-related-content/TagsList";
 
 const TvShowDetails = () => {
   const { id } = useParams();
@@ -116,7 +117,6 @@ const TvShowDetails = () => {
           <div className="w-[80%] lg:max-w-[440px] mx-auto">
             {details?.download_links?.length === 0 && (
               <p className="text-[18px] font-medium text-slate-500 text-center">
-                {" "}
                 No Download Link
               </p>
             )}
@@ -129,6 +129,9 @@ const TvShowDetails = () => {
 
           {/* ===========>> TELEGRAM BUTTON <<=============*/}
           <JoinTelegramBtn />
+
+          <TagsList details={details} title="Web-Series"/>
+
 
           {/* =============>> COUNTRY LIST <<===============*/}
 
