@@ -9,12 +9,12 @@ import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const FilterList = () => {
   const location = useLocation();
-  const {siteName} = useSiteConfig();
   const currentRoute = location.pathname;
+  const {siteName} = useSiteConfig();
   const storedPage = JSON.parse(localStorage.getItem("filterPagination")) || 1;
   const [currentPage, setCurrentPage] = useState(storedPage || 1);
 
-  const filteredTerm = currentRoute?.slice(7)
+  const filteredTerm = currentRoute?.slice(7);
   const { data: filteredResults, isLoading } = useFilteredResultsByPaginationQuery({filteredTerm, currentPage });
 
   useEffect(() => {
@@ -34,10 +34,7 @@ const FilterList = () => {
     <section className="min-h-screen">
       <Helmet>
         <title>{siteName} || {filteredTerm}</title>
-        <meta
-          name="description"
-          content="Unlimited Bangla Movies and Latest Collections"
-        />
+        <meta name="description" content="Unlimited Bangla Movies and Latest Collections"/>
       </Helmet>
 
       <div className=" ml-10 lg:ml-0 my-5">

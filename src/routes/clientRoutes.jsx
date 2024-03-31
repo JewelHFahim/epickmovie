@@ -40,7 +40,7 @@ export const clientRoutes = [
   },
 
   {
-    path: "/search-list",
+    path: "/search-list/:string",
     element: <SearchList />,
   },
   

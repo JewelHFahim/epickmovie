@@ -1,4 +1,7 @@
-import { useFeaturedPostsQuery, usePerPgaeMovieQuery } from "../../redux/features/movies/movieApi";
+import {
+  useFeaturedPostsQuery,
+  usePerPgaeMovieQuery,
+} from "../../redux/features/movies/movieApi";
 import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
@@ -13,12 +16,14 @@ import { Helmet } from "react-helmet";
 import { useEffect } from "react";
 
 const Home = () => {
-  const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
-  const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
+  const { data: featuredPosts, isLoading: featureLoading } =
+    useFeaturedPostsQuery();
+  const { data: tvShowList, isLoading: tvShowLoading } =
+    usePerPgaeTvShowQuery(1);
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
-  
+
   const { data: quickMenu } = useQuickMenuUserQuery();
-  const { siteName} = useSiteConfig();
+  const { siteName } = useSiteConfig();
 
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
@@ -36,7 +41,7 @@ const Home = () => {
   }, [currentRoute]);
 
   return (
-    <section className="bg-[#27272A] lg:bg-[#18181a] min-h-screen flex flex-col justify-center items-center">
+    <section className="bg-[#27272A] lg:bg-[#18181a] flex flex-col justify-center items-center">
       <Helmet>
         <title>{siteName}</title>
       </Helmet>
@@ -51,13 +56,16 @@ const Home = () => {
       </div>
 
       {/* =====================>> Domains <<===================*/}
-      <SiteNews/>
+      <SiteNews />
 
       {/* ================>> Featured Movies <<================*/}
       <>
         <HomePageSeeAllBtn>Featured Movies</HomePageSeeAllBtn>
         <div className="my-[18px]">
-          <FeaturedMovies featuredPosts={featuredPosts} featureLoading={featureLoading}/>
+          <FeaturedMovies
+            featuredPosts={featuredPosts}
+            featureLoading={featureLoading}
+          />
         </div>
       </>
 
@@ -66,14 +74,31 @@ const Home = () => {
         Movies
       </HomePageSeeAllBtn>
 
-      <div>
+      <div className="px-5 lg:px-0 w-full">
         {movieLoading ? (
-          <LazyLoading />
+          <div className="w-full">
+            <LazyLoading />
+          </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-2  lg:grid-cols-5 gap-[25px] my-[18px]">
-            {movieList?.data?.data?.slice(0, 10)?.map((item) => (
-              <MovieCard key={item?.id} item={item} redirect={`/movie/${item?.id}`}/>
-            ))}
+          <div>
+            <div className="hidden lg:grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
+              {movieList?.data?.data?.slice(0, 18)?.map((item) => (
+                <MovieCard
+                  key={item?.id}
+                  item={item}
+                  redirect={`/movie/${item?.id}`}
+                />
+              ))}
+            </div>
+            <div className="grid lg:hidden grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
+              {movieList?.data?.data?.slice(0, 9)?.map((item) => (
+                <MovieCard
+                  key={item?.id}
+                  item={item}
+                  redirect={`/movie/${item?.id}`}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
@@ -83,18 +108,59 @@ const Home = () => {
         TV Show
       </HomePageSeeAllBtn>
 
-      <div>
+      <div className="px-5 lg:px-0 w-full">
         {tvShowLoading ? (
+          <div className="w-full">
           <LazyLoading />
+        </div>
         ) : (
-          <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-5 gap-[25px] my-[18px]">
-            {tvShowList?.data?.data?.slice(0, 10)?.map((item) => (
-              <MovieCard key={item?.id} item={item} redirect={`/series/${item?.id}`} />
-            ))}
+          <div>
+            <div className="hidden lg:grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
+              {tvShowList?.data?.data?.slice(0, 18)?.map((item) => (
+                <MovieCard
+                  key={item?.id}
+                  item={item}
+                  redirect={`/series/${item?.id}`}
+                />
+              ))}
+            </div>
+
+            <div className="grid lg:hidden grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
+              {tvShowList?.data?.data?.slice(0, 9)?.map((item) => (
+                <MovieCard
+                  key={item?.id}
+                  item={item}
+                  redirect={`/series/${item?.id}`}
+                />
+              ))}
+            </div>
           </div>
         )}
       </div>
 
+      {/* ==================>> Up Comming Movies/TV Shows <<==================*/}
+      <HomePageSeeAllBtn total={totalTvShow} redirect={""}>
+        Up Comming Movies & Tv Shows
+      </HomePageSeeAllBtn>
+      <div className="px-5 lg:px-0 w-full">
+        {tvShowLoading ? (
+         <div className="w-full">
+         <LazyLoading />
+       </div>
+        ) : (
+          <div>
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
+              {tvShowList?.data?.data?.slice(0, 6)?.map((item) => (
+                <MovieCard
+                  key={item?.id}
+                  item={item}
+                  redirect={`/series/${item?.id}`}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </section>
   );
 };

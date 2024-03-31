@@ -19,9 +19,9 @@
   z-index: 9999;
 }
 
-.mainSlider {
+/* .mainSlider {
   width: 215px !important;
-}
+} */
 
 @media only screen and (max-width: 1024px) {
   .mainSlider {

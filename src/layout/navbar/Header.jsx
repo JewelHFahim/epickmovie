@@ -31,7 +31,7 @@ const Header = () => {
       const res = dispatch(collectSearchItem(searchTermState));
       if (res !== null) {
         setLastSearchTime(Date.now());
-        navigate("/search-list");
+        navigate(`/search-list/${searchTermState}`);
         setSearchTerm("");
       }
     }
@@ -47,7 +47,7 @@ const Header = () => {
       const res = dispatch(collectSearchItem(searchTermState));
       if (res !== null) {
         setLastSearchTime(Date.now());
-        navigate("/search-list");
+        navigate(`/search-list/${searchTermState}`);
         setSearchTerm("");
         setUserAnswer("")
       }

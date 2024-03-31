@@ -1,17 +1,15 @@
 const LazyLoading = () => {
   return (
-    <div className="px-6 py-10 mx-auto animate-pulse">
-      <div className="grid grid-cols-2 lg:grid-cols-5 gap-[17px] lg:gap-[25px] my-[18px]">
-        {Array.from({ length: 10 })?.map((item, i) => (
-          <div
-            key={i}
-            className="w-[401px] h-[635px] lg:w-[205px] lg:h-[460px] p-[1.5px] lg:p-[2px] rounded-[10px]"
-          >
-            <div className=" bg-slate-600 rounded-lg h-[90%] w-full"></div>
-            <h1 className="w-full h-[20px] mt-4 bg-slate-600 rounded-lg "></h1>
-          </div>
-        ))}
-      </div>
+    <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
+      {Array.from({ length: 12 }).map((item, i) => (
+        <div
+          key={i}
+          className="h-[450px] lg:h-[338px] rounded-[10px] flex flex-col justify-between overflow-hidden "
+        >
+          <div className="h-[90%] rounded-[10px] bg-slate-600"></div>
+          <div className="bg-slate-600 h-[5%] rounded-[10px]"></div>
+        </div>
+      ))}
     </div>
   );
 };

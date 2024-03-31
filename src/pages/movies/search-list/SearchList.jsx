@@ -1,4 +1,3 @@
-import { useSelector } from "react-redux";
 import { useSerachResultsQuery } from "../../../redux/features/search/searchApi";
 import MovieCard from "../../../components/movie-card/MovieCard";
 import { useLocation } from "react-router-dom";
@@ -7,12 +6,11 @@ import { Helmet } from "react-helmet";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const SearchList = () => {
-  const { searchTerm } = useSelector((state) => state.search);
-  const { data: searchResults, isLoading } = useSerachResultsQuery(searchTerm);
-
-  const { siteName } = useSiteConfig();
   const location = useLocation();
   const currentRoute = location.pathname;
+  const searchTerm = currentRoute?.slice(13);
+  const { data: searchResults, isLoading } = useSerachResultsQuery(searchTerm);
+  const { siteName } = useSiteConfig();
 
   useEffect(() => {
     if (currentRoute === "/search-list") {
@@ -26,13 +24,8 @@ const SearchList = () => {
   return (
     <section className="min-h-screen px-[50px] py-[20px] lg:px-0 lg:py-5">
       <Helmet>
-        <title>
-          {siteName} || {searchTerm}
-        </title>
-        <meta
-          name="description"
-          content="Unlimited Bangla Movies and Latest Collections"
-        />
+        <title> {siteName} || {searchTerm} </title>
+        <meta name="description" content="Unlimited Bangla Movies and Latest Collections"/>
       </Helmet>
 
       <div className="mt-2 mb-[32px]">
