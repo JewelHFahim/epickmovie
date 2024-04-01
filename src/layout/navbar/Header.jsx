@@ -15,6 +15,7 @@ const Header = () => {
   const [userAnswer, setUserAnswer] = useState("");
   const { siteLogo, siteName, isLoading } = useSiteConfig();
 
+
   const handleInputChange = (e) => {
     setSearchTerm(e.target.value);
   };

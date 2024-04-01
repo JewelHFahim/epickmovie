@@ -70,7 +70,7 @@ const Home = () => {
       </>
 
       {/* ====================>> Movies <<====================*/}
-      <HomePageSeeAllBtn total={totalMovies} redirect={"/movies"}>
+      <HomePageSeeAllBtn total={totalMovies} redirect={"/movies/page/1"}>
         Movies
       </HomePageSeeAllBtn>
 
@@ -104,7 +104,7 @@ const Home = () => {
       </div>
 
       {/* ==================>> Tv Shows <<==================*/}
-      <HomePageSeeAllBtn total={totalTvShow} redirect={"/tv-show"}>
+      <HomePageSeeAllBtn total={totalTvShow} redirect={"/tv-show/page/1"}>
         TV Show
       </HomePageSeeAllBtn>
 

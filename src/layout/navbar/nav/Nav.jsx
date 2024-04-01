@@ -18,13 +18,12 @@ import { useMemo } from "react";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const Nav = () => {
-
-  const {telegramLink} = useSiteConfig();
+  const { telegramLink } = useSiteConfig();
   const { data: yearList } = useYearListQuery();
   const { data: genreList } = useGenreListQuery();
   const { data: pixelQualityList } = usePixelQualityClientQuery();
   const { data: printQualityList } = usePrintQualityClientQuery();
-  
+
   const pixel = pixelQualityList?.data;
   const print = printQualityList?.data;
   const combinedQuality = pixel?.concat(print);
@@ -35,40 +34,53 @@ const Nav = () => {
     columns.push(genreList?.data?.slice(i, i + itemsPerColumn));
   }
 
-  const menus = useMemo(() => [
-    { title: "Home", path: "/", isDrapdown: false, icon: home },
-    { title: "Movie", path: "/movies", isDrapdown: false, icon: movie },
-    {
-      title: "Genre",
-      path: "#",
-      isDrapdown: true,
-      subMenu: genreList?.data,
-      icon: link,
-    },
-    {
-      title: "Year",
-      path: "#",
-      isDrapdown: true,
-      subMenu: yearList?.data,
-      icon: calender,
-    },
-    {
-      title: "Quality",
-      path: "#",
-      isDrapdown: true,
-      subMenu: combinedQuality,
-      icon: quality,
-    },
-    { title: "Web Series", path: "/tv-show", isDrapdown: false, icon: webSer },
-    { title: "Bangla", path: "/bangla", isDrapdown: false, icon: bangla },
-    {
-      title: "Join Telegram",
-      path: telegramLink,
-      isDrapdown: false,
-      icon: telegram,
-      newTab: true,
-    },
-  ], [genreList, yearList, combinedQuality, telegramLink]);
+  const menus = useMemo(
+    () => [
+      { title: "Home", path: "/", isDrapdown: false, icon: home },
+      {
+        title: "Movie",
+        path: "/movies/page/1",
+        isDrapdown: false,
+        icon: movie,
+      },
+      {
+        title: "Genre",
+        path: "#",
+        isDrapdown: true,
+        subMenu: genreList?.data,
+        icon: link,
+      },
+      {
+        title: "Year",
+        path: "#",
+        isDrapdown: true,
+        subMenu: yearList?.data,
+        icon: calender,
+      },
+      {
+        title: "Quality",
+        path: "#",
+        isDrapdown: true,
+        subMenu: combinedQuality,
+        icon: quality,
+      },
+      {
+        title: "Web Series",
+        path: "/tv-show/page/1",
+        isDrapdown: false,
+        icon: webSer,
+      },
+      { title: "Bangla", path: "/bangla", isDrapdown: false, icon: bangla },
+      {
+        title: "Join Telegram",
+        path: telegramLink,
+        isDrapdown: false,
+        icon: telegram,
+        newTab: true,
+      },
+    ],
+    [genreList, yearList, combinedQuality, telegramLink]
+  );
 
   return (
     <nav className="menu bg-[#494949] w-full h-[54px]">

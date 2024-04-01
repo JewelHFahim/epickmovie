@@ -49,11 +49,13 @@ const FilterList = () => {
             Requested Data Not Found !!
           </h1>
         )}
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center w-full px-5 lg:px-0">
         {isLoading ? (
+          <div className="w-full">
           <LazyLoading />
+        </div>
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-[30px] my-[18px]">
+          <div className="grid grid-cols-3 lg:grid-cols-6 gap-[30px] my-[18px]">
             {filteredResults?.data?.data?.map((item) => (
               <MovieCard
                 key={item?.id}

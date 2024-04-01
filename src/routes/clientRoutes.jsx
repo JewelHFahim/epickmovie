@@ -6,7 +6,7 @@ import Movies from "../pages/movies/movies/Movies";
 import SearchList from "../pages/movies/search-list/SearchList";
 import NotFound from "../pages/not-found/NotFound";
 import TvShow from "../pages/tv-show/TvShow";
-import TvShowDetails from "../pages/tv-show/tvShowDetails";
+import TvShowDetails from "../pages/tv-show/TvShowDetails";
 
 export const clientRoutes = [
   {
@@ -15,7 +15,7 @@ export const clientRoutes = [
   },
 
   {
-    path: "/movies",
+    path: "/movies/page/:id",
     element: <Movies />,
   },
 
@@ -25,7 +25,7 @@ export const clientRoutes = [
   },
 
   {
-    path: "/tv-show",
+    path: "/tv-show/page/:id",
     element: <TvShow />,
   },
 

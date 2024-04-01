@@ -1,8 +1,8 @@
 import { FaSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const TagsList = ({ details,title }) => {
-  
+const TagsList = ({ details, title }) => {
+  console.log(details)
   const tagsList = [
     { title: `Download Filmyzilla`, url: "" },
     { title: `Download HDMovies`, url: "" },
@@ -60,12 +60,12 @@ const TagsList = ({ details,title }) => {
       </p>
 
       <div className="inline-block-flex ml-7 mt-5 text-white text-sm font-semibold text-justif">
-        <Link to="" className="hover:underline pr-1">
-          Download {details?.post_im_title} (
+        <Link to={`/search-list/${details?.post_im_title}`} className="hover:underline pr-1">
+          Download {details?.post_title} (
           {details?.release_date?.slice(0, 4)}),
         </Link>
         {tagsList.map((item, i) => (
-          <Link key={i} className="hover:underline pr-1">
+          <Link key={i} to={`/search-list/${details?.post_im_title}`} className="hover:underline pr-1">
             <span>
               <span>{details?.post_im_title}</span>
               <span className="mx-1">({details?.release_date?.slice(0, 4)})</span>

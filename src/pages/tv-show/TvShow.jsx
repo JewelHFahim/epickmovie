@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import Title from "../../utils/Title";
 import { Helmet } from "react-helmet";
 import TvPagination from "./TvPagination";
@@ -9,28 +8,14 @@ import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 
-
 const TvShow = () => {
-  const storedPage = JSON.parse(localStorage.getItem("tvCurrentPage")) || 1;
-
-  const [currentPage, setCurrentPage] = useState(storedPage);
-  const { data: perPgaeMovie, isLoading} = usePerPgaeTvShowQuery(currentPage);
-  const {siteName} = useSiteConfig();
-
   const location = useLocation();
-  const currentRoute = location.pathname;
+  const { siteName } = useSiteConfig();
+  const currentRoute = location?.pathname;
+  const currentP = Number(currentRoute?.slice(14));
+  const { data: perPgaeMovie, isLoading } = usePerPgaeTvShowQuery(currentP);
 
-  useEffect(() => {
-    localStorage.setItem("tvCurrentPage", JSON.stringify(currentPage));
-    return () => {
-      if (currentRoute === "/tv-show") {
-        localStorage.removeItem("MovieCurrentPage");
-        localStorage.removeItem("banglaPagination");
-        localStorage.removeItem("filterPagination");
-      }
-    };
-  }, [currentPage, currentRoute]);
-
+  
   return (
     <div className="min-h-screen flex flex-col items-center">
       <Helmet>
@@ -42,32 +27,32 @@ const TvShow = () => {
       </Helmet>
 
       {/* ==================>> Domains <<=================*/}
-      <SiteNews/>
+      <SiteNews />
 
       <div className="w-full flex justify-start mt-[22px] ml-20 lg:ml-0">
         <Title>TV Series</Title>
       </div>
 
       {/* ==================>> TV Shows <<==================*/}
-      {isLoading ? (
-        <LazyLoading />
-      ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] md:gap-auto my-[18px]">
-          {perPgaeMovie?.data?.data?.map((item) => (
-            <MovieCard
-              key={item?.id}
-              item={item}
-              redirect={`/series/${item?.id}`}
-            ></MovieCard>
-          ))}
-        </div>
-      )}
+      <div className="px-5 lg:px-0 w-full">
+        {isLoading ? (
+          <div className="w-full">
+            <LazyLoading />
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] md:gap-auto my-[18px]">
+            {perPgaeMovie?.data?.data?.map((item) => (
+              <MovieCard
+                key={item?.id}
+                item={item}
+                redirect={`/series/${item?.id}`}
+              ></MovieCard>
+            ))}
+          </div>
+        )}
+      </div>
 
-      <TvPagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        perPgaeMovie={perPgaeMovie}
-      />
+      <TvPagination currentPage={currentP} perPgaeMovie={perPgaeMovie} />
     </div>
   );
 };

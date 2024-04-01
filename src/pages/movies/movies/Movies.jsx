@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import MovieCard from "../../../components/movie-card/MovieCard";
 import Title from "../../../utils/Title";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
@@ -13,20 +12,9 @@ const Movies = () => {
   const location = useLocation();
   const { siteName } = useSiteConfig();
   const currentRoute = location.pathname;
-  const storedPage = JSON.parse(localStorage.getItem("MovieCurrentPage")) || 1;
-  const [currentPage, setCurrentPage] = useState(storedPage || 1);
-  const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentPage);
-
-  useEffect(() => {
-    localStorage.setItem("MovieCurrentPage", JSON.stringify(currentPage));
-    return () => {
-      if (currentRoute === "/movies") {
-        localStorage.removeItem("tvCurrentPage");
-        localStorage.removeItem("banglaPagination");
-        localStorage.removeItem("filterPagination");
-      }
-    };
-  }, [currentPage, currentRoute]);
+  
+  const currentP = Number(currentRoute?.slice(13));
+  const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentP);
 
   // const adBlockDetected = useDetectAdBlock();
   // useEffect(() => {
@@ -44,7 +32,7 @@ const Movies = () => {
           content="Unlimited Movies and Latest Collections"
         />
       </Helmet>
-      
+
       {/* ==================>> Domains <<=================*/}
       <SiteNews />
 
@@ -54,23 +42,21 @@ const Movies = () => {
         <Title>Movies</Title>
       </div>
 
-      {isLoading ? (
-        <LazyLoading />
-      ) : (
-        <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] md:gap-auto my-[18px]">
-          {perPgaeMovie?.data?.data?.map((item) => (
-            <MovieCard
-              key={item?.id}
-              item={item}
-              redirect={`/movie/${item?.id}`}
-            ></MovieCard>
-          ))}
-        </div>
-      )}
-
+      <div className="px-5 lg:px-0 w-full">
+        {isLoading ? (
+          <div className="w-full">
+            <LazyLoading />
+          </div>
+        ) : (
+          <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] md:gap-auto my-[18px]">
+            {perPgaeMovie?.data?.data?.map((item) => (
+              <MovieCard key={item?.id} item={item} redirect={`/movie/${item?.id}`}/>
+            ))}
+          </div>
+        )}
+      </div>
       <MoviePagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
+        currentPage={currentP}
         perPgaeMovie={perPgaeMovie}
       />
     </div>
