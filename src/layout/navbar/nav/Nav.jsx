@@ -70,7 +70,7 @@ const Nav = () => {
         isDrapdown: false,
         icon: webSer,
       },
-      { title: "Bangla", path: "/bangla", isDrapdown: false, icon: bangla },
+      { title: "Bangla", path: "/bangla/page/1", isDrapdown: false, icon: bangla },
       {
         title: "Join Telegram",
         path: telegramLink,
@@ -111,7 +111,7 @@ const Nav = () => {
 
             <ul>
               {item?.subMenu?.map((item, i) => (
-                <Link key={i} to={`/terms/${item?.slug}`} className="subM">
+                <Link key={i} to={`/terms/${item?.slug}/page/1`} className="subM">
                   {item?.name}
                 </Link>
               ))}

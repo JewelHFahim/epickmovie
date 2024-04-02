@@ -1,6 +1,5 @@
 import { useFilteredResultsByPaginationQuery } from "../../../redux/features/search/searchApi";
 import MovieCard from "../../../components/movie-card/MovieCard";
-import { useEffect, useState } from "react";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import FilterPagination from "./FilterPagination";
 import { useLocation } from "react-router-dom";
@@ -9,32 +8,45 @@ import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const FilterList = () => {
   const location = useLocation();
+  const { siteName } = useSiteConfig();
   const currentRoute = location.pathname;
-  const {siteName} = useSiteConfig();
-  const storedPage = JSON.parse(localStorage.getItem("filterPagination")) || 1;
-  const [currentPage, setCurrentPage] = useState(storedPage || 1);
 
-  const filteredTerm = currentRoute?.slice(7);
-  const { data: filteredResults, isLoading } = useFilteredResultsByPaginationQuery({filteredTerm, currentPage });
+  // Function to extract genres from route
+  const getGenresFromRoute = (route) => {
+    const parts = route.split("/");
+    const startIndex = parts.indexOf("terms");
+    const genres = parts.slice(startIndex + 1, -2);
+    const genresString = genres.join("-");
+    return genresString;
+  };
 
-  useEffect(() => {
-    localStorage.setItem("filterPagination", JSON.stringify(currentPage));
-    window.scrollTo({ top: 0, behavior: "smooth" });
-    
-    return () => {
-      if (currentRoute === "/filter-list") {
-        localStorage.removeItem("tvCurrentPage");
-        localStorage.removeItem("banglaPagination");
-        localStorage.removeItem("MovieCurrentPage");
-      }
-    };
-  }, [currentPage, currentRoute]);
+  // Usage example
+  const filteredTerm = getGenresFromRoute(currentRoute);
+
+  // Function to extract page number as a number from route
+  const getPageNumberFromRoute = (route) => {
+    const parts = route.split("/");
+    const pageIndex = parts.indexOf("page");
+    const pageNumber = parseInt(parts[pageIndex + 1], 10);
+    return pageNumber;
+  };
+
+  // Usage example
+  const currentPage = getPageNumberFromRoute(currentRoute);
+
+  const { data: filteredResults, isLoading } =
+    useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
 
   return (
     <section className="min-h-screen">
       <Helmet>
-        <title>{siteName} || {filteredTerm}</title>
-        <meta name="description" content="Unlimited Bangla Movies and Latest Collections"/>
+        <title>
+          {siteName} || {filteredTerm}
+        </title>
+        <meta
+          name="description"
+          content="Unlimited Bangla Movies and Latest Collections"
+        />
       </Helmet>
 
       <div className=" ml-10 lg:ml-0 my-5">
@@ -44,16 +56,16 @@ const FilterList = () => {
       </div>
 
       {/* ===========>> Filter Results <<===========*/}
-      { (filteredResults?.status === false) && (
-          <h1 className="text-[28px] font-medium text-slate-600 text-center">
-            Requested Data Not Found !!
-          </h1>
-        )}
+      {filteredResults?.status === false && (
+        <h1 className="text-[28px] font-medium text-slate-600 text-center">
+          Requested Data Not Found !!
+        </h1>
+      )}
       <div className="flex justify-center items-center w-full px-5 lg:px-0">
         {isLoading ? (
           <div className="w-full">
-          <LazyLoading />
-        </div>
+            <LazyLoading />
+          </div>
         ) : (
           <div className="grid grid-cols-3 lg:grid-cols-6 gap-[30px] my-[18px]">
             {filteredResults?.data?.data?.map((item) => (
@@ -73,9 +85,15 @@ const FilterList = () => {
 
       <FilterPagination
         currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
         perPgaeMovie={filteredResults}
+        filteredTerm={filteredTerm}
       />
+      {/* <CommonPagination
+        currentPage={currentPage}
+        perPgaeMovie={filteredResults}
+        filteredTerm={filteredTerm}
+        type="terms"
+      /> */}
     </section>
   );
 };

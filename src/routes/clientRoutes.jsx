@@ -20,7 +20,7 @@ export const clientRoutes = [
   },
 
   {
-    path: "/bangla",
+    path: "/bangla/page/:id",
     element: <BanglaMovie />,
   },
 
@@ -45,7 +45,7 @@ export const clientRoutes = [
   },
   
   {
-    path: "/terms/:string",
+    path: "/terms/:string/page/:id",
     element: <FilterList />,
   },
 

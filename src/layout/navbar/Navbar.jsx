@@ -23,7 +23,7 @@ const Navbar = () => {
         <div className="w-[94%] h-[100%] mx-auto mt-[20px] p-4 lg:hidden border-[3px] border-black">
           <div className="grid grid-cols-4 gap-5">
             {quickMenu?.data?.map((menu, i) => (
-              <Link key={i} to={`/terms/${menu?.slug}`}  >
+              <Link key={i} to={`/terms/${menu?.slug}/page/1`}  >
                 <MobileMenuButton key={i}>{menu.name}</MobileMenuButton>
               </Link>
             ))}

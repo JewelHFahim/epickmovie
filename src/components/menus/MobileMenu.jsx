@@ -34,7 +34,7 @@ const MobileMenu = () => {
   const navigation = [
     { title: "Home", path: "/", isDrapdown: false, icon: <RiHome2Line /> },
 
-    { title: "Movies", path: "/movies", isDrapdown: false, icon: <MdOutlineMovieFilter /> },
+    { title: "Movies", path: "/movies/page/1", isDrapdown: false, icon: <MdOutlineMovieFilter /> },
 
     {
       title: "Genre",
@@ -62,14 +62,14 @@ const MobileMenu = () => {
 
     {
       title: "Web Series",
-      path: "/tv-show",
+      path: "/tv-show/page/1",
       isDrapdown: false,
       icon: <GoGlobe />,
     },
 
     {
       title: "Bangla",
-      path: "/bangla",
+      path: "/bangla/page/1",
       isDrapdown: false,
       icon: <RiMovie2Line />,
     },
@@ -155,7 +155,7 @@ const MobileMenu = () => {
                         <div>
                           <ul className="flex flex-col gap-y-4 mx-10">
                             {item?.navs?.map((item, i) => (
-                              <Link to={`/terms/${item?.slug}`} key={i}
+                              <Link to={`/terms/${item?.slug}/page/1`} key={i}
                                 className="flex items-center gap-2 text-white px-2 py-4 border-b-[.5px] border-[#2D2C2C] my-2">
                                 <LuFolderInput className="w-[30px] h-[30px]"/>
                                 <p className="text-[30px] font-inter font-[600]"> {item.name} </p>

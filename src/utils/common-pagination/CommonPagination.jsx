@@ -1,17 +1,27 @@
 import React from "react";
-import PaginationButton from "../../../utils/PaginationButton";
 import { useNavigate } from "react-router-dom";
+import PaginationButton from "../PaginationButton";
 
-const MoviePagination = ({ currentPage, perPgaeMovie }) => {
+const CommonPagination = ({
+  currentPage,
+  perPgaeMovie,
+  type,
+  filteredTerm,
+}) => {
   const navigate = useNavigate();
+  
   const totalData = perPgaeMovie?.data?.total;
-
   const perPage = perPgaeMovie?.data?.data?.length;
   const totalPages = Math.ceil(totalData / perPage);
 
   // Function to handle page change
   const handlePageChange = (page) => {
-    navigate(`/movies/page/${page}`);
+    if (type === "movies" || type === "tv-show") {
+      navigate(`/${type}/page/${page}`);
+    } else {
+      navigate(`/terms/${filteredTerm}/page/${page}`);
+    }
+
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -91,4 +101,4 @@ const MoviePagination = ({ currentPage, perPgaeMovie }) => {
   );
 };
 
-export default MoviePagination;
+export default CommonPagination;

@@ -50,7 +50,7 @@ const MovieDetails = () => {
       <Breadcum
         children1="Movies"
         children2={details?.post_title}
-        redirect={"/movies"}
+        redirect={"/movies/page/1"}
       />
 
       <section className="py-4 px-10 lg:py-2 lg:px-5 flex justify-between">

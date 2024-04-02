@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import MovieCard from "../../../components/movie-card/MovieCard";
 import { usePerPageBengaliMovieListQuery } from "../../../redux/features/movies/movieApi";
 import Title from "../../../utils/Title";
@@ -9,25 +8,11 @@ import { useLocation } from "react-router-dom";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const BanglaMovie = () => {
-  
-  const storedPage = JSON.parse(localStorage.getItem("banglaPagination")) || 1;
-  const [currentPage, setCurrentPage] = useState(storedPage || 1);
-  const { data: perPgaeMovie, isLoading } = usePerPageBengaliMovieListQuery(currentPage);
-  const { siteName} = useSiteConfig();
-
+  const { siteName } = useSiteConfig();
   const location = useLocation();
   const currentRoute = location.pathname;
-
-  useEffect(() => {
-    localStorage.setItem("banglaPagination", JSON.stringify(currentPage));
-    return () => {
-      if (currentRoute === "/bangla") {
-        localStorage.removeItem("tvCurrentPage");
-        localStorage.removeItem("MovieCurrentPage");
-        localStorage.removeItem("filterPagination");
-      }
-    };
-  }, [currentPage, currentRoute]);
+  const currentP = Number(currentRoute?.slice(13));
+  const { data: perPgaeMovie, isLoading } = usePerPageBengaliMovieListQuery(currentP);
 
   return (
     <div className="min-h-screen">
@@ -40,19 +25,21 @@ const BanglaMovie = () => {
       </Helmet>
 
       {/* ==================>> BENGALI MOVIES <<==================*/}
-      <div className="px-10 lg:px-0 py-5">
+      <div className="w-full flex justify-start mt-[22px] mb-[20px] lg:mb-0 ml-10 lg:ml-0">
         <Title>Bengali</Title>
       </div>
 
-      <div className="flex justify-center items-center">
+      <div className="flex justify-center items-center px-5 lg:px-0 w-full">
         {perPgaeMovie?.status === false ? (
           <div className="w-full flex justify-center my-5">
             <p className="text-[35px] text-white font-medium">No Data Found</p>
           </div>
         ) : isLoading ? (
-          <LazyLoading />
+          <div className="w-full">
+            <LazyLoading />
+          </div>
         ) : (
-          <div className="grid grid-cols-2 lg:grid-cols-5 gap-[25px] md:gap-auto my-[18px]">
+          <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] md:gap-auto my-[18px]">
             {perPgaeMovie?.data?.data?.map((item) => (
               <MovieCard
                 key={item?.id}
@@ -69,8 +56,7 @@ const BanglaMovie = () => {
       </div>
 
       <BanglaMoviePagination
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
+        currentPage={currentP}
         perPgaeMovie={perPgaeMovie}
       />
     </div>

@@ -11,9 +11,8 @@ import MovieCard from "../../components/movie-card/MovieCard";
 import HomePageSeeAllBtn from "../../utils/HomePageSeeAllBtn";
 import SiteNews from "../../components/SiteNews/SiteNews";
 import SubMenuButton from "../../utils/SubMenuButton";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Helmet } from "react-helmet";
-import { useEffect } from "react";
 
 const Home = () => {
   const { data: featuredPosts, isLoading: featureLoading } =
@@ -28,18 +27,6 @@ const Home = () => {
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
 
-  const location = useLocation();
-  const currentRoute = location.pathname;
-
-  useEffect(() => {
-    if (currentRoute === "/") {
-      localStorage.removeItem("MovieCurrentPage");
-      localStorage.removeItem("tvCurrentPage");
-      localStorage.removeItem("banglaPagination");
-      localStorage.removeItem("filterPagination");
-    }
-  }, [currentRoute]);
-
   return (
     <section className="bg-[#27272A] lg:bg-[#18181a] flex flex-col justify-center items-center">
       <Helmet>
@@ -49,7 +36,7 @@ const Home = () => {
       {/* ===================>> Quick Menus <<=================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {quickMenu?.data?.map((menu, i) => (
-          <Link key={i} to={`/terms/${menu?.slug}`}>
+          <Link key={i} to={`/terms/${menu?.slug}/page/1`}>
             <SubMenuButton>{menu.name}</SubMenuButton>
           </Link>
         ))}
@@ -111,8 +98,8 @@ const Home = () => {
       <div className="px-5 lg:px-0 w-full">
         {tvShowLoading ? (
           <div className="w-full">
-          <LazyLoading />
-        </div>
+            <LazyLoading />
+          </div>
         ) : (
           <div>
             <div className="hidden lg:grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
@@ -144,9 +131,9 @@ const Home = () => {
       </HomePageSeeAllBtn>
       <div className="px-5 lg:px-0 w-full">
         {tvShowLoading ? (
-         <div className="w-full">
-         <LazyLoading />
-       </div>
+          <div className="w-full">
+            <LazyLoading />
+          </div>
         ) : (
           <div>
             <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">

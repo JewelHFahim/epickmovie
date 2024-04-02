@@ -1,23 +1,19 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PaginationButton from "../../../utils/PaginationButton";
+import { useNavigate } from "react-router-dom";
 
-const BanglaMoviePagination = ({ currentPage, setCurrentPage, perPgaeMovie }) => {
+const BanglaMoviePagination = ({ currentPage, perPgaeMovie }) => {
+  const navigate = useNavigate();
 
   const totalData = perPgaeMovie?.data?.total;
-
-  const perPage = 20;
+  const perPage = perPgaeMovie?.data?.data?.length;
   const totalPages = Math.ceil(totalData / perPage);
 
   // Function to handle page change
   const handlePageChange = (page) => {
-    setCurrentPage(page);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    navigate(`/bangla/page/${page}`);
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
-
-  useEffect(() => {
-    localStorage.setItem("banglaPagination", JSON.stringify(currentPage));
-  }, [currentPage]);
-
 
   // Function to generate page numbers
   const generatePageNumbers = () => {
@@ -62,7 +58,6 @@ const BanglaMoviePagination = ({ currentPage, setCurrentPage, perPgaeMovie }) =>
 
   return (
     <div className="bg-[#27272A] mt-8 w-full p-4  flex flex-wrap items-center gap-5 lg:gap-2">
-
       <PaginationButton
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
@@ -92,7 +87,6 @@ const BanglaMoviePagination = ({ currentPage, setCurrentPage, perPgaeMovie }) =>
       >
         Next
       </PaginationButton>
-
     </div>
   );
 };

@@ -2,17 +2,17 @@ import MovieCard from "../../../components/movie-card/MovieCard";
 import Title from "../../../utils/Title";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import { Helmet } from "react-helmet";
-import MoviePagination from "./MoviePagination";
 import { useLocation } from "react-router-dom";
 import SiteNews from "../../../components/SiteNews/SiteNews";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 import { usePerPgaeMovieQuery } from "../../../redux/features/movies/movieApi";
+import CommonPagination from "../../../utils/common-pagination/CommonPagination";
 
 const Movies = () => {
   const location = useLocation();
   const { siteName } = useSiteConfig();
   const currentRoute = location.pathname;
-  
+
   const currentP = Number(currentRoute?.slice(13));
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentP);
 
@@ -50,15 +50,16 @@ const Movies = () => {
         ) : (
           <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] md:gap-auto my-[18px]">
             {perPgaeMovie?.data?.data?.map((item) => (
-              <MovieCard key={item?.id} item={item} redirect={`/movie/${item?.id}`}/>
+              <MovieCard
+                key={item?.id}
+                item={item}
+                redirect={`/movie/${item?.id}`}
+              />
             ))}
           </div>
         )}
       </div>
-      <MoviePagination
-        currentPage={currentP}
-        perPgaeMovie={perPgaeMovie}
-      />
+      <CommonPagination currentPage={currentP} perPgaeMovie={perPgaeMovie} type="movies" />
     </div>
   );
 };

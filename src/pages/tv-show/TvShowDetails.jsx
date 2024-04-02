@@ -48,7 +48,7 @@ const TvShowDetails = () => {
       <Breadcum
         children1="TV Show"
         children2={details?.post_title}
-        redirect={`/tv-show`}
+        redirect={`/tv-show/page/1`}
       />
 
       <section className=" py-4 px-10 lg:py-2 lg:px-5 flex justify-between">
