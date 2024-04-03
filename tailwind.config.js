@@ -7,10 +7,10 @@ export default {
       inter: ["Inter", "sans-serif"],
       roboto: ["Roboto", "sans-serif"],
       alef: ["Alef", "sans-serif"],
+      lilita: ["Lilita One", "sans-serif"],
     },
 
     extend: {},
   },
   plugins: [],
-
 };

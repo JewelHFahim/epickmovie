@@ -1,0 +1,19 @@
+.playBtnCont:hover .posterImg {
+  filter: blur(2px);
+  transition-duration: 0.2s;
+}
+
+.playBtn {
+  display: none;
+}
+
+.playBtnCont:hover .playBtn {
+  position: absolute;
+  z-index: 100;
+  transition-duration: 0.2s;
+  top: 100px;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
