@@ -8,6 +8,7 @@ export default {
       roboto: ["Roboto", "sans-serif"],
       alef: ["Alef", "sans-serif"],
       lilita: ["Lilita One", "sans-serif"],
+      encode: ["Encode Sans Semi Expanded", "sans-serif"],
     },
 
     extend: {},

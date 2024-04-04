@@ -86,8 +86,11 @@ const Nav = () => {
     <nav className="menu bg-[#494949] w-full h-[54px]">
       <ul>
         {menus.map((item, i) => (
+
           <li key={i} className="main-menu">
-            {item?.isDrapdown ? (
+
+            {
+            item?.isDrapdown ? (
               <Link to={item?.path} className="flex items-center gap-2">
                 <img src={item?.icon} alt="" className="w-[23px] h-[23px]" />
                 {item?.title}
@@ -116,6 +119,7 @@ const Nav = () => {
                 </Link>
               ))}
             </ul>
+            
           </li>
         ))}
       </ul>

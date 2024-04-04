@@ -22,7 +22,7 @@ const Header = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (lastSearchTime && Date.now() - lastSearchTime < 7000) {
+    if (lastSearchTime && Date.now() - lastSearchTime < 3000) {
       setShowPopup(true);
       const num1 = Math.floor(Math.random() * 9) + 1;
       const num2 = Math.floor(Math.random() * 9) + 1;

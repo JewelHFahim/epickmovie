@@ -15,7 +15,7 @@ const Theme1Card = ({ item }) => {
         <img
           src={item?.poster_image_url}
           alt=""
-          className="object-cover w-full h-full posterImg"
+          className="object-cover w-full h-full rounded-[10px] posterImg"
         />
 
         {/* Pixel/Print Quality  */}

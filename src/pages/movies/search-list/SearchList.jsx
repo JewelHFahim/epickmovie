@@ -56,7 +56,11 @@ const SearchList = () => {
         <div className="px-5 lg:px-0 w-full">
           {isLoading ? (
             <div className="w-full">
-              <LazyLoading />
+              <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
+                {Array.from({ length: 18 }).map((item, i) => (
+                  <LazyLoading key={i} />
+                ))}
+              </div>
             </div>
           ) : (
             <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] my-[18px]">

@@ -21,6 +21,8 @@ const HomeDefault = () => {
     usePerPgaeTvShowQuery(1);
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
 
+  console.log(movieList)
+
   const { data: quickMenu } = useQuickMenuUserQuery();
   const { siteName } = useSiteConfig();
 
@@ -34,14 +36,13 @@ const HomeDefault = () => {
       </Helmet>
 
       {/* ===================>> Quick Menus <<=================*/}
-
-        <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
-          {quickMenu?.data?.map((menu, i) => (
-            <Link key={i} to={`/terms/${menu?.slug}/page/1`}>
-              <SubMenuButton>{menu.name}</SubMenuButton>
-            </Link>
-          ))}
-        </div>
+      <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
+        {quickMenu?.data?.map((menu, i) => (
+          <Link key={i} to={`/terms/${menu?.slug}/page/1`}>
+            <SubMenuButton>{menu.name}</SubMenuButton>
+          </Link>
+        ))}
+      </div>
 
       {/* =====================>> Domains <<===================*/}
       <SiteNews />
@@ -65,7 +66,11 @@ const HomeDefault = () => {
       <div className="px-5 lg:px-0 w-full">
         {movieLoading ? (
           <div className="w-full">
-            <LazyLoading />
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
+              {Array.from({ length: 18 }).map((item, i) => (
+                <LazyLoading key={i} />
+              ))}
+            </div>
           </div>
         ) : (
           <div>
@@ -99,7 +104,11 @@ const HomeDefault = () => {
       <div className="px-5 lg:px-0 w-full">
         {tvShowLoading ? (
           <div className="w-full">
-            <LazyLoading />
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
+              {Array.from({ length: 18 }).map((item, i) => (
+                <LazyLoading key={i} />
+              ))}
+            </div>
           </div>
         ) : (
           <div>
@@ -133,7 +142,11 @@ const HomeDefault = () => {
       <div className="px-5 lg:px-0 w-full">
         {tvShowLoading ? (
           <div className="w-full">
-            <LazyLoading />
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
+              {Array.from({ length: 6 }).map((item, i) => (
+                <LazyLoading key={i} />
+              ))}
+            </div>
           </div>
         ) : (
           <div>

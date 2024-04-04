@@ -1,15 +1,15 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import PaginationButton from "../PaginationButton";
+import PagiBtnTheme1 from "../../theme1-contents/PagiBtnTheme1";
 
-const CommonPagination = ({
+const PaginationTheme1 = ({
   currentPage,
   perPgaeMovie,
   type,
   filteredTerm,
 }) => {
   const navigate = useNavigate();
-  
+
   const totalData = perPgaeMovie?.data?.total;
   const perPage = perPgaeMovie?.data?.data?.length;
   const totalPages = Math.ceil(totalData / perPage);
@@ -67,38 +67,38 @@ const CommonPagination = ({
   };
 
   return (
-    <div className="bg-[#27272A] mt-8 w-full pl-10 lg:pl-4 p-0 lg:p-4  flex flex-wrap items-center gap-5 lg:gap-2">
-      <PaginationButton
+    <div className="mt-8 w-full pl-10 lg:pl-4 p-0 lg:p-4  flex flex-wrap items-center gap-4">
+      <PagiBtnTheme1
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}
         className={`${currentPage === 1 ? "hidden" : ""}`}
       >
         Prev
-      </PaginationButton>
+      </PagiBtnTheme1>
 
       {generatePageNumbers().map((page, index) => (
         <React.Fragment key={index}>
           {page === "..." ? (
-            <PaginationButton>...</PaginationButton>
+            <PagiBtnTheme1>...</PagiBtnTheme1>
           ) : (
-            <PaginationButton
+            <PagiBtnTheme1
               onClick={() => handlePageChange(page)}
-              className={page === currentPage ? "active bg-[#269500]" : ""}
+              className={page === currentPage ? "active bg-[#FFA113]" : ""}
             >
               {page}
-            </PaginationButton>
+            </PagiBtnTheme1>
           )}
         </React.Fragment>
       ))}
 
-      <PaginationButton
+      <PagiBtnTheme1
         onClick={() => handlePageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
       >
         Next
-      </PaginationButton>
+      </PagiBtnTheme1>
     </div>
   );
 };
 
-export default CommonPagination;
+export default PaginationTheme1;

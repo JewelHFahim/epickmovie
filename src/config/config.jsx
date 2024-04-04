@@ -3,4 +3,4 @@ export const admin_base_url = "http://localhost:3001";
 export const user_api_key = "dtmgNfrv6AJDXV3nPEhkaQ";
 
 // theme  switch
-export const theme = "theme"; // "theme1" 
+export const theme = "theme"; // "theme1"

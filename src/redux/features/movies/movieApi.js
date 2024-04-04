@@ -2,7 +2,6 @@ import apiSlice from "../api/apiSlice";
 
 const movieApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
     // =================>>PER PAGE BENGALI MOVIE <<========================
     perPageBengaliMovieList: builder.query({
       query: (page) => `/get-bengali-post?page=${page}`,
@@ -45,7 +44,6 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-
     // ========================>> COUNTRY <<=============================
     countryListClient: builder.query({
       query: () => "/terms/get-countries",
@@ -58,6 +56,11 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
+    // =====================>> UpComming POSTS <<=========================
+    upCommingPosts: builder.query({
+      query: () => "/upcoming-posts",
+      providesTags: ["EpicMovies"],
+    }),
   }),
 });
 
@@ -71,5 +74,6 @@ export const {
   usePrintQualityClientQuery,
   usePixelQualityClientQuery,
   usePerPageBengaliMovieListQuery,
+  useUpCommingPostsQuery,
 } = movieApi;
 export default movieApi;
