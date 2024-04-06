@@ -1,17 +1,23 @@
-import { Link, useNavigate } from "react-router-dom";
-import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
-import { IoSearch } from "react-icons/io5";
-import { useGenreListQuery } from "../../../redux/features/movies/movieApi";
-import "./NavbarTheme1.css";
+import "./NavbarTv.css";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { GrChannel } from "react-icons/gr";
+import { IoSearch } from "react-icons/io5";
+import { RiHome4Line } from "react-icons/ri";
+import { FaRegNewspaper } from "react-icons/fa";
+import { PiMonitorPlayLight } from "react-icons/pi";
+import { Link, useNavigate } from "react-router-dom";
+import { MdOutlineSportsCricket } from "react-icons/md";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
+import { useGenreListQuery } from "../../../redux/features/movies/movieApi";
 import { collectSearchItem } from "../../../redux/features/search/searchSlice";
 
 
-const NavbarTheme1 = () => {
+const NavbarTv = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { siteLogo, telegramLink } = useSiteConfig();
+  const { siteLogo } = useSiteConfig();
   const { data: genreList } = useGenreListQuery();
   const [searchTermState, setSearchTerm] = useState("");
   const [lastSearchTime, setLastSearchTime] = useState(null);
@@ -19,35 +25,12 @@ const NavbarTheme1 = () => {
   const [popupNumbers, setPopupNumbers] = useState([]);
   const [userAnswer, setUserAnswer] = useState("");
 
-
-
-
-
-
   const menus = [
-    { title: "Home", url: "/", isDrapdown: false, newTab: false },
-    {
-      title: "Movies",
-      url: "/movies/page/1",
-      isDrapdown: false,
-      newTab: false,
-    },
-    { title: "Web-Series", url: "/tv-show/page/1", newTab: false },
-    {
-      title: "Genres",
-      url: "#",
-      isDrapdown: true,
-      subMenu: genreList?.data,
-      newTab: false,
-    },
-    { title: "Hollywood", url: "/english/page/1", isDrapdown: false },
-    { title: "Bollywood", url: "/hindi/page/1", isDrapdown: false },
-    {
-      title: "Join Telegram",
-      url: telegramLink,
-      isDrapdown: false,
-      newTab: true,
-    },
+    { title: "Home", url: "/tv", icon: <RiHome4Line />, isDrapdown: false },
+    { title: "Sports", url: "/tv/sports", icon: <MdOutlineSportsCricket />, isDrapdown: false },
+    { title: "News", url: "/tv", icon: <FaRegNewspaper />, isDrapdown: false  },
+    { title: "Entertainment", url: "/tv", icon: <PiMonitorPlayLight />, isDrapdown: false  },
+    { title: "All Tv", url: "/tv", icon: <GrChannel />, isDrapdown: true,  subMenu: genreList?.data },
   ];
 
   const handleInputChange = (e) => {
@@ -84,14 +67,15 @@ const NavbarTheme1 = () => {
         setLastSearchTime(Date.now());
         navigate(`/search-list/${searchTermState}`);
         setSearchTerm("");
-        setUserAnswer("")
+        setUserAnswer("");
       }
     } else {
       alert("Incorrect answer. Please try again.");
     }
   };
+
   return (
-    <div className="w-full h-[70px] bg-[#262626] flex items-center">
+    <div className="w-full h-[70px] bg-[#282727] flex items-center">
       <div className="lg:w-[78vw] lg:min-w-[1500px] mx-auto flex justify-between items-center">
         <div className="flex items-center gap-x-5 ">
           <Link to="/">
@@ -105,7 +89,8 @@ const NavbarTheme1 = () => {
           <ul className="font-lilita text-[22px] text-white flex items-center gap-x-5 menus ">
             {menus.map((item, i) => (
               <li key={i} className="relative">
-                <Link to={item.url} target={`${item.newTab ? "_blank" : ""}`}>
+                <Link to={item.url} target={`${item.newTab ? "_blank" : ""}`} className="flex items-center gap-1">
+                    {item.icon}
                   {item.title}
                 </Link>
 
@@ -128,7 +113,10 @@ const NavbarTheme1 = () => {
         </div>
 
         {/* Serach Field */}
-        <form onSubmit={handleSubmit} className="w-[332px] py-2 rounded-md flex items-center bg-[#444444]">
+        <form
+          onSubmit={handleSubmit}
+          className="w-[332px] py-2 rounded-md flex items-center bg-[#444444]"
+        >
           <input
             type="text"
             value={searchTermState}
@@ -139,25 +127,33 @@ const NavbarTheme1 = () => {
           <IoSearch className="10% text-[#d73ee3]" />
         </form>
         {showPopup && (
-        <div className="absolute z-[9999] top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-gray-300 p-8 rounded-lg flex flex-col items-center">
-            <p className="font-medium">Verify that you are not robot...</p>
-            <p className="font-medium"> {popupNumbers[0]} + {popupNumbers[1]} = ?</p>
-            <div className=" mt-2 rounded-md">
-              <input type="text" value={userAnswer} onChange={(e) => setUserAnswer(e.target.value)}
-                className=" border-black outline-none rounded-s-md px-2 h-[30px]"/>
-              <button onClick={handleAuthenticate} className=" px-5 bg-gray-600 text-white rounded-e-md text-sm h-[30px]">
-                Submit
-              </button>
+          <div className="absolute z-[9999] top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-gray-300 p-8 rounded-lg flex flex-col items-center">
+              <p className="font-medium">Verify that you are not robot...</p>
+              <p className="font-medium">
+                {" "}
+                {popupNumbers[0]} + {popupNumbers[1]} = ?
+              </p>
+              <div className=" mt-2 rounded-md">
+                <input
+                  type="text"
+                  value={userAnswer}
+                  onChange={(e) => setUserAnswer(e.target.value)}
+                  className=" border-black outline-none rounded-s-md px-2 h-[30px]"
+                />
+                <button
+                  onClick={handleAuthenticate}
+                  className=" px-5 bg-gray-600 text-white rounded-e-md text-sm h-[30px]"
+                >
+                  Submit
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-
-
+        )}
       </div>
     </div>
   );
 };
 
-export default NavbarTheme1;
+export default NavbarTv;

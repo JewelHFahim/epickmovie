@@ -5,7 +5,7 @@ const FooterTheme1 = () => {
     <div className="mt-5 h-[162px] bg-[#262626] flex justify-center items-center">
       <div className="lg:w-[78vw] mx-auto flex flex-col justify-center items-center gap-y-2.5 text-white">
         <h2 className=" text-[22px] font-bold">EpickMovies.com @ 2022</h2>
-        <p className="text-[18px]">
+        <p className="text-[18px] text-center">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry&aposs standard dummy text
           ever since the 1500s, when an unknown printer took a galley of type

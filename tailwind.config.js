@@ -9,6 +9,7 @@ export default {
       alef: ["Alef", "sans-serif"],
       lilita: ["Lilita One", "sans-serif"],
       encode: ["Encode Sans Semi Expanded", "sans-serif"],
+      jost: ["Jost", "sans-serif"],
     },
 
     extend: {},

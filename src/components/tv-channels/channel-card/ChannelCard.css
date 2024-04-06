@@ -1,0 +1,6 @@
+.cardContainer:hover img {
+  scale: 1.2;
+  filter: blur(3px);
+  /* animation: ; */
+  transition-duration: 0.2s;
+}

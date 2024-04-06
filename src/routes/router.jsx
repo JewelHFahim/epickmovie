@@ -4,7 +4,10 @@ import { clientRoutes } from "./ClientRoutes.jsx";
 import NotFound from "../pages/not-found/NotFound.jsx";
 import AdminLoginRedirect from "../components/admin-redirect/AdminLoginRedirect.jsx";
 import HomeRoutes from "../components/SitemapGenerator/HomeRoutes.jsx";
-
+import TvLayout from "../layout/TvLayout.jsx";
+import TvHome from "../pages/tv-channels/tv-home/TvHome.jsx";
+import TvSports from "../pages/tv-channels/TvSports.jsx";
+import TvStreaming from "../pages/tv-channels/TvStreaming.jsx";
 
 const router = createBrowserRouter([
   {
@@ -14,9 +17,29 @@ const router = createBrowserRouter([
   },
 
   {
+    path: "/tv",
+    element: <TvLayout />,
+    children: [
+      {
+        path: "/tv",
+        element: <TvHome />,
+      },
+      {
+        path: "/tv/sports",
+        element: <TvSports />,
+      },
+      {
+        path: "/tv/streaming/:string",
+        element: <TvStreaming />,
+      },
+    ],
+  },
+
+  {
     path: "/admin/login",
     element: <AdminLoginRedirect />,
   },
+
   {
     path: "/sitemap-xml",
     element: <HomeRoutes />,

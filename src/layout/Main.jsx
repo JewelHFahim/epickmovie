@@ -11,7 +11,9 @@ const Main = () => {
   return (
     <>
       <div>
+        
         { theme === "theme1" ? <NavbarTheme1/> : <div className="lg:w-[61vw] lg:min-w-[1170px]  mx-auto "> <Navbar /> </div>}
+
 
         <div className={`w-full ${theme === "theme1" ? "lg:w-[78vw] lg:min-w-[1500px]" : "lg:w-[61vw] lg:min-w-[1170px]" }  mx-auto overflow-hidden`}>
         <Outlet />

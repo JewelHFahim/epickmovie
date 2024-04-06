@@ -1,43 +1,44 @@
 import { useEffect } from "react";
 import { Helmet } from "react-helmet";
+import Breadcum from "../../../utils/breadcum/Breadcum";
+import SiteNews from "../../../components/SiteNews/SiteNews";
+import JoinTelegramBtn from "../../../utils/JoinTelegramBtn";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import Breadcum from "../../../../utils/breadcum/Breadcum";
-import SEOContentsTheme1 from "../../../../components/theme1-contents/SEOContentsTheme1";
-import TagsList from "../../../../components/seo-related-content/TagsList";
-import SiteNews from "../../../../components/SiteNews/SiteNews";
-import JoinTelegramBtn from "../../../../utils/JoinTelegramBtn";
-import { useSiteConfig } from "../../../../utils/configHooks/ConfigHooks";
-import Theme1Card from "../../../../components/movie-card/theme1-card/Theme1Card";
-import LazyLoadingTheme1 from "../../../../components/lazy-loading/LazyLoadingTheme1";
-import SectionTitle from "../../../../utils/theme1-contents/section-title/SectionTitle";
-import { useSuggessionMovieSeriesQuery } from "../../../../redux/features/search/searchApi";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
+import TagsList from "../../../components/seo-related-content/TagsList";
+import Theme1Card from "../../../components/movie-card/theme1-card/Theme1Card";
+import LazyLoadingTheme1 from "../../../components/lazy-loading/LazyLoadingTheme1";
+import SectionTitle from "../../../utils/theme1-contents/section-title/SectionTitle";
+import { useSuggessionMovieSeriesQuery } from "../../../redux/features/search/searchApi";
 import {
-  useMovieDetailsQuery,
-  usePerPgaeMovieQuery,
-} from "../../../../redux/features/movies/movieApi";
-import LatestMovieTvShow from "../../../../components/theme1-contents/LatestMovieTvShow";
-import DownloadButton from "../../../../utils/DownloadButton";
-import DownloadBtnTheme1 from "../../../../utils/theme1-contents/DownloadBtnTheme1";
+  usePerPgaeTvShowQuery,
+  useSeriesDetailsQuery,
+} from "../../../redux/features/tv-show/tvShowApi";
+import SEOContentsTheme1 from "../../../components/theme1-contents/SEOContentsTheme1";
+import LatestMovieTvShow from "../../../components/theme1-contents/LatestMovieTvShow";
+import DownloadSeason from "../DownloadSeason";
+import DownloadButton from "../../../utils/DownloadButton";
+import DownloadBtnTheme1 from "../../../utils/theme1-contents/DownloadBtnTheme1";
 
-const MovieDetailsTheme1 = () => {
+const TvShowDetailsTheme1 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { siteName } = useSiteConfig();
-
-  const { data: movieDetails } = useMovieDetailsQuery(id);
-  const details = movieDetails?.data;
-  console.log(details);
-
-  const { data: perPageMovie, isLoading: movieLoading } =
-    usePerPgaeMovieQuery(1);
+  const { data: seriesDetails } = useSeriesDetailsQuery(id);
+  const details = seriesDetails?.data;
+  const { data: perPageTvShow, isLoading: tvShowLoading } =
+    usePerPgaeTvShowQuery(1);
   const { data: suggessions, isLoading: suggessionsLoading } =
     useSuggessionMovieSeriesQuery(id);
 
+  console.log(details);
+  console.log(perPageTvShow);
+
   useEffect(() => {
-    if (movieDetails?.status === false) {
+    if (seriesDetails?.status === false) {
       navigate("/404");
     }
-  }, [movieDetails, navigate]);
+  }, [seriesDetails, navigate]);
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -53,19 +54,19 @@ const MovieDetailsTheme1 = () => {
           name={details?.post_title ? details?.post_title : ""}
           content={details?.post_content}
         />
-        <meta name="keywords" content="movies" />
+        <meta name="keywords" content="web-series" />
       </Helmet>
 
       <SiteNews />
 
       {/* ===========> Latest Movies <===========*/}
-      <LatestMovieTvShow loading={movieLoading} perPageData={perPageMovie} />
+      <LatestMovieTvShow loading={tvShowLoading} perPageData={perPageTvShow} />
 
       <section className=" w-[1300px] mx-auto font-encode">
         <Breadcum
-          children1="movies"
+          children1="Web-Series"
           children2={details?.post_title}
-          redirect="movies/page/1"
+          redirect={`/tv-show/page/1`}
         />
 
         <div className="bg-[#262626]">
@@ -194,7 +195,7 @@ const MovieDetailsTheme1 = () => {
           <SEOContentsTheme1 details={details} />
 
           {/* Download Section */}
-          <div>
+          <div className="w-full">
             <h2 className="text-[28px] text-[#1FCD0F] font-bold text-center px-8">
               {details?.post_title}:
             </h2>
@@ -203,36 +204,36 @@ const MovieDetailsTheme1 = () => {
               Download Links:
             </div>
 
-            <div className="mt-7 mx-auto flex justify-center items-center">
-              <div className="flex flex-col gap-y-4">
-                {details?.download_links.length ? (
-                  <>
-                    {details?.download_links?.map((item, i) => (
-                      <DownloadBtnTheme1 key={i} url={item?.download_url}>
-                        {item?.label} {item?.px_quality} {item?.file_size}
-                      </DownloadBtnTheme1>
-                    ))}
-                  </>
-                ) : (
-                  <p className="text-[18px] font-medium text-slate-500 text-center">
-                    No Download Link
-                  </p>
-                )}
-              </div>
+            {/* ==========>> DOWNLOAD BUTTON <<=============*/}
+            <div className="w-[600px] mx-auto mt-3">
+              {details?.download_links?.length === 0 && (
+                <p className="text-[18px] font-medium text-slate-500 text-center">
+                  No Download Link
+                </p>
+              )}
 
-              {/* <div className="max-w-[80%] lg:max-w-[550px] flex flex-col gap-5 lg:gap-3 mx-auto">
-                {details?.download_links.length > 0 ? (
-                  details?.download_links?.map((item, i) => (
-                    <DownloadButton key={i} url={item?.download_url}>
-                      {item?.label} {item?.px_quality} {item?.file_size}
-                    </DownloadButton>
-                  ))
-                ) : (
-                  <p className="text-[18px] font-medium text-slate-500 text-center">
-                    No Download Link
-                  </p>
+              {details?.download_links &&
+                Object.keys(details?.download_links) && (
+                  <div className="">
+                    {Object.keys(details?.download_links || [])?.map(
+                      (item, i) => (
+                        <div key={i} className="flex flex-col gap-y-2">
+                          <div className="px-5 flex flex-col gap-y-2 my-2">
+                            {details?.download_links[item] &&
+                              details?.download_links[item]?.map((itm, i) => (
+                                <DownloadBtnTheme1
+                                  key={i}
+                                  url={itm?.download_link}
+                                >
+                                  {itm?.label}
+                                </DownloadBtnTheme1>
+                              ))}
+                          </div>
+                        </div>
+                      )
+                    )}
+                  </div>
                 )}
-              </div> */}
             </div>
 
             <div className="mt-5">
@@ -248,9 +249,9 @@ const MovieDetailsTheme1 = () => {
           {/* Tag List */}
           <TagsList details={details} title="Movie" />
 
-          {/* ===========> Latest Movies <===========*/}
+          {/* ===========> Latest Web-Series <===========*/}
           <div className="flex flex-col justify-center items-center p-5">
-            <SectionTitle> Related Movies </SectionTitle>
+            <SectionTitle> Related Web-Series </SectionTitle>
             {suggessionsLoading ? (
               <div className="w-full">
                 <LazyLoadingTheme1 lazyLength={5} />
@@ -269,4 +270,4 @@ const MovieDetailsTheme1 = () => {
   );
 };
 
-export default MovieDetailsTheme1;
+export default TvShowDetailsTheme1;

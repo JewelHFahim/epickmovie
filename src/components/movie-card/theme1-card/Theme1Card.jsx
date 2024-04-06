@@ -4,6 +4,8 @@ import { useCleanedTitle, useRedirect, useSiteConfig } from "../../../utils/conf
 
 const Theme1Card = ({ item }) => {
 
+  console.log(item)
+
   const { maskLink } = useSiteConfig();
   const { url } = useCleanedTitle(item);
   const handleRedirect = useRedirect(url, maskLink);
@@ -19,9 +21,12 @@ const Theme1Card = ({ item }) => {
         />
 
         {/* Pixel/Print Quality  */}
-        <div className="z-50 absolute top-2 right-2 w-[48px] h-[20px] rounded-[3px] bg-[#FFB800] uppercase text-[10px] text-black flex justify-center items-center">
-          web-dl
+        {
+          item?.stickerLabel &&
+        <div className="z-50 absolute top-2 right-2 px-2 py-1 rounded-[3px] font-bold bg-[#FFB800] uppercase text-[10px] text-black flex justify-center items-center">
+          {item?.stickerLabel}
         </div>
+        }
 
         {/* Title */}
         <div className="z-50 absolute bottom-2 text-white">

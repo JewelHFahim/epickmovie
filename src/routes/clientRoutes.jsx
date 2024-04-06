@@ -1,6 +1,8 @@
 import Home from "../pages/home/Home";
 import BanglaMovie from "../pages/movies/bangla/BanglaMovie";
+import EnglishMovies from "../pages/movies/english/EnglishMovies";
 import FilterList from "../pages/movies/filter-list/FilterList";
+import HindiMovies from "../pages/movies/hindi/HindiMovies";
 import MovieDetails from "../pages/movies/movie-details/MovieDetails";
 import Movies from "../pages/movies/movies/Movies";
 import SearchList from "../pages/movies/search-list/SearchList";
@@ -22,6 +24,16 @@ export const clientRoutes = [
   {
     path: "/bangla/page/:id",
     element: <BanglaMovie />,
+  },
+
+  {
+    path: "/hindi/page/:id",
+    element: <HindiMovies />,
+  },
+
+  {
+    path: "/english/page/:id",
+    element: <EnglishMovies />,
   },
 
   {

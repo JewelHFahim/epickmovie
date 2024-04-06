@@ -2,12 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import PagiBtnTheme1 from "../../theme1-contents/PagiBtnTheme1";
 
-const PaginationTheme1 = ({
-  currentPage,
-  perPgaeMovie,
-  type,
-  filteredTerm,
-}) => {
+const PaginationTheme1 = ({ currentPage, perPgaeMovie, type, filteredTerm }) => {
   const navigate = useNavigate();
 
   const totalData = perPgaeMovie?.data?.total;
@@ -16,9 +11,10 @@ const PaginationTheme1 = ({
 
   // Function to handle page change
   const handlePageChange = (page) => {
-    if (type === "movies" || type === "tv-show") {
+    if (type === "movies" || type === "tv-show" || type === "hindi" || type === "english") {
       navigate(`/${type}/page/${page}`);
-    } else {
+    } 
+    else {
       navigate(`/terms/${filteredTerm}/page/${page}`);
     }
 

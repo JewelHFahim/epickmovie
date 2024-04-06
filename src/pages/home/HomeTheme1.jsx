@@ -5,7 +5,6 @@ import UpCommingTheme1 from "../../components/theme1-contents/UpCommingTheme1";
 import {
   useFeaturedPostsQuery,
   usePerPgaeMovieQuery,
-  useUpCommingPostsQuery,
 } from "../../redux/features/movies/movieApi";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import SectionTitle from "../../utils/theme1-contents/section-title/SectionTitle";
@@ -16,8 +15,7 @@ const HomeTheme1 = () => {
   const { data: tvShowList, isLoading: tvShowLoading } =
     usePerPgaeTvShowQuery(1);
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
-  const { data: upCommingPosts, isLoading: upCommingLoading } =
-    useUpCommingPostsQuery(1);
+
 
   return (
     <div>

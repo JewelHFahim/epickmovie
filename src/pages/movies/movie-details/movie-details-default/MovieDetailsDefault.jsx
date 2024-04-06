@@ -125,6 +125,7 @@ const MovieDetailsDefault = () => {
               </p>
             )}
           </div>
+          
 
           {/* ===========>> JOIN TELEGRAM <<=========== */}
           <JoinTelegramBtn />

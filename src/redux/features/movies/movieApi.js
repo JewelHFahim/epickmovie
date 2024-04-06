@@ -2,11 +2,25 @@ import apiSlice from "../api/apiSlice";
 
 const movieApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+
     // =================>>PER PAGE BENGALI MOVIE <<========================
     perPageBengaliMovieList: builder.query({
       query: (page) => `/get-bengali-post?page=${page}`,
       providesTags: ["EpicMovies"],
     }),
+
+    // =================>> PER PAGE HINDI MOVIE <<========================
+    perPageHindiMovieList: builder.query({
+      query: (page) => `/sp-terms/india?page=${page}`,
+      providesTags: ["EpicMovies"],
+    }),
+
+    // =================>> PER PAGE English MOVIE <<========================
+    perPageEnglishMovieList: builder.query({
+      query: (page) => `/sp-terms/united-states-of-america?page=${page}`,
+      providesTags: ["EpicMovies"],
+    }),
+
 
     // ======================>> SINGLE MOVIE DETAILS <<===================
     movieDetails: builder.query({
@@ -74,6 +88,8 @@ export const {
   usePrintQualityClientQuery,
   usePixelQualityClientQuery,
   usePerPageBengaliMovieListQuery,
+  usePerPageHindiMovieListQuery,
+  usePerPageEnglishMovieListQuery,
   useUpCommingPostsQuery,
 } = movieApi;
 export default movieApi;
