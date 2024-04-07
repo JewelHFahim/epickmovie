@@ -6,18 +6,29 @@ import ChannelCard from "../../components/tv-channels/channel-card/ChannelCard";
 const TvStreaming = () => {
   return (
     <div className="mt-8">
+      <div className="w-full flex justify-center items-center py-2 lg:hidden">
+        <p className="text-[18px] text-white">
+          সকল খেলার আপডেট পেতে আমাদের চ্যানেলে জয়েন করুন এবং আমাদের সাইট ভিজিট
+          করুন
+        </p>
+      </div>
+
       {/* Banner Ads */}
       <div className="mt-5 w-full h-[157px]">
         <img src={bannerImg} alt="" className="w-full h-full" />
       </div>
 
       {/* Streaming */}
-      <div className="mt-5 flex flex-col justify-center items-center">
-        <div className="w-[1037px]  h-[510px] rounded-[8px] mx-auto">
-          <img src={streamming} alt="" className="w-full h-full object-cover" />
+      <div className="mt-5 flex flex-col justify-center items-center w-[80%] mx-auto lg:w-full">
+        <div className="w-full lg:w-[1037px] h-[450px] lg:h-[510px] rounded-[10px] mx-auto border-2 border-yellow-600">
+          <img
+            src={streamming}
+            alt=""
+            className="w-full h-full object-cover rounded-[10px] "
+          />
         </div>
 
-        <p className="mt-5 text-[22px] text-white text-center px-10">
+        <p className="hidden lg:block mt-5 text-[22px] text-white text-center px-10">
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry. Lorem Ipsum has been the industry&apos;s standard dummy text
           ever since the 1500s, when an unknown printer took a galley of type
@@ -36,14 +47,19 @@ const TvStreaming = () => {
       </div>
 
       {/* Sport Section */}
-      <>
-        <SectionTitleBtn>Sport</SectionTitleBtn>
-        <div className="mt-5 grid grid-cols-6 gap-5">
+      <div className="w-[80%] mx-auto lg:w-full">
+        <SectionTitleBtn>Sports</SectionTitleBtn>
+        <div className="mt-5 hidden lg:flex flex-wrap gap-5">
           {Array.from({ length: 12 }).map((item, i) => (
             <ChannelCard key={i} />
           ))}
         </div>
-      </>
+        <div className="mt-5 grid grid-cols-2 gap-12 mx-auto lg:hidden">
+          {Array.from({ length: 8 }).map((item, i) => (
+            <ChannelCard key={i} />
+          ))}
+        </div>
+      </div>
 
       {/* Banner Ads */}
       <div className="mt-5 w-full h-[157px]">

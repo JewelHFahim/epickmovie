@@ -12,9 +12,7 @@ import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 import { useGenreListQuery } from "../../../redux/features/movies/movieApi";
 import { collectSearchItem } from "../../../redux/features/search/searchSlice";
 
-
 const NavbarTv = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { siteLogo } = useSiteConfig();
@@ -27,10 +25,26 @@ const NavbarTv = () => {
 
   const menus = [
     { title: "Home", url: "/tv", icon: <RiHome4Line />, isDrapdown: false },
-    { title: "Sports", url: "/tv/sports", icon: <MdOutlineSportsCricket />, isDrapdown: false },
-    { title: "News", url: "/tv", icon: <FaRegNewspaper />, isDrapdown: false  },
-    { title: "Entertainment", url: "/tv", icon: <PiMonitorPlayLight />, isDrapdown: false  },
-    { title: "All Tv", url: "/tv", icon: <GrChannel />, isDrapdown: true,  subMenu: genreList?.data },
+    {
+      title: "Sports",
+      url: "/tv/sports",
+      icon: <MdOutlineSportsCricket />,
+      isDrapdown: false,
+    },
+    { title: "News", url: "/tv", icon: <FaRegNewspaper />, isDrapdown: false },
+    {
+      title: "Entertainment",
+      url: "/tv",
+      icon: <PiMonitorPlayLight />,
+      isDrapdown: false,
+    },
+    {
+      title: "All Tv",
+      url: "/tv",
+      icon: <GrChannel />,
+      isDrapdown: false,
+      subMenu: genreList?.data,
+    },
   ];
 
   const handleInputChange = (e) => {
@@ -89,12 +103,16 @@ const NavbarTv = () => {
           <ul className="font-lilita text-[22px] text-white flex items-center gap-x-5 menus ">
             {menus.map((item, i) => (
               <li key={i} className="relative">
-                <Link to={item.url} target={`${item.newTab ? "_blank" : ""}`} className="flex items-center gap-1">
-                    {item.icon}
+                <Link
+                  to={item.url}
+                  target={`${item.newTab ? "_blank" : ""}`}
+                  className="flex items-center gap-1"
+                >
+                  {item.icon}
                   {item.title}
                 </Link>
 
-                {item?.isDrapdown && (
+                {/* {item?.isDrapdown && (
                   <ul className="z-[999] absolute top-[35px] left-0 bg-[#323131] flex flex-wrap flex-col gap-y-2 gap-x-5 h-[450px] p-4 shadow-md text-[16px] font-[300] w-[450px] submenu">
                     {item?.subMenu?.map((sMenu, i) => (
                       <Link
@@ -106,7 +124,7 @@ const NavbarTv = () => {
                       </Link>
                     ))}
                   </ul>
-                )}
+                )} */}
               </li>
             ))}
           </ul>
@@ -114,24 +132,25 @@ const NavbarTv = () => {
 
         {/* Serach Field */}
         <form
-          onSubmit={handleSubmit}
+          // onSubmit={handleSubmit}
           className="w-[332px] py-2 rounded-md flex items-center bg-[#444444]"
         >
           <input
             type="text"
-            value={searchTermState}
-            onChange={handleInputChange}
-            placeholder="Search Movie/TV Shows"
+            // value={searchTermState}
+            // onChange={handleInputChange}
+            placeholder="Search Tv Channel"
             className="w-[90%] focus:outline-none bg-transparent px-4 text-slate-200 text-sm font-semibold"
           />
           <IoSearch className="10% text-[#d73ee3]" />
         </form>
+
+        {/* 
         {showPopup && (
           <div className="absolute z-[9999] top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
             <div className="bg-gray-300 p-8 rounded-lg flex flex-col items-center">
               <p className="font-medium">Verify that you are not robot...</p>
               <p className="font-medium">
-                {" "}
                 {popupNumbers[0]} + {popupNumbers[1]} = ?
               </p>
               <div className=" mt-2 rounded-md">
@@ -150,7 +169,9 @@ const NavbarTv = () => {
               </div>
             </div>
           </div>
-        )}
+        )} */}
+
+
       </div>
     </div>
   );

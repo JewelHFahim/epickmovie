@@ -123,10 +123,10 @@ const Header = () => {
         </div>
       )}
 
-      <div>
-        <Link
-          to="/tv"
-          className="border border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white rounded-md font-semibold px-4 py-1 "
+      <div className="w-[80%] h-[90px] lg:w-[300px] lg:h-[40px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[15px] lg:rounded-[8px]">
+        <Link to="/tv"
+          className="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white rounded-md font-semiboldpx-4 w-[60%] mx-auto py-4 lg:py-2 flex justify-center items-center text-[30px] lg:text-base font-semibold"
+          
         >
           Live TV Channels
         </Link>
