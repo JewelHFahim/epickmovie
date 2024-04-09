@@ -4,8 +4,7 @@ import LazyLoadingTheme1 from "../lazy-loading/LazyLoadingTheme1";
 import Theme1Card from "../movie-card/theme1-card/Theme1Card";
 
 const UpCommingTheme1 = () => {
-  const { data: upCommingPosts, isLoading: upCommingLoading } =
-    useUpCommingPostsQuery(1);
+  const { data: upCommingPosts, isLoading: upCommingLoading } = useUpCommingPostsQuery(1);
 
   return (
     <>

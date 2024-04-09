@@ -2,6 +2,7 @@ import { Helmet } from "react-helmet";
 import {
   useFeaturedPostsQuery,
   usePerPgaeMovieQuery,
+  useUpCommingPostsQuery,
 } from "../../redux/features/movies/movieApi";
 import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
@@ -15,16 +16,15 @@ import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import MovieCard from "../../components/movie-card/MovieCard";
 
 const HomeDefault = () => {
-  const { data: featuredPosts, isLoading: featureLoading } =
-    useFeaturedPostsQuery();
-  const { data: tvShowList, isLoading: tvShowLoading } =
-    usePerPgaeTvShowQuery(1);
+  const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
+  const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
-
-  console.log(movieList)
-
   const { data: quickMenu } = useQuickMenuUserQuery();
   const { siteName } = useSiteConfig();
+
+  const { data: upCommingPosts, isLoading: upCommingLoading } = useUpCommingPostsQuery(1);
+  console.log(upCommingPosts);
+
 
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
@@ -139,8 +139,9 @@ const HomeDefault = () => {
       <HomePageSeeAllBtn total={totalTvShow} redirect={""}>
         Up Comming Movies & Tv Shows
       </HomePageSeeAllBtn>
+
       <div className="px-5 lg:px-0 w-full">
-        {tvShowLoading ? (
+        {upCommingLoading ? (
           <div className="w-full">
             <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
               {Array.from({ length: 6 }).map((item, i) => (
@@ -151,7 +152,7 @@ const HomeDefault = () => {
         ) : (
           <div>
             <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
-              {tvShowList?.data?.data?.slice(0, 6)?.map((item) => (
+              {upCommingPosts?.data?.slice(0, 6)?.map((item) => (
                 <MovieCard
                   key={item?.id}
                   item={item}

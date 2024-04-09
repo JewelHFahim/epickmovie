@@ -2,8 +2,15 @@ import bannerImg from "../../assets/tv-channel-ads.jpg";
 import streamming from "../../assets/stramming.png";
 import SectionTitleBtn from "../../utils/tv-channels/SectionTitleBtn";
 import ChannelCard from "../../components/tv-channels/channel-card/ChannelCard";
+import { useSingleTvChannelQuery } from "../../redux/features/live-tv/liveTvApi";
+import { useParams } from "react-router-dom";
 
 const TvStreaming = () => {
+  const { id } = useParams();
+
+  const { data: singleCategory } = useSingleTvChannelQuery(8);
+  console.log(singleCategory);
+
   return (
     <div className="mt-8">
       <div className="w-full flex justify-center items-center py-2 lg:hidden">
@@ -21,11 +28,7 @@ const TvStreaming = () => {
       {/* Streaming */}
       <div className="mt-5 flex flex-col justify-center items-center w-[80%] mx-auto lg:w-full">
         <div className="w-full lg:w-[1037px] h-[450px] lg:h-[510px] rounded-[10px] mx-auto border-2 border-yellow-600">
-          <img
-            src={streamming}
-            alt=""
-            className="w-full h-full object-cover rounded-[10px] "
-          />
+          <img src={streamming} alt="" className="w-full h-full object-cover rounded-[10px]"/>
         </div>
 
         <p className="hidden lg:block mt-5 text-[22px] text-white text-center px-10">

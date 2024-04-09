@@ -2,9 +2,10 @@ import apiSlice from "../api/apiSlice";
 
 const liveTvApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
+
     // =========>>  Live Tv Category <<============
     liveTvCategory: builder.query({
-      query: () => ``,
+      query: () => `/live-tv-category`,
       providesTags: ["EpicMovies"],
     }),
 

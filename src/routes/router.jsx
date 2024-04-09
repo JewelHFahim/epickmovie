@@ -29,7 +29,7 @@ const router = createBrowserRouter([
         element: <TvSports />,
       },
       {
-        path: "/tv/streaming/:string",
+        path: "/tv/streaming/:id",
         element: <TvStreaming />,
       },
     ],

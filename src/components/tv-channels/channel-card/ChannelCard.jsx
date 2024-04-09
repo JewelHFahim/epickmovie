@@ -1,26 +1,22 @@
 import { Link } from "react-router-dom";
 import "./ChannelCard.css";
 
-const ChannelCard = () => {
+const ChannelCard = ({ item }) => {
+
   return (
     <Link
-      to={`/tv/streaming/star-sports`}
-      className="w-full h-[500px] lg:w-[200px] lg:h-[320px] rounded-[10px] border-2 overflow-hidden relative cardContainer border-red-600"
-    >
-      <img
-        src="https://s3-alpha-sig.figma.com/img/66d1/de44/b16bb7cc63abe9c8a34d5e963513dbea?Expires=1713139200&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4&Signature=kFAWspx3DOkDWYYgT4Cdn8sRZQ8hnK50wxPBSXS4yxkLjJhhuFqgUakUwzAWszDJw4ImugvdcNyTQZHqs4CflC53kU6M7oY2EehEJhkBUSb8BXJtR-ivJbcJhvybZ1G3JVHBQFAIb6V~Antc08xvSJ27lgw62lx5nucs3Qn-bI3UfeEHbcH9gLAnbmGyrhkKFkOK1iJLCThyIYkONPF-VgQk3E8PkFXRE5yx1cDdqOpklYxTrDKwMKEOUfYgeKgLIDv6~twaDn2IR6q7DWgGQ0~E7gY4RRDIA6fAP5mM4Q4CznRYoLzhThCf8JYmbyA4Lf7mrVucEjuAQ5uRIO9ppg__"
-        alt=""
-        className="w-full h-full rounded-[10px]"
-      />
+      to={`/tv/streaming/${item?.id}`}
+      className="w-full h-[500px] lg:w-[200px] lg:h-[320px] rounded-[10px] border-2 overflow-hidden relative cardContainer border-red-600">
 
-      <div className="absolute z-20 bottom-3 px-3">
+      <img src={item?.thumb_name} alt="" className="w-full h-full rounded-[10px]"/>
+
+      <div className="absolute z-20 bottom-3 px-3 w-full">
         <p className="text-center text-white font-bold text-[24px] leading-[30px] lg:leading-normal lg:text-[13px]">
-          Download Captain Miller (2024) Hindi WEB-DL 480p, 720p & 1080p |
-          Gdrive
+          {item?.channel_name}
         </p>
       </div>
 
-      <div className="absolute top-0 left-0 z-10 w-full h-full bg-gradient-to-t from-gray-600 from-5%  to-transparent to-60% "></div>
+      <div className="absolute top-0 left-0 z-10 w-full h-full bg-gradient-to-t from-black from-5%  to-transparent to-60% "></div>
 
       <div className="bg-[#FF0000] absolute top-3 right-3 px-7 py-2 lg:px-4 lg:py-[2px] rounded-md">
         <p className="font-bold text-xl lg:text-base">Live</p>
