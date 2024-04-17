@@ -40,7 +40,7 @@ const NavbarTv = () => {
     },
     {
       title: "All Tv",
-      url: "/tv",
+      url: "/tv/all-tvs",
       icon: <GrChannel />,
       isDrapdown: false,
       subMenu: genreList?.data,

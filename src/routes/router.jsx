@@ -8,6 +8,7 @@ import TvLayout from "../layout/TvLayout.jsx";
 import TvHome from "../pages/tv-channels/tv-home/TvHome.jsx";
 import TvSports from "../pages/tv-channels/TvSports.jsx";
 import TvStreaming from "../pages/tv-channels/TvStreaming.jsx";
+import AllChannels from "../pages/tv-channels/AllChannels.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "/tv",
         element: <TvHome />,
+      },
+      {
+        path: "/tv/all-tvs",
+        element: <AllChannels />,
       },
       {
         path: "/tv/sports",

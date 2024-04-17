@@ -4,12 +4,19 @@ import SectionTitleBtn from "../../utils/tv-channels/SectionTitleBtn";
 import ChannelCard from "../../components/tv-channels/channel-card/ChannelCard";
 import { useSingleTvChannelQuery } from "../../redux/features/live-tv/liveTvApi";
 import { useParams } from "react-router-dom";
+import VideoPlayer from "../video-player/VideoPlayer";
+import { useEffect } from "react";
 
 const TvStreaming = () => {
   const { id } = useParams();
+  const { data: singleCategory } = useSingleTvChannelQuery(id);
+  console.log(singleCategory)
 
-  const { data: singleCategory } = useSingleTvChannelQuery(8);
-  console.log(singleCategory);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
+
+
 
   return (
     <div className="mt-8">
@@ -27,20 +34,14 @@ const TvStreaming = () => {
 
       {/* Streaming */}
       <div className="mt-5 flex flex-col justify-center items-center w-[80%] mx-auto lg:w-full">
-        <div className="w-full lg:w-[1037px] h-[450px] lg:h-[510px] rounded-[10px] mx-auto border-2 border-yellow-600">
-          <img src={streamming} alt="" className="w-full h-full object-cover rounded-[10px]"/>
+        <div className="">
+          {/* <img src={streamming} alt="" className="w-full h-full object-cover rounded-[10px]"/> */}
+          <VideoPlayer singleCategory={singleCategory}/>
+
         </div>
 
         <p className="hidden lg:block mt-5 text-[22px] text-white text-center px-10">
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry&apos;s standard dummy text
-          ever since the 1500s, when an unknown printer took a galley of type
-          and scrambled it to make a type specimen book. It has survived not
-          only five centuries, but also the leap into electronic typesetting,
-          remaining essentially unchanged. It was popularised in the 1960s with
-          the release of Letraset sheets containing Lorem Ipsum passages, and
-          more recently with desktop publishing software like Aldus PageMaker
-          including versions of Lorem Ipsum.
+         {singleCategory?.data?.description}
         </p>
       </div>
 

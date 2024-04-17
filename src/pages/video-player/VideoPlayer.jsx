@@ -38,10 +38,11 @@
 //   );
 // }
 
-// // ****************>> With Sub Title <<***************
+// ****************>> With Sub Title <<***************
 // import React, { useEffect } from 'react';
 
 // const JWPlayer = () => {
+
 //   useEffect(() => {
 //     const loadJWPlayerScript = () => {
 //       // Load JWPlayer script dynamically
@@ -113,3 +114,28 @@
 // };
 
 // export default JWPlayer;
+
+import ReactPlayer from "react-player";
+import "./VideoPlayer.css";
+
+const VideoPlayer = ({ singleCategory }) => {
+  return (
+    <>
+      {singleCategory?.data?.link?.map((link, i) => (
+        <div
+          key={i}
+          className="player-wrapper w-[1037px] rounded-[10px] overflow-hidden border-2 border-yellow-600"
+        >
+          <ReactPlayer
+            url={link.stream_url}
+            controls={true} 
+            width="100%"
+            height="100%"
+          />
+        </div>
+      ))}
+    </>
+  );
+};
+
+export default VideoPlayer;
