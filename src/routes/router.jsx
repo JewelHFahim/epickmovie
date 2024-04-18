@@ -6,9 +6,11 @@ import AdminLoginRedirect from "../components/admin-redirect/AdminLoginRedirect.
 import HomeRoutes from "../components/SitemapGenerator/HomeRoutes.jsx";
 import TvLayout from "../layout/TvLayout.jsx";
 import TvHome from "../pages/tv-channels/tv-home/TvHome.jsx";
-import TvSports from "../pages/tv-channels/TvSports.jsx";
 import TvStreaming from "../pages/tv-channels/TvStreaming.jsx";
 import AllChannels from "../pages/tv-channels/AllChannels.jsx";
+import TvSports from "../pages/tv-channels/sports/TvSports.jsx";
+import News from "../pages/tv-channels/news/News.jsx";
+import Entertainment from "../pages/tv-channels/entertainment/Entertainment.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +34,14 @@ const router = createBrowserRouter([
       {
         path: "/tv/sports",
         element: <TvSports />,
+      },
+      {
+        path: "/tv/news",
+        element: <News />,
+      },
+      {
+        path: "/tv/entertainment",
+        element: <Entertainment />,
       },
       {
         path: "/tv/streaming/:id",

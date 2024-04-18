@@ -6,6 +6,8 @@ import { useSingleTvChannelQuery } from "../../redux/features/live-tv/liveTvApi"
 import { useParams } from "react-router-dom";
 import VideoPlayer from "../video-player/VideoPlayer";
 import { useEffect } from "react";
+import HLSPlayer from "../video-player/HLSPlayer";
+import VideoJS from "../video-player/VideoJS";
 
 const TvStreaming = () => {
   const { id } = useParams();
@@ -15,6 +17,10 @@ const TvStreaming = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
+
+
+  const videoSrc = 'https://ekusheyserver.com/etvlivesn.m3u8';
+  // const videoSrc = singleCategory?.data?.link?.map(link => link.stream_url) || [];
 
 
 
@@ -36,7 +42,9 @@ const TvStreaming = () => {
       <div className="mt-5 flex flex-col justify-center items-center w-[80%] mx-auto lg:w-full">
         <div className="">
           {/* <img src={streamming} alt="" className="w-full h-full object-cover rounded-[10px]"/> */}
-          <VideoPlayer singleCategory={singleCategory}/>
+          {/* <VideoPlayer singleCategory={singleCategory}/> */}
+          <HLSPlayer src={videoSrc} singleCategory={singleCategory}/>
+          {/* <VideoJS/> */}
 
         </div>
 

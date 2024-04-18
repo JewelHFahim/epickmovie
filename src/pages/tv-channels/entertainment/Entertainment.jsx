@@ -1,14 +1,14 @@
-import HighLightCard from "../../components/tv-channels/HighLightCard";
-import bannerImg from "../../assets/tv-channel-ads.jpg";
-import SectionTitleBtn from "../../utils/tv-channels/SectionTitleBtn";
+import HighLightCard from "../../../components/tv-channels/HighLightCard";
+import bannerImg from "../../../assets/tv-channel-ads.jpg";
+import SectionTitleBtn from "../../../utils/tv-channels/SectionTitleBtn";
 import { useEffect } from "react";
-import ChannelCard from "../../components/tv-channels/channel-card/ChannelCard";
+import ChannelCard from "../../../components/tv-channels/channel-card/ChannelCard";
 import {
   useLiveTvCategoryQuery,
   useLiveTvChannelQuery,
-} from "../../redux/features/live-tv/liveTvApi";
+} from "../../../redux/features/live-tv/liveTvApi";
 
-const TvSports = () => {
+const Entertainment = () => {
   const { data: liveTvList } = useLiveTvChannelQuery();
   const { data: tvCategory } = useLiveTvCategoryQuery();
 
@@ -56,14 +56,14 @@ const TvSports = () => {
 
       {/* Sport Section */}
       <div className="w-[80%] mx-auto lg:w-full">
-        <SectionTitleBtn>Sports</SectionTitleBtn>
+        <SectionTitleBtn>Entertainment</SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
-          {groupedTvLinks?.Sports?.map((item, i) => (
+          {groupedTvLinks?.Entertainment?.map((item, i) => (
             <ChannelCard key={i} item={item} />
           ))}
         </div>
         <div className="mt-5 grid grid-cols-2 gap-12 mx-auto lg:hidden">
-          {groupedTvLinks?.Sports?.map((item, i) => (
+          {groupedTvLinks?.Entertainment?.map((item, i) => (
             <ChannelCard key={i} item={item} />
           ))}
         </div>
@@ -77,4 +77,4 @@ const TvSports = () => {
   );
 };
 
-export default TvSports;
+export default Entertainment;

@@ -31,10 +31,10 @@ const NavbarTv = () => {
       icon: <MdOutlineSportsCricket />,
       isDrapdown: false,
     },
-    { title: "News", url: "/tv", icon: <FaRegNewspaper />, isDrapdown: false },
+    { title: "News", url: "/tv/news", icon: <FaRegNewspaper />, isDrapdown: false },
     {
       title: "Entertainment",
-      url: "/tv",
+      url: "/tv/entertainment",
       icon: <PiMonitorPlayLight />,
       isDrapdown: false,
     },
