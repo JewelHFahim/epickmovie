@@ -39,14 +39,14 @@ const TvMobileMenu = () => {
 
     {
       title: "Entertainment",
-      path: "",
+      path: "/tv/entertainment",
       isDrapdown: false,
       icon: <PiMonitorPlayLight />,
     },
 
     {
       title: "All Tv",
-      path: "",
+      path: "/tv/all-tvs",
       isDrapdown: false,
       icon: <GrChannel />,
     },
