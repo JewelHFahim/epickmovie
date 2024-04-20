@@ -10,18 +10,16 @@ import UpCommingTheme1 from "../../../components/theme1-contents/UpCommingTheme1
 const TvShowsTheme1 = () => {
   const location = useLocation();
   const currentRoute = location?.pathname;
-  const currentP = Number(currentRoute?.slice(14));
+  const currentP = Number(currentRoute?.slice(14)) === 0 ? 1 : Number(currentRoute?.slice(14));
   const { data: perPageTvShows, isLoading } = usePerPgaeTvShowQuery(currentP);
 
   return (
-    <div>
+    <div className="px-10 lg:px-0">
       <SiteNews />
 
       {/* All Web-Series */}
       <div className="mt-5">
-        <button className="px-6 h-[40px] bg-[#FFB800] text-black text-[18px] font-bold flex justify-center items-center gap-x-4">
-          <span>All Web-Series</span>
-        </button>
+        <SectionTitle> All Web-Series </SectionTitle>
 
         {isLoading ? (
           <div className="w-full">

@@ -15,9 +15,16 @@ const FilterListTheme1 = () => {
   const getGenresFromRoute = (route) => {
     const parts = route.split("/");
     const startIndex = parts.indexOf("terms");
-    const genres = parts.slice(startIndex + 1, -2);
-    const genresString = genres.join("-");
-    return genresString;
+
+    if(parts?.length === 5 ){
+      const genres = parts.slice(startIndex + 1, -2);
+      const genresString = genres.join("-");
+      return genresString;
+    }else{
+      const genres = parts.slice(startIndex + 1);
+      const genresString = genres.join("-");
+      return genresString;
+    }
   };
 
   // Usage example
@@ -32,7 +39,7 @@ const FilterListTheme1 = () => {
   };
 
   // Usage example
-  const currentPage = getPageNumberFromRoute(currentRoute);
+  const currentPage = isNaN(getPageNumberFromRoute(currentRoute)) ? 1 : getPageNumberFromRoute(currentRoute);
 
   const { data: filteredResults, isLoading } = useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
 

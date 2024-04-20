@@ -1,8 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import PagiBtnTheme1 from "../../theme1-contents/PagiBtnTheme1";
 
 const PaginationTheme1 = ({ currentPage, perPgaeMovie, type, filteredTerm }) => {
+  
   const navigate = useNavigate();
 
   const totalData = perPgaeMovie?.data?.total;
@@ -63,7 +65,7 @@ const PaginationTheme1 = ({ currentPage, perPgaeMovie, type, filteredTerm }) => 
   };
 
   return (
-    <div className="mt-8 w-full pl-10 lg:pl-4 p-0 lg:p-4  flex flex-wrap items-center gap-4">
+    <div className="mt-8 w-full flex flex-wrap items-center gap-4">
       <PagiBtnTheme1
         onClick={() => handlePageChange(currentPage - 1)}
         disabled={currentPage === 1}

@@ -11,7 +11,7 @@ const BanglaMovie = () => {
   const { siteName } = useSiteConfig();
   const location = useLocation();
   const currentRoute = location.pathname;
-  const currentP = Number(currentRoute?.slice(13));
+  const currentP = Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
   const { data: perPgaeMovie, isLoading } = usePerPageBengaliMovieListQuery(currentP);
 
   return (

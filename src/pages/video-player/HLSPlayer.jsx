@@ -34,10 +34,10 @@ const HLSPlayer = ({ singleCategory }) => {
       }
     };
   }, [src]);
-
+  
   return (
-    <div className="w-full h-full max-w-[1037px] rounded-[10px] overflow-hidden border-2 border-yellow-600 flex justify-center items-center">
-      <video ref={videoRef} controls autoPlay/>
+    <div className="w-full h-full min-w-full lg:min-w-[1037px] lg:max-w-[1037px] rounded-[10px] overflow-hidden border-2 border-yellow-600 flex justify-center items-center">
+      <video ref={videoRef} controls autoPlay width="100%" height="100%" />
     </div>
   );
 };

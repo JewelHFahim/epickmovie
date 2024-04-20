@@ -12,8 +12,8 @@ const MoviesDefault = () => {
   const location = useLocation();
   const { siteName } = useSiteConfig();
   const currentRoute = location.pathname;
+  const currentP = Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
 
-  const currentP = Number(currentRoute?.slice(13));
   const { data: perPgaeMovie, isLoading } = usePerPgaeMovieQuery(currentP);
 
   // const adBlockDetected = useDetectAdBlock();

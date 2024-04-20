@@ -7,8 +7,8 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { collectSearchItem } from "../../../redux/features/search/searchSlice";
 
-
 const NavbarTheme1 = () => {
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { siteLogo, telegramLink } = useSiteConfig();
@@ -19,20 +19,15 @@ const NavbarTheme1 = () => {
   const [popupNumbers, setPopupNumbers] = useState([]);
   const [userAnswer, setUserAnswer] = useState("");
 
-
-
-
-
-
   const menus = [
     { title: "Home", url: "/", isDrapdown: false, newTab: false },
     {
       title: "Movies",
-      url: "/movies/page/1",
+      url: "/movies",
       isDrapdown: false,
       newTab: false,
     },
-    { title: "Web-Series", url: "/tv-show/page/1", newTab: false },
+    { title: "Web-Series", url: "/tv-show", newTab: false },
     {
       title: "Genres",
       url: "#",
@@ -40,8 +35,8 @@ const NavbarTheme1 = () => {
       subMenu: genreList?.data,
       newTab: false,
     },
-    { title: "Hollywood", url: "/english/page/1", isDrapdown: false },
-    { title: "Bollywood", url: "/hindi/page/1", isDrapdown: false },
+    { title: "Hollywood", url: "/english", isDrapdown: false },
+    { title: "Bollywood", url: "/hindi", isDrapdown: false },
     {
       title: "Join Telegram",
       url: telegramLink,
@@ -91,7 +86,7 @@ const NavbarTheme1 = () => {
     }
   };
   return (
-    <div className="w-full h-[70px] bg-[#262626] flex items-center">
+    <div className="hidden w-full h-[70px] bg-[#262626] lg:flex items-center">
       <div className="lg:w-[78vw] lg:min-w-[1500px] mx-auto flex justify-between items-center">
         <div className="flex items-center gap-x-5 ">
           <Link to="/">
@@ -112,9 +107,7 @@ const NavbarTheme1 = () => {
                 {item?.isDrapdown && (
                   <ul className="z-[999] absolute top-[35px] left-0 bg-[#323131] flex flex-wrap flex-col gap-y-2 gap-x-5 h-[450px] p-4 shadow-md text-[16px] font-[300] w-[450px] submenu">
                     {item?.subMenu?.map((sMenu, i) => (
-                      <Link
-                        to={`/terms/${sMenu?.slug}/page/1`}
-                        key={i}
+                      <Link to={`/terms/${sMenu?.slug}`} key={i}
                         className="hover:bg-slate-700 py-1 pl-2 rounded-md"
                       >
                         <span>{sMenu?.name}</span>

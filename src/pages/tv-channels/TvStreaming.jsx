@@ -1,13 +1,10 @@
 import bannerImg from "../../assets/tv-channel-ads.jpg";
-import streamming from "../../assets/stramming.png";
 import SectionTitleBtn from "../../utils/tv-channels/SectionTitleBtn";
 import ChannelCard from "../../components/tv-channels/channel-card/ChannelCard";
 import { useSingleTvChannelQuery } from "../../redux/features/live-tv/liveTvApi";
 import { useParams } from "react-router-dom";
-import VideoPlayer from "../video-player/VideoPlayer";
 import { useEffect } from "react";
 import HLSPlayer from "../video-player/HLSPlayer";
-import VideoJS from "../video-player/VideoJS";
 
 const TvStreaming = () => {
   const { id } = useParams();
@@ -17,11 +14,6 @@ const TvStreaming = () => {
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
-
-
-  const videoSrc = 'https://ekusheyserver.com/etvlivesn.m3u8';
-  // const videoSrc = singleCategory?.data?.link?.map(link => link.stream_url) || [];
-
 
 
   return (
@@ -40,12 +32,8 @@ const TvStreaming = () => {
 
       {/* Streaming */}
       <div className="mt-5 flex flex-col justify-center items-center w-[80%] mx-auto lg:w-full">
-        <div className="">
-          {/* <img src={streamming} alt="" className="w-full h-full object-cover rounded-[10px]"/> */}
-          {/* <VideoPlayer singleCategory={singleCategory}/> */}
-          <HLSPlayer src={videoSrc} singleCategory={singleCategory}/>
-          {/* <VideoJS/> */}
-
+        <div className="w-full flex flex-col justify-center items-center">
+          <HLSPlayer singleCategory={singleCategory}/>
         </div>
 
         <p className="hidden lg:block mt-5 text-[22px] text-white text-center px-10">

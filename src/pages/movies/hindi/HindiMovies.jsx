@@ -9,9 +9,8 @@ import PaginationTheme1 from "../../../utils/common-pagination/pagination-theme1
 const HindiMovies = () => {
   const location = useLocation();
   const currentRoute = location.pathname;
-  const currentP = Number(currentRoute?.slice(12));
-  const { data: perPageHindiMovies, isLoading } =
-    usePerPageHindiMovieListQuery(currentP);
+  const currentP = Number(currentRoute?.slice(12)) === 0 ? 1 : Number(currentRoute?.slice(12));
+  const { data: perPageHindiMovies, isLoading } = usePerPageHindiMovieListQuery(currentP);
 
   return (
     <div>

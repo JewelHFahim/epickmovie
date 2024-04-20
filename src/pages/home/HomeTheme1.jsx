@@ -16,29 +16,41 @@ const HomeTheme1 = () => {
     usePerPgaeTvShowQuery(1);
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
 
-
   return (
-    <div>
+    <div className="px-10 lg:px-0">
       <SiteNews />
 
       {/* ==============> Feature Movies <=============*/}
-      <>
+      <div>
         <SectionTitle> Feature Movies </SectionTitle>
         {featureLoading ? (
           <div className="w-full">
-            <LazyLoadingTheme1 lazyLength={8} />
+            <div className="hidden lg:block">
+              <LazyLoadingTheme1 lazyLength={8} />
+            </div>
+            <div className="block lg:hidden">
+              <LazyLoadingTheme1 lazyLength={3} />
+            </div>
           </div>
         ) : (
-          <div className=" mt-5 grid grid-cols-8 gap-5">
-            {featuredPosts?.data?.slice(0, 8)?.map((item, i) => (
-              <Theme1Card key={i} item={item} />
-            ))}
-          </div>
+          <>
+            <div className="mt-5 lg:grid grid-cols-8 gap-5 hidden">
+              {featuredPosts?.data?.slice(0, 8)?.map((item, i) => (
+                <Theme1Card key={i} item={item} />
+              ))}
+            </div>
+
+            <div className="mt-5 grid grid-cols-3 gap-5 lg:hidden">
+              {featuredPosts?.data?.slice(0, 3)?.map((item, i) => (
+                <Theme1Card key={i} item={item} />
+              ))}
+            </div>
+          </>
         )}
-      </>
+      </div>
 
       {/* ==============> Latest Movies <==============*/}
-      <>
+      <div>
         <SectionTitle>Latest Movies </SectionTitle>
 
         {movieLoading ? (
@@ -46,29 +58,43 @@ const HomeTheme1 = () => {
             <LazyLoadingTheme1 lazyLength={24} />
           </div>
         ) : (
-          <div className=" mt-5 grid grid-cols-8 gap-5">
+          <>
+          <div className=" mt-5 lg:grid grid-cols-8 gap-5 hidden">
             {movieList?.data?.data?.map((item, i) => (
               <Theme1Card key={i} item={item} />
             ))}
           </div>
+          <div className="mt-5 grid grid-cols-3 gap-5 lg:hidden">
+            {movieList?.data?.data?.slice(0,12)?.map((item, i) => (
+              <Theme1Card key={i} item={item} />
+            ))}
+          </div>
+          </>
         )}
-      </>
+      </div>
 
       {/* ==============> Latest Web-Series <===============*/}
-      <>
+      <div>
         <SectionTitle> Latest Web-Series </SectionTitle>
         {tvShowLoading ? (
           <div className="w-full">
             <LazyLoadingTheme1 lazyLength={24} />
           </div>
         ) : (
-          <div className=" mt-5 grid grid-cols-8 gap-5">
+          <>
+          <div className=" mt-5 lg:grid grid-cols-8 gap-5 hidden">
             {tvShowList?.data?.data?.map((item, i) => (
               <Theme1Card key={i} item={item} />
             ))}
           </div>
+          <div className=" mt-5 grid grid-cols-3 gap-5 lg:hidden">
+            {tvShowList?.data?.data?.slice(0,12)?.map((item, i) => (
+              <Theme1Card key={i} item={item} />
+            ))}
+          </div>
+          </>
         )}
-      </>
+      </div>
 
       {/* ========> Up Comming Movies/Tv Shows <========*/}
       <UpCommingTheme1 />

@@ -5,34 +5,38 @@ import { usePerPgaeMovieQuery } from "../../../../redux/features/movies/movieApi
 import { useLocation } from "react-router-dom";
 import PaginationTheme1 from "../../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
 import UpCommingTheme1 from "../../../../components/theme1-contents/UpCommingTheme1";
+import SectionTitle from "../../../../utils/theme1-contents/section-title/SectionTitle";
 
 const MoviesTheme1 = () => {
-
   const location = useLocation();
-  const currentRoute = location.pathname;
-
-  const currentP = Number(currentRoute?.slice(13));
+  const currentRoute = location?.pathname;
+  const currentP = Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
   const { data: perPgaeMovie, isLoading: movieLoading } = usePerPgaeMovieQuery(currentP);
 
   return (
-    <div>
+    <div className="px-5 lg:px-0">
       <SiteNews />
 
       <div className="mt-5">
-        <button className="px-6 h-[40px] bg-[#FFB800] text-black text-[18px] font-bold flex justify-center items-center gap-x-4">
-          <span>All Movies</span>
-        </button>
+      <SectionTitle> All Movies</SectionTitle>
 
         {movieLoading ? (
           <div className="w-full">
             <LazyLoadingTheme1 lazyLength={24} />
           </div>
         ) : (
-          <div className=" mt-5 grid grid-cols-8 gap-5">
-            {perPgaeMovie?.data?.data?.map((item, i) => (
-              <Theme1Card key={i} item={item} />
-            ))}
-          </div>
+          <>
+            <div className=" mt-5 lg:grid grid-cols-8 gap-5 hidden">
+              {perPgaeMovie?.data?.data?.map((item, i) => (
+                <Theme1Card key={i} item={item} />
+              ))}
+            </div>
+            <div className=" mt-5 grid grid-cols-3 gap-5 lg:hidden">
+              {perPgaeMovie?.data?.data?.map((item, i) => (
+                <Theme1Card key={i} item={item} />
+              ))}
+            </div>
+          </>
         )}
       </div>
 

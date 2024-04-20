@@ -39,7 +39,7 @@ const Nav = () => {
       { title: "Home", path: "/", isDrapdown: false, icon: home },
       {
         title: "Movie",
-        path: "/movies/page/1",
+        path: "/movies",
         isDrapdown: false,
         icon: movie,
       },
@@ -66,11 +66,11 @@ const Nav = () => {
       },
       {
         title: "Web Series",
-        path: "/tv-show/page/1",
+        path: "/tv-show",
         isDrapdown: false,
         icon: webSer,
       },
-      { title: "Bangla", path: "/bangla/page/1", isDrapdown: false, icon: bangla },
+      { title: "Bangla", path: "/bangla", isDrapdown: false, icon: bangla },
       {
         title: "Join Telegram",
         path: telegramLink,
@@ -114,7 +114,7 @@ const Nav = () => {
 
             <ul>
               {item?.subMenu?.map((item, i) => (
-                <Link key={i} to={`/terms/${item?.slug}/page/1`} className="subM">
+                <Link key={i} to={`/terms/${item?.slug}`} className="subM">
                   {item?.name}
                 </Link>
               ))}

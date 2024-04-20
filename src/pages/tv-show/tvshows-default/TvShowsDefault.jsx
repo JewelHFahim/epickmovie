@@ -12,7 +12,8 @@ const TvShowsDefault = () => {
   const location = useLocation();
   const { siteName } = useSiteConfig();
   const currentRoute = location?.pathname;
-  const currentP = Number(currentRoute?.slice(14));
+  const currentP = Number(currentRoute?.slice(14)) === 0 ? 1 : Number(currentRoute?.slice(14));
+
   const { data: perPgaeMovie, isLoading } = usePerPgaeTvShowQuery(currentP);
 
   return (

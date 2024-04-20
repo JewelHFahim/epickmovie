@@ -17,13 +17,27 @@ export const clientRoutes = [
   },
 
   {
+    path: "/movies",
+    element: <Movies />,
+  },
+  {
     path: "/movies/page/:id",
     element: <Movies />,
   },
 
   {
+    path: "/bangla",
+    element: <BanglaMovie />,
+  },
+  
+  {
     path: "/bangla/page/:id",
     element: <BanglaMovie />,
+  },
+
+  {
+    path: "/hindi",
+    element: <HindiMovies />,
   },
 
   {
@@ -32,10 +46,19 @@ export const clientRoutes = [
   },
 
   {
+    path: "/english",
+    element: <EnglishMovies />,
+  },
+
+  {
     path: "/english/page/:id",
     element: <EnglishMovies />,
   },
 
+  {
+    path: "/tv-show",
+    element: <TvShow />,
+  },
   {
     path: "/tv-show/page/:id",
     element: <TvShow />,
@@ -58,6 +81,10 @@ export const clientRoutes = [
   
   {
     path: "/terms/:string/page/:id",
+    element: <FilterList />,
+  },
+  {
+    path: "/terms/:string",
     element: <FilterList />,
   },
 
