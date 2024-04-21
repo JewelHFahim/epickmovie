@@ -1,15 +1,17 @@
+/* eslint-disable react/prop-types */
 import SectionTitle from "../../utils/theme1-contents/section-title/SectionTitle";
 import LazyLoadingTheme1 from "../lazy-loading/LazyLoadingTheme1";
 import Theme1Card from "../movie-card/theme1-card/Theme1Card";
 
-const LatestMovieTvShow = ({ loading, perPageData }) => {
+const RelatedMovieTv = ({ suggessions, isLoading, type }) => {
+
   return (
-    <div>
-      <SectionTitle>Latest Movies </SectionTitle>
-      {loading ? (
+    <div className="flex flex-col justify-center items-center p-5">
+      <SectionTitle> Related {type} </SectionTitle>
+      {isLoading ? (
         <div className="w-full">
           <div className="hidden lg:block">
-            <LazyLoadingTheme1 lazyLength={8} />
+            <LazyLoadingTheme1 lazyLength={5} />
           </div>
           <div className="lg:hidden">
             <LazyLoadingTheme1 lazyLength={3} />
@@ -17,14 +19,14 @@ const LatestMovieTvShow = ({ loading, perPageData }) => {
         </div>
       ) : (
         <>
-          <div className=" mt-5 lg:grid grid-cols-8 gap-5 hidden">
-            {perPageData?.data?.data?.slice(0, 8)?.map((item, i) => (
+          <div className="w-full mt-5 lg:flex justify-between hidden">
+            {suggessions?.data?.slice(0, 5)?.map((item, i) => (
               <Theme1Card key={i} item={item} />
             ))}
           </div>
 
-          <div className=" mt-5 grid grid-cols-3 gap-5 lg:hidden">
-            {perPageData?.data?.data?.slice(0, 3)?.map((item, i) => (
+          <div className="w-full mt-5 flex justify-between gap-5 lg:hidden">
+            {suggessions?.data?.slice(0, 3)?.map((item, i) => (
               <Theme1Card key={i} item={item} />
             ))}
           </div>
@@ -34,4 +36,4 @@ const LatestMovieTvShow = ({ loading, perPageData }) => {
   );
 };
 
-export default LatestMovieTvShow;
+export default RelatedMovieTv;

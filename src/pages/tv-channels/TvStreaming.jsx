@@ -9,7 +9,6 @@ import HLSPlayer from "../video-player/HLSPlayer";
 const TvStreaming = () => {
   const { id } = useParams();
   const { data: singleCategory } = useSingleTvChannelQuery(id);
-  console.log(singleCategory)
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -33,6 +32,7 @@ const TvStreaming = () => {
       {/* Streaming */}
       <div className="mt-5 flex flex-col justify-center items-center w-[80%] mx-auto lg:w-full">
         <div className="w-full flex flex-col justify-center items-center">
+          {/* <div className="w-full h-[420px] lg:w-[1065px] lg:h-[510px] border border-yellow-600"></div> */}
           <HLSPlayer singleCategory={singleCategory}/>
         </div>
 

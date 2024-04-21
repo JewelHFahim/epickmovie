@@ -23,7 +23,6 @@ const HomeDefault = () => {
   const { siteName } = useSiteConfig();
 
   const { data: upCommingPosts, isLoading: upCommingLoading } = useUpCommingPostsQuery(1);
-  console.log(upCommingPosts);
 
 
   const totalTvShow = tvShowList?.data?.total;
@@ -38,7 +37,7 @@ const HomeDefault = () => {
       {/* ===================>> Quick Menus <<=================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
         {quickMenu?.data?.map((menu, i) => (
-          <Link key={i} to={`/terms/${menu?.slug}/page/1`}>
+          <Link key={i} to={`/terms/${menu?.slug}`}>
             <SubMenuButton>{menu.name}</SubMenuButton>
           </Link>
         ))}

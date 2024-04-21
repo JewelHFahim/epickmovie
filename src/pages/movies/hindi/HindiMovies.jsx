@@ -9,11 +9,13 @@ import PaginationTheme1 from "../../../utils/common-pagination/pagination-theme1
 const HindiMovies = () => {
   const location = useLocation();
   const currentRoute = location.pathname;
-  const currentP = Number(currentRoute?.slice(12)) === 0 ? 1 : Number(currentRoute?.slice(12));
-  const { data: perPageHindiMovies, isLoading } = usePerPageHindiMovieListQuery(currentP);
+  const currentP =
+    Number(currentRoute?.slice(12)) === 0 ? 1 : Number(currentRoute?.slice(12));
+  const { data: perPageHindiMovies, isLoading } =
+    usePerPageHindiMovieListQuery(currentP);
 
   return (
-    <div>
+    <div className="px-10 lg:px-0">
       <SiteNews />
 
       <div className="mt-5">
@@ -26,7 +28,7 @@ const HindiMovies = () => {
             <LazyLoadingTheme1 lazyLength={24} />
           </div>
         ) : (
-          <div className=" mt-5 grid grid-cols-8 gap-5">
+          <div className=" mt-5 grid grid-cols-3 lg:grid-cols-8 gap-5">
             {perPageHindiMovies?.data?.data?.map((item, i) => (
               <Theme1Card key={i} item={item} />
             ))}

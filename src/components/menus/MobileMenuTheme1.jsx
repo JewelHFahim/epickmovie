@@ -16,7 +16,7 @@ import { useGenreListQuery } from "../../redux/features/movies/movieApi";
 const MobileMenu = () => {
   const location = useLocation();
   const { data: genreList } = useGenreListQuery();
-  const { telegramLink } = useSiteConfig();
+  const { telegramLink, siteLogo } = useSiteConfig();
 
   const [state, setState] = useState(false);
   const [drapdownState, setDrapdownState] = useState({
@@ -102,7 +102,11 @@ const MobileMenu = () => {
           >
             <div onClick={() => setState(!state)} className="w-full py-2">
               <button className="w-full flex justify-between items-center text-white">
-                <p className="text-[35px] font-medium">MENU</p>
+
+                {/* <p className="text-[35px] font-medium">MENU</p> */}
+                <Link to="/"><img src={siteLogo} alt="" className="w-[350px]"/></Link>
+
+
                 {state ? (
                   <IoClose className="text-[50px]" />
                 ) : (

@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const FooterTheme1 = () => {
   return (
-    <div className="mt-5 bg-[#262626] flex justify-center items-center p-2">
+    <div className="mt-5 border-t border-slate-700 bg-[#262626] flex justify-center items-center p-2">
       <div className="lg:w-[78vw] mx-auto flex flex-col justify-center items-center gap-y-3 text-white px-8 lg:px-0 p-2">
 
         <h2 className=" text-[22px] font-bold"> EpickMovies.com @ 2022 </h2>

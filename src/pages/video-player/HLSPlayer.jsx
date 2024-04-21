@@ -3,10 +3,9 @@ import { useEffect, useRef } from "react";
 import Hls from "hls.js";
 
 const HLSPlayer = ({ singleCategory }) => {
+  
   const videoSrc = singleCategory?.data?.link?.map((link) => link.stream_url) || [];
   const src = videoSrc?.length > 0 ? videoSrc[0] : "";
-
-  console.log(singleCategory);
 
   const videoRef = useRef(null);
   const hlsRef = useRef(null);

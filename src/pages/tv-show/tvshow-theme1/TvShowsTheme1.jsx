@@ -26,11 +26,13 @@ const TvShowsTheme1 = () => {
             <LazyLoadingTheme1 lazyLength={24} />
           </div>
         ) : (
-          <div className=" mt-5 grid grid-cols-8 gap-5">
+          <>
+          <div className=" mt-5 grid grid-cols-3 lg:grid-cols-8 gap-5">
             {perPageTvShows?.data?.data?.map((item, i) => (
               <Theme1Card key={i} item={item} />
             ))}
           </div>
+          </>
         )}
       </div>
 

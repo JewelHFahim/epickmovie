@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { IoClose } from "react-icons/io5";
-import { LuFolderInput, LuSearch } from "react-icons/lu";
-import { FaMinus, FaPlus, FaRegNewspaper, FaTelegram } from "react-icons/fa6";
-import { Link, useLocation } from "react-router-dom";
+import { LuSearch } from "react-icons/lu";
+import { FaRegNewspaper, FaTelegram } from "react-icons/fa6";
+import { Link } from "react-router-dom";
 import { MdOutlineSportsCricket } from "react-icons/md";
 import { RiHome4Line } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -12,13 +12,8 @@ import { PiMonitorPlayLight } from "react-icons/pi";
 import { GrChannel } from "react-icons/gr";
 
 const TvMobileMenu = () => {
-  const location = useLocation();
   const { telegramLink, siteLogo } = useSiteConfig();
   const [state, setState] = useState(false);
-  const [drapdownState, setDrapdownState] = useState({
-    isActive: false,
-    idx: null,
-  });
 
   const navigation = [
     { title: "Home", path: "/tv", isDrapdown: false, icon: <RiHome4Line /> },
@@ -52,27 +47,6 @@ const TvMobileMenu = () => {
     },
   ];
 
-  useEffect(() => {
-    document.onclick = (e) => {
-      const target = e.target;
-      if (!target.closest(".nav-menu"))
-        setDrapdownState({ isActive: false, idx: null });
-    };
-  }, []);
-
-  useEffect(() => {
-    setState(false);
-  }, [location]);
-
-  const handleSubMenuClick = (idx) => {
-    setDrapdownState((prevState) => ({
-      idx,
-      isActive: prevState.idx === idx ? !prevState.isActive : true,
-    }));
-  };
-
-
-  
   return (
     <>
       <nav
@@ -89,9 +63,9 @@ const TvMobileMenu = () => {
               )}
             </button>
 
-            <div className="w-[200px] h-[50px]">
+            <Link to="/" className="w-[200px] h-[50px]">
               <img src={siteLogo} alt="logo" className="w-full h-full" />
-            </div>
+            </Link>
 
             <div className="">
               <button className=" text-white text-[50px]">
