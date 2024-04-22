@@ -1,11 +1,12 @@
 import ChannelCard from "../../../components/tv-channels/channel-card/ChannelCard";
 import SectionTitleBtn from "../../../utils/tv-channels/SectionTitleBtn";
-import bannerImg from "../../../assets/tv-channel-ads.jpg";
 import HighLightCard from "../../../components/tv-channels/HighLightCard";
 import {
   useLiveTvCategoryQuery,
   useLiveTvChannelQuery,
 } from "../../../redux/features/live-tv/liveTvApi";
+import TvAdSection from "../../../components/tv-channels/TvAdSection";
+import TvNews from "../../../components/tv-channels/TvNews";
 
 const TvHome = () => {
   const { data: liveTvList } = useLiveTvChannelQuery();
@@ -24,32 +25,27 @@ const TvHome = () => {
   }, {});
 
   return (
-    <div className="mt-3 lg:mt-8 ">
-      <div className="w-full flex justify-center items-center py-2 lg:hidden">
-        <p className="text-[18px] text-white">
-          সকল খেলার আপডেট পেতে আমাদের চ্যানেলে জয়েন করুন এবং আমাদের সাইট ভিজিট
-          করুন
-        </p>
-      </div>
+    <div className="mt-3 lg:mt-8">
+      {/* TvNews Section */}
+      <TvNews />
 
       {/* Highlight Cards */}
       <div className="mt-5 lg:flex items-center justify-between hidden">
         <HighLightCard className="w-[640px] h-[350px]" />
         <HighLightCard className="w-[640px] h-[350px]" />
       </div>
+
       <div className="mt-5 flex items-center justify-center lg:hidden">
         <HighLightCard className="w-[80%] mx-auto h-[400px] " />
       </div>
 
-      {/* ====================== SPORTS ======================= */}
+      {/* ==================== SPORTS ======================= */}
       {/* Banner Ads */}
-      <div className="mt-5 w-full h-[157px]">
-        <img src={bannerImg} alt="" className="w-full h-full" />
-      </div>
+      <TvAdSection />
 
       {/* Sport Section */}
       <div className="w-[80%] mx-auto lg:w-full">
-        <SectionTitleBtn>Sports</SectionTitleBtn>
+        <SectionTitleBtn url="/tv/sports"> Sports </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
           {groupedTvLinks?.Sports?.map((item, i) => (
             <ChannelCard key={i} item={item} />
@@ -62,15 +58,16 @@ const TvHome = () => {
         </div>
       </div>
 
-      {/* ====================== Entertainment ======================= */}
+      {/* ================== Entertainment =================== */}
       {/* Banner Ads */}
-      <div className="mt-5 w-full h-[157px]">
-        <img src={bannerImg} alt="" className="w-full h-full" />
-      </div>
+      <TvAdSection />
 
       {/* Entertainment Section */}
       <div className="w-[80%] mx-auto lg:w-full">
-        <SectionTitleBtn> Entertainment </SectionTitleBtn>
+        <SectionTitleBtn url="/tv/entertainment">
+          {" "}
+          Entertainment{" "}
+        </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
           {groupedTvLinks?.Entertainment?.map((item, i) => (
             <ChannelCard key={i} item={item} />
@@ -85,9 +82,7 @@ const TvHome = () => {
 
       {/* ====================== Movies ======================= */}
       {/* Banner Ads */}
-      <div className="mt-5 w-full h-[157px]">
-        <img src={bannerImg} alt="" className="w-full h-full" />
-      </div>
+      <TvAdSection />
 
       {/* Movies Section */}
       <div className="w-[80%] mx-auto lg:w-full">
@@ -106,13 +101,11 @@ const TvHome = () => {
 
       {/* ====================== News ======================= */}
       {/* Banner Ads */}
-      <div className="mt-5 w-full h-[157px]">
-        <img src={bannerImg} alt="" className="w-full h-full" />
-      </div>
+      <TvAdSection />
 
       {/* News Section */}
       <div className="w-[80%] mx-auto lg:w-full">
-        <SectionTitleBtn> News </SectionTitleBtn>
+        <SectionTitleBtn url="/tv/news"> News </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
           {groupedTvLinks?.News?.map((item, i) => (
             <ChannelCard key={i} item={item} />
@@ -127,13 +120,11 @@ const TvHome = () => {
 
       {/* ====================== All Channel ======================= */}
       {/* Banner Ads */}
-      <div className="mt-5 w-full h-[157px]">
-        <img src={bannerImg} alt="" className="w-full h-full" />
-      </div>
+      <TvAdSection />
 
       {/* All Channel Section */}
       <div className="w-[80%] mx-auto lg:w-full">
-        <SectionTitleBtn> All Channel </SectionTitleBtn>
+        <SectionTitleBtn url="/tv/all-tvs"> All Channel </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
           {liveTvList?.data?.data?.map((item, i) => (
             <ChannelCard key={i} item={item} />
@@ -147,9 +138,7 @@ const TvHome = () => {
       </div>
 
       {/* Banner Ads */}
-      <div className="mt-5 w-full h-[157px]">
-        <img src={bannerImg} alt="" className="w-full h-full" />
-      </div>
+      <TvAdSection />
     </div>
   );
 };

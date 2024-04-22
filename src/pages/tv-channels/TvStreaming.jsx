@@ -1,10 +1,11 @@
-import bannerImg from "../../assets/tv-channel-ads.jpg";
 import SectionTitleBtn from "../../utils/tv-channels/SectionTitleBtn";
 import ChannelCard from "../../components/tv-channels/channel-card/ChannelCard";
 import { useSingleTvChannelQuery } from "../../redux/features/live-tv/liveTvApi";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
-import HLSPlayer from "../video-player/HLSPlayer";
+import HLSPlayer from "../../components/tv-channels/HLSPlayer";
+import TvAdSection from "../../components/tv-channels/TvAdSection";
+import TvNews from "../../components/tv-channels/TvNews";
 
 const TvStreaming = () => {
   const { id } = useParams();
@@ -14,37 +15,28 @@ const TvStreaming = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }, []);
 
-
   return (
     <div className="mt-8">
-      <div className="w-full flex justify-center items-center py-2 lg:hidden">
-        <p className="text-[18px] text-white">
-          সকল খেলার আপডেট পেতে আমাদের চ্যানেলে জয়েন করুন এবং আমাদের সাইট ভিজিট
-          করুন
-        </p>
-      </div>
+      {/* TvNews Section */}
+      <TvNews />
 
       {/* Banner Ads */}
-      <div className="mt-5 w-full h-[157px]">
-        <img src={bannerImg} alt="" className="w-full h-full" />
-      </div>
+      <TvAdSection />
 
       {/* Streaming */}
       <div className="mt-5 flex flex-col justify-center items-center w-[80%] mx-auto lg:w-full">
         <div className="w-full flex flex-col justify-center items-center">
           {/* <div className="w-full h-[420px] lg:w-[1065px] lg:h-[510px] border border-yellow-600"></div> */}
-          <HLSPlayer singleCategory={singleCategory}/>
+          <HLSPlayer singleCategory={singleCategory} />
         </div>
 
         <p className="hidden lg:block mt-5 text-[22px] text-white text-center px-10">
-         {singleCategory?.data?.description}
+          {singleCategory?.data?.description}
         </p>
       </div>
 
       {/* Banner Ads */}
-      <div className="mt-5 w-full h-[157px]">
-        <img src={bannerImg} alt="" className="w-full h-full" />
-      </div>
+      <TvAdSection />
 
       {/* Sport Section */}
       <div className="w-[80%] mx-auto lg:w-full">
@@ -62,9 +54,7 @@ const TvStreaming = () => {
       </div>
 
       {/* Banner Ads */}
-      <div className="mt-5 w-full h-[157px]">
-        <img src={bannerImg} alt="" className="w-full h-full" />
-      </div>
+      <TvAdSection />
     </div>
   );
 };
