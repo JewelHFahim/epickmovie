@@ -18,7 +18,7 @@ const TvShowDetailsTheme1 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { siteName } = useSiteConfig();
-  const { data: seriesDetails } = useSeriesDetailsQuery(id);
+  const { data: seriesDetails, isLoading: detaislLoading } = useSeriesDetailsQuery(id);
   const details = seriesDetails?.data;
   const { data: perPageTvShow, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
   const { data: suggessions, isLoading: suggessionsLoading } = useSuggessionMovieSeriesQuery(id);
@@ -59,7 +59,7 @@ const TvShowDetailsTheme1 = () => {
 
         <div className="bg-[#262626]">
           {/* =============>> INFO CARD <<============= */}
-          <DetailsInfoCard details={details} />
+          <DetailsInfoCard details={details} detaislLoading={detaislLoading}/>
 
           {/* ============>> SEO CONTENT <<============ */}
           <SEOContentsTheme1 details={details} type="Web-Series" />

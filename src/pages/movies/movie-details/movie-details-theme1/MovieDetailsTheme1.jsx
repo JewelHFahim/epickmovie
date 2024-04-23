@@ -18,7 +18,7 @@ const MovieDetailsTheme1 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { siteName } = useSiteConfig();
-  const { data: movieDetails } = useMovieDetailsQuery(id);
+  const { data: movieDetails, isLoading: detaislLoading } = useMovieDetailsQuery(id);
   const details = movieDetails?.data;
   const { data: perPageMovie, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
   const { data: suggessions, isLoading: suggessionsLoading } = useSuggessionMovieSeriesQuery(id);
@@ -61,7 +61,7 @@ const MovieDetailsTheme1 = () => {
 
         <div className="bg-[#262626] w-full">
           {/* ===========> INFO CARD <===========*/}
-          <DetailsInfoCard details={details} />
+          <DetailsInfoCard details={details} detaislLoading={detaislLoading}/>
 
           {/* ==========> SEO CONTENT <==========*/}
           <SEOContentsTheme1 details={details} type="Movies" />
