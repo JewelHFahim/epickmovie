@@ -1,10 +1,10 @@
 import { useFilteredResultsByPaginationQuery } from "../../../../redux/features/search/searchApi";
-import LazyLoading from "../../../../components/lazy-loading/LazyLoading";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useSiteConfig } from "../../../../utils/configHooks/ConfigHooks";
 import Theme1Card from "../../../../components/movie-card/theme1-card/Theme1Card";
 import PaginationTheme1 from "../../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
+import LazyLoadingTheme1 from "../../../../components/lazy-loading/LazyLoadingTheme1";
 
 const FilterListTheme1 = () => {
   const location = useLocation();
@@ -71,12 +71,8 @@ const FilterListTheme1 = () => {
       <div className="flex justify-center items-center w-full px-5 lg:px-0">
         {isLoading ? (
           <div className="w-full">
-            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
-              {Array.from({ length: 24 }).map((item, i) => (
-                <LazyLoading key={i} />
-              ))}
-            </div>
-          </div>
+          <LazyLoadingTheme1 lazyLength={24} />
+        </div>
         ) : (
           <div className="grid grid-cols-3 lg:grid-cols-8 gap-[25px] my-3">
             {filteredResults?.data?.data?.map((item) => (

@@ -9,7 +9,7 @@ const DetailsInfoCard = ({ details, detaislLoading }) => {
       ) : (
         <img
           src={details?.poster_image_url}
-          alt=""
+          alt="Poster Image"
           className="p-12 lg:p-0 object-cover lg:w-[150px] lg:h-[230px]"
         />
       )}

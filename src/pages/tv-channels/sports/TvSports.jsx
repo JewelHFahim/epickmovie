@@ -7,7 +7,6 @@ import {
   useLiveTvChannelQuery,
 } from "../../../redux/features/live-tv/liveTvApi";
 import TvNews from "../../../components/tv-channels/TvNews";
-import TvAdSection from "../../../components/tv-channels/TvAdSection";
 
 const TvSports = () => {
   const { data: liveTvList } = useLiveTvChannelQuery();
@@ -45,10 +44,6 @@ const TvSports = () => {
       </div>
 
       {/* ====================== SPORTS ======================= */}
-      {/* Banner Ads */}
-      <TvAdSection />
-
-      {/* Sport Section */}
       <div className="w-[80%] mx-auto lg:w-full">
         <SectionTitleBtn>Sports</SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
@@ -63,8 +58,6 @@ const TvSports = () => {
         </div>
       </div>
 
-      {/* Banner Ads */}
-      <TvAdSection />
     </div>
   );
 };

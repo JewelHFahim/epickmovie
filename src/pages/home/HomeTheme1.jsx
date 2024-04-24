@@ -20,9 +20,9 @@ const HomeTheme1 = () => {
     <div className="px-10 lg:px-0">
       <SiteNews />
 
-      {/* ==============> Feature Movies <=============*/}
+      {/* ==============> Feature Movies <==============*/}
       <div>
-        <SectionTitle> Feature Movies </SectionTitle>
+        <SectionTitle url=""> Feature Movies </SectionTitle>
         {featureLoading ? (
           <div className="w-full">
             <div className="hidden lg:block">
@@ -49,9 +49,9 @@ const HomeTheme1 = () => {
         )}
       </div>
 
-      {/* ==============> Latest Movies <==============*/}
+      {/* ==============> Latest Movies <===============*/}
       <div>
-        <SectionTitle>Latest Movies </SectionTitle>
+        <SectionTitle url="/movies">Latest Movies </SectionTitle>
 
         {movieLoading ? (
           <div className="w-full">
@@ -73,9 +73,9 @@ const HomeTheme1 = () => {
         )}
       </div>
 
-      {/* ==============> Latest Web-Series <===============*/}
+      {/* ============> Latest Web-Series <=============*/}
       <div>
-        <SectionTitle> Latest Web-Series </SectionTitle>
+        <SectionTitle url="/tv-show"> Latest Web-Series </SectionTitle>
         {tvShowLoading ? (
           <div className="w-full">
             <LazyLoadingTheme1 lazyLength={24} />

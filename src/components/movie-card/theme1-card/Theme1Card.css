@@ -1,6 +1,14 @@
 .playBtnCont:hover .posterImg {
   filter: blur(2px);
+  scale: 1.15;
   transition-duration: 0.2s;
+  transform-origin: center center;
+}
+
+.playBtnCont:hover .title{
+  scale: 1.1;
+  transition-duration: 0.2s;
+  transform-origin: center center;
 }
 
 .playBtn {

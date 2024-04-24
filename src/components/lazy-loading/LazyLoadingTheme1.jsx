@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 const LazyLoadingTheme1 = ({ lazyLength }) => {
   return (
     <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-8 gap-[22px] mt-5 animate-pulse w-full">

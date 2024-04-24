@@ -1,5 +1,5 @@
 import { GoGlobe } from "react-icons/go";
-import { IoClose } from "react-icons/io5";
+import { IoClose, IoSearch } from "react-icons/io5";
 import { useEffect, useState } from "react";
 import { RiHome2Line } from "react-icons/ri";
 import { RiMovie2Line } from "react-icons/ri";
@@ -8,15 +8,24 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { RiListIndefinite } from "react-icons/ri";
 import { FaMinus, FaPlus } from "react-icons/fa6";
 import { LiaTelegramPlane } from "react-icons/lia";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { MdOutlineMovieFilter } from "react-icons/md";
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 import { useGenreListQuery } from "../../redux/features/movies/movieApi";
+import { useDispatch } from "react-redux";
+import { collectSearchItem } from "../../redux/features/search/searchSlice";
 
 const MobileMenu = () => {
   const location = useLocation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { data: genreList } = useGenreListQuery();
   const { telegramLink, siteLogo } = useSiteConfig();
+  const [searchTermState, setSearchTerm] = useState("");
+  const [showPopup, setShowPopup] = useState(false);
+  const [popupNumbers, setPopupNumbers] = useState([]);
+  const [userAnswer, setUserAnswer] = useState("");
+  const [lastSearchTime, setLastSearchTime] = useState(null);
 
   const [state, setState] = useState(false);
   const [drapdownState, setDrapdownState] = useState({
@@ -90,6 +99,48 @@ const MobileMenu = () => {
     }));
   };
 
+  // Search Functions Start
+  const handleInputChange = (e) => {
+    setSearchTerm(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    if (lastSearchTime && Date.now() - lastSearchTime < 3000) {
+      setShowPopup(true);
+      const num1 = Math.floor(Math.random() * 9) + 1;
+      const num2 = Math.floor(Math.random() * 9) + 1;
+      setPopupNumbers([num1, num2]);
+    } else {
+      // Proceed with the search
+      const res = dispatch(collectSearchItem(searchTermState));
+      if (res !== null) {
+        setLastSearchTime(Date.now());
+        navigate(`/search-list/${searchTermState}`);
+        setSearchTerm("");
+      }
+    }
+  };
+
+  const handleAuthenticate = () => {
+    const sum = popupNumbers.reduce((acc, num) => acc + num, 0);
+    const difference = popupNumbers.reduce((acc, num) => acc - num, 0);
+
+    if (userAnswer === sum.toString() || userAnswer === difference.toString()) {
+      setLastSearchTime(Date.now());
+      setShowPopup(false);
+      const res = dispatch(collectSearchItem(searchTermState));
+      if (res !== null) {
+        setLastSearchTime(Date.now());
+        navigate(`/search-list/${searchTermState}`);
+        setSearchTerm("");
+        setUserAnswer("");
+      }
+    } else {
+      alert("Incorrect answer. Please try again.");
+    }
+  };
+
   return (
     <div className="lg:hidden">
       <nav
@@ -97,22 +148,62 @@ const MobileMenu = () => {
         ${state ? "shadow-lg rounded-b-xl md:shadow-none" : ""}`}
       >
         <div className="w-full flex flex-col gap-y-3 items-center gap-x-14  mx-auto md:flex md:px-8 bg-[#464646]">
-          <div
-            className={`w-full flex justify-between items-center p-2`}
-          >
-            <div onClick={() => setState(!state)} className="w-full py-2">
-              <button className="w-full flex justify-between items-center text-white">
+          <div className={`w-full flex justify-between items-center p-2`}>
+            <div  className="w-full py-2">
+              <div className="w-full flex justify-between items-center text-white">
+                <Link to="/">
+                  <img src={siteLogo} alt="" className="w-[280px]" />
+                </Link>
 
-                {/* <p className="text-[35px] font-medium">MENU</p> */}
-                <Link to="/"><img src={siteLogo} alt="" className="w-[350px]"/></Link>
-
-
-                {state ? (
-                  <IoClose className="text-[50px]" />
-                ) : (
-                  <GiHamburgerMenu className="text-[50px]" />
+                {/* Serach Field */}
+                <form
+                  onSubmit={handleSubmit}
+                  className="w-[350px] rounded-md flex items-center bg-[#444444] border"
+                >
+                  <input
+                    type="text"
+                    value={searchTermState}
+                    onChange={handleInputChange}
+                    placeholder="Search Movie/TV Shows"
+                    className="w-[90%] focus:outline-none bg-transparent px-4 py-2.5 text-slate-200 text-xl font-semibold"
+                  />
+                  <IoSearch className="w-[10%] text-3xl text-[#d73ee3]" />
+                </form>
+                {showPopup && (
+                  <div className="absolute z-[9999] top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+                    <div className="bg-gray-300 p-8 rounded-lg flex flex-col items-center">
+                      <p className="font-medium">
+                        Verify that you are not robot...
+                      </p>
+                      <p className="font-medium">
+                        {popupNumbers[0]} + {popupNumbers[1]} = ?
+                      </p>
+                      <div className=" mt-2 rounded-md">
+                        <input
+                          type="text"
+                          value={userAnswer}
+                          onChange={(e) => setUserAnswer(e.target.value)}
+                          className=" border-black outline-none rounded-s-md px-2 h-[30px]"
+                        />
+                        <button
+                          onClick={handleAuthenticate}
+                          className=" px-5 bg-gray-600 text-white rounded-e-md text-sm h-[30px]"
+                        >
+                          Submit
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 )}
-              </button>
+
+                <button onClick={() => setState(!state)}>
+                  {state ? (
+                    <IoClose className="text-[50px]" />
+                  ) : (
+                    <GiHamburgerMenu className="text-[50px]" />
+                  )}
+                </button>
+              </div>
             </div>
           </div>
 

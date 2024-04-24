@@ -1,14 +1,18 @@
+/* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import "./ChannelCard.css";
 
 const ChannelCard = ({ item }) => {
-
   return (
     <Link
       to={`/tv/streaming/${item?.id}`}
-      className="w-full h-[500px] lg:w-[200px] lg:h-[320px] rounded-[10px] border-2 overflow-hidden relative cardContainer border-red-600">
-
-      <img src={item?.thumb_name} alt="" className="w-full h-full rounded-[10px]"/>
+      className="w-full h-[580px] lg:w-[200px] lg:h-[320px] rounded-[10px] border-2 overflow-hidden relative cardContainer border-red-600"
+    >
+      <img
+        src={item?.thumb_name}
+        alt=""
+        className="w-full h-full rounded-[10px]"
+      />
 
       <div className="absolute z-20 bottom-3 px-3 w-full">
         <p className="text-center text-white font-bold text-[24px] leading-[30px] lg:leading-normal lg:text-[13px]">

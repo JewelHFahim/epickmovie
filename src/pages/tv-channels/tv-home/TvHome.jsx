@@ -5,7 +5,6 @@ import {
   useLiveTvCategoryQuery,
   useLiveTvChannelQuery,
 } from "../../../redux/features/live-tv/liveTvApi";
-import TvAdSection from "../../../components/tv-channels/TvAdSection";
 import TvNews from "../../../components/tv-channels/TvNews";
 
 const TvHome = () => {
@@ -25,7 +24,7 @@ const TvHome = () => {
   }, {});
 
   return (
-    <div className="mt-3 lg:mt-8">
+    <div className="mt-3 lg:mt-8 h-full min-h-screen">
       {/* TvNews Section */}
       <TvNews />
 
@@ -40,10 +39,6 @@ const TvHome = () => {
       </div>
 
       {/* ==================== SPORTS ======================= */}
-      {/* Banner Ads */}
-      <TvAdSection />
-
-      {/* Sport Section */}
       <div className="w-[80%] mx-auto lg:w-full">
         <SectionTitleBtn url="/tv/sports"> Sports </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
@@ -59,10 +54,6 @@ const TvHome = () => {
       </div>
 
       {/* ================== Entertainment =================== */}
-      {/* Banner Ads */}
-      <TvAdSection />
-
-      {/* Entertainment Section */}
       <div className="w-[80%] mx-auto lg:w-full">
         <SectionTitleBtn url="/tv/entertainment">
           {" "}
@@ -81,10 +72,6 @@ const TvHome = () => {
       </div>
 
       {/* ====================== Movies ======================= */}
-      {/* Banner Ads */}
-      <TvAdSection />
-
-      {/* Movies Section */}
       <div className="w-[80%] mx-auto lg:w-full">
         <SectionTitleBtn> Movies </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
@@ -100,10 +87,6 @@ const TvHome = () => {
       </div>
 
       {/* ====================== News ======================= */}
-      {/* Banner Ads */}
-      <TvAdSection />
-
-      {/* News Section */}
       <div className="w-[80%] mx-auto lg:w-full">
         <SectionTitleBtn url="/tv/news"> News </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
@@ -119,10 +102,6 @@ const TvHome = () => {
       </div>
 
       {/* ====================== All Channel ======================= */}
-      {/* Banner Ads */}
-      <TvAdSection />
-
-      {/* All Channel Section */}
       <div className="w-[80%] mx-auto lg:w-full">
         <SectionTitleBtn url="/tv/all-tvs"> All Channel </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
@@ -137,8 +116,6 @@ const TvHome = () => {
         </div>
       </div>
 
-      {/* Banner Ads */}
-      <TvAdSection />
     </div>
   );
 };

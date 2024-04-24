@@ -11,6 +11,7 @@ const NavbarTheme1 = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const { siteLogo, telegramLink } = useSiteConfig();
   const { data: genreList } = useGenreListQuery();
   const [searchTermState, setSearchTerm] = useState("");
@@ -85,6 +86,8 @@ const NavbarTheme1 = () => {
       alert("Incorrect answer. Please try again.");
     }
   };
+
+
   return (
     <div className="hidden w-full h-[70px] bg-[#262626] lg:flex items-center">
       <div className="lg:w-[78vw] lg:min-w-[1500px] mx-auto flex justify-between items-center">
