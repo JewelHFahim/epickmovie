@@ -1,8 +1,8 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { IoClose } from "react-icons/io5";
 import { LuSearch } from "react-icons/lu";
 import { FaRegNewspaper, FaTelegram } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { MdOutlineSportsCricket } from "react-icons/md";
 import { RiHome4Line } from "react-icons/ri";
 import { GiHamburgerMenu } from "react-icons/gi";
@@ -12,6 +12,7 @@ import { PiMonitorPlayLight } from "react-icons/pi";
 import { GrChannel } from "react-icons/gr";
 
 const TvMobileMenu = () => {
+  const route = useLocation();
   const { telegramLink, siteLogo } = useSiteConfig();
   const [state, setState] = useState(false);
 
@@ -46,6 +47,10 @@ const TvMobileMenu = () => {
       icon: <GrChannel />,
     },
   ];
+
+  useEffect(() => {
+    setState(false);
+  }, [route.pathname]);
 
   return (
     <>

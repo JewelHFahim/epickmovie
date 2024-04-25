@@ -1,10 +1,14 @@
+import Marquee from "react-fast-marquee";
+
 const TvNews = () => {
   return (
-    <div className="w-full flex justify-center items-center py-2 lg:hidden">
-      <p className="text-[18px] text-white">
-        সকল খেলার আপডেট পেতে আমাদের চ্যানেলে জয়েন করুন এবং আমাদের সাইট ভিজিট
-        করুন
-      </p>
+    <div className="flex justify-center items-center bg-[#5C1EC2] py-2">
+      <div className="text-[28px] lg:text-[18px] text-white">
+        <Marquee>
+          সকল খেলার আপডেট পেতে আমাদের চ্যানেলে জয়েন করুন এবং আমাদের সাইট ভিজিট
+          করুন
+        </Marquee>
+      </div>
     </div>
   );
 };

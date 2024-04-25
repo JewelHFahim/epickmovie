@@ -17,12 +17,13 @@ const AllChannels = () => {
       {/* TvNews Section */}
       <TvNews />
 
-      {/* Highlight Cards */}
+      {/* ============== HIGHLIGHTS CARD PC ================== */}
       <div className="mt-5 lg:flex items-center justify-between hidden">
         <HighLightCard className="w-[640px] h-[350px]" />
         <HighLightCard className="w-[640px] h-[350px]" />
       </div>
 
+      {/* ============== HIGHLIGHTS CARD MB ================== */}
       <div className="mt-5 flex items-center justify-center lg:hidden">
         <HighLightCard className="w-[80%] mx-auto h-[400px] " />
       </div>
@@ -35,7 +36,7 @@ const AllChannels = () => {
             <ChannelCard key={i} item={item} />
           ))}
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-12 mx-auto lg:hidden">
+        <div className="mt-5 grid grid-cols-2 gap-8 mx-auto lg:hidden">
           {liveTvList?.data?.data?.map((item, i) => (
             <ChannelCard key={i} item={item} />
           ))}

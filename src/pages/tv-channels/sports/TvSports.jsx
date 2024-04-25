@@ -51,13 +51,12 @@ const TvSports = () => {
             <ChannelCard key={i} item={item} />
           ))}
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-12 mx-auto lg:hidden">
+        <div className="mt-5 grid grid-cols-2 gap-8 mx-auto lg:hidden">
           {groupedTvLinks?.Sports?.map((item, i) => (
             <ChannelCard key={i} item={item} />
           ))}
         </div>
       </div>
-
     </div>
   );
 };

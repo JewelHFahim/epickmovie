@@ -28,17 +28,18 @@ const TvHome = () => {
       {/* TvNews Section */}
       <TvNews />
 
-      {/* Highlight Cards */}
+      {/* ============== HIGHLIGHTS CARD PC ================== */}
       <div className="mt-5 lg:flex items-center justify-between hidden">
         <HighLightCard className="w-[640px] h-[350px]" />
         <HighLightCard className="w-[640px] h-[350px]" />
       </div>
 
+      {/* ============== HIGHLIGHTS CARD MB ================== */}
       <div className="mt-5 flex items-center justify-center lg:hidden">
         <HighLightCard className="w-[80%] mx-auto h-[400px] " />
       </div>
 
-      {/* ==================== SPORTS ======================= */}
+      {/* ==================== SPORTS ======================== */}
       <div className="w-[80%] mx-auto lg:w-full">
         <SectionTitleBtn url="/tv/sports"> Sports </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
@@ -46,32 +47,29 @@ const TvHome = () => {
             <ChannelCard key={i} item={item} />
           ))}
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-12 mx-auto lg:hidden">
+        <div className="mt-5 grid grid-cols-2 gap-8 mx-auto lg:hidden">
           {groupedTvLinks?.Sports?.map((item, i) => (
             <ChannelCard key={i} item={item} />
           ))}
         </div>
       </div>
 
-      {/* ================== Entertainment =================== */}
+      {/* ================== ENTERTAINMENT =================== */}
       <div className="w-[80%] mx-auto lg:w-full">
-        <SectionTitleBtn url="/tv/entertainment">
-          {" "}
-          Entertainment{" "}
-        </SectionTitleBtn>
+        <SectionTitleBtn url="/tv/entertainment">Entertainment</SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
           {groupedTvLinks?.Entertainment?.map((item, i) => (
             <ChannelCard key={i} item={item} />
           ))}
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-12 mx-auto lg:hidden">
+        <div className="mt-5 grid grid-cols-2 gap-8 mx-auto lg:hidden">
           {groupedTvLinks?.Entertainment?.map((item, i) => (
             <ChannelCard key={i} item={item} />
           ))}
         </div>
       </div>
 
-      {/* ====================== Movies ======================= */}
+      {/* ====================== MOVIES ====================== */}
       <div className="w-[80%] mx-auto lg:w-full">
         <SectionTitleBtn> Movies </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
@@ -79,14 +77,14 @@ const TvHome = () => {
             <ChannelCard key={i} item={item} />
           ))}
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-12 mx-auto lg:hidden">
+        <div className="mt-5 grid grid-cols-2 gap-8 mx-auto lg:hidden">
           {groupedTvLinks?.Movies?.map((item, i) => (
             <ChannelCard key={i} item={item} />
           ))}
         </div>
       </div>
 
-      {/* ====================== News ======================= */}
+      {/* ====================== NEWS ======================== */}
       <div className="w-[80%] mx-auto lg:w-full">
         <SectionTitleBtn url="/tv/news"> News </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
@@ -94,14 +92,14 @@ const TvHome = () => {
             <ChannelCard key={i} item={item} />
           ))}
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-12 mx-auto lg:hidden">
+        <div className="mt-5 grid grid-cols-2 gap-8 mx-auto lg:hidden">
           {groupedTvLinks?.News?.map((item, i) => (
             <ChannelCard key={i} item={item} />
           ))}
         </div>
       </div>
 
-      {/* ====================== All Channel ======================= */}
+      {/* ================== ALL CHANNEL ===================== */}
       <div className="w-[80%] mx-auto lg:w-full">
         <SectionTitleBtn url="/tv/all-tvs"> All Channel </SectionTitleBtn>
         <div className="mt-5 hidden lg:flex flex-wrap gap-5">
@@ -109,13 +107,12 @@ const TvHome = () => {
             <ChannelCard key={i} item={item} />
           ))}
         </div>
-        <div className="mt-5 grid grid-cols-2 gap-12 mx-auto lg:hidden">
+        <div className="mt-5 grid grid-cols-2 gap-8 mx-auto lg:hidden">
           {liveTvList?.data?.data?.map((item, i) => (
             <ChannelCard key={i} item={item} />
           ))}
         </div>
       </div>
-
     </div>
   );
 };
