@@ -13,7 +13,7 @@ const AllChannels = () => {
   }, []);
 
   return (
-    <div className="mt-8">
+    <div className="mt-3">
       {/* TvNews Section */}
       <TvNews />
 

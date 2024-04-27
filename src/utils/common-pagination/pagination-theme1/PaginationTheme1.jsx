@@ -4,6 +4,8 @@ import { useNavigate } from "react-router-dom";
 import PagiBtnTheme1 from "../../theme1-contents/PagiBtnTheme1";
 
 const PaginationTheme1 = ({ currentPage, perPgaeMovie, type, filteredTerm }) => {
+
+  console.log(perPgaeMovie)
   
   const navigate = useNavigate();
 

@@ -1,4 +1,6 @@
 import { Helmet } from "react-helmet";
+import { Link } from "react-router-dom";
+import SubMenuButton from "../../utils/SubMenuButton";
 import {
   useFeaturedPostsQuery,
   usePerPgaeMovieQuery,
@@ -8,21 +10,19 @@ import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi";
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 import SiteNews from "../../components/SiteNews/SiteNews";
-import { Link } from "react-router-dom";
-import SubMenuButton from "../../utils/SubMenuButton";
 import HomePageSeeAllBtn from "../../utils/HomePageSeeAllBtn";
 import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import MovieCard from "../../components/movie-card/MovieCard";
 
 const HomeDefault = () => {
-  const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
-  const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
-  const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
-  const { data: quickMenu } = useQuickMenuUserQuery();
   const { siteName } = useSiteConfig();
-
+  const { data: quickMenu } = useQuickMenuUserQuery();
+  const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
+  const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
+  const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
   const { data: upCommingPosts, isLoading: upCommingLoading } = useUpCommingPostsQuery(1);
+
 
 
   const totalTvShow = tvShowList?.data?.total;
@@ -151,7 +151,7 @@ const HomeDefault = () => {
         ) : (
           <div>
             <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
-              {upCommingPosts?.data?.slice(0, 6)?.map((item) => (
+              {upCommingPosts?.data?.data?.slice(0, 6)?.map((item) => (
                 <MovieCard
                   key={item?.id}
                   item={item}

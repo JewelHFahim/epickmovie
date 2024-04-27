@@ -18,11 +18,11 @@ const FilterListDefault = () => {
     const startIndex = parts.indexOf("terms");
 
     if(parts?.length === 5 ){
-      const genres = parts.slice(startIndex + 1, -2);
+      const genres = parts?.slice(startIndex + 1, -2);
       const genresString = genres.join("-");
       return genresString;
     }else{
-      const genres = parts.slice(startIndex + 1);
+      const genres = parts?.slice(startIndex + 1);
       const genresString = genres.join("-");
       return genresString;
     }

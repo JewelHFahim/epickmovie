@@ -10,10 +10,8 @@ import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import SectionTitle from "../../utils/theme1-contents/section-title/SectionTitle";
 
 const HomeTheme1 = () => {
-  const { data: featuredPosts, isLoading: featureLoading } =
-    useFeaturedPostsQuery();
-  const { data: tvShowList, isLoading: tvShowLoading } =
-    usePerPgaeTvShowQuery(1);
+  const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
+  const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
 
   return (
@@ -36,13 +34,13 @@ const HomeTheme1 = () => {
           <>
             <div className="mt-5 lg:grid grid-cols-8 gap-5 hidden">
               {featuredPosts?.data?.slice(0, 8)?.map((item, i) => (
-                <Theme1Card key={i} item={item} />
+                <Theme1Card key={i} item={item} isLoading={featureLoading}/>
               ))}
             </div>
 
             <div className="mt-5 grid grid-cols-3 gap-5 lg:hidden">
               {featuredPosts?.data?.slice(0, 3)?.map((item, i) => (
-                <Theme1Card key={i} item={item} />
+                <Theme1Card key={i} item={item} isLoading={featureLoading}/>
               ))}
             </div>
           </>
@@ -61,12 +59,12 @@ const HomeTheme1 = () => {
           <>
           <div className=" mt-5 lg:grid grid-cols-8 gap-5 hidden">
             {movieList?.data?.data?.map((item, i) => (
-              <Theme1Card key={i} item={item} />
+              <Theme1Card key={i} item={item} isLoading={movieLoading}/>
             ))}
           </div>
           <div className="mt-5 grid grid-cols-3 gap-5 lg:hidden">
             {movieList?.data?.data?.slice(0,12)?.map((item, i) => (
-              <Theme1Card key={i} item={item} />
+              <Theme1Card key={i} item={item} isLoading={movieLoading}/>
             ))}
           </div>
           </>
@@ -84,12 +82,12 @@ const HomeTheme1 = () => {
           <>
           <div className=" mt-5 lg:grid grid-cols-8 gap-5 hidden">
             {tvShowList?.data?.data?.map((item, i) => (
-              <Theme1Card key={i} item={item} />
+              <Theme1Card key={i} item={item} isLoading={tvShowLoading}/>
             ))}
           </div>
           <div className=" mt-5 grid grid-cols-3 gap-5 lg:hidden">
             {tvShowList?.data?.data?.slice(0,12)?.map((item, i) => (
-              <Theme1Card key={i} item={item} />
+              <Theme1Card key={i} item={item} isLoading={tvShowLoading}/>
             ))}
           </div>
           </>

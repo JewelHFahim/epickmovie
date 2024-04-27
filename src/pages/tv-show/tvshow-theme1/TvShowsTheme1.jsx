@@ -29,7 +29,7 @@ const TvShowsTheme1 = () => {
           <>
           <div className=" mt-5 grid grid-cols-3 lg:grid-cols-8 gap-5">
             {perPageTvShows?.data?.data?.map((item, i) => (
-              <Theme1Card key={i} item={item} />
+              <Theme1Card key={i} item={item} isLoading={isLoading}/>
             ))}
           </div>
           </>

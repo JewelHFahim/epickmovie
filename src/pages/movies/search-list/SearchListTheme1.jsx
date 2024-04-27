@@ -7,15 +7,19 @@ import {
 } from "../../../utils/configHooks/ConfigHooks";
 import LazyLoading from "../../../components/lazy-loading/LazyLoading";
 import Theme1Card from "../../../components/movie-card/theme1-card/Theme1Card";
+import PaginationTheme1 from "../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
 
 const SearchListTheme1 = () => {
   const location = useLocation();
+  const { siteName } = useSiteConfig();
   const currentRoute = location.pathname;
   const searchTerm = currentRoute?.slice(13);
   const { url } = useCleanedTitleForSearch(searchTerm);
-
   const { data: searchResults, isLoading } = useSerachResultsQuery(url);
-  const { siteName } = useSiteConfig();
+  const currentP = Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
+
+  console.log(searchResults)
+
 
 
   return (
@@ -55,10 +59,11 @@ const SearchListTheme1 = () => {
           </div>
         ) : (
           <div className="grid grid-cols-3 lg:grid-cols-8 gap-[25px] my-3">
-            {searchResults?.data?.map((item) => (
+            {searchResults?.data?.data?.map((item) => (
               <Theme1Card
                 key={item?.id}
                 item={item}
+                isLoading={isLoading}
                 redirect={
                   item?.post_type === "movies"
                     ? `/movie/${item?.id}`
@@ -69,8 +74,13 @@ const SearchListTheme1 = () => {
           </div>
         )}
       </div>
-
       </>
+
+      {/* <PaginationTheme1
+        currentPage={currentP}
+        perPgaeMovie={searchResults}
+        type="movies"
+      /> */}
 
     </section>
   );

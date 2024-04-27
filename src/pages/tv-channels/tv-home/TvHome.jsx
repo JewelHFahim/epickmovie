@@ -24,7 +24,7 @@ const TvHome = () => {
   }, {});
 
   return (
-    <div className="mt-3 lg:mt-8 h-full min-h-screen">
+    <div className="mt-3 h-full min-h-screen">
       {/* TvNews Section */}
       <TvNews />
 

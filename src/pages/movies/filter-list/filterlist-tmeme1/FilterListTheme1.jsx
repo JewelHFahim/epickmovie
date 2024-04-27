@@ -17,11 +17,11 @@ const FilterListTheme1 = () => {
     const startIndex = parts.indexOf("terms");
 
     if(parts?.length === 5 ){
-      const genres = parts.slice(startIndex + 1, -2);
+      const genres = parts?.slice(startIndex + 1, -2);
       const genresString = genres.join("-");
       return genresString;
     }else{
-      const genres = parts.slice(startIndex + 1);
+      const genres = parts?.slice(startIndex + 1);
       const genresString = genres.join("-");
       return genresString;
     }
@@ -79,6 +79,7 @@ const FilterListTheme1 = () => {
               <Theme1Card
                 key={item?.id}
                 item={item}
+                isLoading={isLoading}
                 redirect={
                   item?.post_type === "movies"
                     ? `/movie/${item?.id}`

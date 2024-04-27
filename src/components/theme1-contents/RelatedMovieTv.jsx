@@ -21,13 +21,13 @@ const RelatedMovieTv = ({ suggessions, isLoading, type }) => {
         <>
           <div className="w-full mt-5 lg:flex justify-between hidden">
             {suggessions?.data?.slice(0, 5)?.map((item, i) => (
-              <Theme1Card key={i} item={item} />
+              <Theme1Card key={i} item={item} isLoading={isLoading}/>
             ))}
           </div>
 
           <div className="w-full mt-5 flex justify-between gap-5 lg:hidden">
             {suggessions?.data?.slice(0, 3)?.map((item, i) => (
-              <Theme1Card key={i} item={item} />
+              <Theme1Card key={i} item={item} isLoading={isLoading} />
             ))}
           </div>
         </>

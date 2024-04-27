@@ -10,10 +10,8 @@ import SectionTitle from "../../../../utils/theme1-contents/section-title/Sectio
 const MoviesTheme1 = () => {
   const location = useLocation();
   const currentRoute = location?.pathname;
-  const currentP =
-    Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
-  const { data: perPgaeMovie, isLoading: movieLoading } =
-    usePerPgaeMovieQuery(currentP);
+  const currentP = Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
+  const { data: perPgaeMovie, isLoading: movieLoading } = usePerPgaeMovieQuery(currentP);
 
   return (
     <div className="px-5 lg:px-0">
@@ -29,7 +27,7 @@ const MoviesTheme1 = () => {
         ) : (
           <div className="mt-5 grid grid-cols-3 lg:grid-cols-8 gap-5">
             {perPgaeMovie?.data?.data?.map((item, i) => (
-              <Theme1Card key={i} item={item} />
+              <Theme1Card key={i} item={item} isLoading={movieLoading}/>
             ))}
           </div>
         )}

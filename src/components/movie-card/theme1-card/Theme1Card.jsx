@@ -7,20 +7,24 @@ import {
   useSiteConfig,
 } from "../../../utils/configHooks/ConfigHooks";
 
-const Theme1Card = ({ item }) => {
+const Theme1Card = ({ item, isLoading }) => {
   const { maskLink } = useSiteConfig();
   const { url } = useCleanedTitle(item);
   const handleRedirect = useRedirect(url, maskLink);
 
   return (
     <div onClick={() => handleRedirect()}>
-      <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506]  p-[5px] lg:p-[3px] overflow-hidden rounded-[10px] flex justify-center items-center">
+      <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[5px] lg:p-[3px] overflow-hidden rounded-[10px] flex justify-center items-center">
         <div className="relative min-h-full lg:w-[165px] lg:h-[260px] rounded-[10px]  overflow-hidden flex flex-col justify-center items-center playBtnCont cursor-pointer bg-slate-600">
-          <img
-            src={item?.poster_image_url}
-            alt="Poster Img"
-            className="object-cover w-full h-full rounded-[10px] posterImg"
-          />
+          {isLoading ? (
+            <div className="min-w-[270px] h-[385px] bg-slate-600"></div>
+          ) : (
+            <img
+              src={item?.poster_image_url}
+              alt="Poster Img"
+              className="object-cover w-full h-full rounded-[10px] posterImg"
+            />
+          )}
 
           {/* Pixel/Print Quality  */}
           {item?.stickerLabel && (
