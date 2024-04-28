@@ -14,8 +14,8 @@ const Theme1Card = ({ item, isLoading }) => {
 
   return (
     <div onClick={() => handleRedirect()}>
-      <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[5px] lg:p-[3px] overflow-hidden rounded-[10px] flex justify-center items-center">
-        <div className="relative min-h-full lg:w-[165px] lg:h-[260px] rounded-[10px]  overflow-hidden flex flex-col justify-center items-center playBtnCont cursor-pointer bg-slate-600">
+      <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[4px] lg:p-[2px] overflow-hidden rounded-[10px] flex justify-center items-center">
+        <div className="relative min-h-full lg:w-[180px] lg:h-[320px] rounded-[10px]  overflow-hidden flex flex-col justify-center items-center playBtnCont cursor-pointer bg-slate-600">
           {isLoading ? (
             <div className="min-w-[270px] h-[385px] bg-slate-600"></div>
           ) : (

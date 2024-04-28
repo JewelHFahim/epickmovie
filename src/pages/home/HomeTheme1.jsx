@@ -32,7 +32,7 @@ const HomeTheme1 = () => {
           </div>
         ) : (
           <>
-            <div className="mt-5 lg:grid grid-cols-8 gap-5 hidden">
+            <div className="mt-5 lg:grid grid-cols-8 gap-2 hidden">
               {featuredPosts?.data?.slice(0, 8)?.map((item, i) => (
                 <Theme1Card key={i} item={item} isLoading={featureLoading}/>
               ))}
@@ -57,7 +57,7 @@ const HomeTheme1 = () => {
           </div>
         ) : (
           <>
-          <div className=" mt-5 lg:grid grid-cols-8 gap-5 hidden">
+          <div className=" mt-5 lg:grid grid-cols-8 gap-2 hidden">
             {movieList?.data?.data?.map((item, i) => (
               <Theme1Card key={i} item={item} isLoading={movieLoading}/>
             ))}
@@ -80,7 +80,7 @@ const HomeTheme1 = () => {
           </div>
         ) : (
           <>
-          <div className=" mt-5 lg:grid grid-cols-8 gap-5 hidden">
+          <div className=" mt-5 lg:grid grid-cols-8 gap-2 hidden">
             {tvShowList?.data?.data?.map((item, i) => (
               <Theme1Card key={i} item={item} isLoading={tvShowLoading}/>
             ))}

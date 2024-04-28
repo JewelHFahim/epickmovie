@@ -5,6 +5,8 @@ import Theme1Card from "../movie-card/theme1-card/Theme1Card";
 
 const RelatedMovieTv = ({ suggessions, isLoading, type }) => {
 
+  console.log(suggessions)
+
   return (
     <div className="flex flex-col justify-center items-center p-5">
       <SectionTitle> Related {type} </SectionTitle>
@@ -20,7 +22,7 @@ const RelatedMovieTv = ({ suggessions, isLoading, type }) => {
       ) : (
         <>
           <div className="w-full mt-5 lg:flex justify-between hidden">
-            {suggessions?.data?.slice(0, 5)?.map((item, i) => (
+            {suggessions?.data?.slice(0, 6)?.map((item, i) => (
               <Theme1Card key={i} item={item} isLoading={isLoading}/>
             ))}
           </div>

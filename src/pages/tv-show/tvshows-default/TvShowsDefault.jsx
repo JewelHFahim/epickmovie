@@ -37,14 +37,14 @@ const TvShowsDefault = () => {
       <div className="px-5 lg:px-0 w-full">
         {isLoading ? (
           <div className="w-full">
-          <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
+          <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] lg:gap-[10px] mt-10 animate-pulse w-full lg:px-5">
             {Array.from({ length: 24 }).map((item, i) => (
               <LazyLoading key={i} />
             ))}
           </div>
         </div>
         ) : (
-          <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] md:gap-auto my-[18px]">
+          <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] lg:gap-[10px] md:gap-auto my-[18px]">
             {perPgaeMovie?.data?.data?.map((item) => (
               <MovieCard
                 key={item?.id}

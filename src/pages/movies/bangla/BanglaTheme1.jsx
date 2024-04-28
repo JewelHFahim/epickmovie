@@ -3,16 +3,14 @@ import SiteNews from "../../../components/SiteNews/SiteNews";
 import LazyLoadingTheme1 from "../../../components/lazy-loading/LazyLoadingTheme1";
 import Theme1Card from "../../../components/movie-card/theme1-card/Theme1Card";
 import UpCommingTheme1 from "../../../components/theme1-contents/UpCommingTheme1";
-import { usePerPageEnglishMovieListQuery } from "../../../redux/features/movies/movieApi";
+import { usePerPageBanglaMovieListTheme1Query } from "../../../redux/features/movies/movieApi";
 import PaginationTheme1 from "../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
 
-const EnglishMovies = () => {
+const BanglaTheme1 = () => {
   const location = useLocation();
   const currentRoute = location.pathname;
-  const currentP =
-    Number(currentRoute?.slice(14)) === 0 ? 1 : Number(currentRoute?.slice(14));
-  const { data: perPageEnglishMovies, isLoading } =
-    usePerPageEnglishMovieListQuery(currentP);
+  const currentP = Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
+  const { data: perPageBanglaMovies, isLoading } = usePerPageBanglaMovieListTheme1Query(currentP);
 
   return (
     <div className="px-10 lg:px-0">
@@ -20,7 +18,7 @@ const EnglishMovies = () => {
 
       <div className="mt-5">
         <button className="px-6 h-[40px] bg-[#FFB800] text-black text-[18px] font-bold flex justify-center items-center gap-x-4">
-          <span>English Movies</span>
+          <span>Bangla Movies</span>
         </button>
 
         {isLoading ? (
@@ -28,20 +26,18 @@ const EnglishMovies = () => {
             <LazyLoadingTheme1 lazyLength={24} />
           </div>
         ) : (
-          <>
-            <div className=" mt-5 grid grid-cols-3 lg:grid-cols-8 gap-2">
-              {perPageEnglishMovies?.data?.data?.map((item, i) => (
-                <Theme1Card key={i} item={item} isLoading={isLoading}/>
-              ))}
-            </div>
-          </>
+          <div className=" mt-5 grid grid-cols-3 lg:grid-cols-8 gap-2">
+            {perPageBanglaMovies?.data?.data?.map((item, i) => (
+              <Theme1Card key={i} item={item} isLoading={isLoading}/>
+            ))}
+          </div>
         )}
       </div>
 
       <PaginationTheme1
         currentPage={currentP}
-        perPgaeMovie={perPageEnglishMovies}
-        type="english"
+        perPgaeMovie={perPageBanglaMovies}
+        type="bangla"
       />
 
       {/* ========> Up Comming Movies/Tv Shows <========*/}
@@ -50,4 +46,4 @@ const EnglishMovies = () => {
   );
 };
 
-export default EnglishMovies;
+export default BanglaTheme1;

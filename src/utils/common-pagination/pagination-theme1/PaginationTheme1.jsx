@@ -4,8 +4,6 @@ import { useNavigate } from "react-router-dom";
 import PagiBtnTheme1 from "../../theme1-contents/PagiBtnTheme1";
 
 const PaginationTheme1 = ({ currentPage, perPgaeMovie, type, filteredTerm }) => {
-
-  console.log(perPgaeMovie)
   
   const navigate = useNavigate();
 
@@ -15,9 +13,13 @@ const PaginationTheme1 = ({ currentPage, perPgaeMovie, type, filteredTerm }) => 
 
   // Function to handle page change
   const handlePageChange = (page) => {
-    if (type === "movies" || type === "tv-show" || type === "hindi" || type === "english") {
+    if (type === "movies" || type === "tv-show" || type === "hindi" || type === "english" || type === "bangla") {
       navigate(`/${type}/page/${page}`);
     } 
+    else if(type === "search-list"){
+      navigate(`/search-list/${filteredTerm}/page/${page}`);
+
+    }
     else {
       navigate(`/terms/${filteredTerm}/page/${page}`);
     }

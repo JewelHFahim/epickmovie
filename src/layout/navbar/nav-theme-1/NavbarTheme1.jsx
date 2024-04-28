@@ -38,6 +38,7 @@ const NavbarTheme1 = () => {
     },
     { title: "Hollywood", url: "/english", isDrapdown: false },
     { title: "Bollywood", url: "/hindi", isDrapdown: false },
+    { title: "Bangla", url: "/bangla", isDrapdown: false },
     {
       title: "Join Telegram",
       url: telegramLink,

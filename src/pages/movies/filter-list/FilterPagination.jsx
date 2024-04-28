@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import React, { useEffect } from "react";
 import PaginationButton from "../../../utils/PaginationButton";
 import { useNavigate } from "react-router-dom";

@@ -60,10 +60,12 @@ const TagsList = ({ details, title }) => {
       </p>
 
       <div className="inline-block-flex ml-7 mt-5 text-white text-lg lg:text-sm font-semibold text-justif">
+
         <Link to={`/search-list/${details?.post_im_title}`} className="hover:underline pr-1">
           Download {details?.post_title} (
           {details?.release_date?.slice(0, 4)}),
         </Link>
+
         {tagsList.map((item, i) => (
           <Link key={i} to={`/search-list/${details?.post_im_title}`} className="hover:underline pr-1">
             <span>
@@ -74,7 +76,8 @@ const TagsList = ({ details, title }) => {
             ,
           </Link>
         ))}
-        <span>Impact of Downloading {title} from Torrent Websites</span>
+        
+        {/* <span>Impact of Downloading {title} from Torrent Websites</span> */}
       </div>
     </div>
   );

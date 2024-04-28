@@ -28,7 +28,7 @@ const HindiMovies = () => {
             <LazyLoadingTheme1 lazyLength={24} />
           </div>
         ) : (
-          <div className=" mt-5 grid grid-cols-3 lg:grid-cols-8 gap-5">
+          <div className=" mt-5 grid grid-cols-3 lg:grid-cols-8 gap-2">
             {perPageHindiMovies?.data?.data?.map((item, i) => (
               <Theme1Card key={i} item={item} isLoading={isLoading}/>
             ))}

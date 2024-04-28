@@ -9,9 +9,15 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-    // =================>> PER PAGE HINDI MOVIE <<========================
+    // =================>> PER PAGE HINDI MOVIE <<=========================
     perPageHindiMovieList: builder.query({
       query: (page) => `/sp-terms/india?page=${page}`,
+      providesTags: ["EpicMovies"],
+    }),
+
+    // =============>> PER PAGE BANGLA MOVIE THEME-1 <<====================
+    perPageBanglaMovieListTheme1: builder.query({
+      query: (page) => `/sp-terms/bangla?page=${page}`,
       providesTags: ["EpicMovies"],
     }),
 
@@ -22,13 +28,13 @@ const movieApi = apiSlice.injectEndpoints({
     }),
 
 
-    // ======================>> SINGLE MOVIE DETAILS <<===================
+    // ======================>> SINGLE MOVIE DETAILS <<====================
     movieDetails: builder.query({
       query: (movieId) => `/movie-post/${movieId}`,
       providesTags: ["EpicMovies"],
     }),
 
-    // ===================>> PAGINATION WISE MOVIE <<=====================
+    // ===================>> PAGINATION WISE MOVIE <<======================
     perPgaeMovie: builder.query({
       query: (pageNo) => `/movie-posts?page=${pageNo}`,
       providesTags: ["EpicMovies"],
@@ -89,6 +95,7 @@ export const {
   usePixelQualityClientQuery,
   usePerPageBengaliMovieListQuery,
   usePerPageHindiMovieListQuery,
+  usePerPageBanglaMovieListTheme1Query,
   usePerPageEnglishMovieListQuery,
   useUpCommingPostsQuery,
 } = movieApi;

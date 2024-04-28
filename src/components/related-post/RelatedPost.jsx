@@ -17,7 +17,7 @@ const RelatedPost = ({ id }) => {
         <div className="flex justify-center items-center">
 
         <div className="hidden mt-[23px] lg:grid grid-cols-5 items-center gap-[25px] ">
-          {suggessions?.data?.map((item, i) => (
+          {suggessions?.data?.slice(0,5)?.map((item, i) => (
             <CardRelatedPost item={item} key={i}/>
           ))}
         </div>

@@ -43,7 +43,7 @@ const HomeDefault = () => {
         ))}
       </div>
 
-      {/* =====================>> Domains <<===================*/}
+      {/* =====================>> SiteNews <<===================*/}
       <SiteNews />
 
       {/* ================>> Featured Movies <<================*/}
@@ -65,7 +65,7 @@ const HomeDefault = () => {
       <div className="px-5 lg:px-0 w-full">
         {movieLoading ? (
           <div className="w-full">
-            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] lg:gap-[10px] mt-10 animate-pulse w-full lg:px-5">
               {Array.from({ length: 18 }).map((item, i) => (
                 <LazyLoading key={i} />
               ))}
@@ -73,7 +73,7 @@ const HomeDefault = () => {
           </div>
         ) : (
           <div>
-            <div className="hidden lg:grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
+            <div className="hidden lg:grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[10px] my-[18px]">
               {movieList?.data?.data?.slice(0, 18)?.map((item) => (
                 <MovieCard
                   key={item?.id}
@@ -103,7 +103,7 @@ const HomeDefault = () => {
       <div className="px-5 lg:px-0 w-full">
         {tvShowLoading ? (
           <div className="w-full">
-            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] lg:gap-[10px] mt-10 animate-pulse w-full lg:px-5">
               {Array.from({ length: 18 }).map((item, i) => (
                 <LazyLoading key={i} />
               ))}
@@ -111,7 +111,7 @@ const HomeDefault = () => {
           </div>
         ) : (
           <div>
-            <div className="hidden lg:grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
+            <div className="hidden lg:grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[10px] my-[18px]">
               {tvShowList?.data?.data?.slice(0, 18)?.map((item) => (
                 <MovieCard
                   key={item?.id}
@@ -142,7 +142,7 @@ const HomeDefault = () => {
       <div className="px-5 lg:px-0 w-full">
         {upCommingLoading ? (
           <div className="w-full">
-            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] mt-10 animate-pulse w-full lg:px-5">
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] lg:gap-[10px] mt-10 animate-pulse w-full lg:px-5">
               {Array.from({ length: 6 }).map((item, i) => (
                 <LazyLoading key={i} />
               ))}
@@ -150,7 +150,7 @@ const HomeDefault = () => {
           </div>
         ) : (
           <div>
-            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[25px] my-[18px]">
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[20px] lg:gap-[10px] my-[18px]">
               {upCommingPosts?.data?.data?.slice(0, 6)?.map((item) => (
                 <MovieCard
                   key={item?.id}

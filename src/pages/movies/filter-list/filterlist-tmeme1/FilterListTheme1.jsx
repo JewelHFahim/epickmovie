@@ -16,11 +16,11 @@ const FilterListTheme1 = () => {
     const parts = route.split("/");
     const startIndex = parts.indexOf("terms");
 
-    if(parts?.length === 5 ){
+    if (parts?.length === 5) {
       const genres = parts?.slice(startIndex + 1, -2);
       const genresString = genres.join("-");
       return genresString;
-    }else{
+    } else {
       const genres = parts?.slice(startIndex + 1);
       const genresString = genres.join("-");
       return genresString;
@@ -39,9 +39,12 @@ const FilterListTheme1 = () => {
   };
 
   // Usage example
-  const currentPage = isNaN(getPageNumberFromRoute(currentRoute)) ? 1 : getPageNumberFromRoute(currentRoute);
+  const currentPage = isNaN(getPageNumberFromRoute(currentRoute))
+    ? 1
+    : getPageNumberFromRoute(currentRoute);
 
-  const { data: filteredResults, isLoading } = useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
+  const { data: filteredResults, isLoading } =
+    useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
 
   return (
     <section className="min-h-screen">
@@ -55,7 +58,7 @@ const FilterListTheme1 = () => {
         />
       </Helmet>
 
-      <div className=" ml-10 lg:ml-0 my-5">
+      <div className=" ml-10 lg:ml-0 my-4">
         <h1 className="text-[28px] font-[700] font-roboto text-white capitalize">
           Filtered By: {filteredTerm}
         </h1>
@@ -71,10 +74,10 @@ const FilterListTheme1 = () => {
       <div className="flex justify-center items-center w-full px-5 lg:px-0">
         {isLoading ? (
           <div className="w-full">
-          <LazyLoadingTheme1 lazyLength={24} />
-        </div>
+            <LazyLoadingTheme1 lazyLength={24} />
+          </div>
         ) : (
-          <div className="grid grid-cols-3 lg:grid-cols-8 gap-[25px] my-3">
+          <div className="grid grid-cols-3 lg:grid-cols-8 gap-2 my-3">
             {filteredResults?.data?.data?.map((item) => (
               <Theme1Card
                 key={item?.id}

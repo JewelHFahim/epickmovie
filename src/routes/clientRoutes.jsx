@@ -78,6 +78,11 @@ export const clientRoutes = [
     path: "/search-list/:string",
     element: <SearchList />,
   },
+
+  {
+    path: "/search-list/:string/page/:id",
+    element: <SearchList />,
+  },
   
   {
     path: "/terms/:string/page/:id",
