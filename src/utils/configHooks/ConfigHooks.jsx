@@ -87,16 +87,16 @@ const generateCleanedTitleSearch = (title) => {
 };
 
 export const useCleanedTitleForSearch = (item) => {
-  const [url, setUrl] = useState();
+  const [searchTerm, setSearchTerm] = useState();
 
   useEffect(() => {
     if (item) {
       const cleanedTitle = generateCleanedTitleSearch(item);
-      setUrl(cleanedTitle);
+      setSearchTerm(cleanedTitle);
     }
   }, [item]);
 
-  return { url };
+  return { searchTerm };
 };
 
 // ===================>> CONFIG DATAS <<======================

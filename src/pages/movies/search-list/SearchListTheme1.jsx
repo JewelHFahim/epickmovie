@@ -1,6 +1,6 @@
 import { Helmet } from "react-helmet";
 import { useLocation } from "react-router-dom";
-import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
+import { useCleanedTitleForSearch, useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 import Theme1Card from "../../../components/movie-card/theme1-card/Theme1Card";
 import { useSerachResultsQuery } from "../../../redux/features/search/searchApi";
 import PaginationTheme1 from "../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
@@ -12,7 +12,7 @@ const SearchListTheme1 = () => {
   const currentRoute = location.pathname;
 
   // Function to extract genres from route
-  const getGenresFromRoute = (route) => {
+  const getGenresFromRoute = (route ) => {
     const parts = route.split("/");
     const startIndex = parts.indexOf("search-list");
 
@@ -28,13 +28,15 @@ const SearchListTheme1 = () => {
   };
 
   // Usage example
-  const searchTerm = getGenresFromRoute(currentRoute);
-  console.log(searchTerm);
+  const searchTermUncleaned = getGenresFromRoute(currentRoute);
+  console.log(searchTermUncleaned);
+  const {searchTerm} = useCleanedTitleForSearch(searchTermUncleaned);
+
+  console.log(searchTerm)
 
   // Function to extract page number as a number from route
   const getPageNumberFromRoute = (route) => {
     const parts = route.split("/");
-    console.log(parts);
     const pageIndex = parts.indexOf("page");
     const pageNumber = parseInt(parts[pageIndex + 1], 10);
     return pageNumber;
@@ -43,17 +45,15 @@ const SearchListTheme1 = () => {
   // Usage example
   const currentPage = isNaN(getPageNumberFromRoute(currentRoute)) ? 1 : getPageNumberFromRoute(currentRoute);
   const { data: searchResults, isLoading } = useSerachResultsQuery({ searchTerm, currentPage });
+  console.log(searchResults)
 
   return (
     <section className="min-h-screen px-[50px] py-[20px] lg:px-0 lg:py-5">
 
-      <Helmet>
+      {/* <Helmet>
         <title> {siteName} || {searchTerm} </title>
-        <meta
-          name="description"
-          content="Unlimited Bangla Movies and Latest Collections"
-        />
-      </Helmet>
+        <meta  name="description" content="Unlimited Movies and Web-Series Latest Collections"/>
+      </Helmet> */}
 
     {/* ===========>> Searched Results <<===========*/}
       <div className=" ml-10 lg:ml-0 mb-4">

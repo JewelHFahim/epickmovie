@@ -19,7 +19,7 @@ const LatestMovieTvShow = ({ loading, perPageData }) => {
         </div>
       ) : (
         <>
-          <div className=" mt-5 lg:grid grid-cols-8 gap-5 hidden">
+          <div className=" mt-5 lg:grid grid-cols-8 gap-2 hidden">
             {perPageData?.data?.data?.slice(0, 8)?.map((item, i) => (
               <Theme1Card key={i} item={item} isLoading={loading}/>
             ))}
