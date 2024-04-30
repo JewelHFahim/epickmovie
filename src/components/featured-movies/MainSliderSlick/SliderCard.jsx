@@ -18,9 +18,6 @@ const SliderCard = ({ item }) => {
         onClick={() => handleRedirect()}
         className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative cursor-pointer`}
       >
-        {/* <CachedImage src={item?.poster_image_url}
-        imgStyle="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg"
-      /> */}
         <img
           src={item?.poster_image_url}
           alt="poster"

@@ -73,16 +73,9 @@ export const useCleanedTitle = (item) => {
   return { url };
 };
 
-// ===============Only For Search Title Clean==============
+// =============== Only For Search Title Clean ==============
 const generateCleanedTitleSearch = (title) => {
-  const cleanedTitle = title
-    // .replace(/[^\w\s]|_/g, "")
-    // .replace(/\s+/g, "-")
-    // .replace(/-+/g, "-")
-    // .replace(/:/g, "-")
-    .replace(/%20/g, " ")
-    // .replace(/(\d{1,2})a/g, "$1")
-    .toLowerCase();
+  const cleanedTitle = title.replace(/%20/g, " ").toLowerCase();
   return cleanedTitle;
 };
 

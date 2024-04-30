@@ -71,6 +71,12 @@ const MobileMenu = () => {
       isDrapdown: false,
       icon: <RiMovie2Line />,
     },
+    {
+      title: "Bangla",
+      path: "/bangla",
+      isDrapdown: false,
+      icon: <RiMovie2Line />,
+    },
 
     {
       title: "Join Telegram",

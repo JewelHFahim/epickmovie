@@ -2,8 +2,6 @@ li ul {
   display: none !important;
 }
 
-
 ul li:hover ul{
-    /* display: block !important; */
     display: inline-flex !important;
 }

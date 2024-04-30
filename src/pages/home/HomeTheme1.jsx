@@ -1,6 +1,7 @@
 import SiteNews from "../../components/SiteNews/SiteNews";
 import LazyLoadingTheme1 from "../../components/lazy-loading/LazyLoadingTheme1";
 import Theme1Card from "../../components/movie-card/theme1-card/Theme1Card";
+import FeatureSliderTheme1 from "../../components/theme1-contents/FeatureSLider/FeatureSliderTheme1";
 import UpCommingTheme1 from "../../components/theme1-contents/UpCommingTheme1";
 import {
   useFeaturedPostsQuery,
@@ -21,7 +22,8 @@ const HomeTheme1 = () => {
       {/* ==============> Feature Movies <==============*/}
       <div>
         <SectionTitle url=""> Feature Movies </SectionTitle>
-        {featureLoading ? (
+
+        {/* {featureLoading ? (
           <div className="w-full">
             <div className="hidden lg:block">
               <LazyLoadingTheme1 lazyLength={8} />
@@ -44,7 +46,9 @@ const HomeTheme1 = () => {
               ))}
             </div>
           </>
-        )}
+        )} */}
+
+        <FeatureSliderTheme1 featureLoading={featureLoading} featuredPosts={featuredPosts}/>
       </div>
 
       {/* ==============> Latest Movies <===============*/}

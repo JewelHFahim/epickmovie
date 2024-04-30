@@ -29,10 +29,8 @@ const SearchListTheme1 = () => {
 
   // Usage example
   const searchTermUncleaned = getGenresFromRoute(currentRoute);
-  console.log(searchTermUncleaned);
   const {searchTerm} = useCleanedTitleForSearch(searchTermUncleaned);
 
-  console.log(searchTerm)
 
   // Function to extract page number as a number from route
   const getPageNumberFromRoute = (route) => {
@@ -45,15 +43,19 @@ const SearchListTheme1 = () => {
   // Usage example
   const currentPage = isNaN(getPageNumberFromRoute(currentRoute)) ? 1 : getPageNumberFromRoute(currentRoute);
   const { data: searchResults, isLoading } = useSerachResultsQuery({ searchTerm, currentPage });
-  console.log(searchResults)
+
+  console.log(searchTerm)
 
   return (
     <section className="min-h-screen px-[50px] py-[20px] lg:px-0 lg:py-5">
 
-      {/* <Helmet>
-        <title> {siteName} || {searchTerm} </title>
+      <Helmet>
+        {/* <title> {siteName} || {searchTerm} </title> */}
+        <title>{siteName || 'Fallback Site Name'} || {searchTerm || 'Fallback Search Term'}</title>
         <meta  name="description" content="Unlimited Movies and Web-Series Latest Collections"/>
-      </Helmet> */}
+      </Helmet>
+
+
 
     {/* ===========>> Searched Results <<===========*/}
       <div className=" ml-10 lg:ml-0 mb-4">
