@@ -8,9 +8,7 @@ import TvLayout from "../layout/TvLayout.jsx";
 import TvHome from "../pages/tv-channels/tv-home/TvHome.jsx";
 import TvStreaming from "../pages/tv-channels/TvStreaming.jsx";
 import AllChannels from "../pages/tv-channels/AllChannels.jsx";
-import TvSports from "../pages/tv-channels/sports/TvSports.jsx";
-import News from "../pages/tv-channels/news/News.jsx";
-import Entertainment from "../pages/tv-channels/entertainment/Entertainment.jsx";
+import SingleCategory from "../pages/tv-channels/single-category/SingleCategory.jsx";
 
 const router = createBrowserRouter([
   {
@@ -31,20 +29,14 @@ const router = createBrowserRouter([
         path: "/tv/all-tvs",
         element: <AllChannels />,
       },
+
       {
-        path: "/tv/sports",
-        element: <TvSports />,
+        path: "/tv/:string",
+        element: <SingleCategory />,
       },
+
       {
-        path: "/tv/news",
-        element: <News />,
-      },
-      {
-        path: "/tv/entertainment",
-        element: <Entertainment />,
-      },
-      {
-        path: "/tv/streaming/:id",
+        path: "/tv/streaming/:string/:id",
         element: <TvStreaming />,
       },
     ],

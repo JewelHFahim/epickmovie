@@ -1,0 +1,20 @@
+.theme1slider .slick-next:before,
+.slick-prev:before {
+  font-size: 35px;
+  display: none;
+}
+
+.theme1slider:hover .slick-next:before,
+.theme1slider:hover .slick-prev:before {
+  display: block;
+}
+
+.theme1slider .slick-next {
+  right: 80px;
+  z-index: 9999;
+}
+
+.theme1slider .slick-prev {
+  left: 80px !important;
+  z-index: 9999;
+}

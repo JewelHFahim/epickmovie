@@ -1,19 +1,13 @@
+/* eslint-disable react/prop-types */
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import "./FeatureSliderTheme1.css";
 import Theme1Card from "../../movie-card/theme1-card/Theme1Card";
-import {
-  useCleanedTitle,
-  useRedirect,
-  useSiteConfig,
-} from "../../../utils/configHooks/ConfigHooks";
-import { FaPlay } from "react-icons/fa";
+import Theme1CardMobile from "../../movie-card/theme1-card-mobile/Theme1CardMobile";
 
 const FeatureSliderTheme1 = ({ featuredPosts, featureLoading }) => {
-//   const { maskLink } = useSiteConfig();
-//   const { url } = useCleanedTitle(item);
-//   const handleRedirect = useRedirect(url, maskLink);
-
+  
   var settings = {
     dots: false,
     infinite: true,
@@ -26,7 +20,7 @@ const FeatureSliderTheme1 = ({ featuredPosts, featureLoading }) => {
     pauseOnHover: true,
     arrows: true,
     draggable: true,
-
+    className: "theme1slider",
     responsive: [
       {
         breakpoint: 1024,
@@ -58,11 +52,17 @@ const FeatureSliderTheme1 = ({ featuredPosts, featureLoading }) => {
   };
 
   return (
-    <div className="w-full mt-5">
+    <div className="w-full mt-5 ">
       <Slider {...settings}>
-        {featuredPosts?.data?.slice(0, 8)?.map((item, i) => (
+        {featuredPosts?.data?.map((item, i) => (
           <div key={i} className="px-1">
-            <Theme1Card item={item} isLoading={featureLoading} />
+            <div className="hidden lg:block">
+              <Theme1Card item={item} isLoading={featureLoading} />
+            </div>
+
+            <div className="lg:hidden">
+              <Theme1CardMobile item={item} isLoading={featureLoading} />
+            </div>
           </div>
         ))}
       </Slider>

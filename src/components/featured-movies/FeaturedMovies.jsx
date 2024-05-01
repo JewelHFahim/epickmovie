@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/navigation";

@@ -1,16 +1,25 @@
-import ChannelCard from "../../../components/tv-channels/channel-card/ChannelCard";
-import SectionTitleBtn from "../../../utils/tv-channels/SectionTitleBtn";
 import HighLightCard from "../../../components/tv-channels/HighLightCard";
+import { useEffect } from "react";
+import ChannelCard from "../../../components/tv-channels/channel-card/ChannelCard";
 import {
   useLiveTvCategoryQuery,
   useLiveTvChannelQuery,
 } from "../../../redux/features/live-tv/liveTvApi";
 import TvNews from "../../../components/tv-channels/TvNews";
+import { useLocation } from "react-router-dom";
+import SingleCatTitle from "../../../utils/tv-channels/SingleCatTitle";
 import ChannelLoadingPage from "../../../components/tv-channels/ChannelLoadingPage";
 
-const TvHome = () => {
+const SingleCategory = () => {
+  const location = useLocation();
+  const catName = location?.pathname.slice(4);
+
   const { data: liveTvList } = useLiveTvChannelQuery();
   const { data: tvCategory } = useLiveTvCategoryQuery();
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   if (!liveTvList || !tvCategory) {
     return <ChannelLoadingPage />;
@@ -38,29 +47,29 @@ const TvHome = () => {
     items: groupedTvLinks[category],
   }));
 
+  const singleCat = mappedCategories?.filter(
+    (sigCat) => sigCat.name.toLowerCase() === catName
+  );
+
   return (
-    <div className="mt-3 h-full min-h-screen">
+    <div className="mt-3">
       {/* TvNews Section */}
       <TvNews />
 
-      {/* ============== HIGHLIGHTS CARD PC ================== */}
+      {/* Highlight Cards */}
       <div className="mt-5 lg:flex items-center justify-between hidden">
         <HighLightCard className="w-[640px] h-[350px]" />
         <HighLightCard className="w-[640px] h-[350px]" />
       </div>
 
-      {/* ============== HIGHLIGHTS CARD MB ================== */}
       <div className="mt-5 flex items-center justify-center lg:hidden">
         <HighLightCard className="w-[80%] mx-auto h-[400px] " />
       </div>
 
-      {/* ============= Categorywise Channels ================ */}
-      {mappedCategories?.map((category, i) => (
+      {/* ============= Single CategoryChannels ================ */}
+      {singleCat?.map((category, i) => (
         <div key={i} className="w-[80%] mx-auto lg:w-full">
-          <SectionTitleBtn url={`/tv/${category.name.toLowerCase()}`}>
-            {" "}
-            {category.name}{" "}
-          </SectionTitleBtn>
+          <SingleCatTitle>{category.name}</SingleCatTitle>
 
           <div className="mt-5 hidden lg:flex flex-wrap gap-5">
             {category?.items.map((item, i) => (
@@ -75,23 +84,8 @@ const TvHome = () => {
           </div>
         </div>
       ))}
-
-      {/* ================== ALL CHANNEL ===================== */}
-      <div className="w-[80%] mx-auto lg:w-full">
-        <SectionTitleBtn url="/tv/all-tvs"> All Channel </SectionTitleBtn>
-        <div className="mt-5 hidden lg:flex flex-wrap gap-5">
-          {liveTvList?.data?.data?.map((item, i) => (
-            <ChannelCard key={i} item={item} />
-          ))}
-        </div>
-        <div className="mt-5 grid grid-cols-2 gap-8 mx-auto lg:hidden">
-          {liveTvList?.data?.data?.map((item, i) => (
-            <ChannelCard key={i} item={item} />
-          ))}
-        </div>
-      </div>
     </div>
   );
 };
 
-export default TvHome;
+export default SingleCategory;

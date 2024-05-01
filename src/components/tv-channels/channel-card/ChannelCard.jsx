@@ -1,11 +1,27 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import "./ChannelCard.css";
+import { useLiveTvCategoryQuery } from "../../../redux/features/live-tv/liveTvApi";
 
 const ChannelCard = ({ item }) => {
+  const { data: tvCategory } = useLiveTvCategoryQuery();
+  
+  if (!item || !item.category_id) {
+    console.log("Item or category ID is undefined");
+    return ('Loading...');
+  }
+
+  const category = tvCategory?.data?.find((cat) => cat.id === item.category_id);
+
+  if (category) {
+    console.log(category?.name);
+  } else {
+    console.log("Category not found");
+  }
+
   return (
     <Link
-      to={`/tv/streaming/${item?.id}`}
+      to={`/tv/streaming/${category?.name}/${item?.id}`}
       className="w-full h-[580px] lg:w-[200px] lg:h-[320px] rounded-[10px] border-2 overflow-hidden relative cardContainer border-red-600"
     >
       <img
