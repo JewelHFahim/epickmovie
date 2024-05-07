@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import HLSPlayer from "../../components/tv-channels/HLSPlayer";
 import TvNews from "../../components/tv-channels/TvNews";
 import SingleCatTitle from "../../utils/tv-channels/SingleCatTitle";
+import StreamPageLoading from "../../components/tv-channels/StreamPageLoading";
 
 const TvStreaming = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ const TvStreaming = () => {
   }, []);
 
   if (!liveTvList || !tvCategory) {
-    return "Loading....";
+    return <StreamPageLoading/>;
   }
 
   // Function to extract genres from route
