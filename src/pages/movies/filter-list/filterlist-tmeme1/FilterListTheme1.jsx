@@ -77,7 +77,7 @@ const FilterListTheme1 = () => {
             <LazyLoadingTheme1 lazyLength={24} />
           </div>
         ) : (
-          <div className="grid grid-cols-3 lg:grid-cols-8 gap-2 my-3">
+          <div className="grid grid-cols-3 lg:grid-cols-8 gap-4 my-3">
             {filteredResults?.data?.data?.map((item) => (
               <Theme1Card
                 key={item?.id}

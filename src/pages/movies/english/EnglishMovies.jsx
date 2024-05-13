@@ -29,7 +29,7 @@ const EnglishMovies = () => {
           </div>
         ) : (
           <>
-            <div className=" mt-5 grid grid-cols-3 lg:grid-cols-8 gap-2">
+            <div className=" mt-5 grid grid-cols-3 lg:grid-cols-8 gap-4">
               {perPageEnglishMovies?.data?.data?.map((item, i) => (
                 <Theme1Card key={i} item={item} isLoading={isLoading}/>
               ))}

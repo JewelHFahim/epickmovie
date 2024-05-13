@@ -56,7 +56,7 @@ const HomeTheme1 = () => {
           </div>
         ) : (
           <>
-            <div className=" mt-5 lg:grid grid-cols-8 gap-2 hidden">
+            <div className=" mt-5 lg:grid grid-cols-8 gap-4 hidden">
               {movieList?.data?.data?.map((item, i) => (
                 <Theme1Card key={i} item={item} isLoading={movieLoading} />
               ))}
@@ -79,7 +79,7 @@ const HomeTheme1 = () => {
           </div>
         ) : (
           <>
-            <div className=" mt-5 lg:grid grid-cols-8 gap-2 hidden">
+            <div className=" mt-5 lg:grid grid-cols-8 gap-4 hidden">
               {tvShowList?.data?.data?.map((item, i) => (
                 <Theme1Card key={i} item={item} isLoading={tvShowLoading} />
               ))}

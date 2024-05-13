@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { collectSearchItem } from "../../../redux/features/search/searchSlice";
 
 const NavbarTheme1 = () => {
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -81,13 +80,12 @@ const NavbarTheme1 = () => {
         setLastSearchTime(Date.now());
         navigate(`/search-list/${searchTermState}`);
         setSearchTerm("");
-        setUserAnswer("")
+        setUserAnswer("");
       }
     } else {
       alert("Incorrect answer. Please try again.");
     }
   };
-
 
   return (
     <div className="hidden w-full h-[70px] bg-[#262626] lg:flex items-center">
@@ -101,7 +99,7 @@ const NavbarTheme1 = () => {
             />
           </Link>
 
-          <ul className="font-lilita text-[22px] text-white flex items-center gap-x-5 menus ">
+          <ul className="font-roboto text-[20px] font-medium text-white flex items-center gap-x-4 menus ">
             {menus.map((item, i) => (
               <li key={i} className="relative">
                 <Link to={item.url} target={`${item.newTab ? "_blank" : ""}`}>
@@ -109,9 +107,11 @@ const NavbarTheme1 = () => {
                 </Link>
 
                 {item?.isDrapdown && (
-                  <ul className="z-[999] absolute top-[35px] left-0 bg-[#323131] flex flex-wrap flex-col gap-1 h-[450px] p-2 shadow-md text-[16px] font-[300] w-[500px] submenu">
+                  <ul className="z-[999] absolute top-[35px] left-0 bg-[#323131] flex flex-wrap flex-col gap-1 h-[450px] p-2 shadow-md text-[16px] font-[500] w-[500px] submenu">
                     {item?.subMenu?.map((sMenu, i) => (
-                      <Link to={`/terms/${sMenu?.slug}`} key={i}
+                      <Link
+                        to={`/terms/${sMenu?.slug}`}
+                        key={i}
                         className="hover:bg-slate-700 py-1 pl-2 rounded-md"
                       >
                         <span>{sMenu?.name}</span>
@@ -122,10 +122,19 @@ const NavbarTheme1 = () => {
               </li>
             ))}
           </ul>
+
+          <Link to="/tv">
+            <button className="border text-[20px] px-4 text-yellow-500 border-yellow-500  hover:bg-yellow-500 hover:text-black transition-all ease-in-out">
+             <span className="animate-pulse"> Live Tv</span>
+            </button>
+          </Link>
         </div>
 
         {/* Serach Field */}
-        <form onSubmit={handleSubmit} className="w-[332px] py-2 rounded-md flex items-center bg-[#444444]">
+        <form
+          onSubmit={handleSubmit}
+          className="w-[332px] py-2 rounded-md flex items-center bg-[#444444]"
+        >
           <input
             type="text"
             value={searchTermState}
@@ -136,22 +145,30 @@ const NavbarTheme1 = () => {
           <IoSearch className="10% text-[#d73ee3]" />
         </form>
         {showPopup && (
-        <div className="absolute z-[9999] top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
-          <div className="bg-gray-300 p-8 rounded-lg flex flex-col items-center">
-            <p className="font-medium">Verify that you are not robot...</p>
-            <p className="font-medium"> {popupNumbers[0]} + {popupNumbers[1]} = ?</p>
-            <div className=" mt-2 rounded-md">
-              <input type="text" value={userAnswer} onChange={(e) => setUserAnswer(e.target.value)}
-                className=" border-black outline-none rounded-s-md px-2 h-[30px]"/>
-              <button onClick={handleAuthenticate} className=" px-5 bg-gray-600 text-white rounded-e-md text-sm h-[30px]">
-                Submit
-              </button>
+          <div className="absolute z-[9999] top-0 left-0 w-full h-full bg-black bg-opacity-50 flex items-center justify-center">
+            <div className="bg-gray-300 p-8 rounded-lg flex flex-col items-center">
+              <p className="font-medium">Verify that you are not robot...</p>
+              <p className="font-medium">
+                {" "}
+                {popupNumbers[0]} + {popupNumbers[1]} = ?
+              </p>
+              <div className=" mt-2 rounded-md">
+                <input
+                  type="text"
+                  value={userAnswer}
+                  onChange={(e) => setUserAnswer(e.target.value)}
+                  className=" border-black outline-none rounded-s-md px-2 h-[30px]"
+                />
+                <button
+                  onClick={handleAuthenticate}
+                  className=" px-5 bg-gray-600 text-white rounded-e-md text-sm h-[30px]"
+                >
+                  Submit
+                </button>
+              </div>
             </div>
           </div>
-        </div>
-      )}
-
-
+        )}
       </div>
     </div>
   );

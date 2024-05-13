@@ -55,7 +55,7 @@ const FeatureSliderTheme1 = ({ featuredPosts, featureLoading }) => {
     <div className="w-full mt-5 ">
       <Slider {...settings}>
         {featuredPosts?.data?.map((item, i) => (
-          <div key={i} className="px-1">
+          <div key={i} className="px-2">
             <div className="hidden lg:block">
               <Theme1Card item={item} isLoading={featureLoading} />
             </div>

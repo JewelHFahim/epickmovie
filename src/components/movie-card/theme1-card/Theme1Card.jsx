@@ -14,8 +14,8 @@ const Theme1Card = ({ item, isLoading }) => {
 
   return (
     <div onClick={() => handleRedirect()}>
-      <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[4px] lg:p-[2px] overflow-hidden rounded-[10px] flex justify-center items-center">
-        <div className="relative min-h-full w-full h-[415px] lg:w-[180px] lg:h-[320px] rounded-[10px] overflow-hidden flex flex-col justify-center items-center playBtnCont cursor-pointer bg-slate-600">
+      <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[3px] lg:p-[1.5px] overflow-hidden rounded-[10px] flex justify-center items-center">
+        <div className="relative min-h-full w-full h-[415px] lg:w-[180px] lg:h-[280px] rounded-[10px] overflow-hidden flex flex-col justify-center items-center playBtnCont cursor-pointer bg-slate-600">
           {isLoading ? (
             <div className="min-w-[270px] h-[385px] bg-slate-600"></div>
           ) : (
@@ -34,7 +34,7 @@ const Theme1Card = ({ item, isLoading }) => {
           )}
 
           {/* Title */}
-          <div className="z-50 absolute bottom-2 text-white px-5">
+          <div className="z-50 absolute bottom-2 text-white px-1">
             <p className="text-[20px] lg:text-[13px] font-bold text-center title">
               {item?.post_title}
             </p>
