@@ -8,8 +8,10 @@ import {
 } from "../../../utils/configHooks/ConfigHooks";
 
 const Theme1Card = ({ item, isLoading }) => {
+
   const { maskLink } = useSiteConfig();
   const { url } = useCleanedTitle(item);
+  
   const handleRedirect = useRedirect(url, maskLink);
 
   return (

@@ -11,10 +11,8 @@ import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import SectionTitle from "../../utils/theme1-contents/section-title/SectionTitle";
 
 const HomeTheme1 = () => {
-  const { data: featuredPosts, isLoading: featureLoading } =
-    useFeaturedPostsQuery();
-  const { data: tvShowList, isLoading: tvShowLoading } =
-    usePerPgaeTvShowQuery(1);
+  const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
+  const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
 
   return (

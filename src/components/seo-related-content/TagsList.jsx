@@ -1,7 +1,8 @@
+/* eslint-disable react/prop-types */
 import { FaSquare } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-const TagsList = ({ details, title }) => {
+const TagsList = ({ details, title, className }) => {
   
   const tagsList = [
     { title: `Download Filmyzilla`, url: "" },
@@ -54,7 +55,7 @@ const TagsList = ({ details, title }) => {
   ];
 
   return (
-    <div className="mt-5 px-4">
+    <div className={`mt-5 px-4 ${className}`}>
       <p className="text-3xl lg:text-xl flex items-center text-white gap-x-1 font-semibold">
         <FaSquare className="text-green-500 text-2xl" /> Tags:
       </p>

@@ -5,8 +5,6 @@ import Theme1Card from "../movie-card/theme1-card/Theme1Card";
 
 const RelatedMovieTv = ({ suggessions, isLoading, type }) => {
 
-  console.log(suggessions)
-
   return (
     <div className="flex flex-col justify-center items-center p-5">
       <SectionTitle> Related {type} </SectionTitle>

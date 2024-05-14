@@ -3,7 +3,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import PagiBtnTheme1 from "../../theme1-contents/PagiBtnTheme1";
 
-const PaginationTheme1 = ({ currentPage, perPgaeMovie, type, filteredTerm }) => {
+const PaginationTheme1 = ({ currentPage, perPgaeMovie, type, filteredTerm, btnColor }) => {
   
   const navigate = useNavigate();
 
@@ -85,7 +85,7 @@ const PaginationTheme1 = ({ currentPage, perPgaeMovie, type, filteredTerm }) => 
           ) : (
             <PagiBtnTheme1
               onClick={() => handlePageChange(page)}
-              className={page === currentPage ? "active bg-[#FFA113]" : ""}
+              className={page === currentPage ? `active bg-[#FFA113] ${btnColor}` : ""}
             >
               {page}
             </PagiBtnTheme1>
