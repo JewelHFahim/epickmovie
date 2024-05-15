@@ -1,9 +1,9 @@
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { usePerPgaeTvShowQuery } from "../../../redux/features/tv-show/tvShowApi";
-import LazyLoadingTheme2 from "../../../components/lazy-loading/LazyLoadingTheme2";
+import Theme2Card from "../../../components/movie-card/move-card-theme2/Theme2Card";
+import SeoContentTheme2 from "../../../components/theme2-contents/SeoContentTheme2";
 import SectionTitleTheme2 from "../../../components/theme2-contents/SectionTitleTheme2";
 import PaginationTheme1 from "../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
-import SeoContentTheme2 from "../../../components/theme2-contents/SeoContentTheme2";
 
 const TvShowTheme2 = () => {
   const location = useLocation();
@@ -13,7 +13,7 @@ const TvShowTheme2 = () => {
   const { data: perPageTvShows, isLoading } = usePerPgaeTvShowQuery(currentP);
 
   return (
-    <div className="bg-[#A8A8A812] p-3 mt-14">
+    <div className="bg-[#A8A8A812] px-8 py-4 lg:px-3 lg:py-3 mt-8 lg:mt-14">
       {/* ==================== MOVIES ======================== */}
       <div className="">
         <SectionTitleTheme2
@@ -24,22 +24,11 @@ const TvShowTheme2 = () => {
           Latest Web-Series
         </SectionTitleTheme2>
 
-        <div className="mt-5">
-          {isLoading ? (
-            <LazyLoadingTheme2 length={perPageTvShows?.data?.data?.length} />
-          ) : (
-            <div className="flex flex-col gap-y-1 font-jost">
-              {perPageTvShows?.data?.data?.map((item, i) => (
-                <Link
-                  key={i}
-                  className="underline text-[#1FCD0F] font-medium text-[20px] hover:text-[#a1ea9a] transition-all ease-in-out"
-                >
-                  {item?.post_title}
-                </Link>
-              ))}
-            </div>
-          )}
-        </div>
+        <Theme2Card
+          isLoading={isLoading}
+          dataList={perPageTvShows}
+          className="text-[#1FCD0F]"
+        />
       </div>
 
       {/* =================== PAGINATIONS ===================== */}

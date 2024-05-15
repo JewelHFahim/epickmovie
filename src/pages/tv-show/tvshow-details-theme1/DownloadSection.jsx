@@ -4,7 +4,7 @@ import DownloadBtnTheme1 from "../../../utils/theme1-contents/DownloadBtnTheme1"
 const DownloadSection = ({ details }) => {
   return (
     <div className="w-full">
-      <h2 className="text-[28px] text-[#1FCD0F] font-bold text-center px-8">
+      <h2 className="text-[36px] lg:text-[28px] text-[#1FCD0F] font-bold text-center px-8">
         {details?.post_title}:
       </h2>
 

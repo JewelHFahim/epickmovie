@@ -1,21 +1,20 @@
 import { useLocation } from "react-router-dom";
-import SectionTitleTheme2 from "../../../../components/theme2-contents/SectionTitleTheme2";
-import { usePerPgaeMovieQuery } from "../../../../redux/features/movies/movieApi";
-import PaginationTheme1 from "../../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
-import SeoContentTheme2 from "../../../../components/theme2-contents/SeoContentTheme2";
-import Theme2Card from "../../../../components/movie-card/move-card-theme2/Theme2Card";
+import PaginationTheme1 from "../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
+import SeoContentTheme2 from "../../../components/theme2-contents/SeoContentTheme2";
+import { usePerPageBanglaMovieListTheme1Query } from "../../../redux/features/movies/movieApi";
+import SectionTitleTheme2 from "../../../components/theme2-contents/SectionTitleTheme2";
+import Theme2Card from "../../../components/movie-card/move-card-theme2/Theme2Card";
 
-const MoviesTheme2 = () => {
+const BanglaTheme2 = () => {
   const location = useLocation();
-  const currentRoute = location?.pathname;
+  const currentRoute = location.pathname;
   const currentP =
     Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
-  const { data: perPgaeMovie, isLoading: movieLoading } =
-    usePerPgaeMovieQuery(currentP);
+  const { data: perPageBanglaMovies, isLoading } =
+    usePerPageBanglaMovieListTheme1Query(currentP);
 
   return (
     <div className="bg-[#A8A8A812] px-8 py-4 lg:px-3 lg:py-3 mt-8 lg:mt-14">
-      
       {/* ==================== MOVIES ======================== */}
       <div className="">
         <SectionTitleTheme2
@@ -23,12 +22,12 @@ const MoviesTheme2 = () => {
           className="bg-[#009987]"
           textColor="text-[#009987]"
         >
-          Latest Movies
+          Bangla Movies
         </SectionTitleTheme2>
 
         <Theme2Card
-          isLoading={movieLoading}
-          dataList={perPgaeMovie}
+          isLoading={isLoading}
+          dataList={perPageBanglaMovies}
           className="text-[#009987]"
         />
       </div>
@@ -36,7 +35,7 @@ const MoviesTheme2 = () => {
       {/* =================== PAGINATIONS ===================== */}
       <PaginationTheme1
         currentPage={currentP}
-        perPgaeMovie={perPgaeMovie}
+        perPgaeMovie={perPageBanglaMovies}
         type="movies"
         btnColor="bg-[#009987]"
       />
@@ -49,4 +48,4 @@ const MoviesTheme2 = () => {
   );
 };
 
-export default MoviesTheme2;
+export default BanglaTheme2;

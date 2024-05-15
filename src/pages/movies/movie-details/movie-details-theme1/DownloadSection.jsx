@@ -4,6 +4,7 @@ import DownloadBtnTheme1 from "../../../../utils/theme1-contents/DownloadBtnThem
 const DownloadSection = ({ details, textColor, textSize }) => {
   return (
     <div>
+      
       <h2 className={`text-[35px] lg:text-[28px] text-[#1FCD0F] font-bold text-center px-8 ${textColor} ${textSize}`}>
         {details?.post_title}:
       </h2>

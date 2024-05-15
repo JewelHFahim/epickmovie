@@ -135,7 +135,7 @@ const NavbarTheme2 = () => {
               value={searchTermState}
               onChange={handleInputChange}
               placeholder="Search Movie/TV Shows"
-              className="w-[90%] focus:outline-none bg-transparent px-4 text-slate-200 text-sm font-semibold"
+              className="w-[90%] focus:outline-none bg-transparent px-4 text-slate-800 text-sm font-semibold"
             />
             <IoSearch className="10% text-[#d73ee3]" />
           </form>

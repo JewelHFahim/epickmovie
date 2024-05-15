@@ -19,6 +19,7 @@ const Main = () => {
         ) : theme === "theme2" ? (
           <>
             <NavbarTheme2 />
+            <MobileMenuTheme1 />
           </>
         ) : (
           <div className="lg:w-[61vw] lg:min-w-[1170px] mx-auto">

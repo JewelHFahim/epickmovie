@@ -15,7 +15,7 @@ const MovieCardTheme2 = ({ item, className }) => {
   return (
     <Link
       onClick={() => handleRedirect()}
-      className={`underline text-[#009987] font-medium text-[20px] hover:text-[#6bd4c8] transition-all ease-in-out cursor-pointer ${className}`}
+      className={`underline font-medium text-[30px] lg:text-[20px] hover:text-[#6bd4c8] transition-all ease-in-out cursor-pointer ${className} even:bg-[#373737] lg:even:bg-transparent p-3 lg:p-0`}
     >
       {item?.post_title}
     </Link>
