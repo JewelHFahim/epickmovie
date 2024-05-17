@@ -10,9 +10,14 @@ const tvShowApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
+    // ===========>>  Filter Results THEME-2 <<=============
+    filteredResultsTheme2: builder.query({
+      query: ({ filteredTerm, currentPage }) => `/sp-terms/${filteredTerm}/60?page=${currentPage}`,
+      providesTags: ["EpicMovies"],
+    }),
+
     // ===========>>  SEARCH By GENRE/YEAR/QUALITY  <<=============
     serachResults: builder.query({
-      // query: ({ searchTerm, currentPage }) => `/sp-terms/${searchTerm}?page=${currentPage}`,
       query: ({ searchTerm, currentPage }) => `/search/${searchTerm}?page=${currentPage}`,
       providesTags: ["EpicMovies"],
     }),
@@ -28,7 +33,8 @@ const tvShowApi = apiSlice.injectEndpoints({
 
 export const {
   useSerachResultsQuery,
-  useFilteredResultsByPaginationQuery,
+  useFilteredResultsTheme2Query,
   useSuggessionMovieSeriesQuery,
+  useFilteredResultsByPaginationQuery,
 } = tvShowApi;
 export default tvShowApi;

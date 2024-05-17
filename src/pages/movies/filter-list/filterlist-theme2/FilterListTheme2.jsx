@@ -1,4 +1,4 @@
-import { useFilteredResultsByPaginationQuery } from "../../../../redux/features/search/searchApi";
+import { useFilteredResultsTheme2Query } from "../../../../redux/features/search/searchApi";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useSiteConfig } from "../../../../utils/configHooks/ConfigHooks";
@@ -43,8 +43,7 @@ const FilterListTheme2 = () => {
     ? 1
     : getPageNumberFromRoute(currentRoute);
 
-  const { data: filteredResults, isLoading } =
-    useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
+  const { data: filteredResults, isLoading } = useFilteredResultsTheme2Query({ filteredTerm, currentPage });
 
   return (
     <section className="min-h-screen bg-[#A8A8A812] px-8 py-4 lg:px-3 lg:py-3 mt-8 lg:mt-14">

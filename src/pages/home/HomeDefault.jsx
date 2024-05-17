@@ -23,8 +23,6 @@ const HomeDefault = () => {
   const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
   const { data: upCommingPosts, isLoading: upCommingLoading } = useUpCommingPostsQuery(1);
 
-
-
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
 

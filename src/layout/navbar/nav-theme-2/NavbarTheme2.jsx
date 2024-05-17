@@ -103,7 +103,7 @@ const NavbarTheme2 = () => {
                 </Link>
 
                 {item?.isDrapdown && (
-                  <ul className="z-[999] absolute top-[35px] left-0 bg-[#323131] flex flex-wrap flex-col gap-1 h-[450px] p-2 shadow-md text-[16px] font-[500] w-[500px] submenu">
+                  <ul className="z-[999] absolute top-[30px] left-0 bg-[#323131] flex flex-wrap flex-col gap-1 h-[450px] p-2 shadow-md text-[16px] font-[500] w-[500px] submenu">
                     {item?.subMenu?.map((sMenu, i) => (
                       <Link
                         to={`/terms/${sMenu?.slug}`}

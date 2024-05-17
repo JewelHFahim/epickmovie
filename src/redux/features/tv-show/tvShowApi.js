@@ -14,11 +14,20 @@ const tvShowApi = apiSlice.injectEndpoints({
       query: (pageNo) => `/tv-posts?page=${pageNo}`,
       providesTags: ["EpicMovies"],
     }),
+
+    // ======================>> THEME 2 TV LIST <<===========================
+    perPgaeTvShowTheme2: builder.query({
+      query: (pageNo) => `/tv-posts/60?page=${pageNo}`,
+      providesTags: ["EpicMovies"],
+    }),
+
+
   }),
 });
 
 export const {
   useSeriesDetailsQuery,
   usePerPgaeTvShowQuery,
+  usePerPgaeTvShowTheme2Query
 } = tvShowApi;
 export default tvShowApi;

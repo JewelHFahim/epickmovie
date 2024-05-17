@@ -5,9 +5,9 @@ import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
 import Theme2Card from "../../components/movie-card/move-card-theme2/Theme2Card";
 
 const HomeTheme2 = () => {
+
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
-  const { data: perPageTvShows, isLoading: tvLoading } =
-    usePerPgaeTvShowQuery(1);
+  const { data: perPageTvShows, isLoading: tvLoading } = usePerPgaeTvShowQuery(1);
 
   return (
     <div className="bg-[#A8A8A812] px-8 py-4 lg:px-3 lg:py-3 mt-8 lg:mt-14 pb-16">

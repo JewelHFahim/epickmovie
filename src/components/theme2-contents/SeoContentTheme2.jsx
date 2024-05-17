@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 const SeoContentTheme2 = () => {
   return (
     <div className="font-inter">
@@ -25,8 +27,7 @@ const SeoContentTheme2 = () => {
 
         <p className="text-slate-300 text-3xl lg:text-base mt-2">
           There are many sites on the internet where you can watch Hollywood
-          Movies in Hindi, among them the famous sites areEpickMovies and
-          MLCBD.FUN.
+          Movies in Hindi, among them the famous sites are <Link to="/" className="underline text-orange-500"> EpickMovies</Link> and <Link to="https://mlcbd.fun/" target="_blank" className="underline text-orange-500"> MLCBD.FUN</Link>.
         </p>
       </div>
 
@@ -38,8 +39,8 @@ const SeoContentTheme2 = () => {
 
         <p className="text-slate-300 text-3xl lg:text-base mt-2">
           There are so many Movies download sites but they provide so many ads
-          with download links. ButEpickMoviesdoes not provide any ads with
-          download links. SoEpickMoviesis the best website to download the
+          with download links. But <Link to="/" className="underline text-orange-500"> EpickMovies</Link> does not provide any ads with
+          download links. So <Link to="/" className="underline text-orange-500"> EpickMovies</Link> is the best website to download the
           latest Movies for free.
         </p>
       </div>

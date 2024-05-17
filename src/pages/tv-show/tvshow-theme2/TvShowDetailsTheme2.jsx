@@ -40,7 +40,7 @@ const TvShowDetailsTheme2 = () => {
       />
 
       <div className="bg-[#A8A8A812] py-5 px-7">
-        <h2 className="font-jost text-[36px] lg:text-[26px] text-center lg:text-left font-bold text-[#10FFE3]">
+        <h2 className="font-jost text-[36px] lg:text-[26px] text-center lg:text-left font-bold text-[#1FCD0F]">
           {details?.post_title}
         </h2>
 

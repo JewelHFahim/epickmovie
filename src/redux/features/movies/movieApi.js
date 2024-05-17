@@ -2,7 +2,6 @@ import apiSlice from "../api/apiSlice";
 
 const movieApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
-
     // =================>>PER PAGE BENGALI MOVIE <<========================
     perPageBengaliMovieList: builder.query({
       query: (page) => `/get-bengali-post?page=${page}`,
@@ -15,9 +14,27 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
+    // =================>> HINDI MOVIE LIST THEME-2 <<=========================
+    hindiMovieListTHeme2: builder.query({
+      query: (page) => `/sp-terms/india/60?page=${page}`,
+      providesTags: ["EpicMovies"],
+    }),
+
     // =============>> PER PAGE BANGLA MOVIE THEME-1 <<====================
     perPageBanglaMovieListTheme1: builder.query({
       query: (page) => `/sp-terms/bangla?page=${page}`,
+      providesTags: ["EpicMovies"],
+    }),
+
+     // =============>> PER PAGE BANGLA MOVIE THEME-2 <<====================
+     banglaMovieListTheme2: builder.query({
+      query: (page) => `/sp-terms/bangla/60?page=${page}`,
+      providesTags: ["EpicMovies"],
+    }),
+
+    // =============>> MOVIE LIST THEME-2 <<====================
+    perPageMovieListTheme2: builder.query({
+      query: (page) => `/movie-posts/60?page=${page}`,
       providesTags: ["EpicMovies"],
     }),
 
@@ -27,6 +44,11 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
+    // =================>> ENGLISH MOVIE LIST THEME 2 <<========================
+    englishMovieListTheme2: builder.query({
+      query: (page) => `/sp-terms/united-states-of-america/60?page=${page}`,
+      providesTags: ["EpicMovies"],
+    }),
 
     // ======================>> SINGLE MOVIE DETAILS <<====================
     movieDetails: builder.query({
@@ -90,13 +112,17 @@ export const {
   useMovieDetailsQuery,
   usePerPgaeMovieQuery,
   useFeaturedPostsQuery,
+  useUpCommingPostsQuery,
   useCountryListClientQuery,
   usePrintQualityClientQuery,
   usePixelQualityClientQuery,
-  usePerPageBengaliMovieListQuery,
+  useHindiMovieListTHeme2Query,
   usePerPageHindiMovieListQuery,
-  usePerPageBanglaMovieListTheme1Query,
+  useBanglaMovieListTheme2Query,
+  usePerPageMovieListTheme2Query,
+  useEnglishMovieListTheme2Query,
   usePerPageEnglishMovieListQuery,
-  useUpCommingPostsQuery,
+  usePerPageBengaliMovieListQuery,
+  usePerPageBanglaMovieListTheme1Query,
 } = movieApi;
 export default movieApi;
