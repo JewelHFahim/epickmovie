@@ -8,9 +8,9 @@ const Theme2Card = ({ isLoading, dataList, className }) => {
       {isLoading ? (
         <LazyLoadingTheme2 length={dataList?.data?.data?.length} />
       ) : (
-        <div className={`flex flex-col gap-y-3 lg:gap-y-1 font-jost ${className}`}>
+        <div className={`flex flex-col gap-y-3 lg:gap-y-1.5 font-jost ${className}`}>
           {dataList?.data?.data?.map((item, i) => (
-            <MovieCardTheme2 key={i} item={item} className={className} i={i}/>
+            <MovieCardTheme2 key={i} item={item} className={className}/>
           ))}
         </div>
       

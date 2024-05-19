@@ -45,92 +45,20 @@ const MovieDetailsTheme2 = () => {
         </h2>
 
         <div className="mt-5 flex flex-col lg:flex-row gap-y-10 lg:gap-x-24">
-          <div className="w-[80%] lg:w-[503px] mx-auto lg:mx-0">
+          <div className="w-[70%] lg:w-[450px] mx-auto lg:mx-0">
             {detaislLoading ? (
-              <div className="w-full h-[691px]  bg-slate-600 animate-pulse rounded-[15px]" />
+              <div className="w-full h-[800px] lg:h-[600px]  bg-slate-600 animate-pulse rounded-[15px]" />
             ) : (
               <img
                 src={details?.poster_image_url}
                 alt=""
-                className="w-full lg:h-[691px] rounded-[15px]"
+                className="w-full object-cover lg:h-[600px] rounded-[15px]"
               />
             )}
-
-            <h2 className="text-[#10FFE3] text-[36px] lg:text-[26px] font-jost font-bold text-center mt-5">
-              Movie Details
-            </h2>
-
-            <hr className="border-[#009987] border-[1px] mb-4" />
-
-            <div className="text-[30px] lg:text-[24px] lg:leading-[32px] text-white font-jost font-[700]">
-              <p>
-                Genre:
-                <span>
-                  {details?.additional_data?.genres?.map((item, i) => (
-                    <Link
-                      to=""
-                      key={i}
-                      className="font-normal text-yellow-600 ml-2"
-                    >
-                      {item?.term?.name},
-                    </Link>
-                  ))}
-                </span>
-              </p>
-
-              <p>
-                Director:
-                <span>
-                  {details?.additional_data?.dtdirector?.map((item, i) => (
-                    <Link
-                      to=""
-                      key={i}
-                      className="font-normal text-yellow-600 ml-2"
-                    >
-                      {item?.term?.name},
-                    </Link>
-                  ))}
-                </span>
-              </p>
-
-              <p>
-                Actors:
-                <span>
-                  {details?.additional_data?.dtcast?.map((item, i) => (
-                    <Link
-                      to=""
-                      key={i}
-                      className="font-normal text-yellow-600 ml-2"
-                    >
-                      {item?.term?.name},
-                    </Link>
-                  ))}
-                </span>
-              </p>
-
-              <p>
-                Country:
-                <span className="font-normal text-yellow-600 ml-2">
-                  {details?.country ? (
-                    details?.country
-                  ) : (
-                    <span className="text-slate-400">N/A</span>
-                  )}
-                </span>
-              </p>
-
-              <p>
-                Runtime:
-                <span className="font-normal text-yellow-600 ml-2">
-                  {details?.runtime} min.
-                </span>
-              </p>
-            </div>
           </div>
 
           {/* Related Post */}
           <div className="hidden lg:flex flex-col lg:w-[450px] mx-auto lg:mx-0">
-
             <h2 className="text-[#10FFE3] text-[36px] lg:text-[26px] font-jost font-bold text-center">
               Related Movies
             </h2>
@@ -152,10 +80,83 @@ const MovieDetailsTheme2 = () => {
                 </div>
               )}
             </div>
-
           </div>
-
         </div>
+
+        {/* =======> MOVIE DETAILS <========*/}
+
+        <>
+          <h2 className="text-[#10FFE3] text-[36px] lg:text-[26px] font-jost font-bold text-center mt-5">
+            Movie Details
+          </h2>
+
+          <hr className="border-[#009987] border-[1px] mb-4" />
+
+          <div className="text-[30px] lg:text-[24px] lg:leading-[32px] text-white font-jost font-[700]">
+            <p>
+              Genre:
+              <span>
+                {details?.additional_data?.genres?.map((item, i) => (
+                  <Link
+                    to=""
+                    key={i}
+                    className="font-normal text-yellow-600 ml-2"
+                  >
+                    {item?.term?.name},
+                  </Link>
+                ))}
+              </span>
+            </p>
+
+            <p>
+              Director:
+              <span>
+                {details?.additional_data?.dtdirector?.map((item, i) => (
+                  <Link
+                    to=""
+                    key={i}
+                    className="font-normal text-yellow-600 ml-2"
+                  >
+                    {item?.term?.name},
+                  </Link>
+                ))}
+              </span>
+            </p>
+
+            <p>
+              Actors:
+              <span>
+                {details?.additional_data?.dtcast?.map((item, i) => (
+                  <Link
+                    to=""
+                    key={i}
+                    className="font-normal text-yellow-600 ml-2"
+                  >
+                    {item?.term?.name},
+                  </Link>
+                ))}
+              </span>
+            </p>
+
+            <p>
+              Country:
+              <span className="font-normal text-yellow-600 ml-2">
+                {details?.country ? (
+                  details?.country
+                ) : (
+                  <span className="text-slate-400">N/A</span>
+                )}
+              </span>
+            </p>
+
+            <p>
+              Runtime:
+              <span className="font-normal text-yellow-600 ml-2">
+                {details?.runtime} min.
+              </span>
+            </p>
+          </div>
+        </>
 
         {/* =======> DOWNLOAD SECTION <========*/}
         <div className="mt-16">
@@ -168,28 +169,27 @@ const MovieDetailsTheme2 = () => {
 
         {/* Related Post */}
         <div className=" lg:hidden mt-20 lg:w-[450px] mx-auto lg:mx-0">
-            <h2 className="text-red-600 lg:text-[#10FFE3] text-[36px] lg:text-[26px] font-jost font-bold text-center">
-              Related Movies
-            </h2>
-            <hr className="border-[#009987] border-[1px] mb-4" />
+          <h2 className="text-red-600 lg:text-[#10FFE3] text-[36px] lg:text-[26px] font-jost font-bold text-center">
+            Related Movies
+          </h2>
+          <hr className="border-[#009987] border-[1px] mb-4" />
 
-            <div>
-              {suggessionsLoading ? (
-                <LazyLoadingTheme2 length={suggessions?.data?.data?.length} />
-              ) : (
-                <div className="flex flex-col gap-y-2 font-jost">
-                  {suggessions?.data?.map((item, i) => (
-                    <MovieCardTheme2
-                      key={i}
-                      item={item}
-                      className=" text-[#10FFE3] "
-                    />
-                  ))}
-                </div>
-              )}
-            </div>
-
+          <div>
+            {suggessionsLoading ? (
+              <LazyLoadingTheme2 length={suggessions?.data?.data?.length} />
+            ) : (
+              <div className="flex flex-col gap-y-2 font-jost">
+                {suggessions?.data?.map((item, i) => (
+                  <MovieCardTheme2
+                    key={i}
+                    item={item}
+                    className=" text-[#10FFE3] "
+                  />
+                ))}
+              </div>
+            )}
           </div>
+        </div>
 
         <hr className="mt-5 mb-2" />
         {/* ==================== SEO-CONTENT ===================== */}
@@ -198,7 +198,6 @@ const MovieDetailsTheme2 = () => {
         {/* ===========> TAG LIST <============*/}
         <TagsList details={details} title="Movie" className="pl-0 mt-8" />
       </div>
-
     </div>
   );
 };

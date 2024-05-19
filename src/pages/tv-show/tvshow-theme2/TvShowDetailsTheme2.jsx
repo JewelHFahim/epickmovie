@@ -45,87 +45,16 @@ const TvShowDetailsTheme2 = () => {
         </h2>
 
         <div className="mt-5 flex flex-col lg:flex-row gap-y-10 lg:gap-x-24">
-          <div className="w-[80%] lg:w-[503px] mx-auto lg:mx-0">
+          <div className="w-[70%] lg:w-[450px] mx-auto lg:mx-0">
             {detaislLoading ? (
-              <div className="w-full h-[691px] bg-slate-600 animate-pulse rounded-[15px]" />
+              <div className="w-full h-[600px] bg-slate-600 animate-pulse rounded-[15px]" />
             ) : (
               <img
                 src={details?.poster_image_url}
                 alt=""
-                className="w-full lg:h-[691px] rounded-[15px]"
+                className="w-full lg:h-[600px] object-cover rounded-[15px]"
               />
             )}
-
-            <h2 className="text-[#10FFE3] text-[36px] lg:text-[26px] font-jost font-bold text-center mt-5">
-              Movie Details
-            </h2>
-
-            <hr className="border-[#009987] border-[1px] mb-4" />
-
-            <div className="text-[30px] lg:text-[24px] leading-[32px] text-white font-jost font-[700]">
-              <p>
-                Genre:
-                <span>
-                  {details?.additional_data?.genres?.map((item, i) => (
-                    <Link
-                      to=""
-                      key={i}
-                      className="font-normal text-yellow-600 ml-2"
-                    >
-                      {item?.term?.name},
-                    </Link>
-                  ))}
-                </span>
-              </p>
-
-              <p>
-                Director:
-                <span>
-                  {details?.additional_data?.dtdirector?.map((item, i) => (
-                    <Link
-                      to=""
-                      key={i}
-                      className="font-normal text-yellow-600 ml-2"
-                    >
-                      {item?.term?.name},
-                    </Link>
-                  ))}
-                </span>
-              </p>
-
-              <p>
-                Actors:
-                <span>
-                  {details?.additional_data?.dtcast?.map((item, i) => (
-                    <Link
-                      to=""
-                      key={i}
-                      className="font-normal text-yellow-600 ml-2"
-                    >
-                      {item?.term?.name},
-                    </Link>
-                  ))}
-                </span>
-              </p>
-
-              <p>
-                Country:
-                <span className="font-normal text-yellow-600 ml-2">
-                  {details?.country ? (
-                    details?.country
-                  ) : (
-                    <span className="text-slate-400">N/A</span>
-                  )}
-                </span>
-              </p>
-
-              <p>
-                Runtime:
-                <span className="font-normal text-yellow-600 ml-2">
-                  {details?.runtime} min.
-                </span>
-              </p>
-            </div>
           </div>
 
           {/* Related Post */}
@@ -152,6 +81,80 @@ const TvShowDetailsTheme2 = () => {
             </div>
           </div>
         </div>
+        {/* =======> MOVIE DETAILS <========*/}
+
+        <>
+          <h2 className="text-[#10FFE3] text-[36px] lg:text-[26px] font-jost font-bold text-center mt-5">
+            Movie Details
+          </h2>
+
+          <hr className="border-[#009987] border-[1px] mb-4" />
+
+          <div className="text-[30px] lg:text-[24px] leading-[32px] text-white font-jost font-[700]">
+            <p>
+              Genre:
+              <span>
+                {details?.additional_data?.genres?.map((item, i) => (
+                  <Link
+                    to=""
+                    key={i}
+                    className="font-normal text-yellow-600 ml-2"
+                  >
+                    {item?.term?.name},
+                  </Link>
+                ))}
+              </span>
+            </p>
+
+            <p>
+              Director:
+              <span>
+                {details?.additional_data?.dtdirector?.map((item, i) => (
+                  <Link
+                    to=""
+                    key={i}
+                    className="font-normal text-yellow-600 ml-2"
+                  >
+                    {item?.term?.name},
+                  </Link>
+                ))}
+              </span>
+            </p>
+
+            <p>
+              Actors:
+              <span>
+                {details?.additional_data?.dtcast?.map((item, i) => (
+                  <Link
+                    to=""
+                    key={i}
+                    className="font-normal text-yellow-600 ml-2"
+                  >
+                    {item?.term?.name},
+                  </Link>
+                ))}
+              </span>
+            </p>
+
+            <p>
+              Country:
+              <span className="font-normal text-yellow-600 ml-2">
+                {details?.country ? (
+                  details?.country
+                ) : (
+                  <span className="text-slate-400">N/A</span>
+                )}
+              </span>
+            </p>
+
+            <p>
+              Runtime:
+              <span className="font-normal text-yellow-600 ml-2">
+                {details?.runtime} min.
+              </span>
+            </p>
+          </div>
+        </>
 
         {/* =======> DOWNLOAD SECTION <========*/}
         <div className="mt-16">

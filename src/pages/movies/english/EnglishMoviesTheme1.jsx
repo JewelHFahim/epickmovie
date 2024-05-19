@@ -9,10 +9,8 @@ import PaginationTheme1 from "../../../utils/common-pagination/pagination-theme1
 const EnglishMoviesTheme1 = () => {
   const location = useLocation();
   const currentRoute = location.pathname;
-  const currentP =
-    Number(currentRoute?.slice(14)) === 0 ? 1 : Number(currentRoute?.slice(14));
-  const { data: perPageEnglishMovies, isLoading } =
-    usePerPageEnglishMovieListQuery(currentP);
+  const currentP = Number(currentRoute?.slice(14)) === 0 ? 1 : Number(currentRoute?.slice(14));
+  const { data: perPageEnglishMovies, isLoading } = usePerPageEnglishMovieListQuery(currentP);
 
   return (
     <div className="px-10 lg:px-0">

@@ -44,8 +44,7 @@ const FilterListTheme1 = () => {
     ? 1
     : getPageNumberFromRoute(currentRoute);
 
-  const { data: filteredResults, isLoading } =
-    useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
+  const { data: filteredResults, isLoading } = useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
 
   return (
     <section className="min-h-screen">

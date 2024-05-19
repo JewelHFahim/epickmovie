@@ -150,7 +150,7 @@ const MobileMenu = () => {
   return (
     <div className="lg:hidden">
       <nav
-        className={`w-full py-2 relative z-20 bg-[#464646]  md:static md:text-sm md:border-none
+        className={`w-full py-8 relative z-20 bg-[#464646]  md:static md:text-sm md:border-none
         ${state ? "shadow-lg rounded-b-xl md:shadow-none" : ""}`}
       >
         <div className="w-full flex flex-col gap-y-3 items-center gap-x-14  mx-auto md:flex md:px-8 bg-[#464646]">
@@ -158,20 +158,20 @@ const MobileMenu = () => {
             <div  className="w-full py-2">
               <div className="w-full flex justify-between items-center text-white">
                 <Link to="/">
-                  <img src={siteLogo} alt="" className="w-[280px]" />
+                  <img src={siteLogo} alt="" className="w-[280px] h-[65px]" />
                 </Link>
 
                 {/* Serach Field */}
                 <form
                   onSubmit={handleSubmit}
-                  className="w-[350px] rounded-md flex items-center bg-[#444444] border"
+                  className="w-[470px] rounded-md flex items-center bg-[#444444] border pr-2"
                 >
                   <input
                     type="text"
                     value={searchTermState}
                     onChange={handleInputChange}
                     placeholder="Search Movie/TV Shows"
-                    className="w-[90%] focus:outline-none bg-transparent px-4 py-2.5 text-slate-200 text-xl font-semibold"
+                    className="w-[90%] focus:outline-none bg-transparent px-4 py-5 text-slate-200 text-2xl font-semibold"
                   />
                   <IoSearch className="w-[10%] text-3xl text-[#d73ee3]" />
                 </form>
@@ -204,9 +204,9 @@ const MobileMenu = () => {
 
                 <button onClick={() => setState(!state)}>
                   {state ? (
-                    <IoClose className="text-[50px]" />
+                    <IoClose className="text-[65px]" />
                   ) : (
-                    <GiHamburgerMenu className="text-[50px]" />
+                    <GiHamburgerMenu className="text-[65px]" />
                   )}
                 </button>
               </div>

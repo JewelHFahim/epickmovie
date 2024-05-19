@@ -1,4 +1,7 @@
-import { useFilteredResultsTheme2Query } from "../../../../redux/features/search/searchApi";
+import {
+  useFilteredResultsByPaginationQuery,
+  useFilteredResultsTheme2Query,
+} from "../../../../redux/features/search/searchApi";
 import { useLocation } from "react-router-dom";
 import { Helmet } from "react-helmet";
 import { useSiteConfig } from "../../../../utils/configHooks/ConfigHooks";
@@ -43,7 +46,10 @@ const FilterListTheme2 = () => {
     ? 1
     : getPageNumberFromRoute(currentRoute);
 
-  const { data: filteredResults, isLoading } = useFilteredResultsTheme2Query({ filteredTerm, currentPage });
+  const { data: largeDevFilteredResults, largeDevLoading } =
+    useFilteredResultsTheme2Query({ filteredTerm, currentPage });
+  const { data: filteredResults, isLoading } =
+    useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
 
   return (
     <section className="min-h-screen bg-[#A8A8A812] px-8 py-4 lg:px-3 lg:py-3 mt-8 lg:mt-14">
@@ -72,18 +78,39 @@ const FilterListTheme2 = () => {
         </h1>
       )}
 
-      <Theme2Card
-        isLoading={isLoading}
-        dataList={filteredResults}
-        className="text-[#009987]"
-      />
+      <div className="hidden lg:block">
+        <Theme2Card
+          isLoading={largeDevLoading}
+          dataList={largeDevFilteredResults}
+          className="text-[#009987]"
+        />
+      </div>
 
-      <PaginationTheme1
-        currentPage={currentPage}
-        perPgaeMovie={filteredResults}
-        filteredTerm={filteredTerm}
-        btnColor="bg-[#009987]"
-      />
+      <div className="lg:hidden">
+        <Theme2Card
+          isLoading={isLoading}
+          dataList={filteredResults}
+          className="text-[#009987]"
+        />
+      </div>
+
+      <div className="hidden lg:block">
+        <PaginationTheme1
+          currentPage={currentPage}
+          perPgaeMovie={largeDevFilteredResults}
+          filteredTerm={filteredTerm}
+          btnColor="bg-[#009987]"
+        />
+      </div>
+
+      <div className="lg:hidden">
+        <PaginationTheme1
+          currentPage={currentPage}
+          perPgaeMovie={filteredResults}
+          filteredTerm={filteredTerm}
+          btnColor="bg-[#009987]"
+        />
+      </div>
     </section>
   );
 };
