@@ -11,6 +11,7 @@ const HomeTheme2 = () => {
 
   return (
     <div className="bg-[#A8A8A812] px-8 py-4 lg:px-3 lg:py-3 mt-8 lg:mt-14 pb-16">
+      
       {/* ==================== MOVIES ======================== */}
       <div className="">
         <SectionTitleTheme2

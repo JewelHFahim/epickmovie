@@ -1,20 +1,17 @@
-import { theme } from "../../config/config";
-import HomeDefault from "./HomeDefault";
 import HomeTheme1 from "./HomeTheme1";
 import HomeTheme2 from "./HomeTheme2";
+import HomeTheme3 from "./HomeTheme3";
+import HomeDefault from "./HomeDefault";
+import { theme } from "../../config/config";
 
 const Home = () => {
-  return (
-    <>
-      {theme === "theme1" ? (
-        <HomeTheme1 />
-      ) : theme === "theme2" ? (
-        <HomeTheme2 />
-      ) : (
-        <HomeDefault />
-      )}
-    </>
-  );
+  const themes = {
+    theme1: <HomeTheme1 />,
+    theme2: <HomeTheme2 />,
+    theme3: <HomeTheme3 />,
+  };
+
+  return <>{themes[theme] || <HomeDefault />}</>;
 };
 
 export default Home;
