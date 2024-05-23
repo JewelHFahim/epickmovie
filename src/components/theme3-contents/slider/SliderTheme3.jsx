@@ -48,7 +48,7 @@ const SliderTheme3 = () => {
     <div className="slider-container sliderTheme3 mb-10">
       <Slider {...settings}>
         {featuredPosts?.data?.map((item, i) => (
-          <div key={i} className="w-[380px] h-[240px] px-4">
+          <div key={i} className="w-[380px] h-[240px] px-1">
             {featureLoading ? (
               <div className=" w-full h-[240px] bg-slate-700 animate-pulse"></div>
             ) : (

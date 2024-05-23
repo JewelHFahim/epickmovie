@@ -1,0 +1,15 @@
+.cardContainer:hover .imgContainer img {
+  scale: 1.05;
+  transition-duration: 0.3s;
+  transform-origin: center center;
+}
+
+.cardContainer .playBtn {
+  display: none;
+}
+
+.cardContainer:hover .playBtn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

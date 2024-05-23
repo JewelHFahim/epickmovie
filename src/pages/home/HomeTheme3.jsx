@@ -1,52 +1,29 @@
-import CardTheme3 from "../../components/theme3-contents/CardTheme3";
-import { formatDate } from "../../components/theme3-contents/FormateDateTheme3";
+import CardTheme3 from "../../components/theme3-contents/card-theme3/CardTheme3";
+import FeaturedSliderTheme3 from "../../components/theme3-contents/fetured-slider/FeturedSliderTheme3";
 import SectionTitleTheme3 from "../../components/theme3-contents/SectionTitleTheme3";
 import SliderTheme3 from "../../components/theme3-contents/slider/SliderTheme3";
-import {
-  useFeaturedPostsQuery,
-  usePerPgaeMovieQuery,
-} from "../../redux/features/movies/movieApi";
-import { usePerPgaeTvShowQuery } from "../../redux/features/tv-show/tvShowApi";
+import { useMovieListTheme3Query } from "../../redux/features/movies/movieApi";
+import { useTvShowTheme3Query } from "../../redux/features/tv-show/tvShowApi";
 
 const HomeTheme3 = () => {
-  const { data: featuredPosts, isLoading: featureLoading } =
-    useFeaturedPostsQuery();
-
-  const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
-  const { data: perPageTvShows, isLoading: tvLoading } =
-    usePerPgaeTvShowQuery(1);
+  const { data: movieList, isLoading: movieLoading } = useMovieListTheme3Query({
+    quantity: 25,
+    page: 1,
+  });
+  const { data: tvShowsList, isLoading: tvLoading } = useTvShowTheme3Query({
+    quantity: 25,
+    page: 1,
+  });
 
   return (
-    <div className="border border-red-500 flex items-center">
-      <div className="border py-5 w-[840px]">
+    <div className=" border-red-500 flex items-center">
+      <div className=" py-5 w-[840px]">
         <SliderTheme3 />
 
         {/* ==================>> FEATURED <<==================== */}
         <>
           <SectionTitleTheme3 sideBtn={false}>Featured</SectionTitleTheme3>
-
-          <div className="flex justify-between">
-            {featuredPosts?.data?.slice(0, 5)?.map((item, i) => (
-              <div key={i} className="w-[160px] h-[290px] p-2">
-                <img
-                  src={item?.poster_image_url}
-                  alt=""
-                  className="w-full h-[200px] object-cover"
-                />
-
-                <div className="mt-1">
-                  <p className="text-[12px] text-[#D8D8D8] font-bold">
-                    {item?.post_title?.length >= 60
-                      ? `${item?.post_title.slice(0, 60)} ...`
-                      : item?.post_title}
-                  </p>
-                  <p className="text-[#D8D8D8] text-[9px] mt-1">
-                    {formatDate(item?.updated_at)}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
+          <FeaturedSliderTheme3 />
         </>
 
         <hr className="border-1 border-[#676666] mt-5" />
@@ -59,8 +36,43 @@ const HomeTheme3 = () => {
 
         {/* ================>> LATEST TV SHOWS <<================= */}
         <div className="mt-10">
-          <SectionTitleTheme3 sideBtn={true}> Latest Web-Series </SectionTitleTheme3>
-          <CardTheme3 datas={perPageTvShows} isLoading={tvLoading} />
+          <SectionTitleTheme3 sideBtn={true}>
+            Latest Web-Series
+          </SectionTitleTheme3>
+          <CardTheme3 datas={tvShowsList} isLoading={tvLoading} />
+        </div>
+
+        {/* ================>> LATEST BLOGS <<================= */}
+        <div className="mt-10">
+          <SectionTitleTheme3 sideBtn={true}>Latest Blogs</SectionTitleTheme3>
+
+          <div className="mt-10 grid grid-cols gap-y-5">
+            {Array.from({ length: 5 }).map((item, i) => (
+              <div
+                key={i}
+                className="flex items-center gap-x-4 border-b p-2 pb-5"
+              >
+                <div className=" border">
+                  <img
+                    src="https://cdn.paperpile.com/guides/img/credible-blog-illustr-1400x1400.png"
+                    alt=""
+                    className="w-[67px] h-[80px] object-cover"
+                  />
+                </div>
+                <div className="text-white w-[90%]">
+                  <h2 className="text-[18px] font-bold">
+                    How to Create Detailed Buyer Personas for Your Business
+                    [+Free Persona Template]
+                  </h2>
+                  <p className="mt-1">
+                    As marketers, we know that marketing according to data
+                    points alone isn’t enough to get meaningful engagement for
+                    your business—that’s the job of a buyer persona
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
 

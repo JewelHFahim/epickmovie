@@ -1,5 +1,5 @@
 import { collectSearchItem } from "../../../redux/features/search/searchSlice";
-import { useGenreListQuery } from "../../../redux/features/movies/movieApi";
+import { useGenreListQuery, usePixelQualityClientQuery, usePrintQualityClientQuery } from "../../../redux/features/movies/movieApi";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 import { Link, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
@@ -13,11 +13,22 @@ const NavbarTheme3 = () => {
 
   const { siteLogo, telegramLink } = useSiteConfig();
   const { data: genreList } = useGenreListQuery();
+
   const [searchTermState, setSearchTerm] = useState("");
   const [lastSearchTime, setLastSearchTime] = useState(null);
   const [showPopup, setShowPopup] = useState(false);
   const [popupNumbers, setPopupNumbers] = useState([]);
   const [userAnswer, setUserAnswer] = useState("");
+
+  const { data: pixelQualityList } = usePixelQualityClientQuery();
+  const { data: printQualityList } = usePrintQualityClientQuery();
+
+  const pixel = pixelQualityList?.data;
+  const print = printQualityList?.data;
+  const combinedQuality = pixel?.concat(print);
+
+  console.log(combinedQuality)
+
 
   const menus = [
     {
@@ -40,7 +51,7 @@ const NavbarTheme3 = () => {
       title: "Quality",
       url: "#",
       isDrapdown: true,
-      subMenu: genreList?.data,
+      subMenu: combinedQuality,
       newTab: false,
     },
 
@@ -110,8 +121,9 @@ const NavbarTheme3 = () => {
                   {item.title}
                 </Link>
 
+
                 {item?.isDrapdown && (
-                  <ul className="z-[999] absolute top-[35px] left-0 bg-[#323131] flex flex-wrap flex-col gap-1 h-[450px] p-2 shadow-md text-[16px] font-[500] w-[500px] submenu">
+                  <ul className="z-[999] absolute top-[30px] left-0 bg-[#323131] flex flex-wrap flex-col gap-1 h-[450px] p-2 shadow-md text-[16px] font-[500] w-[500px] submenu">
                     {item?.subMenu?.map((sMenu, i) => (
                       <Link
                         to={`/terms/${sMenu?.slug}`}
@@ -123,15 +135,11 @@ const NavbarTheme3 = () => {
                     ))}
                   </ul>
                 )}
+
+
               </li>
             ))}
           </ul>
-
-          {/* <Link to="/tv">
-            <button className="border text-[20px] px-4 text-yellow-500 border-yellow-500  hover:bg-yellow-500 hover:text-black transition-all ease-in-out">
-              <span className="animate-pulse"> Live Tv</span>
-            </button>
-          </Link> */}
         </div>
 
         {/* Serach Field */}
