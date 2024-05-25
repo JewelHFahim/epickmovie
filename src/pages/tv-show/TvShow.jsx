@@ -2,19 +2,17 @@ import { theme } from "../../config/config";
 import TvShowTheme2 from "./tvshow-theme2/TvShowTheme2";
 import TvShowsTheme1 from "./tvshow-theme1/TvShowsTheme1";
 import TvShowsDefault from "./tvshows-default/TvShowsDefault";
+import TvShowTheme3 from "./tvshow-theme3/TvShowTheme3";
 
 const TvShow = () => {
-  return (
-    <div>
-      {theme === "theme1" ? (
-        <TvShowsTheme1 />
-      ) : theme === "theme2" ? (
-        <TvShowTheme2 />
-      ) : (
-        <TvShowsDefault />
-      )}
-    </div>
-  );
+  const tvshows = {
+    theme1: <TvShowsTheme1 />,
+    theme2: <TvShowTheme2 />,
+    theme3: <TvShowTheme3 />,
+    default: <TvShowsDefault />,
+  };
+
+  return <>{tvshows[theme] || tvshows.default}</>;
 };
 
 export default TvShow;

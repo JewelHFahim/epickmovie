@@ -16,8 +16,7 @@ const MoviesTheme2 = () => {
   const { data: perPgaeMovie, isLoading: movieLoading } =
     usePerPgaeMovieQuery(currentP);
 
-  const { data: largeMovieList, isLoading: largeMovieLoading } =
-    usePerPageMovieListTheme2Query(currentP);
+  const { data: largeMovieList, isLoading: largeMovieLoading } = usePerPageMovieListTheme2Query(currentP);
 
   return (
     <div className="bg-[#A8A8A812] px-8 py-4 lg:px-3 lg:py-3 mt-8 lg:mt-14">

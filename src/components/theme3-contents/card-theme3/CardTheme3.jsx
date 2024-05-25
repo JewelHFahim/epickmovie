@@ -8,24 +8,25 @@ const CardTheme3 = ({ datas, isLoading }) => {
   console.log(datas);
 
   return (
-    <div className="mt-5 grid grid-cols-5 gap-y-3 gap-x-1">
+    <div className="mt-5 flex flex-wrap justify-between gap-2">
       {isLoading ? (
         <>
           {Array.from({ length: 25 }).map((item, i) => (
             <div
               key={i}
-              className="w-full min-h-[240px] h-full flex flex-col justify-between"
+              className="w-[160px] h-[280px] flex flex-col justify-between"
             >
-              <div className="w-full h-[200px] bg-slate-700 animate-pulse"></div>
+              <div className="w-full h-[85%] bg-slate-700 animate-pulse"></div>
 
-              <div className="w-full h-[35px] bg-slate-700 animate-pulse"></div>
+              <div className="w-full h-[12%] bg-slate-700 animate-pulse"></div>
             </div>
           ))}
         </>
       ) : (
         <>
           {datas?.data?.data?.map((item, i) => (
-            <div key={i} className="w-full  p-1.5 cardContainer cursor-pointer">
+            <div key={i} className="w-[160px] h-[280px]  p-1.5 cardContainer cursor-pointer borde">
+
               <div className="w-full h-[200px] relative imgContainer overflow-hidden">
                 <img
                   src={item?.poster_image_url}

@@ -8,22 +8,16 @@ const SectionTitleTheme3 = ({ children, sideBtn }) => {
         {children}
       </p>
 
-     { sideBtn === true ?
-     
-
-
-      <button className="bg-red-600 text-white text-[10px] font-bold w-[50px] rounded-sm h-[20px] hover:bg-red-500 transition-all ease-in-out">
-        See All
-      </button>
-
-      :
-
-<div className="flex items-center text-[#A4A4A4]">
-<BiSolidLeftArrow />
-<BiSolidRightArrow />
-</div>
-      }
-
+      {sideBtn === true ? (
+        <button className="bg-red-600 text-white text-[10px] font-bold w-[50px] rounded-sm h-[20px] hover:bg-red-500 transition-all ease-in-out">
+          See All
+        </button>
+      ) : (
+        <div className="flex items-center text-[#A4A4A4]">
+          <BiSolidLeftArrow />
+          <BiSolidRightArrow />
+        </div>
+      )}
     </div>
   );
 };

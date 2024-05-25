@@ -46,30 +46,46 @@ const FeaturedSlider3 = () => {
   };
 
   return (
-    <div className="featuredSlider3 mt-4">
-      <Slider {...settings}>
-        {featuredPosts?.data?.slice(0, 5)?.map((item, i) => (
-          <div key={i} className="w-[160px] h-[290px] p-2">
-            <img
-              src={item?.poster_image_url}
-              alt=""
-              className="w-full h-[200px] object-cover"
-            />
-
-            <div className="mt-1">
-              <p className="text-[12px] text-[#D8D8D8] font-bold">
-                {item?.post_title?.length >= 60
-                  ? `${item?.post_title.slice(0, 60)} ...`
-                  : item?.post_title}
-              </p>
-              <p className="text-[#D8D8D8] text-[9px] mt-1">
-                {formatDate(item?.updated_at)}
-              </p>
+    <>
+      {featureLoading ? (
+        <div className="flex justify-between mt-5">
+          {Array.from({ length: 5 }).map((item, i) => (
+            <div
+              key={i}
+              className="w-[160px] h-[280px] flex flex-col justify-between"
+            >
+              <div className="w-full h-[220px] bg-slate-600 animate-pulse"></div>
+              <div className="w-full h-[40px] bg-slate-600 animate-pulse"></div>
             </div>
-          </div>
-        ))}
-      </Slider>
-    </div>
+          ))}
+        </div>
+      ) : (
+        <div className="featuredSlider3 mt-4">
+          <Slider {...settings}>
+            {featuredPosts?.data?.slice(0, 5)?.map((item, i) => (
+              <div key={i} className="w-[160px] h-[290px] p-2">
+                <img
+                  src={item?.poster_image_url}
+                  alt=""
+                  className="w-full h-[200px] object-cover"
+                />
+
+                <div className="mt-1">
+                  <p className="text-[12px] text-[#D8D8D8] font-bold">
+                    {item?.post_title?.length >= 60
+                      ? `${item?.post_title.slice(0, 60)} ...`
+                      : item?.post_title}
+                  </p>
+                  <p className="text-[#D8D8D8] text-[9px] mt-1">
+                    {formatDate(item?.updated_at)}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        </div>
+      )}
+    </>
   );
 };
 

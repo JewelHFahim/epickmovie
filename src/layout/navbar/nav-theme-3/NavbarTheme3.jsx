@@ -27,9 +27,6 @@ const NavbarTheme3 = () => {
   const print = printQualityList?.data;
   const combinedQuality = pixel?.concat(print);
 
-  console.log(combinedQuality)
-
-
   const menus = [
     {
       title: "Movies",
