@@ -1,6 +1,7 @@
 import CardTheme3 from "../../components/theme3-contents/card-theme3/CardTheme3";
 import FeaturedSliderTheme3 from "../../components/theme3-contents/fetured-slider/FeturedSliderTheme3";
 import SectionTitleTheme3 from "../../components/theme3-contents/SectionTitleTheme3";
+import SideContentTheme3 from "../../components/theme3-contents/side-content/SideContentTheme3";
 import SliderTheme3 from "../../components/theme3-contents/slider/SliderTheme3";
 import { useMovieListTheme3Query } from "../../redux/features/movies/movieApi";
 import { useTvShowTheme3Query } from "../../redux/features/tv-show/tvShowApi";
@@ -16,8 +17,9 @@ const HomeTheme3 = () => {
   });
 
   return (
-    <div className=" border-red-500 flex items-center">
-      <div className=" py-5 w-[840px]">
+    <div className=" flex flex-col lg:flex-row">
+
+      <div className=" p-5 lg:w-[850px] border-r border-slate-800 pr-[8px]">
         <SliderTheme3 />
 
         {/* ==================>> FEATURED <<==================== */}
@@ -30,8 +32,24 @@ const HomeTheme3 = () => {
 
         {/* ================>> LATEST MOVIES <<================= */}
         <div className="mt-10">
-          <SectionTitleTheme3 sideBtn={true}>Latest Movies</SectionTitleTheme3>
-          <CardTheme3 datas={movieList} isLoading={movieLoading} />
+          <SectionTitleTheme3 sideBtn={true}> Latest Movies </SectionTitleTheme3>
+
+          <div className="mt-5 grid grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-2">
+            {movieLoading
+              ? Array.from({ length: 25 }).map((item, i) => (
+                  <div
+                    key={i}
+                    className="lg:w-[160px] h-[550px] lg:h-[280px] flex flex-col justify-between"
+                  >
+                    <div className="w-full h-[85%] bg-slate-700 animate-pulse"></div>
+
+                    <div className="w-full h-[12%] bg-slate-700 animate-pulse"></div>
+                  </div>
+                ))
+              : movieList?.data?.data?.map((item, i) => (
+                  <CardTheme3 key={i} item={item} />
+                ))}
+          </div>
         </div>
 
         {/* ================>> LATEST TV SHOWS <<================= */}
@@ -39,7 +57,23 @@ const HomeTheme3 = () => {
           <SectionTitleTheme3 sideBtn={true}>
             Latest Web-Series
           </SectionTitleTheme3>
-          <CardTheme3 datas={tvShowsList} isLoading={tvLoading} />
+
+          <div className="mt-5 grid grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-2">
+            {tvLoading
+              ? Array.from({ length: 25 }).map((item, i) => (
+                  <div
+                    key={i}
+                    className="lg:w-[160px] h-[550px] lg:h-[280px] flex flex-col justify-between"
+                  >
+                    <div className="w-full h-[85%] bg-slate-700 animate-pulse"></div>
+
+                    <div className="w-full h-[12%] bg-slate-700 animate-pulse"></div>
+                  </div>
+                ))
+              : tvShowsList?.data?.data?.map((item, i) => (
+                  <CardTheme3 key={i} item={item} />
+                ))}
+          </div>
         </div>
 
         {/* ================>> LATEST BLOGS <<================= */}
@@ -56,15 +90,15 @@ const HomeTheme3 = () => {
                   <img
                     src="https://cdn.paperpile.com/guides/img/credible-blog-illustr-1400x1400.png"
                     alt=""
-                    className="w-[67px] h-[80px] object-cover"
+                    className="w-[150px] h-[180px] lg:w-[67px] lg:h-[80px] object-cover"
                   />
                 </div>
                 <div className="text-white w-[90%]">
-                  <h2 className="text-[18px] font-bold">
+                  <h2 className="text-[30px] lg:text-[18px] font-bold">
                     How to Create Detailed Buyer Personas for Your Business
                     [+Free Persona Template]
                   </h2>
-                  <p className="mt-1">
+                  <p className="mt-1 text-xl lg:text-base">
                     As marketers, we know that marketing according to data
                     points alone isn’t enough to get meaningful engagement for
                     your business—that’s the job of a buyer persona
@@ -76,8 +110,8 @@ const HomeTheme3 = () => {
         </div>
       </div>
 
-      <div className="border border-blue-500 bg-green-900 w-[360px] h-full">
-        Side Content
+      <div className="lg:w-[350px] h-full p-4">
+        <SideContentTheme3 />
       </div>
     </div>
   );

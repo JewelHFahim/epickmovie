@@ -32,6 +32,12 @@ const movieApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
+     // =============>> PER PAGE BANGLA MOVIE THEME-3 <<====================
+     banglaMovieListTheme3: builder.query({
+      query: ({quantity, page}) => `/sp-terms/bangla/${quantity}?page=${page}`,
+      providesTags: ["EpicMovies"],
+    }),
+
     // =============>> MOVIE LIST THEME-2 <<====================
     perPageMovieListTheme2: builder.query({
       query: (page) => `/movie-posts/60?page=${page}`,
@@ -131,6 +137,7 @@ export const {
   usePerPageBengaliMovieListQuery,
   usePerPageBanglaMovieListTheme1Query,
 
-  useMovieListTheme3Query
+  useMovieListTheme3Query,
+  useBanglaMovieListTheme3Query
 } = movieApi;
 export default movieApi;

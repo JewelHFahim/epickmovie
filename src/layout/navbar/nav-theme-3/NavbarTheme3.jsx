@@ -1,5 +1,9 @@
 import { collectSearchItem } from "../../../redux/features/search/searchSlice";
-import { useGenreListQuery, usePixelQualityClientQuery, usePrintQualityClientQuery } from "../../../redux/features/movies/movieApi";
+import {
+  useGenreListQuery,
+  usePixelQualityClientQuery,
+  usePrintQualityClientQuery,
+} from "../../../redux/features/movies/movieApi";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 import { Link, useNavigate } from "react-router-dom";
 import { IoSearch } from "react-icons/io5";
@@ -103,12 +107,15 @@ const NavbarTheme3 = () => {
   };
 
   return (
-    <div className="hidden w-full h-[70px] bg-[#171717] lg:flex items-center shadow-md">
-      <div className="lg:w-[1200px] mx-auto flex justify-between items-center">
-
+    <div className="lg:w-[1200px] mx-auto hidden w-full h-[70px] bg-[#171717] lg:flex items-center shadow-md border-b border-gray-800">
+      <div className="w-full flex justify-between items-center">
         <div className="flex items-center gap-x-5">
           <Link to="/">
-            <img src={siteLogo} alt="site-logo" className="w-[142px] h-[41px]"/>
+            <img
+              src={siteLogo}
+              alt="site-logo"
+              className="w-[142px] h-[41px]"
+            />
           </Link>
 
           <ul className="font-josefin text-[20px] font-semibold text-white flex items-center gap-x-4 menus ">
@@ -117,7 +124,6 @@ const NavbarTheme3 = () => {
                 <Link to={item.url} target={`${item.newTab ? "_blank" : ""}`}>
                   {item.title}
                 </Link>
-
 
                 {item?.isDrapdown && (
                   <ul className="z-[999] absolute top-[30px] left-0 bg-[#323131] flex flex-wrap flex-col gap-1 h-[450px] p-2 shadow-md text-[16px] font-[500] w-[500px] submenu">
@@ -132,8 +138,6 @@ const NavbarTheme3 = () => {
                     ))}
                   </ul>
                 )}
-
-
               </li>
             ))}
           </ul>
@@ -177,7 +181,6 @@ const NavbarTheme3 = () => {
             </div>
           </div>
         )}
-
       </div>
     </div>
   );

@@ -12,11 +12,9 @@ import { useEffect } from "react";
 const MovieDetailsTheme2 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: movieDetails, isLoading: detaislLoading } =
-    useMovieDetailsQuery(id);
+  const { data: movieDetails, isLoading: detaislLoading } = useMovieDetailsQuery(id);
   const details = movieDetails?.data;
-  const { data: suggessions, isLoading: suggessionsLoading } =
-    useSuggessionMovieSeriesQuery(id);
+  const { data: suggessions, isLoading: suggessionsLoading } = useSuggessionMovieSeriesQuery(id);
 
   // Error handle, if id not found
   useEffect(() => {

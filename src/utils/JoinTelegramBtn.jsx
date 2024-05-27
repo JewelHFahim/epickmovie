@@ -6,7 +6,6 @@ const JoinTelegramBtn = () => {
 
   const {telegramLink} = useSiteConfig();
 
-
   return (
     <div className="flex justify-center mt-[50px] lg:mt-[36px]">
       <Link

@@ -9,6 +9,7 @@ import {
 } from "../../utils/configHooks/ConfigHooks";
 
 const MovieCard = ({ item }) => {
+  
   const { maskLink } = useSiteConfig();
   const { url } = useCleanedTitle(item);
   const handleRedirect = useRedirect(url, maskLink);

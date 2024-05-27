@@ -21,8 +21,8 @@ const FeaturedSlider3 = () => {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
+          slidesToShow: 3,
+          slidesToScroll: 3,
           infinite: true,
           dots: true,
         },
@@ -30,8 +30,8 @@ const FeaturedSlider3 = () => {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2,
+          slidesToScroll: 2,
           initialSlide: 1,
         },
       },
@@ -63,20 +63,20 @@ const FeaturedSlider3 = () => {
         <div className="featuredSlider3 mt-4">
           <Slider {...settings}>
             {featuredPosts?.data?.slice(0, 5)?.map((item, i) => (
-              <div key={i} className="w-[160px] h-[290px] p-2">
+              <div key={i} className="lg:w-[160px] lg:h-[290px] p-2">
                 <img
                   src={item?.poster_image_url}
                   alt=""
-                  className="w-full h-[200px] object-cover"
+                  className="w-full lg:h-[200px] object-cover"
                 />
 
                 <div className="mt-1">
-                  <p className="text-[12px] text-[#D8D8D8] font-bold">
+                  <p className="text-[28px] lg:text-[12px] text-[#D8D8D8] font-bold">
                     {item?.post_title?.length >= 60
                       ? `${item?.post_title.slice(0, 60)} ...`
                       : item?.post_title}
                   </p>
-                  <p className="text-[#D8D8D8] text-[9px] mt-1">
+                  <p className="text-[#D8D8D8] text-[20px] lg:text-[9px] mt-1">
                     {formatDate(item?.updated_at)}
                   </p>
                 </div>

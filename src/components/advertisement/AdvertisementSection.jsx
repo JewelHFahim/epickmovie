@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import joinTelegran from "../../assets/join telegram.png";
 import ads from "../../assets/ads.png";
 import CountryList from "./CountryList";

@@ -1,11 +1,9 @@
 import { useLocation } from "react-router-dom";
 import CardTheme3 from "../../../../components/theme3-contents/card-theme3/CardTheme3";
 import { useSiteConfig } from "../../../../utils/configHooks/ConfigHooks";
-import {
-  useFilteredResultsByPaginationQuery,
-  //   useFilteredResultsTheme2Query,
-} from "../../../../redux/features/search/searchApi";
+import { useFilteredResultsTheme3Query } from "../../../../redux/features/search/searchApi";
 import { Helmet } from "react-helmet";
+import PaginationTheme1 from "../../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
 
 const FilterListTheme3 = () => {
   const location = useLocation();
@@ -44,10 +42,11 @@ const FilterListTheme3 = () => {
     ? 1
     : getPageNumberFromRoute(currentRoute);
 
-  //   const { data: largeDevFilteredResults, largeDevLoading } =
-  //     useFilteredResultsTheme2Query({ filteredTerm, currentPage });
-  const { data: filteredResults, isLoading } =
-    useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
+  const { data: filteredResults, isLoading } = useFilteredResultsTheme3Query({
+    filteredTerm,
+    quantity: 42,
+    currentPage,
+  });
 
   return (
     <div className="mt-6 min-h-screen">
@@ -61,13 +60,37 @@ const FilterListTheme3 = () => {
         />
       </Helmet>
 
-      <div className="px-4 h-[53px] flex items-center justify-between bg-[#D9D9D914]">
-        <p className="text-white text-xl border-l-4 border-red-600 pl-1">
+      <div className="px-4 h-[70px] lg:h-[53px] flex items-center justify-between bg-[#D9D9D914]">
+        <p className="text-white text-[35px] lg:text-xl border-l-4 border-red-600 pl-1">
           Filtered List: {filteredTerm}
         </p>
       </div>
 
-      <CardTheme3 datas={filteredResults} isLoading={isLoading} />
+      <div className="mt-6 grid grid-cols-3 lg:grid-cols-7 gap-2">
+        {isLoading
+          ? Array.from({ length: 25 }).map((item, i) => (
+              <div
+                key={i}
+                className="lg:w-[160px] h-[550px] lg:h-[280px] flex flex-col justify-between"
+              >
+                <div className="w-full h-[85%] bg-slate-700 animate-pulse"></div>
+
+                <div className="w-full h-[12%] bg-slate-700 animate-pulse"></div>
+              </div>
+            ))
+          : filteredResults?.data?.data?.map((item, i) => (
+              <CardTheme3 key={i} item={item} />
+            ))}
+      </div>
+
+      <div className="">
+        <PaginationTheme1
+          currentPage={currentPage}
+          perPgaeMovie={filteredResults}
+          filteredTerm={filteredTerm}
+          btnColor="bg-[#009987]"
+        />
+      </div>
     </div>
   );
 };
