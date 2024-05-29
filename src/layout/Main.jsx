@@ -7,6 +7,7 @@ import FooterTheme1 from "./footers/FooterTheme1";
 import MobileMenuTheme1 from "../components/menus/MobileMenuTheme1";
 import { theme } from "../config/config";
 import NavbarTheme3 from "./navbar/nav-theme-3/navbarTheme3";
+import SideContentTheme3 from "../components/theme3-contents/side-content/SideContentTheme3";
 
 const Main = () => {
   // Define theme-based components
@@ -46,7 +47,7 @@ const Main = () => {
   const containerWidth = {
     theme1: "lg:w-[78vw] lg:min-w-[1500px]",
     theme2: "lg:w-[1200px]",
-    theme3: "lg:w-[1200px]",
+    theme3: "lg:w-[1200px] flex flex-col lg:flex-row gap-y-5 bg-black bg-opacity-[10%]",
     default: "lg:w-[61vw] lg:min-w-[1170px]",
   };
 
@@ -61,6 +62,12 @@ const Main = () => {
           } mx-auto overflow-hidden`}
         >
           <Outlet />
+
+          {theme === "theme3" && (
+            <div className="lg:w-[350px] h-full p-4 border-l border-slate-800 ">
+              <SideContentTheme3 />
+            </div>
+          )}
         </div>
       </div>
 

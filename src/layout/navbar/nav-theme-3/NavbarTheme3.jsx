@@ -118,7 +118,7 @@ const NavbarTheme3 = () => {
             />
           </Link>
 
-          <ul className="font-josefin text-[20px] font-semibold text-white flex items-center gap-x-4 menus ">
+          <ul className="font-roboto text-[18px] text-white flex items-center gap-x-5 menus ">
             {menus.map((item, i) => (
               <li key={i} className="relative">
                 <Link to={item.url} target={`${item.newTab ? "_blank" : ""}`}>

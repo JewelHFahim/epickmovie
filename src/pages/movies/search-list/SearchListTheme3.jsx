@@ -51,7 +51,8 @@ const SearchListTheme3 = () => {
   });
 
   return (
-    <section className="min-h-screen bg-[#A8A8A812]  px-8 py-4 lg:px-3 lg:py-3 mt-6">
+    <section className=" lg:m-4 lg:mt-0 p-4 lg:px-0 border-b lg:border-0 pb-10">
+
       <Helmet>
         {/* <title> {siteName} || {searchTerm} </title> */}
         <title>
@@ -67,7 +68,7 @@ const SearchListTheme3 = () => {
       {/* ===========>> Searched Results <<===========*/}
       <div className="px-4 h-[70px] lg:h-[53px] flex items-center justify-between bg-[#D9D9D914]">
         <p className="text-white text-[35px] lg:text-xl border-l-4 border-red-600 pl-1">
-        Filtered By: <span className="capitalize">{searchTerm}</span>
+          Filtered By: <span className="capitalize">{searchTerm}</span>
         </p>
       </div>
 
@@ -85,7 +86,7 @@ const SearchListTheme3 = () => {
           </h1>
         )}
 
-        <div className="mt-6 grid grid-cols-3 lg:grid-cols-7 gap-2">
+        <div className="mt-4 grid grid-cols-3 lg:grid-cols-5 gap-2">
           {isLoading
             ? Array.from({ length: 25 }).map((item, i) => (
                 <div

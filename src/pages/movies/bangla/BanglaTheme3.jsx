@@ -15,7 +15,7 @@ const BanglaTheme3 = () => {
     useBanglaMovieListTheme3Query({ quantity: 42, currentP });
 
   return (
-    <div className="mt-6 min-h-screen">
+    <div className="mt-4 mr-4 min-h-screen">
       <Helmet>
         <title>{siteName}</title>
         <meta
@@ -30,7 +30,7 @@ const BanglaTheme3 = () => {
         </p>
       </div>
 
-      <div className="mt-6 grid grid-cols-3 lg:grid-cols-7 gap-2">
+      <div className="mt-4 grid grid-cols-3 lg:grid-cols-5 gap-2">
         {isLoading
           ? Array.from({ length: 42 }).map((item, i) => (
               <div

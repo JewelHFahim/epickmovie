@@ -4,6 +4,7 @@ import { BiSolidLeftArrow, BiSolidRightArrow } from "react-icons/bi";
 const SectionTitleTheme3 = ({ children, sideBtn }) => {
   return (
     <div className="px-4 h-[70px] lg:h-[53px] flex items-center justify-between bg-[#D9D9D914]">
+      
       <p className="text-white text-[30px] lg:text-xl border-l-4 border-red-600 pl-1">
         {children}
       </p>

@@ -49,7 +49,8 @@ const FilterListTheme3 = () => {
   });
 
   return (
-    <div className="mt-6 min-h-screen">
+    <div className="mt-4 lg:mr-4 px-4 lg:px-0 min-h-screen border-b lg:border-0 pb-10">
+
       <Helmet>
         <title>
           {siteName} || {filteredTerm}
@@ -66,7 +67,7 @@ const FilterListTheme3 = () => {
         </p>
       </div>
 
-      <div className="mt-6 grid grid-cols-3 lg:grid-cols-7 gap-2">
+      <div className="mt-4 grid grid-cols-3 lg:grid-cols-5 gap-2">
         {isLoading
           ? Array.from({ length: 25 }).map((item, i) => (
               <div

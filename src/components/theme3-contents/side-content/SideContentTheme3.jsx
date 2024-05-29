@@ -38,14 +38,14 @@ const SideContentTheme3 = () => {
           rel="noopener noreferrer"
           className="flex flex-col justify-center items-center gap-y-2"
         >
-          <h2 className="text-[40px] lg:text-[25px] text-orange-600 font-medium">
+          <h2 className="text-[40px] lg:text-[25px] text-center text-orange-600 font-medium">
             JOIN US ON TELEGRAM
           </h2>
           <img src={telegram} alt="" className="w-[80%]" />
         </Link>
 
         {/* Facebook */}
-        <div className="flex flex-col justify-center items-center gap-y-2 mt-5">
+        <div className="flex flex-col justify-center text-center items-center gap-y-2 mt-5">
           <h2 className="text-[40px] lg:text-[25px] text-orange-600 font-medium">
             JOIN US ON FACEBOOK
           </h2>

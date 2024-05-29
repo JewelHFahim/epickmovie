@@ -2,8 +2,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useFeaturedPostsQuery } from "../../../redux/features/movies/movieApi";
-import { formatDate } from "../FormateDateTheme3";
 import "./FeturedSliderTheme3.css";
+import CardTheme3 from "../card-theme3/CardTheme3";
 
 const FeaturedSlider3 = () => {
   const { data: featuredPosts, isLoading: featureLoading } =
@@ -63,24 +63,7 @@ const FeaturedSlider3 = () => {
         <div className="featuredSlider3 mt-4">
           <Slider {...settings}>
             {featuredPosts?.data?.slice(0, 5)?.map((item, i) => (
-              <div key={i} className="lg:w-[160px] lg:h-[290px] p-2">
-                <img
-                  src={item?.poster_image_url}
-                  alt=""
-                  className="w-full lg:h-[200px] object-cover"
-                />
-
-                <div className="mt-1">
-                  <p className="text-[28px] lg:text-[12px] text-[#D8D8D8] font-bold">
-                    {item?.post_title?.length >= 60
-                      ? `${item?.post_title.slice(0, 60)} ...`
-                      : item?.post_title}
-                  </p>
-                  <p className="text-[#D8D8D8] text-[20px] lg:text-[9px] mt-1">
-                    {formatDate(item?.updated_at)}
-                  </p>
-                </div>
-              </div>
+              <CardTheme3 key={i} item={item} />
             ))}
           </Slider>
         </div>
