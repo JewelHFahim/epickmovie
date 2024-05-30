@@ -22,8 +22,8 @@ const SideContentTheme3 = () => {
     <div className="px-2">
       {/* =============>> SEARCH <<============= */}
       <div className="h-[80px] lg:h-[35px] flex justify-between">
-        <input type="text" className="h-full w-[70%] focus:outline-none px-2" />
-        <button className="bg-white h-full text-[30px] lg:text-base w-[28%] hover:bg-gray-200 transition-all ease-in-out">
+        <input type="text" className="h-full w-[70%] focus:outline-none px-8 lg:px-2 text-4xl lg:text-base" />
+        <button className="bg-white h-full text-[40px] font-medium lg:text-base w-[28%] hover:bg-gray-200 transition-all ease-in-out">
           Search
         </button>
       </div>

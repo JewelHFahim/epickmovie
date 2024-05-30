@@ -1,37 +1,40 @@
 import { useEffect } from "react";
-import DownloadPlayer from "./DownloadPlayer";
-import DownloadLinksTable from "./DownloadLinksTable";
 import { useNavigate, useParams } from "react-router-dom";
-import TagsList from "../../../../components/seo-related-content/TagsList";
-import { useMovieDetailsQuery } from "../../../../redux/features/movies/movieApi";
-import { useSuggessionMovieSeriesQuery } from "../../../../redux/features/search/searchApi";
-import SynopsisTheme3 from "../../../../components/theme3-contents/movie-tv-details/SynopsisTheme3";
-import DetailsInfoCard from "../../../../components/theme3-contents/movie-tv-details/DetailsInfoCard";
-import SharedSocialTheme3 from "../../../../components/theme3-contents/movie-tv-details/SharedSocialTheme3";
-import DetailsJoinusTheme3 from "../../../../components/theme3-contents/movie-tv-details/DetailsJoinusTheme3";
-import RecomendedMoviesTvs from "../../../../components/theme3-contents/movie-tv-details/RecomendedMoviesTvs";
-import MovieTvYoutubeTrailer from "../../../../components/theme3-contents/movie-tv-details/MovieTvYoutubeTrailer";
+import { useSuggessionMovieSeriesQuery } from "../../../redux/features/search/searchApi";
+import SynopsisTheme3 from "../../../components/theme3-contents/movie-tv-details/SynopsisTheme3";
+import DetailsInfoCard from "../../../components/theme3-contents/movie-tv-details/DetailsInfoCard";
+import SharedSocialTheme3 from "../../../components/theme3-contents/movie-tv-details/SharedSocialTheme3";
+import DetailsJoinusTheme3 from "../../../components/theme3-contents/movie-tv-details/DetailsJoinusTheme3";
+import RecomendedMoviesTvs from "../../../components/theme3-contents/movie-tv-details/RecomendedMoviesTvs";
+import MovieTvYoutubeTrailer from "../../../components/theme3-contents/movie-tv-details/MovieTvYoutubeTrailer";
+import DownloadPlayer from "../../movies/movie-details/movie-details-theme3/DownloadPlayer";
+import TagsList from "../../../components/seo-related-content/TagsList";
+import { useSeriesDetailsQuery } from "../../../redux/features/tv-show/tvShowApi";
+import DownloadLinksTableTv from "./DownloadLinkTableTv";
 
-const MovieDetailsTheme3 = () => {
+const TvShowDetailsTheme3 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: movieDetails, isLoading: detaislLoading } =
-    useMovieDetailsQuery(id);
-  const details = movieDetails?.data;
+  const { data: tvShowDetails, isLoading: detaislLoading } =
+    useSeriesDetailsQuery(id);
   const { data: suggessions, isLoading: suggessionsLoading } =
     useSuggessionMovieSeriesQuery(id);
 
+  const details = tvShowDetails?.data;
+
+  console.log(details);
+
   // Error handle, if id not found
   useEffect(() => {
-    if (movieDetails?.status === false) {
+    if (tvShowDetails?.status === false) {
       navigate("/404");
     }
-  }, [movieDetails, navigate]);
+  }, [tvShowDetails, navigate]);
 
   // page scroll effect
-  // useEffect(() => {
-  //   window.scrollTo({ top: 0, behavior: "smooth" });
-  // }, []);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <div className="lg:w-[850px] mt-4 px-4">
@@ -54,20 +57,19 @@ const MovieDetailsTheme3 = () => {
         <TagsList
           details={details}
           className="px-0 mt-12 text-white text-opacity-[40%]"
-          textSize="text-3xl lg:text-base"
         />
 
         <hr className=" border-white border-opacity-[10%] mt-10" />
 
         {/* ========>> Sreen Shots <<========= */}
         {details?.screenshots && (
-          <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-4 my-7">
+          <div className="flex flex-col lg:flex-row items-center gap-4 my-7">
             {details?.screenshots?.slice(0, 3)?.map((item, i) => (
               <div key={i} className="w-full h-full mx-auto">
                 <img
                   src={item}
-                  alt=""
-                  className=" w-[80%] mx-auto lg:w-full h-[400px] lg:h-full object-cover"
+                  alt="Screen Shots"
+                  className="w-full h-[450px] lg:h-full object-cover"
                 />
               </div>
             ))}
@@ -78,7 +80,7 @@ const MovieDetailsTheme3 = () => {
 
         {/* How to download Video */}
         <div className="mt-8 border-[4px] border-red-700 flex flex-col items-center p-5">
-          <h2 className="text-red-600 text-[40px] lg:text-[30px] font-medium">
+          <h2 className="text-red-600 text-[30px] font-medium">
             How To Download Movies
           </h2>
 
@@ -88,15 +90,13 @@ const MovieDetailsTheme3 = () => {
         {/* =============>> Download Links <<============== */}
         <div className="mt-10">
           <div className="flex items-center gap-x-5 mb-5">
-            <p className=" text-5xl lg:text-2xl font-medium text-gray-600">
-              Links
-            </p>
-            <p className="px-4 rounded-md bg-blue-600 text-white py-[2px] text-xl lg:text-sm">
+            <p className="text-2xl font-medium text-gray-600">Links</p>
+            <p className="px-4 rounded-md bg-blue-600 text-white py-[2px] text-sm">
               Download
             </p>
           </div>
 
-          <DownloadLinksTable details={details} />
+          <DownloadLinksTableTv details={details} />
         </div>
 
         {/* ============>> JOIN US <<============ */}
@@ -111,4 +111,4 @@ const MovieDetailsTheme3 = () => {
   );
 };
 
-export default MovieDetailsTheme3;
+export default TvShowDetailsTheme3;

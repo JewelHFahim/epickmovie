@@ -2,8 +2,10 @@
 import { useRedirect, useSiteConfig } from "../configHooks/ConfigHooks";
 
 const DownloadBtnTheme1 = ({ children, url }) => {
+
   const { maskLink } = useSiteConfig();
   const handleRedirect = useRedirect(url, maskLink);
+  
 
   return (
     <button

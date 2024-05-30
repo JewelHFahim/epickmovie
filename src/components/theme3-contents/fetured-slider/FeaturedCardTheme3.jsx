@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 import { FaPlay, FaStar } from "react-icons/fa";
-import "./CardTheme3.css";
+import "./FeaturedCardTheme3.css";
 import {
   useCleanedTitle,
   useRedirect,
@@ -9,8 +9,7 @@ import {
 
 import { formatDate } from "../FormateDateTheme3";
 
-const CardTheme3 = ({ item }) => {
-  
+const FeaturedCardTheme3 = ({ item }) => {
   const { maskLink } = useSiteConfig();
   const { url } = useCleanedTitle(item);
   const handleRedirect = useRedirect(url, maskLink);
@@ -20,12 +19,11 @@ const CardTheme3 = ({ item }) => {
     : "No date available";
 
   return (
-    <div className="w-full lg:w-[160px] lg:h-[285px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[2px] ">
-      <button
-        onClick={() => handleRedirect()}
-        className="h-full w-full cardContainer cursor-pointer bg-[#27272A]"
+    <div className="w-[300px] mx-auto h-[600px] lg:w-[160px] lg:h-[285px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[2px] ">
+      <button onClick={() => handleRedirect()}
+        className=" h-full w-full cardContainer cursor-pointer bg-[#27272A]"
       >
-        <div className="w-full h-[72%] relative imgContainer overflow-hidden">
+        <div className="w-full  h-[72%] relative imgContainer overflow-hidden">
           <img
             src={item?.poster_image_url}
             alt=""
@@ -58,4 +56,4 @@ const CardTheme3 = ({ item }) => {
   );
 };
 
-export default CardTheme3;
+export default FeaturedCardTheme3;
