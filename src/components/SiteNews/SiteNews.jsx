@@ -1,13 +1,13 @@
 import Marquee from "react-fast-marquee";
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
-import { theme } from "../../config/config";
 
 const SiteNews = () => {
-  const { siteNews } = useSiteConfig();
+  const { siteNews, themeValue } = useSiteConfig();
+
 
   return (
     <>
-      {theme ? (
+      {themeValue ? (
         <div className="mt-5 w-full h-[50px] bg-[#2a2a2a] flex items-center">
           <div className="text-[30px] lg:text-[14px] font-[600] flex items-center  text-white">
             <Marquee>{siteNews}</Marquee>

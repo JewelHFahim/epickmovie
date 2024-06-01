@@ -1,10 +1,12 @@
-import { theme } from "../../../config/config";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 import MovieDetailsDefault from "./movie-details-default/MovieDetailsDefault";
 import MovieDetailsTheme1 from "./movie-details-theme1/MovieDetailsTheme1";
 import MovieDetailsTheme2 from "./movie-details-theme2/MovieDetailsTheme2";
 import MovieDetailsTheme3 from "./movie-details-theme3/MovieDetailsTheme3";
 
 const MovieDetails = () => {
+  const { themeValue } = useSiteConfig();
+
   const movieDetails = {
     theme1: <MovieDetailsTheme1 />,
     theme2: <MovieDetailsTheme2 />,
@@ -12,7 +14,7 @@ const MovieDetails = () => {
     default: <MovieDetailsDefault />,
   };
 
-  return <>{movieDetails[theme] || movieDetails.default}</>;
+  return <>{movieDetails[themeValue] || movieDetails.default}</>;
 };
 
 export default MovieDetails;

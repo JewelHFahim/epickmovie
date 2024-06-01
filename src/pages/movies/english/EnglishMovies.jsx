@@ -1,12 +1,14 @@
-import { theme } from "../../../config/config";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 import EnglishMoviesTheme1 from "./EnglishMoviesTheme1";
 import EnglishMoviesTheme2 from "./EnglishMoviesTheme2";
 
 const EnglishMovies = () => {
+  const { themeValue } = useSiteConfig();
+
   return (
     <>
-      {theme === "theme1" && <EnglishMoviesTheme1 />}
-      {theme === "theme2" && <EnglishMoviesTheme2 />}
+      {themeValue === "theme1" && <EnglishMoviesTheme1 />}
+      {themeValue === "theme2" && <EnglishMoviesTheme2 />}
     </>
   );
 };

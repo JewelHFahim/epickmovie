@@ -105,6 +105,13 @@ export const useSiteConfig = () => {
     );
   }, [allConfig]);
 
+  const themeValue = useMemo(() => {
+    return (
+      allConfig?.data?.find((config) => config.name === "theme_name")?.value ??
+      "loading"
+    );
+  }, [allConfig]);
+
   const websiteLink = useMemo(() => {
     return (
       allConfig?.data?.find((config) => config.name === "website_link")
@@ -185,6 +192,7 @@ export const useSiteConfig = () => {
 
   return {
     siteName,
+    themeValue,
     siteLogo,
     favIcon,
     siteNews,

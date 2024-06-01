@@ -6,9 +6,9 @@ import {
   useGenreListQuery,
   useMovieListTheme3Query,
 } from "../../../redux/features/movies/movieApi";
-import { FaStar } from "react-icons/fa";
 import ads from "../../../assets/ads.png";
 import { FaCircleDot } from "react-icons/fa6";
+import SideLatestMovieCard from "./SideLatestMovieCard";
 
 const SideContentTheme3 = () => {
   const { telegramLink } = useSiteConfig();
@@ -22,7 +22,10 @@ const SideContentTheme3 = () => {
     <div className="px-2">
       {/* =============>> SEARCH <<============= */}
       <div className="h-[80px] lg:h-[35px] flex justify-between">
-        <input type="text" className="h-full w-[70%] focus:outline-none px-8 lg:px-2 text-4xl lg:text-base" />
+        <input
+          type="text"
+          className="h-full w-[70%] focus:outline-none px-8 lg:px-2 text-4xl lg:text-base"
+        />
         <button className="bg-white h-full text-[40px] font-medium lg:text-base w-[28%] hover:bg-gray-200 transition-all ease-in-out">
           Search
         </button>
@@ -68,35 +71,7 @@ const SideContentTheme3 = () => {
                 ></div>
               ))
             : movieList?.data?.data?.slice(0, 7)?.map((item, i) => (
-                <Link
-                  key={i}
-                  to=""
-                  className="flex gap-x-2 bg-black bg-opacity-[20%]"
-                >
-                  <img
-                    src={item?.poster_image_url}
-                    alt=""
-                    className=" w-[200px] h-[260px] lg:w-[70px] lg:h-[100px]"
-                  />
-
-                  <div className="py-1">
-                    <p className="text-[30px] lg:text-base text-slate-300">
-                      {item?.post_im_title?.length <= 25
-                        ? item?.post_im_title
-                        : `${item?.post_im_title?.slice(0, 25)} ...`}
-                    </p>
-
-                    <p className="mt-2 flex items-center gap-x-2">
-                      <span className="flex items-center gap-x-1 px-1 text-[20px] lg:text-sm border text-gray-600 w-[80px] lg:w-[55px] rounded-sm border-slate-600">
-                        <FaStar />
-                        7.2
-                      </span>
-                      <span className="text-[20px] lg:text-sm text-gray-500">
-                        {item?.release_date.slice(0, 4)}
-                      </span>
-                    </p>
-                  </div>
-                </Link>
+                <SideLatestMovieCard key={i} item={item} />
               ))}
         </div>
       </div>
@@ -108,7 +83,10 @@ const SideContentTheme3 = () => {
 
       {/* ============>> GENRES <<============== */}
       <div className="mt-8">
-        <p className="text-[45px] lg:text-xl font-medium text-gray-500"> Genres </p>
+        <p className="text-[45px] lg:text-xl font-medium text-gray-500">
+          {" "}
+          Genres{" "}
+        </p>
         {
           <ul className="flex flex-col text-slate-300 mt-3 gap-y-2">
             {genreList?.data?.map((menu, i) => (

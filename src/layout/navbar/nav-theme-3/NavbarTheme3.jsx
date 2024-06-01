@@ -141,6 +141,8 @@ const NavbarTheme3 = () => {
               </li>
             ))}
           </ul>
+
+          <Link to="/tv" className="border border-yellow-500 text-yellow-500 px-5 hover:border-yellow-300 hover:text-yellow-300 rounded-md font-medium">Live Tv</Link>
         </div>
 
         {/* Serach Field */}
