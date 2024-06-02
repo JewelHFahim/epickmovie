@@ -148,13 +148,14 @@ const NavbarTheme3 = () => {
         {/* Serach Field */}
         <form
           onSubmit={handleSubmit}
-          className="w-[332px] py-2 rounded-md flex items-center bg-[#272727] border border-gray-600"
+          className="w-[332px] py-2 rounded-md flex items-center bg-[#272727] border border-gray-700"
         >
           <input
             type="text"
             value={searchTermState}
             onChange={handleInputChange}
-            className="w-[90%] focus:outline-none bg-transparent px-4 text-slate-200 text-sm font-semibold"
+            placeholder="Search..."
+            className="w-[90%] placeholder:text-gray-500 focus:outline-none bg-transparent px-4 text-slate-200 text-sm font-semibold"
           />
           <IoSearch className="10% text-slate-300" />
         </form>

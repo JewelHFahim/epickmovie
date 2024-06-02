@@ -4,6 +4,7 @@ import { useSiteConfig } from "../../../../utils/configHooks/ConfigHooks";
 import { useFilteredResultsTheme3Query } from "../../../../redux/features/search/searchApi";
 import { Helmet } from "react-helmet";
 import PaginationTheme1 from "../../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
+import { useEffect } from "react";
 
 const FilterListTheme3 = () => {
   const location = useLocation();
@@ -47,6 +48,11 @@ const FilterListTheme3 = () => {
     quantity: 42,
     currentPage,
   });
+
+  // page scroll effect
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <div className="mt-4 lg:mr-4 px-4 lg:px-0 min-h-screen border-b lg:border-0 pb-10">

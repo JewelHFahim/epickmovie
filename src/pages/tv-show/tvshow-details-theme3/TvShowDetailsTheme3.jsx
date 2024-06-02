@@ -22,8 +22,6 @@ const TvShowDetailsTheme3 = () => {
 
   const details = tvShowDetails?.data;
 
-  console.log(details);
-
   // Error handle, if id not found
   useEffect(() => {
     if (tvShowDetails?.status === false) {

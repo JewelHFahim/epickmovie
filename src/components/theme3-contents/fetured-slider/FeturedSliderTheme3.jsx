@@ -48,23 +48,37 @@ const FeaturedSlider3 = () => {
   return (
     <>
       {featureLoading ? (
-        <div className="flex justify-between mt-5">
-          {Array.from({ length: 5 }).map((item, i) => (
-            <div
-              key={i}
-              className="w-[160px] h-[280px] flex flex-col justify-between"
-            >
-              <div className="w-full h-[220px] bg-slate-600 animate-pulse"></div>
-              <div className="w-full h-[40px] bg-slate-600 animate-pulse"></div>
-            </div>
-          ))}
-        </div>
+        <>
+          <div className=" hidden lg:flex justify-between mt-5">
+            {Array.from({ length: 5 }).map((item, i) => (
+              <div
+                key={i}
+                className="w-[300px] mx-auto h-[600px] lg:w-[160px] lg:h-[285px] flex flex-col justify-between"
+              >
+                <div className="w-full h-[82%] bg-slate-600 animate-pulse"></div>
+                <div className="w-full h-[15%] bg-slate-600 animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+
+          <div className="flex lg:hidden justify-between mt-5">
+            {Array.from({ length: 3 }).map((item, i) => (
+              <div
+                key={i}
+                className="w-[300px] mx-auto h-[600px] lg:w-[160px] lg:h-[285px] flex flex-col justify-between"
+              >
+                <div className="w-full h-[480px] bg-slate-600 animate-pulse"></div>
+                <div className="w-full h-[100px] bg-slate-600 animate-pulse"></div>
+              </div>
+            ))}
+          </div>
+        </>
       ) : (
         <div className="featuredSlider3 mt-4">
           <Slider {...settings}>
             {featuredPosts?.data?.slice(0, 5)?.map((item, i) => (
               // <CardTheme3 key={i} item={item} />
-              <FeaturedCardTheme3 key={i} item={item}/>
+              <FeaturedCardTheme3 key={i} item={item} />
             ))}
           </Slider>
         </div>

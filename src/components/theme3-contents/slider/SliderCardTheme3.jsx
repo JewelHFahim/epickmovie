@@ -13,7 +13,7 @@ const SliderCardTheme3 = ({ item }) => {
   return (
     <div
       onClick={() => handleRedirect()}
-      className="relative w-full h-full flex flex-col justify-end items-center hover:scale-[1.02] transition-all ease-in-out"
+      className="relative w-full h-full flex flex-col justify-end items-center hover:scale-[1.02] transition-all duration-200 ease-in-out"
     >
       <div className="z-10 w-full h-full absolute bg-gradient-to-t from-black from-8% via-transparent via-40%"></div>
       <div className="absolute bottom-3 z-20 w-full mx-auto px-4 text-center">
