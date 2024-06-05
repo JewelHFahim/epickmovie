@@ -2,10 +2,9 @@ import SearchListTheme1 from "./SearchListTheme1";
 import SearchListDefault from "./SearchListDefault";
 import SearchListTheme2 from "./SearchListTheme2";
 import SearchListTheme3 from "./SearchListTheme3";
-import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
+import { themeValue } from "../../../config/config";
 
 const SearchList = () => {
-  const { themeValue } = useSiteConfig();
 
   const searchList = {
     theme1: <SearchListTheme1 />,

@@ -7,7 +7,6 @@ import SharedSocialTheme3 from "../../../components/theme3-contents/movie-tv-det
 import DetailsJoinusTheme3 from "../../../components/theme3-contents/movie-tv-details/DetailsJoinusTheme3";
 import RecomendedMoviesTvs from "../../../components/theme3-contents/movie-tv-details/RecomendedMoviesTvs";
 import MovieTvYoutubeTrailer from "../../../components/theme3-contents/movie-tv-details/MovieTvYoutubeTrailer";
-import DownloadPlayer from "../../movies/movie-details/movie-details-theme3/DownloadPlayer";
 import TagsList from "../../../components/seo-related-content/TagsList";
 import { useSeriesDetailsQuery } from "../../../redux/features/tv-show/tvShowApi";
 import DownloadLinksTableTv from "./DownloadLinkTableTv";
@@ -61,29 +60,33 @@ const TvShowDetailsTheme3 = () => {
 
         {/* ========>> Sreen Shots <<========= */}
         {details?.screenshots && (
-          <div className="flex flex-col lg:flex-row items-center gap-4 my-7">
-            {details?.screenshots?.slice(0, 3)?.map((item, i) => (
-              <div key={i} className="w-full h-full mx-auto">
-                <img
-                  src={item}
-                  alt="Screen Shots"
-                  className="w-full h-[450px] lg:h-full object-cover"
-                />
-              </div>
-            ))}
+          <div className="my-7">
+            {/* Large Devices */}
+            <div className="hidden lg:flex  items-center gap-4">
+              {details?.screenshots?.slice(0, 3)?.map((item, i) => (
+                <div key={i} className="w-full h-full mx-auto">
+                  <img
+                    src={item}
+                    alt=""
+                    className=" w-[80%] mx-auto lg:w-full h-[400px] lg:h-full object-cover"
+                  />
+                </div>
+              ))}
+            </div>
+
+            {/* Small Devices */}
+            <div className="lg:hidden flex  items-center gap-4">
+              {details?.screenshots?.slice(0, 2)?.map((item, i) => (
+                <div key={i} className="w-full h-full mx-auto">
+                  <img src={item} alt="" className="  object-cover" />
+                </div>
+              ))}
+            </div>
+            
           </div>
         )}
 
         <hr className=" border-white border-opacity-[10%]" />
-
-        {/* How to download Video */}
-        <div className="mt-8 border-[4px] border-red-700 flex flex-col items-center p-5">
-          <h2 className="text-red-600 text-[30px] font-medium">
-            How To Download Movies
-          </h2>
-
-          <DownloadPlayer />
-        </div>
 
         {/* =============>> Download Links <<============== */}
         <div className="mt-10">

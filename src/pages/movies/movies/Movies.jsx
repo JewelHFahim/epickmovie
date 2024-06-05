@@ -4,11 +4,10 @@ import MoviesDefault from "./movies-default/MoviesDefault";
 import MoviesTheme1 from "./movies-theme1/MoviesTheme1";
 import MoviesTheme2 from "./movies-theme2/MoviesTheme2";
 import MoviesTheme3 from "./movies-theme3/MoviesTheme3";
-import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
+import { themeValue } from "../../../config/config";
 
 const Movies = () => {
   const location = useLocation();
-  const { themeValue } = useSiteConfig();
   const currentRoute = location.pathname;
 
   const currentP = Number(currentRoute?.slice(13));

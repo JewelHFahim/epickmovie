@@ -1,3 +1,4 @@
+import BlogDetailsPage from "../pages/blogs/BlogDetailsPage";
 import Home from "../pages/home/Home";
 import BanglaMovie from "../pages/movies/bangla/BanglaMovie";
 import EnglishMovies from "../pages/movies/english/EnglishMovies";
@@ -29,7 +30,7 @@ export const clientRoutes = [
     path: "/bangla",
     element: <BanglaMovie />,
   },
-  
+
   {
     path: "/bangla/page/:id",
     element: <BanglaMovie />,
@@ -83,7 +84,7 @@ export const clientRoutes = [
     path: "/search-list/:string/page/:id",
     element: <SearchList />,
   },
-  
+
   {
     path: "/terms/:string/page/:id",
     element: <FilterList />,
@@ -91,6 +92,11 @@ export const clientRoutes = [
   {
     path: "/terms/:string",
     element: <FilterList />,
+  },
+
+  {
+    path: "/blogs/:id",
+    element: <BlogDetailsPage />,
   },
 
   {

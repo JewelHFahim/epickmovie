@@ -1,8 +1,9 @@
 import Marquee from "react-fast-marquee";
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
+import { themeValue } from "../../config/config";
 
 const SiteNews = () => {
-  const { siteNews, themeValue } = useSiteConfig();
+  const { siteNews } = useSiteConfig();
 
 
   return (

@@ -6,6 +6,7 @@ import { useLocation } from "react-router-dom";
 import PaginationTheme1 from "../../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
 import UpCommingTheme1 from "../../../../components/theme1-contents/UpCommingTheme1";
 import SectionTitle from "../../../../utils/theme1-contents/section-title/SectionTitle";
+import { useEffect } from "react";
 
 const MoviesTheme1 = () => {
   const location = useLocation();
@@ -13,12 +14,18 @@ const MoviesTheme1 = () => {
   const currentP = Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
   const { data: perPgaeMovie, isLoading: movieLoading } = usePerPgaeMovieQuery(currentP);
 
+    // page scroll effect
+    useEffect(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }, []);
+  
+ 
   return (
     <div className="px-5 lg:px-0">
       <SiteNews />
 
       <div className="mt-5">
-        <SectionTitle> All Movies</SectionTitle>
+        <SectionTitle> All Movies </SectionTitle>
 
         {movieLoading ? (
           <div className="w-full">

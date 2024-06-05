@@ -6,7 +6,7 @@ const SynopsisTheme3 = ({details}) => {
         <div className="mt-10">
         <h2 className="text-4xl lg:text-[25px] text-gray-300 font-medium">Synopsis</h2>
 
-        <div className="text-gray-300 mt-5 text-2xl lg:text-lg">
+        <div className="text-gray-300 mt-5 text-3xl lg:text-lg">
           ✅ {details?.post_title}: This is one of the best movies based on
           {details?.additional_data?.genres &&
             details?.additional_data?.genres?.map((item, i) => (

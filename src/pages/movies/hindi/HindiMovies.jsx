@@ -1,9 +1,8 @@
-import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
+import { themeValue } from "../../../config/config";
 import HindiMoviesTheme1 from "./HindiMoviesTheme1";
 import HindiMoviesTheme2 from "./HindiMoviesTheme2";
 
 const HindiMovies = () => {
-  const { themeValue } = useSiteConfig();
 
   return (
     <>

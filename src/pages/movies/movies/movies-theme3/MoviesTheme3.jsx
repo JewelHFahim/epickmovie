@@ -2,6 +2,8 @@ import { useLocation } from "react-router-dom";
 import CardTheme3 from "../../../../components/theme3-contents/card-theme3/CardTheme3";
 import { useMovieListTheme3Query } from "../../../../redux/features/movies/movieApi";
 import PaginationTheme1 from "../../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
+import { useEffect } from "react";
+
 
 const MoviesTheme3 = () => {
   const location = useLocation();
@@ -12,6 +14,11 @@ const MoviesTheme3 = () => {
     quantity: 42,
     page: currentP || 1,
   });
+
+      // page scroll effect
+      useEffect(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, []);
 
   return (
     <div className="mt-4 lg:mr-4 px-4 lg:px-0 border-b lg:border-0 pb-10">

@@ -1,13 +1,14 @@
+/* eslint-disable react/prop-types */
 import { useState } from "react";
 import { FaYoutube } from "react-icons/fa";
 import { IoPlayCircle } from "react-icons/io5";
 
-const MovieTvYoutubeTrailer = () => {
+const MovieTvYoutubeTrailer = ({url}) => {
   const [trailer, setTrailer] = useState(false);
   const handleTralerVideo = () => {
     setTrailer(!trailer);
   };
-
+console.log(url)
   return (
     <div>
       {/* ==============>> TRAILER <<============== */}
@@ -56,7 +57,7 @@ const MovieTvYoutubeTrailer = () => {
           <iframe
             width="100%"
             height="400"
-            src="https://www.youtube.com/embed/vqu4z34wENw?si=EqZRclTD0_GJKU5a"
+            src={url}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
             referrerPolicy="strict-origin-when-cross-origin"

@@ -7,6 +7,7 @@ import {
 import PaginationTheme1 from "../../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
 import SeoContentTheme2 from "../../../../components/theme2-contents/SeoContentTheme2";
 import Theme2Card from "../../../../components/movie-card/move-card-theme2/Theme2Card";
+import { useEffect } from "react";
 
 const MoviesTheme2 = () => {
   const location = useLocation();
@@ -16,7 +17,13 @@ const MoviesTheme2 = () => {
   const { data: perPgaeMovie, isLoading: movieLoading } =
     usePerPgaeMovieQuery(currentP);
 
-  const { data: largeMovieList, isLoading: largeMovieLoading } = usePerPageMovieListTheme2Query(currentP);
+  const { data: largeMovieList, isLoading: largeMovieLoading } =
+    usePerPageMovieListTheme2Query(currentP);
+
+  // page scroll effect
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <div className="bg-[#A8A8A812] px-8 py-4 lg:px-3 lg:py-3 mt-8 lg:mt-14">

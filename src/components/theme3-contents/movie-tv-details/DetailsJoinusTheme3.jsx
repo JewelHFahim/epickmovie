@@ -4,7 +4,7 @@ import facebook from "../../../assets/join fb.png";
 import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
 
 const DetailsJoinusTheme3 = () => {
-  const { telegramLink } = useSiteConfig();
+  const { telegramLink, faceBookLink } = useSiteConfig();
 
   return (
     <div className="hidden  border-[4px] lg:flex items-start justify-evenly border-red-700 mt-8 py-10">
@@ -24,7 +24,8 @@ const DetailsJoinusTheme3 = () => {
 
       {/* Facebook */}
       <Link
-        to=""
+        to={faceBookLink}
+        target="_blank"
         className="flex flex-col justify-center text-center items-center gap-y-2"
       >
         <h2 className="text-[40px] lg:text-[25px] text-orange-600 font-medium">

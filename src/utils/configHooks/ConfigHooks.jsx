@@ -98,6 +98,7 @@ import { useMemo } from "react";
 export const useSiteConfig = () => {
   const { data: allConfig, isLoading } = useAllConfigQuery();
 
+  // ===================>> Site Name <<======================
   const siteName = useMemo(() => {
     return (
       allConfig?.data?.find((config) => config.name === "site_name")?.value ??
@@ -105,13 +106,7 @@ export const useSiteConfig = () => {
     );
   }, [allConfig]);
 
-  const themeValue = useMemo(() => {
-    return (
-      allConfig?.data?.find((config) => config.name === "theme_name")?.value ??
-      "loading"
-    );
-  }, [allConfig]);
-
+  // ===================>> Website Link <<======================
   const websiteLink = useMemo(() => {
     return (
       allConfig?.data?.find((config) => config.name === "website_link")
@@ -119,6 +114,7 @@ export const useSiteConfig = () => {
     );
   }, [allConfig]);
 
+  // ===================>> Site Logo<<======================
   const siteLogo = useMemo(() => {
     return (
       allConfig?.data?.find((config) => config.name === "site_logo")?.value ??
@@ -126,6 +122,7 @@ export const useSiteConfig = () => {
     );
   }, [allConfig]);
 
+  // ===================>> Fav Icon <<======================
   const favIcon = useMemo(() => {
     return (
       allConfig?.data?.find((config) => config.name === "fav_icon")?.value ??
@@ -133,6 +130,7 @@ export const useSiteConfig = () => {
     );
   }, [allConfig]);
 
+  // ===================>> Site News <<======================
   const siteNews = useMemo(() => {
     return (
       allConfig?.data?.find((config) => config.name === "site_news")?.value ??
@@ -140,6 +138,7 @@ export const useSiteConfig = () => {
     );
   }, [allConfig]);
 
+  // ===================>> Telegram <<======================
   const telegramLink = useMemo(() => {
     return (
       allConfig?.data?.find((config) => config.name === "telegram_link")
@@ -147,6 +146,39 @@ export const useSiteConfig = () => {
     );
   }, [allConfig]);
 
+  // ===================>> facebook <<======================
+  const faceBookLink = useMemo(() => {
+    return (
+      allConfig?.data?.find((config) => config.name === "facebook_url")
+        ?.value ?? null
+    );
+  }, [allConfig]);
+
+  // ===================>> Twitter <<======================
+  const twitterLink = useMemo(() => {
+    return (
+      allConfig?.data?.find((config) => config.name === "twitter_url")?.value ??
+      null
+    );
+  }, [allConfig]);
+
+  // ===================>> Pinterest <<======================
+  const pinterestLink = useMemo(() => {
+    return (
+      allConfig?.data?.find((config) => config.name === "pinterest_url")
+        ?.value ?? null
+    );
+  }, [allConfig]);
+
+  // ===================>> Whats App <<======================
+  const whatsAppNo = useMemo(() => {
+    return (
+      allConfig?.data?.find((config) => config.name === "whatsapp_no")?.value ??
+      null
+    );
+  }, [allConfig]);
+
+  // ===================>> Site Footer <<======================
   const siteFooter = useMemo(() => {
     return (
       allConfig?.data?.find((config) => config.name === "site_footer")?.value ??
@@ -154,6 +186,7 @@ export const useSiteConfig = () => {
     );
   }, [allConfig]);
 
+  // ===================>> Google Id <<======================
   const googleAnalytic =
     allConfig?.data?.find((config) => config.name === "gtag_id")?.value ?? "";
 
@@ -192,7 +225,6 @@ export const useSiteConfig = () => {
 
   return {
     siteName,
-    themeValue,
     siteLogo,
     favIcon,
     siteNews,
@@ -207,5 +239,9 @@ export const useSiteConfig = () => {
     interstitialType,
     inpageAdId,
     websiteLink,
+    faceBookLink,
+    twitterLink,
+    pinterestLink,
+    whatsAppNo,
   };
 };

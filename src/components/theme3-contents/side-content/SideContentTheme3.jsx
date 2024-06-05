@@ -11,7 +11,7 @@ import { FaCircleDot } from "react-icons/fa6";
 import SideLatestMovieCard from "./SideLatestMovieCard";
 
 const SideContentTheme3 = () => {
-  const { telegramLink } = useSiteConfig();
+  const { telegramLink, faceBookLink } = useSiteConfig();
   const { data: genreList } = useGenreListQuery();
   const { data: movieList, isLoading: movieLoading } = useMovieListTheme3Query({
     quantity: 25,
@@ -44,16 +44,16 @@ const SideContentTheme3 = () => {
           <h2 className="text-[40px] lg:text-[25px] text-center text-orange-600 font-medium">
             JOIN US ON TELEGRAM
           </h2>
-          <img src={telegram} alt="" className="w-[80%]" />
+          <img src={telegram} alt="" className="w-[60%] lg:w-[80%]" />
         </Link>
 
         {/* Facebook */}
-        <div className="flex flex-col justify-center text-center items-center gap-y-2 mt-5">
+        <Link to={faceBookLink} target="_blank" className="flex flex-col justify-center text-center items-center gap-y-2 mt-5">
           <h2 className="text-[40px] lg:text-[25px] text-orange-600 font-medium">
             JOIN US ON FACEBOOK
           </h2>
-          <img src={facebook} alt="" className="w-[80%]" />
-        </div>
+          <img src={facebook} alt="" className=" w-[60%] lg:w-[80%]" />
+        </Link>
       </div>
 
       {/* ========>> LATEST MOVIES/TV <<======== */}

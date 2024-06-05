@@ -7,11 +7,10 @@ import FooterTheme1 from "./footers/FooterTheme1";
 import MobileMenuTheme1 from "../components/menus/MobileMenuTheme1";
 import NavbarTheme3 from "./navbar/nav-theme-3/navbarTheme3";
 import SideContentTheme3 from "../components/theme3-contents/side-content/SideContentTheme3";
-import { useSiteConfig } from "../utils/configHooks/ConfigHooks";
 import MobileMenuTheme3 from "../components/menus/MobileMenuTheme3";
+import { themeValue } from "../config/config";
 
 const Main = () => {
-  const { themeValue } = useSiteConfig();
 
 
   // Define theme-based components

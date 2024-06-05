@@ -4,6 +4,7 @@ import SectionTitleTheme3 from "../../components/theme3-contents/SectionTitleThe
 import SliderTheme3 from "../../components/theme3-contents/slider/SliderTheme3";
 import { useMovieListTheme3Query } from "../../redux/features/movies/movieApi";
 import { useTvShowTheme3Query } from "../../redux/features/tv-show/tvShowApi";
+import Blogs from "../blogs/Blogs";
 
 const HomeTheme3 = () => {
   const { data: movieList, isLoading: movieLoading } = useMovieListTheme3Query({
@@ -74,37 +75,7 @@ const HomeTheme3 = () => {
       </div>
 
       {/* ================>> LATEST BLOGS <<================= */}
-      <div className="mt-10">
-        <SectionTitleTheme3 sideBtn={true}>Latest Blogs</SectionTitleTheme3>
-
-        <div className="mt-10 grid grid-cols gap-y-5">
-          {Array.from({ length: 5 }).map((item, i) => (
-            <div
-              key={i}
-              className="flex items-center gap-x-4 border-b p-2 pb-5"
-            >
-              <div className=" border">
-                <img
-                  src="https://cdn.paperpile.com/guides/img/credible-blog-illustr-1400x1400.png"
-                  alt=""
-                  className="w-[150px] h-[180px] lg:w-[67px] lg:h-[80px] object-cover"
-                />
-              </div>
-              <div className="text-white w-[90%]">
-                <h2 className="text-[30px] lg:text-[18px] font-bold">
-                  How to Create Detailed Buyer Personas for Your Business [+Free
-                  Persona Template]
-                </h2>
-                <p className="mt-1 text-xl lg:text-base">
-                  As marketers, we know that marketing according to data points
-                  alone isn’t enough to get meaningful engagement for your
-                  business—that’s the job of a buyer persona
-                </p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Blogs />
     </div>
   );
 };
