@@ -7,10 +7,12 @@ import { useTvShowTheme3Query } from "../../redux/features/tv-show/tvShowApi";
 import Blogs from "../blogs/Blogs";
 
 const HomeTheme3 = () => {
+
   const { data: movieList, isLoading: movieLoading } = useMovieListTheme3Query({
     quantity: 25,
     page: 1,
   });
+  
   const { data: tvShowsList, isLoading: tvLoading } = useTvShowTheme3Query({
     quantity: 25,
     page: 1,

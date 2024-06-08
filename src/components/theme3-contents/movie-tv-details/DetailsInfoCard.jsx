@@ -129,7 +129,7 @@ const DetailsInfoCard = ({ details, detaislLoading }) => {
         <div className="flex gap-x-8 border-b border-gray-500 pb-10">
           <div className="w-[40%]">
             {detaislLoading ? (
-              <div className="mx-auto w-[550px] h-[800px] lg:w-[270px] lg:h-[300px] bg-slate-700 animate-pulse"></div>
+              <div className="mx-auto w-full h-[550px] bg-slate-700 animate-pulse"></div>
             ) : (
               <img
                 src={details?.poster_image_url}

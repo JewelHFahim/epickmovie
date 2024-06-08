@@ -6,12 +6,9 @@ import ThumbnailImage from "./ThumbnailImage";
 const Blogs = () => {
   const { data: blogs } = useGetAllBlogsQuery();
 
-  console.log(blogs);
-
   return (
     <div className="mt-10">
-      <SectionTitleTheme3 sideBtn={true}>Latest Blogs</SectionTitleTheme3>
-
+      <SectionTitleTheme3 sideBtn={true}> Latest Blogs </SectionTitleTheme3>
       <div className="mt-10 grid grid-cols gap-y-5">
         {blogs?.data?.map((item, i) => (
           <Link

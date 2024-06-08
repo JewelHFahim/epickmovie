@@ -28,9 +28,9 @@ const MovieDetailsTheme3 = () => {
   }, [movieDetails, navigate]);
 
   // page scroll effect
-  // useEffect(() => {
-  //   window.scrollTo({ top: 0, behavior: "smooth" });
-  // }, []);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <div className="lg:w-[850px] pt-4 px-4 relative overflow-hidde">
