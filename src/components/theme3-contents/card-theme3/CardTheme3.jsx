@@ -20,7 +20,7 @@ const CardTheme3 = ({ item }) => {
     : "No date available";
 
   return (
-    <div className="w-full lg:w-[160px] lg:h-[285px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[2px] ">
+    <div className="w-full lg:w-[160px] lg:h-[285px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[2px]">
       <button
         onClick={() => handleRedirect()}
         className="h-full w-full cardContainer cursor-pointer bg-[#27272A]"
@@ -44,9 +44,9 @@ const CardTheme3 = ({ item }) => {
         </div>
 
         <div className="mt-2 lg:mt-1 h-[28%] text-left px-1">
-          <p className="text-[30px] leading-[38px] lg:leading-normal lg:text-[12px] text-[#D8D8D8] font-bold">
-            {item?.post_title?.length >= 40
-              ? `${item?.post_title.slice(0, 40)} ...`
+          <p className="text-[30px] leading-[38px] lg:leading-normal lg:text-[15px] text-[#D8D8D8] font-bold">
+            {item?.post_title?.length >= 28
+              ? `${item?.post_title.slice(0, 28)} ...`
               : item?.post_title}
           </p>
           <p className="text-[#D8D8D8] text-[20px] lg:text-[9px] mt-1">
