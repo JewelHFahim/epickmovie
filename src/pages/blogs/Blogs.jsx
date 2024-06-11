@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import SectionTitleTheme3 from "../../components/theme3-contents/SectionTitleTheme3";
 import { useGetAllBlogsQuery } from "../../redux/features/blogs/blogsApi";
 import ThumbnailImage from "./ThumbnailImage";
+import ShortDesClean from "./ShortdDesClean";
 
 const Blogs = () => {
   const { data: blogs } = useGetAllBlogsQuery();
@@ -25,7 +26,14 @@ const Blogs = () => {
               <h2 className="text-[30px] lg:text-[18px] font-bold">
                 {item?.post_title}
               </h2>
-              <p className="mt-1 text-xl lg:text-base">{item?.post_content}</p>
+
+              <ShortDesClean
+                text={
+                  item?.post_content?.length >= 180
+                    ? `${item?.post_content?.slice(0, 180)}...`
+                    : item?.post_content
+                }
+              />
             </div>
           </Link>
         ))}
