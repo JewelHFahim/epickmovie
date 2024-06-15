@@ -3,12 +3,11 @@ import { useState } from "react";
 import { FaYoutube } from "react-icons/fa";
 import { IoPlayCircle } from "react-icons/io5";
 
-const MovieTvYoutubeTrailer = ({url}) => {
+const MovieTvYoutubeTrailer = ({ url }) => {
   const [trailer, setTrailer] = useState(false);
   const handleTralerVideo = () => {
     setTrailer(!trailer);
   };
-console.log(url)
   return (
     <div>
       {/* ==============>> TRAILER <<============== */}

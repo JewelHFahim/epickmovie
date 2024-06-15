@@ -15,7 +15,7 @@ const BanglaTheme3 = () => {
     useBanglaMovieListTheme3Query({ quantity: 42, currentP });
 
   return (
-    <div className="mt-4 mr-4 min-h-screen">
+    <div className="mt-4 mr-4 min-h-screen lg:w-[850px]">
       <Helmet>
         <title>{siteName}</title>
         <meta

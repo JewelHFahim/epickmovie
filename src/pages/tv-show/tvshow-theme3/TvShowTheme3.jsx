@@ -13,7 +13,7 @@ const TvShowTheme3 = () => {
   });
 
   return (
-    <div className="mt-4 lg:mr-4 px-4 lg:px-0 border-b lg:border-0 pb-10">
+    <div className="mt-4 lg:mr-4 px-4 lg:px-0 border-b lg:border-0 pb-10 lg:w-[850px]">
        <div className="px-4 h-[70px] lg:h-[53px] flex items-center justify-between bg-[#D9D9D914]">
         <p className="text-white text-[35px] lg:text-xl border-l-4 border-red-600 pl-1">
           Latest Web-Series
