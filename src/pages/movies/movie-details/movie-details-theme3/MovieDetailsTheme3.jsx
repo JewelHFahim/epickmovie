@@ -119,7 +119,7 @@ const MovieDetailsTheme3 = () => {
           <h2 className="text-center text-gray-300 text-3xl font-medium">
             Watch Movie/Web-Series
           </h2>
-          <M3U8Player />
+          <M3U8Player details={details}/>
         </div>
 
         <hr className=" border-white border-opacity-[10%] my-8" />
