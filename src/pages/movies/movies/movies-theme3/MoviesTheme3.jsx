@@ -4,7 +4,6 @@ import { useMovieListTheme3Query } from "../../../../redux/features/movies/movie
 import PaginationTheme1 from "../../../../utils/common-pagination/pagination-theme1/PaginationTheme1";
 import { useEffect } from "react";
 
-
 const MoviesTheme3 = () => {
   const location = useLocation();
   const currentRoute = location?.pathname;
@@ -15,10 +14,10 @@ const MoviesTheme3 = () => {
     page: currentP || 1,
   });
 
-      // page scroll effect
-      useEffect(() => {
-        window.scrollTo({ top: 0, behavior: "smooth" });
-      }, []);
+  // page scroll effect
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <div className="mt-4 lg:mr-4 px-4 lg:px-0 border-b lg:border-0 pb-10 lg:w-[850px]">
@@ -28,7 +27,6 @@ const MoviesTheme3 = () => {
           Latest Movies
         </p>
       </div>
-      
 
       <div className="mt-4 grid grid-cols-3 lg:grid-cols-5 gap-2">
         {movieLoading
@@ -56,6 +54,7 @@ const MoviesTheme3 = () => {
           btnColor="bg-[#009987]"
         />
       </div>
+      
     </div>
   );
 };

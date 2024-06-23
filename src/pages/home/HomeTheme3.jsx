@@ -18,8 +18,11 @@ const HomeTheme3 = () => {
     page: 1,
   });
 
+  console.log("movie list", movieList)
+
   return (
-    <div className="mt-4 lg:w-[850px] lg:mr-4 px-4 lg:px-0">
+    <div className="mt-4 lg:mr-4 px-4 lg:px-0 border-b lg:border-0 pb-10 lg:w-[850px]">
+      {/* className="mt-4 lg:mr-4 px-4 lg:px-0 border-b lg:border-0 pb-10 lg:w-[850px]" */}
       <SliderTheme3 />
 
       {/* ==================>> FEATURED <<==================== */}

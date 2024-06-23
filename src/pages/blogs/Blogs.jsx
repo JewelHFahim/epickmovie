@@ -10,12 +10,13 @@ const Blogs = () => {
   return (
     <div className="mt-10">
       <SectionTitleTheme3 sideBtn={true}> Latest Blogs </SectionTitleTheme3>
+
       <div className="mt-10 grid grid-cols gap-y-5">
         {blogs?.data?.map((item, i) => (
           <Link
             to={`/blogs/${item?.id}`}
             key={i}
-            className="flex items-center gap-x-4 border-b p-2 pb-5"
+            className="flex items-center gap-x-4 border-b border-white border-opacity-[30%] p-2 pb-5"
           >
             <ThumbnailImage
               meta={item?.meta}

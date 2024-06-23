@@ -6,12 +6,8 @@ import CleanContents from "./CLeanContents";
 
 const BlogDetailsPage = () => {
   const { id } = useParams();
-
   const { data: detailsBlog, isLoading } = useGetSeingleBlogQuery(id);
-
   const details = detailsBlog?.data;
-
-  console.log(detailsBlog);
 
   // page scroll effect
   useEffect(() => {
@@ -19,7 +15,7 @@ const BlogDetailsPage = () => {
   }, []);
 
   return (
-    <div className="w-full max-w-[850px] py-4 px-5 border border-white border-opacity-[5%] overflow-hidden">
+    <div className="w-full lg:max-w-[850px] mx-auto py-7 lg:py-4 px-7 lg:px-5 lg:border border-white border-opacity-[5%] overflow-hidden">
       {isLoading ? (
         <div className="w-full h-[450px] bg-slate-700 animate-pulse"></div>
       ) : (
@@ -52,7 +48,7 @@ const BlogDetailsPage = () => {
       ) : (
         <CleanContents
           text={details?.post_content}
-          className="mt-10 text-gray-200"
+          className="mt-10 text-gray-200 text-2xl lg:text-base overflow-hidden"
         />
       )}
 

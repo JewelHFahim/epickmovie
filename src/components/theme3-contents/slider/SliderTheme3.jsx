@@ -48,11 +48,11 @@ const SliderTheme3 = () => {
   return (
     <>
       {featureLoading ? (
-        <div className="flex items-center justify-between gap-x-5 my-4">
+        <div className="flex items-center justify-between gap-x-2 mb-4">
           {Array.from({ length: 2 }).map((item, i) => (
             <div
               key={i}
-              className="w-full h-[240px] bg-slate-700   animate-pulse"
+              className="w-full h-[247px] bg-slate-700   animate-pulse"
             ></div>
           ))}
         </div>
@@ -61,7 +61,9 @@ const SliderTheme3 = () => {
           <Slider {...settings}>
             {featuredPosts?.data?.map((item, i) => (
               <div key={i} className="w-full h-[400px] lg:w-[380px] lg:h-[240px] px-1 cursor-pointer">
-                <SliderCardTheme3 key={i} item={item} />
+
+                 <SliderCardTheme3 key={i} item={item} /> 
+
               </div>
             ))}
           </Slider>

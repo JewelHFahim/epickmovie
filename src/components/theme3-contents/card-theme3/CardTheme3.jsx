@@ -25,7 +25,7 @@ const CardTheme3 = ({ item }) => {
         onClick={() => handleRedirect()}
         className="h-full w-full cardContainer cursor-pointer bg-[#27272A]"
       >
-        <div className="w-full h-[72%] relative imgContainer overflow-hidden">
+        <div className="w-full h-[70%] relative imgContainer overflow-hidden">
           <img
             src={item?.poster_image_url}
             alt=""
@@ -44,7 +44,7 @@ const CardTheme3 = ({ item }) => {
         </div>
 
         <div className="mt-2 lg:mt-1 h-[28%] text-left px-1">
-          <p className="text-[30px] leading-[38px] lg:leading-normal lg:text-[15px] text-[#D8D8D8] font-bold">
+          <p className="text-[30px] leading-[38px] lg:leading-normal lg:text-[14px] text-[#D8D8D8] font-bold">
             {item?.post_title?.length >= 28
               ? `${item?.post_title.slice(0, 28)} ...`
               : item?.post_title}
