@@ -16,6 +16,7 @@ import StoryTitle from "../../../components/seo-related-content/StoryTitle";
 import MobileStoryTitle from "../../../components/seo-related-content/MobileStoryTitle";
 import DownloadInfos from "../../../components/seo-related-content/DownloadInfos";
 import TagsList from "../../../components/seo-related-content/TagsList";
+import M3U8Player from "../../../components/theme3-contents/movie-tv-details/M3U8Player";
 
 const TvShowDetailsDefault = () => {
   const { id } = useParams();
@@ -87,7 +88,7 @@ const TvShowDetailsDefault = () => {
             <div className="lg:max-w-[715px] mt-[13px]">
               <h3 className="text-[50px] leading-none lg:text-[24px] font-[600] font-roboto text-[#217703] text-left lg:text-center">
                 <Link to={details?.guid}>
-                  {details?.post_title} ~ EpicSeries{" "}
+                  {details?.post_title} ~ EpicSeries
                 </Link>
               </h3>
             </div>
@@ -129,7 +130,17 @@ const TvShowDetailsDefault = () => {
           {/* ===========>> TELEGRAM BUTTON <<=============*/}
           <JoinTelegramBtn />
 
-          <TagsList details={details} title="Web-Series" />
+          {/* ===============>> Player <<============== */}
+          <div className="h-[450px] mt-10 mr-5">
+            <h2 className="text-center text-gray-300 text-3xl font-medium">
+              Watch Movie/Web-Series
+            </h2>
+            <M3U8Player details={details} />
+          </div>
+
+          <div className="mt-32 lg:mt-20">
+            <TagsList details={details} title="Web-Series" />
+          </div>
 
           {/* =============>> COUNTRY LIST <<===============*/}
 

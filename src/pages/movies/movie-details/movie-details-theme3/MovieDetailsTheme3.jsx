@@ -115,7 +115,7 @@ const MovieDetailsTheme3 = () => {
 
         {/* =======>> Streaming <<================*/}
 
-        <div className="mt-10  ">
+        <div className="mt-10">
           <h2 className="text-center text-gray-300 text-3xl font-medium">
             Watch Movie/Web-Series
           </h2>

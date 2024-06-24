@@ -16,6 +16,7 @@ import DownloadInfos from "../../../../components/seo-related-content/DownloadIn
 import StoryTitle from "../../../../components/seo-related-content/StoryTitle";
 import TagsList from "../../../../components/seo-related-content/TagsList";
 import MobileStoryTitle from "../../../../components/seo-related-content/MobileStoryTitle";
+import M3U8Player from "../../../../components/theme3-contents/movie-tv-details/M3U8Player";
 
 const MovieDetailsDefault = () => {
   const { id } = useParams();
@@ -30,9 +31,9 @@ const MovieDetailsDefault = () => {
     }
   }, [movieDetails, navigate]);
 
-  useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, []);
+  // useEffect(() => {
+  //   window.scrollTo({ top: 0, behavior: "smooth" });
+  // }, []);
 
   return (
     <div className="bg-[#27272A]">
@@ -72,6 +73,7 @@ const MovieDetailsDefault = () => {
             <div className="hidden lg:block">
               <StoryTitle details={details} type={"Movies"} />
             </div>
+
             <div className="lg:hidden">
               <MobileStoryTitle details={details} type={"Movies"} />
             </div>
@@ -125,12 +127,21 @@ const MovieDetailsDefault = () => {
               </p>
             )}
           </div>
-          
 
           {/* ===========>> JOIN TELEGRAM <<=========== */}
           <JoinTelegramBtn />
 
-          <TagsList details={details} title="Movie" />
+          {/* ===============>> Player <<============== */}
+          <div className="h-[450px] mt-10 mr-5">
+            <h2 className="text-center text-gray-300 text-3xl font-medium">
+              Watch Movie/Web-Series
+            </h2>
+            <M3U8Player details={details} />
+          </div>
+
+          <div className="mt-32 lg:mt-20">
+            <TagsList details={details} title="Movie" />
+          </div>
 
           <div className="mt-16 lg:hidden ">
             <h2 className="text-white text-[40px] font-medium px-4">

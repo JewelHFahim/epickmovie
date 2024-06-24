@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef, useState } from "react";
+import { BsPlayCircle } from "react-icons/bs";
+
 import Hls from "hls.js";
 import "./M3U8Player.css";
 
@@ -57,10 +59,10 @@ const M3U8Player = ({ details }) => {
       />
       {!isPlaying && (
         <button
-          className="play-button absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 text-white text-4xl"
+          className="play-button absolute inset-0 flex items-center justify-center bg-black bg-opacity-[60%] text-blue-500 text-5xl "
           onClick={handlePlayButtonClick}
         >
-          &#9654; {/* Play icon (triangle) */}
+          <BsPlayCircle className="hover:text-6xl transition-all ease-in-out"/>
         </button>
       )}
     </div>
