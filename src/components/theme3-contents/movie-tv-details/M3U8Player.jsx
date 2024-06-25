@@ -1,7 +1,6 @@
 /* eslint-disable react/prop-types */
 import { useEffect, useRef, useState } from "react";
 import { BsPlayCircle } from "react-icons/bs";
-
 import Hls from "hls.js";
 import "./M3U8Player.css";
 
@@ -48,7 +47,7 @@ const M3U8Player = ({ details }) => {
   };
 
   return (
-    <div className="video-container mt-4 w-full h-full rounded-[10px] overflow-hidden border-2 border-yellow-600 flex justify-center items-center relative">
+    <div className="video-container mt-4 w-full h-full overflow-hidden flex justify-center items-center relative">
       <video
         ref={videoRef}
         controls

@@ -9,8 +9,7 @@ import DetailsInfoCard from "../../../../components/theme3-contents/movie-tv-det
 import SharedSocialTheme3 from "../../../../components/theme3-contents/movie-tv-details/SharedSocialTheme3";
 import DetailsJoinusTheme3 from "../../../../components/theme3-contents/movie-tv-details/DetailsJoinusTheme3";
 import RecomendedMoviesTvs from "../../../../components/theme3-contents/movie-tv-details/RecomendedMoviesTvs";
-import MovieTvYoutubeTrailer from "../../../../components/theme3-contents/movie-tv-details/MovieTvYoutubeTrailer";
-import M3U8Player from "../../../../components/theme3-contents/movie-tv-details/M3U8Player";
+import StreamingTrailer from "../../../../components/theme3-contents/movie-tv-details/StreamingTrailer";
 
 const MovieDetailsTheme3 = () => {
   const { id } = useParams();
@@ -44,8 +43,8 @@ const MovieDetailsTheme3 = () => {
       ></div> */}
 
       <div className="">
-        {/* =============>> Youtube Trailer <<============ */}
-        <MovieTvYoutubeTrailer url={details?.youtube_trailer} />
+        {/* =============>> Stream / Youtube Trailer <<============ */}
+        <StreamingTrailer details={details} />
 
         {/* =============>> Info Section <<================*/}
         <DetailsInfoCard details={details} detaislLoading={detaislLoading} />
@@ -111,15 +110,6 @@ const MovieDetailsTheme3 = () => {
           </div>
 
           <DownloadLinksTable details={details} />
-        </div>
-
-        {/* =======>> Streaming <<================*/}
-
-        <div className="mt-10">
-          <h2 className="text-center text-gray-300 text-3xl font-medium">
-            Watch Movie/Web-Series
-          </h2>
-          <M3U8Player details={details}/>
         </div>
 
         <hr className=" border-white border-opacity-[10%] my-8" />

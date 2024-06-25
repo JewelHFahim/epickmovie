@@ -58,7 +58,7 @@ const FilterListDefault = () => {
         />
       </Helmet>
 
-      <div className=" ml-10 lg:ml-0 my-5">
+      <div className="ml-10 lg:ml-0 my-4">
         <h1 className="text-[28px] lg:text-[32px] font-[700] font-roboto text-white">
           Filter By: {filteredTerm}
         </h1>
@@ -70,6 +70,7 @@ const FilterListDefault = () => {
           Requested Data Not Found !!
         </h1>
       )}
+
       <div className="flex justify-center items-center w-full px-5 lg:px-0">
         {isLoading ? (
           <div className="w-full">
@@ -80,7 +81,7 @@ const FilterListDefault = () => {
           </div>
         </div>
         ) : (
-          <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] lg:gap-[10px] my-[18px]">
+          <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] lg:gap-[10px]">
             {filteredResults?.data?.data?.map((item) => (
               <MovieCard
                 key={item?.id}

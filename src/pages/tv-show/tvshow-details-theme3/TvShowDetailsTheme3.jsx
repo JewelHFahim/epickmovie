@@ -10,7 +10,6 @@ import MovieTvYoutubeTrailer from "../../../components/theme3-contents/movie-tv-
 import TagsList from "../../../components/seo-related-content/TagsList";
 import { useSeriesDetailsQuery } from "../../../redux/features/tv-show/tvShowApi";
 import DownloadLinksTableTv from "./DownloadLinkTableTv";
-import M3U8Player from "../../../components/theme3-contents/movie-tv-details/M3U8Player";
 
 const TvShowDetailsTheme3 = () => {
   const { id } = useParams();
@@ -21,7 +20,7 @@ const TvShowDetailsTheme3 = () => {
     useSuggessionMovieSeriesQuery(id);
 
   const details = tvShowDetails?.data;
-  console.log(details)
+  console.log(details);
 
   // Error handle, if id not found
   useEffect(() => {
@@ -84,7 +83,6 @@ const TvShowDetailsTheme3 = () => {
                 </div>
               ))}
             </div>
-            
           </div>
         )}
 
@@ -100,14 +98,6 @@ const TvShowDetailsTheme3 = () => {
           </div>
 
           <DownloadLinksTableTv details={details} />
-        </div>
-
-        {/* =============>> Player <<============ */}
-        <div className="mt-10  ">
-          <h2 className="text-center text-gray-300 text-3xl font-medium">
-            Watch Movie/Web-Series
-          </h2>
-          <M3U8Player details={details}/>
         </div>
 
         {/* ============>> JOIN US <<============ */}

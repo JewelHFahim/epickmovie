@@ -58,7 +58,6 @@ const Header = () => {
 
   return (
     <div className="w-full lg:h-[130px] flex flex-col lg:flex-row items-center justify-between py-5 lg:py-0 px-4 ">
-      
       {isLoading ? (
         <div className="w-[150px] h-[40px] lg:w-[200px] lg:h-[65px] bg-slate-700 rounded-lg animate-pulse "></div>
       ) : (
@@ -103,7 +102,6 @@ const Header = () => {
           <div className="bg-gray-300 p-8 rounded-lg flex flex-col items-center">
             <p className="font-medium">Verify that you are not robot...</p>
             <p className="font-medium">
-              {" "}
               {popupNumbers[0]} + {popupNumbers[1]} = ?
             </p>
             <div className=" mt-2 rounded-md">
@@ -125,11 +123,13 @@ const Header = () => {
       )}
 
       <div className="w-[50%] lg:w-[200px] mt-[15px] lg:mt-0 flex items-center justify-between rounded-[15px] lg:rounded-[8px]">
-        <Link to="/tv" className="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white rounded-md font-semiboldpx-4 w-full mx-auto py-4 lg:py-[7px] flex justify-center items-center text-[30px] lg:text-base font-semibold">
+        <Link
+          to="/tv"
+          className="border border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white rounded-md font-semiboldpx-4 w-full mx-auto py-4 lg:py-[7px] flex justify-center items-center text-[30px] lg:text-base font-semibold transition-all ease-in-out"
+        >
           Live TV Channels
         </Link>
       </div>
-
     </div>
   );
 };

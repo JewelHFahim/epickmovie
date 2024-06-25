@@ -19,6 +19,7 @@
   padding: 0px 5px;
 }
 
+
 .menu ul .main-menu {
   position: relative;
   border-right: 0.5px solid #aeabab;
@@ -28,9 +29,9 @@
 
 .menu ul li ul .subM {
   z-index: 999;
-  min-width: 150px;
-  background-color: #000000;
-  padding: 5px 4px 5px 20px;
+  min-width: 130px;
+  background: #000000;
+  padding: 5px 0px 5px 5px;
   color: rgb(200, 197, 197);
 }
 
@@ -48,7 +49,7 @@
 
 .menu ul li:hover {
   background: #323232;
-  transition: 0.2s all ease-in-out;
+  transition: 0.1s all ease-in-out;
 }
 
 .menu ul li ul {
@@ -59,8 +60,11 @@
   flex-direction: column;
   border-radius: 0;
   max-height: 550px;
+  background: black;
 }
 
 .menu ul li:hover > ul {
   display: flex;
+  z-index: 999;
+  width: 100%;
 }
