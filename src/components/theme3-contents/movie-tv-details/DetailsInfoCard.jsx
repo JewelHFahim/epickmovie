@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { formatDate } from "../FormateDateTheme3";
 import { FaStar, FaUserCircle } from "react-icons/fa";
+import UserRating from "../../../utils/theme3/user-rating/UserRating";
 
 const DetailsInfoCard = ({ details, detaislLoading }) => {
   const customizedDate = details?.release_date
@@ -10,7 +11,6 @@ const DetailsInfoCard = ({ details, detaislLoading }) => {
 
   return (
     <div className="mt-5 ">
-
       {/* ========>> Desktop Device <<=======*/}
       <div className="hidden lg:flex gap-4 shadow-sm lg:border-b border-gray-200 pb-5 border-opacity-[20%]">
         <div>
@@ -46,32 +46,7 @@ const DetailsInfoCard = ({ details, detaislLoading }) => {
           )}
 
           {/*=========>> RATINGS <<=============*/}
-          {detaislLoading ? (
-            <div className="mt-4 h-[60px] bg-slate-700 animate-pulse"></div>
-          ) : (
-            <div className="py-4 flex items-center gap-x-3 border-b border-gray-700">
-              <p className=" text-[40px] lg:text-[30px] font-medium text-gray-200 max-w-fit px-4 text-center bg-gray-500 bg-opacity-[20%] rounded-md">
-                {details?.imdb_rating}
-              </p>
-              <div className="flex gap-x-4">
-                <div>
-                  <p className="flex items-center gap-x-1 text-2xl lg:text-lg text-blue-600">
-                    {Array.from({ length: 10 }).map((item, i) => (
-                      <FaStar key={i} />
-                    ))}
-                  </p>
-                  <p className="flex items-center gap-x-1 text-lg lg:text-sm mt-[2px] text-gray-400">
-                    <FaUserCircle />
-                    579 votes
-                  </p>
-                </div>
-
-                <p className="text-gray-200 h-[40px] lg:h-[25px] flex justify-center items-center bg-gray-500 bg-opacity-[20%] px-4 border text-xl lg:text-sm rounded-md">
-                  Your rating: 10
-                </p>
-              </div>
-            </div>
-          )}
+          <UserRating detaislLoading={detaislLoading} details={details} />
 
           {/* ===========>> CAST <<============ */}
           {detaislLoading ? (
@@ -228,8 +203,6 @@ const DetailsInfoCard = ({ details, detaislLoading }) => {
           )}
         </div>
       </div>
-
-
     </div>
   );
 };

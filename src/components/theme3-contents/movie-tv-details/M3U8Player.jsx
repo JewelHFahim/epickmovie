@@ -47,7 +47,7 @@ const M3U8Player = ({ details }) => {
   };
 
   return (
-    <div className="video-container mt-4 w-full h-full overflow-hidden flex justify-center items-center relative">
+    <div className="video-container w-full h-[450px] overflow-hidden flex justify-center items-center relative">
       <video
         ref={videoRef}
         controls
@@ -61,9 +61,11 @@ const M3U8Player = ({ details }) => {
           className="play-button absolute inset-0 flex items-center justify-center bg-black bg-opacity-[60%] text-blue-500 text-5xl "
           onClick={handlePlayButtonClick}
         >
-          <BsPlayCircle className="hover:text-6xl transition-all ease-in-out"/>
+          <BsPlayCircle className="hover:text-6xl transition-all ease-in-out" />
         </button>
       )}
+
+   
     </div>
   );
 };

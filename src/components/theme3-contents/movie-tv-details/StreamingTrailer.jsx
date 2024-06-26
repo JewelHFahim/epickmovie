@@ -3,53 +3,48 @@ import { useState } from "react";
 import MovieTvYoutubeTrailer from "./MovieTvYoutubeTrailer";
 import M3U8Player from "./M3U8Player";
 import StreamTrailerButton from "../../../utils/theme3/StreamTrailerButton";
+import StreamReport from "../../../utils/theme3/StreamReport";
 
 const StreamingTrailer = ({ details }) => {
   const [status, setStatus] = useState(null);
-  console.log(status);
 
   return (
-    <div>
-      {status === null && (
-        <div className="bg-black bg-opacity-[40%] flex justify-between p-10 lg:p-5">
-          <p className=" text-4xl lg:text-xl font-medium text-gray-200">
-            Video Source
-          </p>
+    <div className="border border-white border-opacity-[5%] bg-black bg-opacity-[10%]">
+      {/* ==============>> Stream Report <<============== */}
+      {status === null && <StreamReport />}
 
-          <p className="flex items-center gap-x-2">
-            <span className="border border-white border-opacity-[20%] px-4 text-center py-2 lg:py-1 text-blue-600 bg-black rounded-md text-xl lg:text-sm">
-              Report Error
-            </span>
-            <span className="text-gray-400 font-medium text-2xl lg:text-base">
-              112 views
-            </span>
-          </p>
+      {/* =================>> Players <<================== */}
+
+      {status === "trailer" && (
+        <MovieTvYoutubeTrailer url={details?.youtube_trailer} />
+      )}
+      {status === "stream" && (
+        <div>
+          <M3U8Player details={details} />
+          <StreamReport />
         </div>
       )}
 
-      {status === "trailer" && <MovieTvYoutubeTrailer />}
-      {status === "stream" && <M3U8Player details={details} />}
 
-      <hr className="border border-white border-opacity-[20%] my-4" />
-
+      {/* =================>> Buttons <<================== */}
       <StreamTrailerButton
         title="youtube.com"
         btn={true}
         context="trailer"
         setStatus={setStatus}
-        active="trailer"
+        active={status === "trailer"}
       >
         Watch Trailer
       </StreamTrailerButton>
 
-      <hr className="w-[90%] mx-auto border border-white border-opacity-[20%] " />
+      <hr className="w-[92.5%] mx-auto border border-white border-opacity-[10%] " />
 
       <StreamTrailerButton
         title="terabox.com"
         btn={false}
         context="stream"
         setStatus={setStatus}
-        active="stream"
+        active={status === "stream"}
       >
         Watch Now
       </StreamTrailerButton>

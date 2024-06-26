@@ -14,20 +14,31 @@ const settingApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-
-
     // ======================>> Site Map URLS <<====================
     websiteLink: builder.query({
       query: () => "",
       providesTags: ["EpicMovies"],
     }),
 
+    // ======================>> User Rating<<====================
+
+    userRating: builder.query({
+      query: ({postId,ratingNo}) => `/do-vote/${postId}/${ratingNo}`,
+      providesTags: ["EpicMovies"],
+    }),
+
+    // userRating: builder.mutation({
+    //   query: ({ postId, ratingNo }) => ({
+    //     method: "POST",
+    //     url: `/do-vote/${postId}/${ratingNo}`,
+    //   }),
+    //   providesTags: ["EpicMovies"],
+    // }),
+
 
   }),
 });
 
-export const {
-  useAllConfigQuery,
-  useQuickMenuUserQuery,
-} = settingApi;
+export const { useAllConfigQuery, useQuickMenuUserQuery,  useUserRatingQuery} =
+  settingApi;
 export default settingApi;

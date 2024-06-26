@@ -1,0 +1,42 @@
+.stars {
+  display: flex;
+  /* gap: 10px; */
+}
+
+.stars .rating-star {
+  cursor: pointer;
+  font-size: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stars .rating-star svg {
+  width: 20px;
+  height: 20px;
+  fill: #00882620;
+  transition: 0.45s;
+}
+
+.stars .rating-star.to-rate svg {
+  fill: #008826;
+}
+
+.stars .rating-star.rated svg {
+  fill: #2a18e8;
+}
+
+.stars .rating-star.no-to-rated svg {
+  fill: #8a8c8d;
+}
+
+.stars .rating-star.to-hover svg {
+  fill: #008826;
+}
+
+.rating-text {
+  color: #008826;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
