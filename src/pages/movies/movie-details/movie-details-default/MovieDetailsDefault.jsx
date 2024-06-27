@@ -16,7 +16,6 @@ import DownloadInfos from "../../../../components/seo-related-content/DownloadIn
 import StoryTitle from "../../../../components/seo-related-content/StoryTitle";
 import TagsList from "../../../../components/seo-related-content/TagsList";
 import MobileStoryTitle from "../../../../components/seo-related-content/MobileStoryTitle";
-import M3U8Player from "../../../../components/theme3-contents/movie-tv-details/M3U8Player";
 
 const MovieDetailsDefault = () => {
   const { id } = useParams();
@@ -131,15 +130,8 @@ const MovieDetailsDefault = () => {
           {/* ===========>> JOIN TELEGRAM <<=========== */}
           <JoinTelegramBtn />
 
-          {/* ===============>> Player <<============== */}
-          <div className="h-[450px] mt-10 mr-5">
-            <h2 className="text-center text-gray-300 text-3xl font-medium">
-              Watch Movie/Web-Series
-            </h2>
-            <M3U8Player details={details} />
-          </div>
 
-          <div className="mt-32 lg:mt-20">
+          <div className="mt-32 lg:mt-10">
             <TagsList details={details} title="Movie" />
           </div>
 

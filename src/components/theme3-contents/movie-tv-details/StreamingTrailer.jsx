@@ -14,7 +14,6 @@ const StreamingTrailer = ({ details }) => {
       {status === null && <StreamReport />}
 
       {/* =================>> Players <<================== */}
-
       {status === "trailer" && (
         <MovieTvYoutubeTrailer url={details?.youtube_trailer} />
       )}

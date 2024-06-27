@@ -8,8 +8,8 @@ const UserRating = ({ detailsLoading, details }) => {
   const [selectedRate, setSelectedRate] = useState(null);
   const [hoverRate, setHoverRate] = useState(null);
   const {data} = useUserRatingQuery({postId: details?.id, ratingNo: selectedRate});
+
   console.log(data)
-  console.log(details)
 
   const handleStarClick = (rate) => {
     setSelectedRate(rate);
