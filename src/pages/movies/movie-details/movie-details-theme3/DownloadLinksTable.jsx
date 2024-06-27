@@ -3,6 +3,9 @@ import TableDatasDownloadLinks from "./TableDatasDownloadLinks";
 
 const DownloadLinksTable = ({ details }) => {
 
+  const downloadLinks = details?.download_links?.filter(link => link?.type === "download");
+  console.log(downloadLinks)
+
   return (
     <div className="overflow-x-auto">
       <table className="w-full table-auto text-sm text-left">
@@ -17,7 +20,7 @@ const DownloadLinksTable = ({ details }) => {
         <tbody className="text-gray-200 divide-y divide-slate-800">
           {
             
-          details?.download_links?.map((item, idx) => (
+            downloadLinks.map((item, idx) => (
             <TableDatasDownloadLinks key={idx} item={item} />
           ))
           
