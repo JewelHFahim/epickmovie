@@ -3,17 +3,23 @@ import { useState } from "react";
 import { FaStar, FaUserCircle } from "react-icons/fa";
 import "./UserRating.css";
 import { useUserRatingQuery } from "../../../redux/features/settings/settingApi";
+import toast from "react-hot-toast";
 
 const UserRating = ({ detailsLoading, details }) => {
   const [selectedRate, setSelectedRate] = useState(null);
   const [hoverRate, setHoverRate] = useState(null);
-  const {data} = useUserRatingQuery({postId: details?.id, ratingNo: selectedRate});
 
-  console.log(data)
+  const { data } = useUserRatingQuery({
+    postId: details?.id,
+    ratingNo: selectedRate,
+  });
 
   const handleStarClick = (rate) => {
     setSelectedRate(rate);
-    console.log("Rated:", );
+    if (data?.status) {
+      toast.success(data?.message);
+    }
+    console.log(data);
   };
 
   const handleStarMouseOver = (rate) => {
@@ -38,7 +44,6 @@ const UserRating = ({ detailsLoading, details }) => {
           </p>
           <div className="flex gap-x-4">
             <div>
-
               <div
                 className="stars right flex gap-[5px]"
                 data-selected-rate={selectedRate}

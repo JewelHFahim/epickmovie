@@ -15,9 +15,13 @@ const DownloadLinksTable = ({ details }) => {
           </tr>
         </thead>
         <tbody className="text-gray-200 divide-y divide-slate-800">
-          {details?.download_links?.map((item, idx) => (
+          {
+            
+          details?.download_links?.map((item, idx) => (
             <TableDatasDownloadLinks key={idx} item={item} />
-          ))}
+          ))
+          
+          }
         </tbody>
       </table>
     </div>

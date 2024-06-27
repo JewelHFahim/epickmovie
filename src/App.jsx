@@ -3,6 +3,7 @@ import { RouterProvider } from "react-router-dom";
 import { HelmetProvider, Helmet } from "react-helmet-async";
 import router from "./routes/router";
 import { useSiteConfig } from "./utils/configHooks/ConfigHooks";
+import { Toaster } from "react-hot-toast";
 
 const App = () => {
   const {
@@ -155,6 +156,7 @@ const App = () => {
         </Helmet>
 
         <RouterProvider router={router} />
+        <Toaster />
       </div>
     </HelmetProvider>
   );
