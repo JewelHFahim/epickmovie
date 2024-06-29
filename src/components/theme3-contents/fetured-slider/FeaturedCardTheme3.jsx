@@ -19,7 +19,7 @@ const FeaturedCardTheme3 = ({ item }) => {
     : "No date available";
 
   return (
-    <div className="w-[300px] mx-auto h-[600px] lg:w-[160px] lg:h-[285px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[2px] ">
+    <div className="mx-auto w-[300px] h-[600px] lg:w-[160px] lg:h-[285px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[2px] overflow-hidden">
       <button onClick={() => handleRedirect()}
         className=" h-full w-full cardContainer cursor-pointer bg-[#27272A]"
       >

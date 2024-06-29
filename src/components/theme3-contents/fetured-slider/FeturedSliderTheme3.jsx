@@ -49,7 +49,7 @@ const FeaturedSlider3 = () => {
     <>
       {featureLoading ? (
         <>
-          <div className=" hidden lg:flex justify-between mt-5">
+          <div className="hidden lg:flex justify-between mt-5">
             {Array.from({ length: 5 }).map((item, i) => (
               <div
                 key={i}
@@ -77,7 +77,7 @@ const FeaturedSlider3 = () => {
         <div className="featuredSlider3 mt-4">
           <Slider {...settings}>
             {featuredPosts?.data?.slice(0, 5)?.map((item, i) => (
-              // <CardTheme3 key={i} item={item} />
+              // <CardTheme3 key={i} item={item}/>
               <FeaturedCardTheme3 key={i} item={item} />
             ))}
           </Slider>

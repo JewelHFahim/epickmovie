@@ -20,7 +20,7 @@ const DownloadLinksTable = ({ details }) => {
         <tbody className="text-gray-200 divide-y divide-slate-800">
           {
             
-            downloadLinks.map((item, idx) => (
+            downloadLinks?.map((item, idx) => (
             <TableDatasDownloadLinks key={idx} item={item} />
           ))
           
