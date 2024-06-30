@@ -102,5 +102,5 @@ export const clientRoutes = [
   {
     path: "/not-found",
     element: <NotFound />,
-  },
+  }
 ];

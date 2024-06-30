@@ -3,7 +3,8 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useFeaturedPostsQuery } from "../../../redux/features/movies/movieApi";
 import "./FeturedSliderTheme3.css";
-import FeaturedCardTheme3 from "./FeaturedCardTheme3";
+// import FeaturedCardTheme3 from "./FeaturedCardTheme3";
+import CardTheme3 from "../card-theme3/CardTheme3";
 
 const FeaturedSlider3 = () => {
   const { data: featuredPosts, isLoading: featureLoading } =
@@ -77,8 +78,8 @@ const FeaturedSlider3 = () => {
         <div className="featuredSlider3 mt-4">
           <Slider {...settings}>
             {featuredPosts?.data?.slice(0, 5)?.map((item, i) => (
-              // <CardTheme3 key={i} item={item}/>
-              <FeaturedCardTheme3 key={i} item={item} />
+              <div key={i} className="p-[5px] lg:p-0 border-red-600"><CardTheme3  item={item}/></div>
+              // <FeaturedCardTheme3 key={i} item={item} />
             ))}
           </Slider>
         </div>

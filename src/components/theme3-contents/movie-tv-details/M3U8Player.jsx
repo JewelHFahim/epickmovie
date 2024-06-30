@@ -6,11 +6,12 @@ import "./M3U8Player.css";
 
 const M3U8Player = ({ details }) => {
 
-  const src = details?.download_links?.find(link=> link?.type === "stream")?.download_url ?? "";
-  console.log("url",src)
+  // const src = details?.download_links?.find(link=> link?.type === "stream")?.download_url ?? "";
+  // console.log("url",src)
 
 
   // const src = "http://content.jwplatform.com/manifests/vM7nH0Kl.m3u8";
+  const src = "https://live-cdn.tsports.com/live-02/index.m3u8";
 
   const videoRef = useRef(null);
   const hlsRef = useRef(null);
