@@ -7,6 +7,7 @@ import StreamReport from "../../../utils/theme3/StreamReport";
 
 const StreamingTrailer = ({ details }) => {
   const [status, setStatus] = useState(null);
+  console.log(details)
 
   return (
     <div className="border border-white border-opacity-[5%] bg-black bg-opacity-[10%]">

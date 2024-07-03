@@ -1,15 +1,11 @@
-/* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import Hls from "hls.js";
-import "./M3U8Player.css";
 import Plyr from "plyr";
 
-const M3U8Player = ({ details }) => {
+const PlayerWithQuality = () => {
   useEffect(() => {
-    //   // const source = details?.download_links?.find(link=> link?.type === "stream")?.download_url ?? "";
-
-    const source = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
-
+    const source =
+      "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
     const videoElement = document.querySelector("video");
 
     if (!videoElement) {
@@ -22,7 +18,7 @@ const M3U8Player = ({ details }) => {
       captions: { active: true, update: true, language: "en" },
       quality: {
         default: 576,
-        options: [2160, 1440, 1080, 720, 576, 480, 360, 240],
+        options: [4320, 2880, 2160, 1440, 1080, 720, 576, 480, 360, 240],
         forced: true,
         onChange: (e) => updateQuality(e),
       },
@@ -35,9 +31,24 @@ const M3U8Player = ({ details }) => {
       hls.attachMedia(videoElement);
       window.hls = hls;
 
-      // Handle changing captions
-      player.on("languagechange", () => {
-        setTimeout(() => (hls.subtitleTrack = player.currentTrack), 50);
+      hls.on(Hls.Events.MANIFEST_PARSED, () => {
+        const availableQualities = hls.levels.map((level) => level.height);
+        player.quality.options = availableQualities;
+        player.quality.default = availableQualities[0];
+      });
+
+      // Automatically select quality based on bandwidth
+      hls.on(Hls.Events.LEVEL_SWITCHED, (event, data) => {
+        const quality = hls.levels[data.level].height;
+        player.quality = quality;
+      });
+
+      // Handle changing quality manually
+      player.on("qualitychange", (event) => {
+        const quality = event.detail.plyr.quality;
+        hls.currentLevel = hls.levels.findIndex(
+          (level) => level.height === quality
+        );
       });
     } else if (videoElement.canPlayType("application/vnd.apple.mpegurl")) {
       // For Safari, directly set the video source
@@ -54,28 +65,27 @@ const M3U8Player = ({ details }) => {
     };
   }, []);
 
-
-    // Define the updateQuality function
-    const updateQuality = (quality) => {
-      if (window.hls) {
-        window.hls.currentLevel = window.hls.levels.findIndex(
-          (level) => level.height === quality
-        );
-      }
-    };
+  // Define the updateQuality function
+  const updateQuality = (quality) => {
+    if (window.hls) {
+      window.hls.currentLevel = window.hls.levels.findIndex(
+        (level) => level.height === quality
+      );
+    }
+  };
 
   return (
-    <div className=" w-full h-[450px] ">
+    <div className="w-full h-[450px]">
       <video
         width="100%"
         height="100%"
         controls
         crossOrigin="anonymous"
         playsInline
-        poster={details?.backdrop_image}
+        poster=""
       ></video>
     </div>
   );
 };
 
-export default M3U8Player;
+export default PlayerWithQuality;
