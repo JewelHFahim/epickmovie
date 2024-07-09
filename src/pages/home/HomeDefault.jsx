@@ -11,17 +11,21 @@ import { useQuickMenuUserQuery } from "../../redux/features/settings/settingApi"
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
 import SiteNews from "../../components/SiteNews/SiteNews";
 import HomePageSeeAllBtn from "../../utils/HomePageSeeAllBtn";
-import FeaturedMovies from "../../components/featured-movies/FeaturedMovies";
 import LazyLoading from "../../components/lazy-loading/LazyLoading";
 import MovieCard from "../../components/movie-card/MovieCard";
+import MainSliderSlick from "../../components/featured-movies/MainSliderSlick/MainSliderSlick";
+import SliderCardLazyLoader from "../../components/featured-movies/MainSliderSlick/SliderCardLazyLoader";
 
 const HomeDefault = () => {
   const { siteName } = useSiteConfig();
   const { data: quickMenu } = useQuickMenuUserQuery();
   const { data: movieList, isLoading: movieLoading } = usePerPgaeMovieQuery(1);
-  const { data: tvShowList, isLoading: tvShowLoading } = usePerPgaeTvShowQuery(1);
-  const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
-  const { data: upCommingPosts, isLoading: upCommingLoading } = useUpCommingPostsQuery(1);
+  const { data: tvShowList, isLoading: tvShowLoading } =
+    usePerPgaeTvShowQuery(1);
+  const { data: featuredPosts, isLoading: featureLoading } =
+    useFeaturedPostsQuery();
+  const { data: upCommingPosts, isLoading: upCommingLoading } =
+    useUpCommingPostsQuery(1);
 
   const totalTvShow = tvShowList?.data?.total;
   const totalMovies = movieList?.data?.total;
@@ -29,8 +33,39 @@ const HomeDefault = () => {
   return (
     <section className="bg-[#27272A] lg:bg-[#18181a] flex flex-col justify-center items-center">
       <Helmet>
-        <title>{siteName}</title>
+        <title>
+          {siteName} || Watch Movies Online Free on {siteName}
+        </title>
+
+        <link rel="canonical" href="http://localhost:3000/movies" />
+        <meta
+          name="description"
+          content="The best place to watch movies online for free with HD quality. No ADS! No registration is required!"
+        />
+        <meta
+          name="keywords"
+          content="free movies, online movie, movie online, free movies online, watch movies online free, free hd movies, watch movies online"
+        />
       </Helmet>
+
+      {/* <Helmet>
+        <title>My Page Title</title>
+        <meta
+          name="description"
+          content="This is the description of my page."
+        />
+        <link rel="canonical" href="https://www.example.com/my-page" />
+        <script type="application/ld+json">
+          {`
+          {
+            "@context": "http://schema.org",
+            "@type": "WebPage",
+            "name": "My Page Title",
+            "description": "This is the description of my page."
+          }
+        `}
+        </script>
+      </Helmet> */}
 
       {/* ===================>> Quick Menus <<=================*/}
       <div className="hidden lg:flex items-center gap-[25px] mt-[6px]">
@@ -46,12 +81,25 @@ const HomeDefault = () => {
 
       {/* ================>> Featured Movies <<================*/}
       <>
-        <HomePageSeeAllBtn>Featured Movies</HomePageSeeAllBtn>
+        <HomePageSeeAllBtn> Featured Movies </HomePageSeeAllBtn>
         <div className="my-[18px]">
-          <FeaturedMovies
-            featuredPosts={featuredPosts}
-            featureLoading={featureLoading}
-          />
+          {featureLoading ? (
+            <>
+              <div className=" grid lg:hidden grid-cols-3 gap-5">
+                {Array.from({ length: 3 }).map((item, i) => (
+                  <SliderCardLazyLoader key={i} />
+                ))}
+              </div>
+
+              <div className="hidden lg:grid grid-cols-6 gap-2">
+                {Array.from({ length: 6 }).map((item, i) => (
+                  <SliderCardLazyLoader key={i} />
+                ))}
+              </div>
+            </>
+          ) : (
+            <MainSliderSlick featuredPosts={featuredPosts} />
+          )}
         </div>
       </>
 

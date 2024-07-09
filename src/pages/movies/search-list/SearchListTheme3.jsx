@@ -51,8 +51,7 @@ const SearchListTheme3 = () => {
   });
 
   return (
-    <section className=" lg:m-4 lg:mt-0 p-4 lg:px-0 border-b lg:border-0 pb-10">
-
+    <section className="mt-4 lg:mr-4 px-4 lg:px-0 border-b lg:border-0 pb-10 lg:w-[850px]">
       <Helmet>
         {/* <title> {siteName} || {searchTerm} </title> */}
         <title>
@@ -104,13 +103,15 @@ const SearchListTheme3 = () => {
         </div>
       </>
 
-      <PaginationTheme1
-        currentPage={currentPage}
-        perPgaeMovie={searchResults}
-        type="search-list"
-        filteredTerm={searchTerm}
-        btnColor="bg-[#009987]"
-      />
+      {searchResults?.status && (
+        <PaginationTheme1
+          currentPage={currentPage}
+          perPgaeMovie={searchResults}
+          type="search-list"
+          filteredTerm={searchTerm}
+          btnColor="bg-[#009987]"
+        />
+      )}
     </section>
   );
 };

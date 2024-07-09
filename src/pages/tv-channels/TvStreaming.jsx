@@ -79,9 +79,8 @@ const TvStreaming = () => {
       <div className="mt-5 flex flex-col justify-center items-center w-[80%] mx-auto lg:w-full">
         <div className="w-full flex flex-col justify-center items-center">
           <HLSPlayer singleCategory={singleCategory} />
-          {/* <PlyrPlayer singleCategory={singleCategory} /> */}
-          {/* <TestPlayer singleCategory={singleCategory}/> */}
-          {/* <HTMLPlayer singleCategory={singleCategory}/> */}
+          {/* <QualityIncludedM3u8Player singleCategory={singleCategory}/> */}
+
         </div>
 
         <p className="hidden lg:block mt-5 text-[22px] text-white text-center px-10">

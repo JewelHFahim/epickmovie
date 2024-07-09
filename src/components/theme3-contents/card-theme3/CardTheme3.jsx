@@ -25,7 +25,7 @@ const CardTheme3 = ({ item }) => {
         onClick={() => handleRedirect()}
         className="h-full w-full cardContainer cursor-pointer bg-[#27272A]"
       >
-        <div className="w-full h-[70%] relative imgContainer overflow-hidden">
+        <div className="w-full h-[70.5%] relative imgContainer overflow-hidden">
           <img
             src={item?.poster_image_url}
             alt=""
@@ -53,6 +53,7 @@ const CardTheme3 = ({ item }) => {
             {customizedDate}
           </p>
         </div>
+
       </button>
     </div>
   );

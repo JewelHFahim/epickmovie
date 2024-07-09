@@ -11,17 +11,16 @@ const FilterListDefault = () => {
   const { siteName } = useSiteConfig();
   const currentRoute = location.pathname;
 
-
   // Function to extract genres from route
   const getGenresFromRoute = (route) => {
     const parts = route.split("/");
     const startIndex = parts.indexOf("terms");
 
-    if(parts?.length === 5 ){
+    if (parts?.length === 5) {
       const genres = parts?.slice(startIndex + 1, -2);
       const genresString = genres.join("-");
       return genresString;
-    }else{
+    } else {
       const genres = parts?.slice(startIndex + 1);
       const genresString = genres.join("-");
       return genresString;
@@ -40,26 +39,33 @@ const FilterListDefault = () => {
   };
 
   // Usage example
-  const currentPage = isNaN(getPageNumberFromRoute(currentRoute)) ? 1 : getPageNumberFromRoute(currentRoute);
-
+  const currentPage = isNaN(getPageNumberFromRoute(currentRoute))
+    ? 1
+    : getPageNumberFromRoute(currentRoute);
 
   const { data: filteredResults, isLoading } =
     useFilteredResultsByPaginationQuery({ filteredTerm, currentPage });
 
   return (
     <section className="min-h-screen">
+      {/* ==================>> SEO Content <<============ */}
       <Helmet>
         <title>
-          {siteName} || {filteredTerm}
+          {siteName} || Watch {filteredTerm} Movies, Tv Show Online Free on{" "}
+          {siteName}
         </title>
         <meta
           name="description"
-          content="Unlimited Bangla Movies and Latest Collections"
+          content="The best place to watch Movies, Tv Shows and Latest Collections online for free with HD quality. No ADS! No registration is required!"
+        />
+        <meta
+          name="keywords"
+          content="free movies, online movie, movie online, free movies online, watch movies online free, free hd movies, watch movies online"
         />
       </Helmet>
 
-      <div className="ml-10 lg:ml-0 my-4">
-        <h1 className="text-[28px] lg:text-[32px] font-[700] font-roboto text-white">
+      <div className="ml-6 lg:ml-0 my-4">
+        <h1 className="text-[28px] lg:text-[32px] font-[700] font-roboto text-white capitalize">
           Filter By: {filteredTerm}
         </h1>
       </div>
@@ -74,12 +80,12 @@ const FilterListDefault = () => {
       <div className="flex justify-center items-center w-full px-5 lg:px-0">
         {isLoading ? (
           <div className="w-full">
-          <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] lg:gap-[10px] mt-10 animate-pulse w-full lg:px-5">
-            {Array.from({ length: 24 }).map((item, i) => (
-              <LazyLoading key={i} />
-            ))}
+            <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] lg:gap-[10px]  animate-pulse w-full">
+              {Array.from({ length: 24 }).map((item, i) => (
+                <LazyLoading key={i} />
+              ))}
+            </div>
           </div>
-        </div>
         ) : (
           <div className="grid grid-cols-3 lg:grid-cols-6 gap-[25px] lg:gap-[10px]">
             {filteredResults?.data?.data?.map((item) => (
@@ -102,7 +108,6 @@ const FilterListDefault = () => {
         perPgaeMovie={filteredResults}
         filteredTerm={filteredTerm}
       />
-
     </section>
   );
 };

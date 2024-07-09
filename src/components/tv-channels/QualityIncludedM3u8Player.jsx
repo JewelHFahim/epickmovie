@@ -1,13 +1,15 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import Hls from "hls.js";
-import "./M3U8Player.css";
 import Plyr from "plyr";
 
-const M3U8Player = ({ details }) => {
+const QualityIncludedM3u8Player = ({ singleCategory }) => {
+  console.log(singleCategory);
+
   useEffect(() => {
-     const source = details?.download_links?.find(link=> link?.type === "stream")?.download_url ?? "";
-     console.log(source)
+    const videoSrc =
+      singleCategory?.data?.link?.map((link) => link.stream_url) || [];
+    const source = videoSrc?.length > 0 ? videoSrc[0] : "";
 
     // const source = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
 
@@ -55,28 +57,39 @@ const M3U8Player = ({ details }) => {
     };
   }, []);
 
-
-    // Define the updateQuality function
-    const updateQuality = (quality) => {
-      if (window.hls) {
-        window.hls.currentLevel = window.hls.levels.findIndex(
-          (level) => level.height === quality
-        );
-      }
-    };
+  // Define the updateQuality function
+  const updateQuality = (quality) => {
+    if (window.hls) {
+      window.hls.currentLevel = window.hls.levels.findIndex(
+        (level) => level.height === quality
+      );
+    }
+  };
 
   return (
-    <div className=" w-full h-[450px] ">
+    // <div className=" w-full h-[450px] ">
+    //   <video
+    //     width="100%"
+    //     height="100%"
+    //     controls
+    //     crossOrigin="anonymous"
+    //     playsInline
+    //     poster=""
+    //   ></video>
+    // </div>
+
+    <div className="w-full h-full min-w-full lg:min-w-[1037px] lg:max-w-[1037px] rounded-[10px] overflow-hidden border-2 border-yellow-600 flex justify-center items-center">
       <video
+        autoPlay
         width="100%"
         height="100%"
         controls
         crossOrigin="anonymous"
         playsInline
-        poster={details?.backdrop_image}
-      ></video>
+        poster=""
+      />
     </div>
   );
 };
 
-export default M3U8Player;
+export default QualityIncludedM3u8Player;

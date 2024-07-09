@@ -19,6 +19,8 @@
   z-index: 9999;
 }
 
+
+
 @media only screen and (max-width: 1024px) {
   .mainSlider {
     width: 100% !important;
@@ -26,5 +28,9 @@
 
   .mainSlider img {
     object-fit: contain !important;
+  }
+
+  .slick-slide > div {
+    margin: 0 7px;
   }
 }

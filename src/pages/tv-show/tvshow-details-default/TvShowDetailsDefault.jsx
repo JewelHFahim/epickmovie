@@ -1,21 +1,21 @@
-import calender from "../../../assets/calender.svg";
-import { Link, useNavigate, useParams } from "react-router-dom";
-import { useSeriesDetailsQuery } from "../../../redux/features/tv-show/tvShowApi";
-import JoinTelegramBtn from "../../../utils/JoinTelegramBtn";
-import RelatedPost from "../../../components/related-post/RelatedPost";
-import AdvertisementSection from "../../../components/advertisement/AdvertisementSection";
-import Breadcum from "../../../utils/breadcum/Breadcum";
-import UploadedDate from "../../../utils/uploaded-date/UploadedDate";
-import DetailsPosterCard from "../../../components/details-poster-card/DetailsPosterCard";
-import { Helmet } from "react-helmet";
-import CountryList from "../../../components/advertisement/CountryList";
 import { useEffect } from "react";
-import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
+import { Helmet } from "react-helmet";
 import DownloadSeason from "../DownloadSeason";
-import StoryTitle from "../../../components/seo-related-content/StoryTitle";
-import MobileStoryTitle from "../../../components/seo-related-content/MobileStoryTitle";
-import DownloadInfos from "../../../components/seo-related-content/DownloadInfos";
+import calender from "../../../assets/calender.svg";
+import Breadcum from "../../../utils/breadcum/Breadcum";
+import JoinTelegramBtn from "../../../utils/JoinTelegramBtn";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import UploadedDate from "../../../utils/uploaded-date/UploadedDate";
+import { useSiteConfig } from "../../../utils/configHooks/ConfigHooks";
+import RelatedPost from "../../../components/related-post/RelatedPost";
+import CountryList from "../../../components/advertisement/CountryList";
 import TagsList from "../../../components/seo-related-content/TagsList";
+import StoryTitle from "../../../components/seo-related-content/StoryTitle";
+import { useSeriesDetailsQuery } from "../../../redux/features/tv-show/tvShowApi";
+import DownloadInfos from "../../../components/seo-related-content/DownloadInfos";
+import MobileStoryTitle from "../../../components/seo-related-content/MobileStoryTitle";
+import AdvertisementSection from "../../../components/advertisement/AdvertisementSection";
+import DetailsPosterCard from "../../../components/details-poster-card/DetailsPosterCard";
 
 const TvShowDetailsDefault = () => {
   const { id } = useParams();
@@ -36,12 +36,21 @@ const TvShowDetailsDefault = () => {
 
   return (
     <div className="bg-[#27272A]">
+      
+      {/* ======================>> SEO Content <<===================== */}
       <Helmet>
         <title>
-          {`${siteName} || ${details?.post_title ? details?.post_title : ""} `}
+          {siteName} || Watch {details?.post_title ? details?.post_title : ""}
+          Online Free on {siteName}
         </title>
-        <meta name="description" content={details?.post_content} />
-        <meta name="keywords" content="tvshows" />
+        <meta
+          name={details?.post_title ? details?.post_title : ""}
+          content={details?.post_content}
+        />
+        <meta
+          name="keywords"
+          content="free movies, online movie, movie online, free movies online, tv show, series, episode, season, watch movies online free, free hd movies, watch movies online"
+        />
       </Helmet>
 
       <Breadcum
@@ -51,7 +60,7 @@ const TvShowDetailsDefault = () => {
       />
 
       <section className=" py-4 px-10 lg:py-2 lg:px-5 flex justify-between">
-        {/* >>>>>>> COLUMN ONE <<<<<<< */}
+        {/* ========================>> Column One <<====================== */}
         <div className="w-full  lg:w-[70%]">
           <div>
             <h4 className="text-[50px] lg:text-[24px] text-white font-aclonica lg:max-w-[748px]">
@@ -145,7 +154,7 @@ const TvShowDetailsDefault = () => {
           </div>
         </div>
 
-        {/* >>>>>>> COLUMN TWO <<<<<<<<*/}
+        {/* ========================>> Column Two <<====================== */}
         <AdvertisementSection />
       </section>
 

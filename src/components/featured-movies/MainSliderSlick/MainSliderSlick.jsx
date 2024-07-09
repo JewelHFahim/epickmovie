@@ -5,7 +5,6 @@ import "slick-carousel/slick/slick-theme.css";
 import SliderCard from "./SliderCard";
 
 function MainSliderSlick({ featuredPosts }) {
-
   var settings = {
     dots: false,
     infinite: true,
@@ -17,13 +16,11 @@ function MainSliderSlick({ featuredPosts }) {
     autoplaySpeed: 2000,
     pauseOnHover: true,
     arrows: true,
-    // draggable: true,
-
     responsive: [
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -33,16 +30,16 @@ function MainSliderSlick({ featuredPosts }) {
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 2,
-          initialSlide: 2,
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 3,
         },
       },
 
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
@@ -50,10 +47,10 @@ function MainSliderSlick({ featuredPosts }) {
   };
 
   return (
-    <div className="slider-container w-[1170px] ml-4">
+    <div className="slider-container w-[950px] lg:w-[1170px]">
       <Slider {...settings}>
         {featuredPosts?.data?.map((item, i) => (
-          <SliderCard key={i} item={item}/>
+          <SliderCard key={i} item={item} />
         ))}
       </Slider>
     </div>

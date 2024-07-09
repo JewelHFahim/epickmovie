@@ -13,7 +13,7 @@ const SliderCard = ({ item }) => {
   const handleRedirect = useRedirect(url, maskLink);
 
   return (
-    <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] lg:w-[185px] h-[420px] lg:h-[345px] p-[4px] lg:p-[2px] rounded-[10px] relative playBtnCont overflow-hidden">
+    <div className="bg-gradient-to-t from-[#ff1818] to-[#fdd506] h-[550px] lg:h-[345px] lg:w-[185px] p-[4px] lg:p-[2px] rounded-[10px] relative playBtnCont overflow-hidden">
       <button
         onClick={() => handleRedirect()}
         className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative cursor-pointer`}
@@ -21,7 +21,7 @@ const SliderCard = ({ item }) => {
         <img
           src={item?.poster_image_url}
           alt="poster"
-          className="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg lg:h-[65%] object-cover lg:object-cover"
+          className="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg h-full lg:h-[65%] object-cover lg:object-cover"
         />
 
         <p className="hidden lg:block lg:h-[35%] text-center text-white font-[700] text-[25px] lg:leading-[20px] lg:text-[12px] p-4 lg:p-2 font-alef ">
@@ -30,22 +30,16 @@ const SliderCard = ({ item }) => {
             : `${item?.post_title?.slice(0, 150)} ...`}
         </p>
 
-        <p className="text-white bg-black bg-opacity-[40%] font-[700] text-[30px] absolute lg:hidden bottom-5 p-8">
-          {item?.post_title?.length <= 150
+        <p className="text-white bg-black bg-opacity-[70%] font-[700] text-[28px] absolute lg:hidden bottom-0 p-2 min-h-[45%]">
+          {item?.post_title?.length <= 100
             ? item?.post_title
-            : `${item?.post_title?.slice(0, 150)} ...`}
+            : `${item?.post_title?.slice(0, 100)} ...`}
         </p>
 
         <div className="playBtn">
           <FaPlay className="text-[50px] text-white" />
         </div>
       </button>
-
-      {/* {item?.stickerLabel?.length > 0 && (
-        <div className="absolute left-2 top-4">
-          <FeatureSticker item={item} />
-        </div>
-      )} */}
     </div>
   );
 };

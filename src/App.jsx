@@ -4,6 +4,7 @@ import { HelmetProvider, Helmet } from "react-helmet-async";
 import router from "./routes/router";
 import { useSiteConfig } from "./utils/configHooks/ConfigHooks";
 import { Toaster } from "react-hot-toast";
+import UserVisitTracker from "./utils/user-track/UserVisitTracker";
 
 const App = () => {
   const {
@@ -17,7 +18,7 @@ const App = () => {
     inpageAdId,
   } = useSiteConfig();
 
-  // Favicon Icon Set
+  // ================>> Favicon Icon Set
   useEffect(() => {
     const fetchFavicon = () => {
       try {
@@ -31,7 +32,7 @@ const App = () => {
     fetchFavicon();
   }, [favIcon]);
 
-  // Google Analytics ID
+  // ===============>> Google Analytics ID
   useEffect(() => {
     const setupGtag = async () => {
       const dynamicId = await googleAnalytic;
@@ -68,7 +69,7 @@ const App = () => {
     setupGtag();
   }, [googleAnalytic]);
 
-  // OnClick Ads
+  // ===============>> OnClick Ads
   useEffect(() => {
     const setupGtag = async () => {
       const src = await onClickAdSrc;
@@ -89,7 +90,7 @@ const App = () => {
     setupGtag();
   }, [onClickAdSrc, onClickAdId]);
 
-  // Interstitial
+  // ===============>> Interstitial
   useEffect(() => {
     const setupGtag = async () => {
       const src = await interstitialType;
@@ -104,7 +105,7 @@ const App = () => {
     setupGtag();
   }, [interstitialType]);
 
-  // In Page Ads
+  // ================>> In Page Ads
   useEffect(() => {
     const setupGtag = async () => {
       const src = await inpageAdSrc;
@@ -126,7 +127,7 @@ const App = () => {
     setupGtag();
   }, [inpageAdSrc, inpageAdId]);
 
-  // Script Setup End Here
+  // ================>> Script Setup End Here
 
   // const adBlockDetected = useDetectAdBlock();
   // const [intervalId, setIntervalId] = useState(null);
@@ -151,12 +152,23 @@ const App = () => {
     <HelmetProvider>
       <div className=" bg-[#27272A] lg:bg-[#18181a]">
         <Helmet>
-          <title>{siteName}</title>
-          <meta name="description" content="entertainment unlimited" />
+          <title>
+            {siteName} || Watch Movies, Tv Shows Online Free on {siteName}
+          </title>
+
+          <meta
+            name="description"
+            content="The best place to watch movies, tv shows online for free with HD quality. No ADS! No registration is required!"
+          />
+          <meta
+            name="keywords"
+            content="free movies, online movie, movie online, free movies online, watch movies online free, free hd movies, watch movies online, tv shows, series, episode, season"
+          />
         </Helmet>
 
         <RouterProvider router={router} />
         <Toaster />
+        <UserVisitTracker />
       </div>
     </HelmetProvider>
   );

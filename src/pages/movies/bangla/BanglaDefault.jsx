@@ -11,21 +11,30 @@ const BanglaDefault = () => {
   const { siteName } = useSiteConfig();
   const location = useLocation();
   const currentRoute = location.pathname;
-  const currentP = Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
-  const { data: perPgaeMovie, isLoading } = usePerPageBengaliMovieListQuery(currentP);
+  const currentP =
+    Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
+  const { data: perPgaeMovie, isLoading } =
+    usePerPageBengaliMovieListQuery(currentP);
 
   return (
     <div className="min-h-screen">
+      {/* ==================>> SEO Content <<============ */}
       <Helmet>
-        <title>{siteName} || Bangla</title>
+        <title>
+          {siteName} || Watch Bangla Movies, Tv Show Online Free on {siteName}
+        </title>
         <meta
           name="description"
-          content="Unlimited Bangla Movies and Latest Collections"
+          content="The best place to watch Movies, Tv Shows and Latest Collections online for free with HD quality. No ADS! No registration is required!"
+        />
+        <meta
+          name="keywords"
+          content="free movies, online movie, movie online, free movies online, watch movies online free, free hd movies, watch movies online"
         />
       </Helmet>
 
       {/* ==================>> BENGALI MOVIES <<==================*/}
-      <div className="w-full flex justify-start mt-[22px] mb-[20px] lg:mb-0 ml-10 lg:ml-0">
+      <div className="w-full flex justify-start mt-[12px] mb-[20px] lg:mb-0 ml-7 lg:ml-0">
         <Title>Bengali</Title>
       </div>
 
@@ -36,7 +45,7 @@ const BanglaDefault = () => {
           </div>
         ) : isLoading ? (
           <div className="w-full">
-            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[22px] lg:gap-[10px] mt-10 animate-pulse w-full lg:px-5">
+            <div className="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-6 gap-[25px] lg:gap-[10px] my-[18px] animate-pulse w-full">
               {Array.from({ length: 24 }).map((item, i) => (
                 <LazyLoading key={i} />
               ))}

@@ -1,21 +1,21 @@
+import { useEffect } from "react";
+import { Helmet } from "react-helmet";
 import calender from "../../../../assets/calender.svg";
+import Breadcum from "../../../../utils/breadcum/Breadcum";
 import DownloadButton from "../../../../utils/DownloadButton";
-import { useMovieDetailsQuery } from "../../../../redux/features/movies/movieApi";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import JoinTelegramBtn from "../../../../utils/JoinTelegramBtn";
-import DetailsPosterCard from "../../../../components/details-poster-card/DetailsPosterCard";
-import RelatedPost from "../../../../components/related-post/RelatedPost";
-import AdvertisementSection from "../../../../components/advertisement/AdvertisementSection";
-import Breadcum from "../../../../utils/breadcum/Breadcum";
 import UploadedDate from "../../../../utils/uploaded-date/UploadedDate";
-import { Helmet } from "react-helmet";
-import CountryList from "../../../../components/advertisement/CountryList";
-import { useEffect } from "react";
+import RelatedPost from "../../../../components/related-post/RelatedPost";
 import { useSiteConfig } from "../../../../utils/configHooks/ConfigHooks";
-import DownloadInfos from "../../../../components/seo-related-content/DownloadInfos";
-import StoryTitle from "../../../../components/seo-related-content/StoryTitle";
+import CountryList from "../../../../components/advertisement/CountryList";
 import TagsList from "../../../../components/seo-related-content/TagsList";
+import StoryTitle from "../../../../components/seo-related-content/StoryTitle";
+import { useMovieDetailsQuery } from "../../../../redux/features/movies/movieApi";
+import DownloadInfos from "../../../../components/seo-related-content/DownloadInfos";
 import MobileStoryTitle from "../../../../components/seo-related-content/MobileStoryTitle";
+import DetailsPosterCard from "../../../../components/details-poster-card/DetailsPosterCard";
+import AdvertisementSection from "../../../../components/advertisement/AdvertisementSection";
 
 const MovieDetailsDefault = () => {
   const { id } = useParams();
@@ -30,21 +30,27 @@ const MovieDetailsDefault = () => {
     }
   }, [movieDetails, navigate]);
 
-  // useEffect(() => {
-  //   window.scrollTo({ top: 0, behavior: "smooth" });
-  // }, []);
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, []);
 
   return (
     <div className="bg-[#27272A]">
+      
+      {/* ==================>> SEO Content <<============ */}
       <Helmet>
         <title>
-          {`${siteName} || ${details?.post_title ? details?.post_title : ""} `}
+          {siteName} || Watch {details?.post_title ? details?.post_title : ""}{" "}
+          Online Free on {siteName}
         </title>
         <meta
           name={details?.post_title ? details?.post_title : ""}
           content={details?.post_content}
         />
-        <meta name="keywords" content="movies" />
+        <meta
+          name="keywords"
+          content="free movies, online movie, movie online, free movies online, watch movies online free, free hd movies, watch movies online"
+        />
       </Helmet>
 
       <Breadcum
@@ -129,7 +135,6 @@ const MovieDetailsDefault = () => {
 
           {/* ===========>> JOIN TELEGRAM <<=========== */}
           <JoinTelegramBtn />
-
 
           <div className="mt-32 lg:mt-10">
             <TagsList details={details} title="Movie" />
