@@ -10,14 +10,13 @@ import MovieTvYoutubeTrailer from "../../../components/theme3-contents/movie-tv-
 import TagsList from "../../../components/seo-related-content/TagsList";
 import { useSeriesDetailsQuery } from "../../../redux/features/tv-show/tvShowApi";
 import DownloadLinksTableTv from "./DownloadLinkTableTv";
+import ScreenshotSlider from "../../../components/theme3-contents/ScreenshotSlider";
 
 const TvShowDetailsTheme3 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: tvShowDetails, isLoading: detaislLoading } =
-    useSeriesDetailsQuery(id);
-  const { data: suggessions, isLoading: suggessionsLoading } =
-    useSuggessionMovieSeriesQuery(id);
+  const { data: tvShowDetails, isLoading: detaislLoading } = useSeriesDetailsQuery(id);
+  const { data: suggessions, isLoading: suggessionsLoading } = useSuggessionMovieSeriesQuery(id);
 
   const details = tvShowDetails?.data;
   console.log(details);
@@ -36,16 +35,19 @@ const TvShowDetailsTheme3 = () => {
 
   return (
     <div className="lg:w-[850px] mt-4 px-4">
-      <div className="">
-        {/* ==============>> YOUTUBE TRAILER <<============== */}
-        <MovieTvYoutubeTrailer />
+
+      <div>
+        {/* ==========>> YOUTUBE TRAILER <<========== */}
+        {details?.youtube_trailer && (
+          <MovieTvYoutubeTrailer url={details?.youtube_trailer} />
+        )}
 
         {/* =============>> INFO SECTION <<===========*/}
         <DetailsInfoCard details={details} detaislLoading={detaislLoading} />
 
         <SynopsisTheme3 details={details} />
 
-        {/* ==========>> Recommended Movies <<======== */}
+        {/* =========>> Recommended Movies <<======== */}
         <RecomendedMoviesTvs
           suggessions={suggessions}
           suggessionsLoading={suggessionsLoading}
@@ -57,36 +59,15 @@ const TvShowDetailsTheme3 = () => {
           className="px-0 mt-12 text-white text-opacity-[40%]"
         />
 
-        <hr className=" border-white border-opacity-[10%] mt-10" />
+        <hr className=" border-white border-opacity-[10%] my-10" />
 
         {/* ========>> Sreen Shots <<========= */}
         {details?.screenshots && (
-          <div className="my-7">
-            {/* Large Devices */}
-            <div className="hidden lg:flex  items-center gap-4">
-              {details?.screenshots?.slice(0, 3)?.map((item, i) => (
-                <div key={i} className="w-full h-full mx-auto">
-                  <img
-                    src={item}
-                    alt=""
-                    className=" w-[80%] mx-auto lg:w-full h-[400px] lg:h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Small Devices */}
-            <div className="lg:hidden flex  items-center gap-4">
-              {details?.screenshots?.slice(0, 2)?.map((item, i) => (
-                <div key={i} className="w-full h-full mx-auto">
-                  <img src={item} alt="" className="  object-cover" />
-                </div>
-              ))}
-            </div>
-          </div>
+          <ScreenshotSlider screenshots={details?.screenshots}/>
         )}
+        
 
-        <hr className=" border-white border-opacity-[10%]" />
+        <hr className=" border-white border-opacity-[10%] mt-10" />
 
         {/* =============>> Download Links <<============== */}
         <div className="mt-10">

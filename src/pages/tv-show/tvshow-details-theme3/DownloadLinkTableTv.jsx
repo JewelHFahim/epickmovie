@@ -14,7 +14,7 @@ const DownloadLinksTableTv = ({ details }) => {
                 {item}
               </div>
 
-              <div className="px-5 flex flex-col mt-2">
+              <div className="px-5 flex flex-col">
                 {details?.download_links[item] &&
                   details?.download_links[item]?.map((itm, i) => (
                     <DownloadBtnTheme1 key={i} url={itm?.download_link}>

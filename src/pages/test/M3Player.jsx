@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 
 const M3U8Player = ({ channel }) => {
+  
   return (
     <div>
       <h3 className="text-white">{channel.name}</h3>

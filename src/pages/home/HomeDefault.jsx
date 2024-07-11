@@ -82,7 +82,7 @@ const HomeDefault = () => {
       {/* ================>> Featured Movies <<================*/}
       <>
         <HomePageSeeAllBtn> Featured Movies </HomePageSeeAllBtn>
-        <div className="my-[18px]">
+        <div className="my-[18px] w-full">
           {featureLoading ? (
             <>
               <div className=" grid lg:hidden grid-cols-3 gap-5">

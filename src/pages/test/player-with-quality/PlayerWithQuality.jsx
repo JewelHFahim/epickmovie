@@ -4,8 +4,8 @@ import Plyr from "plyr";
 
 const PlayerWithQuality = () => {
   useEffect(() => {
-    const source =
-      "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
+    // const source = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
+    const source = "https://81produ-pepp.xyz/4073/tracks-v1a1/mono.m3u8?ip=&token=b1b9de9f7a82744555e34572e9c2be9039ed9081-c755b1b13a67988a9c6eed1eb6123bea-1720618107-1720607307&user=c6886283a4e3ff767e7916de3f95e5a45f77417d";
     const videoElement = document.querySelector("video");
 
     if (!videoElement) {

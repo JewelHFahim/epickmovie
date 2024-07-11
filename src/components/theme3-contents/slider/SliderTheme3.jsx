@@ -6,8 +6,7 @@ import "./SliderTheme3.css";
 import SliderCardTheme3 from "./SliderCardTheme3";
 
 const SliderTheme3 = () => {
-  const { data: featuredPosts, isLoading: featureLoading } =
-    useFeaturedPostsQuery();
+  const { data: featuredPosts, isLoading: featureLoading } = useFeaturedPostsQuery();
 
   var settings = {
     dots: true,
@@ -61,9 +60,7 @@ const SliderTheme3 = () => {
           <Slider {...settings}>
             {featuredPosts?.data?.map((item, i) => (
               <div key={i} className="w-full h-[400px] lg:w-[380px] lg:h-[240px] px-1 cursor-pointer">
-
                  <SliderCardTheme3 key={i} item={item} /> 
-
               </div>
             ))}
           </Slider>

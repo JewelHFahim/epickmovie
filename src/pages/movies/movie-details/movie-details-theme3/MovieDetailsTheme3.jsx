@@ -10,6 +10,7 @@ import SharedSocialTheme3 from "../../../../components/theme3-contents/movie-tv-
 import DetailsJoinusTheme3 from "../../../../components/theme3-contents/movie-tv-details/DetailsJoinusTheme3";
 import RecomendedMoviesTvs from "../../../../components/theme3-contents/movie-tv-details/RecomendedMoviesTvs";
 import StreamingTrailer from "../../../../components/theme3-contents/movie-tv-details/StreamingTrailer";
+import ScreenshotSlider from "../../../../components/theme3-contents/ScreenshotSlider";
 
 const MovieDetailsTheme3 = () => {
   const { id } = useParams();
@@ -34,15 +35,8 @@ const MovieDetailsTheme3 = () => {
   }, []);
 
   return (
-    <div className="lg:w-[850px] pt-4 px-4 relative overflow-hidde">
-      {/* <div
-        className="absolute inset- inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-        style={{
-          backgroundImage: `url(${details?.poster_image_url})`,
-        }}
-      ></div> */}
-
-      <div className="">
+    <div className="lg:w-[850px] pt-4 px-4">
+      <div>
         {/* =============>> Stream / Youtube Trailer <<============ */}
         <StreamingTrailer details={details} />
 
@@ -65,37 +59,14 @@ const MovieDetailsTheme3 = () => {
           textSize="text-3xl lg:text-base"
         />
 
-        <hr className=" border-white border-opacity-[10%] mt-10" />
+        <hr className=" border-white border-opacity-[10%] my-10" />
 
         {/* ========>> Sreen Shots <<========= */}
         {details?.screenshots && (
-          <div className="my-7">
-            {/* Large Devices */}
-            <div className="hidden lg:flex  items-center gap-4">
-              {details?.screenshots?.slice(0, 3)?.map((item, i) => (
-                <div key={i} className="w-full h-full mx-auto">
-                  <img
-                    src={item}
-                    alt=""
-                    className=" w-[80%] mx-auto lg:w-full h-[400px] lg:h-full object-cover"
-                  />
-                </div>
-              ))}
-            </div>
-
-            {/* Small Devices */}
-            <div className="lg:hidden flex  items-center gap-4">
-              {details?.screenshots?.slice(0, 2)?.map((item, i) => (
-                <div key={i} className="w-full h-full mx-auto">
-                  <img src={item} alt="" className="  object-cover" />
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {details?.screenshots?.length > 0 && (
-          <hr className=" border-white border-opacity-[10%]" />
+          <>
+            <ScreenshotSlider screenshots={details?.screenshots} />
+            <hr className=" border-white border-opacity-[10%] mt-10" />
+          </>
         )}
 
         {/* =============>> Download Links <<============== */}

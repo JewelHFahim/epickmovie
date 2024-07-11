@@ -4,50 +4,76 @@ import MovieTvYoutubeTrailer from "./MovieTvYoutubeTrailer";
 import M3U8Player from "./M3U8Player";
 import StreamTrailerButton from "../../../utils/theme3/StreamTrailerButton";
 import StreamReport from "../../../utils/theme3/StreamReport";
+import IframeMoviePlayer from "./IframeMoviePlayer";
 
 const StreamingTrailer = ({ details }) => {
   const [status, setStatus] = useState(null);
-  console.log(details)
+  console.log(details);
+
+  const source =
+    details?.download_links?.find((link) => link?.type === "stream")
+      ?.download_url ?? "";
 
   return (
     <div className="border border-white border-opacity-[5%] bg-black bg-opacity-[10%]">
-      {/* ==============>> Stream Report <<============== */}
-      {status === null && <StreamReport />}
-
-      {/* =================>> Players <<================== */}
+ 
+     {/* =================>> Players <<================== */}
       {status === "trailer" && (
-        <MovieTvYoutubeTrailer url={details?.youtube_trailer} />
+        <MovieTvYoutubeTrailer url={details?.youtube_trailer} /> //Youtube Trailer
       )}
-      {status === "stream" && (
+
+      {status === "stream" && ( //M3U8 PLayer
         <div>
-          <M3U8Player details={details} />
+          <M3U8Player source={source} details={details} />
           <StreamReport />
         </div>
       )}
 
+      {status === "iframe" && (
+        <IframeMoviePlayer url={details?.youtube_trailer} />
+      )}
 
       {/* =================>> Buttons <<================== */}
-      <StreamTrailerButton
-        title="youtube.com"
-        btn={true}
-        context="trailer"
-        setStatus={setStatus}
-        active={status === "trailer"}
-      >
-        Watch Trailer
-      </StreamTrailerButton>
+      {details?.youtube_trailer && (
+        <StreamTrailerButton
+          title="youtube.com"
+          btn={true}
+          context="trailer"
+          setStatus={setStatus}
+          active={status === "trailer"}
+        >
+          Watch Trailer
+        </StreamTrailerButton>
+      )}
 
       <hr className="w-[92.5%] mx-auto border border-white border-opacity-[10%] " />
 
-      <StreamTrailerButton
-        title="terabox.com"
-        btn={false}
-        context="stream"
-        setStatus={setStatus}
-        active={status === "stream"}
-      >
-        Watch Now
-      </StreamTrailerButton>
+      {source && (
+        <>
+          <StreamTrailerButton
+            title="terabox.com"
+            btn={false}
+            context="stream"
+            setStatus={setStatus}
+            active={status === "stream"}
+          >
+            Watch Now
+          </StreamTrailerButton>
+          <hr className="w-[92.5%] mx-auto border border-white border-opacity-[10%] " />
+        </>
+      )}
+
+      {status === "iframe" && (
+        <StreamTrailerButton
+          title="Fastest Player"
+          btn={false}
+          context="stream"
+          setStatus={setStatus}
+          active={status === "stream"}
+        >
+          Watch Now
+        </StreamTrailerButton>
+      )}
     </div>
   );
 };

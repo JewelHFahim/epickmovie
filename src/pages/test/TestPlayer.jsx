@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import M3Player from "./M3Player";
 import Hls from "hls.js";
-import PlayerWithQuality from "./player-with-quality/PlayerWithQuality";
 
 const TestPLayer = () => {
   const [channelsData, setChannelsData] = useState(null);
   const [error, setError] = useState(null);
 
-  console.log(channelsData);
+  const UserAgent = "User-Agent"
 
   // =================================>> DATA FETCHING <<======================================
   useEffect(() => {
@@ -38,6 +37,7 @@ const TestPLayer = () => {
 
   const initializePlayers = () => {
     channelsData?.forEach((channel) => {
+      console.log(channel)
       const videoElement = document.getElementById(`video-${channel.name}`);
       if (!videoElement) return;
 
@@ -52,21 +52,17 @@ const TestPLayer = () => {
             fetch(url, {
               method: "GET",
               headers: {
-                Cookie: channel.cookie,
-                Origin: channel.origin,
-                Referer: channel.referrer,
+                // Cookie: channel?.cookie,
+                // Origin: channel?.origin,
+                Referer: channel?.referrer,
+                UserAgent: channel?.userAgent,
               },
             })
               .then((response) => {
                 if (response.ok) {
                   response.arrayBuffer().then((data) => {
                     callbacks.onSuccess(
-                      {
-                        url,
-                        data,
-                        context,
-                        response,
-                      },
+                      { url, data, context, response },
                       context,
                       config
                     );
@@ -115,12 +111,11 @@ const TestPLayer = () => {
 
   return (
     <div className="w-full flex justify-center border p-5">
-      {/* <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mx-auto justify-center">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 mx-auto justify-center">
         {channelsData?.map((channel, index) => (
           <M3Player key={index} channel={channel} />
         ))}
-      </div>  */}
-      <PlayerWithQuality />
+      </div>
     </div>
   );
 };
