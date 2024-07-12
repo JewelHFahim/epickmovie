@@ -14,7 +14,7 @@ const SectionTitleTheme3 = ({ children, sideBtn }) => {
           See All
         </button>
       ) : (
-        <div className="flex items-center text-[#A4A4A4]">
+        <div className="flex gap-5 items-center text-[#A4A4A4]">
           <BiSolidLeftArrow />
           <BiSolidRightArrow />
         </div>

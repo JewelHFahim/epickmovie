@@ -51,7 +51,7 @@ const Main = () => {
     theme1: "lg:w-[78vw] lg:min-w-[1500px]",
     theme2: "lg:w-[1200px]",
     theme3: "lg:w-[1200px] flex flex-col lg:flex-row gap-y-5 bg-black bg-opacity-[10%]",
-    default: "lg:w-[61vw] lg:min-w-[1170px] ",
+    default: "lg:w-[61vw] lg:min-w-[1170px]",
   };
 
   return (

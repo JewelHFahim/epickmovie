@@ -8,7 +8,6 @@ import IframeMoviePlayer from "./IframeMoviePlayer";
 
 const StreamingTrailer = ({ details }) => {
   const [status, setStatus] = useState(null);
-  console.log(details);
 
   const source =
     details?.download_links?.find((link) => link?.type === "stream")

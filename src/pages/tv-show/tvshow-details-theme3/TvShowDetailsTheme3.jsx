@@ -17,9 +17,7 @@ const TvShowDetailsTheme3 = () => {
   const navigate = useNavigate();
   const { data: tvShowDetails, isLoading: detaislLoading } = useSeriesDetailsQuery(id);
   const { data: suggessions, isLoading: suggessionsLoading } = useSuggessionMovieSeriesQuery(id);
-
   const details = tvShowDetails?.data;
-  console.log(details);
 
   // Error handle, if id not found
   useEffect(() => {

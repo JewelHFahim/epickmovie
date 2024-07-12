@@ -20,7 +20,6 @@ const HomeTheme3 = () => {
 
   return (
     <div className="mt-4 lg:mr-4 px-4 lg:px-0 border-b lg:border-0 pb-10 lg:w-[850px]">
-      {/* className="mt-4 lg:mr-4 px-4 lg:px-0 border-b lg:border-0 pb-10 lg:w-[850px]" */}
       <SliderTheme3 />
 
       {/* ==================>> FEATURED <<==================== */}

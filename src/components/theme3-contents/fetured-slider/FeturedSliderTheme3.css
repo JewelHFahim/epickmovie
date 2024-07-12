@@ -1,18 +1,23 @@
 .featuredSlider3 .slick-next {
-  right: 0px;
+  right: 1.5%;
   z-index: 9999;
+  top: -7.7%;
+  display: block;
+  width: 20px;
+  height: 20px;
+  transform: translate(0, -50%);
 }
 
 .featuredSlider3 .slick-next:before {
   content: "*";
 }
 
-.featuredSlider3 .slick-next {
-  right: 1%;
-  top: -14.5%;
-  display: block;
+
+.featuredSlider3 .slick-prev {
+  z-index: 9999;
   width: 20px;
   height: 20px;
-  padding: 0;
+  top: -42px;
+  left: 91.5% !important;
   transform: translate(0, -50%);
 }

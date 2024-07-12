@@ -15,12 +15,9 @@ import ScreenshotSlider from "../../../../components/theme3-contents/ScreenshotS
 const MovieDetailsTheme3 = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { data: movieDetails, isLoading: detaislLoading } =
-    useMovieDetailsQuery(id);
+  const { data: movieDetails, isLoading: detaislLoading } = useMovieDetailsQuery(id);
   const details = movieDetails?.data;
-  console.log(details);
-  const { data: suggessions, isLoading: suggessionsLoading } =
-    useSuggessionMovieSeriesQuery(id);
+  const { data: suggessions, isLoading: suggessionsLoading } = useSuggessionMovieSeriesQuery(id);
 
   // Error handle, if id not found
   useEffect(() => {

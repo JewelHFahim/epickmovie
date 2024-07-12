@@ -9,7 +9,6 @@ import {
 } from "../../utils/configHooks/ConfigHooks";
 
 const MovieCard = ({ item }) => {
-  
   const { maskLink } = useSiteConfig();
   const { url } = useCleanedTitle(item);
   const handleRedirect = useRedirect(url, maskLink);
@@ -20,17 +19,22 @@ const MovieCard = ({ item }) => {
         onClick={() => handleRedirect()}
         className={`w-full h-full rounded-[10px] flex flex-col items-center bg-[#27272A] overflow-hidden relative cursor-pointer`}
       >
-
         <img
           src={item?.poster_image_url}
           alt="poster"
           className="w-full rounded-tr-[10px] rounded-tl-[10px] object-cover posterImg h-[65%]"
         />
 
-        <p className="h-[35%] text-center text-white font-[700] text-[25px] lg:text-[14px] p-4 lg:p-2 font-alef lg:leading-[18px]">
+        <p className="hidden lg:block h-[35%] text-center text-white font-[700] text-[25px] lg:text-[14px] p-4 lg:p-2 font-alef lg:leading-[18px]">
           {item?.post_title?.length <= 150
             ? item?.post_title
             : `${item?.post_title?.slice(0, 150)} ...`}
+        </p>
+
+        <p className="block lg:hidden h-[35%] text-center text-white font-[700] text-[25px] lg:text-[14px] p-4 lg:p-2 font-alef lg:leading-[18px]">
+          {item?.post_title?.length <= 80
+            ? item?.post_title
+            : `${item?.post_title?.slice(0, 80)} ...`}
         </p>
 
         <div className="playBtn">

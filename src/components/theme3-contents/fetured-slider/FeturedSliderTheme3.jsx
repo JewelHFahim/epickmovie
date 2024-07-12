@@ -78,7 +78,7 @@ const FeaturedSlider3 = () => {
         <div className="featuredSlider3 mt-4">
           <Slider {...settings}>
             {featuredPosts?.data?.slice(0, 5)?.map((item, i) => (
-              <div key={i} className="p-[5px] lg:p-0 border-red-600"><CardTheme3  item={item}/></div>
+              <div key={i} className="p-[5px] lg:p-0 h-[550px] lg:h-full"><CardTheme3  item={item}/></div>
               // <FeaturedCardTheme3 key={i} item={item} />
             ))}
           </Slider>

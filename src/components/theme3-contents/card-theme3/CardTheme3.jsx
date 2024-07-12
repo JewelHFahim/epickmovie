@@ -20,7 +20,7 @@ const CardTheme3 = ({ item }) => {
     : "No date available";
 
   return (
-    <div className="w-full lg:w-[160px] lg:h-[285px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[2px]">
+    <div className="w-full h-full lg:w-[160px] lg:h-[285px] bg-gradient-to-t from-[#ff1818] to-[#fdd506] p-[2px]">
       <button
         onClick={() => handleRedirect()}
         className="h-full w-full cardContainer cursor-pointer bg-[#27272A]"

@@ -6,8 +6,6 @@ const TestPLayer = () => {
   const [channelsData, setChannelsData] = useState(null);
   const [error, setError] = useState(null);
 
-  const UserAgent = "User-Agent"
-
   // =================================>> DATA FETCHING <<======================================
   useEffect(() => {
     const fetchChannelsData = async () => {
@@ -37,7 +35,17 @@ const TestPLayer = () => {
 
   const initializePlayers = () => {
     channelsData?.forEach((channel) => {
-      console.log(channel)
+
+
+
+      console.log(
+        "Cookie===>", channel?.cookie,
+        "Origin===>", channel?.origin,
+        "Referer===>", channel?.referrer,
+        "UserAgent===>", channel?.userAgent
+      );
+
+
       const videoElement = document.getElementById(`video-${channel.name}`);
       if (!videoElement) return;
 
@@ -52,10 +60,10 @@ const TestPLayer = () => {
             fetch(url, {
               method: "GET",
               headers: {
-                // Cookie: channel?.cookie,
-                // Origin: channel?.origin,
+                Cookie: channel?.cookie,
+                Origin: channel?.origin,
                 Referer: channel?.referrer,
-                UserAgent: channel?.userAgent,
+                // UserAgent: channel?.userAgent,
               },
             })
               .then((response) => {

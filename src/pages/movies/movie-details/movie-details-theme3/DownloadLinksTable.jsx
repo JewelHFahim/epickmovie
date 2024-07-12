@@ -4,7 +4,6 @@ import TableDatasDownloadLinks from "./TableDatasDownloadLinks";
 const DownloadLinksTable = ({ details }) => {
 
   const downloadLinks = details?.download_links?.filter(link => link?.type === "download");
-  console.log(downloadLinks)
 
   return (
     <div className="overflow-x-auto">

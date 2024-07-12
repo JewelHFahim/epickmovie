@@ -5,9 +5,7 @@ import CountryList from "./CountryList";
 import { Link } from "react-router-dom";
 import LatestMoviesCard from "../latest-movies/LatestMoviesCard";
 import { useSiteConfig } from "../../utils/configHooks/ConfigHooks";
-
 const AdvertisementSection = ({ details }) => {
-  
   const { telegramLink } = useSiteConfig();
 
   return (
@@ -15,6 +13,7 @@ const AdvertisementSection = ({ details }) => {
       {/* Join Telegram */}
       <div className="w-[299px] h-[193px] bg-[#27272A] flex flex-col">
         <p className="text-white font-inter font-[500] mt-[39px] ml-[18px]">
+          
           Join Our Telegram
         </p>
         <hr className="w-full bg-[#494949] opacity-[.4]" />

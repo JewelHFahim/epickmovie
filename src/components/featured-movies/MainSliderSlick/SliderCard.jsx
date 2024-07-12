@@ -30,7 +30,7 @@ const SliderCard = ({ item }) => {
             : `${item?.post_title?.slice(0, 150)} ...`}
         </p>
 
-        <p className="text-white bg-black bg-opacity-[70%] font-[700] text-[28px] absolute lg:hidden bottom-0 p-2 min-h-[45%]">
+        <p className="text-white bg-black bg-opacity-[70%] font-[700] text-[25px] absolute lg:hidden bottom-0 p-2 min-h-[45%] w-full">
           {item?.post_title?.length <= 100
             ? item?.post_title
             : `${item?.post_title?.slice(0, 100)} ...`}
