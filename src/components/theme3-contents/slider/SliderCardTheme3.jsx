@@ -10,6 +10,8 @@ const SliderCardTheme3 = ({ item }) => {
   const { url } = useCleanedTitle(item);
   const handleRedirect = useRedirect(url, maskLink);
 
+  console.log(item);
+
   return (
     <div
       onClick={() => handleRedirect()}

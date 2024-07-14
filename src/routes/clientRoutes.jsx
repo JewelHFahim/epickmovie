@@ -8,7 +8,6 @@ import MovieDetails from "../pages/movies/movie-details/MovieDetails";
 import Movies from "../pages/movies/movies/Movies";
 import SearchList from "../pages/movies/search-list/SearchList";
 import NotFound from "../pages/not-found/NotFound";
-import TestPLayer from "../pages/test/TestPlayer";
 import TvShow from "../pages/tv-show/TvShow";
 import TvShowDetails from "../pages/tv-show/TvShowDetails";
 
@@ -103,9 +102,5 @@ export const clientRoutes = [
   {
     path: "/not-found",
     element: <NotFound />,
-  },
-  {
-    path: "/test-player",
-    element: <TestPLayer />,
   }
 ];

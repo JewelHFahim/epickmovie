@@ -24,7 +24,7 @@ const SliderCard = ({ item }) => {
           className="w-full rounded-tr-[10px] rounded-tl-[10px] posterImg h-full lg:h-[65%] object-cover lg:object-cover"
         />
 
-        <p className="hidden lg:block lg:h-[35%] text-center text-white font-[700] text-[25px] lg:leading-[20px] lg:text-[12px] p-4 lg:p-2 font-alef ">
+        <p className="hidden lg:block lg:h-[35%] text-center text-white font-[700] leading-[20px] text-[13px] p-4 lg:p-2 font-alef ">
           {item?.post_title?.length <= 150
             ? item?.post_title
             : `${item?.post_title?.slice(0, 150)} ...`}

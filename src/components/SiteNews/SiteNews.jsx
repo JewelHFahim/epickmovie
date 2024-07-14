@@ -9,8 +9,8 @@ const SiteNews = () => {
   return (
     <>
       {themeValue ? (
-        <div className="mt-5 w-full h-[50px] bg-[#2a2a2a] flex items-center">
-          <div className="text-[30px] lg:text-[14px] font-[600] flex items-center  text-white">
+        <div className="mt-5 w-full h-[50px] bg-[#2a2a2a] flex justify-center items-center">
+          <div className="w-full text-[30px] lg:text-[15px] font-[600] flex items-center text-white">
             <Marquee>{siteNews}</Marquee>
           </div>
         </div>

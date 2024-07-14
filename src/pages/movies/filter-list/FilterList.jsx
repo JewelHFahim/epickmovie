@@ -1,8 +1,8 @@
 import { themeValue } from "../../../config/config";
-import FilterListDefault from "./filter-default/FilterListDefault";
 import FilterListTheme1 from "./filterlist-theme1/FilterListTheme1";
 import FilterListTheme2 from "./filterlist-theme2/FilterListTheme2";
 import FilterListTheme3 from "./filterlist-theme3/FilterListTheme3";
+import FilterListDefault from "./filter-default/FilterListDefault";
 
 const FilterList = () => {
 

@@ -5,6 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import SliderCard from "./SliderCard";
 
 function MainSliderSlick({ featuredPosts }) {
+  
   var settings = {
     dots: false,
     infinite: true,

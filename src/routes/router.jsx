@@ -9,6 +9,7 @@ import TvHome from "../pages/tv-channels/tv-home/TvHome.jsx";
 import TvStreaming from "../pages/tv-channels/TvStreaming.jsx";
 import AllChannels from "../pages/tv-channels/AllChannels.jsx";
 import SingleCategory from "../pages/tv-channels/single-category/SingleCategory.jsx";
+import TestRoute from "../pages/test/TestRoute.jsx";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
   {
     path: "*",
     element: <NotFound />,
+  },
+  {
+    path: "/test",
+    element: <TestRoute />,
   },
 ]);
 

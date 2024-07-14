@@ -3,15 +3,13 @@ import { useEffect } from "react";
 import Hls from "hls.js";
 import Plyr from "plyr";
 
-const QualityIncludedM3u8Player = ({ singleCategory }) => {
-  console.log(singleCategory);
+const QualityIncludedTvPlayer = ({singleCategory}) => {
+  console.log(singleCategory)
 
   useEffect(() => {
-    const videoSrc =
-      singleCategory?.data?.link?.map((link) => link.stream_url) || [];
-    const source = videoSrc?.length > 0 ? videoSrc[0] : "";
+     const source = singleCategory?.data?.link?.map((link) => link.stream_url)[0] || "";
 
-    // const source = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
+     console.log(source)
 
     const videoElement = document.querySelector("video");
 
@@ -57,39 +55,29 @@ const QualityIncludedM3u8Player = ({ singleCategory }) => {
     };
   }, []);
 
-  // Define the updateQuality function
-  const updateQuality = (quality) => {
-    if (window.hls) {
-      window.hls.currentLevel = window.hls.levels.findIndex(
-        (level) => level.height === quality
-      );
-    }
-  };
+
+    // Define the updateQuality function
+    const updateQuality = (quality) => {
+      if (window.hls) {
+        window.hls.currentLevel = window.hls.levels.findIndex(
+          (level) => level.height === quality
+        );
+      }
+    };
 
   return (
-    // <div className=" w-full h-[450px] ">
-    //   <video
-    //     width="100%"
-    //     height="100%"
-    //     controls
-    //     crossOrigin="anonymous"
-    //     playsInline
-    //     poster=""
-    //   ></video>
-    // </div>
-
-    <div className="w-full h-full min-w-full lg:min-w-[1037px] lg:max-w-[1037px] rounded-[10px] overflow-hidden border-2 border-yellow-600 flex justify-center items-center">
+    <div className="w-full lg:w-[1050px] rounded-[15px] overflow-hidden">
       <video
-        autoPlay
         width="100%"
         height="100%"
         controls
         crossOrigin="anonymous"
         playsInline
-        poster=""
-      />
+        poster={singleCategory?.data?.thumb_name}
+      ></video>
+      <h2 className="text-white text-3xl lg:text-lg mt-1 font-semibold">{singleCategory?.data?.channel_name}</h2>
     </div>
   );
 };
 
-export default QualityIncludedM3u8Player;
+export default QualityIncludedTvPlayer;

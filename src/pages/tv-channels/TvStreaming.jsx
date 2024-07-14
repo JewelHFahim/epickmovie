@@ -6,10 +6,11 @@ import {
 } from "../../redux/features/live-tv/liveTvApi";
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect } from "react";
-import HLSPlayer from "../../components/tv-channels/HLSPlayer";
+// import HLSPlayer from "../../components/tv-channels/HLSPlayer";
 import TvNews from "../../components/tv-channels/TvNews";
 import SingleCatTitle from "../../utils/tv-channels/SingleCatTitle";
 import StreamPageLoading from "../../components/tv-channels/StreamPageLoading";
+import QualityIncludedTvPlayer from "../../components/tv-channels/QualityIncludedTvPlayer";
 
 const TvStreaming = () => {
   const { id } = useParams();
@@ -78,9 +79,8 @@ const TvStreaming = () => {
       {/* Streaming */}
       <div className="mt-5 flex flex-col justify-center items-center w-[80%] mx-auto lg:w-full">
         <div className="w-full flex flex-col justify-center items-center">
-          <HLSPlayer singleCategory={singleCategory} />
-          {/* <QualityIncludedM3u8Player singleCategory={singleCategory}/> */}
-
+          {/* <HLSPlayer singleCategory={singleCategory} /> */}
+          <QualityIncludedTvPlayer singleCategory={singleCategory}/>
         </div>
 
         <p className="hidden lg:block mt-5 text-[22px] text-white text-center px-10">

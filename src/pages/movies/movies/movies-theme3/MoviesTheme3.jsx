@@ -7,12 +7,8 @@ import { useEffect } from "react";
 const MoviesTheme3 = () => {
   const location = useLocation();
   const currentRoute = location?.pathname;
-  const currentP =
-    Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
-  const { data: movieList, isLoading: movieLoading } = useMovieListTheme3Query({
-    quantity: 42,
-    page: currentP || 1,
-  });
+  const currentP = Number(currentRoute?.slice(13)) === 0 ? 1 : Number(currentRoute?.slice(13));
+  const { data: movieList, isLoading: movieLoading } = useMovieListTheme3Query({ quantity: 42, page: currentP || 1});
 
   // page scroll effect
   useEffect(() => {

@@ -1,14 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useEffect } from "react";
 import Hls from "hls.js";
-import "./M3U8Player.css";
 import Plyr from "plyr";
+import "./M3U8Player.css";
 
 const M3U8Player = ({ source, details }) => {
 
   useEffect(() => {
     //  const source = details?.download_links?.find(link=> link?.type === "stream")?.download_url ?? "";
-    // const source = "http://sample.vodobox.net/skate_phantom_flex_4k/skate_phantom_flex_4k.m3u8";
      console.log(source)
 
 
