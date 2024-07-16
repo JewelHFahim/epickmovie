@@ -138,6 +138,14 @@ export const useSiteConfig = () => {
     );
   }, [allConfig]);
 
+  // ===================>> Notice Message <<======================
+  const noticeMessage = useMemo(() => {
+    return (
+      allConfig?.data?.find((config) => config.name === "flash_message")?.value ??
+      "loading"
+    );
+  }, [allConfig]);
+
   // ===================>> Telegram <<======================
   const telegramLink = useMemo(() => {
     return (
@@ -243,5 +251,6 @@ export const useSiteConfig = () => {
     twitterLink,
     pinterestLink,
     whatsAppNo,
+    noticeMessage
   };
 };

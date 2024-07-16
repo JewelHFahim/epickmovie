@@ -7,7 +7,7 @@ import { FaTelegram } from "react-icons/fa6";
 
 const UserVisitTracker = () => {
   const [showPopup, setShowPopup] = useState(false);
-  const { siteName, telegramLink } = useSiteConfig();
+  const { siteName, telegramLink, noticeMessage } = useSiteConfig();
 
   useEffect(() => {
     const userIdKey = "userId";
@@ -50,9 +50,7 @@ const UserVisitTracker = () => {
               </h1>
 
               <div className="flex flex-col justify-center items-center w-full h-full">
-                <p className="text-5xl lg:text-2xl mt-14 lg:mt-8">
-                  সকল প্রকার আপডেট পেতে আমাদের এই গ্রুপে জয়েন করুন-
-                </p>
+                <p className="text-5xl lg:text-2xl">{noticeMessage}</p>
 
                 <div className="flex justify-center items-center mt-8 lg:mt-3">
                   <a
