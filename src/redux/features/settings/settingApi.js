@@ -27,15 +27,6 @@ const settingApi = apiSlice.injectEndpoints({
       providesTags: ["EpicMovies"],
     }),
 
-    // userRating: builder.mutation({
-    //   query: ({ postId, ratingNo }) => ({
-    //     method: "POST",
-    //     url: `/do-vote/${postId}/${ratingNo}`,
-    //   }),
-    //   providesTags: ["EpicMovies"],
-    // }),
-
-
   }),
 });
 

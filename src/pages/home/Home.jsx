@@ -6,7 +6,6 @@ import { themeValue } from "../../config/config";
 
 const Home = () => {
 
-
   const themes = {
     theme1: <HomeTheme1 />,
     theme2: <HomeTheme2 />,

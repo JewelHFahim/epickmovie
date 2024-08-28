@@ -10,8 +10,8 @@ import IframeMoviePlayer from "./IframeMoviePlayer";
 const StreamingTrailer = ({ details }) => {
   const [status, setStatus] = useState(null);
 
-  const source = details?.download_links?.find((link) => link?.type === "stream") ?.download_url ?? "";
-  // const source = "https://cloudyhost.online/proxy/live-cdn.tsports.com/live-02/master_1080.m3u8"
+  // const source = details?.download_links?.find((link) => link?.type === "stream") ?.download_url ?? "";
+  const source = "https://cloudyhost.online/proxy/live-cdn.tsports.com/live-02/master_1080.m3u8"
 
   return (
     <div className="border border-white border-opacity-[5%] bg-black bg-opacity-[10%]">

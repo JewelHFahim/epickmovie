@@ -58,8 +58,7 @@ const TvHome = () => {
       {mappedCategories?.map((category, i) => (
         <div key={i} className="w-[80%] mx-auto lg:w-full">
           <SectionTitleBtn url={`/tv/${category.name.toLowerCase()}`}>
-            {" "}
-            {category.name}{" "}
+            {category.name}
           </SectionTitleBtn>
 
           <div className="mt-5 hidden lg:flex flex-wrap gap-5">

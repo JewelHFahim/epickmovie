@@ -26,6 +26,7 @@ const liveTvApi = apiSlice.injectEndpoints({
       query: (id) => `/live-tv/${id}`,
       providesTags: ["EpicMovies"],
     }),
+    
   }),
 });
 

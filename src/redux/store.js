@@ -8,8 +8,7 @@ const store = configureStore({
     search: searchSlice,
     [apiSlice.reducerPath]: apiSlice.reducer,
   },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiSlice.middleware, thunk),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(apiSlice.middleware, thunk),
 });
 
 export default store;

@@ -6,6 +6,7 @@ import TvMobileMenu from "../components/tv-channels/tv-mobile-menu/TvMobileMenu"
 const TvLayout = () => {
   return (
     <div className="bg-[#2C2B2B]">
+      
       <div className="hidden lg:block">
         <NavbarTv />
       </div>
