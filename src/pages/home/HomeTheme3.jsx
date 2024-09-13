@@ -77,7 +77,7 @@ const HomeTheme3 = () => {
       </div>
 
       {/* ================>> LATEST BLOGS <<================= */}
-      <Blogs />
+      {/* <Blogs /> */}
     </div>
   );
 };

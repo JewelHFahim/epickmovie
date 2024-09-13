@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { twMerge } from "tailwind-merge";
 
 const PagiBtnTheme1 = ({ children, className, ...proops }) => {
